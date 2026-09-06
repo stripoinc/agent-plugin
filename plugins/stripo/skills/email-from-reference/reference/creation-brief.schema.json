@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/ardas/convo-email-agent/schemas/email-from-reference/creation-brief.stripo.schema.json",
+  "title": "Stripo native email creation brief",
+  "description": "Stripo creation metadata and a native editor model. Drafts are completed, native block types from a reference are preserved, and the result is validated against the downloaded editor schema.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["v", "message", "model"],
+  "properties": {
+    "v": {"const": 2},
+    "note": {"type": "string"},
+    "sourceSummary": {"type": "array", "items": {"type": "string"}},
+    "message": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name"],
+      "properties": {
+        "name": {"type": "string", "minLength": 1, "maxLength": 200, "pattern": "\\S"},
+        "projectId": {"type": "integer", "minimum": 1},
+        "folderId": {"type": "integer", "minimum": 1}
+      }
+    },
+    "model": {
+      "type": "object",
+      "description": "Native Stripo editor JSON. IDs and default settings may be omitted; native settings, resources, and block types from a reference are preserved.",
+      "required": ["stripes"],
+      "properties": {"stripes": {"type": "array", "minItems": 1}}
+    }
+  }
+}

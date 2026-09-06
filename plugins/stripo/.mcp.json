@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "stripo": {
+      "type": "http",
+      "url": "https://REPLACE-WITH-PRODUCTION-HOST/mcp",
+      "oauth": {
+        "clientId": "REPLACE-WITH-PUBLIC-CLIENT-ID",
+        "scopes": "mcp:tools"
+      }
+    }
+  }
+}

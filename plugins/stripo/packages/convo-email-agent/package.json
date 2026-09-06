@@ -1,0 +1,21 @@
+{
+  "name": "@ardas/convo-email-agent",
+  "version": "0.1.4",
+  "private": true,
+  "type": "module",
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "engines": {
+    "node": ">=20"
+  },
+  "exports": {
+    ".": {
+      "types": "./index.d.ts",
+      "import": "./index.js"
+    },
+    "./mcp-tools": {
+      "types": "./mcp-tools.d.ts",
+      "import": "./mcp-tools.js"
+    }
+  }
+}

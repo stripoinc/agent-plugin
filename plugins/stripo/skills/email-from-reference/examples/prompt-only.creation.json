@@ -1,0 +1,18 @@
+{
+  "v": 2,
+  "note": "Minimal prompt-only example; replace every placeholder with verified campaign facts.",
+  "sourceSummary": [
+    "Replace this example's content and include settings/resources from the designated reference."
+  ],
+  "message": {"name": "Email from reference"},
+  "model": {
+    "stripes": [{
+      "structures": [{
+        "columns": [{
+          "settings": {"width": 600},
+          "containers": [{"blocks": [{"type": "text", "content": "<p>Reference-based email content.</p>"}]}]
+        }]
+      }]
+    }]
+  }
+}

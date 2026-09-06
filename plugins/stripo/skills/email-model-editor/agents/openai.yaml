@@ -1,0 +1,6 @@
+interface:
+  display_name: "Email Model Editor"
+  short_description: "Edit Stripo emails through native JSON models"
+  default_prompt: "Use $email-model-editor to edit an existing Stripo email through a generated SDK mutation module and verify the saved model and desktop/mobile PNGs."
+policy:
+  allow_implicit_invocation: true

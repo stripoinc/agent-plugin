@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "package": "@ardas/convo-email-agent",
+  "version": "0.1.4",
+  "sourceRevision": "6507bf5dfbe605f833185e12906782a31abee8a0",
+  "sourceDirty": false,
+  "brand": "stripo",
+  "canonicalMcpBrand": "reteno",
+  "endpointConfiguration": "consumer-owned",
+  "skills": [
+    "email-model-editor",
+    "email-from-reference"
+  ],
+  "agentFormats": [
+    "codex",
+    "claude-cowork"
+  ],
+  "mcpToolMapping": "./mcp-tools.json",
+  "sdk": "./packages/convo-email-agent/index.js"
+}

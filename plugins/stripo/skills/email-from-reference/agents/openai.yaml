@@ -1,0 +1,6 @@
+interface:
+  display_name: "Email From Reference"
+  short_description: "Create Stripo emails from text or other references"
+  default_prompt: "Use $email-from-reference to create and persist a Stripo email from a text description or other authorized references as native editable JSON, then verify the saved model and desktop/mobile PNGs."
+policy:
+  allow_implicit_invocation: true

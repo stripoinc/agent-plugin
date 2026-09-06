@@ -1,0 +1,23 @@
+{
+  "name": "stripo",
+  "owner": {
+    "name": "Stripo"
+  },
+  "metadata": {
+    "description": "Stripo plugins for Claude Code and Codex."
+  },
+  "plugins": [
+    {
+      "name": "stripo",
+      "source": "./plugins/stripo",
+      "description": "Create and edit Stripo emails and templates through the Stripo MCP with native JSON-model skills.",
+      "version": "0.1.4",
+      "category": "productivity",
+      "keywords": [
+        "stripo",
+        "email",
+        "mcp"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "brand": "stripo",
+  "canonicalBrand": "reteno",
+  "fieldMapping": "adapter",
+  "tools": {
+    "getEmailModel": "get_document_state",
+    "getEmailModelSchema": "get_document_state_schema",
+    "getEmailMessagePreview": "get_screenshot",
+    "createEmailShell": "create_email",
+    "prepareEmailModelUpload": "prepare_document_state_upload",
+    "updateEmailModel": "set_document_state"
+  },
+  "auxiliaryTools": {
+    "identity": "whoami",
+    "contentMetadata": "get_content",
+    "recoverCreatedEmail": "find_content",
+    "folders": "find_folders"
+  },
+  "unsupported": {
+    "getBrandkit": "Use the reference email or template for brand facts.",
+    "listEmailInterfaces": "This editor has no sending interfaces.",
+    "updateEmailMetadata": "No metadata write tool is available.",
+    "prepareImageUpload": "Reuse hosted reference assets or user-supplied hosted assets.",
+    "uploadImage": "No asset upload tool is available.",
+    "createTemplate": "Templates can be read, edited and rebuilt; only emails can be created."
+  },
+  "entityTypes": [
+    "EMAIL",
+    "TEMPLATE"
+  ],
+  "contract": {
+    "read": {
+      "id": "id",
+      "type": "type",
+      "file": "downloadUrl"
+    },
+    "prepare": {
+      "id": "id",
+      "type": "type",
+      "file": "uploadUrl",
+      "ticket": "uploadId"
+    },
+    "write": {
+      "id": "id",
+      "type": "type",
+      "ticket": "uploadId",
+      "singleUse": true,
+      "baseVersion": false
+    },
+    "preview": {
+      "id": "id",
+      "type": "type",
+      "mode": "BOTH",
+      "files": "screenshots"
+    }
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "name": "stripo",
+  "version": "0.1.4",
+  "description": "Create and edit Stripo emails and templates through the Stripo MCP: native JSON-model skills backed by the convo-email-agent SDK.",
+  "author": {
+    "name": "Stripo",
+    "url": "https://stripo.email"
+  },
+  "homepage": "https://stripo.email",
+  "repository": "https://github.com/stripoinc/agent-plugin",
+  "keywords": [
+    "stripo",
+    "email",
+    "email-template",
+    "mcp"
+  ],
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
+  "interface": {
+    "displayName": "Stripo",
+    "shortDescription": "Create and edit Stripo emails through their native JSON model",
+    "longDescription": "Create new Stripo emails from a text description or an existing email, template, HTML or screenshot, and make bounded copy, link, image and style edits to existing emails and templates. Changes go through the native editor JSON model and the Stripo MCP, then are verified by reading the saved model back and inspecting desktop and mobile previews.",
+    "developerName": "Stripo",
+    "category": "Productivity",
+    "capabilities": [
+      "Read",
+      "Write"
+    ],
+    "websiteURL": "https://stripo.email",
+    "defaultPrompt": [
+      "Create a new Stripo email from this description",
+      "Change the copy, links or images in an existing Stripo email"
+    ]
+  }
+}
