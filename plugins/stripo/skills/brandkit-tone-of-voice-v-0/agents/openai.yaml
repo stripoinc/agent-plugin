@@ -1,0 +1,9 @@
+interface:
+  display_name: "Brand Kit Tone of Voice"
+  short_description: "Derive brand voice from bounded website evidence"
+  default_prompt: >-
+    Use $brandkit-tone-of-voice-v-0 to derive the requested website's tone of
+    voice from the supplied technical evidence directory and write the
+    validated satellite artifact for the brand kit extraction workflow.
+policy:
+  allow_implicit_invocation: true

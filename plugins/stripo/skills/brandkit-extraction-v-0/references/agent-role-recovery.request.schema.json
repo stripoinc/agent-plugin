@@ -1,0 +1,117 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://example.local/brandkit-extractor/agent-role-recovery.request.schema.json",
+  "title": "Agent-selected styling role recovery request",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "recoveries"],
+  "properties": {
+    "version": { "const": 1 },
+    "recoveries": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 20,
+      "items": { "$ref": "#/$defs/recovery" }
+    }
+  },
+  "$defs": {
+    "locator": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["selector", "matchIndex"],
+      "properties": {
+        "selector": { "type": "string", "minLength": 1, "maxLength": 200 },
+        "matchIndex": { "type": "integer", "minimum": 0, "maximum": 1000 },
+        "expectedText": { "type": "string", "maxLength": 200 }
+      }
+    },
+    "region": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["x", "y", "width", "height"],
+      "properties": {
+        "x": { "type": "integer", "minimum": 0 },
+        "y": { "type": "integer", "minimum": 0 },
+        "width": { "type": "integer", "minimum": 1 },
+        "height": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "typographyValue": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["family", "weight", "sizePx", "lineHeightPx", "letterSpacingPx", "fontStyle", "textTransform"],
+      "properties": {
+        "family": { "type": "string", "minLength": 1 },
+        "weight": { "type": ["number", "null"] },
+        "sizePx": { "type": ["number", "null"] },
+        "lineHeightPx": { "type": ["number", "null"] },
+        "letterSpacingPx": { "type": ["number", "null"] },
+        "fontStyle": { "type": ["string", "null"] },
+        "textTransform": { "type": ["string", "null"] }
+      }
+    },
+    "fallback": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind", "value", "reason", "screenshotRegion"],
+          "properties": {
+            "kind": { "const": "screenshot-color" },
+            "value": { "type": "string", "pattern": "^#[0-9a-f]{6}$" },
+            "reason": { "type": "string", "minLength": 1, "maxLength": 500 },
+            "screenshotRegion": { "$ref": "#/$defs/region" }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind", "value", "reason", "source"],
+          "properties": {
+            "kind": { "const": "typography-default" },
+            "value": { "$ref": "#/$defs/typographyValue" },
+            "reason": { "type": "string", "minLength": 1, "maxLength": 500 },
+            "source": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["kind", "selector", "matchIndex"],
+              "properties": {
+                "kind": { "const": "captured-row" },
+                "selector": { "type": "string", "minLength": 1, "maxLength": 200 },
+                "matchIndex": { "type": "integer", "minimum": 0, "maximum": 1000 }
+              }
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind", "reason", "source"],
+          "properties": {
+            "kind": { "const": "typography-default" },
+            "reason": { "type": "string", "minLength": 1, "maxLength": 500 },
+            "source": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["kind"],
+              "properties": { "kind": { "const": "system-default" } }
+            }
+          }
+        }
+      ]
+    },
+    "recovery": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["role", "property", "locator"],
+      "properties": {
+        "role": { "type": "string", "minLength": 1, "maxLength": 100 },
+        "property": {
+          "enum": ["color", "background-color", "border-color", "hover-color", "hover-background-color", "typography"]
+        },
+        "locator": { "$ref": "#/$defs/locator" },
+        "fallback": { "$ref": "#/$defs/fallback" }
+      }
+    }
+  }
+}

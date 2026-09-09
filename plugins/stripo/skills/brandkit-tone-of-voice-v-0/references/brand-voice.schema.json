@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/brandkit-tone-of-voice-v-0/brand-voice.schema.json",
+  "title": "Brand Voice",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["toneOfVoice", "rulesToFollow", "defaultLanguages", "styles"],
+  "properties": {
+    "toneOfVoice": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "rulesToFollow": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["allowed", "forbidden"],
+      "properties": {
+        "allowed": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "forbidden": {
+          "type": "array",
+          "items": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "defaultLanguages": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "styles": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 }
+    }
+  }
+}

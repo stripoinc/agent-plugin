@@ -1,0 +1,211 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://example.local/brandkit-extractor/agent-role-recovery.schema.json",
+  "title": "Agent-selected styling role recovery evidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "producer", "captureBinding", "recoveries"],
+  "properties": {
+    "version": { "const": 1 },
+    "producer": { "const": "recover-role-styles.js" },
+    "captureBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["pageUrl", "captureSha256", "screenshotSha256", "textStylesSha256"],
+      "properties": {
+        "pageUrl": { "type": "string", "minLength": 1 },
+        "captureSha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "screenshotSha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "textStylesSha256": {
+          "oneOf": [
+            { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+            { "type": "null" }
+          ]
+        }
+      }
+    },
+    "recoveries": {
+      "type": "array",
+      "maxItems": 20,
+      "items": { "$ref": "#/$defs/recovery" }
+    }
+  },
+  "$defs": {
+    "locator": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["selector", "matchIndex"],
+      "properties": {
+        "selector": { "type": "string", "minLength": 1, "maxLength": 500 },
+        "matchIndex": { "type": "integer", "minimum": 0, "maximum": 1000 },
+        "expectedText": { "type": "string", "maxLength": 200 }
+      }
+    },
+    "style": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "color", "backgroundColor", "borderColor", "fontFamily", "fontWeight",
+        "fontSizePx", "lineHeightPx", "letterSpacingPx", "fontStyle", "textTransform"
+      ],
+      "properties": {
+        "color": { "type": ["string", "null"] },
+        "backgroundColor": { "type": ["string", "null"] },
+        "borderColor": { "type": ["string", "null"] },
+        "fontFamily": { "type": ["string", "null"] },
+        "fontWeight": { "type": ["number", "null"] },
+        "fontSizePx": { "type": ["number", "null"] },
+        "lineHeightPx": { "type": ["number", "null"] },
+        "letterSpacingPx": { "type": ["number", "null"] },
+        "fontStyle": { "type": ["string", "null"] },
+        "textTransform": { "type": ["string", "null"] }
+      }
+    },
+    "measurement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["pageUrl", "tag", "text", "style"],
+      "properties": {
+        "pageUrl": { "type": "string", "minLength": 1 },
+        "tag": { "type": "string", "minLength": 1 },
+        "text": { "type": "string", "maxLength": 200 },
+        "style": { "$ref": "#/$defs/style" }
+      }
+    },
+    "region": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["x", "y", "width", "height"],
+      "properties": {
+        "x": { "type": "integer", "minimum": 0 },
+        "y": { "type": "integer", "minimum": 0 },
+        "width": { "type": "integer", "minimum": 1 },
+        "height": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "typographyValue": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["family", "weight", "sizePx", "lineHeightPx", "letterSpacingPx", "fontStyle", "textTransform"],
+      "properties": {
+        "family": { "type": "string", "minLength": 1 },
+        "weight": { "type": ["number", "null"] },
+        "sizePx": { "type": ["number", "null"] },
+        "lineHeightPx": { "type": ["number", "null"] },
+        "letterSpacingPx": { "type": ["number", "null"] },
+        "fontStyle": { "type": ["string", "null"] },
+        "textTransform": { "type": ["string", "null"] }
+      }
+    },
+    "fallback": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind", "value", "reason", "screenshotRegion"],
+          "properties": {
+            "kind": { "const": "screenshot-color" },
+            "value": { "type": "string", "pattern": "^#[0-9a-f]{6}$" },
+            "reason": { "type": "string", "minLength": 1, "maxLength": 500 },
+            "screenshotRegion": { "$ref": "#/$defs/region" }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["kind", "value", "reason", "source"],
+          "properties": {
+            "kind": { "const": "typography-default" },
+            "value": { "$ref": "#/$defs/typographyValue" },
+            "reason": { "type": "string", "minLength": 1, "maxLength": 500 },
+            "source": {
+              "oneOf": [
+                {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": ["kind", "selector", "matchIndex"],
+                  "properties": {
+                    "kind": { "const": "captured-row" },
+                    "selector": { "type": "string", "minLength": 1 },
+                    "matchIndex": { "type": "integer", "minimum": 0 }
+                  }
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": ["kind"],
+                  "properties": { "kind": { "const": "system-default" } }
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "failure": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["code", "message"],
+      "properties": {
+        "code": {
+          "enum": ["selector-invalid", "element-missing", "element-hidden", "text-mismatch", "probe-error"]
+        },
+        "message": { "type": "string", "minLength": 1, "maxLength": 500 }
+      }
+    },
+    "baseRecovery": {
+      "type": "object",
+      "properties": {
+        "role": { "type": "string", "minLength": 1 },
+        "property": {
+          "enum": ["color", "background-color", "border-color", "hover-color", "hover-background-color", "typography"]
+        },
+        "locator": { "$ref": "#/$defs/locator" }
+      },
+      "required": ["role", "property", "locator"]
+    },
+    "recovery": {
+      "oneOf": [
+        {
+          "allOf": [
+            { "$ref": "#/$defs/baseRecovery" },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["role", "property", "locator", "status", "measurement"],
+              "properties": {
+                "role": { "type": "string", "minLength": 1 },
+                "property": {
+                  "enum": ["color", "background-color", "border-color", "hover-color", "hover-background-color", "typography"]
+                },
+                "locator": { "$ref": "#/$defs/locator" },
+                "status": { "const": "reprobed" },
+                "measurement": { "$ref": "#/$defs/measurement" }
+              }
+            }
+          ]
+        },
+        {
+          "allOf": [
+            { "$ref": "#/$defs/baseRecovery" },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["role", "property", "locator", "status", "failure"],
+              "properties": {
+                "role": { "type": "string", "minLength": 1 },
+                "property": {
+                  "enum": ["color", "background-color", "border-color", "hover-color", "hover-background-color", "typography"]
+                },
+                "locator": { "$ref": "#/$defs/locator" },
+                "status": { "const": "reprobe-failed" },
+                "failure": { "$ref": "#/$defs/failure" },
+                "fallback": { "$ref": "#/$defs/fallback" }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -51,9 +51,11 @@ function writeJson(filePath, value) {
 }
 function compactError(error) {
   const fields = error instanceof Error || isObject(error) ? error : void 0;
+  const errors = fields && "errors" in fields && Array.isArray(fields.errors) ? fields.errors : void 0;
   return {
     name: typeof fields?.name === "string" ? fields.name : "Error",
-    message: String(fields?.message ?? error).slice(0, 2e3)
+    message: String(fields?.message ?? error).slice(0, 2e3),
+    ...errors ? { errors } : {}
   };
 }
 function resolveSdkDist(startUrl = import.meta.url) {
@@ -233,9 +235,14 @@ function summarizeBlock(block, area, summary, inheritedHiddenOn) {
       area,
       ownHideElement: visibility.ownHideElement,
       effectiveVisibility: visibility.effectiveVisibility,
+      style: settings.style,
+      textCustomization: settings.textCustomization,
       networks: networks.slice(0, 20).map((network) => ({
         type: isObject(network) ? network.type : void 0,
-        href: isObject(network) ? linkValue(network.link) : void 0
+        href: isObject(network) ? linkValue(network.link) : void 0,
+        title: isObject(network) ? truncate(network.title) : void 0,
+        alt: isObject(network) ? truncate(network.alt) : void 0,
+        icon: isObject(network) ? network.icon : void 0
       }))
     });
     return;
@@ -271,6 +278,7 @@ function summarizeEditorJson(value) {
       hasCompiledHtml: typeof emailJson?.html === "string",
       hasCompiledCss: typeof emailJson?.css === "string"
     },
+    metadata: structuredClone(objectValue(emailJson.metadata)),
     theme: {
       contentWidth: objectValue(settings.general).messageContentWidth,
       generalBackgroundColor: objectValue(settings.general).backgroundColor,
@@ -365,6 +373,7 @@ async function main(argv = process.argv.slice(2)) {
     inputPath,
     outputPath,
     schemaValid: result.schema.valid,
+    metadata: result.summary.metadata,
     counts: result.summary.counts,
     blockTypes: result.summary.blockTypes
   }));

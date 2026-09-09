@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/brandkit-business-context-v-0/business-context.schema.json",
+  "title": "Business Context",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["customerValue", "revenueModel"],
+  "properties": {
+    "customerValue": { "type": "string" },
+    "revenueModel": { "type": "string" }
+  }
+}

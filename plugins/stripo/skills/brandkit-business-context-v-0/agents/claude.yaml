@@ -1,0 +1,8 @@
+interface:
+  display_name: "Brand Kit Business Context"
+  short_description: "Derive business context from website evidence"
+  default_prompt: >-
+    Use $brandkit-business-context-v-0 to derive the requested website's
+    customer value and revenue model from the supplied technical evidence
+    directory and write the validated satellite artifact for the brand kit
+    extraction workflow.

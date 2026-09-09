@@ -1,0 +1,44 @@
+{
+  "_audience": "Downstream consumers (DB writers, validators, integrators) and operators auditing the extraction pipeline. Not directly consumed by the agent at runtime — the agent's contract lives in SKILL.md and the JSON schemas. Linked from SKILL.md \"Reference index\".",
+  "_purpose": "Stable contract documenting which actor (agent / scaffolder / normalize / runtime) owns which artifact, plus the public-output rules a final brandkit.json must satisfy.",
+  "version": 1,
+  "owner": "agent-and-runtime",
+  "assembler": "scripts/assemble-extraction-stage.js",
+  "assemblerModes": {
+    "scaffold": "Generate a shape-safe candidate extraction-stage draft and assembly-diagnostics.json from saved homepage artifacts.",
+    "normalize": "Validate, sanitize, canonicalize known aliases, and refresh diagnostics for an agent-authored draft passed with --input <path>."
+  },
+  "extractionStageOutput": "artifacts/technical/<slug>/brandkit.extraction.json",
+  "finalOutputs": [
+    "artifacts/results/<slug>/brandkit.json",
+    "artifacts/results/<slug>/brandkit.html"
+  ],
+  "rules": [
+    "Extraction owns homepage evidence and non-voice public fields only.",
+    "Use --mode scaffold after homepage-pass.js as a candidate extraction-stage draft.",
+    "The assembler generates a shape-safe candidate draft and diagnostics; it does not own brand role decisions.",
+    "The agent owns role decisions from saved screenshot, DOM hierarchy, and focused probe evidence, and decides which candidate records survive into brandkit.extraction.json.",
+    "Use --mode normalize --input <path> after agent edits; normalize validates, sanitizes, canonicalizes, and diagnoses only.",
+    "Extraction-stage public fields copied unchanged by runtime must use the same shape as final schema.",
+    "Tone-of-voice owns brand.brandVoice only.",
+    "Runtime merges brand-voice into extraction output and validates final schema.",
+    "Product-card evidence is neutral evidence under brand.components.productCard.",
+    "No public field may contain worker-local paths, selectors, debug traces, screenshots, coordinates, DOM ids, or DOM classes."
+  ],
+  "extractionFields": {
+    "brand": [
+      "organization",
+      "logos",
+      "colors",
+      "typography",
+      "components.button",
+      "components.productCard"
+    ],
+    "topLevel": [
+      "contacts",
+      "socials",
+      "importantLinks",
+      "languages"
+    ]
+  }
+}

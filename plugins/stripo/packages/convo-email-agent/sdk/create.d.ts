@@ -1,4 +1,5 @@
 import type { EmailMutationSdkSession, IdFactory } from "./types.js";
+import { type SocialNetworkInput } from "./social.js";
 type JsonArray = JsonValue[];
 type JsonObject = {
     [key: string]: JsonValue;
@@ -25,12 +26,10 @@ export interface CreateEmailBuilderOptions extends CreateMinimalEmailSeedOptions
 export interface CreateEmailFromDraftOptions {
     /** Native editor JSON; IDs and default settings may be omitted. */
     emailJson: unknown;
-    /**
-     * Keep blocks whose type has no draft defaults (menu, video, and other native
-     * kinds copied from a reference) instead of rejecting them. Their IDs and
-     * settings are checked and preserved as supplied.
-     */
-    preserveNativeBlocks?: boolean;
+    /** Acquired target model for a rebuild; unchanged imported metadata text may exceed 500 UTF-16 code units. */
+    baselineEmailJson?: unknown;
+    /** Assign new structural IDs when copying or fully replacing a document. */
+    regenerateIds?: boolean;
     idFactory?: IdFactory;
 }
 export interface AddTextSectionOptions {
@@ -58,6 +57,29 @@ export interface AddFooterSectionOptions {
     area?: EmailBuilderArea;
     after?: string | EmailBuilderSection;
 }
+/** Native social block from caller-facing network descriptions; omitted settings take the editor defaults. */
+export interface SocialBlockOptions {
+    networks: readonly SocialNetworkInput[];
+    /** One of the editor's icon styles, e.g. "logoColored" (default), "logoBlack", "circleColored". */
+    style?: string;
+    /** 16..64, default 32. */
+    iconSize?: number;
+    /** 0..40 per breakpoint, default 10. */
+    spaceBetweenIcons?: number | {
+        desktop: number;
+        mobile: number;
+    };
+    alignment?: "left" | "center" | "right" | {
+        desktop: string;
+        mobile: string;
+    };
+    /** Defaults to true when any network supplies alt; when true every network gets alt (title fallback). */
+    textCustomization?: boolean;
+}
+export interface AddSocialSectionOptions extends SocialBlockOptions {
+    area?: EmailBuilderArea;
+    after?: string | EmailBuilderSection;
+}
 export interface EmailBuilderSection {
     readonly id: string;
     readonly area: EmailBuilderArea;
@@ -72,6 +94,7 @@ export interface EmailBuilder {
     addTextSection(options: AddTextSectionOptions): EmailBuilderSection;
     addImageSection(options: AddImageSectionOptions): EmailBuilderSection;
     addButtonSection(options: AddButtonSectionOptions): EmailBuilderSection;
+    addSocialSection(options: AddSocialSectionOptions): EmailBuilderSection;
     addFooterSection(options: AddFooterSectionOptions): EmailBuilderSection;
     setTheme(path: string, value: unknown): EmailBuilder;
     toJSON(): unknown;
@@ -94,6 +117,8 @@ export declare function createMinimalEmailSeed(options?: CreateMinimalEmailSeedO
  * Complete a native editor draft, preserving its fields and topology except
  * for email button targets, which require a mailto: URI. Missing IDs and settings
  * receive defaults; the downloaded schema validates the completed document.
+ * With regenerateIds, structural nodes receive new IDs from the ID factory.
+ * Native block kinds without draft defaults keep their supplied settings.
  * The caller's draft is untouched.
  */
 export declare function createEmailFromDraft(options: CreateEmailFromDraftOptions): unknown;
