@@ -1,3 +1,6 @@
+// src/skill-scripts/email-from-reference/create-from-brief.ts
+import { randomUUID } from "node:crypto";
+
 // src/skill-scripts/shared/schema-cache.ts
 import { statSync } from "node:fs";
 function schemaIsFresh(file) {
@@ -51,9 +54,11 @@ function writeJson(filePath, value) {
 }
 function compactError(error) {
   const fields = error instanceof Error || isObject(error) ? error : void 0;
+  const errors = fields && "errors" in fields && Array.isArray(fields.errors) ? fields.errors : void 0;
   return {
     name: typeof fields?.name === "string" ? fields.name : "Error",
-    message: String(fields?.message ?? error).slice(0, 2e3)
+    message: String(fields?.message ?? error).slice(0, 2e3),
+    ...errors ? { errors } : {}
   };
 }
 function resolveSdkDist(startUrl = import.meta.url) {
@@ -233,9 +238,14 @@ function summarizeBlock(block, area, summary, inheritedHiddenOn) {
       area,
       ownHideElement: visibility.ownHideElement,
       effectiveVisibility: visibility.effectiveVisibility,
+      style: settings.style,
+      textCustomization: settings.textCustomization,
       networks: networks.slice(0, 20).map((network) => ({
         type: isObject(network) ? network.type : void 0,
-        href: isObject(network) ? linkValue(network.link) : void 0
+        href: isObject(network) ? linkValue(network.link) : void 0,
+        title: isObject(network) ? truncate(network.title) : void 0,
+        alt: isObject(network) ? truncate(network.alt) : void 0,
+        icon: isObject(network) ? network.icon : void 0
       }))
     });
     return;
@@ -271,6 +281,7 @@ function summarizeEditorJson(value) {
       hasCompiledHtml: typeof emailJson?.html === "string",
       hasCompiledCss: typeof emailJson?.css === "string"
     },
+    metadata: structuredClone(objectValue(emailJson.metadata)),
     theme: {
       contentWidth: objectValue(settings.general).messageContentWidth,
       generalBackgroundColor: objectValue(settings.general).backgroundColor,
@@ -495,6 +506,7 @@ async function main() {
   const args = parseArgs(process.argv.slice(2));
   const briefPath = requireString(args, "brief");
   const outputPath = requireString(args, "output");
+  const baselinePath = args.baseline === void 0 ? void 0 : requireString(args, "baseline");
   const diagnosticsPath = optionalString(args, "diagnostics") ?? `${outputPath}.diagnostics.json`;
   const sdkPath = resolveSdkDist();
   const brand = optionalString(args, "brand") ?? "reteno";
@@ -508,7 +520,12 @@ async function main() {
     }
     const typedBrief = brief;
     const sdk = await loadSdk(sdkPath);
-    const emailJson = sdk.createEmailFromDraft({ emailJson: typedBrief.model, preserveNativeBlocks: brand === "stripo" });
+    const emailJson = sdk.createEmailFromDraft({
+      emailJson: typedBrief.model,
+      baselineEmailJson: baselinePath === void 0 ? void 0 : readJson(baselinePath),
+      regenerateIds: true,
+      idFactory: () => randomUUID()
+    });
     const validation = await validateEditorJson(emailJson, sdkPath);
     if (!validation.valid) {
       throw new Error(`Created model failed native editor schema validation: ${validation.error?.message ?? "unknown error"}`);
@@ -519,6 +536,7 @@ async function main() {
     writeJson(diagnosticsPath, {
       status: "ok",
       briefPath,
+      baselinePath,
       outputPath,
       sdkPath,
       message: typedBrief.message,
@@ -539,6 +557,7 @@ async function main() {
     writeJson(diagnosticsPath, {
       status: "error",
       briefPath,
+      baselinePath,
       outputPath,
       sdkPath,
       fontGate: brand === "reteno" ? { customFontsEnabled } : void 0,

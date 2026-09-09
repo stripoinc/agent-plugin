@@ -1,0 +1,1151 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/brandkit-extractor/extraction-stage.schema.json",
+  "title": "Brandkit Extraction Stage Output",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "brand",
+    "contacts",
+    "socials",
+    "importantLinks",
+    "languages"
+  ],
+  "properties": {
+    "brand": {
+      "$ref": "#/$defs/brandExtraction"
+    },
+    "contacts": {
+      "$ref": "#/$defs/contacts"
+    },
+    "socials": {
+      "$ref": "#/$defs/socials"
+    },
+    "importantLinks": {
+      "$ref": "#/$defs/importantLinks"
+    },
+    "languages": {
+      "$ref": "#/$defs/stringList",
+      "description": "Visible site languages as deduped lowercase ISO 639-1 two-letter codes (e.g. \"en\", \"uk\", \"ru\"). The runtime normalizes region subtags (\"uk-ua\"->\"uk\") and common aliases (\"ua\"->\"uk\", \"cz\"->\"cs\") and drops non-conforming entries; it never rejects."
+    },
+    "roleProvenance": {
+      "type": "object",
+      "description": "Per-role provenance and confidence for every published styling role plus the required roles normalize grades even when missing. dom-measured is an exact deterministic capture value. agent-recovered is an exact computed-style value from a run-bound agent-selected DOM re-probe. screenshot-sampled is a color sampled from the run-bound screenshot only after an eligible exact re-probe failure. defaulted is an unmeasured or conservative fallback, including bounded typography fallback after failed re-probe. missing means no carrier was published. Styling uncertainty warns and never blocks. Normalize rebuilds this object on every pass; agent-authored grades are not trusted. The object stays optional for artifacts written before this field existed.",
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "provenance",
+          "confidence"
+        ],
+        "properties": {
+          "provenance": {
+            "type": "string",
+            "enum": [
+              "dom-measured",
+              "agent-recovered",
+              "screenshot-sampled",
+              "defaulted",
+              "missing"
+            ]
+          },
+          "confidence": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "colorOrNull": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "colorMeasurementState": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "measured",
+        "transparent",
+        "unavailable",
+        null
+      ],
+      "description": "How the colour beside this field was arrived at, as the probe recorded it (`measureColor`, scripts/lib.js): `measured` is a real colour with alpha > 0; `transparent` is a colour parsed with alpha 0 (the element paints nothing there -- a design fact, and a value the productCard variant signature compares); `unavailable` is no value, unparseable, or never read -- the ONE state the normalize pass may treat as an unmeasured axis when it absorbs a record into a peer that measured it. Absent or null means the record carries no state: it is compared on its hex like any other value and is never a wildcard. Never written by hand; carried from the technical row by the scaffold."
+    },
+    "numberOrNull": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "stringList": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "usageHint": {
+      "type": "string",
+      "enum": [
+        "brand-primary-accent",
+        "brand-secondary-accent",
+        "promo-accent",
+        "promo-surface-accent",
+        "promo-surface-background",
+        "canvas-background",
+        "content-background",
+        "header-background",
+        "footer-background",
+        "product-card-surface-background",
+        "heading-text",
+        "body-text",
+        "link",
+        "link-text",
+        "link-promo",
+        "header-link",
+        "footer-text",
+        "footer-link",
+        "button-primary-background",
+        "button-primary-text",
+        "button-primary-hover-background",
+        "button-secondary-background",
+        "button-secondary-text",
+        "product-card-cta-background",
+        "product-card-cta-text",
+        "product-card-cta-hover-background",
+        "product-card-cta-border",
+        "price-current",
+        "price-old",
+        "divider",
+        "border-subtle",
+        "body-typography",
+        "heading-typography",
+        "header-typography",
+        "footer-typography",
+        "button-typography",
+        "product-name-typography",
+        "product-price-typography",
+        "product-old-price-typography",
+        "product-card-cta"
+      ]
+    },
+    "usageHintList": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/usageHint"
+      }
+    },
+    "colorUsageHint": {
+      "type": "string",
+      "enum": [
+        "brand-primary-accent",
+        "brand-secondary-accent",
+        "promo-accent",
+        "promo-surface-accent",
+        "promo-surface-background",
+        "canvas-background",
+        "content-background",
+        "header-background",
+        "footer-background",
+        "product-card-surface-background",
+        "heading-text",
+        "body-text",
+        "link",
+        "link-text",
+        "link-promo",
+        "header-link",
+        "footer-text",
+        "footer-link",
+        "button-primary-background",
+        "button-primary-text",
+        "button-primary-hover-background",
+        "button-secondary-background",
+        "button-secondary-text",
+        "product-card-cta-background",
+        "product-card-cta-text",
+        "product-card-cta-hover-background",
+        "product-card-cta-border",
+        "price-current",
+        "price-old",
+        "divider",
+        "border-subtle"
+      ]
+    },
+    "colorUsageHintList": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/usageHintList"
+        },
+        {
+          "items": {
+            "$ref": "#/$defs/colorUsageHint"
+          }
+        }
+      ]
+    },
+    "accentColorUsageHint": {
+      "type": "string",
+      "enum": [
+        "brand-primary-accent",
+        "brand-secondary-accent",
+        "promo-accent",
+        "promo-surface-accent",
+        "button-primary-background",
+        "button-primary-hover-background",
+        "button-secondary-background",
+        "product-card-cta-background",
+        "product-card-cta-hover-background",
+        "product-card-cta-border",
+        "price-current",
+        "price-old",
+        "divider",
+        "border-subtle",
+        "link-text",
+        "link-promo"
+      ]
+    },
+    "accentColorUsageHintList": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/usageHintList"
+        },
+        {
+          "items": {
+            "$ref": "#/$defs/accentColorUsageHint"
+          }
+        }
+      ]
+    },
+    "backgroundColorUsageHint": {
+      "type": "string",
+      "enum": [
+        "canvas-background",
+        "content-background",
+        "header-background",
+        "footer-background",
+        "product-card-surface-background",
+        "promo-surface-background"
+      ]
+    },
+    "backgroundColorUsageHintList": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/usageHintList"
+        },
+        {
+          "items": {
+            "$ref": "#/$defs/backgroundColorUsageHint"
+          }
+        }
+      ]
+    },
+    "textColorUsageHint": {
+      "type": "string",
+      "enum": [
+        "heading-text",
+        "body-text",
+        "link",
+        "link-text",
+        "link-promo",
+        "header-link",
+        "footer-text",
+        "footer-link",
+        "button-primary-text",
+        "button-secondary-text",
+        "product-card-cta-text",
+        "price-current",
+        "price-old"
+      ]
+    },
+    "textColorUsageHintList": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/usageHintList"
+        },
+        {
+          "items": {
+            "$ref": "#/$defs/textColorUsageHint"
+          }
+        }
+      ]
+    },
+    "typographyUsageHint": {
+      "type": "string",
+      "enum": [
+        "body-typography",
+        "heading-typography",
+        "header-typography",
+        "footer-typography",
+        "button-typography",
+        "product-name-typography",
+        "product-price-typography",
+        "product-old-price-typography",
+        "product-card-cta"
+      ]
+    },
+    "typographyUsageHintList": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/usageHintList"
+        },
+        {
+          "items": {
+            "$ref": "#/$defs/typographyUsageHint"
+          }
+        }
+      ]
+    },
+    "buttonUsageHint": {
+      "type": "string",
+      "enum": [
+        "button-primary-background",
+        "button-primary-text",
+        "button-primary-hover-background",
+        "button-secondary-background",
+        "button-secondary-text",
+        "product-card-cta"
+      ]
+    },
+    "buttonUsageHintList": {
+      "allOf": [
+        {
+          "$ref": "#/$defs/usageHintList"
+        },
+        {
+          "items": {
+            "$ref": "#/$defs/buttonUsageHint"
+          }
+        }
+      ]
+    },
+    "simplePadding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "top",
+        "right",
+        "bottom",
+        "left"
+      ],
+      "properties": {
+        "top": {
+          "type": "number"
+        },
+        "right": {
+          "type": "number"
+        },
+        "bottom": {
+          "type": "number"
+        },
+        "left": {
+          "type": "number"
+        }
+      }
+    },
+    "brandExtraction": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "organization",
+        "logos",
+        "colors",
+        "typography",
+        "components"
+      ],
+      "properties": {
+        "organization": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "name",
+            "website"
+          ],
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "website": {
+              "type": "string"
+            }
+          }
+        },
+        "logos": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "type",
+              "url",
+              "background",
+              "svgPath"
+            ],
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "primary",
+                  "alternative",
+                  "secondary",
+                  "favicon"
+                ]
+              },
+              "url": {
+                "type": "string"
+              },
+              "background": {
+                "type": "string",
+                "enum": [
+                  "light",
+                  "dark",
+                  "unknown"
+                ]
+              },
+              "svgPath": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "colors": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "accentColors",
+            "backgroundColors",
+            "textColors"
+          ],
+          "properties": {
+            "accentColors": {
+              "$ref": "#/$defs/accentColorTokenList"
+            },
+            "backgroundColors": {
+              "$ref": "#/$defs/backgroundColorTokenList"
+            },
+            "textColors": {
+              "$ref": "#/$defs/textColorTokenList"
+            }
+          }
+        },
+        "typography": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/typographyStyle"
+          }
+        },
+        "components": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "button",
+            "productCard"
+          ],
+          "properties": {
+            "button": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/buttonStyle"
+              }
+            },
+            "productCard": {
+              "$ref": "#/$defs/productCardStyleList"
+            }
+          }
+        }
+      }
+    },
+    "accentColorToken": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "value",
+        "description",
+        "usageHints"
+      ],
+      "properties": {
+        "value": {
+          "type": "string",
+          "pattern": "^#[0-9a-f]{6}$",
+          "description": "Canonical lowercase `#rrggbb`. `normalizeColor` (scripts/lib/extraction-pass-helpers.js) runs inside `normalizeExtraction` BEFORE this validator (scripts/lib/normalize-pass.js), so this pattern sits downstream of canonicalisation. MEASURED end to end, one `backgroundColors` row per spelling: ACCEPTED and rewritten to `#rrggbb` are `#abc`, `#ABC`, `#AABBCC`, `rgb()`, `RGB()`, `rgba()` with a NON-ZERO alpha, and `hsl()`. REFUSED are `linear-gradient(...)`, `transparent`, `rgba(r,g,b,0)` and `hsla(...,0)` (normalizeColor maps both zero-alpha forms onto the literal `transparent`), 4-digit `#rgba` and 8-digit `#rrggbbaa` (the 4-digit form expands to the 8-digit one), `inherit`, `var(...)`, and any bare word. A gradient is refused ON PURPOSE and not as collateral: the downstream compiler writes this value into an HTML `bgcolor` attribute and a CSS `background-color`, neither of which renders one, and `USAGE_HINT_ALIASES` already maps `gradient-background` to nothing. The refusal names the repair per spelling -- see `colourTokenValueRepairNote` beside the validator. Colours that may legitimately be `transparent` use `$defs/colorOrNull` instead. Do NOT mirror this pattern into `references/schema.json`: the extraction-strict / final-loose split is deliberate."
+        },
+        "description": {
+          "type": "string"
+        },
+        "usageHints": {
+          "$ref": "#/$defs/accentColorUsageHintList"
+        }
+      }
+    },
+    "accentColorTokenList": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/accentColorToken"
+      }
+    },
+    "backgroundColorToken": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "value",
+        "description",
+        "usageHints"
+      ],
+      "properties": {
+        "value": {
+          "type": "string",
+          "pattern": "^#[0-9a-f]{6}$",
+          "description": "Canonical lowercase `#rrggbb`. See `$defs/accentColorToken.properties.value` for the measured accept/refuse matrix and for why a `linear-gradient(...)` is refused rather than widened for: this is the one array a real shipped kit carried a gradient in (one storefront, 2026-04-23, `footer-background`, via the pre-extraction `brandkit.raw.json` path)."
+        },
+        "description": {
+          "type": "string"
+        },
+        "usageHints": {
+          "$ref": "#/$defs/backgroundColorUsageHintList"
+        }
+      }
+    },
+    "backgroundColorTokenList": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/backgroundColorToken"
+      }
+    },
+    "textColorToken": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "value",
+        "description",
+        "usageHints"
+      ],
+      "properties": {
+        "value": {
+          "type": "string",
+          "pattern": "^#[0-9a-f]{6}$",
+          "description": "Canonical lowercase `#rrggbb`. See `$defs/accentColorToken.properties.value` for the measured accept/refuse matrix. The semantic gate in scripts/lib/text-color-role-coverage.js only judges `heading-text` and `body-text`, so this pattern is the ONLY thing standing between a `link-text` row and a value that is not a colour."
+        },
+        "description": {
+          "type": "string"
+        },
+        "usageHints": {
+          "$ref": "#/$defs/textColorUsageHintList"
+        }
+      }
+    },
+    "textColorTokenList": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/textColorToken"
+      }
+    },
+    "typographyStyle": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "family",
+        "weight",
+        "sizePx",
+        "lineHeightPx",
+        "fontStyle",
+        "textTransform",
+        "usageHints",
+        "description"
+      ],
+      "properties": {
+        "family": {
+          "type": "string"
+        },
+        "weight": {
+          "$ref": "#/$defs/numberOrNull"
+        },
+        "sizePx": {
+          "$ref": "#/$defs/numberOrNull"
+        },
+        "lineHeightPx": {
+          "$ref": "#/$defs/numberOrNull"
+        },
+        "fontStyle": {
+          "type": "string"
+        },
+        "letterSpacingPx": {
+          "$ref": "#/$defs/numberOrNull"
+        },
+        "textTransform": {
+          "type": "string"
+        },
+        "usageHints": {
+          "$ref": "#/$defs/typographyUsageHintList"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+    "buttonLayout": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "intent"
+      ],
+      "properties": {
+        "intent": {
+          "type": "string",
+          "enum": [
+            "full-width",
+            "content-sized",
+            "fixed-width",
+            "icon-only",
+            "unknown"
+          ]
+        },
+        "isFullWidth": {
+          "type": "boolean"
+        },
+        "computedWidthPx": {
+          "$ref": "#/$defs/numberOrNull"
+        },
+        "computedHeightPx": {
+          "$ref": "#/$defs/numberOrNull"
+        },
+        "parentWidthPx": {
+          "$ref": "#/$defs/numberOrNull"
+        },
+        "widthRatioToParent": {
+          "$ref": "#/$defs/numberOrNull"
+        },
+        "display": {
+          "type": "string"
+        },
+        "cssWidth": {
+          "type": "string"
+        },
+        "cssMinWidth": {
+          "type": "string"
+        },
+        "cssMaxWidth": {
+          "type": "string"
+        },
+        "boxSizing": {
+          "type": "string"
+        },
+        "lineHeightPx": {
+          "$ref": "#/$defs/numberOrNull"
+        },
+        "alignSelf": {
+          "type": "string"
+        },
+        "justifyContent": {
+          "type": "string"
+        },
+        "marginLeftPx": {
+          "$ref": "#/$defs/numberOrNull"
+        },
+        "marginRightPx": {
+          "$ref": "#/$defs/numberOrNull"
+        }
+      }
+    },
+    "buttonStyle": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "backgroundColor",
+        "fontColor",
+        "borderColor",
+        "borderWidth",
+        "borderRadius",
+        "padding",
+        "usageHints",
+        "description"
+      ],
+      "properties": {
+        "backgroundColor": {
+          "$ref": "#/$defs/colorOrNull"
+        },
+        "fontColor": {
+          "$ref": "#/$defs/colorOrNull"
+        },
+        "borderColor": {
+          "type": "string"
+        },
+        "borderWidth": {
+          "type": "number"
+        },
+        "borderRadius": {
+          "type": "number"
+        },
+        "padding": {
+          "$ref": "#/$defs/simplePadding"
+        },
+        "hoverBackgroundColor": {
+          "$ref": "#/$defs/colorOrNull"
+        },
+        "hoverFontColor": {
+          "$ref": "#/$defs/colorOrNull"
+        },
+        "hoverBorderColor": {
+          "$ref": "#/$defs/colorOrNull"
+        },
+        "hoverBorderWidth": {
+          "$ref": "#/$defs/numberOrNull"
+        },
+        "layout": {
+          "$ref": "#/$defs/buttonLayout"
+        },
+        "usageHints": {
+          "$ref": "#/$defs/buttonUsageHintList"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+    "neutralSurface": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "backgroundColor": {
+          "$ref": "#/$defs/colorOrNull"
+        },
+        "backgroundColorState": {
+          "$ref": "#/$defs/colorMeasurementState"
+        },
+        "borderColor": {
+          "$ref": "#/$defs/colorOrNull"
+        },
+        "borderWidth": {
+          "$ref": "#/$defs/numberOrNull"
+        },
+        "borderStyle": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "borderRadius": {
+          "$ref": "#/$defs/numberOrNull"
+        },
+        "boxShadow": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "CSS box-shadow declaration captured from the live card container. `null` means no visible shadow chrome (CSS `none` or absent). The downstream customise pipeline applies this verbatim to the rendered email card so tile-using brands keep their shadow and bare brands explicitly clear the bundled template's shadow. Without this field, a tile-shadow brand collapses into the same {bg:white, border:0, radius:0} token shape as a bare brand and the two render visually identical."
+        }
+      }
+    },
+    "neutralTitleTypography": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "family": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "weight": {
+          "type": [
+            "string",
+            "number",
+            "null"
+          ]
+        },
+        "sizePx": {
+          "$ref": "#/$defs/numberOrNull"
+        },
+        "lineHeightPx": {
+          "$ref": "#/$defs/numberOrNull"
+        },
+        "fontStyle": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "letterSpacingPx": {
+          "$ref": "#/$defs/numberOrNull"
+        },
+        "textTransform": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "neutralCta": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "text": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "textSource": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "visible-text",
+            "aria-label",
+            "title",
+            "alt",
+            "inferred",
+            "none",
+            null
+          ]
+        },
+        "hasUsableVisibleText": {
+          "type": "boolean",
+          "default": false
+        },
+        "isCompact": {
+          "type": "boolean",
+          "default": false
+        },
+        "isIconLike": {
+          "type": "boolean",
+          "default": false
+        },
+        "hasInlineIcon": {
+          "type": [
+            "boolean",
+            "null"
+          ],
+          "description": "True when the live product-card CTA carries BOTH visible text AND a decorative inline glyph (img / svg / element with 'icon' in its class). Distinguishes verb-with-decorative-glyph CTAs (template variant 0) from pure verb-only CTAs (template variants 1/3/4) without requiring the agent to judge from the screenshot. Null when neither the probe nor the agent supplied a value."
+        },
+        "backgroundColor": {
+          "$ref": "#/$defs/colorOrNull"
+        },
+        "backgroundColorState": {
+          "$ref": "#/$defs/colorMeasurementState"
+        },
+        "fontColor": {
+          "$ref": "#/$defs/colorOrNull"
+        },
+        "fontColorState": {
+          "$ref": "#/$defs/colorMeasurementState"
+        },
+        "borderColor": {
+          "$ref": "#/$defs/colorOrNull"
+        },
+        "borderColorState": {
+          "$ref": "#/$defs/colorMeasurementState"
+        },
+        "borderWidth": {
+          "$ref": "#/$defs/numberOrNull"
+        },
+        "borderRadius": {
+          "$ref": "#/$defs/numberOrNull"
+        },
+        "padding": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/simplePadding"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "hoverBackgroundColor": {
+          "$ref": "#/$defs/colorOrNull"
+        },
+        "hoverFontColor": {
+          "$ref": "#/$defs/colorOrNull"
+        },
+        "hoverBorderColor": {
+          "$ref": "#/$defs/colorOrNull"
+        },
+        "layoutIntent": {
+          "type": "string",
+          "enum": [
+            "full-width",
+            "content-sized",
+            "fixed-width",
+            "icon-only",
+            "unknown"
+          ]
+        },
+        "hoverBackgroundColorState": {
+          "$ref": "#/$defs/colorMeasurementState"
+        },
+        "hoverFontColorState": {
+          "$ref": "#/$defs/colorMeasurementState"
+        },
+        "hoverBorderColorState": {
+          "$ref": "#/$defs/colorMeasurementState"
+        }
+      }
+    },
+    "productCardStyle": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "description",
+        "evidenceQuality",
+        "confidence"
+      ],
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "evidenceQuality": {
+          "type": "string",
+          "enum": [
+            "none",
+            "weak",
+            "medium",
+            "strong"
+          ]
+        },
+        "confidence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "priceColor": {
+          "$ref": "#/$defs/colorOrNull"
+        },
+        "priceColorState": {
+          "$ref": "#/$defs/colorMeasurementState"
+        },
+        "oldPriceColor": {
+          "$ref": "#/$defs/colorOrNull"
+        },
+        "borderColor": {
+          "$ref": "#/$defs/colorOrNull"
+        },
+        "borderWidth": {
+          "$ref": "#/$defs/numberOrNull"
+        },
+        "ctaPadding": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/simplePadding"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "surface": {
+          "$ref": "#/$defs/neutralSurface"
+        },
+        "titleTypography": {
+          "$ref": "#/$defs/neutralTitleTypography"
+        },
+        "priceTypography": {
+          "$ref": "#/$defs/neutralTitleTypography"
+        },
+        "oldPriceTypography": {
+          "$ref": "#/$defs/neutralTitleTypography"
+        },
+        "cta": {
+          "$ref": "#/$defs/neutralCta"
+        },
+        "contentAlign": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "left",
+            "center",
+            null
+          ],
+          "description": "Dominant text-alignment observed on the live product-card title and price. 'left' or 'center' when the probe captured a consistent signal across representative rows; null when evidence is weak or mixed. Maps to brandkit-tokens.productCardSelection.preferredContentAlign."
+        },
+        "oldPricePosition": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "top",
+            "left",
+            "right",
+            null
+          ],
+          "description": "Where the strikethrough old price renders relative to the current price on the live product cards. 'top' = stacked above current price; 'left' / 'right' = beside current on the same row. Null when no old price is shown or the layout is ambiguous. Downstream customise reads this to override the bundled variant's default price-block layout (each abandoned-cart variant ships with one of TOP/LEFT/RIGHT; this field lets the customiser swap to the layout the brand actually uses without needing a new variant for every alignment \u00d7 old-price-position combination)."
+        },
+        "recommendedVariantIndex": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 4,
+          "description": "Extraction agent's pick of the 5 bundled abandoned-cart product-card variants (0\u20134) whose shape best matches the live homepage. Read references/product-card-variants.md to choose. Null ONLY when there is no card to pick for \u2014 a non-ecommerce homepage, where productCard is empty and no row carries an index at all. Null is NOT a safe fallback on a page that has cards: no consumer-side scorer exists, build_product_card_bundle.py raises WorkflowError on --variant auto unless this is an int 0..4, and the downstream run HALTs for an operator-supplied --variant."
+        },
+        "recommendedVariantReason": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "One-line rationale for the recommendedVariantIndex choice. Null when recommendedVariantIndex is null."
+        },
+        "missingEvidence": {
+          "$ref": "#/$defs/stringList"
+        }
+      }
+    },
+    "productCardStyleList": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/productCardStyle"
+      }
+    },
+    "contacts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "emails",
+        "phones",
+        "addresses"
+      ],
+      "properties": {
+        "emails": {
+          "$ref": "#/$defs/stringList",
+          "description": "Canonical usable email facts only; never visible labels or prose."
+        },
+        "phones": {
+          "$ref": "#/$defs/stringList",
+          "description": "Canonical usable phone facts only; never visible labels or prose."
+        },
+        "addresses": {
+          "$ref": "#/$defs/stringList"
+        }
+      }
+    },
+    "socials": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "facebook",
+        "youtube",
+        "instagram",
+        "tiktok",
+        "twitter",
+        "x",
+        "snapchat",
+        "pinterest",
+        "linkedin",
+        "android",
+        "apple",
+        "rss",
+        "yelp",
+        "threads",
+        "discord",
+        "twitch",
+        "whatsapp",
+        "viber",
+        "telegram",
+        "messenger"
+      ],
+      "properties": {
+        "facebook": {
+          "type": "string"
+        },
+        "youtube": {
+          "type": "string"
+        },
+        "instagram": {
+          "type": "string"
+        },
+        "tiktok": {
+          "type": "string"
+        },
+        "twitter": {
+          "type": "string"
+        },
+        "x": {
+          "type": "string"
+        },
+        "snapchat": {
+          "type": "string"
+        },
+        "pinterest": {
+          "type": "string"
+        },
+        "linkedin": {
+          "type": "string"
+        },
+        "android": {
+          "type": "string"
+        },
+        "apple": {
+          "type": "string"
+        },
+        "rss": {
+          "type": "string"
+        },
+        "yelp": {
+          "type": "string"
+        },
+        "threads": {
+          "type": "string"
+        },
+        "discord": {
+          "type": "string"
+        },
+        "twitch": {
+          "type": "string"
+        },
+        "whatsapp": {
+          "type": "string"
+        },
+        "viber": {
+          "type": "string"
+        },
+        "telegram": {
+          "type": "string"
+        },
+        "messenger": {
+          "type": "string"
+        }
+      }
+    },
+    "importantLinks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "name",
+          "url"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

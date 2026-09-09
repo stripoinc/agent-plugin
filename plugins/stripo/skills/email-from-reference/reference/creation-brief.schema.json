@@ -22,7 +22,7 @@
     },
     "model": {
       "type": "object",
-      "description": "Native Stripo editor JSON. IDs and default settings may be omitted; native settings, resources, and block types from a reference are preserved.",
+      "description": "Native Stripo editor JSON, including metadata.title and metadata.preheader {text, fillSpace} when requested. IDs and default settings may be omitted; native metadata, settings, resources, and block types from a reference are preserved. The downloaded editor schema validates their shape. The builder also limits new or changed metadata text to 500 UTF-16 code units; unchanged longer text requires the acquired rebuild target supplied through --baseline.",
       "required": ["stripes"],
       "properties": {"stripes": {"type": "array", "minItems": 1}}
     }

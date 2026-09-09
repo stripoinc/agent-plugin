@@ -1,0 +1,11 @@
+interface:
+  display_name: "Brand Kit Updater"
+  short_description: "Update brand kits from real email evidence"
+  default_prompt: >-
+    Use $brandkit-updater to check, fill, reconcile, or update the current
+    publisher account brandkit from real email JSON models and rendered PNG
+    evidence. Ask for the evidence email scope when it is not specified, use
+    the configured publisher MCP brandkit read/update tools only, auto-apply
+    only high-confidence non-destructive additions when update permission is
+    clear, ask before overwriting or deleting existing values, and keep the
+    final response concise.

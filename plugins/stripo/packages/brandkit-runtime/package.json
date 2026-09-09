@@ -1,0 +1,10 @@
+{
+  "name": "brandkit-runtime",
+  "version": "0.2.0",
+  "private": true,
+  "description": "Python workflow runtime for the bundled brandkit skills.",
+  "files": [
+    "brandkit_runtime",
+    "requirements.txt"
+  ]
+}

@@ -1,20 +1,32 @@
 {
   "schemaVersion": 1,
   "package": "@ardas/convo-email-agent",
-  "version": "0.1.4",
-  "sourceRevision": "6507bf5dfbe605f833185e12906782a31abee8a0",
+  "version": "0.2.0",
+  "sourceRevision": "f7a9cd2fa5d4d7250885328e0b09e1acafd481c6",
   "sourceDirty": false,
   "brand": "stripo",
   "canonicalMcpBrand": "reteno",
   "endpointConfiguration": "consumer-owned",
   "skills": [
     "email-model-editor",
-    "email-from-reference"
+    "email-from-reference",
+    "brandkit-extraction-v-0",
+    "brandkit-tone-of-voice-v-0",
+    "brandkit-business-context-v-0",
+    "brandkit-updater"
   ],
   "agentFormats": [
     "codex",
     "claude-cowork"
   ],
   "mcpToolMapping": "./mcp-tools.json",
-  "sdk": "./packages/convo-email-agent/index.js"
+  "sdk": "./packages/convo-email-agent/index.js",
+  "brandkit": {
+    "runtime": "./packages/brandkit-runtime",
+    "python": ">=3.11",
+    "pythonRequirements": "./packages/brandkit-runtime/requirements.txt",
+    "nodeProject": "./skills/brandkit-extraction-v-0/scripts",
+    "browser": "playwright-chromium-1.60.0",
+    "hostAdapter": "consumer-owned"
+  }
 }

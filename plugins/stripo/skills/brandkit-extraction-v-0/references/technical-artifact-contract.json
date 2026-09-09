@@ -1,0 +1,137 @@
+{
+  "_audience": "Downstream consumers (DB writers, validators, integrators) and operators auditing the extraction pipeline. Documents the homepage technical artifacts produced under artifacts/technical/<slug>/ and the assembly-diagnostics structure normalize emits. Linked from SKILL.md \"Reference index\".",
+  "_purpose": "Reference for what the per-slug technical directory contains, what each artifact is for, and how the assembler uses each input.",
+  "version": 1,
+  "homepageArtifacts": {
+    "home.png": "Homepage screenshot technical artifact.",
+    "capture.json": "Capture metadata; `url` is the POST-redirect page URL and `requestedUrl` is the `--url` the pass was launched with, recorded verbatim before any redirect (the satellites' site-match input, written by the runtime rather than by the agent). Also title, viewport, bounded observedHomepageCopy snippets for tone-of-voice, and observed public asset URLs. `landedMainFrameDocuments` is the bounded chronological main-frame document-response log filtered to the landed URL only when its latest response still belongs to that URL (fragments ignored). A later token document followed by replaceState/pushState makes earlier matching responses inconclusive. Present empty means inspected but ambiguous/no matching current document and fails open; absent retains legacy request-bucket compatibility, whose records cannot prove frame identity. HTTP statuses outside 100–599, including zero, are unknown.",
+    "dom.json": "Simplified visible homepage DOM hierarchy.",
+    "background-styles.json": {
+      "description": "Background and visible-surface style evidence.",
+      "roleHints": "page, header, footer, navigation, promo, content, overlay, or surface when detected.",
+      "assemblyUse": "The scaffold projects public-safe evidence and normalize mode canonicalizes agent-authored usageHints. The agent decides final color roles."
+    },
+    "text-styles.json": {
+      "description": "Rendered homepage typography evidence.",
+      "requiredEvidence": "family/fontFamily, weight/fontWeight, sizePx/fontSizePx/fontSize, lineHeightPx/lineHeight when available, fontStyle, letterSpacingPx, textTransform, text, tag, selector.",
+      "assemblyUse": "The scaffold projects public-safe typography evidence. The agent decides body, heading, header, footer, product name, product price, old price, button, and product-card CTA roles."
+    },
+    "button-styles.json": {
+      "description": "Rendered homepage button evidence.",
+      "defaultState": "backgroundColor, fontColor, borderColor, borderWidth, borderRadius, padding, layout, text, textSource, font metrics when available. No measurement state and no swap provenance on these rows: a button is read once, at rest, and is never swapped for a hover-revealed alternative. Those fields belong to product-card-styles.json.",
+      "hoverState": "hover background/font/border colors and border width when available — those four fields and nothing else. A null colour here is unreadable-or-transparent with no way to tell which, because this record carries no measurement state.",
+      "selectionSignals": "hasFilledBackground, looksLikePurchaseCta, looksLikeNonPurchaseCta, ctaHasUsableVisibleText, ctaLabelNotUsable, ctaIsIconLike, ctaResolvedToIconOnly, homepageCtaNotReusableAsText, labelRecoveredFromDescendant, labelFragmentCount, and layout intent.",
+      "assemblyUse": "The scaffold projects public-safe button evidence. The agent decides which buttons are reusable public styles, utility controls, primary/secondary roles, or product-card CTA evidence."
+    },
+    "button-styles.diagnostics.json": {
+      "description": "Per-row instrumentation for the button probe: one row per row of button-styles.json, in the same order, plus totals. Row fields are selector, matchIndex, elementKey (an opaque per-ELEMENT id minted in-page during the phase-1 base evaluate, so overlapping selectors resolving to one button share a key), phase1Ms, hoverPath (cssom when a matching :hover rule supplied the value, pointer when the mouse fallback ran, none when the row fell outside the hover budget), cssomNull, hoverOutcome (ok, timeout, error, skipped-budget), hoverMs, settleEnd (transitionend or timeout), settleMs, errorClass, interceptor (the element Playwright blamed for swallowing the pointer), preSettle (the hover value read the instant hover() resolved, before the transition settle) and postSettle (the value actually captured). Totals are rows, distinctElements, redundantRowsInBudget, hoverAttempts, hoverTimeouts, cssomNullCount, phase1Ms, phase2Ms, settleTimeoutCount and preSettleDiffersCount, also emitted once on stderr as the collectButtonStyles.diagnostics event.",
+      "assemblyUse": "None. Operator diagnostics only: the agent must not read, edit, or author it, no assembler stage opens it, and it is deliberately absent from both requiredArtifactPaths and optionalArtifactPaths so a degraded or missing sidecar never flips readyForAssembly and never triggers an agent rerun loop. Recording it changes no captured value: button-styles.json rows, their order, the hover budget and the hover timeouts are identical with the sidecar on or off."
+    },
+    "product-card-styles.json": {
+      "description": "Neutral homepage product-card evidence rows. These rows are evidence only, not canonical template/archetype decisions. Repeated selector matches and nested candidates are resolved using actual DOM containment and shared title, price/action, media and content evidence before serialization. One complete supported body supplies an intact row; compound painted boundaries and unique ancillary observations remain technical supporting evidence. Sibling URLs never establish physical identity. Surface border/radius/shadow distinguish public visual variants; absent legacy identity is not invented.",
+      "rowFields": {
+        "card": "Raw backgroundImage preserves unsupported gradient/image paint technically; never infer transparency from an unavailable color or combine competing boundary measurements. surface background and its measurement state, border color, width/style, radius and box shadow.",
+        "title": "text and computed typography metrics when available.",
+        "price": "current-price text, color, and computed typography metrics: family, weight, size, line-height, style, letter spacing, transform, decoration when available.",
+        "oldPrice": "old/comparison-price text, color, and computed typography metrics: family, weight, size, line-height, style, letter spacing, transform, decoration when available.",
+        "cta": "text, text source, reusable visible text flag via selectionSignals, compact/icon-like signals, colors, border, radius, padding, hover, layout intent, and font metrics when available. `labelExtentPx` is text-node Range geometry as `{widthPx, heightPx}` (largest width/height across text nodes via Range.getBoundingClientRect), or `null` when no text node was measured. Zero on either axis is empty Range geometry; null is unmeasured. Positive geometry is not visible-ink proof: clipping and hidden styles may retain a positive Range. It reads descendant text geometry instead of the control's font-size or line-height. Each colour carries its measurement state beside it — `backgroundColorState`, `fontColorState`, `borderColorState`, each one of measured | transparent | unavailable. The state is the bit the hex cannot carry: `null` is returned both for a colour measured as fully transparent and for one that could not be read, and those are opposite claims. `transparent` is evidence about what the element paints; `unavailable` is the absence of a measurement and must never be read as one. Hover alternatives require original own-style/box suppression, semantic interactivity or a DOM onclick handler, ancestor checkVisibility, positive rectangle intersection with the card and viewport after hover scrolling, and no lost known field. Bare addEventListener/delegated custom containers without semantic controls are conservatively not admitted; no clicks are executed. This does not model all clipping, occlusion, generated paint, transforms, or ancestor opacity suppression of the original.",
+        "ctaHover": "The `hover` record inside `cta`. Same colour fields as the default plus the same three `<field>State` keys. Assembly preserves them as optional `hoverBackgroundColorState`, `hoverFontColorState`, and `hoverBorderColorState` until compose strips the technical states. Transparent is a known treatment during grouping; unavailable and legacy null are missing hover coverage. Recovery requires one compatible reliable treatment and never settles conflicting sampled treatments by count or order. Unchanged CSSOM fallback is coverage only when all supported color channels match default. Persisted null hover values cannot express transparent hover rendering. Also carries `visibility`, `display` and `opacity` — the only direct evidence that the element stopped rendering, which a colour channel going quiet is not.",
+        "ctaProvenance": "How this CTA record was arrived at, on `cta`: `source` (`default`, or `card-hover-alternative` when a hover-revealed alternative was adopted), `alternativeReason`, `alternativeRejectedReason` (why a scoring alternative was refused, which happens when adopting it would leave a field less known than the one it overwrites), `originalCandidate` (the replaced record, including how its hover was read) and `stylesReadUnderHover` (true when this default was read while the card was hovered, which is the case for every adopted alternative). Present on every row that finished hover capture, swap or no swap.",
+        "selectionSignals": "hasTitle, hasCurrentPrice, hasOldPrice, hasCta, ctaLooksPurchaseLike, ctaHasUsableVisibleText, homepageCtaNotReusableAsText, representativeScore, evidence quality flags. Optional supportingBoundaryEvidence=true retains compound paint, ancillary observations, or a scalar purchase control as technical evidence only: it must not seed public cards, recovery, hover probes, typography or card-set votes. Missing means ordinary legacy eligibility."
+      },
+      "assemblyUse": "The scaffold projects public-safe neutral product-card evidence. The agent chooses the representative product-card row and decides which price, old-price, CTA, surface, and typography evidence is reliable enough for public output."
+    },
+    "product-card-styles.recovery.json": {
+      "description": "Best-attempt neutral product-card recovery summary.",
+      "mergeKeys": "Recovery artifacts are evidence only. The agent may compare saved rows by product URL, selector index, or stable text/title signature while deciding what to keep.",
+      "rules": "Absence of a representative row keeps final product-card evidence weak/best-effort. Recovery artifacts may contain technical selector diagnostics, but public JSON must not.",
+      "boundedRecoveryPhases": "static-neutral-selector-retry, dom-mined-selector-retry, and card-hover-retry. card-hover-retry may hover at most three already-visible homepage card candidates to reveal hover-only CTAs; it must not inspect PDPs."
+    },
+    "product-data.json": {
+      "description": "Demo product data harvested from the homepage (status, gate decision, counts, and up to 8 validated products with name/url/imageUrl/price/oldPrice/currency).",
+      "assemblyUse": "None. Downstream-only: the runtime projects it and embeds the validated products into the final brandkit.json as brand.products for demo consumers. The agent must not read, edit, or author it (brand.products is composed by the runtime, never by the agent), and it is never required for assembly readiness."
+    },
+    "logo-assets.json": {
+      "description": "SVG logo markup the homepage render already had, kept rather than re-fetched. entries[] carries url (the public source URL), source (page-response when the rendering page fetched it, browser-navigation when a scratch-page navigation did, inline-svg when the logo was inline <svg> markup in the document and was never downloaded at all), contentType, byteLength, localPath and sidecarPath (both inside the logo-assets/ subdirectory), svgPath, svgPathSuppressed, pathCount, shapeCount. An inline-svg entry carries url \"\" because no public URL exists for it, plus selector/label/background/placement/widthPx/heightPx/score/notes ranking evidence (background is the light|dark|unknown class of the band the mark was measured against — the only place in the pipeline that can see it); its markup is serialized with sprite <use> refs inlined as nested viewports and followed through chains, url(#id) gradients/clips/masks cloned into a <defs>, currentColor and stylesheet-only paint resolved to computed values, display:none variant subtrees dropped, a viewBox synthesized when the page sized the element with CSS, and script elements plus on* handlers stripped. Every SVG entry also carries kind \"svg\" and svgPathSuppressedReason (over-cap when the reduced markup is safe but longer than the published-svgPath cap, unsafe when a safety scan rejected it, null when nothing was suppressed) so a safe-but-long mark stays hostable while an unsafe one never is. A candidate whose URL an email client cannot render (webp/avif/extensionless, never png/jpg/jpeg/gif, and never an extension the raster sniff cannot accept such as ico/bmp/tif/tiff) is fetched by the same Tier-2 navigation AFTER the SVG loop and kept as a kind \"raster\" entry carrying sha256 and localPath with sidecarPath/svgPath empty, solely so the finalizer can convert those bytes to a hosted PNG. skipped[] and counts{retained,browserFetches,suppressed,inline,raster} are diagnostics. Already-email-safe raster candidates, bodies with no raster magic, oversized bodies, HTML error pages served for an .svg URL, shapeless inline captures (an unresolvable external sprite), inline captures carrying an unresolvable PAINT reference (they would render invisible), and markup that either the dangerous-pattern scan or the unsafe-public-string scan rejects are all excluded; every exclusion degrades to svgPath \"\".",
+      "assemblyUse": "The scaffold and normalize passes read it to pre-fill candidates.logos[].value.svgPath and, for inline captures, background with url \"\". The agent must not edit, author, or directly upload from this artifact. During Phase 4, the finalizer alone may match the first primary logo to an entry, resolve localPath within the logo-assets/ directory, upload those original SVG bytes (or, for a kind \"raster\" entry, a Pillow-converted RGBA PNG of them), and write the exact returned .png URL into the in-memory final brandkit. That live tool result is the only authorization for the new URL; no diagnostics field or hosted-domain allowlist can authorize it. localPath, sidecarPath and selector remain worker-local and never reach public JSON. On a failed or skipped attempt the captured source URL is retained, or the inline URL remains empty, and finalize-report.json.logo_hosting records the non-authorizing outcome. The *.svgpath.json sidecars live one level down in logo-assets/ so the flat readdir in lib/load-logo-svg-paths.js does not pick them up; that isolation keeps accent-colour synthesis and primary-button ranking unchanged."
+    },
+    "page-signals.json": {
+      "description": "Homepage contacts, socials, important links, language hints, and business cues.",
+      "contacts": "Producer-owned contact evidence. Email and phone rows carry canonical typed `email` / `phone` facts when a usable literal is mechanically derivable, while `text` remains the visible label and `url` remains the source anchor. Free-form labels or prose never authorize a persisted email or phone fact.",
+      "socials": "Raw homepage social-link evidence as platform/text/url rows.",
+      "socialsForBrandkit": "Deterministic final-shaped socials object with the full schema platform key set and empty strings for missing platforms.",
+      "importantLinks": "Raw homepage important-link evidence as text/url rows.",
+      "importantLinksForBrandkit": "Schema-shaped importantLinks evidence as name/url rows. The agent applies the staged fallback order before public output.",
+      "visibleSocialPlatforms": "Platforms classified from VISIBLE anchors, computed before the 20-row cap on `socials`, restricted to http(s) URLs and — like `unfilteredSocialPlatforms` — decided by URL alone: a link LABELLED `Facebook` that points at `/privacy` is not on this list, because a label cannot prove the mapper destroyed a profile. `socials` rows still carry the label classification; only this evidence set is URL-qualified. The set whose absence from the final kit is genuine loss.",
+      "unfilteredSocialPlatforms": "Platforms classified from every `a[href]` with NO visibility filter, http(s) only and by URL alone. Present-here-but-absent-from-`visibleSocialPlatforms` means the capture is unproven rather than the site lacking the profile.",
+      "unfilteredContactAnchors": "Counts of unfiltered `tel:` and `mailto:` anchors that carry a real recipient — a `mailto:?subject=` share button with no address and a `tel:` with no digit at all are excluded. There is NO length floor on the phone number: 3-4 digit retail hotlines are real in this pipeline's markets. Same capture-unproven role."
+    },
+    "language-subtree.json": "Optional homepage language-control subtree after a bounded toggle action.",
+    "homepage-pass-status.json": {
+      "status": "running, completed, blocked, or failed. running is a heartbeat for the current packaged phase; blocked means a security interstitial, landed HTTP error, or blank render prevents extraction before enrichment.",
+      "currentPhase": "nullable phase name while status is running.",
+      "currentPhaseElapsedMs": "nullable non-negative integer milliseconds while a phase is running.",
+      "recommendedFollowupAction": "wait-for-current-phase while running, abort-extraction when blocked, warning-level-assembly when incomplete/failed.",
+      "blockedBySecurityInterstitial": "required boolean when status is blocked, in saved status and stdout; false for a landed HTTP error. Security interstitials and blank_render retain the legacy true value; blocker.type distinguishes the actual reason.",
+      "blocker": {
+        "type": "security_interstitial, landed_document_error_status, or blank_render",
+        "provider": "cloudflare, imperva, or unknown",
+        "confidence": "medium or high",
+        "title": "captured page title",
+        "evidence": "short public-safe string list explaining the block"
+      },
+      "securityInterstitialFallback": {
+        "eligible": "boolean; true only for conservative provider-specific live evidence, independent of broad blocked semantics",
+        "attempted": "boolean; at most one internal packaged attempt",
+        "outcome": "not_eligible, disabled, already_proxied, starting, completed, still_blocked, release_failed, mint_failed, or open_failed",
+        "proxyCountry": "derived residential country when a fallback opened, otherwise null",
+        "initialBlocker": "safe type/provider/confidence summary only; never session ids, replay URLs, receipts, or captured page text"
+      },
+      "requiredWhenWritten": [
+        "phaseTimingsMs"
+      ],
+      "phaseTimingsMs": {
+        "openPage": "optional non-negative integer milliseconds for browser launch, navigation, page actions, and settle before artifact collection",
+        "capture": "optional non-negative integer milliseconds",
+        "dom": "optional non-negative integer milliseconds",
+        "backgroundStyles": "optional non-negative integer milliseconds",
+        "textStyles": "optional non-negative integer milliseconds",
+        "buttonStyles": "optional non-negative integer milliseconds",
+        "productCardStyles": "optional non-negative integer milliseconds",
+        "productData": "optional non-negative integer milliseconds",
+        "logoAssets": "optional non-negative integer milliseconds",
+        "pageSignals": "optional non-negative integer milliseconds",
+        "languageSubtree": "optional non-negative integer milliseconds",
+        "fallbackOpenPage": "optional non-negative integer milliseconds; present only when a residential fallback was attempted, and written even when that attempt failed",
+        "fallbackcapture": "optional non-negative integer milliseconds; present only when a residential fallback page opened. Lower-cased tail is the emitted key, not a typo",
+        "fallbackdom": "optional non-negative integer milliseconds; present only when a residential fallback page opened",
+        "fallbackpageSignals": "optional non-negative integer milliseconds; present only when a residential fallback page opened",
+        "total": "required non-negative integer milliseconds"
+      }
+    },
+    "assembly-diagnostics.json": {
+      "description": "Technical diagnostics written by assemble-extraction-stage.js in scaffold and normalize modes.",
+      "schemaValidated": "Boolean indicating whether normalize mode validated against extraction-stage.schema.json AND published the artifact. Written after the publish, so it is false when the write itself failed.",
+      "productCardTypographyMirrors": "Missing or weak mirror diagnostics for productCard[].priceTypography and oldPriceTypography. Logo hosting is deliberately absent: it is finalizer-owned, and agent-authored diagnostics never authorize an asset URL."
+    },
+    "review-packet.json": {
+      "description": "Scaffold-time review packet written by assemble-extraction-stage.js --mode scaffold, and printed to stdout by the same run as one compact JSON document with the same bytes. Read it instead of re-opening capture.json / page-signals.json / dom.json / the draft / the diagnostics summary; open a full artifact only when the packet's `files` pointers name one you still need.",
+      "purity": "A projection only. Every leaf is a value another artifact already carries (truncated at 200 chars, lists capped), plus the fixed 5-row product-card variant table and the fixed agent-owned field list. It measures nothing, so it can never disagree with the artifacts it summarises.",
+      "sections": "run, identity, logos (candidates plus svgPathPresent/svgPathChars/sidecarPresent/region/widthPx/heightPx), contacts, socials, links (forBrandkit, raw, navigation), languages, productCard (+ variantTable), colourSeeds, counts, unresolvedRoles, errors, agentOwnedFields, files.",
+      "navigation": "Same-origin anchors inside a <header> or <nav> subtree of dom.json, in document order, capped at 40. It carries the header category links that page-signals.importantLinks filters out.",
+      "degraded": "A missing input degrades its section to null and never throws; a blocked homepage pass yields run.status \"blocked\" with every other section null.",
+      "consumers": "None. No producer, validator or finalizer reads this file — it exists for the agent's review turn only, so adding or removing a section changes no downstream behaviour."
+    },
+    "brandkit.extraction.json": "Extraction-stage public-safe JSON validated by extraction-stage.schema.json."
+  },
+  "rules": [
+    "Homepage readiness is not blocked by missing ecommerce/product-card evidence.",
+    "Scaffold assembly is a shape-safe reducer over homepage artifacts; it must not score, rank, or choose brand roles.",
+    "The assembler writes a shape-safe candidate draft and diagnostics; the agent owns brand role decisions from saved screenshot, DOM hierarchy, and focused probe evidence.",
+    "Normalize mode validates, sanitizes, canonicalizes, and diagnoses an agent-authored draft only.",
+    "Public usageHints must be canonical and downstream-safe. Internal aliases are normalized before final output.",
+    "Technical artifacts may contain raw evidence, but final/public JSON must not expose worker-local paths or debug details.",
+    "Product-card style artifacts are evidence only and are not canonical downstream template decisions.",
+    "Both assembler modes print exactly one compact JSON document on stdout and nothing else: scaffold prints the review packet (same bytes as review-packet.json), normalize prints a verification block on every exit path including failures, before the error is rethrown. The normalize block's `ok` is `assembly-diagnostics.json.schemaValidated`, so it is a claim about the published artifact rather than about control flow; its `errors` are verbatim, and its `evidenceConditions` are the SKILL.md 'Verification after normalize' predicates computed from `candidates`. Neither document is read back by any producer, validator or finalizer."
+  ]
+}

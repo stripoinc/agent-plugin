@@ -1,7 +1,7 @@
 // src/skill-scripts/email-model-editor/run-sdk.ts
-import { mkdirSync as mkdirSync2 } from "node:fs";
 import path2 from "node:path";
 import { pathToFileURL as pathToFileURL2 } from "node:url";
+import { isDeepStrictEqual } from "node:util";
 
 // src/skill-scripts/shared/schema-cache.ts
 import { statSync } from "node:fs";
@@ -56,9 +56,11 @@ function writeJson(filePath, value) {
 }
 function compactError(error) {
   const fields = error instanceof Error || isObject(error) ? error : void 0;
+  const errors = fields && "errors" in fields && Array.isArray(fields.errors) ? fields.errors : void 0;
   return {
     name: typeof fields?.name === "string" ? fields.name : "Error",
-    message: String(fields?.message ?? error).slice(0, 2e3)
+    message: String(fields?.message ?? error).slice(0, 2e3),
+    ...errors ? { errors } : {}
   };
 }
 function resolveSdkDist(startUrl = import.meta.url) {
@@ -238,9 +240,14 @@ function summarizeBlock(block, area, summary, inheritedHiddenOn) {
       area,
       ownHideElement: visibility.ownHideElement,
       effectiveVisibility: visibility.effectiveVisibility,
+      style: settings.style,
+      textCustomization: settings.textCustomization,
       networks: networks.slice(0, 20).map((network) => ({
         type: isObject(network) ? network.type : void 0,
-        href: isObject(network) ? linkValue(network.link) : void 0
+        href: isObject(network) ? linkValue(network.link) : void 0,
+        title: isObject(network) ? truncate(network.title) : void 0,
+        alt: isObject(network) ? truncate(network.alt) : void 0,
+        icon: isObject(network) ? network.icon : void 0
       }))
     });
     return;
@@ -276,6 +283,7 @@ function summarizeEditorJson(value) {
       hasCompiledHtml: typeof emailJson?.html === "string",
       hasCompiledCss: typeof emailJson?.css === "string"
     },
+    metadata: structuredClone(objectValue(emailJson.metadata)),
     theme: {
       contentWidth: objectValue(settings.general).messageContentWidth,
       generalBackgroundColor: objectValue(settings.general).backgroundColor,
@@ -352,42 +360,102 @@ function summarizeEditorJson(value) {
   return summary;
 }
 
-// src/skill-scripts/email-model-editor/run-sdk.ts
-function isEditorJson(value) {
-  return isObject(value) && isObject(value.settings) && Array.isArray(value.stripes);
+// src/skill-scripts/shared/lost-keys.ts
+var CHILD_ARRAYS = /* @__PURE__ */ new Set(["stripes", "structures", "columns", "containers", "blocks"]);
+var DELIBERATE_ELEMENT_REMOVALS = /* @__PURE__ */ new Set(["link"]);
+var CLEARABLE_THEME_KEYS = /* @__PURE__ */ new Set([
+  ...["backgroundImage", "customListStyles"].map((key) => `/settings/general/${key}`),
+  ...["letterSpacing", "lineHeight"].map((key) => `/settings/stripes/${key}`),
+  ...["header", "content", "footer", "infoArea"].flatMap((area) => ["fontSize", "fontColor", "linkColor", "linkColorHover", "paragraphBottomSpace"].map((key) => `/settings/stripes/${area}/${key}`)),
+  ...["header", "content", "footer"].map((area) => `/settings/stripes/${area}/contentBackgroundColor`),
+  ...["header", "footer"].flatMap((area) => ["stripeBackgroundColor", "backgroundImage"].map((key) => `/settings/stripes/${area}/${key}`)),
+  "/settings/headings/letterSpacing",
+  ...["h1", "h2", "h3", "h4", "h5", "h6"].flatMap((heading) => ["fontColor", "textAlign", "textStyle", "fontSize", "lineHeight", "paragraphBottomSpace"].map((key) => `/settings/headings/${heading}/${key}`)),
+  ...[
+    "outlookSupport",
+    "fontColor",
+    "textStyle",
+    "textTransform",
+    "buttonColor",
+    "letterSpacing",
+    "fontSize",
+    "borderRadius",
+    "fitContainer",
+    "hoverButtonStyles",
+    "padding"
+  ].map((key) => `/settings/buttons/${key}`)
+]);
+function isSupportedThemeReset(pointer, before) {
+  if (CLEARABLE_THEME_KEYS.has(pointer)) return true;
+  return /^\/settings\/(?:stripes\/(?:header|content|footer|infoArea)|headings\/h[1-6])$/u.test(pointer) && isObject(before) && Object.keys(before).every((key) => CLEARABLE_THEME_KEYS.has(`${pointer}/${key}`));
 }
-function nodeId(value) {
-  return isObject(value) && typeof value.id === "string" ? value.id : null;
-}
-var TOPOLOGY_KEYS = /* @__PURE__ */ new Set(["stripes", "structures", "columns", "containers", "blocks"]);
-function editorTopology(emailJson) {
-  const topology = [];
-  const visit = (value, pathParts) => {
+function indexElements(document) {
+  const seen = /* @__PURE__ */ new Map();
+  const elements = /* @__PURE__ */ new Map();
+  const visit = (value) => {
     if (Array.isArray(value)) {
-      value.forEach((child, index) => visit(child, [...pathParts, index]));
+      for (const item of value) visit(item);
       return;
     }
     if (!isObject(value)) return;
-    for (const [key, child] of Object.entries(value)) {
-      const childPath = [...pathParts, key];
-      if (TOPOLOGY_KEYS.has(key) && Array.isArray(child)) {
-        topology.push({
-          path: childPath,
-          nodes: child.map((node) => ({
-            id: nodeId(node),
-            type: key === "blocks" && isObject(node) && typeof node.type === "string" ? node.type : void 0,
-            area: key === "stripes" && typeof objectValue(objectValue(node).settings).messageArea === "string" ? objectValue(objectValue(node).settings).messageArea : void 0
-          }))
-        });
-      }
-      visit(child, childPath);
+    if (typeof value.id === "string") {
+      seen.set(value.id, (seen.get(value.id) ?? 0) + 1);
+      elements.set(value.id, value);
     }
+    for (const key of CHILD_ARRAYS) visit(value[key]);
   };
-  visit(emailJson, []);
-  return topology;
+  visit(objectValue(document).stripes);
+  for (const [id, occurrences] of seen) if (occurrences > 1) elements.delete(id);
+  return elements;
 }
-function countBlocks(emailJson) {
-  return editorTopology(emailJson).filter((entry) => entry.path.at(-1) === "blocks").reduce((total, entry) => total + entry.nodes.length, 0);
+function collect(before, after, pointer, element, lost, socialNetworksPointer) {
+  if (Array.isArray(before)) {
+    if (!Array.isArray(after)) {
+      lost.push(pointer);
+    } else if (pointer === socialNetworksPointer) {
+      return;
+    } else if (after.length === before.length) {
+      before.forEach((item, index) => collect(item, after[index], `${pointer}/${index}`, element, lost, socialNetworksPointer));
+    }
+    return;
+  }
+  if (!isObject(before)) return;
+  if (!isObject(after)) {
+    lost.push(pointer);
+    return;
+  }
+  const replacedSalesforceLink = element && pointer.endsWith("/settings/link") && before.type === "salesforce_mc" && typeof after.type === "string" && after.type !== before.type;
+  for (const [key, value] of Object.entries(before)) {
+    if (element && CHILD_ARRAYS.has(key)) continue;
+    const explicitThemeClear = !element && Object.hasOwn(after, key) && after[key] === void 0 && isSupportedThemeReset(`${pointer}/${key}`, value);
+    if (explicitThemeClear) continue;
+    if (Object.hasOwn(after, key) && after[key] !== void 0) {
+      collect(value, after[key], `${pointer}/${key}`, element, lost, socialNetworksPointer);
+    } else if (!(element && DELIBERATE_ELEMENT_REMOVALS.has(key)) && !(replacedSalesforceLink && key === "salesforce")) {
+      lost.push(`${pointer}/${key}`);
+    }
+  }
+}
+function findLostKeys(input, output) {
+  const lost = [];
+  const before = objectValue(input);
+  const after = objectValue(output);
+  for (const key of ["metadata", "settings"]) {
+    if (key in before) collect(before[key], after[key], `/${key}`, false, lost);
+  }
+  const survivors = indexElements(after);
+  for (const [id, element] of indexElements(before)) {
+    if (!survivors.has(id)) continue;
+    const survivor = survivors.get(id);
+    const socialNetworksPointer = isObject(element) && element.type === "social" && isObject(survivor) && survivor.type === "social" ? `/${id}/settings/networks` : void 0;
+    collect(element, survivor, `/${id}`, true, lost, socialNetworksPointer);
+  }
+  return lost;
+}
+
+// src/skill-scripts/email-model-editor/run-sdk.ts
+function isEditorJson(value) {
+  return isObject(value) && isObject(value.settings) && (value.stripes === void 0 || Array.isArray(value.stripes));
 }
 function normalizeDiagnostics(diagnostics) {
   if (!diagnostics) return void 0;
@@ -410,12 +478,11 @@ function resolveChangeFunction(module) {
   }
   return candidate;
 }
-function resolveResult(returned, session) {
+function resolveResult(returned) {
   if (returned !== void 0) {
     if (isObject(returned) && typeof returned.finish === "function") return returned.finish();
     return returned;
   }
-  if (session !== void 0) return session.finish();
   throw new Error("Create mode script must return native email editor JSON or an SDK builder/session.");
 }
 function writeFailureDiagnostics({ diagnosticsPath, inputPath, outputPath, sdkPath, mode, error }) {
@@ -437,39 +504,29 @@ async function main() {
   const outputPath = requireString(args, "output");
   const diagnosticsPath = optionalString(args, "diagnostics") ?? `${outputPath}.diagnostics.json`;
   const mode = inputPath ? "mutate" : "create";
-  const liveValueEdit = args["live-value-edit"] === true;
-  const liveStructureEdit = args["live-structure-edit"] === true;
-  const guardedEdit = liveValueEdit || liveStructureEdit;
-  const componentsPath = optionalString(args, "components");
   let sdkPath;
   try {
-    sdkPath = resolveSdkDist();
-    if (liveValueEdit && liveStructureEdit) throw new Error("Choose one live edit mode.");
-    if (guardedEdit && inputPath === void 0) {
-      throw new Error("A live edit mode requires --input.");
+    for (const key of Object.keys(args)) {
+      if (!["input", "script", "output", "diagnostics", "schema"].includes(key)) {
+        throw new Error(`Unknown argument: --${key}`);
+      }
     }
-    if (componentsPath && !liveStructureEdit) throw new Error("--components requires --live-structure-edit.");
+    sdkPath = resolveSdkDist();
     const sdk = await loadSdk(sdkPath);
     const inputJson = inputPath ? readJson(inputPath) : void 0;
     const inputSummary = inputJson === void 0 ? void 0 : summarizeEditorJson(inputJson);
-    const inputBlocks = guardedEdit ? countBlocks(inputJson) : void 0;
-    if (guardedEdit && inputBlocks === 0) {
-      throw new Error("Live edits require an input model containing at least one block.");
+    const scriptModule = await importFresh(scriptPath);
+    const change = resolveChangeFunction(scriptModule);
+    const components = scriptModule.components;
+    if (components !== void 0 && !isObject(components)) {
+      throw new Error("The script's components export must be an object keyed by component name.");
     }
-    const inputTopology = guardedEdit ? editorTopology(inputJson) : void 0;
-    const components = componentsPath ? readJson(componentsPath) : void 0;
-    if (components !== void 0 && !isObject(components)) throw new Error("Components must be a JSON object keyed by component name.");
     const session = inputJson === void 0 ? void 0 : sdk.createEmailMutationSdk({
       emailJson: inputJson,
       components
     });
-    const scriptModule = await importFresh(scriptPath);
-    const change = resolveChangeFunction(scriptModule);
-    if (guardedEdit && !session) throw new Error("A live edit mode requires a mutation session.");
-    const changeContext = guardedEdit && session ? {
-      email: liveValueEdit ? sdk.createEmailValueEditor(session.email) : session.email
-    } : {
-      email: session?.email,
+    const changeContext = session ? { email: session.email } : {
+      email: void 0,
       session,
       sdk,
       input: inputJson,
@@ -478,12 +535,12 @@ async function main() {
       diagnosticsPath
     };
     const returned = await change(changeContext);
-    if (guardedEdit && returned !== void 0) {
-      throw new Error("Live edit scripts must not return a replacement document or value. Mutate email and return nothing.");
+    if (session && returned !== void 0) {
+      throw new Error("Edit scripts must not return a replacement document or value. Mutate email and return nothing.");
     }
-    const resultJson = guardedEdit && session ? session.finish() : resolveResult(returned, session);
+    const resultJson = session ? session.finish() : resolveResult(returned);
     if (!isEditorJson(resultJson)) {
-      throw new Error("SDK script did not produce native email editor JSON shaped as {settings, stripes}.");
+      throw new Error("SDK script did not produce native email editor JSON with settings and optional stripes.");
     }
     const validation = await validateEditorJson(resultJson, sdkPath);
     if (!validation.valid) {
@@ -491,19 +548,28 @@ async function main() {
     }
     const outputSummary = summarizeEditorJson(resultJson);
     const sdkDiagnostics = normalizeDiagnostics(session?.diagnostics?.());
-    if (guardedEdit) {
+    if (session) {
       if ((sdkDiagnostics?.mutationCount ?? 0) === 0) {
-        throw new Error("Live edit script made no SDK mutations.");
+        throw new Error("Edit script made no SDK mutations.");
       }
       if ((sdkDiagnostics?.selectorMisses.length ?? 0) > 0) {
-        throw new Error(`Live edit recorded ${sdkDiagnostics?.selectorMisses.length} selector miss(es).`);
+        throw new Error(`Edit recorded ${sdkDiagnostics?.selectorMisses.length} selector miss(es).`);
       }
-      if (countBlocks(resultJson) === 0) throw new Error("Live edits must leave at least one block.");
-      if (liveValueEdit && JSON.stringify(inputTopology) !== JSON.stringify(editorTopology(resultJson))) {
-        throw new Error("Live value edit changed model topology; only existing content and style values may change.");
+      if (inputSummary?.counts.blocks === 0) {
+        if (!isDeepStrictEqual(
+          { ...inputJson, metadata: void 0 },
+          { ...resultJson, metadata: void 0 }
+        )) throw new Error("Edits to a model without blocks must only change metadata.");
+      } else if (outputSummary.counts.blocks === 0) {
+        throw new Error("Edits must leave at least one block.");
+      }
+      const lostKeys = findLostKeys(inputJson, resultJson);
+      if (lostKeys.length > 0) {
+        throw new Error(
+          `Edit dropped ${lostKeys.length} key(s) the acquired model had, and persistence would delete them: ${lostKeys.slice(0, 8).join(", ")}${lostKeys.length > 8 ? ", \u2026" : ""}. Persist the complete model; use a supported setter to clear optional settings.`
+        );
       }
     }
-    mkdirSync2(path2.dirname(outputPath), { recursive: true });
     writeJson(outputPath, resultJson);
     const diagnostics = {
       status: "ok",
@@ -515,13 +581,7 @@ async function main() {
       inputSummary,
       outputSummary,
       sdkDiagnostics,
-      validation,
-      guards: guardedEdit ? {
-        mode: liveValueEdit ? "live-value-edit" : "live-structure-edit",
-        topologyPreserved: JSON.stringify(inputTopology) === JSON.stringify(editorTopology(resultJson)),
-        inputBlocks,
-        outputBlocks: countBlocks(resultJson)
-      } : void 0
+      validation
     };
     writeJson(diagnosticsPath, diagnostics);
     console.log(JSON.stringify({
@@ -530,8 +590,7 @@ async function main() {
       outputPath,
       diagnosticsPath,
       changed: diagnostics.changed,
-      counts: outputSummary.counts,
-      guards: diagnostics.guards
+      counts: outputSummary.counts
     }));
   } catch (error) {
     writeFailureDiagnostics({ diagnosticsPath, inputPath, outputPath, sdkPath, mode, error });

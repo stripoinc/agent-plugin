@@ -1,0 +1,8 @@
+interface:
+  display_name: "Brand Kit Extraction"
+  short_description: "Extract a Reteno brand kit from a website"
+  default_prompt: >-
+    Use $brandkit-extraction-v-0 to extract the current website's brand kit,
+    derive its tone of voice and business context, validate the composed
+    artifacts, and persist and verify the result through the configured Reteno
+    host when the workflow reaches its save phase.

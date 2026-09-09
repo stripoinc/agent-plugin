@@ -1,3 +1,5 @@
+import type { SocialNetworkInput } from "./social.js";
+export type { SocialNetworkInput } from "./social.js";
 export type IdsMap = Record<string, string | number>;
 export type IdFactory = (seed: string, isTaken: (id: string) => boolean) => string;
 export type EffectiveVisibility = "both" | "desktop-only" | "mobile-only" | "neither";
@@ -40,6 +42,42 @@ export interface LinkMutation {
     linkType?: string;
     network?: string;
 }
+/** A social network addressed by its type ("instagram") or its zero-based index in settings.networks. */
+export type SocialNetworkTarget = number | string;
+/** Fields of one social network entry; `url: ""` removes its link. */
+export type SocialNetworkMutation = {
+    url?: string;
+    linkType?: string;
+    title?: string;
+    /** Requires textCustomization on the block (setSocialShared({textCustomization: true})). */
+    alt?: string;
+    /** Custom networks only; known networks take their icon from type and style. */
+    icon?: string;
+    link_type?: string;
+};
+export type SocialSharedMutation = {
+    style?: string;
+    iconSize?: number;
+    spaceBetweenIcons?: number | {
+        desktop: number;
+        mobile: number;
+    };
+    /** Turning it on gives every network an alt (title fallback); turning it off removes them. */
+    textCustomization?: boolean;
+    icon_size?: number;
+    space_between_icons?: number | {
+        desktop: number;
+        mobile: number;
+    };
+    text_customization?: boolean;
+};
+export type SocialNetworkPosition = {
+    after: SocialNetworkTarget;
+    before?: never;
+} | {
+    before: SocialNetworkTarget;
+    after?: never;
+};
 export type StyleBreakpoint = "desktop" | "mobile" | "both";
 export type StyleArea = "header" | "content" | "footer" | "infoArea" | string;
 export type StripeBackgroundTarget = "content" | "stripe";
@@ -105,6 +143,10 @@ export interface EmailNode {
     setStyle(property: string, value: unknown, options?: StyleOptions): EmailNode;
     setMenuItem(itemIndex: number, set: MenuItemMutation): EmailNode;
     setMenuShared(set: MenuSharedMutation): EmailNode;
+    setSocialNetwork(target: SocialNetworkTarget, set: SocialNetworkMutation): EmailNode;
+    addSocialNetwork(network: SocialNetworkInput, position?: SocialNetworkPosition): EmailNode;
+    removeSocialNetwork(target: SocialNetworkTarget): EmailNode;
+    setSocialShared(set: SocialSharedMutation): EmailNode;
     remove(): void;
     repeat(totalCount: number): EmailNode[];
 }
@@ -118,8 +160,19 @@ export type InsertPosition = {
     before: string | EmailNode;
     after?: never;
 };
+/** Native document metadata. Omitted fields keep their current values. */
+export interface EmailMetadataPatch {
+    /** HTML <head><title>; an empty string clears it. */
+    title?: string;
+    /** Both fields are required. Empty text with fillSpace=false clears the preheader. */
+    preheader?: {
+        text: string;
+        fillSpace: boolean;
+    };
+}
 export interface EmailDocument {
     readonly theme: EmailThemeApi;
+    setMetadata(patch: EmailMetadataPatch): EmailDocument;
     byId(id: string, disambiguateBy?: DisambiguateBy): EmailNode;
     select(selector: EmailMutationSelector): EmailNode[];
     first(selector: EmailMutationSelector): EmailNode;

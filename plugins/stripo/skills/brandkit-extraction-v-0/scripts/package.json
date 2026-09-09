@@ -1,0 +1,15 @@
+{
+  "name": "brandkit-extraction-scripts",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "dependencies": {
+    "@browserbasehq/sdk": "^2.12.0",
+    "ajv": "8.20.0",
+    "playwright": "1.60.0",
+    "pngjs": "^7.0.0",
+    "saxes": "^6.0.0",
+    "tldts": "7.4.11",
+    "undici": "^7.10.0"
+  }
+}

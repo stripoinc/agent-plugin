@@ -6979,7 +6979,472 @@ var require_ajv = __commonJS({
 
 // src/sdk/model.ts
 var import_ajv = __toESM(require_ajv(), 1);
+
+// src/sdk/errors.ts
+var EmailSdkError = class extends Error {
+  constructor(message) {
+    super(message);
+    this.name = "EmailSdkError";
+  }
+};
+
+// src/sdk/model-utils.ts
 function isObject(value) {
+  return value !== null && typeof value === "object" && !Array.isArray(value);
+}
+function describeNodeKind(value) {
+  if (!isObject(value)) return void 0;
+  if (Array.isArray(value.structures)) return "stripe";
+  if (Array.isArray(value.columns)) return "structure";
+  if (Array.isArray(value.containers)) return "column";
+  if (Array.isArray(value.blocks)) return "container";
+  return typeof value.type === "string" ? "block" : void 0;
+}
+function collectNodeIds(value, ids = []) {
+  if (Array.isArray(value)) {
+    for (const item of value) collectNodeIds(item, ids);
+    return ids;
+  }
+  if (!isObject(value)) return ids;
+  if (typeof value.id === "string") ids.push(value.id);
+  for (const child of Object.values(value)) collectNodeIds(child, ids);
+  return ids;
+}
+function resolveJsonPointer(root, pointer) {
+  if (pointer === "") return root;
+  if (!pointer.startsWith("/")) return void 0;
+  let current = root;
+  for (const rawSegment of pointer.slice(1).split("/")) {
+    const segment = rawSegment.replace(/~1/g, "/").replace(/~0/g, "~");
+    if (Array.isArray(current)) {
+      current = current[Number(segment)];
+    } else if (isObject(current)) {
+      current = current[segment];
+    } else {
+      return void 0;
+    }
+  }
+  return current;
+}
+function sealHandle(members) {
+  const handle = Object.assign(/* @__PURE__ */ Object.create(null), members);
+  for (const member of Object.values(handle)) {
+    if (typeof member === "function") {
+      Object.setPrototypeOf(member, null);
+      Object.freeze(member);
+    }
+  }
+  return Object.freeze(handle);
+}
+function cloneJson(value) {
+  return structuredClone(value);
+}
+function collectAllIds(value, ids = []) {
+  if (Array.isArray(value)) {
+    for (const item of value) collectAllIds(item, ids);
+    return ids;
+  }
+  if (!isObject(value)) return ids;
+  if (typeof value.id === "string") ids.push(value.id);
+  for (const child of Object.values(value)) collectAllIds(child, ids);
+  return ids;
+}
+function setNested(root, path, value) {
+  let current = root;
+  for (const segment of path.slice(0, -1)) {
+    if (!isObject(current[segment])) current[segment] = {};
+    current = current[segment];
+  }
+  current[path[path.length - 1]] = cloneJson(value);
+  return root;
+}
+function readNested(root, path) {
+  let current = root;
+  for (const segment of path) {
+    if (!isObject(current)) return void 0;
+    current = current[segment];
+  }
+  return current;
+}
+function assertMetadataTextLimits(metadata, baseline) {
+  const next = isObject(metadata) ? metadata : {};
+  const previous = isObject(baseline) ? baseline : {};
+  for (const path of [["title"], ["preheader", "text"]]) {
+    const text = readNested(next, path);
+    if (typeof text === "string" && text !== readNested(previous, path) && text.length > 500) {
+      throw new EmailSdkError(`metadata.${path.join(".")} cannot exceed 500 UTF-16 code units when changed.`);
+    }
+  }
+}
+function rejectNullLeaves(value, path) {
+  if (value === null) {
+    throw new EmailSdkError(`Theme value may not be null at ${path}.`);
+  }
+  if (Array.isArray(value)) {
+    for (let index = 0; index < value.length; index += 1) {
+      rejectNullLeaves(value[index], `${path}.${index}`);
+    }
+    return;
+  }
+  if (isObject(value)) {
+    for (const [key, nestedValue] of Object.entries(value)) {
+      rejectNullLeaves(nestedValue, `${path}.${key}`);
+    }
+  }
+}
+
+// src/sdk/social.ts
+var SOCIAL_CUSTOM_NETWORK_TYPE = "custom";
+var SOCIAL_LINK_TYPES = ["site", "anchor", "email", "phone", "file", "sms", "telegram", "viber", "other"];
+var SOCIAL_LINK_TYPE_SET = new Set(SOCIAL_LINK_TYPES);
+var SOCIAL_NETWORK_TYPES = [
+  "twitter",
+  "xcom",
+  "facebook",
+  "youtube",
+  "askfm",
+  "behance",
+  "dribbble",
+  "flickr",
+  "foursquare",
+  "googleplus",
+  "instagram",
+  "lastfm",
+  "linkedin",
+  "myspace",
+  "pinterest",
+  "soundcloud",
+  "tumblr",
+  "vimeo",
+  "hangouts",
+  "messenger",
+  "skype",
+  "snapchat",
+  "telegram",
+  "viber",
+  "whatsapp",
+  "email",
+  "website",
+  "mapmarker",
+  "world",
+  "address",
+  "phone",
+  "share",
+  "rss",
+  "appstore",
+  "googleplay",
+  "windowsstore",
+  "wechat",
+  "weibo",
+  "blogger",
+  "medium",
+  "dropbox",
+  "googledrive",
+  "slack",
+  "github",
+  "pdf",
+  "doc",
+  "xls",
+  "ppt",
+  "xing",
+  "meetup",
+  "fleeped",
+  "tripAdvisor",
+  "spotify",
+  "tiktok",
+  "workplace",
+  "gmail",
+  "iTunesPodcasts",
+  "zoom",
+  "teams",
+  "onedrive",
+  "discord",
+  "twitch",
+  "line",
+  "patreon",
+  "kofi",
+  "yammer",
+  "buyMeACoffee",
+  "huaweiAppGallery",
+  "googleBusiness",
+  "reddit",
+  "strava",
+  "goodreads",
+  "custom",
+  "yelp",
+  "google",
+  "mastodon",
+  "glassdoor",
+  "threads",
+  "bluesky",
+  "digg",
+  "meet"
+];
+var SOCIAL_NETWORK_TYPE_SET = new Set(SOCIAL_NETWORK_TYPES);
+var SOCIAL_TITLE_MAX_LENGTH = 100;
+var SOCIAL_ALT_MAX_LENGTH = 500;
+var SOCIAL_BLOCK_DEFAULT_SETTINGS = Object.freeze({
+  style: "logoColored",
+  iconSize: 32,
+  spaceBetweenIcons: { desktop: 10, mobile: 10 },
+  textCustomization: false,
+  alignment: { desktop: "center", mobile: "center" },
+  backgroundColor: "transparent",
+  hideElement: "no",
+  margins: {
+    desktop: { top: 0, right: 0, bottom: 0, left: 0 },
+    mobile: { top: 0, right: 0, bottom: 0, left: 0 }
+  },
+  includeInOutput: "both",
+  anchorLinkName: ""
+});
+var DEFAULT_TITLES = {
+  facebook: "Facebook",
+  xcom: "X",
+  twitter: "Twitter",
+  instagram: "Instagram",
+  youtube: "YouTube",
+  linkedin: "LinkedIn",
+  tiktok: "TikTok",
+  telegram: "Telegram",
+  pinterest: "Pinterest",
+  whatsapp: "WhatsApp",
+  viber: "Viber",
+  threads: "Threads",
+  snapchat: "Snapchat",
+  discord: "Discord",
+  twitch: "Twitch",
+  reddit: "Reddit",
+  spotify: "Spotify",
+  medium: "Medium",
+  github: "GitHub",
+  behance: "Behance",
+  dribbble: "Dribbble",
+  vimeo: "Vimeo",
+  tumblr: "Tumblr",
+  bluesky: "Bluesky",
+  mastodon: "Mastodon",
+  email: "Email",
+  website: "Website",
+  phone: "Phone",
+  custom: "Custom"
+};
+function defaultSocialTitle(type) {
+  return DEFAULT_TITLES[type] ?? type.charAt(0).toUpperCase() + type.slice(1);
+}
+function inferSocialLinkType(href) {
+  if (href.startsWith("#")) return "anchor";
+  if (href.startsWith("mailto:")) return "email";
+  if (href.startsWith("tel:")) return "phone";
+  if (/^ftps?:\/\//iu.test(href)) return "file";
+  if (href.startsWith("sms:")) return "sms";
+  if (href.startsWith("tg://")) return "telegram";
+  if (href.startsWith("viber:")) return "viber";
+  if (/^https?:\/\//iu.test(href)) return "site";
+  return "other";
+}
+function hasValueAfterPrefix(href, prefix) {
+  return href.slice(prefix.length).trim().length > 0;
+}
+function socialLinkIssue(link) {
+  if (!isObject(link)) return "Social network link must be an object with type and href.";
+  const { type, href } = link;
+  if (typeof type !== "string" || !SOCIAL_LINK_TYPE_SET.has(type)) {
+    return `Social network link type must be one of ${SOCIAL_LINK_TYPES.join(", ")}.`;
+  }
+  if (typeof href !== "string" || href === "") return "Social network link href cannot be empty.";
+  if (href.trim() !== href) return "Social network link href must not contain leading or trailing spaces.";
+  const lower = href.toLowerCase();
+  switch (type) {
+    case "site":
+      if (!/^https?:\/\//iu.test(href)) return "Site social network links must start with http:// or https://.";
+      if (!hasValueAfterPrefix(href, lower.startsWith("https://") ? "https://" : "http://")) {
+        return "Site social network links must include a value after the protocol.";
+      }
+      return void 0;
+    case "anchor":
+      return href.startsWith("#") ? void 0 : "Anchor social network links must start with #.";
+    case "email":
+      if (!href.startsWith("mailto:")) return "Email social network links must start with mailto:.";
+      return hasValueAfterPrefix(href, "mailto:") ? void 0 : "Email social network links must include a value after mailto:.";
+    case "phone":
+      if (!href.startsWith("tel:")) return "Phone social network links must start with tel:.";
+      return hasValueAfterPrefix(href, "tel:") ? void 0 : "Phone social network links must include a value after tel:.";
+    case "file":
+      if (!/^ftps?:\/\//iu.test(href)) return "File social network links must start with ftp:// or ftps://.";
+      return hasValueAfterPrefix(href, lower.startsWith("ftps://") ? "ftps://" : "ftp://") ? void 0 : "File social network links must include a value after the protocol.";
+    case "sms":
+      if (!href.startsWith("sms:")) return "SMS social network links must start with sms:.";
+      return hasValueAfterPrefix(href, "sms:") ? void 0 : "SMS social network links must include a value after sms:.";
+    case "telegram":
+      if (!href.startsWith("tg://")) return "Telegram social network links must start with tg://.";
+      return hasValueAfterPrefix(href, "tg://") ? void 0 : "Telegram social network links must include a value after tg://.";
+    case "viber":
+      if (!href.startsWith("viber:")) return "Viber social network links must start with viber:.";
+      return hasValueAfterPrefix(href, "viber:") ? void 0 : "Viber social network links must include a value after viber:.";
+    default:
+      return void 0;
+  }
+}
+function collectSocialSettingsIssues(settings) {
+  const issues = [];
+  if (!isObject(settings) || !Array.isArray(settings.networks)) return issues;
+  const textCustomization = settings.textCustomization === true;
+  settings.networks.forEach((network, index) => {
+    if (!isObject(network)) return;
+    const base = `/networks/${index}`;
+    const hasIcon = Object.hasOwn(network, "icon");
+    if (network.type === SOCIAL_CUSTOM_NETWORK_TYPE && !hasIcon) {
+      issues.push({ path: `${base}/icon`, message: "Social network icon is required for custom social networks." });
+    }
+    if (network.type !== SOCIAL_CUSTOM_NETWORK_TYPE && hasIcon) {
+      issues.push({
+        path: `${base}/icon`,
+        message: "Social network icon can only be provided for custom social networks; known networks take their icon from type and style."
+      });
+    }
+    if (hasIcon && typeof network.icon === "string") {
+      if (network.icon.trim() === "") {
+        issues.push({ path: `${base}/icon`, message: "Social network custom icon must contain a non-whitespace value." });
+      } else if (network.icon.trim() !== network.icon) {
+        issues.push({ path: `${base}/icon`, message: "Social network custom icon must not contain leading or trailing spaces." });
+      }
+    }
+    const hasAlt = Object.hasOwn(network, "alt");
+    if (textCustomization && !hasAlt) {
+      issues.push({ path: `${base}/alt`, message: "Social network alt is required when text customization is enabled." });
+    }
+    if (!textCustomization && hasAlt) {
+      issues.push({
+        path: `${base}/alt`,
+        message: "Social network alt can only be provided when text customization is enabled (settings.textCustomization)."
+      });
+    }
+    if (network.link !== void 0) {
+      const linkIssue = socialLinkIssue(network.link);
+      if (linkIssue !== void 0) issues.push({ path: `${base}/link/href`, message: linkIssue });
+    }
+  });
+  return issues;
+}
+var CHILD_ARRAYS = ["stripes", "structures", "columns", "containers", "blocks"];
+function collectSocialDocumentIssues(document) {
+  const issues = [];
+  const visit = (node, pointer) => {
+    if (!isObject(node)) return;
+    if (node.type === "social") {
+      for (const issue of collectSocialSettingsIssues(node.settings)) {
+        issues.push({ ...issue, instancePath: `${pointer}/settings${issue.path}` });
+      }
+    }
+    for (const key of CHILD_ARRAYS) {
+      const children = node[key];
+      if (!Array.isArray(children)) continue;
+      children.forEach((child, index) => visit(child, `${pointer}/${key}/${index}`));
+    }
+  };
+  visit(document, "");
+  return issues;
+}
+function requireNonEmptyString(value, label) {
+  if (typeof value !== "string" || value.trim() === "") throw new EmailSdkError(`${label} must be a non-empty string.`);
+  return value;
+}
+function assertSocialNetworkType(type) {
+  if (!SOCIAL_NETWORK_TYPE_SET.has(type)) {
+    throw new EmailSdkError(
+      `Social network type "${type}" is not one the editor ships an icon for. Use one of its ${SOCIAL_NETWORK_TYPES.length} native types, or type "custom" with an icon URL.`
+    );
+  }
+  return type;
+}
+function assertSocialTextLimit(value, field, limit) {
+  if (value.length > limit) {
+    throw new EmailSdkError(`Social network ${field} must be at most ${limit} characters; got ${value.length}.`);
+  }
+}
+function socialLink(url, linkType) {
+  const link = { type: linkType ?? inferSocialLinkType(url), href: url };
+  const issue = socialLinkIssue(link);
+  if (issue !== void 0) throw new EmailSdkError(issue);
+  return link;
+}
+function buildSocialNetwork(input, textCustomization) {
+  if (!isObject(input)) throw new EmailSdkError("A social network must be an object with at least a type.");
+  const type = assertSocialNetworkType(requireNonEmptyString(input.type, "Social network type"));
+  const network = { type };
+  if (input.url !== void 0 && input.url !== "") {
+    network.link = socialLink(requireNonEmptyString(input.url, "Social network url"), input.linkType);
+  }
+  if (type === SOCIAL_CUSTOM_NETWORK_TYPE) {
+    const icon = requireNonEmptyString(input.icon, `Social network "${type}" icon`);
+    if (icon.trim() !== icon) throw new EmailSdkError("Social network custom icon must not contain leading or trailing spaces.");
+    network.icon = icon;
+  } else if (input.icon !== void 0) {
+    throw new EmailSdkError(
+      `Social network "${type}" does not accept icon; known networks take their icon from type and the block style. Use type "custom" for an own icon.`
+    );
+  }
+  const title = input.title ?? defaultSocialTitle(type);
+  if (typeof title !== "string") throw new EmailSdkError("Social network title must be a string.");
+  assertSocialTextLimit(title, "title", SOCIAL_TITLE_MAX_LENGTH);
+  network.title = title;
+  if (textCustomization) {
+    const alt = input.alt ?? title;
+    if (typeof alt !== "string") throw new EmailSdkError("Social network alt must be a string.");
+    assertSocialTextLimit(alt, "alt", SOCIAL_ALT_MAX_LENGTH);
+    network.alt = alt;
+  } else if (input.alt !== void 0) {
+    throw new EmailSdkError(
+      "Social network alt requires textCustomization: true on the block; the editor rejects alt otherwise."
+    );
+  }
+  return network;
+}
+function completeNativeSocialNetwork(network, textCustomization) {
+  const result = cloneJson(network);
+  if (typeof result.link === "string") {
+    result.link = result.link === "" ? void 0 : { type: inferSocialLinkType(result.link), href: result.link };
+    if (result.link === void 0) delete result.link;
+  } else if (isObject(result.link) && typeof result.link.href === "string" && result.link.type === void 0) {
+    result.link = { type: inferSocialLinkType(result.link.href), href: result.link.href };
+  }
+  if (result.title === void 0 && typeof result.type === "string") result.title = defaultSocialTitle(result.type);
+  if (textCustomization && result.alt === void 0 && typeof result.title === "string") result.alt = result.title;
+  if (typeof result.title === "string") assertSocialTextLimit(result.title, "title", SOCIAL_TITLE_MAX_LENGTH);
+  if (typeof result.alt === "string") assertSocialTextLimit(result.alt, "alt", SOCIAL_ALT_MAX_LENGTH);
+  return result;
+}
+function resolveTextCustomization(settings, networks) {
+  if (typeof settings.textCustomization === "boolean") return settings.textCustomization;
+  return networks.some((network) => isObject(network) && network.alt !== void 0);
+}
+function isSpacing(value) {
+  return typeof value === "number" && Number.isInteger(value) && value >= 0 && value <= 40;
+}
+function normalizeSpaceBetweenIcons(value) {
+  if (isSpacing(value)) return { desktop: value, mobile: value };
+  if (isObject(value) && isSpacing(value.desktop) && isSpacing(value.mobile)) {
+    return { desktop: value.desktop, mobile: value.mobile };
+  }
+  throw new EmailSdkError("spaceBetweenIcons must be an integer 0..40, or {desktop, mobile} integers 0..40.");
+}
+function normalizeIconSize(value) {
+  if (typeof value !== "number" || !Number.isInteger(value) || value < 16 || value > 64) {
+    throw new EmailSdkError("iconSize must be an integer between 16 and 64.");
+  }
+  return value;
+}
+function normalizeSocialAlignment(value) {
+  if (value === "left" || value === "center" || value === "right") return { desktop: value, mobile: value };
+  if (isObject(value) && typeof value.desktop === "string" && typeof value.mobile === "string") {
+    return { desktop: value.desktop, mobile: value.mobile };
+  }
+  throw new EmailSdkError("Social alignment must be left, center, right, or {desktop, mobile}.");
+}
+
+// src/sdk/model.ts
+function isObject2(value) {
   return value !== null && typeof value === "object" && !Array.isArray(value);
 }
 function deepClone(value) {
@@ -6994,7 +7459,7 @@ function regenerateNestedIds(value, nestedIds, usedNestedIds, generateId) {
   const stack = [value];
   while (stack.length > 0) {
     const current = stack.pop();
-    if (isObject(current)) {
+    if (isObject2(current)) {
       if (typeof current.id === "string") {
         const requestedId = nestedIds.get(current.id);
         if (requestedId) {
@@ -7003,14 +7468,14 @@ function regenerateNestedIds(value, nestedIds, usedNestedIds, generateId) {
         current.id = requestedId ?? generateId();
       }
       for (const child of Object.values(current)) {
-        if (isObject(child) || Array.isArray(child)) stack.push(child);
+        if (isObject2(child) || Array.isArray(child)) stack.push(child);
       }
       continue;
     }
     if (Array.isArray(current)) {
       for (let index = current.length - 1; index >= 0; index -= 1) {
         const child = current[index];
-        if (isObject(child) || Array.isArray(child)) stack.push(child);
+        if (isObject2(child) || Array.isArray(child)) stack.push(child);
       }
     }
   }
@@ -7045,7 +7510,8 @@ function formatError(error) {
 }
 function formatErrors(errors) {
   if (!errors?.length) return "unknown schema validation error";
-  return errors.slice(0, 8).map(formatError).join("; ");
+  const summary = errors.slice(0, 8).map(formatError).join("; ");
+  return summary + (errors.length > 8 ? `; ${errors.length - 8} more error(s) in diagnostics.error.errors` : "");
 }
 function formatSchemaErrorPrefix(context, details) {
   if (details?.operation === "insert") {
@@ -7059,12 +7525,131 @@ function formatSchemaErrorPrefix(context, details) {
   return `${context} does not match the loaded Stripo editor schema.`;
 }
 var stripoEmailValidator;
+var validatorContexts = /* @__PURE__ */ new WeakMap();
+var DISCRIMINATORS = ["type", "mode"];
+function decodeSegment(segment) {
+  return segment.replace(/~1/gu, "/").replace(/~0/gu, "~");
+}
+function encodeSegment(segment) {
+  return segment.replace(/~/gu, "~0").replace(/\//gu, "~1");
+}
+function atPointer(root, pointer) {
+  return pointer.replace(/^#/u, "").split("/").slice(1).reduce((value, key) => {
+    return value !== null && typeof value === "object" ? value[decodeSegment(key)] : void 0;
+  }, root);
+}
 function setEmailSchema(schema) {
   stripoEmailValidator = void 0;
-  if (!isObject(schema) || Object.keys(schema).length === 0) {
+  if (!isObject2(schema) || Object.keys(schema).length === 0) {
     throw new Error("The email schema must be a nonempty JSON object.");
   }
-  stripoEmailValidator = new import_ajv.Ajv({ allErrors: true, strict: false }).compile(schema);
+  const ajv = new import_ajv.Ajv({ allErrors: true, strict: false });
+  stripoEmailValidator = ajv.compile(schema);
+  validatorContexts.set(stripoEmailValidator, { ajv, schema });
+}
+function dereference(root, node) {
+  const ref = node.schema.$ref;
+  if (typeof ref !== "string") return node;
+  const target = ref.startsWith("#") ? atPointer(root, ref) : void 0;
+  return isObject2(target) ? dereference(root, { pointer: ref, schema: target }) : void 0;
+}
+function unionOf(schema) {
+  for (const keyword of ["oneOf", "anyOf"]) {
+    const branches = schema[keyword];
+    if (Array.isArray(branches)) return { keyword, branches };
+  }
+  return void 0;
+}
+function acceptsJsonType(schema, value) {
+  const declared = schema.type;
+  const types = typeof declared === "string" ? [declared] : Array.isArray(declared) ? declared : void 0;
+  if (!types) return true;
+  const actual = value === null ? "null" : Array.isArray(value) ? "array" : typeof value;
+  return types.some((type) => type === actual || type === "integer" && actual === "number");
+}
+function fixedValues(root, schema) {
+  const resolved = isObject2(schema) ? dereference(root, { pointer: "", schema }) : void 0;
+  if (!resolved) return void 0;
+  if (resolved.schema.const !== void 0) return [resolved.schema.const];
+  return Array.isArray(resolved.schema.enum) ? resolved.schema.enum : void 0;
+}
+function chooseBranch(root, union, instance) {
+  const members = unionOf(union.schema);
+  if (!members) return void 0;
+  const candidates = members.branches.flatMap((branch, index) => {
+    const node = isObject2(branch) ? dereference(root, { pointer: `${union.pointer}/${members.keyword}/${index}`, schema: branch }) : void 0;
+    return node && acceptsJsonType(node.schema, instance) ? [node] : [];
+  });
+  if (candidates.length === 1) return { kind: "branch", node: candidates[0] };
+  if (candidates.length === 0 || !isObject2(instance)) return void 0;
+  for (const property of DISCRIMINATORS) {
+    const allowed = candidates.map((candidate) => fixedValues(root, isObject2(candidate.schema.properties) ? candidate.schema.properties[property] : void 0));
+    if (!allowed.every((values) => values !== void 0)) continue;
+    const matching = candidates.filter((_, index) => allowed[index].includes(instance[property]));
+    if (matching.length === 1) return { kind: "branch", node: matching[0] };
+    if (matching.length === 0) return { kind: "mismatch", property, allowed: allowed.flat() };
+  }
+  return void 0;
+}
+function settle(root, node, instance) {
+  const resolved = dereference(root, node);
+  if (!resolved || !unionOf(resolved.schema)) return resolved;
+  const choice = chooseBranch(root, resolved, instance);
+  return choice?.kind === "branch" ? settle(root, choice.node, instance) : void 0;
+}
+function descend(node, instance, segment) {
+  const { pointer, schema } = node;
+  if (Array.isArray(instance)) {
+    return isObject2(schema.items) ? { pointer: `${pointer}/items`, schema: schema.items } : void 0;
+  }
+  const property = isObject2(schema.properties) ? schema.properties[segment] : void 0;
+  if (isObject2(property)) return { pointer: `${pointer}/properties/${encodeSegment(segment)}`, schema: property };
+  return isObject2(schema.additionalProperties) ? { pointer: `${pointer}/additionalProperties`, schema: schema.additionalProperties } : void 0;
+}
+function schemaAtPath(root, value, instancePath) {
+  let node = { pointer: "#", schema: root };
+  let instance = value;
+  for (const segment of instancePath.split("/").slice(1).map(decodeSegment)) {
+    const settled = settle(root, node, instance);
+    node = settled ? descend(settled, instance, segment) : void 0;
+    if (!node) return void 0;
+    instance = instance !== null && typeof instance === "object" ? instance[segment] : void 0;
+  }
+  return dereference(root, node);
+}
+function diagnosticErrors(value, validate) {
+  const context = validatorContexts.get(validate);
+  const errors = [...validate.errors ?? []];
+  return context ? explainUnions(context, value, errors) : errors;
+}
+function explainUnions(context, value, errors, parent) {
+  const replacements = /* @__PURE__ */ new Map();
+  const unions = errors.filter((error) => (error.keyword === "oneOf" || error.keyword === "anyOf") && error.instancePath !== parent).sort((left, right) => left.instancePath.length - right.instancePath.length);
+  for (const error of unions) {
+    const path = error.instancePath;
+    if ([...replacements.keys()].some((outer) => path === outer || path.startsWith(`${outer}/`))) continue;
+    const union = schemaAtPath(context.schema, value, path);
+    if (!union) continue;
+    const instance = atPointer(value, path);
+    const choice = chooseBranch(context.schema, union, instance);
+    if (choice?.kind === "mismatch") {
+      replacements.set(path, [{
+        instancePath: `${path}/${encodeSegment(choice.property)}`,
+        keyword: "enum",
+        message: "must be equal to one of the allowed values",
+        params: { allowedValues: choice.allowed },
+        schemaPath: union.pointer
+      }, error]);
+      continue;
+    }
+    const branch = choice ? settle(context.schema, choice.node, instance) : void 0;
+    const validator = branch ? context.ajv.getSchema(branch.pointer) : void 0;
+    if (!validator || validator(instance) !== false) continue;
+    const nested = (validator.errors ?? []).map((issue) => ({ ...issue, instancePath: path + issue.instancePath }));
+    replacements.set(path, explainUnions(context, value, nested, path));
+  }
+  const paths = [...replacements.keys()];
+  return [...replacements.values()].flat().concat(errors.filter((error) => !paths.some((path) => error.instancePath === path || error.instancePath.startsWith(`${path}/`))));
 }
 function getStripoEmailValidator() {
   if (!stripoEmailValidator) {
@@ -7073,8 +7658,18 @@ function getStripoEmailValidator() {
   return stripoEmailValidator;
 }
 function assertValidTemplate(value, context, validate, details) {
-  if (validate(value)) return;
-  throw new EmailSdkSchemaError(context, validate.errors, details);
+  const socialErrors = collectSocialDocumentIssues(value).map((issue) => ({
+    instancePath: issue.instancePath,
+    keyword: "editorRule",
+    message: issue.message,
+    params: {},
+    schemaPath: "#/definitions/socialBlock"
+  }));
+  if (validate(value)) {
+    if (socialErrors.length > 0) throw new EmailSdkSchemaError(context, socialErrors, details);
+    return;
+  }
+  throw new EmailSdkSchemaError(context, [...socialErrors, ...diagnosticErrors(value, validate)], details);
 }
 function assertValidEmailModel(value) {
   assertValidTemplate(value, "Initial JSON", getStripoEmailValidator());
@@ -7086,7 +7681,7 @@ function findElementById(value, id) {
   while (stack.length > 0) {
     const current = stack.pop();
     if (!current) continue;
-    if (isObject(current.value)) {
+    if (isObject2(current.value)) {
       if (current.value.id === id) {
         return {
           element: current.value,
@@ -7096,7 +7691,7 @@ function findElementById(value, id) {
         };
       }
       for (const [key, child] of Object.entries(current.value)) {
-        if (isObject(child) || Array.isArray(child)) {
+        if (isObject2(child) || Array.isArray(child)) {
           stack.push({ value: child, parentKey: key });
         }
       }
@@ -7105,7 +7700,7 @@ function findElementById(value, id) {
     if (Array.isArray(current.value)) {
       for (let index = current.value.length - 1; index >= 0; index -= 1) {
         const child = current.value[index];
-        if (isObject(child) || Array.isArray(child)) {
+        if (isObject2(child) || Array.isArray(child)) {
           stack.push({ value: child, parentArray: current.value, index, parentKey: current.parentKey });
         }
       }
@@ -7120,20 +7715,20 @@ function setFirstNestedProperty(value, property, nextValue) {
   const stack = [value];
   while (stack.length > 0) {
     const current = stack.pop();
-    if (isObject(current)) {
+    if (isObject2(current)) {
       if (hasJsonProperty(current, property)) {
         current[property] = nextValue;
         return true;
       }
       for (const child of Object.values(current)) {
-        if (isObject(child) || Array.isArray(child)) stack.push(child);
+        if (isObject2(child) || Array.isArray(child)) stack.push(child);
       }
       continue;
     }
     if (Array.isArray(current)) {
       for (let index = current.length - 1; index >= 0; index -= 1) {
         const child = current[index];
-        if (isObject(child) || Array.isArray(child)) stack.push(child);
+        if (isObject2(child) || Array.isArray(child)) stack.push(child);
       }
     }
   }
@@ -7141,7 +7736,7 @@ function setFirstNestedProperty(value, property, nextValue) {
 }
 function deepMerge(target, source) {
   for (const [key, value] of Object.entries(source)) {
-    if (isObject(target[key]) && isObject(value)) {
+    if (isObject2(target[key]) && isObject2(value)) {
       deepMerge(target[key], value);
     } else {
       target[key] = deepClone(value);
@@ -7154,13 +7749,13 @@ function setKnownContentProperty(element, property, value) {
     return true;
   }
   if (property === "alt") {
-    if (isObject(element.settings) && isObject(element.settings.altText)) {
+    if (isObject2(element.settings) && isObject2(element.settings.altText)) {
       element.settings.altText.text = value;
       return true;
     }
   }
   if (property === "href") {
-    if (isObject(element.settings) && isObject(element.settings.link)) {
+    if (isObject2(element.settings) && isObject2(element.settings.link)) {
       if (hasJsonProperty(element.settings.link, "href")) {
         element.settings.link.href = value;
         return true;
@@ -7175,7 +7770,7 @@ function setKnownContentProperty(element, property, value) {
     element[property] = value;
     return true;
   }
-  if (isObject(element.settings) && hasJsonProperty(element.settings, property)) {
+  if (isObject2(element.settings) && hasJsonProperty(element.settings, property)) {
     element.settings[property] = value;
     return true;
   }
@@ -7188,7 +7783,7 @@ var EmailSdkSchemaError = class extends Error {
   constructor(context, errors, details) {
     const stableErrors = errors?.map((error) => ({
       ...error,
-      params: isObject(error.params) ? { ...error.params } : error.params
+      params: isObject2(error.params) ? { ...error.params } : error.params
     }));
     super(`${formatSchemaErrorPrefix(context, details)} Errors: ${formatErrors(stableErrors)}`);
     this.name = "EmailSdkSchemaError";
@@ -7279,20 +7874,20 @@ var EditorJsonMutationCore = class {
     }
     let current = this.draft;
     for (const segment of path.slice(0, -1)) {
-      if (!isObject(current)) {
+      if (!isObject2(current)) {
         throw new EditorJsonMutationError(`Document path "${path.join(".")}" traverses a non-object.`);
       }
       const next = current[segment];
-      if (!isObject(next)) {
+      if (!isObject2(next)) {
         current[segment] = {};
       }
       current = current[segment];
     }
-    if (!isObject(current)) {
+    if (!isObject2(current)) {
       throw new EditorJsonMutationError(`Document path "${path.join(".")}" traverses a non-object.`);
     }
     const leaf = path[path.length - 1];
-    if (merge && isObject(current[leaf]) && isObject(value)) {
+    if (merge && isObject2(current[leaf]) && isObject2(value)) {
       deepMerge(current[leaf], value);
     } else {
       current[leaf] = deepClone(value);
@@ -7310,7 +7905,7 @@ var EditorJsonMutationCore = class {
     const nestedIdsMap = new Map(Object.entries(nestedIds));
     const usedNestedIds = /* @__PURE__ */ new Set();
     for (const child of Object.values(clone)) {
-      if (isObject(child) || Array.isArray(child)) {
+      if (isObject2(child) || Array.isArray(child)) {
         regenerateNestedIds(child, nestedIdsMap, usedNestedIds, this.idFactory);
       }
     }
@@ -7335,7 +7930,7 @@ var EditorJsonMutationCore = class {
   // nestedIds or the id factory, so a component extracted from this very email
   // inserts without id collisions.
   insertNode(node, anchorId, isBefore = false, nestedIds = {}) {
-    if (!isObject(node)) {
+    if (!isObject2(node)) {
       throw new EditorJsonMutationError("Inserted node must be a JSON object.");
     }
     const location = findElementById(this.draft, anchorId);
@@ -7398,10 +7993,10 @@ var EditorJsonMutationCore = class {
         for (const item of value) visit(item);
         return;
       }
-      if (!isObject(value)) return;
+      if (!isObject2(value)) return;
       if (typeof value.id === "string") ids.push(value.id);
       for (const child of Object.values(value)) {
-        if (isObject(child) || Array.isArray(child)) visit(child);
+        if (isObject2(child) || Array.isArray(child)) visit(child);
       }
     };
     visit(location.element);
@@ -7452,109 +8047,6 @@ function createEmailValueEditor(email) {
   return wrap(email);
 }
 
-// src/sdk/errors.ts
-var EmailSdkError = class extends Error {
-  constructor(message) {
-    super(message);
-    this.name = "EmailSdkError";
-  }
-};
-
-// src/sdk/model-utils.ts
-function isObject2(value) {
-  return value !== null && typeof value === "object" && !Array.isArray(value);
-}
-function describeNodeKind(value) {
-  if (!isObject2(value)) return void 0;
-  if (Array.isArray(value.structures)) return "stripe";
-  if (Array.isArray(value.columns)) return "structure";
-  if (Array.isArray(value.containers)) return "column";
-  if (Array.isArray(value.blocks)) return "container";
-  return typeof value.type === "string" ? "block" : void 0;
-}
-function collectNodeIds(value, ids = []) {
-  if (Array.isArray(value)) {
-    for (const item of value) collectNodeIds(item, ids);
-    return ids;
-  }
-  if (!isObject2(value)) return ids;
-  if (typeof value.id === "string") ids.push(value.id);
-  for (const child of Object.values(value)) collectNodeIds(child, ids);
-  return ids;
-}
-function resolveJsonPointer(root, pointer) {
-  if (pointer === "") return root;
-  if (!pointer.startsWith("/")) return void 0;
-  let current = root;
-  for (const rawSegment of pointer.slice(1).split("/")) {
-    const segment = rawSegment.replace(/~1/g, "/").replace(/~0/g, "~");
-    if (Array.isArray(current)) {
-      current = current[Number(segment)];
-    } else if (isObject2(current)) {
-      current = current[segment];
-    } else {
-      return void 0;
-    }
-  }
-  return current;
-}
-function sealHandle(members) {
-  const handle = Object.assign(/* @__PURE__ */ Object.create(null), members);
-  for (const member of Object.values(handle)) {
-    if (typeof member === "function") {
-      Object.setPrototypeOf(member, null);
-      Object.freeze(member);
-    }
-  }
-  return Object.freeze(handle);
-}
-function cloneJson(value) {
-  return structuredClone(value);
-}
-function collectAllIds(value, ids = []) {
-  if (Array.isArray(value)) {
-    for (const item of value) collectAllIds(item, ids);
-    return ids;
-  }
-  if (!isObject2(value)) return ids;
-  if (typeof value.id === "string") ids.push(value.id);
-  for (const child of Object.values(value)) collectAllIds(child, ids);
-  return ids;
-}
-function setNested(root, path, value) {
-  let current = root;
-  for (const segment of path.slice(0, -1)) {
-    if (!isObject2(current[segment])) current[segment] = {};
-    current = current[segment];
-  }
-  current[path[path.length - 1]] = cloneJson(value);
-  return root;
-}
-function readNested(root, path) {
-  let current = root;
-  for (const segment of path) {
-    if (!isObject2(current)) return void 0;
-    current = current[segment];
-  }
-  return current;
-}
-function rejectNullLeaves(value, path) {
-  if (value === null) {
-    throw new EmailSdkError(`Theme value may not be null at ${path}.`);
-  }
-  if (Array.isArray(value)) {
-    for (let index = 0; index < value.length; index += 1) {
-      rejectNullLeaves(value[index], `${path}.${index}`);
-    }
-    return;
-  }
-  if (isObject2(value)) {
-    for (const [key, nestedValue] of Object.entries(value)) {
-      rejectNullLeaves(nestedValue, `${path}.${key}`);
-    }
-  }
-}
-
 // src/sdk/selectors.ts
 var LIST_KEY_KIND = {
   stripes: "stripe",
@@ -7566,7 +8058,7 @@ var LIST_KEY_KIND = {
 function collectNodeIndex(value) {
   const entries = [];
   const hideElementValue = (current) => {
-    if (!isObject2(current.settings)) return void 0;
+    if (!isObject(current.settings)) return void 0;
     const value2 = current.settings.hideElement;
     return value2 === "no" || value2 === "mobile" || value2 === "desktop" ? value2 : void 0;
   };
@@ -7583,10 +8075,10 @@ function collectNodeIndex(value) {
       }
       return;
     }
-    if (!isObject2(current)) return;
+    if (!isObject(current)) return;
     const ownKind = describeNodeKind(current) ?? kindFromParent;
     const ownId = typeof current.id === "string" ? current.id : void 0;
-    const settingsArea = isObject2(current.settings) && typeof current.settings.messageArea === "string" ? current.settings.messageArea : void 0;
+    const settingsArea = isObject(current.settings) && typeof current.settings.messageArea === "string" ? current.settings.messageArea : void 0;
     const ownArea = typeof current.messageArea === "string" ? current.messageArea : settingsArea ?? messageArea;
     const moduleValue = current.moduleId;
     const ownModuleId = typeof moduleValue === "string" || typeof moduleValue === "number" ? moduleValue : inheritedModuleId;
@@ -7612,7 +8104,7 @@ function collectNodeIndex(value) {
       const childKind = LIST_KEY_KIND[key];
       if (childKind !== void 0) {
         visit(child, childKind, nextParentChain, ownArea, ownModuleId, hiddenOn);
-      } else if (isObject2(child) || Array.isArray(child)) {
+      } else if (isObject(child) || Array.isArray(child)) {
         visit(child, void 0, nextParentChain, ownArea, ownModuleId, hiddenOn);
       }
     }
@@ -7621,41 +8113,41 @@ function collectNodeIndex(value) {
   return entries;
 }
 function hasLink(element, blockType) {
-  const settings = isObject2(element.settings) ? element.settings : {};
+  const settings = isObject(element.settings) ? element.settings : {};
   if (blockType === "text" && typeof element.content === "string") {
     return /<a\b[^>]*href=/iu.test(element.content);
   }
   if (blockType === "button") {
     const link = settings.link;
-    return isObject2(link) && (typeof link.value === "string" || typeof link.href === "string");
+    return isObject(link) && (typeof link.value === "string" || typeof link.href === "string");
   }
   if (blockType === "image") {
     const link = settings.link;
-    return isObject2(link) && typeof link.href === "string" && link.href.length > 0;
+    return isObject(link) && typeof link.href === "string" && link.href.length > 0;
   }
   if (blockType === "social" && Array.isArray(settings.networks)) {
     return settings.networks.some(
-      (network) => isObject2(network) && isObject2(network.link) && typeof network.link.href === "string" && network.link.href.length > 0
+      (network) => isObject(network) && isObject(network.link) && typeof network.link.href === "string" && network.link.href.length > 0
     );
   }
   return false;
 }
 function linkHostContains(element, blockType, needle) {
   const lowerNeedle = needle.toLowerCase();
-  const settings = isObject2(element.settings) ? element.settings : {};
+  const settings = isObject(element.settings) ? element.settings : {};
   const urls = [];
   if (blockType === "text" && typeof element.content === "string") {
     for (const match of element.content.matchAll(/<a\b[^>]*href=(?:"([^"]*)"|'([^']*)'|([^\s>]+))/giu)) {
       urls.push(match[1] ?? match[2] ?? match[3] ?? "");
     }
-  } else if (blockType === "button" && isObject2(settings.link)) {
+  } else if (blockType === "button" && isObject(settings.link)) {
     if (typeof settings.link.value === "string") urls.push(settings.link.value);
     if (typeof settings.link.href === "string") urls.push(settings.link.href);
-  } else if (blockType === "image" && isObject2(settings.link) && typeof settings.link.href === "string") {
+  } else if (blockType === "image" && isObject(settings.link) && typeof settings.link.href === "string") {
     urls.push(settings.link.href);
   } else if (blockType === "social" && Array.isArray(settings.networks)) {
     for (const network of settings.networks) {
-      if (isObject2(network) && isObject2(network.link) && typeof network.link.href === "string") {
+      if (isObject(network) && isObject(network.link) && typeof network.link.href === "string") {
         urls.push(network.link.href);
       }
     }
@@ -7956,8 +8448,8 @@ function resolveBreakpoints(breakpoint) {
   return [breakpoint];
 }
 function buildResponsiveScalar(value, existing, breakpoint, lo, hi, label) {
-  const base = isObject2(existing) ? cloneJson(existing) : {};
-  if (isObject2(value)) {
+  const base = isObject(existing) ? cloneJson(existing) : {};
+  if (isObject(value)) {
     const extras = Object.keys(value).filter((key) => !BREAKPOINTS.includes(key));
     if (extras.length > 0) throw new EmailSdkError(`${label} rejects keys: ${extras.join(", ")}.`);
     if (Object.keys(value).length === 0) throw new EmailSdkError(`${label} object may not be empty.`);
@@ -7981,14 +8473,14 @@ function buildResponsiveScalar(value, existing, breakpoint, lo, hi, label) {
 function buildAlignment(value, existing, breakpoint, allowJustify = false) {
   const allowed = allowJustify ? ["left", "center", "right", "justify"] : ["left", "center", "right"];
   const valid = new Set(allowed);
-  const base = isObject2(existing) ? cloneJson(existing) : {};
+  const base = isObject(existing) ? cloneJson(existing) : {};
   const check = (candidate, label) => {
     if (typeof candidate !== "string" || !valid.has(candidate)) {
       throw new EmailSdkError(`${label} must be ${allowed.join(", ")}.`);
     }
     return candidate;
   };
-  if (isObject2(value)) {
+  if (isObject(value)) {
     const extras = Object.keys(value).filter((key) => !BREAKPOINTS.includes(key));
     if (extras.length > 0) throw new EmailSdkError(`textAlign rejects keys: ${extras.join(", ")}.`);
     if (Object.keys(value).length === 0) throw new EmailSdkError("textAlign object may not be empty.");
@@ -8009,12 +8501,12 @@ function buildAlignment(value, existing, breakpoint, allowJustify = false) {
 }
 function buildSides(value, existing) {
   const base = {};
-  if (isObject2(existing)) {
+  if (isObject(existing)) {
     for (const side of SIDES) {
       if (typeof existing[side] === "number") base[side] = existing[side];
     }
   }
-  if (isObject2(value)) {
+  if (isObject(value)) {
     const extras = Object.keys(value).filter((key) => !SIDES.includes(key));
     if (extras.length > 0) throw new EmailSdkError(`Side object rejects keys: ${extras.join(", ")}.`);
     if (Object.keys(value).length === 0) throw new EmailSdkError("Side object may not be empty.");
@@ -8031,8 +8523,8 @@ function buildSides(value, existing) {
   return base;
 }
 function buildResponsiveSides(value, existing, breakpoint, allowedBreakpoints, label) {
-  const base = isObject2(existing) ? cloneJson(existing) : {};
-  if (isObject2(value) && BREAKPOINTS.some((key) => Object.hasOwn(value, key))) {
+  const base = isObject(existing) ? cloneJson(existing) : {};
+  if (isObject(value) && BREAKPOINTS.some((key) => Object.hasOwn(value, key))) {
     const extras = Object.keys(value).filter((key) => !BREAKPOINTS.includes(key));
     if (extras.length > 0) throw new EmailSdkError(`${label} rejects keys: ${extras.join(", ")}.`);
     for (const breakpointKey of BREAKPOINTS) {
@@ -8059,18 +8551,18 @@ function buildResponsiveSides(value, existing, breakpoint, allowedBreakpoints, l
   return base;
 }
 function buildBorder(value, existing) {
-  if (!isObject2(value)) {
+  if (!isObject(value)) {
     throw new EmailSdkError("border must be an object.");
   }
   const validStyles = /* @__PURE__ */ new Set(["solid", "dashed", "dotted"]);
-  const base = isObject2(existing) ? cloneJson(existing) : {};
+  const base = isObject(existing) ? cloneJson(existing) : {};
   const extras = Object.keys(value).filter((key) => !SIDES.includes(key) && !["width", "color", "style"].includes(key));
   if (extras.length > 0) throw new EmailSdkError(`border rejects keys: ${extras.join(", ")}.`);
   const sideDefault = () => ({ width: 0, color: "transparent" });
   const buildSide = (src, current) => {
-    if (src !== void 0 && !isObject2(src)) throw new EmailSdkError("border side must be an object.");
-    const side = isObject2(current) ? cloneJson(current) : sideDefault();
-    if (isObject2(src)) {
+    if (src !== void 0 && !isObject(src)) throw new EmailSdkError("border side must be an object.");
+    const side = isObject(current) ? cloneJson(current) : sideDefault();
+    if (isObject(src)) {
       const sideExtras = Object.keys(src).filter((key) => !["width", "color"].includes(key));
       if (sideExtras.length > 0) throw new EmailSdkError(`border side rejects keys: ${sideExtras.join(", ")}.`);
       if (Object.hasOwn(src, "width")) side.width = assertNumber(src.width, 0, 100, "border.width");
@@ -8102,14 +8594,14 @@ function buildBorder(value, existing) {
     }
   }
   for (const side of SIDES) {
-    if (!isObject2(base[side])) base[side] = sideDefault();
+    if (!isObject(base[side])) base[side] = sideDefault();
   }
   base.style ??= "solid";
   return base;
 }
 function buildCorner(value, existing) {
-  const base = isObject2(existing) ? cloneJson(existing) : {};
-  if (isObject2(value)) {
+  const base = isObject(existing) ? cloneJson(existing) : {};
+  if (isObject(value)) {
     const extras = Object.keys(value).filter((key) => !CORNERS.includes(key));
     if (extras.length > 0) throw new EmailSdkError(`borderRadius rejects keys: ${extras.join(", ")}.`);
     if (Object.keys(value).length === 0) throw new EmailSdkError("borderRadius object may not be empty.");
@@ -8126,8 +8618,8 @@ function buildCorner(value, existing) {
   return base;
 }
 function buildResponsiveCorner(value, existing, breakpoint) {
-  const base = isObject2(existing) ? cloneJson(existing) : {};
-  if (isObject2(value) && BREAKPOINTS.some((key) => Object.hasOwn(value, key))) {
+  const base = isObject(existing) ? cloneJson(existing) : {};
+  if (isObject(value) && BREAKPOINTS.some((key) => Object.hasOwn(value, key))) {
     const extras = Object.keys(value).filter((key) => !BREAKPOINTS.includes(key));
     if (extras.length > 0) throw new EmailSdkError(`borderRadius rejects keys: ${extras.join(", ")}.`);
     for (const breakpointKey of BREAKPOINTS) {
@@ -8148,7 +8640,7 @@ function buildResponsiveCorner(value, existing, breakpoint) {
 }
 function buildTextStyle(leaf, value, existing) {
   if (typeof value !== "boolean") throw new EmailSdkError(`${leaf} must be a boolean.`);
-  const base = isObject2(existing) ? cloneJson(existing) : {};
+  const base = isObject(existing) ? cloneJson(existing) : {};
   base.bold ??= false;
   base.italic ??= false;
   base[leaf] = value;
@@ -8511,7 +9003,7 @@ function uniqueUuidFromSeed(seed, isTaken) {
 // src/sdk/edit.ts
 var SETTER_HINTS = "Hints: text block \u2192 setContent(); button \u2192 setText()/setHref(); image \u2192 setSrc()/setHref()/setAlt().";
 function assertEditorEmailJson(value) {
-  if (!isObject2(value)) {
+  if (!isObject(value)) {
     throw new EmailSdkError("Stripo editor JSON must be a top-level object with settings and stripes.");
   }
   if (typeof value.html === "string" || typeof value.css === "string") {
@@ -8519,8 +9011,8 @@ function assertEditorEmailJson(value) {
       "Campaign export JSON with html/css is not supported. Pass Stripo editor JSON with top-level settings and stripes."
     );
   }
-  if (!isObject2(value.settings) || !Array.isArray(value.stripes)) {
-    throw new EmailSdkError("Stripo editor JSON must include a top-level settings object and stripes array.");
+  if (!isObject(value.settings) || value.stripes !== void 0 && !Array.isArray(value.stripes)) {
+    throw new EmailSdkError("Stripo editor JSON must include a top-level settings object and an optional stripes array.");
   }
 }
 function randomUuid(isTaken) {
@@ -8564,6 +9056,7 @@ function createEmailSdk(options) {
     options.emailJson,
     () => generateUniqueId(`fallback#${fallbackOrdinal++}`, () => false)
   );
+  const initialMetadata = sdk.snapshot().metadata;
   const tempToReal = /* @__PURE__ */ new Map();
   const realToTemp = /* @__PURE__ */ new Map();
   const explicitIdsMap = options.idsMap ?? options.idMap;
@@ -8644,6 +9137,15 @@ function createEmailSdk(options) {
     if (root === void 0) return;
     if (opts.allowCollapsedRoot && root === realId) return;
     throw collapsedGuardError(realId, root);
+  }
+  function assertBlockDeletionSupported(realId, method, label) {
+    if (!initialIdCounts.has(realId)) return;
+    const description = sdk.describeElement(realId);
+    if (description?.kind === "block" && (description.type === "social" || description.type === "timer")) {
+      throw new EmailSdkError(
+        `${method}() cannot delete a ${description.type} block ${label}: the editor rejects document-state writes that drop an existing social or timer block. Remove its enclosing container or structure instead.`
+      );
+    }
   }
   function resolveCompactId(rawId) {
     const compactId = String(rawId).trim();
@@ -8746,7 +9248,7 @@ function createEmailSdk(options) {
   function writeSettings(realId, update) {
     assertMutable(realId);
     const entry = entryFor(realId);
-    const settings = isObject2(entry.element.settings) ? cloneJson(entry.element.settings) : {};
+    const settings = isObject(entry.element.settings) ? cloneJson(entry.element.settings) : {};
     update(settings, entry);
     sdk.setElementProperty(realId, "settings", settings);
     mutationCount += 1;
@@ -8759,6 +9261,26 @@ function createEmailSdk(options) {
       const existing = readNested(settings, writePath);
       setNested(settings, writePath, buildStyleValue(spec.shape, value, styleOptions, existing, leaf));
     });
+  }
+  function writeMetadata(patch) {
+    assertNotSealed();
+    if (!isObject(patch) || Object.keys(patch).length === 0 || Object.keys(patch).some((key) => key !== "title" && key !== "preheader")) {
+      throw new EmailSdkError("Metadata patch must contain title or preheader, with no other keys.");
+    }
+    const validateText = (value, label) => {
+      if (typeof value !== "string") throw new EmailSdkError(`${label} must be a string.`);
+    };
+    if (Object.hasOwn(patch, "title")) validateText(patch.title, "metadata.title");
+    if (Object.hasOwn(patch, "preheader")) {
+      const preheader = patch.preheader;
+      if (!isObject(preheader) || typeof preheader.fillSpace !== "boolean" || Object.keys(preheader).some((key) => key !== "text" && key !== "fillSpace")) {
+        throw new EmailSdkError("metadata.preheader must contain text and boolean fillSpace, with no other keys.");
+      }
+      validateText(preheader.text, "metadata.preheader.text");
+    }
+    assertMetadataTextLimits(patch, initialMetadata);
+    sdk.setDocumentPath(["metadata"], patch, true);
+    mutationCount += 1;
   }
   function writeTheme(path, value) {
     assertNotSealed();
@@ -8786,7 +9308,7 @@ function createEmailSdk(options) {
     const entry = entryFor(realId);
     if (entry.kind !== "block") throw new EmailSdkError("replaceText() targets a block.");
     if (entry.blockType === "button") {
-      const settings = isObject2(entry.element.settings) ? cloneJson(entry.element.settings) : {};
+      const settings = isObject(entry.element.settings) ? cloneJson(entry.element.settings) : {};
       const current = typeof settings.text === "string" ? settings.text : "";
       if (normalizeText(current) !== normalizeText(match)) {
         throw new EmailSdkError(`Button label is "${current}", not "${match}".`);
@@ -8815,8 +9337,8 @@ function createEmailSdk(options) {
     mutationCount += 1;
   }
   function writeLink(realId, mutation) {
-    assertSafeHref(mutation.url);
     writeSettings(realId, (settings, entry) => {
+      if (entry.blockType !== "social") assertSafeHref(mutation.url);
       const linkType = mutation.linkType ?? "site";
       if (entry.blockType === "button") {
         settings.link = { type: linkType, value: mutation.url };
@@ -8835,16 +9357,17 @@ function createEmailSdk(options) {
           throw new EmailSdkError("setLink() on a social block requires network.");
         }
         const networks = Array.isArray(settings.networks) ? cloneJson(settings.networks) : [];
-        const index = networks.findIndex((network) => isObject2(network) && network.type === mutation.network);
-        if (index === -1 || !isObject2(networks[index])) {
+        const index = networks.findIndex((network) => isObject(network) && network.type === mutation.network);
+        if (index === -1 || !isObject(networks[index])) {
           throw new EmailSdkError(`Social network "${mutation.network}" was not found.`);
         }
         if (mutation.url === "") {
           delete networks[index].link;
         } else {
-          networks[index].link = { type: linkType, href: mutation.url };
+          networks[index].link = { type: mutation.linkType ?? inferSocialLinkType(mutation.url), href: mutation.url };
         }
         settings.networks = networks;
+        assertNoSocialIssues(settings, "setLink");
         return;
       }
       throw new EmailSdkError(`setLink() supports button, image, and social blocks; got ${entry.blockType ?? entry.kind}.`);
@@ -8856,14 +9379,14 @@ function createEmailSdk(options) {
       if (entry.blockType !== "menu") throw new EmailSdkError("setMenuItem() supports menu blocks only.");
       const items = Array.isArray(settings.items) ? cloneJson(settings.items) : [];
       const item = items[itemIndex];
-      if (!isObject2(item)) throw new EmailSdkError(`Menu item ${itemIndex} was not found.`);
+      if (!isObject(item)) throw new EmailSdkError(`Menu item ${itemIndex} was not found.`);
       const itemLinkColor = set.itemLinkColor ?? set.item_link_color;
       const itemBackgroundColor = set.itemBackgroundColor ?? set.item_background_color;
       const itemLinkValue = set.itemLinkValue ?? set.item_link_value;
       const itemLinkType = set.itemLinkType ?? set.item_link_type;
       const itemName = set.itemName ?? set.item_name;
       if (itemLinkColor !== void 0 || itemBackgroundColor !== void 0) {
-        const colors = isObject2(item.colors) ? cloneJson(item.colors) : {};
+        const colors = isObject(item.colors) ? cloneJson(item.colors) : {};
         if (itemLinkColor !== void 0) colors.link = normalizeColor(itemLinkColor, false);
         if (itemBackgroundColor !== void 0) colors.background = normalizeColor(itemBackgroundColor, true);
         if (colors.link === void 0) colors.link = "#000000";
@@ -8872,7 +9395,7 @@ function createEmailSdk(options) {
       }
       if (itemLinkValue !== void 0) {
         assertSafeHref(itemLinkValue);
-        const link = isObject2(item.link) ? cloneJson(item.link) : {};
+        const link = isObject(item.link) ? cloneJson(item.link) : {};
         link.value = itemLinkValue;
         if (itemLinkType !== void 0) link.type = itemLinkType;
         item.link = link;
@@ -8891,6 +9414,152 @@ function createEmailSdk(options) {
       const sharedLinkColor = set.sharedLinkColor ?? set.shared_link_color;
       if (sharedLinkColor === void 0) throw new EmailSdkError("setMenuShared() requires sharedLinkColor.");
       settings.colors = { mode: "shared", link: normalizeColor(sharedLinkColor, false) };
+    });
+  }
+  function assertSocialBlock(entry, method) {
+    if (entry.blockType !== "social") {
+      throw new EmailSdkError(`${method}() supports social blocks only; got ${entry.blockType ?? entry.kind}.`);
+    }
+  }
+  function assertNoSocialIssues(settings, method) {
+    const [issue] = collectSocialSettingsIssues(settings);
+    if (issue !== void 0) throw new EmailSdkError(`${method}(): ${issue.message} (settings${issue.path})`);
+  }
+  function socialNetworksOf(settings, method) {
+    if (!Array.isArray(settings.networks) || !settings.networks.every(isObject)) {
+      throw new EmailSdkError(`${method}() found no networks array on this social block.`);
+    }
+    return cloneJson(settings.networks);
+  }
+  function socialNetworkSummary(networks) {
+    return networks.length === 0 ? "none" : networks.map((network, index) => `${index}:${String(network.type)}`).join(", ");
+  }
+  function resolveSocialNetworkIndex(networks, target, method) {
+    if (typeof target === "number") {
+      if (!Number.isInteger(target) || target < 0 || target >= networks.length) {
+        throw new EmailSdkError(
+          `${method}(): network index ${String(target)} is out of range. Networks: ${socialNetworkSummary(networks)}.`
+        );
+      }
+      return target;
+    }
+    if (typeof target === "string") {
+      const matches = networks.flatMap((network, index) => network.type === target ? [index] : []);
+      if (matches.length === 1) return matches[0];
+      if (matches.length === 0) {
+        throw new EmailSdkError(
+          `${method}(): social network "${target}" was not found. Networks: ${socialNetworkSummary(networks)}.`
+        );
+      }
+      throw new EmailSdkError(
+        `${method}(): ${matches.length} networks have type "${target}"; address one by index (${matches.join(", ")}).`
+      );
+    }
+    throw new EmailSdkError(`${method}() expects a network type or a zero-based network index.`);
+  }
+  function writeSocialNetwork(realId, target, set) {
+    if (!isObject(set)) throw new EmailSdkError("setSocialNetwork() expects a mutation object.");
+    writeSettings(realId, (settings, entry) => {
+      assertSocialBlock(entry, "setSocialNetwork");
+      const networks = socialNetworksOf(settings, "setSocialNetwork");
+      const index = resolveSocialNetworkIndex(networks, target, "setSocialNetwork");
+      const network = networks[index];
+      const linkType = set.linkType ?? set.link_type;
+      if (set.url !== void 0) {
+        if (set.url === "") {
+          delete network.link;
+        } else {
+          network.link = { type: linkType ?? inferSocialLinkType(set.url), href: set.url };
+        }
+      } else if (linkType !== void 0 && isObject(network.link)) {
+        network.link = { ...network.link, type: linkType };
+      }
+      if (set.title !== void 0) {
+        if (typeof set.title === "string") assertSocialTextLimit(set.title, "title", SOCIAL_TITLE_MAX_LENGTH);
+        network.title = set.title;
+      }
+      if (set.alt !== void 0) {
+        if (typeof set.alt === "string") assertSocialTextLimit(set.alt, "alt", SOCIAL_ALT_MAX_LENGTH);
+        if (settings.textCustomization !== true) {
+          throw new EmailSdkError(
+            "setSocialNetwork(): alt requires text customization on the block \u2014 call setSocialShared({textCustomization: true}) first."
+          );
+        }
+        network.alt = set.alt;
+      }
+      if (set.icon !== void 0) {
+        if (network.type !== SOCIAL_CUSTOM_NETWORK_TYPE) {
+          throw new EmailSdkError(
+            `setSocialNetwork(): icon is only accepted for type "custom"; "${String(network.type)}" takes its icon from type and style.`
+          );
+        }
+        network.icon = set.icon;
+      }
+      settings.networks = networks;
+      assertNoSocialIssues(settings, "setSocialNetwork");
+    });
+  }
+  function writeSocialNetworkAdd(realId, input, position) {
+    writeSettings(realId, (settings, entry) => {
+      assertSocialBlock(entry, "addSocialNetwork");
+      const networks = socialNetworksOf(settings, "addSocialNetwork");
+      const network = buildSocialNetwork(input, settings.textCustomization === true);
+      let index = networks.length;
+      if (position !== void 0) {
+        if (!isObject(position) || position.after === void 0 === (position.before === void 0)) {
+          throw new EmailSdkError("addSocialNetwork() position must contain exactly one of {after} or {before}.");
+        }
+        const anchor = resolveSocialNetworkIndex(networks, position.after ?? position.before, "addSocialNetwork");
+        index = position.after !== void 0 ? anchor + 1 : anchor;
+      }
+      networks.splice(index, 0, network);
+      settings.networks = networks;
+      assertNoSocialIssues(settings, "addSocialNetwork");
+    });
+  }
+  function writeSocialNetworkRemove(realId, target) {
+    writeSettings(realId, (settings, entry) => {
+      assertSocialBlock(entry, "removeSocialNetwork");
+      const networks = socialNetworksOf(settings, "removeSocialNetwork");
+      const index = resolveSocialNetworkIndex(networks, target, "removeSocialNetwork");
+      if (networks.length === 1) {
+        throw new EmailSdkError(
+          "removeSocialNetwork() cannot remove the last network: a social block needs at least one, and an existing block cannot be deleted through document state."
+        );
+      }
+      networks.splice(index, 1);
+      settings.networks = networks;
+    });
+  }
+  function writeSocialShared(realId, set) {
+    if (!isObject(set)) throw new EmailSdkError("setSocialShared() expects a mutation object.");
+    writeSettings(realId, (settings, entry) => {
+      assertSocialBlock(entry, "setSocialShared");
+      const iconSize = set.iconSize ?? set.icon_size;
+      const spaceBetweenIcons = set.spaceBetweenIcons ?? set.space_between_icons;
+      const textCustomization = set.textCustomization ?? set.text_customization;
+      if (set.style === void 0 && iconSize === void 0 && spaceBetweenIcons === void 0 && textCustomization === void 0) {
+        throw new EmailSdkError("setSocialShared() requires at least one of style, iconSize, spaceBetweenIcons, textCustomization.");
+      }
+      if (set.style !== void 0) {
+        if (typeof set.style !== "string" || set.style === "") throw new EmailSdkError('setSocialShared() style must be an icon style name such as "logoColored".');
+        settings.style = set.style;
+      }
+      if (iconSize !== void 0) settings.iconSize = normalizeIconSize(iconSize);
+      if (spaceBetweenIcons !== void 0) settings.spaceBetweenIcons = normalizeSpaceBetweenIcons(spaceBetweenIcons);
+      if (textCustomization !== void 0) {
+        if (typeof textCustomization !== "boolean") throw new EmailSdkError("setSocialShared() textCustomization must be a boolean.");
+        const networks = socialNetworksOf(settings, "setSocialShared");
+        for (const network of networks) {
+          if (textCustomization) {
+            if (network.alt === void 0) network.alt = network.title;
+          } else {
+            delete network.alt;
+          }
+        }
+        settings.networks = networks;
+        settings.textCustomization = textCustomization;
+      }
     });
   }
   function markSubtreeRemoved(realId) {
@@ -9055,8 +9724,25 @@ function createEmailSdk(options) {
         writeMenuShared(realId, set);
         return node;
       },
+      setSocialNetwork(target, set) {
+        writeSocialNetwork(realId, target, set);
+        return node;
+      },
+      addSocialNetwork(network, position) {
+        writeSocialNetworkAdd(realId, network, position);
+        return node;
+      },
+      removeSocialNetwork(target) {
+        writeSocialNetworkRemove(realId, target);
+        return node;
+      },
+      setSocialShared(set) {
+        writeSocialShared(realId, set);
+        return node;
+      },
       remove() {
         assertMutable(realId, { allowCollapsedRoot: true });
+        assertBlockDeletionSupported(realId, "remove", label);
         markSubtreeRemoved(realId);
         sdk.deleteElement(realId);
         for (const siblingId of repeatSiblings[realId] ?? []) {
@@ -9088,6 +9774,7 @@ function createEmailSdk(options) {
         if (enclosingRoot !== void 0 && enclosingRoot !== realId) {
           throw collapsedGuardError(realId, enclosingRoot);
         }
+        assertBlockDeletionSupported(realId, "repeat", label);
         const subtreeIds = sdk.collectSubtreeIds(realId);
         const instances = [];
         for (let ordinal = 0; ordinal < totalCount; ordinal += 1) {
@@ -9223,7 +9910,7 @@ function createEmailSdk(options) {
       if (surviving.length > 0) effectiveAnchorRealId = surviving[surviving.length - 1];
     }
     const componentKind = describeNodeKind(component.node);
-    if (componentKind === void 0 || !isObject2(component.node) || typeof component.node.id !== "string") {
+    if (componentKind === void 0 || !isObject(component.node) || typeof component.node.id !== "string") {
       throw new EmailSdkError(`Component "${componentFile}" is malformed and cannot be inserted.`);
     }
     const anchorKind = sdk.describeElement(anchorRealId)?.kind;
@@ -9274,7 +9961,7 @@ function createEmailSdk(options) {
     const slots = [];
     for (const slot of component.slots) {
       const target = resolveJsonPointer(component.node, slot.pointer);
-      const originalId = isObject2(target) && typeof target.id === "string" ? target.id : void 0;
+      const originalId = isObject(target) && typeof target.id === "string" ? target.id : void 0;
       const slotRealId = originalId === void 0 ? void 0 : mapping.get(originalId);
       if (slotRealId !== void 0) {
         slots.push({ role: slot.role, context: slot.context, realId: slotRealId });
@@ -9334,6 +10021,10 @@ function createEmailSdk(options) {
   const theme = makeEmailTheme(() => email);
   email = sealHandle({
     theme,
+    setMetadata(patch) {
+      writeMetadata(patch);
+      return email;
+    },
     byId(rawId, disambiguateBy) {
       const { compactId, realId } = resolveLookup(rawId, disambiguateBy);
       assertNotRemoved(realId);
@@ -9451,7 +10142,6 @@ function cloneJson2(value) {
 function mergeJson(base, override) {
   if (override === void 0) return cloneJson2(base);
   if (!isObject3(override)) throw new EmailSdkError("Email settings must be an object.");
-  rejectNullLeaves2(override, "Email settings");
   const result = cloneJson2(base);
   for (const [key, value] of Object.entries(override)) {
     if (isObject3(result[key]) && isObject3(value)) {
@@ -9653,6 +10343,22 @@ function spacerBlock(id) {
     }
   };
 }
+function socialBlock(id, options) {
+  if (!isObject3(options) || !Array.isArray(options.networks) || options.networks.length === 0) {
+    throw new EmailSdkError("Social block requires a non-empty networks array.");
+  }
+  const textCustomization = options.textCustomization ?? options.networks.some((network) => isObject3(network) && network.alt !== void 0);
+  const settings = {
+    ...cloneJson2(SOCIAL_BLOCK_DEFAULT_SETTINGS),
+    networks: options.networks.map((network) => buildSocialNetwork(network, textCustomization)),
+    textCustomization
+  };
+  if (options.style !== void 0) settings.style = options.style;
+  if (options.iconSize !== void 0) settings.iconSize = normalizeIconSize(options.iconSize);
+  if (options.spaceBetweenIcons !== void 0) settings.spaceBetweenIcons = normalizeSpaceBetweenIcons(options.spaceBetweenIcons);
+  if (options.alignment !== void 0) settings.alignment = normalizeSocialAlignment(options.alignment);
+  return { id, type: "social", settings };
+}
 var SPACER_LINE_DEFAULTS = {
   width: {
     desktop: { value: 100, unit: "percent" },
@@ -9841,6 +10547,7 @@ function assertNonEmptyArray(value, label) {
 function createEmailFromDraft(options) {
   assertNoSchemaOption2(options);
   if (!isObject3(options.emailJson)) throw new EmailSdkError("emailJson must be a native editor JSON object.");
+  if (options.baselineEmailJson !== void 0) assertValidEmailModel(options.baselineEmailJson);
   const draft = cloneJson2(options.emailJson);
   draft.settings = mergeJson(baseSettings(void 0), draft.settings);
   const globalSettings = draft.settings;
@@ -9862,10 +10569,12 @@ function createEmailFromDraft(options) {
     return value.map((child, index) => objectValue(child, `${label}.${key}[${index}]`));
   }
   function fillNode(node, defaults, label) {
-    if (node.id === void 0) node.id = issueId(label);
+    const suppliedId = node.id !== void 0;
+    if (!suppliedId) node.id = issueId(label);
     assertNonEmptyString(node.id, `${label}.id`);
     if (seenIds.has(node.id)) throw new EmailSdkError(`Duplicate editor id "${node.id}" at ${label}.`);
     seenIds.add(node.id);
+    if (suppliedId && options.regenerateIds) node.id = issueId(label);
     node.settings = mergeJson(defaults, settingsOf(node, label));
   }
   children(draft, "stripes", "emailJson").forEach((stripe, stripeIndex) => {
@@ -9931,12 +10640,17 @@ function createEmailFromDraft(options) {
                   Object.assign(defaults, cloneJson2(SPACER_LINE_DEFAULTS));
                 }
                 break;
+              case "social": {
+                const networks = supplied.networks;
+                assertNonEmptyArray(networks, `${blockPath}.settings.networks`);
+                const textCustomization = resolveTextCustomization(supplied, networks);
+                supplied.networks = networks.map((network, index) => completeNativeSocialNetwork(objectValue(network, `${blockPath}.settings.networks[${index}]`), textCustomization));
+                supplied.textCustomization = textCustomization;
+                block.settings = supplied;
+                defaults = cloneJson2(SOCIAL_BLOCK_DEFAULT_SETTINGS);
+                break;
+              }
               default:
-                if (!options.preserveNativeBlocks) {
-                  throw new EmailSdkError(
-                    `${blockPath}.type must be one of text|image|button|spacer; raw HTML and other block types are unsupported.`
-                  );
-                }
                 assertNonEmptyString(block.type, `${blockPath}.type`);
                 defaults = {};
             }
@@ -9946,7 +10660,9 @@ function createEmailFromDraft(options) {
       });
     });
   });
-  return new EditorJsonMutationCore(draft).apply();
+  const completed = new EditorJsonMutationCore(draft).apply();
+  assertMetadataTextLimits(completed.metadata, options.baselineEmailJson?.metadata);
+  return completed;
 }
 var minimalEmailComponents = Object.freeze({
   "L1/text-section.json": {
@@ -9975,6 +10691,22 @@ var minimalEmailComponents = Object.freeze({
       [buttonBlock("minimal-button-cta", { text: "Start now", href: "https://example.com", theme: DEFAULT_THEME })]
     ),
     slots: Object.freeze([{ role: "cta", blockType: "button", pointer: "/structures/0/columns/0/containers/0/blocks/0" }])
+  },
+  "L1/social-section.json": {
+    level: "L1",
+    node: componentStripe(
+      "minimal-social",
+      "footer",
+      [socialBlock("minimal-social-icons", {
+        networks: [
+          { type: "facebook", url: "https://www.facebook.com/example" },
+          { type: "xcom", url: "https://x.com/example" },
+          { type: "instagram", url: "https://www.instagram.com/example" },
+          { type: "youtube", url: "https://www.youtube.com/@example" }
+        ]
+      })]
+    ),
+    slots: Object.freeze([{ role: "social", blockType: "social", pointer: "/structures/0/columns/0/containers/0/blocks/0" }])
   },
   "L1/footer-section.json": {
     level: "L1",
@@ -10091,6 +10823,12 @@ function createEmailBuilder(options = {}) {
       const stripe = sectionStripe(ids, sectionOptions.area ?? "content", [
         buttonBlock(ids.block, { text: sectionOptions.text, href: sectionOptions.href, theme })
       ], theme);
+      return insertStripe(stripe, sectionOptions.after);
+    },
+    addSocialSection(sectionOptions) {
+      assertNotSealed();
+      const ids = nextIds("social-section");
+      const stripe = sectionStripe(ids, sectionOptions.area ?? "footer", [socialBlock(ids.block, sectionOptions)], theme);
       return insertStripe(stripe, sectionOptions.after);
     },
     addFooterSection(sectionOptions) {
@@ -10378,6 +11116,9 @@ var RETENO_MCP_TOOL_MAPPING = Object.freeze({
   fieldMapping: "identity",
   tools: Object.freeze({
     getBrandkit: "get_brandkit",
+    prepareBrandkitUpload: "prepare_brandkit_upload",
+    updateBrandkitFromExtraction: "update_brandkit_from_extraction",
+    updateBrandkit: "update_brandkit",
     listEmailInterfaces: "list_email_interfaces",
     getEmailModel: "get_email_model",
     getEmailModelSchema: "get_email_model_schema",
@@ -10397,6 +11138,13 @@ var STRIPO_MCP_TOOL_MAPPING = Object.freeze({
   canonicalBrand: "reteno",
   fieldMapping: "adapter",
   tools: Object.freeze({
+    // Stripo calls the Brand Kit a Business Profile and scopes it to a project, where Reteno's is
+    // account-wide: every brandkit call needs a projectId the adapter resolves through find_projects.
+    getBrandkit: "get_business_profile",
+    prepareBrandkitUpload: "prepare_business_profile_upload",
+    // One tool covers both replacements; the adapter supplies website only for extracted data.
+    updateBrandkitFromExtraction: "replace_business_profile",
+    updateBrandkit: "replace_business_profile",
     getEmailModel: "get_document_state",
     getEmailModelSchema: "get_document_state_schema",
     getEmailMessagePreview: "get_screenshot",
@@ -10408,28 +11156,27 @@ var STRIPO_MCP_TOOL_MAPPING = Object.freeze({
     identity: "whoami",
     contentMetadata: "get_content",
     recoverCreatedEmail: "find_content",
-    folders: "find_folders"
+    folders: "find_folders",
+    // Resolves the projectId the Business Profile tools require.
+    projects: "find_projects",
+    // No canonical counterpart: Reteno has no partial Brand Kit write.
+    patchBrandkit: "patch_business_profile"
   }),
   unsupported: Object.freeze({
-    getBrandkit: "Use the reference email or template for brand facts.",
     listEmailInterfaces: "This editor has no sending interfaces.",
-    updateEmailMetadata: "No metadata write tool is available.",
+    updateEmailMetadata: "No write tool for name, project, or folder metadata. Native document title/preheader use updateEmailModel.",
     prepareImageUpload: "Reuse hosted reference assets or user-supplied hosted assets.",
     uploadImage: "No asset upload tool is available.",
     createTemplate: "Templates can be read, edited and rebuilt; only emails can be created."
-  }),
-  entityTypes: ["EMAIL", "TEMPLATE"],
-  contract: Object.freeze({
-    read: { id: "id", type: "type", file: "downloadUrl" },
-    prepare: { id: "id", type: "type", file: "uploadUrl", ticket: "uploadId" },
-    write: { id: "id", type: "type", ticket: "uploadId", singleUse: true, baseVersion: false },
-    preview: { id: "id", type: "type", mode: "BOTH", files: "screenshots" }
   })
 });
 
 // src/mcp-tools.ts
 var CANONICAL_MCP_OPERATIONS = [
   "getBrandkit",
+  "prepareBrandkitUpload",
+  "updateBrandkitFromExtraction",
+  "updateBrandkit",
   "listEmailInterfaces",
   "getEmailModel",
   "getEmailModelSchema",
@@ -10446,9 +11193,8 @@ function supportsEmailInterfaces(brand) {
   return brand === "reteno" || brand === "yespo";
 }
 function getMcpOperationsForBrand(brand) {
-  return CANONICAL_MCP_OPERATIONS.filter(
-    (operation) => operation !== "listEmailInterfaces" || supportsEmailInterfaces(brand)
-  );
+  const mapping = brand === "yespo" ? RETENO_MCP_TOOL_MAPPING : getMcpToolMapping(brand);
+  return Object.keys(mapping.tools);
 }
 function getMcpToolMapping(brand) {
   if (brand === "reteno") return RETENO_MCP_TOOL_MAPPING;

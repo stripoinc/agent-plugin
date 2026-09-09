@@ -9,11 +9,16 @@
  * --allow-dirty  accept a bundle built from an uncommitted checkout (local testing only)
  *
  * The script replaces skills/, packages/, mcp-tools.json and bundle.json under plugins/stripo,
- * adds the host paths paragraph to every SKILL.md, installs host/HOST.md beside each skill,
- * checks that the SDK loads from its new location, and writes the version into both plugin
- * manifests and the Claude Code marketplace entry. Nothing else in the repository is touched.
+ * adds the host paths paragraph to the SKILL.md files that carry the placeholders, installs the
+ * host files beside each skill, checks that the SDK loads from its new location, and writes the
+ * version into both plugin manifests and the Claude Code marketplace entry. Nothing else in the
+ * repository is touched.
+ *
+ * Host files come from host/: a skill with a host/<skill>/ directory gets that directory copied
+ * over it (HOST.md plus any helper the skill calls by path), and every other skill gets the
+ * shared host/HOST.md.
  */
-import {cpSync, existsSync, readFileSync, rmSync, statSync, writeFileSync} from "node:fs";
+import {cpSync, existsSync, readdirSync, readFileSync, rmSync, statSync, writeFileSync} from "node:fs";
 import path from "node:path";
 import {fileURLToPath, pathToFileURL} from "node:url";
 
@@ -27,7 +32,8 @@ const PLUGIN_MANIFESTS = [
 ];
 const CLAUDE_MARKETPLACE = path.join(ROOT, ".claude-plugin", "marketplace.json");
 const MCP_CONFIG = path.join(PLUGIN, ".mcp.json");
-const HOST_NOTES = path.join(ROOT, "host", "HOST.md");
+const HOST_ROOT = path.join(ROOT, "host");
+const HOST_NOTES = path.join(HOST_ROOT, "HOST.md");
 const SDK_ENTRY = path.join(PLUGIN, "packages", "convo-email-agent", "index.js");
 const HOST_PARAGRAPH = [
   "Host paths: in Claude Code `<skill-dir>` is `${CLAUDE_SKILL_DIR}` and `<bundle-root>` is",
@@ -79,7 +85,11 @@ function writeJson(file, value) {
 }
 
 function addHostParagraph(skillFile) {
-  const lines = readFileSync(skillFile, "utf8").split("\n");
+  const source = readFileSync(skillFile, "utf8");
+  // The paragraph resolves `<skill-dir>` and `<bundle-root>`. The brandkit skills use neither
+  // placeholder and name their own roots, so adding it there would only contradict them.
+  if (!source.includes("<skill-dir>")) return;
+  const lines = source.split("\n");
   if (lines[0] !== "---") fail(`${skillFile} has no frontmatter.`);
   const frontmatterEnd = lines.indexOf("---", 1);
   if (frontmatterEnd === -1) fail(`${skillFile} has an unterminated frontmatter block.`);
@@ -87,6 +97,19 @@ function addHostParagraph(skillFile) {
   if (heading === -1) fail(`${skillFile} has no top-level heading.`);
   lines.splice(heading + 1, 0, "", HOST_PARAGRAPH);
   writeFileSync(skillFile, lines.join("\n"), "utf8");
+}
+
+function installHostFiles(skill) {
+  const destination = path.join(PLUGIN, "skills", skill);
+  const overlay = path.join(HOST_ROOT, skill);
+  if (existsSync(overlay)) {
+    // The brandkit skills call host-owned helpers by path, so an overlay carries scripts/
+    // beside its HOST.md. cpSync copies the file mode, which keeps the helpers executable.
+    cpSync(overlay, destination, {recursive: true});
+  } else {
+    cpSync(HOST_NOTES, path.join(destination, "HOST.md"));
+  }
+  if (!existsSync(path.join(destination, "HOST.md"))) fail(`Skill ${skill} has no HOST.md after the host overlay.`);
 }
 
 async function checkSdk(skills) {
@@ -117,9 +140,13 @@ async function main() {
   }
   for (const skill of manifest.skills) {
     const skillDir = path.join(bundle, "skills", skill);
-    if (!existsSync(path.join(skillDir, "SKILL.md")) || !statSync(path.join(skillDir, "scripts")).isDirectory()) {
-      fail(`Bundle skill ${skill} lacks SKILL.md or scripts/.`);
-    }
+    if (!existsSync(path.join(skillDir, "SKILL.md"))) fail(`Bundle skill ${skill} lacks SKILL.md.`);
+    // The brandkit satellites are prompt-only and ship no scripts/ directory.
+    const scripts = path.join(skillDir, "scripts");
+    if (existsSync(scripts) && !statSync(scripts).isDirectory()) fail(`Bundle skill ${skill} has a scripts/ that is not a directory.`);
+  }
+  for (const entry of readdirSync(HOST_ROOT, {withFileTypes: true})) {
+    if (entry.isDirectory() && !manifest.skills.includes(entry.name)) fail(`host/${entry.name} matches no skill in the bundle.`);
   }
 
   const version = options.version ?? manifest.version;
@@ -136,9 +163,9 @@ async function main() {
   }
   for (const skill of manifest.skills) {
     addHostParagraph(path.join(PLUGIN, "skills", skill, "SKILL.md"));
-    cpSync(HOST_NOTES, path.join(PLUGIN, "skills", skill, "HOST.md"));
+    installHostFiles(skill);
   }
-  await checkSdk(manifest.skills);
+  await checkSdk(manifest.skills.filter((skill) => existsSync(path.join(PLUGIN, "skills", skill, "scripts"))));
 
   for (const file of PLUGIN_MANIFESTS) {
     const json = readJson(file);

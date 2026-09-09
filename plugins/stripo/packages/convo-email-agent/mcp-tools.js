@@ -5,6 +5,9 @@ var RETENO_MCP_TOOL_MAPPING = Object.freeze({
   fieldMapping: "identity",
   tools: Object.freeze({
     getBrandkit: "get_brandkit",
+    prepareBrandkitUpload: "prepare_brandkit_upload",
+    updateBrandkitFromExtraction: "update_brandkit_from_extraction",
+    updateBrandkit: "update_brandkit",
     listEmailInterfaces: "list_email_interfaces",
     getEmailModel: "get_email_model",
     getEmailModelSchema: "get_email_model_schema",
@@ -24,6 +27,13 @@ var STRIPO_MCP_TOOL_MAPPING = Object.freeze({
   canonicalBrand: "reteno",
   fieldMapping: "adapter",
   tools: Object.freeze({
+    // Stripo calls the Brand Kit a Business Profile and scopes it to a project, where Reteno's is
+    // account-wide: every brandkit call needs a projectId the adapter resolves through find_projects.
+    getBrandkit: "get_business_profile",
+    prepareBrandkitUpload: "prepare_business_profile_upload",
+    // One tool covers both replacements; the adapter supplies website only for extracted data.
+    updateBrandkitFromExtraction: "replace_business_profile",
+    updateBrandkit: "replace_business_profile",
     getEmailModel: "get_document_state",
     getEmailModelSchema: "get_document_state_schema",
     getEmailMessagePreview: "get_screenshot",
@@ -35,28 +45,27 @@ var STRIPO_MCP_TOOL_MAPPING = Object.freeze({
     identity: "whoami",
     contentMetadata: "get_content",
     recoverCreatedEmail: "find_content",
-    folders: "find_folders"
+    folders: "find_folders",
+    // Resolves the projectId the Business Profile tools require.
+    projects: "find_projects",
+    // No canonical counterpart: Reteno has no partial Brand Kit write.
+    patchBrandkit: "patch_business_profile"
   }),
   unsupported: Object.freeze({
-    getBrandkit: "Use the reference email or template for brand facts.",
     listEmailInterfaces: "This editor has no sending interfaces.",
-    updateEmailMetadata: "No metadata write tool is available.",
+    updateEmailMetadata: "No write tool for name, project, or folder metadata. Native document title/preheader use updateEmailModel.",
     prepareImageUpload: "Reuse hosted reference assets or user-supplied hosted assets.",
     uploadImage: "No asset upload tool is available.",
     createTemplate: "Templates can be read, edited and rebuilt; only emails can be created."
-  }),
-  entityTypes: ["EMAIL", "TEMPLATE"],
-  contract: Object.freeze({
-    read: { id: "id", type: "type", file: "downloadUrl" },
-    prepare: { id: "id", type: "type", file: "uploadUrl", ticket: "uploadId" },
-    write: { id: "id", type: "type", ticket: "uploadId", singleUse: true, baseVersion: false },
-    preview: { id: "id", type: "type", mode: "BOTH", files: "screenshots" }
   })
 });
 
 // src/mcp-tools.ts
 var CANONICAL_MCP_OPERATIONS = [
   "getBrandkit",
+  "prepareBrandkitUpload",
+  "updateBrandkitFromExtraction",
+  "updateBrandkit",
   "listEmailInterfaces",
   "getEmailModel",
   "getEmailModelSchema",
@@ -73,9 +82,8 @@ function supportsEmailInterfaces(brand) {
   return brand === "reteno" || brand === "yespo";
 }
 function getMcpOperationsForBrand(brand) {
-  return CANONICAL_MCP_OPERATIONS.filter(
-    (operation) => operation !== "listEmailInterfaces" || supportsEmailInterfaces(brand)
-  );
+  const mapping = brand === "yespo" ? RETENO_MCP_TOOL_MAPPING : getMcpToolMapping(brand);
+  return Object.keys(mapping.tools);
 }
 function getMcpToolMapping(brand) {
   if (brand === "reteno") return RETENO_MCP_TOOL_MAPPING;
