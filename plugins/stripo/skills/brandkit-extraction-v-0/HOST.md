@@ -64,7 +64,7 @@ the user did not confirm — the write replaces whatever that project holds.
 
 ## MCP server and routing
 
-The plugin configures one MCP server, `stripo`. It is the `<SERVER>` in the Phase 5 cells, so
+The host provides one MCP server, named `stripo`. It is the `<SERVER>` in the Phase 5 cells, so
 `tools.mcp__<SERVER>__prepare_business_profile_upload` is that server's
 `prepare_business_profile_upload`. Both Phase 5 write calls take the resolved `projectId`:
 

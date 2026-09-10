@@ -1,6 +1,6 @@
 {
   "name": "stripo",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Create and edit Stripo emails and templates through the Stripo MCP: native JSON-model skills backed by the convo-email-agent SDK.",
   "author": {
     "name": "Stripo",
@@ -15,7 +15,6 @@
     "mcp"
   ],
   "skills": "./skills/",
-  "mcpServers": "./.mcp.json",
   "interface": {
     "displayName": "Stripo",
     "shortDescription": "Create and edit Stripo emails through their native JSON model",

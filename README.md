@@ -1,8 +1,7 @@
 # Stripo agent plugin
 
-Marketplace repository for the `stripo` plugin: six skills, the convo-email-agent SDK and Brand Kit
-runtime they run on, and the connection to the Stripo MCP server. One plugin directory serves both
-Claude Code and Codex.
+Marketplace repository for the `stripo` plugin: six skills and the convo-email-agent SDK and Brand
+Kit runtime they run on. One plugin directory serves both Claude Code and Codex.
 
 | Skill | What it does |
 | --- | --- |
@@ -18,16 +17,30 @@ Claude Code and Codex.
 The machine that runs the agent needs Node.js 20+ and `curl`. The email skills and
 `brandkit-updater` need nothing else.
 
+The plugin ships no MCP configuration, because the OAuth client is issued per organization: each
+host adds the server itself. Both values below come from the Stripo account once MCP is enabled
+for the organization.
+
+| Placeholder | What it is |
+| --- | --- |
+| `<MCP_SERVER_URL>` | The public MCP endpoint; fixed per environment |
+| `<CLIENT_ID>` | The organization's OAuth client id |
+
+Name the server `stripo` in both hosts: the skills address its tools as `mcp__stripo__<tool>`.
+
 ### Claude Code
 
 ```text
 /plugin marketplace add stripoinc/agent-plugin
 /plugin install stripo@stripo
-/mcp
 ```
 
-`/mcp` opens the browser login for the Stripo MCP server. The skills appear under the `stripo:`
-prefix, for example `stripo:email-model-editor`.
+```bash
+claude mcp add-json stripo '{"type":"http","url":"<MCP_SERVER_URL>","oauth":{"clientId":"<CLIENT_ID>","callbackPort":8080,"scopes":"mcp:tools"}}'
+```
+
+`/mcp` then opens the browser login for the Stripo MCP server. The skills appear under the
+`stripo:` prefix, for example `stripo:email-model-editor`.
 
 ### Codex
 
@@ -36,9 +49,20 @@ codex plugin marketplace add stripoinc/agent-plugin
 codex plugin add stripo@stripo
 ```
 
-Authorization starts on install. If it does not, run
-`codex mcp login stripo --scopes mcp:tools,offline_access`. The skills are invoked by name, for
-example `$email-model-editor`.
+Add the server to `~/.codex/config.toml`:
+
+```toml
+[mcp_servers.stripo]
+url = "<MCP_SERVER_URL>"
+scopes = ["mcp:tools", "offline_access"]
+
+[mcp_servers.stripo.oauth]
+client_id = "<CLIENT_ID>"
+mcp_oauth_callback_port = 1455
+```
+
+Then run `codex mcp login stripo`. The skills are invoked by name, for example
+`$email-model-editor`.
 
 ### Brand Kit extraction
 
@@ -70,7 +94,6 @@ unavailable in these hosts — the skill's `HOST.md` says what that changes in a
 plugins/stripo/                     the plugin
   .claude-plugin/plugin.json        Claude Code manifest; version written by the sync script
   .codex-plugin/plugin.json         Codex manifest; version written by the sync script
-  .mcp.json                         Stripo MCP server
   skills/<skill>/                   synced from convo-email-agent, plus the host files
   packages/convo-email-agent/       synced SDK; must stay next to skills/
   packages/brandkit-runtime/        synced Brand Kit finalizer (Python)
@@ -120,8 +143,4 @@ codex plugin marketplace add /path/to/agent-plugin
 
 ## Before the first publication
 
-- Put the production MCP URL into `plugins/stripo/.mcp.json`.
-- Either register a public OAuth client for the plugin and set `oauth.clientId`, or enable dynamic
-  client registration on the production Keycloak and remove the `oauth` block. The sync script
-  warns while placeholders remain.
 - Choose a license and add `license` to both plugin manifests.

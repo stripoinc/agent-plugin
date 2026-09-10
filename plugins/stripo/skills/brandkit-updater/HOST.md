@@ -13,7 +13,7 @@ that `projectId`.
 
 ## MCP routing
 
-The plugin configures one MCP server, `stripo`. Read the tool names off it directly; the shared
+The host provides one MCP server, named `stripo`. Read the tool names off it directly; the shared
 skill text names Reteno's, and these are the Stripo ones:
 
 | Skill text | Stripo tool |

@@ -31,7 +31,6 @@ const PLUGIN_MANIFESTS = [
   path.join(PLUGIN, ".codex-plugin", "plugin.json"),
 ];
 const CLAUDE_MARKETPLACE = path.join(ROOT, ".claude-plugin", "marketplace.json");
-const MCP_CONFIG = path.join(PLUGIN, ".mcp.json");
 const HOST_ROOT = path.join(ROOT, "host");
 const HOST_NOTES = path.join(HOST_ROOT, "HOST.md");
 const SDK_ENTRY = path.join(PLUGIN, "packages", "convo-email-agent", "index.js");
@@ -125,7 +124,7 @@ async function checkSdk(skills) {
 async function main() {
   const options = parseArgs(process.argv.slice(2));
   const bundle = path.resolve(options.bundle ?? DEFAULT_BUNDLE);
-  for (const file of [...PLUGIN_MANIFESTS, CLAUDE_MARKETPLACE, MCP_CONFIG, HOST_NOTES]) {
+  for (const file of [...PLUGIN_MANIFESTS, CLAUDE_MARKETPLACE, HOST_NOTES]) {
     if (!existsSync(file)) fail(`Plugin skeleton is incomplete, missing ${file}`);
   }
 
@@ -178,10 +177,6 @@ async function main() {
   entry.version = version;
   writeJson(CLAUDE_MARKETPLACE, marketplace);
 
-  const warnings = [];
-  if (readFileSync(MCP_CONFIG, "utf8").includes("REPLACE")) {
-    warnings.push(`${path.relative(ROOT, MCP_CONFIG)} still contains placeholders; fill in the MCP URL and OAuth client before publishing.`);
-  }
   console.log(JSON.stringify({
     status: "ok",
     version,
@@ -189,7 +184,6 @@ async function main() {
     bundleVersion: manifest.version,
     sourceRevision: manifest.sourceRevision,
     skills: manifest.skills,
-    warnings,
   }, null, 2));
 }
 
