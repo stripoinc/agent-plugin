@@ -44,6 +44,7 @@ only if the change is missing, start again from step 1.
 
 ## Authentication
 
-MCP access is authorized once per host through OAuth (Claude Code: `/mcp`; Codex:
-`codex mcp login stripo`). Never paste tokens or credentials into the conversation, runner
+MCP access is authorized once per host through OAuth (Claude Code: `/mcp`; Codex: the browser
+login the `mcp-remote` bridge opens on its first start, or `codex mcp login stripo-mcp` for a
+server configured by `url`). Never paste tokens or credentials into the conversation, runner
 arguments or files.

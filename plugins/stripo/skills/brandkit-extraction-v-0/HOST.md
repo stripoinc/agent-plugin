@@ -64,15 +64,19 @@ the user did not confirm — the write replaces whatever that project holds.
 
 ## MCP server and routing
 
-The host provides one MCP server, named `stripo`. It is the `<SERVER>` in the Phase 5 cells, so
-`tools.mcp__<SERVER>__prepare_business_profile_upload` is that server's
+The host provides the Stripo MCP server as `stripo-mcp`, or `stripo-mcp-dev` / `stripo-mcp-stage`
+when it points at a non-production environment. When more than one of them is connected, ask the
+user which one to write to before resolving the project. The chosen server is the `<SERVER>` in
+the Phase 5 cells, so `tools.mcp__<SERVER>__prepare_business_profile_upload` is that server's
 `prepare_business_profile_upload`. Both Phase 5 write calls take the resolved `projectId`:
 
 - 5a — `prepare_business_profile_upload(projectId)` → `{uploadId, uploadUrl}`
 - 5c — `replace_business_profile(projectId, uploadId, website)`
 
-Authorization is per host, through OAuth (Claude Code: `/mcp`; Codex: `codex mcp login stripo`).
-Never paste tokens or credentials into the conversation, command arguments or files.
+Authorization is per host, through OAuth (Claude Code: `/mcp`; Codex: the browser login the
+`mcp-remote` bridge opens on its first start, or `codex mcp login stripo-mcp` for a server
+configured by `url`). Never paste tokens or credentials into the conversation, command arguments
+or files.
 
 ## Artifact transfer
 

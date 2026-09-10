@@ -11,7 +11,7 @@
       "name": "stripo",
       "source": "./plugins/stripo",
       "description": "Create and edit Stripo emails and templates through the Stripo MCP with native JSON-model skills.",
-      "version": "0.2.1",
+      "version": "0.2.2",
       "category": "productivity",
       "keywords": [
         "stripo",

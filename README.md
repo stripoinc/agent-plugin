@@ -18,15 +18,18 @@ The machine that runs the agent needs Node.js 20+ and `curl`. The email skills a
 `brandkit-updater` need nothing else.
 
 The plugin ships no MCP configuration, because the OAuth client is issued per organization: each
-host adds the server itself. Both values below come from the Stripo account once MCP is enabled
-for the organization.
+host adds the server itself, with the same commands Stripo's MCP setup instructions give. Both
+values below come from the Stripo account once MCP is enabled for the organization.
 
 | Placeholder | What it is |
 | --- | --- |
 | `<MCP_SERVER_URL>` | The public MCP endpoint; fixed per environment |
 | `<CLIENT_ID>` | The organization's OAuth client id |
 
-Name the server `stripo` in both hosts: the skills address its tools as `mcp__stripo__<tool>`.
+Name the server `stripo-mcp` in both hosts, as those instructions do: the Brand Kit extraction and
+updater skills look for it by that name. If you already connected Stripo MCP by those
+instructions, skip the server step below. A server for a non-production environment may be named
+`stripo-mcp-dev` or `stripo-mcp-stage` instead.
 
 ### Claude Code
 
@@ -36,7 +39,7 @@ Name the server `stripo` in both hosts: the skills address its tools as `mcp__st
 ```
 
 ```bash
-claude mcp add-json stripo '{"type":"http","url":"<MCP_SERVER_URL>","oauth":{"clientId":"<CLIENT_ID>","callbackPort":8080,"scopes":"mcp:tools"}}'
+claude mcp add-json stripo-mcp '{"type":"http","url":"<MCP_SERVER_URL>","oauth":{"clientId":"<CLIENT_ID>","callbackPort":8080,"scopes":"openid profile email mcp:tools"}}'
 ```
 
 `/mcp` then opens the browser login for the Stripo MCP server. The skills appear under the
@@ -49,20 +52,17 @@ codex plugin marketplace add stripoinc/agent-plugin
 codex plugin add stripo@stripo
 ```
 
-Add the server to `~/.codex/config.toml`:
+Add the server to `~/.codex/config.toml`. Codex reaches it through the `mcp-remote` bridge:
 
 ```toml
-[mcp_servers.stripo]
-url = "<MCP_SERVER_URL>"
-scopes = ["mcp:tools", "offline_access"]
-
-[mcp_servers.stripo.oauth]
-client_id = "<CLIENT_ID>"
-mcp_oauth_callback_port = 1455
+[mcp_servers.stripo-mcp]
+command = "npx"
+args = ["-y", "mcp-remote", "<MCP_SERVER_URL>", "3334", "--static-oauth-client-info", "{\"client_id\":\"<CLIENT_ID>\"}", "--static-oauth-client-metadata", "{\"scope\":\"openid profile email mcp:tools\"}"]
+startup_timeout_sec = 60
 ```
 
-Then run `codex mcp login stripo`. The skills are invoked by name, for example
-`$email-model-editor`.
+On its first start the bridge opens the browser login for the Stripo MCP server. The skills are
+invoked by name, for example `$email-model-editor`.
 
 ### Brand Kit extraction
 

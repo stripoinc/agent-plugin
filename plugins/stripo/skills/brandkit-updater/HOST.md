@@ -13,8 +13,10 @@ that `projectId`.
 
 ## MCP routing
 
-The host provides one MCP server, named `stripo`. Read the tool names off it directly; the shared
-skill text names Reteno's, and these are the Stripo ones:
+The host provides the Stripo MCP server as `stripo-mcp`, or `stripo-mcp-dev` / `stripo-mcp-stage`
+when it points at a non-production environment. When more than one of them is connected, ask the
+user which one to work in before resolving the project. Read the tool names off that server
+directly; the shared skill text names Reteno's, and these are the Stripo ones:
 
 | Skill text | Stripo tool |
 | --- | --- |
@@ -31,8 +33,9 @@ There is no analytics or message-ranking tool on this server. When the user asks
 
 `publisher-runtime` and `publisher-proxy` are the shared text's names for a runtime this host does
 not have; ignore those rules and the `OPENAI_API_KEY` one with them. Authorization is per host,
-through OAuth (Claude Code: `/mcp`; Codex: `codex mcp login stripo`). Never paste tokens or
-credentials into the conversation, command arguments or files.
+through OAuth (Claude Code: `/mcp`; Codex: the browser login the `mcp-remote` bridge opens on its
+first start, or `codex mcp login stripo-mcp` for a server configured by `url`). Never paste tokens
+or credentials into the conversation, command arguments or files.
 
 ## Artifact transfer
 
