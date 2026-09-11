@@ -13,17 +13,25 @@ tool and move files with `curl`. The machine needs Node.js 20+ and `curl` on `PA
 ## Working directory
 
 Create a fresh temporary directory per task (`mktemp -d`) and keep every file there: the
-downloaded schema, the untouched model, the change module or brief, the candidate, the
-diagnostics and the PNG previews. Do not write these files into the user's project.
+untouched model, the change module or brief, the candidate, the diagnostics and the PNG
+previews. Do not write these files into the user's project.
 
-## Download: schema, model, screenshots
+## Validation
+
+The SDK bundles the editor's executable Document State validator. The runners need no schema
+download or `--schema` argument. `get_document_state_schema()` is available for field
+documentation; validation uses the editor revision recorded in `bundle.json.editorValidator`.
+The service validates and applies each write against its live state, so follow the rejection
+diagnostics in `PROVIDER.md` and verify the saved model after writing.
+
+## Download: model, screenshots
 
 ```bash
 curl -fsSL --retry 2 -o <file> '<downloadUrl>'
 ```
 
 Download URLs are temporary. If a download fails after the URL expired, request a new one through
-the same MCP tool. Refresh a schema file older than one hour.
+the same MCP tool.
 
 ## Upload: candidate model
 

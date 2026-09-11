@@ -19,9 +19,11 @@ metadata, creation, persistence, and verification. Follow it for every MCP step 
 `<bundle-root>/mcp-tools.json` lists the tool names.
 If the host installs `HOST.md` beside this file, read it for the concrete transfer commands.
 
-The email schema comes from `get_document_state_schema` as a temporary download URL. Download it
-to a local file, refresh a file older than one hour, and pass `--schema <file>` to every runner.
-The SDK never bundles a schema; direct SDK callers first call `setEmailSchema(schema)`.
+Validation runs the editor's own Document State rules bundled into the SDK. No schema download
+or initialization is required. `bundle.json.editorValidator` records the editor revision.
+New documents validate without a baseline; rebuilding an existing message uses `--baseline`
+to preserve the acquired document's context. The service also validates its deployed revision
+and applies the write to its live state; local success does not establish persistence.
 
 Default to creating one new draft. Fully rebuild an existing message only when the user explicitly
 names it as the update target; a reference id alone never authorizes overwriting it. For inspection
@@ -119,9 +121,9 @@ Write a version 2 creation brief conforming to [reference/creation-brief.schema.
 The brief contains:
 
 - `message`: `{ "name", "projectId"?, "folderId"? }` for `create_email`; there is no subject, sender, sending interface, or font gate;
-- `model`: a draft using the downloaded native editor schema's field names and nesting.
+- `model`: a draft using the native editor schema's field names and nesting.
 
-The brief schema describes the wrapper and message metadata. The downloaded Stripo schema
+The brief schema describes the wrapper and message metadata. The bundled editor schema
 defines the editor model. Put global styles in `model.settings` and content under
 `model.stripes[].structures[].columns[].containers[].blocks[]`.
 
@@ -163,8 +165,8 @@ the `mailto:` prefix required for persistence. Duplicate IDs fail validation.
 
 Global settings and block settings are different schemas. `model.settings` (`general`, `stripes`,
 `headings`, `buttons`) holds the defaults for every element of a type, but a block's own
-`settings` accepts only the keys the downloaded schema lists for that block type, and some global
-keys have no block-level counterpart. Check the block definition in the downloaded schema before
+`settings` accepts only the keys the editor schema lists for that block type, and some global
+keys have no block-level counterpart. Check the block definition before
 adding a key to a block. When the block schema lacks the key, the global setting is the only way
 to change it, and it then applies to every element of that type in the email. A key the block
 schema does not list fails validation as `unsupported property`. For example, button
@@ -175,7 +177,7 @@ from a reference model, are preserved with their supplied settings; every block 
 builder's checks, so supply non-empty text content, image sources, button text and links, and
 unique IDs. Preserve the reference's native settings and resources unless the request changes
 them, and reconstruct the requested editable content. Supply complete settings for block types
-without draft defaults; the downloaded schema validates them for both brands.
+without draft defaults; the bundled editor schema validates them for both brands.
 
 The builder's defaults are fixed values, not the live document's values, and they do not cover
 every optional global key: the general background image, custom list styles, per-area paragraph
@@ -221,7 +223,6 @@ Run the fixed TypeScript-generated builder:
 ```bash
 node <skill-dir>/scripts/create-from-brief.mjs \
   --brand stripo \
-  --schema <schema.json> \
   --brief <creation-brief.json> \
   --output <new-model.json> \
   --diagnostics <diagnostics.json>
@@ -270,7 +271,11 @@ Persist `<new-model.json>` through the prepare-upload/write flow in `PROVIDER.md
 
 An upload ID is single-use and there is no hash or idempotency argument. After an uncertain
 write, read the state before retrying with a fresh ticket; allow at most one repair retry under
-the same ID. There is no metadata write or asset-upload tool: preserve existing name, project,
+the same ID. A `MERGE_BROKEN` answer carries the editor's `code` and `details` as `PROVIDER.md`
+describes: `details.errors[].path` is a dot path into `<new-model.json>`, so correct the brief,
+rebuild, and persist with a fresh ticket rather than patching the JSON by hand; report the
+returned `code`, paths, and messages when the repair retry fails.
+There is no metadata write or asset-upload tool: preserve existing name, project,
 and folder metadata, report requested metadata changes as unsupported, and reference only hosted
 assets.
 

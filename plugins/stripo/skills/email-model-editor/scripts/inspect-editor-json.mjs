@@ -1,18 +1,5 @@
-// src/skill-scripts/shared/schema-cache.ts
-import { statSync } from "node:fs";
-function schemaIsFresh(file) {
-  try {
-    const stat = statSync(file);
-    return stat.isFile() && Date.now() - stat.mtimeMs <= 36e5;
-  } catch (error) {
-    if (error.code === "ENOENT") return false;
-    throw error;
-  }
-}
-
 // src/skill-scripts/shared/runtime.ts
-import { execFileSync } from "node:child_process";
-import { existsSync, mkdirSync, readFileSync, statSync as statSync2, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync, statSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 function isObject(value) {
@@ -72,25 +59,19 @@ function resolveSdkDist(startUrl = import.meta.url) {
       candidate = path.resolve(scriptDirectory, "../../sdk/index.js");
     }
   }
-  if (candidate && existsSync(candidate) && statSync2(candidate).isFile()) return candidate;
+  if (candidate && existsSync(candidate) && statSync(candidate).isFile()) return candidate;
   throw new Error(
     `Cannot find the packaged convo-email-agent SDK${candidate ? ` at ${candidate}` : ""}. Install skills/ and packages/ together or set CONVO_EMAIL_AGENT_SDK_PATH to an existing index.js.`
   );
 }
 async function loadSdk(sdkPath) {
-  const sdk = await import(pathToFileURL(sdkPath).href);
-  const schemaPath = optionalString(parseArgs(process.argv.slice(2)), "schema") ?? (process.env.PUBLISHER_PROXY_BASE_URL ? execFileSync("python", ["-m", "reteno_agent.email_model_schema"], { encoding: "utf8" }).trim() : process.env.STRIPO_SCHEMA_PATH);
-  if (!schemaPath) throw new Error("Supply --schema or STRIPO_SCHEMA_PATH with the downloaded email schema.");
-  if (!schemaIsFresh(schemaPath)) throw new Error("Email schema is missing or older than one hour. Refresh it through the host's schema cache before retrying.");
-  sdk.setEmailSchema(readJson(schemaPath));
-  return sdk;
+  return import(pathToFileURL(sdkPath).href);
 }
-async function validateEditorJson(emailJson, sdkPath) {
+async function validateEditorJson(emailJson, sdkPath, options = {}) {
   try {
     const sdk = await loadSdk(sdkPath);
-    const session = sdk.createEmailMutationSdk({ emailJson });
-    session.finish();
-    return { valid: true, diagnostics: session.diagnostics() };
+    sdk.assertValidEmailModel(emailJson, options);
+    return { valid: true };
   } catch (error) {
     return { valid: false, error: compactError(error) };
   }
@@ -365,7 +346,7 @@ async function main(argv = process.argv.slice(2)) {
   const result = {
     inputPath,
     sdkPath,
-    schema: await validateEditorJson(emailJson, sdkPath),
+    schema: await validateEditorJson(emailJson, sdkPath, { current: emailJson }),
     summary: summarizeEditorJson(emailJson)
   };
   if (outputPath) writeJson(outputPath, result);

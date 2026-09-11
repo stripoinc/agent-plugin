@@ -109,6 +109,12 @@ scripts/sync-bundle.mjs             sync script
 locates its runtime the same way. Both hosts copy the whole plugin directory into their cache, so
 the layout survives installation.
 
+Email runners validate locally with the editor's executable Document State rules bundled in the
+SDK. They need no schema download or `--schema` argument. `bundle.json.editorValidator` records
+the editor revision and checksum; `get_document_state_schema()` remains available for field
+documentation. Local validation checks that bundled revision, and the service validates and
+applies the write against its live state.
+
 The bundle owns everything under `skills/` and `packages/`; the repository owns `host/`. A skill
 with a `host/<skill>/` directory gets it copied over the synced skill — that is how the brandkit
 skills receive the `HOST.md` they refuse to run without, and the helpers they call by path
@@ -126,9 +132,11 @@ skills receive the `HOST.md` they refuse to run without, and the helpers they ca
    ```
 
    `--bundle <dir>` points at another bundle location. `--version <x.y.z>` sets the plugin
-   version for a plugin-only release (for example a `HOST.md` change without a new bundle); by
-   default the plugin takes the bundle version. The script refuses a dirty bundle and an
-   unchanged version, because installed copies update only when the version changes.
+   release version when it differs from the bundle version, including a new source revision
+   without an upstream version bump or a plugin-only change. By default the plugin takes the
+   bundle version; pass the next plugin version when that default would not advance it.
+   The script refuses a dirty bundle and an unchanged version, because installed copies
+   update only when the version changes.
 3. Review `git diff`, commit and push.
 
 Local check before pushing:
