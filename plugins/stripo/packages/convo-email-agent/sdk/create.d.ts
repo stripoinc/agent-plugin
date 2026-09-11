@@ -116,7 +116,7 @@ export declare function createMinimalEmailSeed(options?: CreateMinimalEmailSeedO
 /**
  * Complete a native editor draft, preserving its fields and topology except
  * for email button targets, which require a mailto: URI. Missing IDs and settings
- * receive defaults; the downloaded schema validates the completed document.
+ * receive defaults; the bundled editor schema validates the completed document.
  * With regenerateIds, structural nodes receive new IDs from the ID factory.
  * Native block kinds without draft defaults keep their supplied settings.
  * The caller's draft is untouched.

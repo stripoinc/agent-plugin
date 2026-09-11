@@ -113,7 +113,9 @@ function installHostFiles(skill) {
 
 async function checkSdk(skills) {
   const sdk = await import(pathToFileURL(SDK_ENTRY).href);
-  if (typeof sdk.setEmailSchema !== "function") fail(`SDK at ${SDK_ENTRY} does not export setEmailSchema.`);
+  for (const name of ["assertValidEmailModel", "validateEmailDocument", "createEmailSdk"]) {
+    if (typeof sdk[name] !== "function") fail(`SDK at ${SDK_ENTRY} does not export ${name}.`);
+  }
   for (const skill of skills) {
     // The runners resolve the SDK relative to their own scripts/ directory (resolveSdkDist).
     const resolved = path.resolve(PLUGIN, "skills", skill, "scripts", "../../../packages/convo-email-agent/index.js");

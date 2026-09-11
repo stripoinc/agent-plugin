@@ -1,4 +1,5 @@
-export { setEmailSchema } from "./sdk/model.js";
+export { assertValidEmailModel, setEmailSchema, type SchemaValidationError, } from "./sdk/model.js";
+export { validateEmailDocument, type EmailValidationIssue, type EmailValidationOptions, } from "./sdk/editor-validator.js";
 export { createEmailValueEditor, type EmailValueEditor, type EmailValueNode } from "./sdk/value-editor.js";
 export { createEmailMutationSdk, createEmailSdk, describeNodeKind, EmailSdkError, EmailSdkSchemaError, type CreateEmailSdkOptions, type EmailComponent, type EmailComponentSlot, type EmailDiagnostics, type EmailDocument, type EffectiveVisibility, type EmailLibraryComponent, type EmailLibrarySlot, type EmailMetadataPatch, type EmailMutationSelector, type EmailMutationSdkSession, type EmailNode, type EmailNodeStyleApi, type EmailSdkSession, type EmailThemeApi, type IdFactory, type IdsMap, type InsertedEmailNode, type InsertPosition, type SocialNetworkInput, type SocialNetworkMutation, type SocialNetworkPosition, type SocialNetworkTarget, type SocialSharedMutation, type StripeBackgroundTarget, type StyleArea, type StyleBreakpoint, type StyleOptions, } from "./sdk/edit.js";
 export { uniqueUuidFromSeed, uuidFromSeed } from "./sdk/ids.js";

@@ -1,21 +1,8 @@
 // src/skill-scripts/email-from-reference/create-from-brief.ts
 import { randomUUID } from "node:crypto";
 
-// src/skill-scripts/shared/schema-cache.ts
-import { statSync } from "node:fs";
-function schemaIsFresh(file) {
-  try {
-    const stat = statSync(file);
-    return stat.isFile() && Date.now() - stat.mtimeMs <= 36e5;
-  } catch (error) {
-    if (error.code === "ENOENT") return false;
-    throw error;
-  }
-}
-
 // src/skill-scripts/shared/runtime.ts
-import { execFileSync } from "node:child_process";
-import { existsSync, mkdirSync, readFileSync, statSync as statSync2, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync, statSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 function isObject(value) {
@@ -75,25 +62,19 @@ function resolveSdkDist(startUrl = import.meta.url) {
       candidate = path.resolve(scriptDirectory, "../../sdk/index.js");
     }
   }
-  if (candidate && existsSync(candidate) && statSync2(candidate).isFile()) return candidate;
+  if (candidate && existsSync(candidate) && statSync(candidate).isFile()) return candidate;
   throw new Error(
     `Cannot find the packaged convo-email-agent SDK${candidate ? ` at ${candidate}` : ""}. Install skills/ and packages/ together or set CONVO_EMAIL_AGENT_SDK_PATH to an existing index.js.`
   );
 }
 async function loadSdk(sdkPath) {
-  const sdk = await import(pathToFileURL(sdkPath).href);
-  const schemaPath = optionalString(parseArgs(process.argv.slice(2)), "schema") ?? (process.env.PUBLISHER_PROXY_BASE_URL ? execFileSync("python", ["-m", "reteno_agent.email_model_schema"], { encoding: "utf8" }).trim() : process.env.STRIPO_SCHEMA_PATH);
-  if (!schemaPath) throw new Error("Supply --schema or STRIPO_SCHEMA_PATH with the downloaded email schema.");
-  if (!schemaIsFresh(schemaPath)) throw new Error("Email schema is missing or older than one hour. Refresh it through the host's schema cache before retrying.");
-  sdk.setEmailSchema(readJson(schemaPath));
-  return sdk;
+  return import(pathToFileURL(sdkPath).href);
 }
-async function validateEditorJson(emailJson, sdkPath) {
+async function validateEditorJson(emailJson, sdkPath, options = {}) {
   try {
     const sdk = await loadSdk(sdkPath);
-    const session = sdk.createEmailMutationSdk({ emailJson });
-    session.finish();
-    return { valid: true, diagnostics: session.diagnostics() };
+    sdk.assertValidEmailModel(emailJson, options);
+    return { valid: true };
   } catch (error) {
     return { valid: false, error: compactError(error) };
   }
@@ -520,13 +501,14 @@ async function main() {
     }
     const typedBrief = brief;
     const sdk = await loadSdk(sdkPath);
+    const baselineEmailJson = baselinePath === void 0 ? void 0 : readJson(baselinePath);
     const emailJson = sdk.createEmailFromDraft({
       emailJson: typedBrief.model,
-      baselineEmailJson: baselinePath === void 0 ? void 0 : readJson(baselinePath),
+      baselineEmailJson,
       regenerateIds: true,
       idFactory: () => randomUUID()
     });
-    const validation = await validateEditorJson(emailJson, sdkPath);
+    const validation = await validateEditorJson(emailJson, sdkPath, { current: baselineEmailJson });
     if (!validation.valid) {
       throw new Error(`Created model failed native editor schema validation: ${validation.error?.message ?? "unknown error"}`);
     }

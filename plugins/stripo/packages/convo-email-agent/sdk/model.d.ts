@@ -1,3 +1,4 @@
+import { type EmailValidationIssue, type EmailValidationOptions } from "./editor-validator.js";
 type JsonArray = JsonValue[];
 type JsonObject = {
     [key: string]: JsonValue;
@@ -18,17 +19,15 @@ type MutationTransaction = {
     lastCloneBySource: Map<string, string>;
     lastInsertByAnchor: Map<string, string>;
 };
-export interface SchemaValidationError {
-    readonly instancePath: string;
-    readonly keyword: string;
-    readonly message?: string;
-    readonly params: Record<string, unknown>;
-    readonly schemaPath: string;
-}
-/** Initialize validation with the schema downloaded from the configured email service. */
+/** One rejection, addressed the way set_document_state reports it (dot path, `<root>` for the document). */
+export type SchemaValidationError = EmailValidationIssue;
+/**
+ * @deprecated Validation uses the bundled editor rules. Retained for existing hosts; the
+ * supplied JSON schema does not configure or disable validation.
+ */
 export declare function setEmailSchema(schema: unknown): void;
-/** Validate native JSON with the loaded schema without opening an editing session. */
-export declare function assertValidEmailModel(value: unknown): asserts value is JsonObject;
+/** Validate native JSON with the bundled editor rules without opening an editing session. */
+export declare function assertValidEmailModel(value: unknown, options?: EmailValidationOptions): asserts value is JsonObject;
 export declare class EmailSdkSchemaError extends Error {
     readonly errors: SchemaValidationError[] | null | undefined;
     readonly context: string;
@@ -43,12 +42,12 @@ export interface ElementDescription {
     type?: string;
 }
 export declare class EditorJsonMutationCore {
-    private readonly validate;
     private readonly draft;
+    private readonly current;
     private readonly idFactory;
     private readonly lastCloneBySource;
     private readonly lastInsertByAnchor;
-    constructor(templateJson: unknown, idFactory?: () => string);
+    constructor(templateJson: unknown, idFactory?: () => string, options?: EmailValidationOptions);
     beginTransaction(): MutationTransaction;
     rollback(transaction: MutationTransaction): this;
     validateDraft(context: string, details?: SchemaValidationDetails): this;

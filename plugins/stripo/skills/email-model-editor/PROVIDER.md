@@ -25,9 +25,10 @@ Never write the Business Profile from these skills. `patch_business_profile`,
 `$brandkit-updater` and `$brandkit-extraction-v-0`, which carry their own approval step. When the
 project has no profile, offer `$brandkit-extraction-v-0` once and continue from the reference.
 
-Acquire the schema with `get_document_state_schema()` and the reference/target with
-`get_document_state(id, type)`. Both return a temporary `downloadUrl`; download to local JSON
-files. Require `status=OK`; a missing, inaccessible or broken model is not an empty reference.
+Acquire the reference/target with `get_document_state(id, type)`; it returns a temporary
+`downloadUrl`, download to a local JSON file. Require `status=OK`; a missing, inaccessible or
+broken model is not an empty reference. The runners validate with the editor rules bundled in
+the SDK. `get_document_state_schema()` remains available for field documentation.
 
 Use `get_content(id, type, includeHtml=false)` for name and project/folder metadata.
 Use `get_screenshot(id, type, mode="BOTH")` for reference and final desktop/mobile inspection.
@@ -81,6 +82,27 @@ retry needs a fresh prepare/upload ticket; do not repeat a possibly successful m
 Follow refusal/error statuses and allow at most one repair retry before reporting the failure.
 There is no conflict-resolution or base-version check in this version. Keep the read-to-write gap
 short, change only requested content, and re-read after writing, as the MCP guide recommends.
+
+`set_document_state` answers with a `status`, never a protocol error. `OK` carries
+`generatedPatchesCount`. `ACCESS_DENIED` has no retry. `UPLOAD_NOT_FOUND` means nothing was
+uploaded under that ticket or it is already spent. `INVALID_STATE` means the file is oversized,
+not UTF-8, or not a single JSON object. `MERGE_BROKEN` means the editor rejected the upload and
+wrote nothing; it carries the editor's `code`, its `message`, and for these codes `details`:
+
+- `VALIDATION_ERROR` — `details.errors[{path, message}]`. `path` is a dot path into the uploaded
+  JSON with numeric array indexes (`stripes.0.structures.0.columns.0.containers.0.blocks.2.settings.…`);
+  `<root>` is the top level. Fix every listed field at its source (the brief or the SDK script,
+  not the candidate JSON by hand), rebuild, and persist with a fresh ticket. This is the retry.
+- `PARSE_ERROR` — `details.parseErrors[{message, location?, severity?}]`. A document could not be
+  parsed; the message may describe the letter's stored state rather than the upload. Re-read the
+  target with `get_document_state`; if that read also fails, report the letter as broken and stop.
+- `SIDE_EFFECT_UNAVAILABLE` — `details.unavailableSideEffects[{kind, affectedBlockIds?, affectedPaths?}]`.
+  The listed blocks need a backend capability this runtime cannot run. The same upload fails
+  again: change or drop what those paths point at, rebuild, and persist with a fresh ticket.
+
+`details.truncated=true` means diagnostics were dropped to fit; fix what is listed, persist, and
+read the fresh diagnostics. Without `details`, use `message`. Report the `code`, the paths, and
+the messages verbatim when the one repair retry does not resolve the rejection.
 
 The upload is the complete document. `set_document_state` diffs it against the live state and
 treats every absent optional key as a deletion: most keys reset to their defaults, `fontWeight`

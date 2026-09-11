@@ -18,9 +18,11 @@ endpoint or credential; use the Stripo MCP server and authorized file-transfer m
 configured by the consuming agent.
 If the host installs `HOST.md` beside this file, read it for the concrete transfer commands.
 
-The email schema comes from `get_document_state_schema` as a temporary download URL. Download it
-to a local file, refresh a file older than one hour, and pass `--schema <file>` to every runner.
-The SDK never bundles a schema; direct SDK callers first call `setEmailSchema(schema)`.
+Validation runs the editor's own Document State rules bundled into the SDK. No schema download
+or initialization is required. `bundle.json.editorValidator` records the editor revision.
+`finish()` validates edits against the acquired input; create mode validates a new document.
+The service also validates its deployed revision and applies the write to its live state;
+local success does not establish persistence.
 
 `<skill-dir>` is this installed skill directory. `<bundle-root>` is the directory containing the
 installed `skills/` and `packages/` directories.
@@ -60,7 +62,6 @@ Inspect the model:
 ```bash
 node <skill-dir>/scripts/inspect-editor-json.mjs \
   --input <downloaded-model.json> \
-  --schema <schema.json> \
   --output <inspection.json>
 ```
 
@@ -158,7 +159,7 @@ the inserted block directly. The SDK assigns fresh IDs. Removal and duplication 
 definitions. For a block type absent from the reference, construct a schema-valid native component
 in the module using the reference styles.
 
-Block `settings` accept only the keys the downloaded schema lists for that block type. The model's
+Block `settings` accept only the keys the editor schema lists for that block type. The model's
 top-level `settings` (`general`, `stripes`, `headings`, `buttons`) holds the defaults for every
 element of a type, and some of those keys have no block-level counterpart. Check the block
 definition before setting a key on a block. When the key is absent there, change the global
@@ -200,7 +201,6 @@ node <skill-dir>/scripts/run-sdk.mjs \
   --input <downloaded-model.json> \
   --script <workspace>/email-<id>.changes.mjs \
   --output <updated-model.json> \
-  --schema <schema.json> \
   --diagnostics <diagnostics.json>
 ```
 
@@ -286,8 +286,11 @@ set_document_state(id=<id>, type=<type>, uploadId=<upload id>)
 Between the two calls, upload `<updated-model.json>` to the returned `uploadUrl` through the
 consuming agent's authorized transfer mechanism. Never pass the model inline. An upload ID is
 single-use and there is no hash or idempotency argument: keep the read-to-write gap short, and
-after an uncertain write read the state before retrying with a fresh ticket. Follow refusal or
-error statuses and allow at most one repair retry before reporting the failure.
+after an uncertain write read the state before retrying with a fresh ticket. Follow the `status`
+contract in `PROVIDER.md`: a `MERGE_BROKEN` answer names the rejected fields in
+`details.errors[].path` (a dot path into `<updated-model.json>`); fix them in the change module,
+rerun the runner, and persist with a fresh ticket. Allow at most one repair retry before reporting
+the failure with the returned `code`, paths, and messages.
 
 ## 5. Verify durable state
 
