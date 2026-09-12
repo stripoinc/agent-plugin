@@ -1,5 +1,9 @@
 export type JsonObject = Record<string, unknown>;
 export declare function isObject(value: unknown): value is JsonObject;
+export declare function objectValue(value: unknown): JsonObject;
+export declare function deepFreeze<T>(value: T): T;
+/** Stable JSON representation; object key order has no semantic meaning. */
+export declare function stableJson(value: unknown): string;
 export declare function describeNodeKind(value: unknown): "stripe" | "structure" | "column" | "container" | "block" | undefined;
 export declare function collectNodeIds(value: unknown, ids?: string[]): string[];
 export declare function resolveJsonPointer(root: unknown, pointer: string): unknown;

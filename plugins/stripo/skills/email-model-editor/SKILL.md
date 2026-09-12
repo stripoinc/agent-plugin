@@ -115,6 +115,16 @@ preheader exists. Both preheader fields must be supplied. `PROVIDER.md` defines 
 clearing semantics. This method also works when the native model has no blocks. Return nothing
 from the module, including after a chained SDK call.
 
+Use `email.one(selector)` when exactly one match is required, or `email.block(id, type)` for
+a type-checked block. `within` restricts a selector to a subtree. Use `patchSettings(patch)`
+for supported settings; unknown keys, arbitrary collection arrays and `undefined` are errors.
+Use collection methods for social/menu items, `setSpacerMode` for spacer variants, and
+`resetSettings(paths)` for confirmed resets. `node.describe()` exposes the pinned contract.
+Each method is atomic. The synchronous module may also receive `transaction` and group
+related changes with `transaction(email => { ... })`; failure restores the whole group.
+All ten native block types are represented. Timer reads and unrelated supported edits are
+allowed, but preview-dependent changes and unsupported structural actions fail explicitly.
+
 Rules for the module:
 
 - Use the full `EmailDocument` API declared in
@@ -144,8 +154,8 @@ Rules for the module:
   editor's `other` type. A network `type` has to be one the editor ships an icon for, `title` is at
   most 100 UTF-16 code units and `alt` at most 500 (`String.length`, so `😀` counts as two),
   `iconSize` is an integer 16..64 and `spaceBetweenIcons`
-  an integer 0..40 per breakpoint. An existing social block cannot be removed directly, but a block
-  newly inserted or cloned in the current session can be removed.
+  an integer 0..40 per breakpoint. Social insertion, duplication and deletion are supported;
+  `moveSocialNetwork` reorders a network through the collection API.
 - Image sources must be email-safe hosted URLs already supplied or authorized by the user or
   reused from the reference; the Stripo MCP has no asset-upload tool. WebP, AVIF, and
   extensionless or otherwise unknown URLs are not confirmed email-safe. Obtain a hosted
@@ -212,9 +222,14 @@ Require exit code 0 and confirm:
 - `inputSummary` and `outputSummary` show the intended content, block types, and counts,
   including any additions, removals, or duplication needed for the request.
 
-`changed:false` is valid when SDK setters ran but the requested values were already present. Keep
-the acquired model, inspection, change module, updated model, and diagnostics as local task
-artifacts.
+If the requested result already exists, call the supplied `skip(reason)` and return. The runner
+reports `skipped` and produces no uploadable output. A setter that silently changes nothing is an
+error. Keep the acquired model, inspection, module, candidate and diagnostics as task artifacts.
+On any preparation failure, the runner removes stale output. Diagnostics distinguish JSON,
+schema, capability, loss and optional runtime stages; inspect `diagnostics.error.issues`.
+Local contract validation is against the pinned revision. `--runtime-snapshot <file>` plus
+`STRIPO_RUNTIME_PATH` explicitly requests model preflight and fails if context is missing.
+Only a successful server set followed by get confirms persistence.
 
 Repair schema errors without removing intended content. Use `diagnostics.error.errors` and
 the untouched acquired model to repair the failing fields. Do not delete a logo or another
@@ -236,9 +251,8 @@ absent from the candidate becomes a delete, not "unchanged". Depending on the ke
   `contentBackgroundColor`; and a column's `settings.width`.
 
 An omitted `stripes`, `structures`, `columns`, or `blocks` array deletes every element it held.
-Timer and Social blocks from the acquired model cannot be deleted directly; the SDK's `remove()`
-and `repeat()` refuse those blocks because repetition also replaces the original. Newly inserted
-or cloned blocks can be removed before persistence.
+Timer blocks from the acquired model cannot be deleted, including through a parent
+`remove()` or `repeat()`. Social deletion is supported in the pinned merge-service profile.
 Therefore persist the complete candidate produced from the freshly acquired model. Clear ordinary
 values by setting their cleared value. The SDK can remove an image or social link with
 `setLink({url: ""})`, or discard `link.salesforce` when `setLink` changes a button's link from
@@ -268,7 +282,7 @@ Reset the whole named setting, preserving unrelated settings. A nested patch wit
 `undefined` also works: `email.setTheme("settings.general", {backgroundImage: undefined})`.
 An entire optional area or heading group can be reset only if every field it currently holds
 supports a reset. A heading containing `fontWeight` therefore requires individual field resets.
-Do not strip fields from JSON manually. The runner still fails with `Edit dropped … key(s)` for
+Do not strip fields from JSON manually. The runner still reports unintended loss for
 accidentally absent fields, unknown settings, and unsupported resets, including global `fontFamily`,
 `hideImageDownloadIcons`, and `fontWeight`. Native schema validation also rejects deletion of
 required settings and required children such as `backgroundImage.path`.

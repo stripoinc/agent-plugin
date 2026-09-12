@@ -1,15 +1,13 @@
 // src/skill-scripts/email-from-reference/create-from-brief.ts
 import { randomUUID } from "node:crypto";
+import { rmSync as rmSync2 } from "node:fs";
 
 // src/skill-scripts/shared/runtime.ts
-import { existsSync, mkdirSync, readFileSync, statSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync, realpathSync, rmSync, statSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 function isObject(value) {
   return value !== null && typeof value === "object" && !Array.isArray(value);
-}
-function objectValue(value) {
-  return isObject(value) ? value : {};
 }
 function parseArgs(argv) {
   const args = {};
@@ -39,13 +37,46 @@ function writeJson(filePath, value) {
   writeFileSync(filePath, `${JSON.stringify(value, null, 2)}
 `, "utf8");
 }
+function beginOutputs(output, diagnostics, inputs) {
+  const canonical = (file) => {
+    const absolute = path.resolve(file);
+    if (existsSync(absolute)) return realpathSync(absolute);
+    const parent = path.dirname(absolute);
+    return parent === absolute ? absolute : path.join(canonical(parent), path.basename(absolute));
+  };
+  const inputPaths = new Set(inputs.filter((value) => value !== void 0).map(canonical));
+  if (canonical(output) === canonical(diagnostics) || inputPaths.has(canonical(output)) || inputPaths.has(canonical(diagnostics))) {
+    throw new Error("Output and diagnostics must differ from each other and every input.");
+  }
+  rmSync(output, { force: true });
+  rmSync(diagnostics, { force: true });
+}
+async function prepareOutput(sdk, options) {
+  if (!options.runtimeSnapshotPath) {
+    const result = options.session?.validate() ?? sdk.validateChange(options);
+    if (!result.success) throw new sdk.DocumentStateError(result.issues);
+    return { documentState: options.session ? options.session.finish() : result.documentState, verification: { level: "contract", ...sdk.getContract() } };
+  }
+  const runtimePath = process.env.STRIPO_RUNTIME_PATH;
+  if (!runtimePath) throw new Error("STRIPO_RUNTIME_PATH must point to the optional SDK runtime entry.");
+  if (!options.session && options.current === void 0) throw new Error("Runtime verification requires an acquired current baseline.");
+  const runtime = await import(pathToFileURL(path.resolve(runtimePath)).href);
+  const raw = readJson(options.runtimeSnapshotPath);
+  if (!isObject(raw) || typeof raw.encodedModel !== "string" || !/^[A-Za-z0-9+/]+={0,2}$/.test(raw.encodedModel)) throw new Error("Runtime snapshot must contain a base64 encodedModel.");
+  const session = options.session ?? sdk.createEmailSdk({ emailJson: options.target, current: options.current, intent: options.intent });
+  return runtime.prepareDocumentState({ session, snapshot: {
+    ...raw,
+    encodedModel: new Uint8Array(Buffer.from(raw.encodedModel, "base64"))
+  } });
+}
 function compactError(error) {
   const fields = error instanceof Error || isObject(error) ? error : void 0;
   const errors = fields && "errors" in fields && Array.isArray(fields.errors) ? fields.errors : void 0;
   return {
     name: typeof fields?.name === "string" ? fields.name : "Error",
     message: String(fields?.message ?? error).slice(0, 2e3),
-    ...errors ? { errors } : {}
+    ...errors ? { errors } : {},
+    ...Object.fromEntries(["code", "stage", "input", "path", "issues"].flatMap((key) => fields && key in fields ? [[key, fields[key]]] : []))
   };
 }
 function resolveSdkDist(startUrl = import.meta.url) {
@@ -80,7 +111,15 @@ async function validateEditorJson(emailJson, sdkPath, options = {}) {
   }
 }
 
-// src/skill-scripts/shared/inspection.ts
+// src/sdk/model-utils.ts
+function isObject2(value) {
+  return value !== null && typeof value === "object" && !Array.isArray(value);
+}
+function objectValue(value) {
+  return isObject2(value) ? value : {};
+}
+
+// src/sdk/inspection.ts
 var MAX_ITEMS = 100;
 var MAX_SNIPPET = 140;
 function truncate(value, limit = MAX_SNIPPET) {
@@ -98,12 +137,12 @@ function count(map, key) {
   map[safeKey] = (map[safeKey] ?? 0) + 1;
 }
 function linkValue(link) {
-  if (!isObject(link)) return void 0;
+  if (!isObject2(link)) return void 0;
   return typeof link.value === "string" ? link.value : typeof link.href === "string" ? link.href : void 0;
 }
 function altTextValue(altText) {
   if (typeof altText === "string") return altText;
-  if (isObject(altText) && typeof altText.text === "string") return altText.text;
+  if (isObject2(altText) && typeof altText.text === "string") return altText.text;
   return void 0;
 }
 function extractAnchors(html) {
@@ -121,7 +160,7 @@ function collectIds(value, counts) {
     for (const item of value) collectIds(item, counts);
     return;
   }
-  if (!isObject(value)) return;
+  if (!isObject2(value)) return;
   if (typeof value.id === "string") counts.set(value.id, (counts.get(value.id) ?? 0) + 1);
   for (const child of Object.values(value)) collectIds(child, counts);
 }
@@ -151,10 +190,10 @@ function visibilityFields(node, inheritedHiddenOn) {
   };
 }
 function summarizeBlock(block, area, summary, inheritedHiddenOn) {
-  if (!isObject(block)) return;
+  if (!isObject2(block)) return;
   const id = typeof block.id === "string" ? block.id : void 0;
   const type = typeof block.type === "string" ? block.type : "unknown";
-  const settings = isObject(block.settings) ? block.settings : {};
+  const settings = isObject2(block.settings) ? block.settings : {};
   const visibility = visibilityFields(block, inheritedHiddenOn);
   count(summary.blockTypes, type);
   count(summary.blockVisibility, visibility.effectiveVisibility);
@@ -202,11 +241,11 @@ function summarizeBlock(block, area, summary, inheritedHiddenOn) {
       area,
       ownHideElement: visibility.ownHideElement,
       effectiveVisibility: visibility.effectiveVisibility,
-      sharedLinkColor: isObject(settings.colors) ? settings.colors.link : void 0,
+      sharedLinkColor: isObject2(settings.colors) ? settings.colors.link : void 0,
       items: items.slice(0, 20).map((item, index) => ({
         index,
-        name: isObject(item) ? truncate(item.name) : void 0,
-        href: isObject(item) ? linkValue(item.link) : void 0,
+        name: isObject2(item) ? truncate(item.name) : void 0,
+        href: isObject2(item) ? linkValue(item.link) : void 0,
         linkColor: objectValue(objectValue(item).colors).link
       }))
     });
@@ -222,11 +261,11 @@ function summarizeBlock(block, area, summary, inheritedHiddenOn) {
       style: settings.style,
       textCustomization: settings.textCustomization,
       networks: networks.slice(0, 20).map((network) => ({
-        type: isObject(network) ? network.type : void 0,
-        href: isObject(network) ? linkValue(network.link) : void 0,
-        title: isObject(network) ? truncate(network.title) : void 0,
-        alt: isObject(network) ? truncate(network.alt) : void 0,
-        icon: isObject(network) ? network.icon : void 0
+        type: isObject2(network) ? network.type : void 0,
+        href: isObject2(network) ? linkValue(network.link) : void 0,
+        title: isObject2(network) ? truncate(network.title) : void 0,
+        alt: isObject2(network) ? truncate(network.alt) : void 0,
+        icon: isObject2(network) ? network.icon : void 0
       }))
     });
     return;
@@ -243,7 +282,7 @@ function summarizeBlock(block, area, summary, inheritedHiddenOn) {
   }
 }
 function summarizeContainer(container, area, summary, inheritedHiddenOn) {
-  if (!isObject(container)) return;
+  if (!isObject2(container)) return;
   const visibility = visibilityFields(container, inheritedHiddenOn);
   summary.counts.containers += 1;
   if (container.moduleId !== void 0) summary.counts.moduleNodes += 1;
@@ -257,7 +296,7 @@ function summarizeEditorJson(value) {
   const stripesSettings = objectValue(settings.stripes);
   const summary = {
     shape: {
-      hasSettings: isObject(emailJson?.settings),
+      hasSettings: isObject2(emailJson?.settings),
       hasStripes: Array.isArray(emailJson?.stripes),
       hasCompiledHtml: typeof emailJson?.html === "string",
       hasCompiledCss: typeof emailJson?.css === "string"
@@ -305,7 +344,7 @@ function summarizeEditorJson(value) {
   summary.ids.duplicateIds = [...idCounts.entries()].filter(([, idCount]) => idCount > 1).map(([id, idCount]) => ({ id, count: idCount })).slice(0, MAX_ITEMS);
   const stripes = Array.isArray(emailJson?.stripes) ? emailJson.stripes : [];
   for (const stripe of stripes) {
-    if (!isObject(stripe)) continue;
+    if (!isObject2(stripe)) continue;
     const stripeVisibility = visibilityFields(stripe, /* @__PURE__ */ new Set());
     summary.counts.stripes += 1;
     if (stripe.moduleId !== void 0) summary.counts.moduleNodes += 1;
@@ -314,7 +353,7 @@ function summarizeEditorJson(value) {
     const area = typeof messageArea === "string" ? messageArea : void 0;
     const structures = Array.isArray(stripe.structures) ? stripe.structures : [];
     for (const structure of structures) {
-      if (!isObject(structure)) continue;
+      if (!isObject2(structure)) continue;
       const structureVisibility = visibilityFields(structure, stripeVisibility.hiddenOn);
       summary.counts.structures += 1;
       if (structure.moduleId !== void 0) summary.counts.moduleNodes += 1;
@@ -322,7 +361,7 @@ function summarizeEditorJson(value) {
       const columns = Array.isArray(structure.columns) ? structure.columns : [];
       if (columns.length > 0) {
         for (const column of columns) {
-          if (!isObject(column)) continue;
+          if (!isObject2(column)) continue;
           const columnVisibility = visibilityFields(column, structureVisibility.hiddenOn);
           summary.counts.columns += 1;
           if (column.moduleId !== void 0) summary.counts.moduleNodes += 1;
@@ -340,7 +379,7 @@ function summarizeEditorJson(value) {
 }
 
 // src/skill-scripts/email-from-reference/create-from-brief.ts
-function isObject2(value) {
+function isObject3(value) {
   return value !== null && typeof value === "object" && !Array.isArray(value);
 }
 function nonEmptyString(value) {
@@ -365,7 +404,7 @@ function validateFontPlan(message, customFontsEnabled) {
   const findings = [];
   const families = message.font_families;
   const roleFamilies = /* @__PURE__ */ new Map();
-  if (!isObject2(families)) {
+  if (!isObject3(families)) {
     findings.push("brief.message.font_families: required object with body, headings, and buttons");
   } else {
     for (const role of FONT_ROLES) {
@@ -403,7 +442,7 @@ function validateFontPlan(message, customFontsEnabled) {
   } else if (Array.isArray(fonts)) {
     if (fonts.length > 4) findings.push("brief.message.fonts: at most four fonts are allowed");
     for (const [index, font] of fonts.entries()) {
-      if (!isObject2(font)) {
+      if (!isObject3(font)) {
         findings.push(`brief.message.fonts[${index}]: expected an object`);
         continue;
       }
@@ -446,10 +485,10 @@ function validateFontPlan(message, customFontsEnabled) {
   return findings;
 }
 function validateCreationBrief(brief, customFontsEnabled = process.env.PUBLISHER_EMAIL_CUSTOM_FONTS_ENABLED === "true", brand = "reteno") {
-  if (!isObject2(brief)) return ["brief: the file must contain a JSON object"];
+  if (!isObject3(brief)) return ["brief: the file must contain a JSON object"];
   const findings = [];
   if (brief.v !== 2) findings.push(`brief.v: expected 2 (native model draft), got ${JSON.stringify(brief.v)}`);
-  if (!isObject2(brief.message)) {
+  if (!isObject3(brief.message)) {
     findings.push("brief.message: required metadata object");
   } else if (brand === "stripo") {
     if (nonEmptyString(brief.message.name) === void 0) findings.push("brief.message.name: required non-empty name");
@@ -471,7 +510,7 @@ function validateCreationBrief(brief, customFontsEnabled = process.env.PUBLISHER
     }
     findings.push(...validateFontPlan(brief.message, customFontsEnabled));
   }
-  if (!isObject2(brief.model)) {
+  if (!isObject3(brief.model)) {
     findings.push("brief.model: required native editor model draft");
   } else if (!Array.isArray(brief.model.stripes) || brief.model.stripes.length === 0) {
     findings.push("brief.model.stripes: required non-empty array");
@@ -489,10 +528,12 @@ async function main() {
   const outputPath = requireString(args, "output");
   const baselinePath = args.baseline === void 0 ? void 0 : requireString(args, "baseline");
   const diagnosticsPath = optionalString(args, "diagnostics") ?? `${outputPath}.diagnostics.json`;
-  const sdkPath = resolveSdkDist();
+  let sdkPath;
   const brand = optionalString(args, "brand") ?? "reteno";
   const customFontsEnabled = brand === "reteno" && process.env.PUBLISHER_EMAIL_CUSTOM_FONTS_ENABLED === "true";
+  beginOutputs(outputPath, diagnosticsPath, [briefPath, baselinePath, optionalString(args, "runtime-snapshot")]);
   try {
+    sdkPath = resolveSdkDist();
     if (brand !== "reteno" && brand !== "stripo") throw new Error(`Unsupported brand: ${brand}`);
     const brief = readJson(briefPath);
     const findings = validateCreationBrief(brief, customFontsEnabled, brand);
@@ -502,9 +543,11 @@ async function main() {
     const typedBrief = brief;
     const sdk = await loadSdk(sdkPath);
     const baselineEmailJson = baselinePath === void 0 ? void 0 : readJson(baselinePath);
+    const baselineStripes = isObject3(baselineEmailJson) && Array.isArray(baselineEmailJson.stripes) ? baselineEmailJson.stripes : [];
     const emailJson = sdk.createEmailFromDraft({
       emailJson: typedBrief.model,
       baselineEmailJson,
+      intent: { removeNodes: baselineStripes.filter(isObject3).map((stripe) => String(stripe.id)) },
       regenerateIds: true,
       idFactory: () => randomUUID()
     });
@@ -512,9 +555,15 @@ async function main() {
     if (!validation.valid) {
       throw new Error(`Created model failed native editor schema validation: ${validation.error?.message ?? "unknown error"}`);
     }
-    const summary = summarizeEditorJson(emailJson);
+    const prepared = await prepareOutput(sdk, {
+      current: baselineEmailJson,
+      target: emailJson,
+      intent: { removeNodes: baselineStripes.filter(isObject3).map((stripe) => String(stripe.id)) },
+      runtimeSnapshotPath: optionalString(args, "runtime-snapshot")
+    });
+    const summary = summarizeEditorJson(prepared.documentState);
     if (brand === "stripo" && summary.counts.blocks === 0) throw new Error("A Stripo email must contain at least one block.");
-    writeJson(outputPath, emailJson);
+    writeJson(outputPath, prepared.documentState);
     writeJson(diagnosticsPath, {
       status: "ok",
       briefPath,
@@ -527,7 +576,8 @@ async function main() {
         fontsIncluded: Object.hasOwn(typedBrief.message, "fonts")
       } : void 0,
       summary,
-      validation
+      validation,
+      verification: prepared.verification
     });
     console.log(JSON.stringify({
       status: "ok",
@@ -536,6 +586,7 @@ async function main() {
       counts: summary.counts
     }));
   } catch (error) {
+    rmSync2(outputPath, { force: true });
     writeJson(diagnosticsPath, {
       status: "error",
       briefPath,

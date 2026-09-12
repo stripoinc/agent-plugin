@@ -1,6 +1,6 @@
 {
   "name": "stripo",
-  "version": "0.2.3",
+  "version": "0.3.0",
   "description": "Create and edit Stripo emails and templates through the Stripo MCP: native JSON-model skills backed by the convo-email-agent SDK.",
   "author": {
     "name": "Stripo",

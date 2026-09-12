@@ -172,12 +172,17 @@ to change it, and it then applies to every element of that type in the email. A 
 schema does not list fails validation as `unsupported property`. For example, button
 `letterSpacing`, `textTransform`, and `hoverButtonStyles` exist only in `settings.buttons`.
 
-Native block types beyond text, image, button, spacer, and social, such as menu or video blocks copied
-from a reference model, are preserved with their supplied settings; every block still passes the
-builder's checks, so supply non-empty text content, image sources, button text and links, and
-unique IDs. Preserve the reference's native settings and resources unless the request changes
-them, and reconstruct the requested editable content. Supply complete settings for block types
-without draft defaults; the bundled editor schema validates them for both brands.
+The unified SDK covers text, image, button, spacer, social, menu, video, timer, HTML and
+unknown blocks with native types and canonical defaults. Use `createBlock`, `createStructure`
+and `createStripe` for programmatic creation; layout widths are positive weights on write.
+Menu and social arrays use explicit collection methods. Timer/video changes that require an
+unavailable preview fail rather than fabricate assets. Preserve supplied native values and
+resources. For a rebuild, use the acquired target as `baselineEmailJson`, or use
+`createDocument({current})`; deleting content must still respect nested timer restrictions.
+Creation, editing and font normalization use the same current/target preparation and loss
+guards. The successful result is the normalized validated JSON; failed preparation removes
+stale output. An optional encoded-model preflight is stronger local evidence, while a server
+set followed by get is required to confirm persistence.
 
 The builder's defaults are fixed values, not the live document's values, and they do not cover
 every optional global key: the general background image, custom list styles, per-area paragraph
