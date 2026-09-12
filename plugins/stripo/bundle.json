@@ -2,16 +2,15 @@
   "schemaVersion": 1,
   "package": "@ardas/convo-email-agent",
   "version": "0.2.0",
-  "sourceRevision": "a8c6db3a9a841fb9c24cad0650058ebe3d2fee01",
+  "sourceRevision": "7e633c8c6135ea508f8aaaad76f12cc5d69f8db4",
   "sourceDirty": false,
   "editorValidator": {
     "editorRevision": "1986edbb3b9cd06876962b5d54a40778baa29f8b",
     "editorDirty": false,
-    "builtAt": "2026-09-11T10:51:10.515Z",
     "esbuildVersion": "0.28.2",
     "zodVersion": "4.5.4",
-    "sizeBytes": 1309260,
-    "bundleSha256": "5b18a3980b85368867bc10aa80f793c0a4ef6bb5628a6dab3a4cbbd6c036ff1d"
+    "sizeBytes": 1313932,
+    "bundleSha256": "29ee22b211a4ae994384a878b74161e0b36c8881011a4050cbe9fa816a2b7dfb"
   },
   "brand": "stripo",
   "canonicalMcpBrand": "reteno",

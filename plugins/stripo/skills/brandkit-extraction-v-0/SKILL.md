@@ -7,7 +7,7 @@ version: 0.3.0
 # brandkit-extraction-v-0
 
 Collect reliable homepage evidence, compose it into a brandkit, and save that brandkit to the account. Start from the rendered homepage, not assumptions or secondary pages.
-This file is the whole contract: run the commands below in order, author the six fields the scaffolder leaves you, and report what the run did. The `references/` table at the end says which file to open when something goes wrong — on a clean run you open none of them.
+This file is the whole contract: run the commands below in order, author the six fields the scaffolder leaves you, and report what the run did. The reference links name when to open each file; on a clean run you need none of them.
 
 ## Host environment
 
@@ -55,16 +55,7 @@ node ${BRANDKIT_SKILL_ROOT}/scripts/assemble-extraction-stage.js --mode scaffold
 
 It prints the review packet (also written as `review-packet.json`) — one JSON document carrying `run`, `identity`, `logos`, `contacts`, `socials`, `links` (`forBrandkit`, `raw`, and a `navigation` list of same-origin anchors), `languages`, `productCard` with the 5-row `variantTable`, `colourSeeds`, `counts`, `unresolvedRoles`, `errors`, `agentOwnedFields` and `files`. **Read the packet, then open `home.png`.** Open a full artifact only when the packet names a `$.path` you need. The packet's `navigation` section matches `header` and `nav` TAGS only — `[role=banner]` / `[role=navigation]` are unreachable, because `dom.json` records no attribute map — so a nav built solely from those roles will be absent and `links.raw` (with its `region`) is what you have.
 
-After opening the screenshot, inspect unresolved high-impact roles: usable main
-logo; canvas/content surfaces; heading/body text and typography; visible
-header/footer links, text, surface and typography; primary CTA; and visible card
-name/price. An absent region is not a failure. For a visible concrete target with
-a missing role, run one bounded recovery pass under
-[`references/phase-2-5-recovery.md`](references/phase-2-5-recovery.md) and the
-role contract, then record what stays unresolved as a warning naming the role and
-the missing evidence. `ok:true` establishes technical progression, not
-completeness or measured brand fidelity; a contrast replacement or typography
-default is an adaptation, not a more precise measurement.
+After opening the screenshot, inspect unresolved high-impact roles: usable main logo; canvas/content surfaces; heading/body text and typography; visible header/footer links, text, surface and typography; primary CTA; and visible card name/price. An absent region is not a failure. For a visible concrete target with a missing role, run one bounded recovery pass under [`references/phase-2-5-recovery.md`](references/phase-2-5-recovery.md) and the role contract, then record what stays unresolved as a warning naming the role and the missing evidence. `ok:true` establishes technical progression, not completeness or measured brand fidelity; a contrast replacement or typography default is an adaptation, not a more precise measurement.
 
 **Phase 3 — author, then normalize.** Write the six agent-owned fields (next section) into `brandkit.extraction.json`, then:
 
@@ -95,12 +86,8 @@ const P="${BRANDKIT_ARTIFACTS_ROOT}/technical/store-example/persist-write.json";
 **5b — send the file.** PUT the finalize CLI's own `brandkit.json`, unedited, this way and no other, then wait for HTTP 2xx:
 
 ```bash
-${BRANDKIT_SKILL_ROOT}/scripts/upload_via_proxy.sh \
-  --organization-id <organization id from HOST.md's selected context> \
-  --url <uploadUrl> \
-  --input ${BRANDKIT_ARTIFACTS_ROOT}/store-example/brandkit.json \
-  --failure-document ${BRANDKIT_ARTIFACTS_ROOT}/technical/store-example/persist-write.json \
-  --content-type application/json
+${BRANDKIT_SKILL_ROOT}/scripts/upload_via_proxy.sh --organization-id <organization id from HOST.md's selected context> --url <uploadUrl> \
+  --input ${BRANDKIT_ARTIFACTS_ROOT}/store-example/brandkit.json --failure-document ${BRANDKIT_ARTIFACTS_ROOT}/technical/store-example/persist-write.json --content-type application/json
 ```
 
 **A 5a or 5b that fails still owes the persist line.** Both write `persist-write.json` with `stage` on failure: skip 5c and 5d and run `report` — it renders `not persisted (<the error>)` from that document and performs no read, because nothing reached the account.
@@ -121,9 +108,7 @@ saves what it read as `persist-readback.json`, and decides the persist line from
 python "${BRANDKIT_SKILL_ROOT}/scripts/finalize.py" report --out-dir ${BRANDKIT_ARTIFACTS_ROOT}/store-example --write-file ${BRANDKIT_ARTIFACTS_ROOT}/technical/store-example/persist-write.json
 ```
 
-`report` decides from `persist-write.json` whether a read is owed (none on the three refusals, none after a failed 5a/5b) and performs it itself.
-
-Any Phase 5 error, including a `different site` rejection: [`references/phase-5-save.md`](references/phase-5-save.md).
+`report` decides from `persist-write.json` whether a read is owed (none on the three refusals, none after a failed 5a/5b) and performs it itself. Any Phase 5 error, including a `different site` rejection: [`references/phase-5-save.md`](references/phase-5-save.md).
 
 ## What you author
 
@@ -180,23 +165,9 @@ Paste every `REPORT_LINE:` the `report` command printed, verbatim, each as its o
 
 ## References
 
-| File | When to read |
-| --- | --- |
-| [`references/product-card-variants.md`](references/product-card-variants.md) | Confirming or authoring the variant index. |
-| [`references/normalize-safety-nets.md`](references/normalize-safety-nets.md) | Normalize printed `errors`, or a gate names the file. |
-| [`references/browsing-and-refusals.md`](references/browsing-and-refusals.md) | Any refusal, `target_not_approved`, or `session_create_failed`. |
-| [`references/phase-5-save.md`](references/phase-5-save.md) | Any Phase 5 error, including `different site`. |
-| [`references/report-lines.md`](references/report-lines.md) | The persist / logo / contact tables `report` renders. |
-| [`references/stop-conditions.md`](references/stop-conditions.md) | Deciding between the four terminal states. |
-| [`references/logo-flow.md`](references/logo-flow.md) | A logo candidate looks incomplete, or `logo_hosting` needs explaining. |
-| [`references/role-tagging-contract.md`](references/role-tagging-contract.md) | The high-impact role check identifies an unresolved visible role. |
-| [`references/phase-2-5-recovery.md`](references/phase-2-5-recovery.md) | Same, and the screenshot/DOM identifies a concrete semantic target. |
-| [`references/role-decision-rules.md`](references/role-decision-rules.md) | Same, and you need the colour / link / description / button flow behind the role. |
-| [`references/workflow-phases.md`](references/workflow-phases.md) | A phase behaved unlike this contract says, or you need the targeted-edit worked example. |
-| [`references/extraction-stage-json.md`](references/extraction-stage-json.md) | A field of the extraction-stage document, a `usageHints` enum, or a hard rule in full. |
-| [`references/decision-flows.md`](references/decision-flows.md) | A command's full prose, its exits, or where a file is written. |
-| [`references/tool-contracts.md`](references/tool-contracts.md) | Re-probing with more selectors (a re-probe must ADD selectors, never drop them). |
-| [`references/scratch-probe-contract.md`](references/scratch-probe-contract.md) | No packaged probe can answer the question. |
-| [`references/site-match.md`](references/site-match.md) | A satellite's `check-site` verdict surprises you. |
-| [`references/assembly-checklist.md`](references/assembly-checklist.md) | Operator or recovery checklist into the sections above. |
-| [`references/schema.md`](references/schema.md), [`references/assembly-contract.json`](references/assembly-contract.json), [`references/technical-artifact-contract.json`](references/technical-artifact-contract.json) | Downstream consumers and operators, not this run. |
+- Recovery: [normalization errors](references/normalize-safety-nets.md), [browser refusals](references/browsing-and-refusals.md), [the five stop conditions](references/stop-conditions.md), or a satellite's [site-match verdict](references/site-match.md).
+- Visible roles: [role contract](references/role-tagging-contract.md), [bounded recovery](references/phase-2-5-recovery.md), and [colour/link/button decisions](references/role-decision-rules.md); [logo evidence and hosting](references/logo-flow.md) or [card variant geometry](references/product-card-variants.md) when those need review.
+- Probe gaps: [tool flags](references/tool-contracts.md) when adding selectors (never drop existing ones); [scratch-probe rules](references/scratch-probe-contract.md) only when no packaged probe can answer.
+- Save and reporting: [Phase 5 errors](references/phase-5-save.md), including `different site`, and the [persist/logo/contact tables](references/report-lines.md).
+- Workflow details: [phase examples](references/workflow-phases.md), [field shapes and usage hints](references/extraction-stage-json.md), [command exits and file layout](references/decision-flows.md), and the [recovery checklist](references/assembly-checklist.md).
+- Downstream consumers and operators: [schema overview](references/schema.md), [assembly contract](references/assembly-contract.json), and [technical artifact contract](references/technical-artifact-contract.json).

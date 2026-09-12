@@ -1,4 +1,5 @@
 import { type EmailValidationIssue, type EmailValidationOptions } from "./editor-validator.js";
+import { type ChangeIntent } from './preparation.js';
 type JsonArray = JsonValue[];
 type JsonObject = {
     [key: string]: JsonValue;
@@ -18,6 +19,7 @@ type MutationTransaction = {
     draft: JsonObject;
     lastCloneBySource: Map<string, string>;
     lastInsertByAnchor: Map<string, string>;
+    references: Map<string, Array<string | number>>;
 };
 /** One rejection, addressed the way set_document_state reports it (dot path, `<root>` for the document). */
 export type SchemaValidationError = EmailValidationIssue;
@@ -29,6 +31,8 @@ export declare function setEmailSchema(schema: unknown): void;
 /** Validate native JSON with the bundled editor rules without opening an editing session. */
 export declare function assertValidEmailModel(value: unknown, options?: EmailValidationOptions): asserts value is JsonObject;
 export declare class EmailSdkSchemaError extends Error {
+    readonly code = "INVALID_DOCUMENT";
+    readonly stage = "schema";
     readonly errors: SchemaValidationError[] | null | undefined;
     readonly context: string;
     readonly details: SchemaValidationDetails | undefined;
@@ -43,6 +47,11 @@ export interface ElementDescription {
 }
 export declare class EditorJsonMutationCore {
     private readonly draft;
+    private readonly references;
+    private referenceOrdinal;
+    private find;
+    reference(path: readonly (string | number)[]): string;
+    referencePath(token: string): Array<string | number> | undefined;
     private readonly current;
     private readonly idFactory;
     private readonly lastCloneBySource;
@@ -54,6 +63,10 @@ export declare class EditorJsonMutationCore {
     getContent(id: string): string | undefined;
     setContent(id: string, property: string, value: JsonValue): this;
     setElementProperty(id: string, property: string, value: JsonValue): this;
+    deleteElementProperty(id: string, path: readonly string[]): this;
+    deleteDocumentPath(path: readonly string[]): this;
+    moveElement(id: string, anchorId: string, before?: boolean): this;
+    appendNode(node: JsonObject, parentId?: string): this;
     setDocumentPath(path: readonly string[], value: JsonValue, merge?: boolean): this;
     cloneElement(id: string, newId: string, isBefore?: boolean, nestedIds?: NestedIdsMap): this;
     insertNode(node: unknown, anchorId: string, isBefore?: boolean, nestedIds?: NestedIdsMap): this;
@@ -62,7 +75,7 @@ export declare class EditorJsonMutationCore {
     hasElement(id: string): boolean;
     collectSubtreeIds(id: string): string[];
     describeElement(id: string): ElementDescription | undefined;
-    apply(): JsonObject;
+    apply(intent?: ChangeIntent): JsonObject;
     snapshot(): JsonObject;
 }
 export {};

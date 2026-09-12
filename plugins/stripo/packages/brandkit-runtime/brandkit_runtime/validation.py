@@ -2839,7 +2839,7 @@ def _important_link_path(url: Any) -> str:
 
 
 def _important_link_name_length(name: str) -> int:
-    """UTF-16 code units, which is what JS `String.prototype.length` counts.
+    r"""UTF-16 code units, which is what JS `String.prototype.length` counts.
 
     The cap this mirrors is enforced in JS, so the unit must be JS's; on a name
     containing an astral character `len(name)` and `name.length` disagree.

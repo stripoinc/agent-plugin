@@ -73,9 +73,7 @@ not. Install them once, then read the skill's `HOST.md` for the rest of the cont
 python3 -m pip install -r <plugin-root>/packages/brandkit-runtime/requirements.txt
 ```
 
-Use Python 3.11 or 3.12. On 3.13 and newer the Brand Kit runtime fails to import: a docstring in
-`validation.py` holds an unpaired `\ud800` escape those versions refuse to compile. The email
-skills and `brandkit-updater` are unaffected — they run no Python.
+Use Python 3.11 or newer. The email skills and `brandkit-updater` run no Python.
 
 ```bash
 cd <plugin-root>/skills/brandkit-extraction-v-0/scripts && npm install && npx playwright install chromium
@@ -114,6 +112,16 @@ SDK. They need no schema download or `--schema` argument. `bundle.json.editorVal
 the editor revision and checksum; `get_document_state_schema()` remains available for field
 documentation. Local validation checks that bundled revision, and the service validates and
 applies the write against its live state.
+
+The SDK provides typed document creation and editing, scoped selectors and atomic transactions.
+Creation and editing share validation against the acquired document, with explicit removal and
+reset rules. Failed preparation and explicit skips remove stale candidate files before they can
+be uploaded.
+
+The plugin includes the portable SDK. Optional `--runtime-snapshot` preflight needs an encoded
+model with its corresponding document and context, and the separate Node runtime entry set through
+`STRIPO_RUNTIME_PATH`; those runtime assets are not included in the plugin. A successful local
+preflight still needs the normal MCP write and read-back to confirm persistence.
 
 The bundle owns everything under `skills/` and `packages/`; the repository owns `host/`. A skill
 with a `host/<skill>/` directory gets it copied over the synced skill — that is how the brandkit

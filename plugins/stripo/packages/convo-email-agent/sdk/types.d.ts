@@ -1,4 +1,7 @@
 import type { SocialNetworkInput } from "./social.js";
+import type { BlockKind, BlockSettings, DocumentState, NativeMenuItem } from './generated/document-state.js';
+import type { ChangeIntent, ValidationResult } from './preparation.js';
+import type { NodeIndexEntry } from './selectors.js';
 export type { SocialNetworkInput } from "./social.js";
 export type IdsMap = Record<string, string | number>;
 export type IdFactory = (seed: string, isTaken: (id: string) => boolean) => string;
@@ -13,6 +16,7 @@ export interface EmailMutationSelector {
     linkHostContains?: string;
     textContains?: string;
     limit?: number;
+    within?: string | EmailNode;
 }
 export interface EmailDiagnostics {
     mutationCount: number;
@@ -22,6 +26,7 @@ export interface EmailDiagnostics {
         message: string;
     }[];
     validation: "pending" | "passed" | "failed";
+    skipped?: string;
 }
 export interface TextReplacementOptions {
     occurrence?: number;
@@ -130,6 +135,29 @@ export interface EmailThemeApi {
 export interface EmailNode {
     readonly id: string;
     readonly style: EmailNodeStyleApi;
+    inspect(): NodeIndexEntry;
+    describe(): unknown;
+    patchSettings(patch: Record<string, unknown>): EmailNode;
+    resetSettings(paths: readonly string[]): EmailNode;
+    setHtml(html: string): EmailNode;
+    setExtension(enabled: boolean): EmailNode;
+    setSpacerMode(mode: 'line' | 'space', settings?: Record<string, unknown>): EmailNode;
+    setMenuMode(mode: string): EmailNode;
+    addMenuItem(item: NativeMenuItem, position?: {
+        before: number;
+    } | {
+        after: number;
+    }): EmailNode;
+    updateMenuItem(index: number, patch: DeepPatch<NativeMenuItem>): EmailNode;
+    removeMenuItem(index: number): EmailNode;
+    moveMenuItem(index: number, position: {
+        before: number;
+    } | {
+        after: number;
+    }): EmailNode;
+    moveSocialNetwork(target: SocialNetworkTarget, position: SocialNetworkPosition): EmailNode;
+    duplicate(position?: InsertPosition): EmailNode;
+    move(position: InsertPosition): EmailNode;
     byId(id: string, disambiguateBy?: DisambiguateBy): EmailNode;
     setContent(value: string): EmailNode;
     setText(value: string): EmailNode;
@@ -176,6 +204,11 @@ export interface EmailDocument {
     byId(id: string, disambiguateBy?: DisambiguateBy): EmailNode;
     select(selector: EmailMutationSelector): EmailNode[];
     first(selector: EmailMutationSelector): EmailNode;
+    one(selector: EmailMutationSelector): EmailNode;
+    block<K extends BlockKind>(id: string, expectedType: K): TypedBlockNode<K>;
+    patchSettings(patch: DeepPatch<DocumentState['settings']>): EmailDocument;
+    resetSettings(paths: readonly string[]): EmailDocument;
+    setFonts(fonts: NonNullable<NonNullable<DocumentState['resources']>['fonts']>): EmailDocument;
     setContent(id: string, value: string, disambiguateBy?: DisambiguateBy): EmailNode;
     setText(id: string, value: string, disambiguateBy?: DisambiguateBy): EmailNode;
     setSrc(id: string, url: string, disambiguateBy?: DisambiguateBy): EmailNode;
@@ -186,7 +219,10 @@ export interface EmailDocument {
     repeat(id: string, totalCount: number, disambiguateBy?: DisambiguateBy): EmailNode[];
     setTheme(path: string, value: unknown): EmailDocument;
     setStyle(property: string, value: unknown, options?: StyleOptions): EmailDocument;
-    insert(componentFile: string, position: InsertPosition): InsertedEmailNode;
+    insert(componentFile: string | EmailComponent, position: InsertPosition): InsertedEmailNode;
+    /** Append a native stripe to the document, or a native child to a layout node. */
+    append(node: unknown, parent?: string | EmailNode): EmailNode;
+    insertFrom(reference: unknown, nodeId: string, position: InsertPosition): InsertedEmailNode;
 }
 export interface EmailLibrarySlot {
     role: string;
@@ -206,6 +242,7 @@ export type EmailComponent = Omit<EmailLibraryComponent, "file" | "level"> & {
     level?: "L1" | "L2" | "atoms";
 };
 export interface DisambiguateBy {
+    nodeKind?: EmailMutationSelector['nodeKind'];
     parentContainerId?: string;
     parent_container_id?: string;
     parentStripeId?: string;
@@ -236,11 +273,45 @@ export interface CreateEmailSdkOptions {
     library?: ReadonlyMap<string, EmailLibraryComponent>;
     components?: ReadonlyMap<string, EmailComponent> | Record<string, EmailComponent>;
     idFactory?: IdFactory;
+    /** Used by create/import wrappers; an edit otherwise uses emailJson as current. */
+    current?: unknown;
+    intent?: ChangeIntent;
+}
+export type DeepPatch<T> = T extends readonly unknown[] ? T : T extends object ? {
+    [K in keyof T]?: DeepPatch<T[K]>;
+} : T;
+export type TypedBlockNode<K extends BlockKind> = Omit<EmailNode, 'patchSettings'> & {
+    patchSettings(patch: DeepPatch<Omit<BlockSettings<K>, 'networks' | 'items'>>): TypedBlockNode<K>;
+};
+export interface EmailChangeRecord {
+    operation: number;
+    type: string;
+    nodeId?: string;
+    nodeType?: string;
+    transaction?: number;
+    origin?: {
+        kind: 'component' | 'reference' | 'native';
+        nodeId?: string;
+        source?: string;
+    };
+    /** Addresses of the touched and inserted nodes; snapshots stay in the session, not the log. */
+    paths: readonly string[];
+    insertedIds: readonly string[];
+    intent: ChangeIntent;
 }
 export interface EmailSdkSession {
     email: EmailDocument;
-    finish(): unknown;
+    finish(): DocumentState;
+    /** Unchecked draft snapshot retained for older scripts. Use finish() before upload. */
     toJSON(): unknown;
+    snapshot(): DocumentState;
+    validate(): ValidationResult;
+    transaction<T>(callback: (email: EmailDocument) => T): T;
+    changes(): readonly EmailChangeRecord[];
+    inspect(): unknown;
+    skip(reason: string): void;
+    readonly version: number;
+    readonly current: unknown;
     diagnostics(): EmailDiagnostics;
     readonly mutationCount: number;
 }

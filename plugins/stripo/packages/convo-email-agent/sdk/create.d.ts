@@ -1,4 +1,5 @@
 import type { EmailMutationSdkSession, IdFactory } from "./types.js";
+import type { ChangeIntent } from './preparation.js';
 import { type SocialNetworkInput } from "./social.js";
 type JsonArray = JsonValue[];
 type JsonObject = {
@@ -31,6 +32,7 @@ export interface CreateEmailFromDraftOptions {
     /** Assign new structural IDs when copying or fully replacing a document. */
     regenerateIds?: boolean;
     idFactory?: IdFactory;
+    intent?: ChangeIntent;
 }
 export interface AddTextSectionOptions {
     html: string;
