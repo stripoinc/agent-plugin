@@ -42,953 +42,826 @@ export type Native__schema10 = {
     "url"?: string;
     "css": string;
 };
-export type Native__schema11 = {
-    "general": NativeGeneralSettings;
-    "stripes": Native__schema37;
-    "headings": Native__schema68;
-    "buttons": Native__schema86;
-};
-export type NativeGeneralSettings = {
-    "defaultStyles": Native__schema12;
-    "hideImageDownloadIcons"?: Native__schema13;
-    "underlineLinks": Native__schema14;
-    "responsiveDesign": Native__schema15;
-    "messageAlignment": Native__schema16;
-    "messageContentWidth": Native__schema17;
-    "backgroundColor": NativeColorValueAllowTransparent;
-    "backgroundImage"?: Native__schema18;
-    "rightToLeftTextDirection": Native__schema28;
-    "marginsAroundMessage": NativeResponsivePadding;
-    "defaultStructurePadding": NativeResponsivePadding;
-    "customListStyles"?: Native__schema33;
-};
-export type Native__schema12 = boolean;
-export type Native__schema13 = boolean;
-export type Native__schema14 = boolean;
-export type Native__schema15 = boolean;
-export type Native__schema16 = "left" | "center" | "right";
-export type Native__schema17 = number;
-export type NativeColorValueAllowTransparent = string;
-export type Native__schema18 = {
-    "path": Native__schema19;
-    "repeat": boolean;
-    "x": Native__schema22;
-    "y": Native__schema23;
-    "sizeX": string;
-    "sizeY": string;
-};
-export type NativeBackgroundImage = {
-    "path": Native__schema19;
-    "repeat": boolean;
-    "x": Native__schema22;
-    "y": Native__schema23;
-    "sizeX": string;
-    "sizeY": string;
-};
-export type Native__schema19 = string;
-export type Native__schema20 = boolean | string;
-export type Native__schema21 = boolean | string;
-export type Native__schema22 = string;
-export type Native__schema23 = string;
-export type Native__schema24 = string;
-export type Native__schema25 = string;
-export type Native__schema26 = string;
-export type Native__schema27 = string;
-export type Native__schema28 = boolean;
-export type NativeResponsivePadding = {
-    "desktop": NativeFullSideValues;
-    "mobile": NativeFullSideValues;
-};
-export type NativeFullSideValues = {
-    "top": Native__schema29;
-    "right": Native__schema30;
-    "bottom": Native__schema31;
-    "left": Native__schema32;
-};
-export type Native__schema29 = number;
-export type Native__schema30 = number;
-export type Native__schema31 = number;
-export type Native__schema32 = number;
-export type Native__schema33 = {
-    "leftIndent": Native__schema34;
-    "listItemsBottomSpace": Native__schema35;
-    "listTopBottomMargin": Native__schema36;
-    "listMarkerColor": NativeColorValueAllowTransparent;
-    "listNumberMarkerColor": NativeColorValueAllowTransparent;
-};
-export type NativeGeneralCustomListStyles = {
-    "leftIndent": Native__schema34;
-    "listItemsBottomSpace": Native__schema35;
-    "listTopBottomMargin": Native__schema36;
-    "listMarkerColor": NativeColorValueAllowTransparent;
-    "listNumberMarkerColor": NativeColorValueAllowTransparent;
-};
-export type Native__schema34 = number;
-export type Native__schema35 = number;
-export type Native__schema36 = number;
-export type Native__schema37 = {
-    "letterSpacing"?: Native__schema38;
-    "lineHeight"?: Native__schema41;
-    "fontFamily"?: Native__schema44;
-    "fontWeight"?: Native__schema45;
-    "header"?: Native__schema47;
-    "content"?: Native__schema61;
-    "footer"?: Native__schema63;
-    "infoArea"?: Native__schema67;
-};
-export type NativeStripesSettings = {
-    "letterSpacing"?: Native__schema38;
-    "lineHeight"?: Native__schema41;
-    "fontFamily"?: Native__schema44;
-    "fontWeight"?: Native__schema45;
-    "header"?: Native__schema47;
-    "content"?: Native__schema61;
-    "footer"?: Native__schema63;
-    "infoArea"?: Native__schema67;
-};
-export type Native__schema38 = {
-    "value": Native__schema39;
-    "unit": Native__schema40;
-};
-export type NativeSpacingValue = {
-    "value": Native__schema39;
-    "unit": Native__schema40;
-};
-export type Native__schema39 = number;
-export type Native__schema40 = "px" | "em";
-export type Native__schema41 = {
-    "desktop": Native__schema42;
-    "mobile": Native__schema43;
-};
-export type NativeLineHeight = {
-    "desktop": Native__schema42;
-    "mobile": Native__schema43;
-};
-export type Native__schema42 = number;
-export type Native__schema43 = number;
-export type Native__schema44 = string;
-export type Native__schema45 = number;
-export type Native__schema46 = number;
-export type Native__schema47 = {
-    "fontSize"?: Native__schema48;
-    "fontColor"?: Native__schema51;
-    "linkColor"?: Native__schema52;
-    "linkColorHover"?: Native__schema53;
-    "paragraphBottomSpace"?: Native__schema54;
-    "contentBackgroundColor"?: Native__schema58;
-    "stripeBackgroundColor"?: Native__schema59;
-    "backgroundImage"?: Native__schema60;
-};
-export type NativeStripesHeaderConfig = {
-    "fontSize"?: Native__schema48;
-    "fontColor"?: Native__schema51;
-    "linkColor"?: Native__schema52;
-    "linkColorHover"?: Native__schema53;
-    "paragraphBottomSpace"?: Native__schema54;
-    "contentBackgroundColor"?: Native__schema58;
-    "stripeBackgroundColor"?: Native__schema59;
-    "backgroundImage"?: Native__schema60;
-};
-export type Native__schema48 = {
-    "desktop": Native__schema49;
-    "mobile": Native__schema50;
-};
-export type NativeFontSize = {
-    "desktop": Native__schema49;
-    "mobile": Native__schema50;
-};
-export type Native__schema49 = number;
-export type Native__schema50 = number;
-export type Native__schema51 = string;
-export type NativeColorValueDisallowTransparent = string;
-export type Native__schema52 = string;
-export type Native__schema53 = {
-    "value": NativeColorValueDisallowTransparent;
-};
-export type NativeHoverLinkColor = {
-    "value": NativeColorValueDisallowTransparent;
-};
-export type Native__schema54 = {
-    "desktop": Native__schema56;
-    "mobile": Native__schema57;
-};
-export type Native__schema55 = {
-    "desktop": Native__schema56;
-    "mobile": Native__schema57;
-};
-export type Native__schema56 = number;
-export type Native__schema57 = number;
-export type Native__schema58 = string;
-export type Native__schema59 = string;
-export type Native__schema60 = {
-    "path": Native__schema19;
-    "repeat": boolean;
-    "x": Native__schema22;
-    "y": Native__schema23;
-    "sizeX": string;
-    "sizeY": string;
-};
-export type Native__schema61 = {
-    "fontSize"?: Native__schema48;
-    "fontColor"?: Native__schema51;
-    "linkColor"?: Native__schema52;
-    "linkColorHover"?: Native__schema53;
-    "paragraphBottomSpace"?: Native__schema54;
-    "contentBackgroundColor"?: Native__schema62;
-};
-export type NativeStripesContentConfig = {
-    "fontSize"?: Native__schema48;
-    "fontColor"?: Native__schema51;
-    "linkColor"?: Native__schema52;
-    "linkColorHover"?: Native__schema53;
-    "paragraphBottomSpace"?: Native__schema54;
-    "contentBackgroundColor"?: Native__schema62;
-};
-export type Native__schema62 = string;
-export type Native__schema63 = {
-    "fontSize"?: Native__schema48;
-    "fontColor"?: Native__schema51;
-    "linkColor"?: Native__schema52;
-    "linkColorHover"?: Native__schema53;
-    "paragraphBottomSpace"?: Native__schema54;
-    "contentBackgroundColor"?: Native__schema64;
-    "stripeBackgroundColor"?: Native__schema65;
-    "backgroundImage"?: Native__schema66;
-};
-export type NativeStripesFooterConfig = {
-    "fontSize"?: Native__schema48;
-    "fontColor"?: Native__schema51;
-    "linkColor"?: Native__schema52;
-    "linkColorHover"?: Native__schema53;
-    "paragraphBottomSpace"?: Native__schema54;
-    "contentBackgroundColor"?: Native__schema64;
-    "stripeBackgroundColor"?: Native__schema65;
-    "backgroundImage"?: Native__schema66;
-};
-export type Native__schema64 = string;
-export type Native__schema65 = string;
-export type Native__schema66 = {
-    "path": Native__schema19;
-    "repeat": boolean;
-    "x": Native__schema22;
-    "y": Native__schema23;
-    "sizeX": string;
-    "sizeY": string;
-};
-export type Native__schema67 = {
-    "fontSize"?: Native__schema48;
-    "fontColor"?: Native__schema51;
-    "linkColor"?: Native__schema52;
-    "linkColorHover"?: Native__schema53;
-    "paragraphBottomSpace"?: Native__schema54;
-};
-export type NativeStripesInfoAreaConfig = {
-    "fontSize"?: Native__schema48;
-    "fontColor"?: Native__schema51;
-    "linkColor"?: Native__schema52;
-    "linkColorHover"?: Native__schema53;
-    "paragraphBottomSpace"?: Native__schema54;
-};
-export type Native__schema68 = {
-    "letterSpacing"?: Native__schema69;
-    "fontFamily"?: Native__schema70;
-    "h1"?: Native__schema71;
-    "h2"?: Native__schema81;
-    "h3"?: Native__schema82;
-    "h4"?: Native__schema83;
-    "h5"?: Native__schema84;
-    "h6"?: Native__schema85;
-};
-export type NativeHeadingsSettings = {
-    "letterSpacing"?: Native__schema69;
-    "fontFamily"?: Native__schema70;
-    "h1"?: Native__schema71;
-    "h2"?: Native__schema81;
-    "h3"?: Native__schema82;
-    "h4"?: Native__schema83;
-    "h5"?: Native__schema84;
-    "h6"?: Native__schema85;
-};
-export type Native__schema69 = {
-    "value": Native__schema39;
-    "unit": Native__schema40;
-};
-export type Native__schema70 = string;
-export type Native__schema71 = {
-    "fontColor"?: Native__schema72;
-    "textAlign"?: Native__schema73;
-    "textStyle"?: Native__schema75;
-    "fontWeight"?: Native__schema77;
-    "fontSize"?: Native__schema78;
-    "lineHeight"?: Native__schema79;
-    "paragraphBottomSpace"?: Native__schema80;
-};
-export type NativeHeadingConfig = {
-    "fontColor"?: Native__schema72;
-    "textAlign"?: Native__schema73;
-    "textStyle"?: Native__schema75;
-    "fontWeight"?: Native__schema77;
-    "fontSize"?: Native__schema78;
-    "lineHeight"?: Native__schema79;
-    "paragraphBottomSpace"?: Native__schema80;
-};
-export type Native__schema72 = string;
-export type Native__schema73 = {
-    "mobile": Native__schema74;
-};
-export type NativeHeadingsAlignment = {
-    "mobile": Native__schema74;
-};
-export type Native__schema74 = "left" | "center" | "right";
-export type Native__schema75 = {
-    "italic": Native__schema76;
-};
-export type NativeHeadingTextStyle = {
-    "italic": Native__schema76;
-};
-export type Native__schema76 = boolean;
-export type Native__schema77 = number;
-export type Native__schema78 = {
-    "desktop": Native__schema49;
-    "mobile": Native__schema50;
-};
-export type Native__schema79 = {
-    "desktop": Native__schema42;
-    "mobile": Native__schema43;
-};
-export type Native__schema80 = {
-    "desktop": Native__schema56;
-    "mobile": Native__schema57;
-};
-export type Native__schema81 = {
-    "fontColor"?: Native__schema72;
-    "textAlign"?: Native__schema73;
-    "textStyle"?: Native__schema75;
-    "fontWeight"?: Native__schema77;
-    "fontSize"?: Native__schema78;
-    "lineHeight"?: Native__schema79;
-    "paragraphBottomSpace"?: Native__schema80;
-};
-export type Native__schema82 = {
-    "fontColor"?: Native__schema72;
-    "textAlign"?: Native__schema73;
-    "textStyle"?: Native__schema75;
-    "fontWeight"?: Native__schema77;
-    "fontSize"?: Native__schema78;
-    "lineHeight"?: Native__schema79;
-    "paragraphBottomSpace"?: Native__schema80;
-};
-export type Native__schema83 = {
-    "fontColor"?: Native__schema72;
-    "textAlign"?: Native__schema73;
-    "textStyle"?: Native__schema75;
-    "fontWeight"?: Native__schema77;
-    "fontSize"?: Native__schema78;
-    "lineHeight"?: Native__schema79;
-    "paragraphBottomSpace"?: Native__schema80;
-};
-export type Native__schema84 = {
-    "fontColor"?: Native__schema72;
-    "textAlign"?: Native__schema73;
-    "textStyle"?: Native__schema75;
-    "fontWeight"?: Native__schema77;
-    "fontSize"?: Native__schema78;
-    "lineHeight"?: Native__schema79;
-    "paragraphBottomSpace"?: Native__schema80;
-};
-export type Native__schema85 = {
-    "fontColor"?: Native__schema72;
-    "textAlign"?: Native__schema73;
-    "textStyle"?: Native__schema75;
-    "fontWeight"?: Native__schema77;
-    "fontSize"?: Native__schema78;
-    "lineHeight"?: Native__schema79;
-    "paragraphBottomSpace"?: Native__schema80;
-};
-export type Native__schema86 = {
-    "outlookSupport"?: Native__schema87;
-    "fontColor"?: Native__schema88;
-    "textStyle"?: Native__schema89;
-    "textTransform"?: Native__schema92;
-    "fontFamily"?: Native__schema93;
-    "buttonColor"?: Native__schema94;
-    "letterSpacing"?: Native__schema95;
-    "fontSize"?: Native__schema96;
-    "borderRadius"?: Native__schema97;
-    "fitContainer"?: Native__schema102;
-    "border": NativeBorder;
-    "hoverButtonStyles"?: Native__schema107;
-    "padding"?: Native__schema108;
-};
-export type NativeButtonsSettings = {
-    "outlookSupport"?: Native__schema87;
-    "fontColor"?: Native__schema88;
-    "textStyle"?: Native__schema89;
-    "textTransform"?: Native__schema92;
-    "fontFamily"?: Native__schema93;
-    "buttonColor"?: Native__schema94;
-    "letterSpacing"?: Native__schema95;
-    "fontSize"?: Native__schema96;
-    "borderRadius"?: Native__schema97;
-    "fitContainer"?: Native__schema102;
-    "border": NativeBorder;
-    "hoverButtonStyles"?: Native__schema107;
-    "padding"?: Native__schema108;
-};
-export type Native__schema87 = boolean;
-export type Native__schema88 = string;
-export type Native__schema89 = {
-    "bold": Native__schema90;
-    "italic": Native__schema91;
-};
-export type NativeButtonsTextStyle = {
-    "bold": Native__schema90;
-    "italic": Native__schema91;
-};
-export type Native__schema90 = boolean;
-export type Native__schema91 = boolean;
-export type Native__schema92 = "none" | "uppercase" | "capitalize" | "lowercase";
-export type Native__schema93 = string;
-export type Native__schema94 = string;
-export type Native__schema95 = {
-    "value": Native__schema39;
-    "unit": Native__schema40;
-};
-export type Native__schema96 = {
-    "desktop": Native__schema49;
-    "mobile": Native__schema50;
-};
-export type Native__schema97 = {
-    "topLeft": Native__schema98;
-    "topRight": Native__schema99;
-    "bottomRight": Native__schema100;
-    "bottomLeft": Native__schema101;
-};
-export type NativeBorderRadius = {
-    "topLeft": Native__schema98;
-    "topRight": Native__schema99;
-    "bottomRight": Native__schema100;
-    "bottomLeft": Native__schema101;
-};
-export type Native__schema98 = number;
-export type Native__schema99 = number;
-export type Native__schema100 = number;
-export type Native__schema101 = number;
-export type Native__schema102 = {
-    "desktop": Native__schema103;
-    "mobile": Native__schema104;
-};
-export type NativeResponsiveBoolean = {
-    "desktop": Native__schema103;
-    "mobile": Native__schema104;
-};
-export type Native__schema103 = boolean;
-export type Native__schema104 = boolean;
-export type NativeBorder = {
-    "top": NativeBorderSide;
-    "right": NativeBorderSide;
-    "bottom": NativeBorderSide;
-    "left": NativeBorderSide;
-    "style": Native__schema106;
-};
-export type NativeBorderSide = {
-    "width": Native__schema105;
-    "color": NativeColorValueAllowTransparent;
-};
-export type Native__schema105 = number;
-export type Native__schema106 = "solid" | "dashed" | "dotted";
-export type Native__schema107 = {
-    "backgroundColor": NativeColorValueAllowTransparent;
-    "fontColor": NativeColorValueDisallowTransparent;
-    "borderColor": NativeButtonsHoverBorderColor;
-};
-export type NativeButtonsHoverButtonStyles = {
-    "backgroundColor": NativeColorValueAllowTransparent;
-    "fontColor": NativeColorValueDisallowTransparent;
-    "borderColor": NativeButtonsHoverBorderColor;
-};
-export type NativeButtonsHoverBorderColor = {
-    "top": NativeColorValueAllowTransparent;
-    "right": NativeColorValueAllowTransparent;
-    "bottom": NativeColorValueAllowTransparent;
-    "left": NativeColorValueAllowTransparent;
-};
-export type Native__schema108 = {
-    "desktop": NativeFullSideValues;
-    "mobile": NativeFullSideValues;
-};
 export type NativeEmailTemplateSettings = {
-    "general": NativeGeneralSettings;
-    "stripes"?: Native__schema37;
-    "headings"?: Native__schema68;
-    "buttons"?: Native__schema86;
+    "general": Native__schema11;
+    "stripes": Native__schema18;
+    "headings": Native__schema27;
+    "buttons": Native__schema29;
 };
-export type Native__schema109 = Array<NativeStripe>;
-export type Native__schema110 = Array<NativeStripe>;
+export type Native__schema11 = {
+    "defaultStyles": boolean;
+    "hideImageDownloadIcons": boolean;
+    "underlineLinks": boolean;
+    "responsiveDesign": boolean;
+    "messageAlignment": "left" | "center" | "right";
+    "messageContentWidth": number;
+    "backgroundImage": (Native__schema12) | (null);
+    "rightToLeftTextDirection": boolean;
+    "marginsAroundMessage": Native__schema14;
+    "defaultStructurePadding": Native__schema14;
+    "customListStyles": ({
+        "leftIndent": number;
+        "listItemsBottomSpace": number;
+        "listTopBottomMargin": number;
+    }) | (null);
+    "lightTheme": {
+        "backgroundColor": Native__schema16;
+        "customListStyles": {
+            "listMarkerColor": Native__schema17;
+            "listNumberMarkerColor": Native__schema17;
+        };
+    };
+    "darkTheme": {
+        "backgroundColor": (Native__schema16) | (null);
+        "customListStyles": {
+            "listMarkerColor": (Native__schema17) | (null);
+            "listNumberMarkerColor": (Native__schema17) | (null);
+        };
+    };
+};
+export type Native__schema12 = {
+    "path": string;
+    "repeat": boolean;
+    "x": string;
+    "y": string;
+    "sizeX": Native__schema13;
+    "sizeY": Native__schema13;
+};
+export type Native__schema13 = string;
+export type Native__schema14 = {
+    "desktop": Native__schema15;
+    "mobile": Native__schema15;
+};
+export type Native__schema15 = {
+    "top": number;
+    "right": number;
+    "bottom": number;
+    "left": number;
+};
+export type Native__schema16 = string;
+export type Native__schema17 = string;
+export type Native__schema18 = {
+    "letterSpacing": Native__schema19;
+    "lineHeight": Native__schema20;
+    "fontFamily": Native__schema21;
+    "fontWeight": Native__schema22;
+    "header": {
+        "fontSize": Native__schema23;
+        "paragraphBottomSpace": Native__schema24;
+        "backgroundImage": (Native__schema12) | (null);
+    };
+    "content": {
+        "fontSize": Native__schema23;
+        "paragraphBottomSpace": Native__schema24;
+    };
+    "footer": {
+        "fontSize": Native__schema23;
+        "paragraphBottomSpace": Native__schema24;
+        "backgroundImage": (Native__schema12) | (null);
+    };
+    "infoArea": {
+        "fontSize": Native__schema23;
+        "paragraphBottomSpace": Native__schema24;
+    };
+    "lightTheme": {
+        "header": {
+            "stripeBackgroundColor": Native__schema16;
+            "contentBackgroundColor": Native__schema16;
+            "fontColor": Native__schema26;
+            "linkColor": Native__schema26;
+            "linkColorHover": Native__schema26;
+        };
+        "content": {
+            "contentBackgroundColor": Native__schema16;
+            "fontColor": Native__schema26;
+            "linkColor": Native__schema26;
+            "linkColorHover": Native__schema26;
+        };
+        "footer": {
+            "stripeBackgroundColor": Native__schema16;
+            "contentBackgroundColor": Native__schema16;
+            "fontColor": Native__schema26;
+            "linkColor": Native__schema26;
+            "linkColorHover": Native__schema26;
+        };
+        "infoArea": {
+            "fontColor": Native__schema26;
+            "linkColor": Native__schema26;
+            "linkColorHover": Native__schema26;
+        };
+    };
+    "darkTheme": {
+        "header": {
+            "stripeBackgroundColor": (Native__schema16) | (null);
+            "contentBackgroundColor": (Native__schema16) | (null);
+            "fontColor": (Native__schema26) | (null);
+            "linkColor": (Native__schema26) | (null);
+            "linkColorHover": (Native__schema26) | (null);
+        };
+        "content": {
+            "contentBackgroundColor": (Native__schema16) | (null);
+            "fontColor": (Native__schema26) | (null);
+            "linkColor": (Native__schema26) | (null);
+            "linkColorHover": (Native__schema26) | (null);
+        };
+        "footer": {
+            "stripeBackgroundColor": (Native__schema16) | (null);
+            "contentBackgroundColor": (Native__schema16) | (null);
+            "fontColor": (Native__schema26) | (null);
+            "linkColor": (Native__schema26) | (null);
+            "linkColorHover": (Native__schema26) | (null);
+        };
+        "infoArea": {
+            "fontColor": (Native__schema26) | (null);
+            "linkColor": (Native__schema26) | (null);
+            "linkColorHover": (Native__schema26) | (null);
+        };
+    };
+};
+export type Native__schema19 = {
+    "value": number;
+    "unit": "px" | "em";
+};
+export type Native__schema20 = {
+    "desktop": number;
+    "mobile": number;
+};
+export type Native__schema21 = string;
+export type Native__schema22 = number;
+export type Native__schema23 = {
+    "desktop": number;
+    "mobile": number;
+};
+export type Native__schema24 = (Native__schema25) | (null);
+export type Native__schema25 = {
+    "desktop": number;
+    "mobile": number;
+};
+export type Native__schema26 = string;
+export type Native__schema27 = {
+    "letterSpacing": Native__schema19;
+    "fontFamily": Native__schema21;
+    "h1": Native__schema28;
+    "h2": Native__schema28;
+    "h3": Native__schema28;
+    "h4": Native__schema28;
+    "h5": Native__schema28;
+    "h6": Native__schema28;
+    "lightTheme": {
+        "h1": {
+            "fontColor": Native__schema26;
+        };
+        "h2": {
+            "fontColor": Native__schema26;
+        };
+        "h3": {
+            "fontColor": Native__schema26;
+        };
+        "h4": {
+            "fontColor": Native__schema26;
+        };
+        "h5": {
+            "fontColor": Native__schema26;
+        };
+        "h6": {
+            "fontColor": Native__schema26;
+        };
+    };
+    "darkTheme": {
+        "h1": {
+            "fontColor": (Native__schema26) | (null);
+        };
+        "h2": {
+            "fontColor": (Native__schema26) | (null);
+        };
+        "h3": {
+            "fontColor": (Native__schema26) | (null);
+        };
+        "h4": {
+            "fontColor": (Native__schema26) | (null);
+        };
+        "h5": {
+            "fontColor": (Native__schema26) | (null);
+        };
+        "h6": {
+            "fontColor": (Native__schema26) | (null);
+        };
+    };
+};
+export type Native__schema28 = {
+    "textAlign": {
+        "mobile": "left" | "center" | "right";
+    };
+    "textStyle": {
+        "italic": boolean;
+    };
+    "fontWeight": (Native__schema22) | (null);
+    "fontSize": Native__schema23;
+    "lineHeight": Native__schema20;
+    "paragraphBottomSpace": (Native__schema25) | (null);
+};
+export type Native__schema29 = {
+    "outlookSupport": boolean;
+    "textStyle": {
+        "bold": boolean;
+        "italic": boolean;
+    };
+    "textTransform": "none" | "uppercase" | "capitalize" | "lowercase";
+    "fontFamily": Native__schema21;
+    "letterSpacing": Native__schema19;
+    "fontSize": Native__schema23;
+    "borderRadius": {
+        "topLeft": number;
+        "topRight": number;
+        "bottomRight": number;
+        "bottomLeft": number;
+    };
+    "fitContainer": {
+        "desktop": boolean;
+        "mobile": boolean;
+    };
+    "border": {
+        "top": Native__schema30;
+        "right": Native__schema30;
+        "bottom": Native__schema30;
+        "left": Native__schema30;
+        "style": "solid" | "dashed" | "dotted";
+    };
+    "hoverButtonStyles": boolean;
+    "padding": Native__schema14;
+    "lightTheme": {
+        "buttonColor": Native__schema16;
+        "fontColor": Native__schema26;
+        "hoverButtonStyles": {
+            "backgroundColor": Native__schema16;
+            "fontColor": Native__schema26;
+            "borderColor": {
+                "top": Native__schema17;
+                "right": Native__schema17;
+                "bottom": Native__schema17;
+                "left": Native__schema17;
+            };
+        };
+        "borderColor": {
+            "top": Native__schema17;
+            "right": Native__schema17;
+            "bottom": Native__schema17;
+            "left": Native__schema17;
+        };
+    };
+    "darkTheme": {
+        "buttonColor": (Native__schema16) | (null);
+        "fontColor": (Native__schema26) | (null);
+        "hoverButtonStyles": {
+            "backgroundColor": (Native__schema16) | (null);
+            "fontColor": (Native__schema26) | (null);
+            "borderColor": {
+                "top": (Native__schema17) | (null);
+                "right": (Native__schema17) | (null);
+                "bottom": (Native__schema17) | (null);
+                "left": (Native__schema17) | (null);
+            };
+        };
+        "borderColor": {
+            "top": (Native__schema17) | (null);
+            "right": (Native__schema17) | (null);
+            "bottom": (Native__schema17) | (null);
+            "left": (Native__schema17) | (null);
+        };
+    };
+};
+export type Native__schema30 = {
+    "width": number;
+};
+export type Native__schema31 = Array<NativeStripe>;
+export type Native__schema32 = Array<NativeStripe>;
 export type NativeStripe = {
-    "id": Native__schema111;
-    "settings"?: Native__schema112;
-    "moduleId"?: Native__schema120;
-    "structures"?: Native__schema121;
+    "id": Native__schema33;
+    "settings"?: Native__schema34;
+    "moduleId"?: Native__schema57;
+    "structures"?: Native__schema58;
 };
-export type Native__schema111 = string;
-export type Native__schema112 = {
-    "messageArea"?: Native__schema113;
-    "includeInOutput"?: Native__schema114;
+export type Native__schema33 = string;
+export type Native__schema34 = {
+    "messageArea"?: Native__schema35;
+    "includeInOutput"?: Native__schema36;
     "hideElement": NativeHideElement;
-    "padding"?: Native__schema115;
-    "stripeBackgroundColor"?: Native__schema116;
-    "contentBackgroundColor"?: Native__schema117;
-    "backgroundImage"?: Native__schema118;
-    "contentBorder"?: Native__schema119;
+    "padding"?: Native__schema37;
+    "stripeBackgroundColor"?: Native__schema42;
+    "contentBackgroundColor"?: Native__schema43;
+    "backgroundImage"?: Native__schema44;
+    "contentBorder"?: Native__schema54;
 };
 export type NativeStripeSettings = {
-    "messageArea"?: Native__schema113;
-    "includeInOutput"?: Native__schema114;
+    "messageArea"?: Native__schema35;
+    "includeInOutput"?: Native__schema36;
     "hideElement": NativeHideElement;
-    "padding"?: Native__schema115;
-    "stripeBackgroundColor"?: Native__schema116;
-    "contentBackgroundColor"?: Native__schema117;
-    "backgroundImage"?: Native__schema118;
-    "contentBorder"?: Native__schema119;
+    "padding"?: Native__schema37;
+    "stripeBackgroundColor"?: Native__schema42;
+    "contentBackgroundColor"?: Native__schema43;
+    "backgroundImage"?: Native__schema44;
+    "contentBorder"?: Native__schema54;
 };
-export type Native__schema113 = "header" | "content" | "footer" | "infoArea";
-export type Native__schema114 = "both" | "html" | "ampHtml";
+export type Native__schema35 = "header" | "content" | "footer" | "infoArea";
+export type Native__schema36 = "both" | "html" | "ampHtml";
 export type NativeOutputInclusion = "both" | "html" | "ampHtml";
 export type NativeHideElement = "no" | "desktop" | "mobile";
-export type Native__schema115 = {
+export type Native__schema37 = {
     "mobile": NativeFullSideValues;
 };
 export type NativeMobilePadding = {
     "mobile": NativeFullSideValues;
 };
-export type Native__schema116 = string;
-export type Native__schema117 = string;
-export type Native__schema118 = {
-    "path": Native__schema19;
+export type NativeFullSideValues = {
+    "top": Native__schema38;
+    "right": Native__schema39;
+    "bottom": Native__schema40;
+    "left": Native__schema41;
+};
+export type Native__schema38 = number;
+export type Native__schema39 = number;
+export type Native__schema40 = number;
+export type Native__schema41 = number;
+export type Native__schema42 = string;
+export type NativeColorValueAllowTransparent = string;
+export type Native__schema43 = string;
+export type Native__schema44 = {
+    "path": Native__schema45;
     "repeat": boolean;
-    "x": Native__schema22;
-    "y": Native__schema23;
+    "x": Native__schema48;
+    "y": Native__schema49;
     "sizeX": string;
     "sizeY": string;
 };
-export type Native__schema119 = {
+export type NativeBackgroundImage = {
+    "path": Native__schema45;
+    "repeat": boolean;
+    "x": Native__schema48;
+    "y": Native__schema49;
+    "sizeX": string;
+    "sizeY": string;
+};
+export type Native__schema45 = string;
+export type Native__schema46 = boolean | string;
+export type Native__schema47 = boolean | string;
+export type Native__schema48 = string;
+export type Native__schema49 = string;
+export type Native__schema50 = string;
+export type Native__schema51 = string;
+export type Native__schema52 = string;
+export type Native__schema53 = string;
+export type Native__schema54 = {
     "top": NativeBorderSide;
     "right": NativeBorderSide;
     "bottom": NativeBorderSide;
     "left": NativeBorderSide;
-    "style": Native__schema106;
+    "style": Native__schema56;
 };
-export type Native__schema120 = number;
-export type Native__schema121 = Array<NativeStructure>;
+export type NativeBorder = {
+    "top": NativeBorderSide;
+    "right": NativeBorderSide;
+    "bottom": NativeBorderSide;
+    "left": NativeBorderSide;
+    "style": Native__schema56;
+};
+export type NativeBorderSide = {
+    "width": Native__schema55;
+    "color": NativeColorValueAllowTransparent;
+};
+export type Native__schema55 = number;
+export type Native__schema56 = "solid" | "dashed" | "dotted";
+export type Native__schema57 = number;
+export type Native__schema58 = Array<NativeStructure>;
 export type NativeStructure = {
-    "id": Native__schema122;
-    "settings"?: Native__schema123;
-    "moduleId"?: Native__schema134;
-    "columns"?: Native__schema135;
+    "id": Native__schema59;
+    "settings"?: Native__schema60;
+    "moduleId"?: Native__schema75;
+    "columns"?: Native__schema76;
 };
-export type Native__schema122 = string;
-export type Native__schema123 = {
+export type Native__schema59 = string;
+export type Native__schema60 = {
     "backgroundColor": NativeColorValueAllowTransparent;
-    "backgroundImage"?: Native__schema124;
+    "backgroundImage"?: Native__schema61;
     "border": NativeBorder;
     "borderRadius": NativeBorderRadius;
-    "columnsGap"?: Native__schema125;
-    "responsiveMobile"?: Native__schema128;
-    "responsiveMobileContainersInversion"?: Native__schema129;
-    "padding"?: Native__schema130;
-    "margins"?: Native__schema131;
-    "includeInOutput"?: Native__schema132;
-    "hideElement"?: Native__schema133;
+    "columnsGap"?: Native__schema66;
+    "responsiveMobile"?: Native__schema69;
+    "responsiveMobileContainersInversion"?: Native__schema70;
+    "padding"?: Native__schema71;
+    "margins"?: Native__schema72;
+    "includeInOutput"?: Native__schema73;
+    "hideElement"?: Native__schema74;
 };
-export type Native__schema124 = {
-    "path": Native__schema19;
+export type Native__schema61 = {
+    "path": Native__schema45;
     "repeat": boolean;
-    "x": Native__schema22;
-    "y": Native__schema23;
+    "x": Native__schema48;
+    "y": Native__schema49;
     "sizeX": string;
     "sizeY": string;
 };
-export type Native__schema125 = {
-    "desktop": Native__schema126;
-    "mobile": Native__schema127;
+export type NativeBorderRadius = {
+    "topLeft": Native__schema62;
+    "topRight": Native__schema63;
+    "bottomRight": Native__schema64;
+    "bottomLeft": Native__schema65;
+};
+export type Native__schema62 = number;
+export type Native__schema63 = number;
+export type Native__schema64 = number;
+export type Native__schema65 = number;
+export type Native__schema66 = {
+    "desktop": Native__schema67;
+    "mobile": Native__schema68;
 };
 export type NativeResponsiveNumber = {
-    "desktop": Native__schema126;
-    "mobile": Native__schema127;
+    "desktop": Native__schema67;
+    "mobile": Native__schema68;
 };
-export type Native__schema126 = number;
-export type Native__schema127 = number;
-export type Native__schema128 = boolean;
-export type Native__schema129 = boolean;
-export type Native__schema130 = {
+export type Native__schema67 = number;
+export type Native__schema68 = number;
+export type Native__schema69 = boolean;
+export type Native__schema70 = boolean;
+export type Native__schema71 = {
     "desktop": NativeFullSideValues;
     "mobile": NativeFullSideValues;
 };
-export type Native__schema131 = {
+export type NativeResponsivePadding = {
     "desktop": NativeFullSideValues;
     "mobile": NativeFullSideValues;
 };
-export type Native__schema132 = "both" | "html" | "ampHtml";
-export type Native__schema133 = "no" | "desktop" | "mobile";
-export type Native__schema134 = number;
-export type Native__schema135 = Array<NativeColumn>;
+export type Native__schema72 = {
+    "desktop": NativeFullSideValues;
+    "mobile": NativeFullSideValues;
+};
+export type Native__schema73 = "both" | "html" | "ampHtml";
+export type Native__schema74 = "no" | "desktop" | "mobile";
+export type Native__schema75 = number;
+export type Native__schema76 = Array<NativeColumn>;
 export type NativeColumn = {
-    "id": Native__schema136;
-    "settings"?: Native__schema137;
-    "containers": Native__schema139;
+    "id": Native__schema77;
+    "settings"?: Native__schema78;
+    "containers": Native__schema80;
 };
-export type Native__schema136 = string;
-export type Native__schema137 = {
-    "width": Native__schema138;
+export type Native__schema77 = string;
+export type Native__schema78 = {
+    "width": Native__schema79;
 };
-export type Native__schema138 = number;
-export type Native__schema139 = Array<NativeContainer>;
+export type Native__schema79 = number;
+export type Native__schema80 = Array<NativeContainer>;
 export type NativeContainer = {
-    "id": Native__schema140;
-    "settings": Native__schema141;
-    "moduleId"?: Native__schema143;
-    "blocks"?: Native__schema144;
+    "id": Native__schema81;
+    "settings": Native__schema82;
+    "moduleId"?: Native__schema84;
+    "blocks"?: Native__schema85;
 };
-export type Native__schema140 = string;
-export type Native__schema141 = {
+export type Native__schema81 = string;
+export type Native__schema82 = {
     "padding": NativeResponsivePadding;
     "includeInOutput": NativeOutputInclusion;
     "hideElement": NativeHideElement;
     "backgroundColor": NativeColorValueAllowTransparent;
-    "backgroundImage"?: Native__schema142;
+    "backgroundImage"?: Native__schema83;
     "border": NativeBorder;
     "radius": NativeBorderRadius;
 };
-export type Native__schema142 = {
-    "path": Native__schema19;
+export type Native__schema83 = {
+    "path": Native__schema45;
     "repeat": boolean;
-    "x": Native__schema22;
-    "y": Native__schema23;
+    "x": Native__schema48;
+    "y": Native__schema49;
     "sizeX": string;
     "sizeY": string;
 };
-export type Native__schema143 = number;
-export type Native__schema144 = Array<NativeBlock>;
+export type Native__schema84 = number;
+export type Native__schema85 = Array<NativeBlock>;
 export type NativeBlock = (NativeTextBlock) | (NativeImageBlock) | (NativeVideoBlock) | (NativeTimerBlock) | (NativeSocialBlock) | (NativeHtmlBlock) | (NativeButtonBlock) | (NativeSpacerBlock) | (NativeMenuBlock) | (NativeUnknownBlock);
 export type NativeTextBlock = {
-    "id": Native__schema145;
-    "type": Native__schema146;
-    "settings"?: Native__schema147;
-    "content"?: Native__schema156;
+    "id": Native__schema86;
+    "type": Native__schema87;
+    "settings"?: Native__schema88;
+    "content"?: Native__schema99;
 };
-export type Native__schema145 = string;
-export type Native__schema146 = "text";
-export type Native__schema147 = {
+export type Native__schema86 = string;
+export type Native__schema87 = "text";
+export type Native__schema88 = {
     "fontColor"?: string;
     "hideElement": NativeHideElement;
     "rightToLeftTextDirection": boolean;
     "alignment"?: {
-        "desktop": Native__schema148;
-        "mobile": Native__schema148;
+        "desktop": Native__schema89;
+        "mobile": Native__schema89;
     };
     "fixedHeight"?: {
-        "desktop"?: Native__schema149;
-        "mobile"?: Native__schema153;
+        "desktop"?: Native__schema90;
+        "mobile"?: Native__schema94;
     };
     "padding": {
-        "desktop": Native__schema154;
-        "mobile": Native__schema154;
+        "desktop": Native__schema95;
+        "mobile": Native__schema95;
     };
     "includeInOutput": NativeOutputInclusion;
     "backgroundColor": NativeColorValueAllowTransparent;
     "letterSpacing"?: {
-        "value": Native__schema39;
-        "unit": Native__schema40;
+        "value": Native__schema97;
+        "unit": Native__schema98;
     };
 };
-export type Native__schema148 = "left" | "center" | "right" | "justify";
-export type Native__schema149 = {
-    "height": Native__schema151;
-    "verticalAlignment"?: Native__schema152;
+export type NativeColorValueDisallowTransparent = string;
+export type Native__schema89 = "left" | "center" | "right" | "justify";
+export type Native__schema90 = {
+    "height": Native__schema92;
+    "verticalAlignment"?: Native__schema93;
 };
-export type Native__schema150 = {
-    "height": Native__schema151;
-    "verticalAlignment"?: Native__schema152;
+export type Native__schema91 = {
+    "height": Native__schema92;
+    "verticalAlignment"?: Native__schema93;
 };
-export type Native__schema151 = number;
-export type Native__schema152 = "top" | "middle" | "bottom";
-export type Native__schema153 = {
-    "height": Native__schema151;
-    "verticalAlignment"?: Native__schema152;
+export type Native__schema92 = number;
+export type Native__schema93 = "top" | "middle" | "bottom";
+export type Native__schema94 = {
+    "height": Native__schema92;
+    "verticalAlignment"?: Native__schema93;
 };
-export type Native__schema154 = {
-    "top": Native__schema155;
-    "right": Native__schema155;
-    "bottom": Native__schema155;
-    "left": Native__schema155;
+export type Native__schema95 = {
+    "top": Native__schema96;
+    "right": Native__schema96;
+    "bottom": Native__schema96;
+    "left": Native__schema96;
 };
-export type Native__schema155 = number;
-export type Native__schema156 = string;
+export type Native__schema96 = number;
+export type NativeSpacingValue = {
+    "value": Native__schema97;
+    "unit": Native__schema98;
+};
+export type Native__schema97 = number;
+export type Native__schema98 = "px" | "em";
+export type Native__schema99 = string;
 export type NativeImageBlock = {
-    "id": Native__schema145;
-    "type": Native__schema157;
-    "settings": Native__schema158;
+    "id": Native__schema86;
+    "type": Native__schema100;
+    "settings": Native__schema101;
 };
-export type Native__schema157 = "image";
-export type Native__schema158 = {
-    "src": Native__schema159;
-    "link"?: Native__schema160;
-    "altText": Native__schema164;
-    "size": Native__schema167;
-    "alignment": Native__schema171;
-    "radius": Native__schema172;
+export type Native__schema100 = "image";
+export type Native__schema101 = {
+    "src": Native__schema102;
+    "link"?: Native__schema103;
+    "altText": Native__schema107;
+    "size": Native__schema110;
+    "alignment": Native__schema114;
+    "radius": Native__schema116;
     "hideElement": NativeHideElement;
-    "margins": Native__schema173;
+    "margins": Native__schema117;
     "includeInOutput": NativeOutputInclusion;
-    "anchorLinkName": Native__schema179;
-    "responsiveMobile": Native__schema180;
+    "anchorLinkName": Native__schema123;
+    "responsiveMobile": Native__schema124;
 };
-export type Native__schema159 = string;
-export type Native__schema160 = {
-    "type": Native__schema162;
-    "href": Native__schema163;
+export type Native__schema102 = string;
+export type Native__schema103 = {
+    "type": Native__schema105;
+    "href": Native__schema106;
 };
-export type Native__schema161 = {
-    "type": Native__schema162;
-    "href": Native__schema163;
+export type Native__schema104 = {
+    "type": Native__schema105;
+    "href": Native__schema106;
 };
-export type Native__schema162 = "site" | "anchor" | "email" | "phone" | "file" | "sms" | "telegram" | "viber" | "other";
-export type Native__schema163 = string;
-export type Native__schema164 = {
-    "text": Native__schema165;
-    "addToTitle": Native__schema166;
+export type Native__schema105 = "site" | "anchor" | "email" | "phone" | "file" | "sms" | "telegram" | "viber" | "other";
+export type Native__schema106 = string;
+export type Native__schema107 = {
+    "text": Native__schema108;
+    "addToTitle": Native__schema109;
 };
-export type Native__schema165 = string;
-export type Native__schema166 = boolean;
-export type Native__schema167 = {
-    "desktop": Native__schema168;
-    "mobile": Native__schema168;
+export type Native__schema108 = string;
+export type Native__schema109 = boolean;
+export type Native__schema110 = {
+    "desktop": Native__schema111;
+    "mobile": Native__schema111;
 };
-export type Native__schema168 = {
-    "mode": Native__schema169;
-    "px": Native__schema170;
+export type Native__schema111 = {
+    "mode": Native__schema112;
+    "px": Native__schema113;
 };
-export type Native__schema169 = "width" | "height";
-export type Native__schema170 = number;
-export type Native__schema171 = {
-    "desktop": Native__schema74;
-    "mobile": Native__schema74;
+export type Native__schema112 = "width" | "height";
+export type Native__schema113 = number;
+export type Native__schema114 = {
+    "desktop": Native__schema115;
+    "mobile": Native__schema115;
 };
-export type Native__schema172 = {
+export type Native__schema115 = "left" | "center" | "right";
+export type Native__schema116 = {
     "desktop": NativeBorderRadius;
     "mobile": NativeBorderRadius;
 };
-export type Native__schema173 = {
-    "desktop": Native__schema174;
-    "mobile": Native__schema174;
+export type Native__schema117 = {
+    "desktop": Native__schema118;
+    "mobile": Native__schema118;
 };
-export type Native__schema174 = {
-    "top": Native__schema175;
-    "right": Native__schema176;
-    "bottom": Native__schema177;
-    "left": Native__schema178;
+export type Native__schema118 = {
+    "top": Native__schema119;
+    "right": Native__schema120;
+    "bottom": Native__schema121;
+    "left": Native__schema122;
 };
-export type Native__schema175 = number;
-export type Native__schema176 = number;
-export type Native__schema177 = number;
-export type Native__schema178 = number;
-export type Native__schema179 = string;
-export type Native__schema180 = boolean;
+export type Native__schema119 = number;
+export type Native__schema120 = number;
+export type Native__schema121 = number;
+export type Native__schema122 = number;
+export type Native__schema123 = string;
+export type Native__schema124 = boolean;
 export type NativeVideoBlock = {
-    "id": Native__schema145;
-    "type": Native__schema181;
+    "id": Native__schema86;
+    "type": Native__schema125;
     "settings": NativeVideoBlockSettings;
 };
-export type Native__schema181 = "video";
+export type Native__schema125 = "video";
 export type NativeVideoBlockSettings = {
-    "videoLink": Native__schema182;
-    "altText": Native__schema164;
-    "customThumbnail"?: Native__schema183;
-    "playButtonStyle": Native__schema185;
-    "size": Native__schema167;
-    "alignment": Native__schema171;
-    "radius": Native__schema172;
+    "videoLink": Native__schema126;
+    "altText": Native__schema107;
+    "customThumbnail"?: Native__schema127;
+    "playButtonStyle": Native__schema129;
+    "size": Native__schema110;
+    "alignment": Native__schema114;
+    "radius": Native__schema116;
     "hideElement": NativeHideElement;
-    "paddings": Native__schema186;
+    "paddings": Native__schema130;
     "includeInOutput": NativeOutputInclusion;
-    "anchorLinkName": Native__schema179;
-    "responsiveMobile": Native__schema187;
+    "anchorLinkName": Native__schema123;
+    "responsiveMobile": Native__schema131;
 };
-export type Native__schema182 = string;
-export type Native__schema183 = {
-    "src": Native__schema184;
+export type Native__schema126 = string;
+export type Native__schema127 = {
+    "src": Native__schema128;
 };
 export type NativeVideoCustomThumbnail = {
-    "src": Native__schema184;
+    "src": Native__schema128;
 };
-export type Native__schema184 = string;
-export type Native__schema185 = "NONE" | "red" | "white" | "black" | "blue" | "whiteCircle" | "blackCircle" | "greyCircle" | "blackCircleInverse";
-export type Native__schema186 = {
-    "desktop": Native__schema174;
-    "mobile": Native__schema174;
+export type Native__schema128 = string;
+export type Native__schema129 = "NONE" | "red" | "white" | "black" | "blue" | "whiteCircle" | "blackCircle" | "greyCircle" | "blackCircleInverse";
+export type Native__schema130 = {
+    "desktop": Native__schema118;
+    "mobile": Native__schema118;
 };
-export type Native__schema187 = boolean;
+export type Native__schema131 = boolean;
 export type NativeTimerBlock = {
-    "id": Native__schema145;
-    "type": Native__schema188;
+    "id": Native__schema86;
+    "type": Native__schema132;
     "settings": NativeTimerBlockSettings;
 };
-export type Native__schema188 = "timer";
+export type Native__schema132 = "timer";
 export type NativeTimerBlockSettings = {
-    "altText": Native__schema164;
-    "responsiveMobile": Native__schema189;
-    "size": Native__schema167;
-    "alignment": Native__schema171;
-    "margins": Native__schema173;
-    "endDate": Native__schema190;
-    "timeZone": Native__schema191;
-    "link": Native__schema192;
-    "displayDays": Native__schema193;
-    "labelsLetterCase"?: Native__schema194;
-    "separator": Native__schema195;
-    "labelsLanguage": Native__schema196;
-    "retinaDisplaySupport": Native__schema197;
-    "expirationImageSrc": Native__schema159;
+    "altText": Native__schema107;
+    "responsiveMobile": Native__schema133;
+    "size": Native__schema110;
+    "alignment": Native__schema114;
+    "margins": Native__schema117;
+    "endDate": Native__schema134;
+    "timeZone": Native__schema135;
+    "link": Native__schema136;
+    "displayDays": Native__schema137;
+    "labelsLetterCase"?: Native__schema138;
+    "separator": Native__schema139;
+    "labelsLanguage": Native__schema140;
+    "retinaDisplaySupport": Native__schema141;
+    "expirationImageSrc": Native__schema102;
     "hideElement": NativeHideElement;
     "includeInOutput": NativeOutputInclusion;
-    "anchorLinkName": Native__schema179;
-    "digitsFontFamily": Native__schema198;
-    "digitsFontSize": Native__schema199;
+    "anchorLinkName": Native__schema123;
+    "digitsFontFamily": Native__schema142;
+    "digitsFontSize": Native__schema143;
     "digitsFontColor": NativeColorValueDisallowTransparent;
-    "digitsAdvancedColorSettings"?: Native__schema200;
-    "labelsFontFamily": Native__schema198;
-    "labelsFontSize": Native__schema199;
+    "digitsAdvancedColorSettings"?: Native__schema144;
+    "labelsFontFamily": Native__schema142;
+    "labelsFontSize": Native__schema143;
     "labelsFontColor": NativeColorValueDisallowTransparent;
-    "labelsAdvancedColorSettings"?: Native__schema202;
-    "separatorFontFamily": Native__schema198;
-    "separatorFontSize": Native__schema199;
+    "labelsAdvancedColorSettings"?: Native__schema146;
+    "separatorFontFamily": Native__schema142;
+    "separatorFontSize": Native__schema143;
     "separatorFontColor": NativeColorValueDisallowTransparent;
     "backgroundColor": NativeColorValueAllowTransparent;
 };
-export type Native__schema189 = boolean;
-export type Native__schema190 = string;
-export type Native__schema191 = "Africa/Abidjan" | "Africa/Accra" | "Africa/Addis_Ababa" | "Africa/Algiers" | "Africa/Asmara" | "Africa/Bamako" | "Africa/Bangui" | "Africa/Banjul" | "Africa/Bissau" | "Africa/Blantyre" | "Africa/Brazzaville" | "Africa/Bujumbura" | "Africa/Cairo" | "Africa/Casablanca" | "Africa/Ceuta" | "Africa/Conakry" | "Africa/Dakar" | "Africa/Dar_es_Salaam" | "Africa/Djibouti" | "Africa/Douala" | "Africa/El_Aaiun" | "Africa/Freetown" | "Africa/Gaborone" | "Africa/Harare" | "Africa/Johannesburg" | "Africa/Juba" | "Africa/Kampala" | "Africa/Khartoum" | "Africa/Kigali" | "Africa/Kinshasa" | "Africa/Lagos" | "Africa/Libreville" | "Africa/Lome" | "Africa/Luanda" | "Africa/Lubumbashi" | "Africa/Lusaka" | "Africa/Malabo" | "Africa/Maputo" | "Africa/Maseru" | "Africa/Mbabane" | "Africa/Mogadishu" | "Africa/Monrovia" | "Africa/Nairobi" | "Africa/Ndjamena" | "Africa/Niamey" | "Africa/Nouakchott" | "Africa/Ouagadougou" | "Africa/Porto-Novo" | "Africa/Sao_Tome" | "Africa/Tripoli" | "Africa/Tunis" | "Africa/Windhoek" | "America/Adak" | "America/Anchorage" | "America/Anguilla" | "America/Antigua" | "America/Araguaina" | "America/Argentina/Buenos_Aires" | "America/Argentina/Catamarca" | "America/Argentina/Cordoba" | "America/Argentina/Jujuy" | "America/Argentina/La_Rioja" | "America/Argentina/Mendoza" | "America/Argentina/Rio_Gallegos" | "America/Argentina/Salta" | "America/Argentina/San_Juan" | "America/Argentina/San_Luis" | "America/Argentina/Tucuman" | "America/Argentina/Ushuaia" | "America/Aruba" | "America/Asuncion" | "America/Atikokan" | "America/Bahia" | "America/Bahia_Banderas" | "America/Barbados" | "America/Belem" | "America/Belize" | "America/Blanc-Sablon" | "America/Boa_Vista" | "America/Bogota" | "America/Boise" | "America/Cambridge_Bay" | "America/Campo_Grande" | "America/Cancun" | "America/Caracas" | "America/Cayenne" | "America/Cayman" | "America/Chicago" | "America/Chihuahua" | "America/Costa_Rica" | "America/Creston" | "America/Cuiaba" | "America/Curacao" | "America/Danmarkshavn" | "America/Dawson" | "America/Dawson_Creek" | "America/Denver" | "America/Detroit" | "America/Dominica" | "America/Edmonton" | "America/Eirunepe" | "America/El_Salvador" | "America/Fort_Nelson" | "America/Fortaleza" | "America/Glace_Bay" | "America/Godthab" | "America/Goose_Bay" | "America/Grand_Turk" | "America/Grenada" | "America/Guadeloupe" | "America/Guatemala" | "America/Guayaquil" | "America/Guyana" | "America/Halifax" | "America/Havana" | "America/Hermosillo" | "America/Indiana/Indianapolis" | "America/Indiana/Knox" | "America/Indiana/Marengo" | "America/Indiana/Petersburg" | "America/Indiana/Tell_City" | "America/Indiana/Vevay" | "America/Indiana/Vincennes" | "America/Indiana/Winamac" | "America/Inuvik" | "America/Iqaluit" | "America/Jamaica" | "America/Juneau" | "America/Kentucky/Louisville" | "Asia/Novokuznetsk" | "America/Kentucky/Monticello" | "America/Kralendijk" | "America/La_Paz" | "America/Lima" | "America/Los_Angeles" | "America/Lower_Princes" | "America/Maceio" | "America/Managua" | "America/Manaus" | "America/Marigot" | "America/Martinique" | "America/Matamoros" | "America/Mazatlan" | "America/Menominee" | "America/Merida" | "America/Metlakatla" | "America/Mexico_City" | "America/Miquelon" | "America/Moncton" | "America/Monterrey" | "America/Montevideo" | "America/Montserrat" | "America/Nassau" | "America/New_York" | "America/Nipigon" | "America/Nome" | "America/Noronha" | "America/North_Dakota/Beulah" | "America/North_Dakota/Center" | "America/North_Dakota/New_Salem" | "America/Ojinaga" | "America/Panama" | "America/Pangnirtung" | "America/Paramaribo" | "America/Phoenix" | "America/Port-au-Prince" | "America/Port_of_Spain" | "America/Porto_Velho" | "America/Puerto_Rico" | "America/Punta_Arenas" | "America/Rainy_River" | "America/Rankin_Inlet" | "America/Recife" | "America/Regina" | "America/Resolute" | "America/Rio_Branco" | "America/Santarem" | "America/Santiago" | "America/Santo_Domingo" | "America/Sao_Paulo" | "America/Scoresbysund" | "America/Sitka" | "America/St_Barthelemy" | "America/St_Johns" | "America/St_Kitts" | "America/St_Lucia" | "America/St_Thomas" | "America/St_Vincent" | "America/Swift_Current" | "America/Tegucigalpa" | "America/Thule" | "America/Thunder_Bay" | "America/Tijuana" | "America/Toronto" | "America/Tortola" | "America/Vancouver" | "America/Whitehorse" | "America/Winnipeg" | "America/Yakutat" | "America/Yellowknife" | "Antarctica/Casey" | "Antarctica/Davis" | "Antarctica/DumontDUrville" | "Antarctica/Macquarie" | "Antarctica/Mawson" | "Antarctica/McMurdo" | "Antarctica/Palmer" | "Antarctica/Rothera" | "Antarctica/Syowa" | "Antarctica/Troll" | "Antarctica/Vostok" | "Arctic/Longyearbyen" | "Asia/Aden" | "Asia/Almaty" | "Asia/Amman" | "Asia/Anadyr" | "Asia/Aqtau" | "Asia/Aqtobe" | "Asia/Ashgabat" | "Asia/Atyrau" | "Asia/Baghdad" | "Asia/Bahrain" | "Asia/Baku" | "Asia/Bangkok" | "Asia/Barnaul" | "Asia/Beirut" | "Asia/Bishkek" | "Asia/Brunei" | "Asia/Chita" | "Asia/Choibalsan" | "Asia/Colombo" | "Asia/Damascus" | "Asia/Dhaka" | "Asia/Dili" | "Asia/Dubai" | "Asia/Dushanbe" | "Asia/Famagusta" | "Asia/Gaza" | "Asia/Hebron" | "Asia/Ho_Chi_Minh" | "Asia/Hong_Kong" | "Asia/Hovd" | "Asia/Irkutsk" | "Asia/Jakarta" | "Asia/Jayapura" | "Asia/Jerusalem" | "Asia/Kabul" | "Asia/Kamchatka" | "Asia/Karachi" | "Asia/Kathmandu" | "Asia/Khandyga" | "Asia/Kolkata" | "Asia/Krasnoyarsk" | "Asia/Kuala_Lumpur" | "Asia/Kuching" | "Asia/Kuwait" | "Asia/Macau" | "Asia/Magadan" | "Asia/Makassar" | "Asia/Manila" | "Asia/Muscat" | "Asia/Nicosia" | "Asia/Novosibirsk" | "Asia/Omsk" | "Asia/Oral" | "Asia/Phnom_Penh" | "Asia/Pontianak" | "Asia/Pyongyang" | "Asia/Qatar" | "Asia/Qyzylorda" | "Asia/Riyadh" | "Asia/Sakhalin" | "Asia/Samarkand" | "Asia/Seoul" | "Asia/Shanghai" | "Asia/Singapore" | "Asia/Srednekolymsk" | "Asia/Taipei" | "Asia/Tashkent" | "Asia/Tbilisi" | "Asia/Tehran" | "Asia/Thimphu" | "Asia/Tokyo" | "Asia/Tomsk" | "Asia/Ulaanbaatar" | "Asia/Urumqi" | "Asia/Ust-Nera" | "Asia/Vientiane" | "Asia/Vladivostok" | "Asia/Yakutsk" | "Asia/Yangon" | "Asia/Yekaterinburg" | "Asia/Yerevan" | "Atlantic/Azores" | "Atlantic/Bermuda" | "Atlantic/Canary" | "Atlantic/Cape_Verde" | "Atlantic/Faroe" | "Atlantic/Madeira" | "Atlantic/Reykjavik" | "Atlantic/South_Georgia" | "Atlantic/St_Helena" | "Atlantic/Stanley" | "Australia/Adelaide" | "Australia/Brisbane" | "Australia/Broken_Hill" | "Australia/Currie" | "Australia/Darwin" | "Australia/Eucla" | "Australia/Hobart" | "Australia/Lindeman" | "Australia/Lord_Howe" | "Australia/Melbourne" | "Australia/Perth" | "Australia/Sydney" | "Canada/Atlantic" | "Canada/Central" | "Canada/Eastern" | "Canada/Mountain" | "Canada/Newfoundland" | "Canada/Pacific" | "Europe/Amsterdam" | "Europe/Andorra" | "Europe/Astrakhan" | "Europe/Athens" | "Europe/Belgrade" | "Europe/Berlin" | "Europe/Bratislava" | "Europe/Brussels" | "Europe/Bucharest" | "Europe/Budapest" | "Europe/Busingen" | "Europe/Chisinau" | "Europe/Copenhagen" | "Europe/Dublin" | "Europe/Gibraltar" | "Europe/Guernsey" | "Europe/Helsinki" | "Europe/Isle_of_Man" | "Europe/Istanbul" | "Europe/Jersey" | "Europe/Kaliningrad" | "Europe/Kiev" | "Europe/Kyiv" | "Europe/Kirov" | "Europe/Lisbon" | "Europe/Ljubljana" | "Europe/London" | "Europe/Luxembourg" | "Europe/Madrid" | "Europe/Malta" | "Europe/Mariehamn" | "Europe/Minsk" | "Europe/Monaco" | "Europe/Moscow" | "Europe/Oslo" | "Europe/Paris" | "Europe/Podgorica" | "Europe/Prague" | "Europe/Riga" | "Europe/Rome" | "Europe/Samara" | "Europe/San_Marino" | "Europe/Sarajevo" | "Europe/Saratov" | "Europe/Simferopol" | "Europe/Skopje" | "Europe/Sofia" | "Europe/Stockholm" | "Europe/Tallinn" | "Europe/Tirane" | "Europe/Ulyanovsk" | "Europe/Uzhgorod" | "Europe/Vaduz" | "Europe/Vatican" | "Europe/Vienna" | "Europe/Vilnius" | "Europe/Volgograd" | "Europe/Warsaw" | "Europe/Zagreb" | "Europe/Zaporozhye" | "Europe/Zaporizhia" | "Europe/Zurich" | "GMT" | "Indian/Antananarivo" | "Indian/Chagos" | "Indian/Christmas" | "Indian/Cocos" | "Indian/Comoro" | "Indian/Kerguelen" | "Indian/Mahe" | "Indian/Maldives" | "Indian/Mauritius" | "Indian/Mayotte" | "Indian/Reunion" | "Pacific/Apia" | "Pacific/Auckland" | "Pacific/Bougainville" | "Pacific/Chatham" | "Pacific/Chuuk" | "Pacific/Easter" | "Pacific/Efate" | "Pacific/Enderbury" | "Pacific/Fakaofo" | "Pacific/Fiji" | "Pacific/Funafuti" | "Pacific/Galapagos" | "Pacific/Gambier" | "Pacific/Guadalcanal" | "Pacific/Guam" | "Pacific/Honolulu" | "Pacific/Kiritimati" | "Pacific/Kosrae" | "Pacific/Kwajalein" | "Pacific/Majuro" | "Pacific/Marquesas" | "Pacific/Midway" | "Pacific/Nauru" | "Pacific/Niue" | "Pacific/Norfolk" | "Pacific/Noumea" | "Pacific/Pago_Pago" | "Pacific/Palau" | "Pacific/Pitcairn" | "Pacific/Pohnpei" | "Pacific/Port_Moresby" | "Pacific/Rarotonga" | "Pacific/Saipan" | "Pacific/Tahiti" | "Pacific/Tarawa" | "Pacific/Tongatapu" | "Pacific/Wake" | "Pacific/Wallis" | "US/Alaska" | "US/Arizona" | "US/Central" | "US/Eastern" | "US/Hawaii" | "US/Mountain" | "US/Pacific" | "UTC";
-export type Native__schema192 = (Native__schema161) | (null);
-export type Native__schema193 = boolean;
-export type Native__schema194 = "CAPITALIZE" | "UPPER" | "LOWER";
-export type Native__schema195 = string;
-export type Native__schema196 = "id" | "ms" | "bs" | "bg" | "da" | "de" | "et" | "en" | "es" | "fr" | "hr" | "it" | "lv" | "lt" | "hu" | "nl" | "no" | "pl" | "pt" | "ro" | "sk" | "sl" | "sr" | "fi" | "sv" | "vi" | "tr" | "cz" | "el" | "ru" | "uk" | "he" | "ar" | "th" | "zh" | "ja" | "ko";
-export type Native__schema197 = boolean;
-export type Native__schema198 = "arial,'helvetica neue',helvetica,sans-serif" | "'comic sans ms','marker felt-thin',arial,sans-serif" | "'courier new',courier,'lucida sans typewriter','lucida typewriter',monospace" | "georgia,times,'times new roman',serif" | "helvetica,'helvetica neue',arial,verdana,sans-serif" | "'lucida sans unicode','lucida grande',sans-serif" | "tahoma,verdana,segoe,sans-serif" | "'times new roman',times,baskerville,georgia,serif" | "'trebuchet ms','lucida grande','lucida sans unicode','lucida sans',tahoma,sans-serif" | "verdana,geneva,sans-serif" | "arvo,courier,georgia,serif" | "lato,'helvetica neue',helvetica,arial,sans-serif" | "lora,georgia,'times new roman',serif" | "merriweather,georgia,'times new roman',serif" | "'merriweather sans','helvetica neue',helvetica,arial,sans-serif" | "'noticia text',georgia,'times new roman',serif" | "'open sans','helvetica neue',helvetica,arial,sans-serif" | "'playfair display',georgia,'times new roman',serif" | "roboto,'helvetica neue',helvetica,arial,sans-serif" | "'source sans pro','helvetica neue',helvetica,arial,sans-serif";
-export type Native__schema199 = number;
-export type Native__schema200 = {
+export type Native__schema133 = boolean;
+export type Native__schema134 = string;
+export type Native__schema135 = "Africa/Abidjan" | "Africa/Accra" | "Africa/Addis_Ababa" | "Africa/Algiers" | "Africa/Asmara" | "Africa/Bamako" | "Africa/Bangui" | "Africa/Banjul" | "Africa/Bissau" | "Africa/Blantyre" | "Africa/Brazzaville" | "Africa/Bujumbura" | "Africa/Cairo" | "Africa/Casablanca" | "Africa/Ceuta" | "Africa/Conakry" | "Africa/Dakar" | "Africa/Dar_es_Salaam" | "Africa/Djibouti" | "Africa/Douala" | "Africa/El_Aaiun" | "Africa/Freetown" | "Africa/Gaborone" | "Africa/Harare" | "Africa/Johannesburg" | "Africa/Juba" | "Africa/Kampala" | "Africa/Khartoum" | "Africa/Kigali" | "Africa/Kinshasa" | "Africa/Lagos" | "Africa/Libreville" | "Africa/Lome" | "Africa/Luanda" | "Africa/Lubumbashi" | "Africa/Lusaka" | "Africa/Malabo" | "Africa/Maputo" | "Africa/Maseru" | "Africa/Mbabane" | "Africa/Mogadishu" | "Africa/Monrovia" | "Africa/Nairobi" | "Africa/Ndjamena" | "Africa/Niamey" | "Africa/Nouakchott" | "Africa/Ouagadougou" | "Africa/Porto-Novo" | "Africa/Sao_Tome" | "Africa/Tripoli" | "Africa/Tunis" | "Africa/Windhoek" | "America/Adak" | "America/Anchorage" | "America/Anguilla" | "America/Antigua" | "America/Araguaina" | "America/Argentina/Buenos_Aires" | "America/Argentina/Catamarca" | "America/Argentina/Cordoba" | "America/Argentina/Jujuy" | "America/Argentina/La_Rioja" | "America/Argentina/Mendoza" | "America/Argentina/Rio_Gallegos" | "America/Argentina/Salta" | "America/Argentina/San_Juan" | "America/Argentina/San_Luis" | "America/Argentina/Tucuman" | "America/Argentina/Ushuaia" | "America/Aruba" | "America/Asuncion" | "America/Atikokan" | "America/Bahia" | "America/Bahia_Banderas" | "America/Barbados" | "America/Belem" | "America/Belize" | "America/Blanc-Sablon" | "America/Boa_Vista" | "America/Bogota" | "America/Boise" | "America/Cambridge_Bay" | "America/Campo_Grande" | "America/Cancun" | "America/Caracas" | "America/Cayenne" | "America/Cayman" | "America/Chicago" | "America/Chihuahua" | "America/Costa_Rica" | "America/Creston" | "America/Cuiaba" | "America/Curacao" | "America/Danmarkshavn" | "America/Dawson" | "America/Dawson_Creek" | "America/Denver" | "America/Detroit" | "America/Dominica" | "America/Edmonton" | "America/Eirunepe" | "America/El_Salvador" | "America/Fort_Nelson" | "America/Fortaleza" | "America/Glace_Bay" | "America/Godthab" | "America/Goose_Bay" | "America/Grand_Turk" | "America/Grenada" | "America/Guadeloupe" | "America/Guatemala" | "America/Guayaquil" | "America/Guyana" | "America/Halifax" | "America/Havana" | "America/Hermosillo" | "America/Indiana/Indianapolis" | "America/Indiana/Knox" | "America/Indiana/Marengo" | "America/Indiana/Petersburg" | "America/Indiana/Tell_City" | "America/Indiana/Vevay" | "America/Indiana/Vincennes" | "America/Indiana/Winamac" | "America/Inuvik" | "America/Iqaluit" | "America/Jamaica" | "America/Juneau" | "America/Kentucky/Louisville" | "Asia/Novokuznetsk" | "America/Kentucky/Monticello" | "America/Kralendijk" | "America/La_Paz" | "America/Lima" | "America/Los_Angeles" | "America/Lower_Princes" | "America/Maceio" | "America/Managua" | "America/Manaus" | "America/Marigot" | "America/Martinique" | "America/Matamoros" | "America/Mazatlan" | "America/Menominee" | "America/Merida" | "America/Metlakatla" | "America/Mexico_City" | "America/Miquelon" | "America/Moncton" | "America/Monterrey" | "America/Montevideo" | "America/Montserrat" | "America/Nassau" | "America/New_York" | "America/Nipigon" | "America/Nome" | "America/Noronha" | "America/North_Dakota/Beulah" | "America/North_Dakota/Center" | "America/North_Dakota/New_Salem" | "America/Ojinaga" | "America/Panama" | "America/Pangnirtung" | "America/Paramaribo" | "America/Phoenix" | "America/Port-au-Prince" | "America/Port_of_Spain" | "America/Porto_Velho" | "America/Puerto_Rico" | "America/Punta_Arenas" | "America/Rainy_River" | "America/Rankin_Inlet" | "America/Recife" | "America/Regina" | "America/Resolute" | "America/Rio_Branco" | "America/Santarem" | "America/Santiago" | "America/Santo_Domingo" | "America/Sao_Paulo" | "America/Scoresbysund" | "America/Sitka" | "America/St_Barthelemy" | "America/St_Johns" | "America/St_Kitts" | "America/St_Lucia" | "America/St_Thomas" | "America/St_Vincent" | "America/Swift_Current" | "America/Tegucigalpa" | "America/Thule" | "America/Thunder_Bay" | "America/Tijuana" | "America/Toronto" | "America/Tortola" | "America/Vancouver" | "America/Whitehorse" | "America/Winnipeg" | "America/Yakutat" | "America/Yellowknife" | "Antarctica/Casey" | "Antarctica/Davis" | "Antarctica/DumontDUrville" | "Antarctica/Macquarie" | "Antarctica/Mawson" | "Antarctica/McMurdo" | "Antarctica/Palmer" | "Antarctica/Rothera" | "Antarctica/Syowa" | "Antarctica/Troll" | "Antarctica/Vostok" | "Arctic/Longyearbyen" | "Asia/Aden" | "Asia/Almaty" | "Asia/Amman" | "Asia/Anadyr" | "Asia/Aqtau" | "Asia/Aqtobe" | "Asia/Ashgabat" | "Asia/Atyrau" | "Asia/Baghdad" | "Asia/Bahrain" | "Asia/Baku" | "Asia/Bangkok" | "Asia/Barnaul" | "Asia/Beirut" | "Asia/Bishkek" | "Asia/Brunei" | "Asia/Chita" | "Asia/Choibalsan" | "Asia/Colombo" | "Asia/Damascus" | "Asia/Dhaka" | "Asia/Dili" | "Asia/Dubai" | "Asia/Dushanbe" | "Asia/Famagusta" | "Asia/Gaza" | "Asia/Hebron" | "Asia/Ho_Chi_Minh" | "Asia/Hong_Kong" | "Asia/Hovd" | "Asia/Irkutsk" | "Asia/Jakarta" | "Asia/Jayapura" | "Asia/Jerusalem" | "Asia/Kabul" | "Asia/Kamchatka" | "Asia/Karachi" | "Asia/Kathmandu" | "Asia/Khandyga" | "Asia/Kolkata" | "Asia/Krasnoyarsk" | "Asia/Kuala_Lumpur" | "Asia/Kuching" | "Asia/Kuwait" | "Asia/Macau" | "Asia/Magadan" | "Asia/Makassar" | "Asia/Manila" | "Asia/Muscat" | "Asia/Nicosia" | "Asia/Novosibirsk" | "Asia/Omsk" | "Asia/Oral" | "Asia/Phnom_Penh" | "Asia/Pontianak" | "Asia/Pyongyang" | "Asia/Qatar" | "Asia/Qyzylorda" | "Asia/Riyadh" | "Asia/Sakhalin" | "Asia/Samarkand" | "Asia/Seoul" | "Asia/Shanghai" | "Asia/Singapore" | "Asia/Srednekolymsk" | "Asia/Taipei" | "Asia/Tashkent" | "Asia/Tbilisi" | "Asia/Tehran" | "Asia/Thimphu" | "Asia/Tokyo" | "Asia/Tomsk" | "Asia/Ulaanbaatar" | "Asia/Urumqi" | "Asia/Ust-Nera" | "Asia/Vientiane" | "Asia/Vladivostok" | "Asia/Yakutsk" | "Asia/Yangon" | "Asia/Yekaterinburg" | "Asia/Yerevan" | "Atlantic/Azores" | "Atlantic/Bermuda" | "Atlantic/Canary" | "Atlantic/Cape_Verde" | "Atlantic/Faroe" | "Atlantic/Madeira" | "Atlantic/Reykjavik" | "Atlantic/South_Georgia" | "Atlantic/St_Helena" | "Atlantic/Stanley" | "Australia/Adelaide" | "Australia/Brisbane" | "Australia/Broken_Hill" | "Australia/Currie" | "Australia/Darwin" | "Australia/Eucla" | "Australia/Hobart" | "Australia/Lindeman" | "Australia/Lord_Howe" | "Australia/Melbourne" | "Australia/Perth" | "Australia/Sydney" | "Canada/Atlantic" | "Canada/Central" | "Canada/Eastern" | "Canada/Mountain" | "Canada/Newfoundland" | "Canada/Pacific" | "Europe/Amsterdam" | "Europe/Andorra" | "Europe/Astrakhan" | "Europe/Athens" | "Europe/Belgrade" | "Europe/Berlin" | "Europe/Bratislava" | "Europe/Brussels" | "Europe/Bucharest" | "Europe/Budapest" | "Europe/Busingen" | "Europe/Chisinau" | "Europe/Copenhagen" | "Europe/Dublin" | "Europe/Gibraltar" | "Europe/Guernsey" | "Europe/Helsinki" | "Europe/Isle_of_Man" | "Europe/Istanbul" | "Europe/Jersey" | "Europe/Kaliningrad" | "Europe/Kiev" | "Europe/Kyiv" | "Europe/Kirov" | "Europe/Lisbon" | "Europe/Ljubljana" | "Europe/London" | "Europe/Luxembourg" | "Europe/Madrid" | "Europe/Malta" | "Europe/Mariehamn" | "Europe/Minsk" | "Europe/Monaco" | "Europe/Moscow" | "Europe/Oslo" | "Europe/Paris" | "Europe/Podgorica" | "Europe/Prague" | "Europe/Riga" | "Europe/Rome" | "Europe/Samara" | "Europe/San_Marino" | "Europe/Sarajevo" | "Europe/Saratov" | "Europe/Simferopol" | "Europe/Skopje" | "Europe/Sofia" | "Europe/Stockholm" | "Europe/Tallinn" | "Europe/Tirane" | "Europe/Ulyanovsk" | "Europe/Uzhgorod" | "Europe/Vaduz" | "Europe/Vatican" | "Europe/Vienna" | "Europe/Vilnius" | "Europe/Volgograd" | "Europe/Warsaw" | "Europe/Zagreb" | "Europe/Zaporozhye" | "Europe/Zaporizhia" | "Europe/Zurich" | "GMT" | "Indian/Antananarivo" | "Indian/Chagos" | "Indian/Christmas" | "Indian/Cocos" | "Indian/Comoro" | "Indian/Kerguelen" | "Indian/Mahe" | "Indian/Maldives" | "Indian/Mauritius" | "Indian/Mayotte" | "Indian/Reunion" | "Pacific/Apia" | "Pacific/Auckland" | "Pacific/Bougainville" | "Pacific/Chatham" | "Pacific/Chuuk" | "Pacific/Easter" | "Pacific/Efate" | "Pacific/Enderbury" | "Pacific/Fakaofo" | "Pacific/Fiji" | "Pacific/Funafuti" | "Pacific/Galapagos" | "Pacific/Gambier" | "Pacific/Guadalcanal" | "Pacific/Guam" | "Pacific/Honolulu" | "Pacific/Kiritimati" | "Pacific/Kosrae" | "Pacific/Kwajalein" | "Pacific/Majuro" | "Pacific/Marquesas" | "Pacific/Midway" | "Pacific/Nauru" | "Pacific/Niue" | "Pacific/Norfolk" | "Pacific/Noumea" | "Pacific/Pago_Pago" | "Pacific/Palau" | "Pacific/Pitcairn" | "Pacific/Pohnpei" | "Pacific/Port_Moresby" | "Pacific/Rarotonga" | "Pacific/Saipan" | "Pacific/Tahiti" | "Pacific/Tarawa" | "Pacific/Tongatapu" | "Pacific/Wake" | "Pacific/Wallis" | "US/Alaska" | "US/Arizona" | "US/Central" | "US/Eastern" | "US/Hawaii" | "US/Mountain" | "US/Pacific" | "UTC";
+export type Native__schema136 = (Native__schema104) | (null);
+export type Native__schema137 = boolean;
+export type Native__schema138 = "CAPITALIZE" | "UPPER" | "LOWER";
+export type Native__schema139 = string;
+export type Native__schema140 = "id" | "ms" | "bs" | "bg" | "da" | "de" | "et" | "en" | "es" | "fr" | "hr" | "it" | "lv" | "lt" | "hu" | "nl" | "no" | "pl" | "pt" | "ro" | "sk" | "sl" | "sr" | "fi" | "sv" | "vi" | "tr" | "cz" | "el" | "ru" | "uk" | "he" | "ar" | "th" | "zh" | "ja" | "ko";
+export type Native__schema141 = boolean;
+export type Native__schema142 = "arial,'helvetica neue',helvetica,sans-serif" | "'comic sans ms','marker felt-thin',arial,sans-serif" | "'courier new',courier,'lucida sans typewriter','lucida typewriter',monospace" | "georgia,times,'times new roman',serif" | "helvetica,'helvetica neue',arial,verdana,sans-serif" | "'lucida sans unicode','lucida grande',sans-serif" | "tahoma,verdana,segoe,sans-serif" | "'times new roman',times,baskerville,georgia,serif" | "'trebuchet ms','lucida grande','lucida sans unicode','lucida sans',tahoma,sans-serif" | "verdana,geneva,sans-serif" | "arvo,courier,georgia,serif" | "lato,'helvetica neue',helvetica,arial,sans-serif" | "lora,georgia,'times new roman',serif" | "merriweather,georgia,'times new roman',serif" | "'merriweather sans','helvetica neue',helvetica,arial,sans-serif" | "'noticia text',georgia,'times new roman',serif" | "'open sans','helvetica neue',helvetica,arial,sans-serif" | "'playfair display',georgia,'times new roman',serif" | "roboto,'helvetica neue',helvetica,arial,sans-serif" | "'source sans pro','helvetica neue',helvetica,arial,sans-serif";
+export type Native__schema143 = number;
+export type Native__schema144 = {
     "days": NativeColorValueDisallowTransparent;
     "hours": NativeColorValueDisallowTransparent;
     "minutes": NativeColorValueDisallowTransparent;
     "seconds": NativeColorValueDisallowTransparent;
 };
-export type Native__schema201 = {
+export type Native__schema145 = {
     "days": NativeColorValueDisallowTransparent;
     "hours": NativeColorValueDisallowTransparent;
     "minutes": NativeColorValueDisallowTransparent;
     "seconds": NativeColorValueDisallowTransparent;
 };
-export type Native__schema202 = {
+export type Native__schema146 = {
     "days": NativeColorValueDisallowTransparent;
     "hours": NativeColorValueDisallowTransparent;
     "minutes": NativeColorValueDisallowTransparent;
     "seconds": NativeColorValueDisallowTransparent;
 };
 export type NativeSocialBlock = {
-    "id": Native__schema145;
-    "type": Native__schema203;
-    "settings": Native__schema204;
+    "id": Native__schema86;
+    "type": Native__schema147;
+    "settings": Native__schema148;
 };
-export type Native__schema203 = "social";
-export type Native__schema204 = {
-    "networks": Native__schema205;
-    "style": Native__schema213;
-    "iconSize": Native__schema214;
-    "spaceBetweenIcons": Native__schema215;
-    "textCustomization": Native__schema218;
-    "alignment": Native__schema219;
+export type Native__schema147 = "social";
+export type Native__schema148 = {
+    "networks": Native__schema149;
+    "style": Native__schema157;
+    "iconSize": Native__schema158;
+    "spaceBetweenIcons": Native__schema159;
+    "textCustomization": Native__schema162;
+    "alignment": Native__schema163;
     "backgroundColor": NativeColorValueAllowTransparent;
     "hideElement": NativeHideElement;
-    "margins": Native__schema220;
+    "margins": Native__schema164;
     "includeInOutput": NativeOutputInclusion;
-    "anchorLinkName": Native__schema179;
+    "anchorLinkName": Native__schema123;
 };
-export type Native__schema205 = Array<Native__schema206>;
-export type Native__schema206 = {
-    "type": Native__schema207;
-    "link"?: Native__schema208;
-    "icon"?: Native__schema210;
-    "title": Native__schema211;
-    "alt"?: Native__schema212;
+export type Native__schema149 = Array<Native__schema150>;
+export type Native__schema150 = {
+    "type": Native__schema151;
+    "link"?: Native__schema152;
+    "icon"?: Native__schema154;
+    "title": Native__schema155;
+    "alt"?: Native__schema156;
 };
-export type Native__schema207 = "twitter" | "xcom" | "facebook" | "youtube" | "askfm" | "behance" | "dribbble" | "flickr" | "foursquare" | "googleplus" | "instagram" | "lastfm" | "linkedin" | "myspace" | "pinterest" | "soundcloud" | "tumblr" | "vimeo" | "hangouts" | "messenger" | "skype" | "snapchat" | "telegram" | "viber" | "whatsapp" | "email" | "website" | "mapmarker" | "world" | "address" | "phone" | "share" | "rss" | "appstore" | "googleplay" | "windowsstore" | "wechat" | "weibo" | "blogger" | "medium" | "dropbox" | "googledrive" | "slack" | "github" | "pdf" | "doc" | "xls" | "ppt" | "xing" | "meetup" | "fleeped" | "tripAdvisor" | "spotify" | "tiktok" | "workplace" | "gmail" | "iTunesPodcasts" | "zoom" | "teams" | "onedrive" | "discord" | "twitch" | "line" | "patreon" | "kofi" | "yammer" | "buyMeACoffee" | "huaweiAppGallery" | "googleBusiness" | "reddit" | "strava" | "goodreads" | "custom" | "yelp" | "google" | "mastodon" | "glassdoor" | "threads" | "bluesky" | "digg" | "meet";
-export type Native__schema208 = {
-    "type": Native__schema162;
-    "href": Native__schema209;
+export type Native__schema151 = "twitter" | "xcom" | "facebook" | "youtube" | "askfm" | "behance" | "dribbble" | "flickr" | "foursquare" | "googleplus" | "instagram" | "lastfm" | "linkedin" | "myspace" | "pinterest" | "soundcloud" | "tumblr" | "vimeo" | "hangouts" | "messenger" | "skype" | "snapchat" | "telegram" | "viber" | "whatsapp" | "email" | "website" | "mapmarker" | "world" | "address" | "phone" | "share" | "rss" | "appstore" | "googleplay" | "windowsstore" | "wechat" | "weibo" | "blogger" | "medium" | "dropbox" | "googledrive" | "slack" | "github" | "pdf" | "doc" | "xls" | "ppt" | "xing" | "meetup" | "fleeped" | "tripAdvisor" | "spotify" | "tiktok" | "workplace" | "gmail" | "iTunesPodcasts" | "zoom" | "teams" | "onedrive" | "discord" | "twitch" | "line" | "patreon" | "kofi" | "yammer" | "buyMeACoffee" | "huaweiAppGallery" | "googleBusiness" | "reddit" | "strava" | "goodreads" | "custom" | "yelp" | "google" | "mastodon" | "glassdoor" | "threads" | "bluesky" | "digg" | "meet";
+export type Native__schema152 = {
+    "type": Native__schema105;
+    "href": Native__schema153;
 };
-export type Native__schema209 = string;
-export type Native__schema210 = string;
-export type Native__schema211 = string;
-export type Native__schema212 = string;
-export type Native__schema213 = "custom" | "logoColored" | "logoBlack" | "logoGray" | "logoWhite" | "circleColored" | "circleColoredBordered" | "roundedColored" | "roundedColoredBordered" | "squareColored" | "squareColoredBordered" | "circleBlack" | "circleBlackBordered" | "roundedBlack" | "roundedBlackBordered" | "squareBlack" | "squareBlackBordered" | "circleGray" | "circleGrayBordered" | "roundedGray" | "roundedGrayBordered" | "squareGray" | "squareGrayBordered" | "circleWhite" | "circleWhiteBordered" | "roundedWhite" | "roundedWhiteBordered" | "squareWhite" | "squareWhiteBordered";
-export type Native__schema214 = number;
-export type Native__schema215 = {
-    "desktop": Native__schema216;
-    "mobile": Native__schema217;
+export type Native__schema153 = string;
+export type Native__schema154 = string;
+export type Native__schema155 = string;
+export type Native__schema156 = string;
+export type Native__schema157 = "custom" | "logoColored" | "logoBlack" | "logoGray" | "logoWhite" | "circleColored" | "circleColoredBordered" | "roundedColored" | "roundedColoredBordered" | "squareColored" | "squareColoredBordered" | "circleBlack" | "circleBlackBordered" | "roundedBlack" | "roundedBlackBordered" | "squareBlack" | "squareBlackBordered" | "circleGray" | "circleGrayBordered" | "roundedGray" | "roundedGrayBordered" | "squareGray" | "squareGrayBordered" | "circleWhite" | "circleWhiteBordered" | "roundedWhite" | "roundedWhiteBordered" | "squareWhite" | "squareWhiteBordered";
+export type Native__schema158 = number;
+export type Native__schema159 = {
+    "desktop": Native__schema160;
+    "mobile": Native__schema161;
 };
-export type Native__schema216 = number;
-export type Native__schema217 = number;
-export type Native__schema218 = boolean;
-export type Native__schema219 = {
-    "desktop": Native__schema74;
-    "mobile": Native__schema74;
+export type Native__schema160 = number;
+export type Native__schema161 = number;
+export type Native__schema162 = boolean;
+export type Native__schema163 = {
+    "desktop": Native__schema115;
+    "mobile": Native__schema115;
 };
-export type Native__schema220 = {
-    "desktop": Native__schema221;
-    "mobile": Native__schema221;
+export type Native__schema164 = {
+    "desktop": Native__schema165;
+    "mobile": Native__schema165;
 };
-export type Native__schema221 = {
-    "top": Native__schema222;
-    "right": Native__schema223;
-    "bottom": Native__schema224;
-    "left": Native__schema225;
+export type Native__schema165 = {
+    "top": Native__schema166;
+    "right": Native__schema167;
+    "bottom": Native__schema168;
+    "left": Native__schema169;
 };
-export type Native__schema222 = number;
-export type Native__schema223 = number;
-export type Native__schema224 = number;
-export type Native__schema225 = number;
+export type Native__schema166 = number;
+export type Native__schema167 = number;
+export type Native__schema168 = number;
+export type Native__schema169 = number;
 export type NativeHtmlBlock = {
-    "id": Native__schema145;
-    "type": Native__schema226;
-    "settings": Native__schema227;
-    "content"?: Native__schema228;
+    "id": Native__schema86;
+    "type": Native__schema170;
+    "settings": Native__schema171;
+    "content"?: Native__schema172;
 };
-export type Native__schema226 = "html";
-export type Native__schema227 = {
-    "margins": Native__schema173;
+export type Native__schema170 = "html";
+export type Native__schema171 = {
+    "margins": Native__schema117;
     "includeInOutput": NativeOutputInclusion;
     "hideElement": NativeHideElement;
-    "anchorLinkName": Native__schema179;
+    "anchorLinkName": Native__schema123;
 };
-export type Native__schema228 = string;
+export type Native__schema172 = string;
 export type NativeButtonBlock = {
-    "id": Native__schema145;
-    "type": Native__schema229;
+    "id": Native__schema86;
+    "type": Native__schema173;
     "settings": NativeButtonBlockSettings;
 };
-export type Native__schema229 = "button";
+export type Native__schema173 = "button";
 export type NativeButtonBlockSettings = {
-    "link"?: Native__schema230;
-    "text": Native__schema242;
-    "alignment": Native__schema243;
-    "fixedHeight"?: Native__schema244;
-    "icon"?: Native__schema247;
+    "link"?: Native__schema174;
+    "text": Native__schema186;
+    "alignment": Native__schema187;
+    "fixedHeight"?: Native__schema188;
+    "icon"?: Native__schema191;
     "hideElement": NativeHideElement;
-    "padding": Native__schema252;
-    "margins": Native__schema252;
+    "padding": Native__schema196;
+    "margins": Native__schema196;
     "includeInOutput": NativeOutputInclusion;
-    "anchorLink": Native__schema255;
+    "anchorLink": Native__schema199;
     "backgroundColor": NativeColorValueAllowTransparent;
     "fontFamily": Native__schema8;
     "fontSize": NativeFontSize;
@@ -999,253 +872,271 @@ export type NativeButtonBlockSettings = {
     "border": NativeBorder;
     "fontColor": NativeColorValueDisallowTransparent;
 };
-export type Native__schema230 = (Native__schema232) | (Native__schema235);
-export type Native__schema231 = (Native__schema232) | (Native__schema235);
-export type Native__schema232 = {
-    "type": Native__schema233;
-    "value": Native__schema234;
+export type Native__schema174 = (Native__schema176) | (Native__schema179);
+export type Native__schema175 = (Native__schema176) | (Native__schema179);
+export type Native__schema176 = {
+    "type": Native__schema177;
+    "value": Native__schema178;
 };
-export type Native__schema233 = "site" | "anchor" | "email" | "phone" | "sms" | "telegram" | "viber" | "file" | "other";
-export type Native__schema234 = string;
-export type Native__schema235 = {
-    "type": Native__schema236;
-    "value": Native__schema237;
-    "salesforce": Native__schema238;
+export type Native__schema177 = "site" | "anchor" | "email" | "phone" | "sms" | "telegram" | "viber" | "file" | "other";
+export type Native__schema178 = string;
+export type Native__schema179 = {
+    "type": Native__schema180;
+    "value": Native__schema181;
+    "salesforce": Native__schema182;
 };
-export type Native__schema236 = "salesforce_mc";
-export type Native__schema237 = string;
-export type Native__schema238 = {
-    "trackingAlias": Native__schema239;
-    "linkTo": Native__schema240;
-    "conversion": Native__schema241;
+export type Native__schema180 = "salesforce_mc";
+export type Native__schema181 = string;
+export type Native__schema182 = {
+    "trackingAlias": Native__schema183;
+    "linkTo": Native__schema184;
+    "conversion": Native__schema185;
 };
-export type Native__schema239 = string;
-export type Native__schema240 = string;
-export type Native__schema241 = boolean;
-export type Native__schema242 = string;
-export type Native__schema243 = {
-    "desktop": Native__schema74;
-    "mobile": Native__schema74;
+export type Native__schema183 = string;
+export type Native__schema184 = string;
+export type Native__schema185 = boolean;
+export type Native__schema186 = string;
+export type Native__schema187 = {
+    "desktop": Native__schema115;
+    "mobile": Native__schema115;
 };
-export type Native__schema244 = {
-    "height": Native__schema245;
-    "alignment"?: Native__schema246;
+export type Native__schema188 = {
+    "height": Native__schema189;
+    "alignment"?: Native__schema190;
 };
-export type Native__schema245 = number;
-export type Native__schema246 = "top" | "middle" | "bottom";
-export type Native__schema247 = {
-    "src": Native__schema248;
-    "width": Native__schema249;
-    "align": Native__schema250;
-    "indent": Native__schema251;
+export type Native__schema189 = number;
+export type Native__schema190 = "top" | "middle" | "bottom";
+export type Native__schema191 = {
+    "src": Native__schema192;
+    "width": Native__schema193;
+    "align": Native__schema194;
+    "indent": Native__schema195;
 };
-export type Native__schema248 = string;
-export type Native__schema249 = number;
-export type Native__schema250 = "left" | "right";
-export type Native__schema251 = number;
-export type Native__schema252 = {
-    "desktop": Native__schema253;
-    "mobile": Native__schema253;
+export type Native__schema192 = string;
+export type Native__schema193 = number;
+export type Native__schema194 = "left" | "right";
+export type Native__schema195 = number;
+export type Native__schema196 = {
+    "desktop": Native__schema197;
+    "mobile": Native__schema197;
 };
-export type Native__schema253 = {
-    "top": Native__schema254;
-    "right": Native__schema254;
-    "bottom": Native__schema254;
-    "left": Native__schema254;
+export type Native__schema197 = {
+    "top": Native__schema198;
+    "right": Native__schema198;
+    "bottom": Native__schema198;
+    "left": Native__schema198;
 };
-export type Native__schema254 = number;
-export type Native__schema255 = string;
+export type Native__schema198 = number;
+export type Native__schema199 = string;
+export type NativeFontSize = {
+    "desktop": Native__schema200;
+    "mobile": Native__schema201;
+};
+export type Native__schema200 = number;
+export type Native__schema201 = number;
+export type NativeButtonsTextStyle = {
+    "bold": Native__schema202;
+    "italic": Native__schema203;
+};
+export type Native__schema202 = boolean;
+export type Native__schema203 = boolean;
+export type NativeResponsiveBoolean = {
+    "desktop": Native__schema204;
+    "mobile": Native__schema205;
+};
+export type Native__schema204 = boolean;
+export type Native__schema205 = boolean;
 export type NativeSpacerBlock = {
-    "id": Native__schema145;
-    "type": Native__schema256;
-    "settings": Native__schema257;
+    "id": Native__schema86;
+    "type": Native__schema206;
+    "settings": Native__schema207;
 };
-export type Native__schema256 = "spacer";
-export type Native__schema257 = {
-    "mode": Native__schema258;
-    "width"?: Native__schema259;
-    "height"?: Native__schema265;
-    "border"?: Native__schema268;
-    "alignment"?: Native__schema270;
+export type Native__schema206 = "spacer";
+export type Native__schema207 = {
+    "mode": Native__schema208;
+    "width"?: Native__schema209;
+    "height"?: Native__schema215;
+    "border"?: Native__schema218;
+    "alignment"?: Native__schema220;
     "backgroundColor": NativeColorValueAllowTransparent;
-    "margins": Native__schema271;
-    "anchorLinkName": Native__schema179;
+    "margins": Native__schema221;
+    "anchorLinkName": Native__schema123;
     "includeInOutput": NativeOutputInclusion;
     "hideElement": NativeHideElement;
 };
-export type Native__schema258 = "line" | "space";
-export type Native__schema259 = {
-    "desktop": Native__schema260;
-    "mobile": Native__schema264;
+export type Native__schema208 = "line" | "space";
+export type Native__schema209 = {
+    "desktop": Native__schema210;
+    "mobile": Native__schema214;
 };
-export type Native__schema260 = {
-    "value": Native__schema261;
-    "unit": Native__schema262;
+export type Native__schema210 = {
+    "value": Native__schema211;
+    "unit": Native__schema212;
 };
-export type Native__schema261 = number;
-export type Native__schema262 = "percent" | "px";
-export type Native__schema263 = {
-    "value": Native__schema261;
-    "unit": Native__schema262;
+export type Native__schema211 = number;
+export type Native__schema212 = "percent" | "px";
+export type Native__schema213 = {
+    "value": Native__schema211;
+    "unit": Native__schema212;
 };
-export type Native__schema264 = {
-    "value": Native__schema261;
-    "unit": Native__schema262;
+export type Native__schema214 = {
+    "value": Native__schema211;
+    "unit": Native__schema212;
 };
-export type Native__schema265 = {
-    "desktop": Native__schema266;
-    "mobile": Native__schema267;
+export type Native__schema215 = {
+    "desktop": Native__schema216;
+    "mobile": Native__schema217;
 };
-export type Native__schema266 = number;
-export type Native__schema267 = number;
-export type Native__schema268 = {
-    "size": Native__schema269;
-    "style": Native__schema106;
+export type Native__schema216 = number;
+export type Native__schema217 = number;
+export type Native__schema218 = {
+    "size": Native__schema219;
+    "style": Native__schema56;
     "color": NativeColorValueDisallowTransparent;
 };
-export type Native__schema269 = number;
-export type Native__schema270 = {
-    "desktop": Native__schema74;
-    "mobile": Native__schema74;
+export type Native__schema219 = number;
+export type Native__schema220 = {
+    "desktop": Native__schema115;
+    "mobile": Native__schema115;
 };
-export type Native__schema271 = {
-    "desktop": Native__schema272;
-    "mobile": Native__schema272;
+export type Native__schema221 = {
+    "desktop": Native__schema222;
+    "mobile": Native__schema222;
 };
-export type Native__schema272 = {
-    "top": Native__schema273;
-    "right": Native__schema274;
-    "bottom": Native__schema275;
-    "left": Native__schema276;
+export type Native__schema222 = {
+    "top": Native__schema223;
+    "right": Native__schema224;
+    "bottom": Native__schema225;
+    "left": Native__schema226;
 };
-export type Native__schema273 = number;
-export type Native__schema274 = number;
-export type Native__schema275 = number;
-export type Native__schema276 = number;
+export type Native__schema223 = number;
+export type Native__schema224 = number;
+export type Native__schema225 = number;
+export type Native__schema226 = number;
 export type NativeMenuBlock = {
-    "id": Native__schema145;
-    "type": Native__schema277;
+    "id": Native__schema86;
+    "type": Native__schema227;
     "settings": NativeMenuBlockSettings;
 };
-export type Native__schema277 = "menu";
+export type Native__schema227 = "menu";
 export type NativeMenuBlockSettings = {
-    "responsiveMenu": Native__schema278;
-    "itemType": Native__schema279;
-    "fitToContainer": Native__schema282;
-    "itemPadding": Native__schema283;
-    "margins": Native__schema283;
-    "anchorLinkName": Native__schema179;
+    "responsiveMenu": Native__schema228;
+    "itemType": Native__schema229;
+    "fitToContainer": Native__schema232;
+    "itemPadding": Native__schema233;
+    "margins": Native__schema233;
+    "anchorLinkName": Native__schema123;
     "includeInOutput": NativeOutputInclusion;
     "separator": NativeMenuSeparator;
     "fontFamily": Native__schema8;
     "fontSize": NativeFontSize;
     "hideElement": NativeHideElement;
     "textStyle": NativeButtonsTextStyle;
-    "colors": Native__schema288;
-    "items": Native__schema291;
+    "colors": Native__schema238;
+    "items": Native__schema241;
 };
-export type Native__schema278 = boolean;
-export type Native__schema279 = (Native__schema280) | (Native__schema281);
-export type Native__schema280 = {
+export type Native__schema228 = boolean;
+export type Native__schema229 = (Native__schema230) | (Native__schema231);
+export type Native__schema230 = {
     "mode": "shared";
     "type": NativeMenuItemType;
 };
 export type NativeMenuItemType = "links" | "icons" | "linksWithIcons";
-export type Native__schema281 = {
+export type Native__schema231 = {
     "mode": "perItem";
 };
-export type Native__schema282 = boolean;
-export type Native__schema283 = {
-    "desktop": Native__schema284;
-    "mobile": Native__schema284;
+export type Native__schema232 = boolean;
+export type Native__schema233 = {
+    "desktop": Native__schema234;
+    "mobile": Native__schema234;
 };
-export type Native__schema284 = {
-    "top": Native__schema285;
-    "right": Native__schema285;
-    "bottom": Native__schema285;
-    "left": Native__schema285;
+export type Native__schema234 = {
+    "top": Native__schema235;
+    "right": Native__schema235;
+    "bottom": Native__schema235;
+    "left": Native__schema235;
 };
-export type Native__schema285 = number;
+export type Native__schema235 = number;
 export type NativeMenuSeparator = {
-    "width": Native__schema286;
-    "style": Native__schema287;
+    "width": Native__schema236;
+    "style": Native__schema237;
     "color": NativeColorValueDisallowTransparent;
 };
-export type Native__schema286 = number;
-export type Native__schema287 = "none" | "line" | "dashed" | "dotted";
-export type Native__schema288 = (Native__schema289) | (Native__schema290);
-export type Native__schema289 = {
+export type Native__schema236 = number;
+export type Native__schema237 = "none" | "line" | "dashed" | "dotted";
+export type Native__schema238 = (Native__schema239) | (Native__schema240);
+export type Native__schema239 = {
     "mode": "shared";
     "link": NativeColorValueDisallowTransparent;
 };
-export type Native__schema290 = {
+export type Native__schema240 = {
     "mode": "perItem";
 };
-export type Native__schema291 = Array<NativeMenuItem>;
+export type Native__schema241 = Array<NativeMenuItem>;
 export type NativeMenuItem = {
-    "type"?: Native__schema292;
-    "name": Native__schema293;
+    "type"?: Native__schema242;
+    "name": Native__schema243;
     "link": NativeMenuLink;
-    "image"?: Native__schema296;
+    "image"?: Native__schema246;
     "hideElement": NativeHideElement;
-    "colors"?: Native__schema303;
+    "colors"?: Native__schema253;
 };
-export type Native__schema292 = "links" | "icons" | "linksWithIcons";
-export type Native__schema293 = string;
+export type Native__schema242 = "links" | "icons" | "linksWithIcons";
+export type Native__schema243 = string;
 export type NativeMenuLink = {
-    "type": Native__schema294;
-    "value": Native__schema295;
+    "type": Native__schema244;
+    "value": Native__schema245;
 };
-export type Native__schema294 = "site" | "email" | "phone" | "anchor";
-export type Native__schema295 = string;
-export type Native__schema296 = {
-    "src": Native__schema297;
+export type Native__schema244 = "site" | "email" | "phone" | "anchor";
+export type Native__schema245 = string;
+export type Native__schema246 = {
+    "src": Native__schema247;
     "size": NativeMenuImageSize;
-    "alignment": Native__schema300;
-    "indent": Native__schema301;
-    "altText": Native__schema302;
+    "alignment": Native__schema250;
+    "indent": Native__schema251;
+    "altText": Native__schema252;
 };
 export type NativeMenuItemImage = {
-    "src": Native__schema297;
+    "src": Native__schema247;
     "size": NativeMenuImageSize;
-    "alignment": Native__schema300;
-    "indent": Native__schema301;
-    "altText": Native__schema302;
+    "alignment": Native__schema250;
+    "indent": Native__schema251;
+    "altText": Native__schema252;
 };
-export type Native__schema297 = string;
+export type Native__schema247 = string;
 export type NativeMenuImageSize = {
-    "mode": Native__schema298;
-    "px": Native__schema299;
+    "mode": Native__schema248;
+    "px": Native__schema249;
 };
-export type Native__schema298 = "width" | "height";
-export type Native__schema299 = number;
-export type Native__schema300 = "left" | "center" | "right";
-export type Native__schema301 = number;
-export type Native__schema302 = string;
-export type Native__schema303 = {
+export type Native__schema248 = "width" | "height";
+export type Native__schema249 = number;
+export type Native__schema250 = "left" | "center" | "right";
+export type Native__schema251 = number;
+export type Native__schema252 = string;
+export type Native__schema253 = {
     "link": NativeColorValueDisallowTransparent;
     "background": NativeColorValueAllowTransparent;
 };
 export type NativeUnknownBlock = {
-    "id": Native__schema145;
-    "type": Native__schema304;
-    "settings"?: Native__schema305;
-    "content": Native__schema308;
-    "extension": Native__schema309;
+    "id": Native__schema86;
+    "type": Native__schema254;
+    "settings"?: Native__schema255;
+    "content": Native__schema258;
+    "extension": Native__schema259;
 };
-export type Native__schema304 = "unknown";
-export type Native__schema305 = {
-    [key: string]: Native__schema307;
+export type Native__schema254 = "unknown";
+export type Native__schema255 = {
+    [key: string]: Native__schema257;
 };
-export type Native__schema306 = string;
-export type Native__schema307 = unknown;
-export type Native__schema308 = string;
-export type Native__schema309 = boolean;
+export type Native__schema256 = string;
+export type Native__schema257 = unknown;
+export type Native__schema258 = string;
+export type Native__schema259 = boolean;
 export type DocumentState = {
     "metadata"?: Native__schema0;
     "resources"?: Native__schema5;
-    "settings": Native__schema11;
-    "stripes"?: Native__schema109;
+    "settings": NativeEmailTemplateSettings;
+    "stripes"?: Native__schema31;
 };
 export type DocumentBlock = NativeBlock;
 export type BlockKind = DocumentBlock['type'];

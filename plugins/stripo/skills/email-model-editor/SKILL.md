@@ -175,7 +175,8 @@ element of a type, and some of those keys have no block-level counterpart. Check
 definition before setting a key on a block. When the key is absent there, change the global
 setting instead and expect the change to apply to every element of that type in the email. A key
 the block schema does not list fails validation as `unsupported property`. For example, button
-`letterSpacing`, `textTransform`, and `hoverButtonStyles` exist only in `settings.buttons`.
+`letterSpacing` and `textTransform` exist only in `settings.buttons`; the hover effect is the boolean
+`settings.buttons.hoverButtonStyles`, with its colors in `settings.buttons.lightTheme.hoverButtonStyles`.
 
 For example, a module can define and insert a text block:
 
@@ -238,17 +239,11 @@ intended block just to obtain a valid model; report an unresolved defect if repa
 ## Model completeness
 
 `set_document_state` replaces the whole document.
-The editor diffs the uploaded JSON against the full live state, so every optional key that is
-absent from the candidate becomes a delete, not "unchanged". Depending on the key, the editor then:
-
-- resets it to its built-in default or clears it: most global, structure, container, stripe, and
-  block settings, including background images, hover button styles, custom list styles, borders,
-  and paddings;
-- keeps the current value: only `fontWeight` (stripes and headings) and `metadata`;
-- rejects the whole write without changing anything: the global `stripes.fontFamily`,
-  `headings.fontFamily`, `buttons.fontFamily`, and `general.hideImageDownloadIcons`; a stripe's
-  `messageArea`, `includeInOutput`, `padding`, `stripeBackgroundColor`, and
-  `contentBackgroundColor`; and a column's `settings.width`.
+The editor diffs the uploaded JSON against the full live state. Settings are canonical and complete:
+every key of `general`, `stripes`, `headings`, and `buttons`, including their `lightTheme` and
+`darkTheme` branches, is required, so a missing settings key fails validation before upload. A
+stripe's `messageArea`, `includeInOutput`, `padding`, `stripeBackgroundColor`, and
+`contentBackgroundColor`, and a column's `settings.width`, must also stay present.
 
 An omitted `stripes`, `structures`, `columns`, or `blocks` array deletes every element it held.
 Timer blocks from the acquired model cannot be deleted, including through a parent
@@ -261,31 +256,28 @@ Social `networks` is replaced as a complete list: replacing or reordering networ
 including multiple custom networks. Every resulting network still has to pass schema validation
 and the editor's icon, alt, and link rules.
 
-For an intentional reset, use `email.setTheme(path, undefined)` on one of the supported optional
-settings below. For example, `email.setTheme("settings.general.backgroundImage", undefined)`
-clears the email's background image; `email.setTheme("settings.general.customListStyles", undefined)`
-disables custom list formatting. Deleting hover settings switches the effect off; other settings
-reset to the editor's defaults or inheritance rules.
+Colors live in the theme branches. Change a light color at its `lightTheme` path, for example
+`email.setTheme("settings.stripes.lightTheme.content.linkColor", "#2457d6")`, and set a dark-mode
+override at the matching `darkTheme` path, where `null` means no override. Switch the button hover
+effect with the boolean `settings.buttons.hoverButtonStyles`.
 
-| Path prefix | Settings that support an explicit reset |
+For an intentional reset, write `undefined` or `null` to a nullable setting below. For example,
+`email.setTheme("settings.general.backgroundImage", undefined)` clears the email's background image,
+and `email.resetSettings(["general.customListStyles"])` disables custom list formatting.
+
+| Path | Settings that accept a reset (`null`) |
 | --- | --- |
 | `settings.general` | `backgroundImage`, `customListStyles` |
-| `settings.stripes` | `letterSpacing`, `lineHeight` |
-| `settings.stripes.<area>` (`header`, `content`, `footer`, `infoArea`) | `fontSize`, `fontColor`, `linkColor`, `linkColorHover`, `paragraphBottomSpace` |
-| `settings.stripes.<area>` (`header`, `content`, `footer`) | `contentBackgroundColor` |
-| `settings.stripes.<area>` (`header`, `footer`) | `stripeBackgroundColor`, `backgroundImage` |
-| `settings.headings` | `letterSpacing` |
-| `settings.headings.h1` through `settings.headings.h6` | `fontColor`, `textAlign`, `textStyle`, `fontSize`, `lineHeight`, `paragraphBottomSpace` |
-| `settings.buttons` | `outlookSupport`, `fontColor`, `textStyle`, `textTransform`, `buttonColor`, `letterSpacing`, `fontSize`, `borderRadius`, `fitContainer`, `hoverButtonStyles`, `padding` |
+| `settings.stripes.<area>` (`header`, `content`, `footer`, `infoArea`) | `paragraphBottomSpace` |
+| `settings.stripes.<area>` (`header`, `footer`) | `backgroundImage` |
+| `settings.headings.h1` through `settings.headings.h6` | `fontWeight`, `paragraphBottomSpace` |
+| `settings.<section>.darkTheme` | every color |
 
-Reset the whole named setting, preserving unrelated settings. A nested patch with an explicit
-`undefined` also works: `email.setTheme("settings.general", {backgroundImage: undefined})`.
-An entire optional area or heading group can be reset only if every field it currently holds
-supports a reset. A heading containing `fontWeight` therefore requires individual field resets.
-Do not strip fields from JSON manually. The runner still reports unintended loss for
-accidentally absent fields, unknown settings, and unsupported resets, including global `fontFamily`,
-`hideImageDownloadIcons`, and `fontWeight`. Native schema validation also rejects deletion of
-required settings and required children such as `backgroundImage.path`.
+A nested patch works the same way: `email.setTheme("settings.general", {backgroundImage: undefined})`.
+Every other setting, including light-theme colors, global `fontFamily`, `general.hideImageDownloadIcons`, and
+whole groups such as `settings.stripes.content`, has no reset; set a new value instead. Do not strip
+fields from JSON manually. The runner still reports unintended loss for accidentally absent fields,
+unknown settings, and unsupported resets.
 
 ## 4. Persist by file reference
 

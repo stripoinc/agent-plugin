@@ -158,7 +158,9 @@ For an authorized logo, native image dimensions use `size`, not `width`, and an 
 ```
 
 Set section areas through stripe `settings.messageArea`. Global settings supply section colors
-and button defaults; explicit node settings take precedence. Images default to their column's
+and button defaults; explicit node settings take precedence. Global colors live in each section's
+`lightTheme` branch, for example `settings.stripes.lightTheme.content.linkColor` or
+`settings.buttons.lightTheme.buttonColor`; `darkTheme` mirrors it, and `null` there means no dark override. Images default to their column's
 width with matching desktop/mobile sizes. Set both sizes explicitly when different sizes are
 intended. Supplied IDs and fields are preserved except that bare email button targets receive
 the `mailto:` prefix required for persistence. Duplicate IDs fail validation.
@@ -170,7 +172,8 @@ keys have no block-level counterpart. Check the block definition before
 adding a key to a block. When the block schema lacks the key, the global setting is the only way
 to change it, and it then applies to every element of that type in the email. A key the block
 schema does not list fails validation as `unsupported property`. For example, button
-`letterSpacing`, `textTransform`, and `hoverButtonStyles` exist only in `settings.buttons`.
+`letterSpacing` and `textTransform` exist only in `settings.buttons`; the hover effect is the boolean
+`settings.buttons.hoverButtonStyles`, with its colors in `settings.buttons.lightTheme.hoverButtonStyles`.
 
 The unified SDK covers text, image, button, spacer, social, menu, video, timer, HTML and
 unknown blocks with native types and canonical defaults. Use `createBlock`, `createStructure`
@@ -184,16 +187,15 @@ guards. The successful result is the normalized validated JSON; failed preparati
 stale output. An optional encoded-model preflight is stronger local evidence, while a server
 set followed by get is required to confirm persistence.
 
-The builder's defaults are fixed values, not the live document's values, and they do not cover
-every optional global key: the general background image, custom list styles, per-area paragraph
-bottom space and hover link color, header and footer background images, and per-heading
-paragraph bottom space. Persistence replaces the whole document by diffing it against the live
-state: a global key missing from the built model is reset to its default, and a missing
-`stripes.fontFamily`, `headings.fontFamily`, `buttons.fontFamily`, or
-`general.hideImageDownloadIcons` rejects the entire write. For an explicit full rebuild, copy the
+The builder's defaults are fixed values, not the live document's values. Persistence
+replaces the whole document by diffing it against the live state. Settings are canonical and complete:
+every key of `general`, `stripes`, `headings`, and `buttons`, including both theme branches, is
+required, so a missing settings key such as `general.hideImageDownloadIcons` fails validation
+instead of being reset. Unset optional values are `null`: background images, custom list styles,
+paragraph bottom space, heading font weight, and every dark-theme color. For an explicit full rebuild, copy the
 target's complete `settings` (and `metadata` when present) from its acquired model into
 `model.settings` and `model.metadata`, then change only the requested values. Never persist a
-partial document; `email-model-editor` describes the per-key outcomes under Model completeness.
+partial document; `email-model-editor` describes resets under Model completeness.
 Put requested document title and preheader values in `model.metadata`, for example:
 
 ```json
@@ -254,7 +256,7 @@ the draft and report the defect; do not redefine the intended result merely to p
 For an explicit full rebuild, skip creation. Use the named target's existing `(id, type)` and
 preserve its unrelated native settings and resources; templates can be rebuilt but not created.
 Copy the target's complete `settings` from its acquired model into the brief's `model.settings`
-before building; the write resets any global key the rebuilt model omits.
+before building; the schema rejects a rebuilt model that omits a settings key.
 
 For a new email, call `create_email` with the brief's `name`, the resolved `projectId`, and a
 `folderId` only when requested, as described in `PROVIDER.md`; pass `sourceEmailId` or
