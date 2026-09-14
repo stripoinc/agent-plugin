@@ -104,19 +104,19 @@ wrote nothing; it carries the editor's `code`, its `message`, and for these code
 read the fresh diagnostics. Without `details`, use `message`. Report the `code`, the paths, and
 the messages verbatim when the one repair retry does not resolve the rejection.
 
-The upload is the complete document. `set_document_state` diffs it against the live state and
-treats every absent optional key as a deletion: most keys reset to their defaults, `fontWeight`
-and `metadata` keep their values, and a missing global `fontFamily` (stripes, headings, buttons),
-`general.hideImageDownloadIcons`, stripe `messageArea`/`includeInOutput`/`padding`/background
-colors, or column `settings.width` rejects the whole write with `ACTION_NOT_APPLIED`. An absent
+The upload is the complete document. `set_document_state` diffs it against the live state. Settings
+are canonical and complete: every key of `general`, `stripes`, `headings`, and `buttons`, including
+their `lightTheme` and `darkTheme` branches, is required, and local validation rejects a model that
+omits one. A missing stripe `messageArea`/`includeInOutput`/`padding`/background color or column
+`settings.width` rejects the whole write with `ACTION_NOT_APPLIED`. An absent
 `stripes`, `structures`, `columns`, or `blocks` array deletes its elements, and Timer and Social
 blocks cannot be deleted through this write. Never upload a partial model: edit the freshly
-acquired one and preserve unrelated keys. The shared editing skill supports intentional
-`email.setTheme(path, undefined)` resets for optional theme settings with native reset handlers,
-including `settings.general.backgroundImage`, `settings.general.customListStyles`, hover effects,
-and optional colors, sizes, and spacing. Its Model completeness section lists the supported paths.
-The runner still rejects accidentally absent fields and unsupported resets; native schema
-validation also rejects deletion of required settings and required children.
+acquired one and preserve unrelated keys. Colors live in `settings.<section>.lightTheme`, with
+nullable dark-mode overrides in `darkTheme`. The shared editing skill resets a nullable setting by
+writing `null` (`email.setTheme(path, undefined)` or `email.resetSettings(paths)`), including
+`settings.general.backgroundImage`, `settings.general.customListStyles`, paragraph spacing, heading
+font weight, and dark-theme colors. Its Model completeness section lists the supported paths.
+The runner still rejects accidentally absent fields and unsupported resets.
 
 Re-read with `get_document_state(id, type)`; IDs can change across reads.
 Request `get_screenshot(id, type, mode="BOTH")`, download `screenshots[].downloadUrl` and visually

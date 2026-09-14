@@ -306,11 +306,11 @@ function summarizeEditorJson(value) {
     metadata: structuredClone(objectValue(emailJson.metadata)),
     theme: {
       contentWidth: objectValue(settings.general).messageContentWidth,
-      generalBackgroundColor: objectValue(settings.general).backgroundColor,
+      generalBackgroundColor: objectValue(objectValue(settings.general).lightTheme).backgroundColor,
       fontFamily: stripesSettings.fontFamily,
-      contentLinkColor: objectValue(stripesSettings.content).linkColor,
-      buttonColor: objectValue(settings.buttons).buttonColor,
-      buttonFontColor: objectValue(settings.buttons).fontColor
+      contentLinkColor: objectValue(objectValue(stripesSettings.lightTheme).content).linkColor,
+      buttonColor: objectValue(objectValue(settings.buttons).lightTheme).buttonColor,
+      buttonFontColor: objectValue(objectValue(settings.buttons).lightTheme).fontColor
     },
     counts: {
       stripes: 0,
