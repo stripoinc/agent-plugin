@@ -42,7 +42,8 @@ installed `skills/` and `packages/` directories.
   Every edit receives the full SDK handle for content, style, insertion, removal, and duplication.
   The runner rejects scripts with no SDK mutations, selector misses, and schema-invalid output.
   A model without blocks permits metadata edits only; other edits must leave at least one block.
-- Keep the acquired model untouched as the baseline for the before/after comparison.
+- Keep the acquired model untouched as the baseline for the before/after comparison and as the
+  base file the write uploads next to the candidate.
 - A successful local mutation is not completion. Verify the saved model and inspect fresh
   desktop and mobile PNG previews of the persisted email.
 
@@ -55,7 +56,7 @@ get_document_state(id=<id>, type=<EMAIL|TEMPLATE>)
 ```
 
 Require `status=OK` and download its temporary `downloadUrl` to a local JSON file through the
-host's authorized transfer path.
+host's authorized transfer path; that file, unmodified, is the base of the write.
 
 Inspect the model:
 
@@ -238,8 +239,9 @@ intended block just to obtain a valid model; report an unresolved defect if repa
 
 ## Model completeness
 
-`set_document_state` replaces the whole document.
-The editor diffs the uploaded JSON against the full live state. Settings are canonical and complete:
+`set_document_state` takes the whole document; with the acquired model uploaded as the base
+the editor applies the difference between it and the candidate to the live state.
+The editor diffs the uploaded JSON against the full acquired state. Settings are canonical and complete:
 every key of `general`, `stripes`, `headings`, and `buttons`, including their `lightTheme` and
 `darkTheme` branches, is required, so a missing settings key fails validation before upload. A
 stripe's `messageArea`, `includeInOutput`, `padding`, `stripeBackgroundColor`, and
@@ -285,18 +287,33 @@ Preserve native font settings and resources; there is no font normalization step
 prepare-upload/write flow in `PROVIDER.md`:
 
 ```text
-prepare_document_state_upload(id=<id>, type=<type>)
-set_document_state(id=<id>, type=<type>, uploadId=<upload id>)
+prepare_document_state_upload(id=<id>, type=<type>)   # ticket for <updated-model.json>
+prepare_document_state_upload(id=<id>, type=<type>)   # ticket for <downloaded-model.json>
+set_document_state(id=<id>, type=<type>, uploadId=<first ticket>, baseUploadId=<second ticket>)
 ```
 
-Between the two calls, upload `<updated-model.json>` to the returned `uploadUrl` through the
-consuming agent's authorized transfer mechanism. Never pass the model inline. An upload ID is
+Between the calls, upload `<updated-model.json>` to the first `uploadUrl` and the untouched
+`<downloaded-model.json>` to the second, both through the consuming agent's authorized transfer
+mechanism. Never pass a model inline and never swap the two ids. With the base the editor writes
+only this edit on top of the live state and concurrent edits by others survive. Tickets are
 single-use and there is no hash or idempotency argument: keep the read-to-write gap short, and
-after an uncertain write read the state before retrying with a fresh ticket. Follow the `status`
+after an uncertain write read the state before retrying with fresh tickets. Follow the `status`
 contract in `PROVIDER.md`: a `MERGE_BROKEN` answer names the rejected fields in
 `details.errors[].path` (a dot path into `<updated-model.json>`); fix them in the change module,
-rerun the runner, and persist with a fresh ticket. Allow at most one repair retry before reporting
-the failure with the returned `code`, paths, and messages.
+rerun the runner, and persist with two fresh tickets. `UPLOAD_NOT_FOUND` names the empty ticket in
+`missingUploadId`: a missing base has spent nothing, finish that upload and call again; a missing
+candidate has spent the base, so upload both files to fresh tickets. `REVISION_CONFLICT` or a
+`VALIDATION_ERROR` whose message says the delta is incompatible with the current document mean
+the letter moved, not that the edit is wrong: for `REVISION_CONFLICT` repeat the same write with
+fresh tickets; otherwise acquire again, rerun the same change module on the fresh model, and
+persist with the fresh model as the base. A deleted target can instead return `WRITE_UNCONFIRMED`:
+the result is unknown, so read back first. If the changes are already present, do not write again;
+if the intended node is missing, report the conflict without recreating it or retargeting the edit.
+Otherwise rerun the change module on the fresh model and use it as the base with fresh tickets.
+If readback fails, stop and report the failure. Use this same read-first procedure after a
+protocol or transport error. Use two fresh tickets for repairs after `INVALID_STATE`, `PARSE_ERROR`
+and `SIDE_EFFECT_UNAVAILABLE` as well. Never drop `baseUploadId` to force a write. Allow at
+most one repair retry before reporting the failure with the returned `code`, paths, and messages.
 
 ## 5. Verify durable state
 
@@ -315,6 +332,9 @@ After a structural edit, compare the census with the intended additions, removal
 After a metadata edit, compare the fresh model's `metadata.title`, `metadata.preheader.text`, and
 `metadata.preheader.fillSpace` with the requested values and the preserved fields. Hidden metadata
 is verified from JSON; an unchanged screenshot is expected for a metadata-only edit.
+Because the write was applied as a delta, the fresh model may also carry edits other people made
+since the acquisition; those are not defects. Report a difference outside the requested change as
+a loss only when the acquisition had it, the current state lacks it, and nothing else explains it.
 
 Open and visually inspect both PNG files with the host's image-viewing tool. Check the requested
 visible changes, text readability, image loading, spacing, alignment, clipping, and responsive

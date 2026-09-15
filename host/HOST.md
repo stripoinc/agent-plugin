@@ -33,22 +33,30 @@ curl -fsSL --retry 2 -o <file> '<downloadUrl>'
 Download URLs are temporary. If a download fails after the URL expired, request a new one through
 the same MCP tool.
 
-## Upload: candidate model
+## Upload: candidate and base models
 
-1. `prepare_document_state_upload(id, type)` returns `uploadUrl`, `uploadId` and `maxBytes`.
-   Check the candidate size against `maxBytes` first (`wc -c <candidate.json>`).
-2. Upload with the method the tool returned. The current presigned URL is a plain `PUT` with no
-   extra headers:
+1. `prepare_document_state_upload(id, type)` returns `uploadUrl`, `uploadId` and `maxBytes` for
+   one file. An edit or a rebuild of an existing letter needs two tickets: one for the candidate
+   and one for the base, the untouched file `get_document_state` was downloaded to. A freshly
+   created email built from a brief has no base and needs one ticket. Check the sizes against
+   `maxBytes` first (`wc -c <candidate.json> <downloaded-model.json>`); with a base, both files
+   together must fit.
+2. Upload each file to its own `uploadUrl` with the method the tool returned. The current
+   presigned URL is a plain `PUT` with no extra headers:
 
    ```bash
-   curl -fsS -X PUT --upload-file <candidate.json> '<uploadUrl>'
+   curl -fsS -X PUT --upload-file <candidate.json> '<candidate uploadUrl>'
+   curl -fsS -X PUT --upload-file <downloaded-model.json> '<base uploadUrl>'
    ```
 
-3. `set_document_state(id, type, uploadId)`.
+3. `set_document_state(id, type, uploadId=<candidate ticket>, baseUploadId=<base ticket>)`, or
+   `set_document_state(id, type, uploadId)` without a base. Never swap the two ids.
 
-`uploadId` is single-use and short-lived. If the `PUT` fails, or it is unclear whether
-`set_document_state` consumed the ticket, do not retry the same ticket: read the state back and,
-only if the change is missing, start again from step 1.
+Tickets are single-use and short-lived. If a `PUT` fails, or it is unclear whether
+`set_document_state` consumed the tickets, do not retry the same ticket: read the state back and,
+only if the change is missing, start again from step 1 with fresh tickets for both files.
+`PROVIDER.md` describes the answers (`UPLOAD_NOT_FOUND` with `missingUploadId`,
+`REVISION_CONFLICT`, `WRITE_UNCONFIRMED`, `MERGE_BROKEN`).
 
 ## Authentication
 

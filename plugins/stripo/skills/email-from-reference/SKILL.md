@@ -274,14 +274,27 @@ Persist `<new-model.json>` through the prepare-upload/write flow in `PROVIDER.md
 
 1. Call `prepare_document_state_upload(id=<id>, type=<type>)`; require `status=OK`.
 2. Upload `<new-model.json>` to the returned `uploadUrl` through the consuming agent's authorized transfer mechanism.
-3. Call `set_document_state(id=<id>, type=<type>, uploadId=<upload id>)`. Never pass the complete model as a tool argument.
+3. Call `set_document_state(id=<id>, type=<type>, uploadId=<upload id>, baseUploadId=<base ticket, rebuild only>)`. Never pass the complete model as a tool argument.
 
+For a rebuild, also call `prepare_document_state_upload` a second time, upload the target's
+untouched acquired model to that ticket and pass it as `baseUploadId`, so the rebuild is applied
+as a delta on top of the current state and concurrent edits survive; `UPLOAD_NOT_FOUND` names the
+empty ticket in `missingUploadId`, a `VALIDATION_ERROR` about an incompatible delta means acquire
+the target again, rebuild from the fresh model, and persist with it as the base, and
+`REVISION_CONFLICT` means repeat the same write with fresh tickets. For a freshly created email
+built from a brief there is no acquisition: use one ticket and no `baseUploadId`, and the upload
+replaces the empty document.
+`WRITE_UNCONFIRMED` means the result is unknown, including when a deleted-target rejection was
+returned as an internal error. Read back first: do not repeat a rebuild already applied, and
+report a missing intended target without recreating or retargeting it. Otherwise rebuild from
+the fresh model and upload it unmodified as the base with fresh tickets. If readback fails, stop
+and report the failure. Follow the same read-first procedure after a protocol or transport error.
 An upload ID is single-use and there is no hash or idempotency argument. After an uncertain
-write, read the state before retrying with a fresh ticket; allow at most one repair retry under
+write, read the state before retrying with fresh tickets; allow at most one repair retry under
 the same ID. A `MERGE_BROKEN` answer carries the editor's `code` and `details` as `PROVIDER.md`
 describes: `details.errors[].path` is a dot path into `<new-model.json>`, so correct the brief,
-rebuild, and persist with a fresh ticket rather than patching the JSON by hand; report the
-returned `code`, paths, and messages when the repair retry fails.
+rebuild, and persist with fresh tickets for both files when rebuilding; do not patch the JSON
+by hand. Report the returned `code`, paths, and messages when the repair retry fails.
 There is no metadata write or asset-upload tool: preserve existing name, project,
 and folder metadata, report requested metadata changes as unsupported, and reference only hosted
 assets.
