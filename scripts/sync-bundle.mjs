@@ -142,7 +142,7 @@ async function main() {
   for (const skill of manifest.skills) {
     const skillDir = path.join(bundle, "skills", skill);
     if (!existsSync(path.join(skillDir, "SKILL.md"))) fail(`Bundle skill ${skill} lacks SKILL.md.`);
-    // The brandkit satellites are prompt-only and ship no scripts/ directory.
+    // A skill may be prompt-only and ship no scripts/ directory.
     const scripts = path.join(skillDir, "scripts");
     if (existsSync(scripts) && !statSync(scripts).isDirectory()) fail(`Bundle skill ${skill} has a scripts/ that is not a directory.`);
   }

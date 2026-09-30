@@ -27,7 +27,7 @@ export interface CreateEmailBuilderOptions extends CreateMinimalEmailSeedOptions
 export interface CreateEmailFromDraftOptions {
     /** Native editor JSON; IDs and default settings may be omitted. */
     emailJson: unknown;
-    /** Acquired target model for a rebuild; unchanged imported metadata text may exceed 500 UTF-16 code units. */
+    /** Acquired target for validation and change intent, not visual defaults; unchanged imported metadata text may exceed 500 UTF-16 code units. */
     baselineEmailJson?: unknown;
     /** Assign new structural IDs when copying or fully replacing a document. */
     regenerateIds?: boolean;

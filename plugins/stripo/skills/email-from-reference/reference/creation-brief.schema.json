@@ -15,6 +15,7 @@
       "additionalProperties": false,
       "required": ["name"],
       "properties": {
+        "referenceMode": {"type": "string", "enum": ["exact", "tailored", "creative", "copy-action"], "default": "creative", "description": "Local generation policy; do not send to create_email. copy-action is a legacy alias for tailored."},
         "name": {"type": "string", "minLength": 1, "maxLength": 200, "pattern": "\\S"},
         "projectId": {"type": "integer", "minimum": 1},
         "folderId": {"type": "integer", "minimum": 1}

@@ -22,8 +22,8 @@ tools.
 
 Never write the Business Profile from these skills. `patch_business_profile`,
 `replace_business_profile` and `prepare_business_profile_upload` belong to
-`$brandkit-updater` and `$brandkit-extraction-v-0`, which carry their own approval step. When the
-project has no profile, offer `$brandkit-extraction-v-0` once and continue from the reference.
+`$business-profile`, which carries its own provider-specific write boundaries. When the
+project has no profile, offer `$business-profile` website extraction once and continue from the reference.
 
 Acquire the reference/target with `get_document_state(id, type)`; it returns a temporary
 `downloadUrl`, download to a local JSON file and keep that file unmodified: it is the base the
@@ -69,7 +69,7 @@ only unchanged text from that baseline may exceed the limit. Omit `--baseline` f
 ## Upload and verification contract
 
 Preserve native font settings/resources. Do not run `normalize-merge-service-fonts.mjs` or apply
-Reteno's font substitutions or preheader restriction. Change native fields only when requested
+Reteno's font substitutions or sending-metadata rules. Change native fields only when requested
 and supported by the live schema; do not invent an external metadata write capability.
 No asset-upload tool exists: reuse hosted reference assets or authorized hosted image URLs.
 

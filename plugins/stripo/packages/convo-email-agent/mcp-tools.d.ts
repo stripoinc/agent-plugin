@@ -10,7 +10,7 @@ export { STRIPO_MCP_TOOL_MAPPING } from "./stripo/mcp-tools.js";
  * and translate non-identity fields at the adapter boundary; skills must not
  * guess brand-specific names at runtime.
  */
-export declare const CANONICAL_MCP_OPERATIONS: readonly ["getBrandkit", "prepareBrandkitUpload", "updateBrandkitFromExtraction", "updateBrandkit", "listEmailInterfaces", "getEmailModel", "getEmailModelSchema", "getEmailMessagePreview", "createEmailShell", "prepareEmailModelUpload", "updateEmailModel", "updateEmailMetadata", "prepareImageUpload", "uploadImage"];
+export declare const CANONICAL_MCP_OPERATIONS: readonly ["getBrandkit", "prepareBrandkitUpload", "updateBrandkitFromExtraction", "updateBrandkit", "listEmailInterfaces", "getEmailModel", "getEmailModelSchema", "getEmailMessageExport", "listCustomBlocks", "getEmailMessagePreview", "getEmailMessageViewLink", "createEmailShell", "prepareEmailModelUpload", "updateEmailModel", "updateEmailMetadata", "prepareImageUpload", "uploadImage"];
 export type CanonicalMcpOperation = (typeof CANONICAL_MCP_OPERATIONS)[number];
 export type McpBrand = "reteno" | "yespo" | "stripo";
 export declare const EMAIL_INTERFACE_MCP_BRANDS: readonly ["reteno", "yespo"];

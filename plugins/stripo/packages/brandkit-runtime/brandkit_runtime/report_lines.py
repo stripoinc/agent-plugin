@@ -1,141 +1,15 @@
-"""Mint the report lines the agent's final reply owes, from the run's own files.
-
-Three families of line exist in `brandkit-extraction-v-0/SKILL.md`, each with a
-markdown table the agent is told to read top-down:
-
-* **Persist outcome** (8 rows) — what Phase 5's write + read-back did;
-* **Logo outcome** (7 rows) — whether the FINAL ``brand.logos`` carries a mark
-  an email can use;
-* **Contact outcome** (1 sentence, one line per stripped value).
-
-The tables below are those rows copied VERBATIM as data, so a reviewer can diff
-them against the markdown cell by cell. WP-A5 moves the markdown to
-``references/report-lines.md``; when it does, the fixtures in the test module
-should be re-pointed at that file and the copies here checked against it rather
-than against ``SKILL.md``.
-
-4/9 measured runs skipped a mandatory report line, so these lines are minted by
-the CLI and the contract only asks the agent to paste them.
-"""
-
+"""Brand Kit logo/contact reporting and read-only stored-profile comparison."""
 from __future__ import annotations
 
 import hashlib
 import json
 import math
-import re
-from dataclasses import dataclass
 from pathlib import Path
-from typing import Any, Callable
+from typing import Any
 from urllib.parse import urlsplit
 
-
 REPORT_LINE_PREFIX = "REPORT_LINE: "
-
-# The two Phase-5 documents move as FILES in the technical dir. The write
-# document is written by the 5a/5b/5c cells and read by `report`; the read-back
-# is written by `report` ITSELF, from its own `get_brandkit` call, so the agent
-# never authors it (the attended run that did wrote a `brand` trimmed to
-# organization + logos, and the witness was right by luck). Neither passes
-# through a shell argument: the write document embeds the server's raw error
-# text, and an apostrophe in it ("can't persist: upstream 502") ended the
-# single-quoted argument the contract used to prescribe — exit 2, no REPORT_LINE
-# at all — while a crafted error executed. Both reproduced. `prepare` clears
-# both names, so a run can never read the PREVIOUS run's Phase-5 documents.
-PERSIST_WRITE_FILENAME = "persist-write.json"
 PERSIST_READBACK_FILENAME = "persist-readback.json"
-
-# --------------------------------------------------------------------------
-# Persist outcome — SKILL.md §"Persist outcome — always reported, never implied"
-# --------------------------------------------------------------------------
-
-# (what happened, the line) — the markdown table's two columns, verbatim, with
-# the backticks that wrap the `the line` cell stripped. Order = table order.
-PERSIST_OUTCOME_TABLE: tuple[tuple[str, str], ...] = (
-    (
-        "written, `cleared` empty, and confirmed by the 5d read",
-        "persisted and verified",
-    ),
-    (
-        "written and confirmed, and `cleared` names one or more sections, or "
-        "parts of sections",
-        "persisted, cleared from the account: <names>",
-    ),
-    (
-        "written, but the 5d read could not confirm it",
-        "persisted but unverified (<reason>)",
-    ),
-    (
-        "the 5c call errored, but the 5d read shows the account holding this "
-        "run's identity sections — website, name, logo URLs, languages, "
-        "contacts, socials and important links; colours, typography and "
-        "button components are compared through a projection that survives "
-        "the server's own normalisation (hex case, rounding, added `size` and "
-        "font fields)",
-        "persisted despite a failed call (<the error, verbatim>)",
-    ),
-    (
-        "approval denied / timed out",
-        "not persisted (approval denied) / not persisted (approval timed out)",
-    ),
-    (
-        "unattended run",
-        "not persisted (unattended run — Reteno mutations are disabled)",
-    ),
-    (
-        "the write was rejected",
-        "not persisted (rejected: <field path>: <message>)",
-    ),
-    (
-        "the call failed for any other reason, and the 5d read does not show "
-        "it landed",
-        "not persisted (<the error, verbatim>)",
-    ),
-)
-
-# reteno-mcp's `_sections_cleared_from_account` names each cleared entry as the
-# dotted JSON path of the SAVED account document at the shallowest key the patch
-# does not write — `socials`, `contacts.emails`, `brand.colors.accentColors` —
-# and, for stored logo rows the patch does not restate, appends the row class it
-# emptied: `brand.logos[type=alternative]` (`type=?` when the row carries none).
-# What is pinned below is that SHAPE — a dotted path with zero or more trailing
-# `[...]` groups — and NOT the vocabulary: no rule here knows `logos`, `type`,
-# or any qualifier name, so a path or a qualifier nobody has emitted yet still
-# renders. Anything that is not that shape renders verbatim (`render_cleared_name`).
-#
-# An override names a SECTION, and is matched as the longest leading run of path
-# segments, so a qualifier or a deeper segment after it is still rendered:
-# `brand.products[id=3]` is "leftover product data (id=3)", not "leftover
-# product data". `brand.products` is the one cleared name that cannot be
-# rendered as a section the reader will find in their Brand Kit (SKILL.md: "Say
-# it removed leftover product data and do not send the reader looking for a
-# section that is not there.").
-CLEARED_NAME_OVERRIDES: dict[str, str] = {
-    "brand.products": "leftover product data",
-}
-
-# The saved document wraps its brand sections in one envelope key
-# (`{brand: {organization, logos, colors, typography, ...}, contacts, socials,
-# importantLinks, languages}`), and no reader finds a section called `brand`.
-# Dropped in front of a section; never when it stands alone.
-CLEARED_PATH_ENVELOPE = "brand"
-
-# ASCII on purpose: `_printable` re-encodes each report line with stdout's codec
-# and `replace`, so a non-ASCII separator would print as `?` inside a name.
-CLEARED_PATH_SEPARATOR = " / "
-
-# The whole entry must be a bracket-free path followed by balanced `[...]`
-# groups that run to the end — anchored at both ends, so an unbalanced or nested
-# bracket does not parse as a shorter name.
-CLEARED_ENTRY_SHAPE = re.compile(
-    r"^(?P<path>[^\[\]]*?)(?P<qualifiers>(?:\[[^\[\]]*\])*)$"
-)
-CLEARED_QUALIFIER = re.compile(r"\[([^\[\]]*)\]")
-
-# --------------------------------------------------------------------------
-# Logo outcome — SKILL.md §"Logo outcome — a missing brand logo is said out
-# loud, not footnoted". Read top-down; take the FIRST row that applies.
-# --------------------------------------------------------------------------
 
 LOGO_OUTCOME_TABLE: tuple[tuple[str, str | None], ...] = (
     (
@@ -367,10 +241,6 @@ def contact_report_lines(warnings: list[Any]) -> list[str]:
 
 
 # --------------------------------------------------------------------------
-# Persist line
-# --------------------------------------------------------------------------
-
-
 def _host(value: Any) -> str | None:
     """Host of ``value``, lowercased, ``www.``-stripped, scheme filled in.
 
@@ -391,54 +261,6 @@ def _host(value: Any) -> str | None:
         return None
     host = host.lower()
     return host[4:] if host.startswith("www.") else host
-
-
-def parse_cleared_entry(name: str) -> tuple[list[str], list[str]] | None:
-    """Split a cleared entry into its path segments and its qualifier texts.
-
-    ``None`` when the string is not a path followed by balanced trailing
-    ``[...]`` groups, or when the path carries no segment at all — the caller
-    renders those verbatim rather than guessing at a shorter name.
-    """
-
-    shape = CLEARED_ENTRY_SHAPE.match(name)
-    if shape is None:
-        return None
-    segments = [segment for segment in shape.group("path").split(".") if segment]
-    if not segments:
-        return None
-    return segments, CLEARED_QUALIFIER.findall(shape.group("qualifiers"))
-
-
-def render_cleared_name(raw: Any) -> str:
-    """Name a cleared entry the way the reader finds it in their Brand Kit.
-
-    The section, then the part of it that emptied: `socials / android` for a
-    field, `logos (type=alternative)` for a row class. Naming only the last
-    segment loses both — it told a reader whose `alternative` logo row was
-    cleared that their `logos` section had gone.
-    """
-
-    if not isinstance(raw, str) or not raw.strip():
-        return "an unnamed entry"
-    name = raw.strip()
-    parsed = parse_cleared_entry(name)
-    if parsed is None:
-        return name
-    segments, qualifiers = parsed
-    head: str | None = None
-    tail = segments
-    for length in range(len(segments), 0, -1):
-        override = CLEARED_NAME_OVERRIDES.get(".".join(segments[:length]))
-        if override is not None:
-            head, tail = override, segments[length:]
-            break
-    if head is None and len(segments) > 1 and segments[0] == CLEARED_PATH_ENVELOPE:
-        tail = segments[1:]
-    text = CLEARED_PATH_SEPARATOR.join(([head] if head else []) + tail)
-    if qualifiers:
-        text = f"{text} ({', '.join(qualifiers)})"
-    return text
 
 
 # The sections of a Brand Kit that witness a write, in the order
@@ -635,388 +457,41 @@ def persist_fingerprint(brandkit: Any) -> dict[str, Any]:
     }
 
 
-@dataclass(frozen=True)
-class PersistRow:
-    """One row of the persist table, bound to the shape that selects it."""
-
-    key: str
-    table_index: int
-    template: str
-    matches: Callable[["PersistInputs"], bool]
-
-
-@dataclass(frozen=True)
-class PersistInputs:
-    """The normalized 5c write result, 5d read-back, and promoted brandkit."""
-
-    write_ok: bool
-    write_error: str
-    write_code: str
-    cleared: list[Any]
-    readback_ok: bool
-    # `persist_fingerprint` of the account's document and of this run's
-    # `brandkit.json`; `None` when the document was absent or unreadable.
-    #
-    # These replaced a website+name comparison, which confirmed on the ONE
-    # sequence that matters: a re-run of the same site into the same account
-    # (32 of 47 technical dirs on the dev publisher are later runs of a slug
-    # already extracted there) whose 5c failed for a non-refusal reason. Host
-    # and name are page-derived and therefore stable across runs, so the old
-    # witness compared two values that could not disagree and printed
-    # "persisted despite a failed call" over the PREVIOUS run's kit.
-    readback_fingerprint: dict[str, Any] | None = None
-    brandkit_fingerprint: dict[str, Any] | None = None
-    # Phase 5d owes NO read on a denied/expired approval, an unattended run, a
-    # validation rejection, or a run that failed at 5a/5b before any write
-    # (`readback_owed`), so `report` performs none there. "No read was owed"
-    # and "the read failed" are different facts and must not render the same
-    # sentence.
-    readback_supplied: bool = True
-    # The stage the write document records: "5c" for the write call itself
-    # (the default, and what a 5c document means by omission); "5a" / "5b"
-    # for a session that could not be minted or an upload that failed BEFORE
-    # any write was attempted -- nothing reached the account, so the line is
-    # "not persisted" and no read is owed.
-    write_stage: str = "5c"
-    # False when no write document could be read at all: missing, unreadable,
-    # or not a JSON object. Nothing on disk then says whether the write
-    # happened -- but the account does, so such a run still owes a read and
-    # is decided by it, never by the absence of the file.
-    write_recorded: bool = True
-    # Why `brandkit_fingerprint` is None. Two causes, and they are different
-    # facts: the file was missing/unreadable, or it was readable but is not
-    # the one `finalize-report.json.brandkit_sha256` records.
-    brandkit_unreadable_reason: str = "this run's brandkit.json could not be read"
-
-    @property
-    def unattended(self) -> bool:
-        return self.write_code == "-32040" and "proactive_mutation_denied" in (
-            self.write_error or ""
-        )
-
-    @property
-    def confirmed(self) -> bool:
-        """Does the 5d read show the account holding THIS run's brandkit?"""
-
-        if not self.readback_ok:
-            return False
-        if self.readback_fingerprint is None or self.brandkit_fingerprint is None:
-            return False
-        return self.readback_fingerprint == self.brandkit_fingerprint
-
-    @property
-    def unconfirmed_reason(self) -> str:
-        reason = self._unconfirmed_reason()
-        if not self.write_recorded:
-            return f"{UNRECORDED_WRITE_ERROR} and {reason}"
-        return reason
-
-    def _unconfirmed_reason(self) -> str:
-        if not self.readback_supplied:
-            return "no read-back was reported"
-        if not self.readback_ok:
-            return "the read-back call failed"
-        if self.readback_fingerprint is None:
-            return "the read-back carries no Brand Kit"
-        if self.brandkit_fingerprint is None:
-            return self.brandkit_unreadable_reason
-        stored = self.readback_fingerprint
-        promoted = self.brandkit_fingerprint
-        for section in PERSIST_FINGERPRINT_SECTIONS:
-            if stored.get(section) == promoted.get(section):
-                continue
-            if section == "website":
-                if promoted.get("website") is None:
-                    return "this run's brandkit records no website to compare"
-                if stored.get("website") is None:
-                    return "the read-back records no website"
-                return (
-                    f"the account holds {stored['website']}, "
-                    f"not {promoted['website']}"
-                )
-            if section == "name":
-                return (
-                    f"the account holds the name {_text(stored.get('name'))!r}, "
-                    f"not {_text(promoted.get('name'))!r}"
-                )
-            return (
-                f"the account's {PERSIST_SECTION_NOUNS[section]} differ from "
-                "this run's"
-            )
-        # Unreachable while `confirmed` is the negation of this walk; say so
-        # rather than crash.
-        return "the read-back matches on every section this run compares"
-
-
 def _text(value: Any) -> str:
     return value if isinstance(value, str) else ""
 
 
-# What `write_error` carries when no write document was recorded at all.
-UNRECORDED_WRITE_ERROR = "no write result was recorded"
-
-# The refusal codes decided BEFORE anything reaches the account (SKILL.md 5d):
-# a denied approval and the unattended `proactive_mutation_denied` (both
-# -32040), an expired approval (-32041), a schema rejection. A read after any
-# of them would witness the PREVIOUS kit, never this run's.
-REFUSAL_WRITE_CODES: frozenset[str] = frozenset({"-32040", "-32041", "validation"})
-
-# The write-document stages a run fails at before the write call is made.
-PRE_WRITE_STAGES: frozenset[str] = frozenset({"5a", "5b"})
-
-
-def readback_owed(inputs: PersistInputs) -> bool:
-    """Whether the account must be read before the persist line can be decided.
-
-    The ONE place that decides it. No read is owed when the write document
-    says the run stopped before the write (`stage` 5a/5b: a session that
-    could not be minted or an upload that failed -- nothing reached the
-    account), or when the write was refused before anything reached the
-    account (a denied/expired approval, an unattended run, a validation
-    rejection). Every other case is decided by the read -- a call that
-    errored in transit can still have landed, a successful-looking result can
-    be an echo, and a MISSING write document says nothing about the account
-    at all (24 of 25 local runs hand-forged one; the line minted from its
-    absence was "persisted but unverified" for an account nothing wrote).
-    """
-
-    if not inputs.write_ok and inputs.write_stage in PRE_WRITE_STAGES:
-        return False
-    if not inputs.write_ok and inputs.write_code in REFUSAL_WRITE_CODES:
-        return False
-    return True
+def comparable_promoted_kit(out_dir: Path) -> tuple[dict[str, Any] | None, str | None]:
+    """Only this run's hash-bound promoted JSON may be compared with the account."""
+    report = _load_json(out_dir / "finalize-report.json")
+    if not isinstance(report, dict) or report.get("promoted") is not True:
+        return None, NOT_PROMOTED_REASON
+    expected = report.get("brandkit_sha256")
+    if not isinstance(expected, str) or not expected:
+        return None, "this run has no promoted-file hash"
+    try:
+        actual = hashlib.sha256((out_dir / "brandkit.json").read_bytes()).hexdigest()
+    except OSError:
+        return None, "this run's brandkit.json is unreadable"
+    if actual != expected:
+        return None, PAIR_MISMATCH_REASON
+    kit = _load_json(out_dir / "brandkit.json")
+    if not isinstance(kit, dict):
+        return None, "this run's brandkit.json is unreadable"
+    return kit, None
 
 
-# Evaluated in order; the first match wins. The three refusals (-32040/-32041/
-# validation) are decided before anything reaches the account, so they are
-# terminal regardless of what a read-back says (SKILL.md 5d).
-PERSIST_ROWS: tuple[PersistRow, ...] = (
-    PersistRow(
-        key="unattended",
-        table_index=5,
-        template="not persisted (unattended run — Reteno mutations are disabled)",
-        matches=lambda i: not i.write_ok and i.unattended,
-    ),
-    PersistRow(
-        key="approval_denied",
-        table_index=4,
-        template="not persisted (approval denied)",
-        matches=lambda i: not i.write_ok and i.write_code == "-32040",
-    ),
-    PersistRow(
-        key="approval_timed_out",
-        table_index=4,
-        template="not persisted (approval timed out)",
-        matches=lambda i: not i.write_ok and i.write_code == "-32041",
-    ),
-    PersistRow(
-        key="rejected",
-        table_index=6,
-        template="not persisted (rejected: {error})",
-        matches=lambda i: not i.write_ok and i.write_code == "validation",
-    ),
-    # A 5a/5b failure is recorded in the same document with its `stage`:
-    # nothing reached the account, so the line is the plain failure row and
-    # no read-back can turn it into "persisted despite a failed call".
-    PersistRow(
-        key="not_persisted_before_write",
-        table_index=7,
-        template="not persisted ({error})",
-        matches=lambda i: not i.write_ok and i.write_stage in PRE_WRITE_STAGES,
-    ),
-    PersistRow(
-        key="persisted_despite_failed_call",
-        table_index=3,
-        template="persisted despite a failed call ({error})",
-        matches=lambda i: not i.write_ok and i.confirmed,
-    ),
-    # No write document AND a read that could not witness: nothing on disk and
-    # nothing from the account says what happened, so the honest line is the
-    # unverified row, never "not persisted" (a write may well have landed).
-    PersistRow(
-        key="unrecorded_write_unverified",
-        table_index=2,
-        template="persisted but unverified ({reason})",
-        matches=lambda i: not i.write_ok and not i.write_recorded and not i.readback_ok,
-    ),
-    PersistRow(
-        key="not_persisted",
-        table_index=7,
-        template="not persisted ({error})",
-        matches=lambda i: not i.write_ok,
-    ),
-    PersistRow(
-        key="persisted_but_unverified",
-        table_index=2,
-        template="persisted but unverified ({reason})",
-        matches=lambda i: i.write_ok and not i.confirmed,
-    ),
-    PersistRow(
-        key="persisted_and_verified",
-        table_index=0,
-        template="persisted and verified",
-        matches=lambda i: i.write_ok and not i.cleared,
-    ),
-    PersistRow(
-        key="persisted_with_cleared",
-        table_index=1,
-        template="persisted, cleared from the account: {names}",
-        matches=lambda i: i.write_ok and bool(i.cleared),
-    ),
-)
-
-
-def select_persist_row(inputs: PersistInputs) -> PersistRow:
-    for row in PERSIST_ROWS:
-        if row.matches(inputs):
-            return row
-    # Unreachable: the last two rows partition write_ok & confirmed. Fail into
-    # the unverified row rather than crashing — this CLI never refuses a run
-    # over its own reporting. (Looked up by key: a positional index silently
-    # pointed at "not persisted" once the rows grew.)
-    return next(row for row in PERSIST_ROWS if row.key == "persisted_but_unverified")
-
-
-def render_persist_line(inputs: PersistInputs) -> str:
-    row = select_persist_row(inputs)
-    names = ", ".join(render_cleared_name(name) for name in inputs.cleared)
-    return row.template.format(
-        error=inputs.write_error or "no error message was returned",
-        reason=inputs.unconfirmed_reason,
-        names=names,
-    )
-
-
-def _coerce_code(raw: Any) -> str:
-    if isinstance(raw, str):
-        return raw
-    if isinstance(raw, int) and not isinstance(raw, bool):
-        return str(raw)
-    return ""
-
-
-# The 5c cell prints `code` from the JSON-RPC error, but that carriage is not
-# guaranteed: a transport that raises before a result exists, or a server that
-# spells the refusal only in prose, leaves `code` null. The refusals are the
-# rows the reader most needs, so the error TEXT is a second witness for each.
-# Order matters: `proactive_mutation_denied` is a -32040 that must select the
-# unattended row, not the bare denial.
-#
-# The rejection marker is the SERVER'S OWN PHRASE, not the bare word
-# "validation". reteno-mcp raises
-# ``ValueError("Brand Kit payload failed schema validation: ...")``, which
-# FastMCP surfaces as an `isError` text with no structured code — so on the
-# prescribed path that text is the only witness of a rejection and a marker
-# has to stay. As the bare word it also claimed "upstream validation service
-# unavailable" and "the validation service timed out; retry" as proven
-# rejections, which SKIPS the read-back the run still owes and reports a
-# transport failure as a refusal. Reproduced.
-WRITE_CODE_TEXT_MARKERS: tuple[tuple[str, str], ...] = (
-    ("proactive_mutation_denied", "-32040"),
-    ("-32041", "-32041"),
-    ("-32040", "-32040"),
-    ("failed schema validation", "validation"),
-)
-
-
-# `mcp.server.fastmcp` wraps every exception a tool raises as an `isError`
-# text result and prepends `Error executing tool <name>: ` to it, so the
-# rejection the 5c cell now preserves verbatim arrives carrying the tool's own
-# name -- `Error executing tool update_brandkit_from_extraction: Brand Kit
-# payload failed schema validation: brand.colors[0].hex: ...`. The reader
-# already knows which call failed; the row promises `rejected: <field path>:
-# <message>`. Stripped once, from the FRONT only, so an error text that merely
-# quotes the phrase keeps it. Not stripped inside `code_from_error_text`,
-# which must keep seeing the whole text it was handed.
-FASTMCP_TOOL_ERROR_PREFIX = re.compile(r"^Error executing tool \S+: ")
-
-
-def code_from_error_text(error: str) -> str:
-    """The refusal code named by an error TEXT, or ``""``.
-
-    Text-only fallback for a 5c result that carries no `code`. It never
-    overrides a code the call did return.
-    """
-
-    if not error:
-        return ""
-    haystack = error.lower()
-    for marker, code in WRITE_CODE_TEXT_MARKERS:
-        # A numeric code is distinctive enough to match as a substring; a
-        # textual marker is matched on word boundaries so "revalidation" is
-        # not a rejection. The boundaries hold at both ends of a multi-word
-        # phrase too (measured: a `" " not in marker` substring branch was a
-        # no-op on every fixture and on the server's own text, so it would
-        # have been a rule no mutation could kill).
-        if marker[0].isalpha():
-            found = re.search(rf"\b{re.escape(marker)}\b", haystack) is not None
-        else:
-            found = marker in haystack
-        if found:
-            return code
-    return ""
-
-
-def build_persist_inputs(
-    write: Any,
-    readback: Any,
-    brandkit: Any,
-    *,
-    readback_supplied: bool = True,
-    brandkit_unreadable_reason: str | None = None,
-) -> PersistInputs:
-    """Normalize the write document and the CLI's own read-back; never raise.
-
-    A ``write`` that is not a JSON object -- the file was missing, unreadable,
-    or held something else -- is an UNRECORDED write: ``write_ok`` is False,
-    ``write_error`` names the absence, and ``write_recorded`` lets the rows
-    tell it from a recorded failure.
-    """
-
-    write_recorded = isinstance(write, dict)
-    write_obj = write if write_recorded else {}
-    readback_obj = readback if isinstance(readback, dict) else {}
-    # The 5d document carries the account's whole Brand Kit under `brandkit`;
-    # a read-back without one cannot witness anything.
-    stored = readback_obj.get("brandkit")
-    readback_fingerprint = (
-        persist_fingerprint(stored) if isinstance(stored, dict) else None
-    )
-    brandkit_fingerprint = (
-        persist_fingerprint(brandkit) if isinstance(brandkit, dict) else None
-    )
-    cleared = write_obj.get("cleared")
-    write_error = FASTMCP_TOOL_ERROR_PREFIX.sub(
-        "", _text(write_obj.get("error")), count=1
-    )
-    write_code = _coerce_code(write_obj.get("code")) or code_from_error_text(
-        write_error
-    )
-    if not write_recorded:
-        write_error = UNRECORDED_WRITE_ERROR
-    write_stage = _text(write_obj.get("stage")).strip() or "5c"
-    return PersistInputs(
-        write_ok=write_obj.get("ok") is True,
-        write_error=write_error,
-        write_code=write_code,
-        cleared=list(cleared) if isinstance(cleared, list) else [],
-        readback_ok=readback_obj.get("ok") is True,
-        readback_fingerprint=readback_fingerprint,
-        brandkit_fingerprint=brandkit_fingerprint,
-        readback_supplied=readback_supplied,
-        write_stage=write_stage,
-        write_recorded=write_recorded,
-        **(
-            {"brandkit_unreadable_reason": brandkit_unreadable_reason}
-            if brandkit_unreadable_reason
-            else {}
-        ),
-    )
-
-
-# --------------------------------------------------------------------------
-# Assembling the CLI outputs
-# --------------------------------------------------------------------------
+def stored_profile_state_line(promoted: dict[str, Any], readback: Any) -> str:
+    """Report current compared fields; never attribute them to a save call."""
+    if not isinstance(readback, dict) or readback.get("ok") is not True or not isinstance(readback.get("brandkit"), dict):
+        return "Stored profile comparison unavailable (account read failed)."
+    intended = persist_fingerprint(promoted)
+    stored = persist_fingerprint(readback["brandkit"])
+    different = [section for section in PERSIST_FINGERPRINT_SECTIONS if intended[section] != stored[section]]
+    if different:
+        names = [PERSIST_SECTION_NOUNS.get(section, section) for section in different]
+        return "Stored profile differs from this run's promoted kit in the checked fields: " + ", ".join(names) + "."
+    return "Stored profile matches this run's promoted kit in the 10 checked fields."
 
 
 def _load_json(path: Path) -> Any:
@@ -1138,63 +613,3 @@ def run_report_block_from_out_dir(out_dir: Path, *, exit_code: int) -> dict[str,
 
     report, brandkit = _load_promoted_pair(out_dir)
     return build_run_report_block(report, brandkit, exit_code=exit_code)
-
-
-def build_report_lines(
-    out_dir: Path,
-    write: Any,
-    readback: Any,
-    *,
-    readback_supplied: bool = True,
-) -> list[str]:
-    """Every line the final reply owes, in reporting order.
-
-    Persist line first (one per run that reached a promoted Phase 4), then the
-    logo line when the table produces one, then one line per stripped contact.
-
-    Both the witness and the logo line read ``brandkit.json`` only when this
-    run's own ``finalize-report.json`` says it promoted it: otherwise the
-    document belongs to an earlier run of the same out-dir and describing it
-    would certify a kit this run never wrote.
-    """
-
-    report, brandkit = _load_promoted_pair(out_dir)
-    # `_load_promoted_pair` drops a brandkit.json the report's own sha does not
-    # bind; say WHY, rather than reusing the missing-file sentence.
-    pair_mismatch = brandkit is None and (out_dir / "brandkit.json").exists()
-    report_obj = report if isinstance(report, dict) else {}
-    # Same rule the `run` block already applies to its logo line: nothing here
-    # may describe a document this run did not promote (NOT_PROMOTED_REASON).
-    promoted = report_obj.get("promoted") is True
-    if not promoted:
-        brandkit = None
-    warnings = report_obj.get("warnings")
-    warnings = list(warnings) if isinstance(warnings, list) else []
-    hosting = report_obj.get("logo_hosting")
-    hosting = hosting if isinstance(hosting, dict) else {}
-
-    lines = [
-        render_persist_line(
-            build_persist_inputs(
-                write,
-                readback,
-                brandkit,
-                readback_supplied=readback_supplied,
-                brandkit_unreadable_reason=(
-                    # "this run promoted nothing" is the stronger fact and
-                    # subsumes a sha that cannot bind, so it is named first.
-                    NOT_PROMOTED_REASON
-                    if not promoted
-                    else PAIR_MISMATCH_REASON if pair_mismatch else None
-                ),
-            )
-        )
-    ]
-    if isinstance(brandkit, dict):
-        # Same rule as the run block: the logo line describes a brandkit that
-        # was read, never the absence of one.
-        logo_line = logo_report_line(_logos_of(brandkit), hosting)
-        if logo_line is not None:
-            lines.append(logo_line)
-    lines.extend(contact_report_lines(warnings))
-    return lines

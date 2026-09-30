@@ -58,6 +58,12 @@ only if the change is missing, start again from step 1 with fresh tickets for bo
 `PROVIDER.md` describes the answers (`UPLOAD_NOT_FOUND` with `missingUploadId`,
 `REVISION_CONFLICT`, `WRITE_UNCONFIRMED`, `MERGE_BROKEN`).
 
+## Images
+
+This host has no image workflow: no crop upload and no image generation. The Stripo MCP has no
+asset-upload or image-generation tool, and the plugin adds none. Reuse hosted reference assets or
+authorized hosted image URLs, and report a visual that cannot be hosted as `SKILL.md` describes.
+
 ## Authentication
 
 MCP access is authorized once per host through OAuth (Claude Code: `/mcp`; Codex: the browser

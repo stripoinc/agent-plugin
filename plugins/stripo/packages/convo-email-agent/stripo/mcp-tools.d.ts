@@ -24,6 +24,9 @@ export declare const STRIPO_MCP_TOOL_MAPPING: Readonly<{
         patchBrandkit: "patch_business_profile";
     }>;
     unsupported: Readonly<{
+        getEmailMessageExport: "No compiled email export tool is available. Read native metadata with getEmailModel.";
+        getEmailMessageViewLink: "No hosted email-view link operation is available in this adapter.";
+        listCustomBlocks: "No saved-module library tool is available in this adapter.";
         listEmailInterfaces: "This editor has no sending interfaces.";
         updateEmailMetadata: "No write tool for name, project, or folder metadata. Native document title/preheader use updateEmailModel.";
         prepareImageUpload: "Reuse hosted reference assets or user-supplied hosted assets.";
