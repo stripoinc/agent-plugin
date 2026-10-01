@@ -385,106 +385,60 @@ function isObject3(value) {
 function nonEmptyString(value) {
   return typeof value === "string" && value.trim() !== "" ? value.trim() : void 0;
 }
-var FONT_ROLES = ["body", "headings", "buttons"];
-var BUILT_IN_FONT_FAMILIES = /* @__PURE__ */ new Set([
-  "arial",
-  "helvetica",
-  "georgia",
-  "times new roman",
-  "verdana",
-  "tahoma",
-  "trebuchet ms",
-  "courier new"
-]);
-function normalizedFontFamily(value) {
-  const family = nonEmptyString(value);
-  return family?.toLowerCase();
-}
-function validateFontPlan(message, customFontsEnabled) {
+function backgroundImageFindings(model, exact) {
   const findings = [];
-  const families = message.font_families;
-  const roleFamilies = /* @__PURE__ */ new Map();
-  if (!isObject3(families)) {
-    findings.push("brief.message.font_families: required object with body, headings, and buttons");
-  } else {
-    for (const role of FONT_ROLES) {
-      const family = nonEmptyString(families[role]);
-      if (family === void 0) {
-        findings.push(`brief.message.font_families.${role}: required primary family name`);
-        continue;
-      }
-      if (family.includes(",")) {
-        findings.push(`brief.message.font_families.${role}: expected one primary family name, not a CSS stack`);
-        continue;
-      }
-      roleFamilies.set(role, family);
+  const stripes = Array.isArray(model.stripes) ? model.stripes : [];
+  const hasBackgroundImage = (value) => {
+    if (Array.isArray(value)) return value.some(hasBackgroundImage);
+    if (!isObject3(value)) return false;
+    if (isObject3(value.backgroundImage) && nonEmptyString(value.backgroundImage.path)) return true;
+    return Object.values(value).some(hasBackgroundImage);
+  };
+  const hasWhiteText = (value) => {
+    if (Array.isArray(value)) return value.some(hasWhiteText);
+    if (!isObject3(value)) return false;
+    if (value.type === "text") {
+      const color = isObject3(value.settings) ? value.settings.fontColor : void 0;
+      if (typeof color === "string" && /^#(?:fff|ffffff)$/i.test(color)) return true;
+      if (typeof value.content === "string" && /\bcolor\s*:\s*#(?:fff|ffffff)\b/i.test(value.content)) return true;
     }
-  }
-  if (!customFontsEnabled) {
-    if (Object.hasOwn(message, "fonts")) {
-      findings.push(
-        "custom_font_creation_disabled: brief.message.fonts must be absent unless PUBLISHER_EMAIL_CUSTOM_FONTS_ENABLED is exactly true"
-      );
+    return Object.values(value).some(hasWhiteText);
+  };
+  const inspect = (value, path2) => {
+    if (Array.isArray(value)) {
+      value.forEach((item, index) => inspect(item, `${path2}[${index}]`));
+    } else if (isObject3(value)) {
+      if (isObject3(value.backgroundImage) && value.backgroundImage.sizeX === "cover" && value.backgroundImage.sizeY === "cover") {
+        findings.push(`${path2}.backgroundImage.sizeY: use "auto" when sizeX is "cover"; this native combination fails Reteno document-state SET`);
+      }
+      for (const [key, child] of Object.entries(value)) inspect(child, `${path2}.${key}`);
     }
-    for (const [role, family] of roleFamilies) {
-      if (!BUILT_IN_FONT_FAMILIES.has(family.toLowerCase())) {
-        findings.push(
-          `custom_font_creation_disabled: brief.message.font_families.${role} must use a built-in family`
-        );
-      }
-    }
-    return findings;
-  }
-  const fonts = message.fonts;
-  const declaredFamilies = /* @__PURE__ */ new Set();
-  if (fonts !== void 0 && !Array.isArray(fonts)) {
-    findings.push("brief.message.fonts: expected an array when supplied");
-  } else if (Array.isArray(fonts)) {
-    if (fonts.length > 4) findings.push("brief.message.fonts: at most four fonts are allowed");
-    for (const [index, font] of fonts.entries()) {
-      if (!isObject3(font)) {
-        findings.push(`brief.message.fonts[${index}]: expected an object`);
-        continue;
-      }
-      const unexpected = Object.keys(font).filter((key) => !["family", "weights", "italic"].includes(key));
-      if (unexpected.length > 0) {
-        findings.push(`brief.message.fonts[${index}]: unsupported keys ${unexpected.join(", ")}`);
-      }
-      const family = nonEmptyString(font.family);
-      if (family === void 0) {
-        findings.push(`brief.message.fonts[${index}].family: required non-empty family name`);
-      } else {
-        const normalized = family.toLowerCase();
-        if (declaredFamilies.has(normalized)) {
-          findings.push(`brief.message.fonts[${index}].family: duplicate family ${JSON.stringify(family)}`);
-        }
-        declaredFamilies.add(normalized);
-      }
-      if (!Array.isArray(font.weights) || font.weights.length === 0) {
-        findings.push(`brief.message.fonts[${index}].weights: required non-empty array`);
-      } else {
-        const weights = font.weights;
-        if (new Set(weights).size !== weights.length) {
-          findings.push(`brief.message.fonts[${index}].weights: duplicate weights are not allowed`);
-        }
-        if (weights.some((weight) => !Number.isInteger(weight) || weight < 100 || weight > 900 || weight % 100 !== 0)) {
-          findings.push(`brief.message.fonts[${index}].weights: expected 100..900 in 100-step increments`);
-        }
-      }
-      if (typeof font.italic !== "boolean") {
-        findings.push(`brief.message.fonts[${index}].italic: required boolean`);
-      }
-    }
-  }
-  for (const [role, family] of roleFamilies) {
-    const normalized = normalizedFontFamily(family);
-    if (normalized !== void 0 && !BUILT_IN_FONT_FAMILIES.has(normalized) && !declaredFamilies.has(normalized)) {
-      findings.push(`brief.message.font_families.${role}: custom family ${JSON.stringify(family)} is not declared`);
-    }
-  }
+  };
+  inspect(model.stripes, "brief.model.stripes");
+  if (exact) stripes.forEach((value, index) => {
+    if (!isObject3(value) || !isObject3(value.settings) || !isObject3(value.settings.backgroundImage) || !nonEmptyString(value.settings.backgroundImage.path)) return;
+    if (value.settings.contentBackgroundColor !== "transparent") return;
+    if (hasBackgroundImage(value.structures) || !hasWhiteText(value.structures)) return;
+    findings.push(`brief.model.stripes[${index}]: white text overlays a stripe-only photo; move the photo to the structure or container background so it appears behind the centered content`);
+  });
   return findings;
 }
-function validateCreationBrief(brief, customFontsEnabled = process.env.PUBLISHER_EMAIL_CUSTOM_FONTS_ENABLED === "true", brand = "reteno") {
+function unbreakableRuleFindings(model) {
+  const findings = [];
+  const inspect = (value, path2) => {
+    if (Array.isArray(value)) {
+      value.forEach((item, index) => inspect(item, `${path2}[${index}]`));
+    } else if (isObject3(value)) {
+      if (value.type === "text" && typeof value.content === "string" && /[━─═]{24,}/u.test(value.content)) {
+        findings.push(`${path2}.content: repeated rule glyphs force the mobile table wider than the viewport; use a full-width border-top span instead`);
+      }
+      for (const [key, child] of Object.entries(value)) inspect(child, `${path2}.${key}`);
+    }
+  };
+  inspect(model.stripes, "brief.model.stripes");
+  return findings;
+}
+function validateCreationBrief(brief, brand = "reteno") {
   if (!isObject3(brief)) return ["brief: the file must contain a JSON object"];
   const findings = [];
   if (brief.v !== 2) findings.push(`brief.v: expected 2 (native model draft), got ${JSON.stringify(brief.v)}`);
@@ -494,7 +448,7 @@ function validateCreationBrief(brief, customFontsEnabled = process.env.PUBLISHER
     if (nonEmptyString(brief.message.name) === void 0) findings.push("brief.message.name: required non-empty name");
     if (typeof brief.message.name === "string" && brief.message.name.length > 200) findings.push("brief.message.name: maximum 200 characters");
     for (const key of Object.keys(brief.message)) {
-      if (!["name", "projectId", "folderId"].includes(key)) findings.push(`brief.message.${key}: unsupported Stripo metadata`);
+      if (!["name", "projectId", "folderId", "referenceMode"].includes(key)) findings.push(`brief.message.${key}: unsupported Stripo metadata`);
     }
     for (const key of ["projectId", "folderId"]) {
       const value = brief.message[key];
@@ -505,15 +459,20 @@ function validateCreationBrief(brief, customFontsEnabled = process.env.PUBLISHER
   } else {
     if (Object.hasOwn(brief.message, "preheader") || Object.hasOwn(brief.message, "preHeader")) {
       findings.push(
-        "preheader_update_unavailable: brief.message.preheader and brief.message.preHeader must be absent"
+        "brief.message.preheader and brief.message.preHeader must be absent; use brief.model.metadata.preheader with text and boolean fillSpace"
       );
     }
-    findings.push(...validateFontPlan(brief.message, customFontsEnabled));
+  }
+  if (isObject3(brief.message) && brief.message.referenceMode !== void 0 && !["exact", "tailored", "creative", "copy-action"].includes(brief.message.referenceMode)) {
+    findings.push("brief.message.referenceMode: expected exact, tailored, or creative (legacy copy-action is accepted)");
   }
   if (!isObject3(brief.model)) {
     findings.push("brief.model: required native editor model draft");
   } else if (!Array.isArray(brief.model.stripes) || brief.model.stripes.length === 0) {
     findings.push("brief.model.stripes: required non-empty array");
+  } else if (brand === "reteno") {
+    findings.push(...backgroundImageFindings(brief.model, isObject3(brief.message) && brief.message.referenceMode === "exact"));
+    findings.push(...unbreakableRuleFindings(brief.model));
   }
   for (const key of Object.keys(brief)) {
     if (!["v", "note", "sourceSummary", "message", "model"].includes(key)) {
@@ -530,17 +489,17 @@ async function main() {
   const diagnosticsPath = optionalString(args, "diagnostics") ?? `${outputPath}.diagnostics.json`;
   let sdkPath;
   const brand = optionalString(args, "brand") ?? "reteno";
-  const customFontsEnabled = brand === "reteno" && process.env.PUBLISHER_EMAIL_CUSTOM_FONTS_ENABLED === "true";
   beginOutputs(outputPath, diagnosticsPath, [briefPath, baselinePath, optionalString(args, "runtime-snapshot")]);
   try {
     sdkPath = resolveSdkDist();
     if (brand !== "reteno" && brand !== "stripo") throw new Error(`Unsupported brand: ${brand}`);
     const brief = readJson(briefPath);
-    const findings = validateCreationBrief(brief, customFontsEnabled, brand);
+    const findings = validateCreationBrief(brief, brand);
     if (findings.length > 0) {
       throw new Error(`Creation brief has ${findings.length} finding(s): ${JSON.stringify(findings)}`);
     }
     const typedBrief = brief;
+    typedBrief.message.referenceMode = typedBrief.message.referenceMode === "copy-action" ? "tailored" : typedBrief.message.referenceMode ?? "creative";
     const sdk = await loadSdk(sdkPath);
     const baselineEmailJson = baselinePath === void 0 ? void 0 : readJson(baselinePath);
     const baselineStripes = isObject3(baselineEmailJson) && Array.isArray(baselineEmailJson.stripes) ? baselineEmailJson.stripes : [];
@@ -571,10 +530,6 @@ async function main() {
       outputPath,
       sdkPath,
       message: typedBrief.message,
-      fontGate: brand === "reteno" ? {
-        customFontsEnabled,
-        fontsIncluded: Object.hasOwn(typedBrief.message, "fonts")
-      } : void 0,
       summary,
       validation,
       verification: prepared.verification
@@ -593,7 +548,6 @@ async function main() {
       baselinePath,
       outputPath,
       sdkPath,
-      fontGate: brand === "reteno" ? { customFontsEnabled } : void 0,
       error: compactError(error)
     });
     throw error;

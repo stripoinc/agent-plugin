@@ -4,20 +4,27 @@ var RETENO_MCP_TOOL_MAPPING = Object.freeze({
   canonicalBrand: "reteno",
   fieldMapping: "identity",
   tools: Object.freeze({
-    getBrandkit: "get_brandkit",
-    prepareBrandkitUpload: "prepare_brandkit_upload",
-    updateBrandkitFromExtraction: "update_brandkit_from_extraction",
-    updateBrandkit: "update_brandkit",
+    getBrandkit: "get_business_profile",
+    prepareBrandkitUpload: "prepare_business_profile_upload",
+    updateBrandkitFromExtraction: "save_business_profile",
+    updateBrandkit: "save_business_profile",
     listEmailInterfaces: "list_email_interfaces",
     getEmailModel: "get_email_model",
     getEmailModelSchema: "get_email_model_schema",
+    getEmailMessageExport: "get_email_message_export",
+    listCustomBlocks: "list_custom_blocks",
     getEmailMessagePreview: "get_email_message_preview_png",
+    getEmailMessageViewLink: "get_email_message_view_link",
     createEmailShell: "create_email_shell",
     prepareEmailModelUpload: "prepare_email_model_upload",
     updateEmailModel: "update_email_model",
     updateEmailMetadata: "update_email_metadata",
     prepareImageUpload: "prepare_image_upload",
     uploadImage: "upload_image"
+  }),
+  auxiliaryTools: Object.freeze({
+    // Supported inline field edits remain separate from the staged full-profile workflows.
+    patchBrandkit: "patch_business_profile"
   })
 });
 
@@ -48,10 +55,13 @@ var STRIPO_MCP_TOOL_MAPPING = Object.freeze({
     folders: "find_folders",
     // Resolves the projectId the Business Profile tools require.
     projects: "find_projects",
-    // No canonical counterpart: Reteno has no partial Brand Kit write.
+    // Supported-field updates are auxiliary operations in both provider mappings.
     patchBrandkit: "patch_business_profile"
   }),
   unsupported: Object.freeze({
+    getEmailMessageExport: "No compiled email export tool is available. Read native metadata with getEmailModel.",
+    getEmailMessageViewLink: "No hosted email-view link operation is available in this adapter.",
+    listCustomBlocks: "No saved-module library tool is available in this adapter.",
     listEmailInterfaces: "This editor has no sending interfaces.",
     updateEmailMetadata: "No write tool for name, project, or folder metadata. Native document title/preheader use updateEmailModel.",
     prepareImageUpload: "Reuse hosted reference assets or user-supplied hosted assets.",
@@ -69,7 +79,10 @@ var CANONICAL_MCP_OPERATIONS = [
   "listEmailInterfaces",
   "getEmailModel",
   "getEmailModelSchema",
+  "getEmailMessageExport",
+  "listCustomBlocks",
   "getEmailMessagePreview",
+  "getEmailMessageViewLink",
   "createEmailShell",
   "prepareEmailModelUpload",
   "updateEmailModel",

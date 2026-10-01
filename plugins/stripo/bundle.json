@@ -1,16 +1,16 @@
 {
   "schemaVersion": 1,
   "package": "@ardas/convo-email-agent",
-  "version": "0.2.0",
-  "sourceRevision": "bfda7d0796b382c9ce2e9ede5cbc0394a535019b",
+  "version": "0.2.12",
+  "sourceRevision": "4f4330cee33b0a43b4eb3f731eaf4e1fc38dd0d5",
   "sourceDirty": false,
   "editorValidator": {
-    "editorRevision": "3ec16aaa91c6550aa464b717d5e9ff71a575af57",
+    "editorRevision": "9fe0771bd1219868d7053ef7e323dc3406329de3",
     "editorDirty": false,
     "esbuildVersion": "0.28.2",
     "zodVersion": "4.5.4",
-    "sizeBytes": 1381548,
-    "bundleSha256": "fdceced812f6094dc0032f56c38ed5ca66f0872a2c3f458cc09323b9eadad939"
+    "sizeBytes": 1388040,
+    "bundleSha256": "bc58780326d9282c31cbbb201410f60ce88e11acb59cacd43f492ce1c7df9b0e"
   },
   "brand": "stripo",
   "canonicalMcpBrand": "reteno",
@@ -18,23 +18,37 @@
   "skills": [
     "email-model-editor",
     "email-from-reference",
-    "brandkit-extraction-v-0",
-    "brandkit-tone-of-voice-v-0",
-    "brandkit-business-context-v-0",
-    "brandkit-updater"
+    "business-profile"
   ],
   "agentFormats": [
     "codex",
     "claude-cowork"
   ],
   "mcpToolMapping": "./mcp-tools.json",
+  "requiredMcpTools": [
+    "create_email",
+    "find_content",
+    "find_folders",
+    "find_projects",
+    "get_business_profile",
+    "get_content",
+    "get_document_state",
+    "get_document_state_schema",
+    "get_screenshot",
+    "patch_business_profile",
+    "prepare_business_profile_upload",
+    "prepare_document_state_upload",
+    "replace_business_profile",
+    "set_document_state",
+    "whoami"
+  ],
   "sdk": "./packages/convo-email-agent/index.js",
   "brandkit": {
     "runtime": "./packages/brandkit-runtime",
     "python": ">=3.11",
     "pythonRequirements": "./packages/brandkit-runtime/requirements.txt",
-    "nodeProject": "./skills/brandkit-extraction-v-0/scripts",
-    "browser": "playwright-chromium-1.60.0",
+    "nodeProject": "./skills/business-profile/scripts",
+    "browser": "chrome-devtools-mcp-1.9.0",
     "hostAdapter": "consumer-owned"
   }
 }

@@ -44,7 +44,6 @@ from urllib.parse import urlsplit
 from PIL import Image, features
 
 from .host_adapter import load_host_adapter as _host_adapter
-from .report_lines import EMAIL_SAFE_SUFFIXES, PRIMARY_LOGO_TYPES
 from .validation import (
     LOGO_ASSET_MAX_BYTES,
     LOGO_SVG_PATH_MAX_CHARS,
@@ -53,7 +52,6 @@ from .validation import (
     ValidatedRasterSidecar,
     ValidatedSvgSidecar,
     _exact_public_asset_url,
-    _is_producer_logo_candidate,
     _is_sha256_hex,
     _svg_markup_is_safe,
     _svg_markup_sha256,
@@ -101,10 +99,6 @@ class LogoHostingResult:
     reason: str | None = None
     source_svg: str | None = None
     source_svg_sha256: str | None = None
-    # The measured identity of a same-mark substitution, or None. Set only by
-    # `apply_same_mark_fallback`, and the ONLY record that the stored primary
-    # URL is not the one the extraction authored.
-    fallback_used: str | None = None
 
     @classmethod
     def not_reached(cls) -> "LogoHostingResult":
@@ -123,7 +117,8 @@ class LogoHostingResult:
             "outcome": self.outcome,
             "error_code": self.error_code,
             "reason": self.reason,
-            "fallback_used": self.fallback_used,
+            # Preserve the report shape; native authoring never substitutes a logo.
+            "fallback_used": None,
         }
 
     @property
@@ -242,6 +237,18 @@ def _extract_mcp_tool_payload(response_body: dict[str, Any]) -> dict[str, Any]:
     result = response_body.get("result")
     if not isinstance(result, dict):
         raise ValueError("MCP response result is missing")
+    if "isError" in result and type(result["isError"]) is not bool:
+        raise ValueError("MCP response has a malformed isError flag")
+    if result.get("isError") is True:
+        detail = ""
+        content = result.get("content")
+        if isinstance(content, list):
+            detail = next((item.get("text", "").strip() for item in content
+                           if isinstance(item, dict) and isinstance(item.get("text"), str)
+                           and item.get("text", "").strip()), "")
+        structured_error = result.get("structuredContent")
+        code = structured_error.get("code") if isinstance(structured_error, dict) else None
+        raise MCPToolError((detail or "MCP tool returned an error result")[:500], code=code)
 
     structured = result.get("structuredContent")
     if isinstance(structured, dict):
@@ -941,225 +948,4 @@ def host_primary_logo(
         True,
         "minted",
         source_svg_sha256=source_digest,
-    )
-
-
-# --------------------------------------------------------------------------
-# Bounded same-mark fallback
-# --------------------------------------------------------------------------
-
-# The two outcomes where the CONVERSION failed and the mark itself is fine.
-# Every other outcome is either a success, a decision not to host, or a
-# failure that says nothing about whether an alternate exists.
-FALLBACK_ELIGIBLE_OUTCOMES: frozenset[str] = frozenset(
-    {"rasterize-failed", "convert-failed"}
-)
-
-# BORROWED, not restated. `EMAIL_SAFE_SUFFIXES` is the set the report line
-# calls "confirmed email-safe" and `PRIMARY_LOGO_TYPES` is the consumer's own
-# (`static_module_builder` reads the first row of one of those types and halts
-# `no_brand_logo` without one). A substitution decided against a second copy
-# of either set could disagree with the sentence that reports it.
-def _is_email_safe_url(url: str) -> bool:
-    return _url_path(url).endswith(EMAIL_SAFE_SUFFIXES)
-
-
-def _measured_identity(row: dict[str, Any]) -> tuple[str, float, float] | None:
-    """The row's own measured identity: what it says, and how big it rendered.
-
-    Both halves are required. A blank ``alt`` names nothing, and a zero
-    dimension is not a rendered size, so neither can establish that two rows
-    are the same mark.
-    """
-
-    alt = row.get("alt")
-    width = row.get("widthPx")
-    height = row.get("heightPx")
-    if not isinstance(alt, str) or not alt.strip():
-        return None
-    if not isinstance(width, (int, float)) or isinstance(width, bool) or width <= 0:
-        return None
-    if not isinstance(height, (int, float)) or isinstance(height, bool) or height <= 0:
-        return None
-    return (alt.strip(), float(width), float(height))
-
-
-def _diagnostics_logo_values(technical_dir: Path) -> list[dict[str, Any]]:
-    """This run's own ranked logo candidates, or ``[]``.
-
-    Read for the CLASSIFICATION only -- `type`, and the measured `background`
-    band. It can only narrow the choice: every candidate still has to be a
-    page-signals row this run measured with the primary's exact identity, and
-    still has to be in `authorized_urls`. So a hand-edited diagnostics file
-    cannot introduce a URL, only withhold one.
-    """
-
-    try:
-        payload = json.loads(
-            (technical_dir / "assembly-diagnostics.json").read_text(encoding="utf-8")
-        )
-    except (OSError, ValueError):
-        return []
-    candidates = payload.get("candidates") if isinstance(payload, dict) else None
-    rows = candidates.get("logos") if isinstance(candidates, dict) else None
-    values = []
-    for row in rows if isinstance(rows, list) else []:
-        value = row.get("value") if isinstance(row, dict) else None
-        if isinstance(value, dict):
-            values.append(value)
-    return values
-
-
-def _page_signal_logo_rows(technical_dir: Path) -> list[dict[str, Any]]:
-    try:
-        payload = json.loads(
-            (technical_dir / "page-signals.json").read_text(encoding="utf-8")
-        )
-    except (OSError, ValueError):
-        return []
-    rows = payload.get("logoCandidates") if isinstance(payload, dict) else None
-    return [row for row in rows if _is_producer_logo_candidate(row)] if isinstance(rows, list) else []
-
-
-def apply_same_mark_fallback(
-    brandkit: dict[str, Any],
-    *,
-    technical_dir: Path,
-    result: LogoHostingResult,
-    logo_evidence: LogoAssetEvidence | None = None,
-) -> LogoHostingResult:
-    """One bounded retry of the LOGO, never of the upload, after a conversion failure.
-
-    A failed rasterization used to end the story: the kit kept a URL an email
-    client cannot render, while an already-email-safe capture OF THE SAME MARK
-    sat in this run's own `page-signals.json`. This substitutes that capture,
-    once, and only when measurement -- not preference -- says it is the same
-    mark:
-
-    * the stored primary is not email-safe as stored (nothing to fix if it is);
-    * the primary's URL has a measured row of its own, so its identity is a
-      fact rather than an assumption, and every row for that URL agrees on it;
-    * exactly ONE other measured row carries the SAME `alt` and the SAME
-      rendered `widthPx` x `heightPx` and an already-email-safe URL. More than
-      one is an ambiguity, not a choice to make here;
-    * this run ranked that URL as a primary mark (never a favicon, never an
-      `alternative`);
-    * the stored mark's surface band and the candidate's band are BOTH
-      measured (`light` or `dark`) and equal. `alt` and rendered size are a
-      label match, not an identity: a site's light and dark variants of one
-      mark share both by design, and `unknown` on either side is the absence
-      of a surface measurement, not a pass. An unknown band therefore refuses
-      the substitution and the kit keeps the SVG the page published, with the
-      existing "could not convert" report line;
-    * the URL is in `authorized_urls`, so the substitution can never turn a
-      failed conversion into a run-refusing blocker.
-
-    This is conservative dormant support for explicitly evidenced inputs.
-    Normal img collection does not measure the required background band;
-    unknown-band candidates cannot activate automatic recovery.
-
-    Region is deliberately NOT a criterion in either direction. A footer mark
-    and a header mark can be the same mark or two variants, and it is the
-    identity evidence above that tells them apart; "prefer the header" would
-    swap a dark-band variant for a light-band one on any site whose header and
-    footer differ.
-
-    The replaced row is kept as an `alternative` with its markup, so the SVG
-    the page published is still on the kit, and the report line names the
-    substitution so a human can check the variant against the site.
-    """
-
-    if result.outcome not in FALLBACK_ELIGIBLE_OUTCOMES:
-        return result
-    primary = _first_primary_logo(brandkit)
-    if primary is None:
-        return result
-    raw_url = primary.get("url")
-    stored_url = raw_url.strip() if isinstance(raw_url, str) else ""
-    if not stored_url or _is_email_safe_url(stored_url):
-        return result
-
-    rows = _page_signal_logo_rows(technical_dir)
-    stored_identities = {
-        identity
-        for row in rows
-        if row.get("src") == stored_url
-        and (identity := _measured_identity(row)) is not None
-    }
-    if len(stored_identities) != 1:
-        # No measured row for the stored mark, or two rows that disagree about
-        # it: identity is unestablished, so there is nothing to match against.
-        return result
-    identity = next(iter(stored_identities))
-
-    evidence = logo_evidence or load_logo_asset_evidence(technical_dir)
-    stored_background = primary.get("background")
-    if stored_background not in {"light", "dark"}:
-        # No measured band on the stored mark: there is nothing a candidate's
-        # band could be equal to, so no substitution can be evidence-bound.
-        return result
-    ranked = _diagnostics_logo_values(technical_dir)
-    primary_urls = {
-        value.get("url") for value in ranked if value.get("type") in PRIMARY_LOGO_TYPES
-    }
-    # EVERY band recorded for a URL, not the last one: two rows that disagree
-    # about the band a mark sits on are two claims, and a contradiction in
-    # either of them is still a contradiction.
-    bands: dict[Any, set[Any]] = {}
-    for value in ranked:
-        bands.setdefault(value.get("url"), set()).add(value.get("background"))
-
-    candidates: set[str] = set()
-    for row in rows:
-        candidate = row.get("src")
-        if not isinstance(candidate, str):
-            continue
-        if _measured_identity(row) != identity:
-            continue
-        if not _exact_public_asset_url(candidate) or not _is_email_safe_url(candidate):
-            continue
-        if candidate not in primary_urls:
-            continue
-        # Every band recorded for the candidate must be the stored mark's:
-        # one row saying `unknown` is a missing measurement, one saying the
-        # other band is a contradiction, and either refuses.
-        if bands.get(candidate, set()) != {stored_background}:
-            continue
-        if candidate not in evidence.authorized_urls:
-            continue
-        candidates.add(candidate)
-
-    if len(candidates) != 1:
-        return result
-    substitute = next(iter(candidates))
-
-    alt, width, height = identity
-    logos = brandkit.get("brand", {}).get("logos")
-    if isinstance(logos, list) and not any(
-        isinstance(logo, dict) and logo.get("url") == stored_url and logo is not primary
-        for logo in logos
-    ):
-        # The page's own SVG/webp stays on the kit, with the markup whose
-        # URL/SVG binding the pre-host validators already accepted.
-        logos.append(
-            {
-                "type": "alternative",
-                "url": stored_url,
-                "background": stored_background,
-                "svgPath": primary.get("svgPath")
-                if isinstance(primary.get("svgPath"), str)
-                else "",
-            }
-        )
-    primary["url"] = substitute
-    # The markup described the mark at the OLD url; carried onto the new row it
-    # is an unbound svgPath and a hard blocker. It survives on the row above.
-    primary["svgPath"] = ""
-    return replace(
-        result,
-        fallback_used=(
-            f'alt="{alt}" {width:g}x{height:g} '
-            f"background={stored_background} "
-            f"-> {substitute}"
-        ),
     )

@@ -1,0 +1,673 @@
+<!-- installed-website-section:02:start -->
+# Website extraction instructions 02 of 3
+
+<!-- source-boundary:schema.json:start -->
+## Canonical source: Public Business Profile schema
+
+```json
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/brandkit-extractor/schema.json",
+  "title": "Brandkit Public Output",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["brand", "contacts", "socials", "importantLinks", "languages"],
+  "properties": {
+    "brand": { "$ref": "#/$defs/brandFinal" },
+    "contacts": { "$ref": "#/$defs/contacts" },
+    "socials": { "$ref": "#/$defs/socials" },
+    "importantLinks": { "$ref": "#/$defs/importantLinks" },
+    "languages": { "$ref": "#/$defs/stringList", "description": "Observed site languages normalized to unique lowercase ISO 639-1 codes under the existing runtime policy. Agent selection supplies grounded language choices; the permissive public shape is unchanged." }
+  },
+  "$defs": {
+    "colorOrNull": { "type": ["string", "null"] },
+    "colorMeasurementState": {
+      "type": ["string", "null"],
+      "enum": ["measured", "transparent", "unavailable", null],
+      "description": "Observed color state: measured, transparent, or unavailable. This is technical style evidence, not semantic authority. Preserve the distinction when projecting supported fields; final composition omits technical measurement-state keys."
+    },
+    "numberOrNull": { "type": ["number", "null"] },
+    "stringList": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+    "usageHint": {
+      "type": "string",
+      "enum": [
+        "brand-primary-accent",
+        "brand-secondary-accent",
+        "promo-accent",
+        "promo-surface-accent",
+        "promo-surface-background",
+        "canvas-background",
+        "content-background",
+        "header-background",
+        "footer-background",
+        "product-card-surface-background",
+        "heading-text",
+        "body-text",
+        "link",
+        "link-text",
+        "link-promo",
+        "header-link",
+        "footer-text",
+        "footer-link",
+        "button-primary-background",
+        "button-primary-text",
+        "button-primary-hover-background",
+        "button-secondary-background",
+        "button-secondary-text",
+        "product-card-cta-background",
+        "product-card-cta-text",
+        "product-card-cta-hover-background",
+        "product-card-cta-border",
+        "price-current",
+        "price-old",
+        "divider",
+        "border-subtle",
+        "body-typography",
+        "heading-typography",
+        "header-typography",
+        "footer-typography",
+        "button-typography",
+        "product-name-typography",
+        "product-price-typography",
+        "product-old-price-typography",
+        "product-card-cta"
+      ]
+    },
+    "usageHintList": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/usageHint" }
+    },
+    "colorUsageHint": {
+      "type": "string",
+      "enum": [
+        "brand-primary-accent",
+        "brand-secondary-accent",
+        "promo-accent",
+        "promo-surface-accent",
+        "promo-surface-background",
+        "canvas-background",
+        "content-background",
+        "header-background",
+        "footer-background",
+        "product-card-surface-background",
+        "heading-text",
+        "body-text",
+        "link",
+        "link-text",
+        "link-promo",
+        "header-link",
+        "footer-text",
+        "footer-link",
+        "button-primary-background",
+        "button-primary-text",
+        "button-primary-hover-background",
+        "button-secondary-background",
+        "button-secondary-text",
+        "product-card-cta-background",
+        "product-card-cta-text",
+        "product-card-cta-hover-background",
+        "product-card-cta-border",
+        "price-current",
+        "price-old",
+        "divider",
+        "border-subtle"
+      ]
+    },
+    "colorUsageHintList": {
+      "allOf": [
+        { "$ref": "#/$defs/usageHintList" },
+        { "items": { "$ref": "#/$defs/colorUsageHint" } }
+      ]
+    },
+    "accentColorUsageHint": {
+      "type": "string",
+      "enum": [
+        "brand-primary-accent",
+        "brand-secondary-accent",
+        "promo-accent",
+        "promo-surface-accent",
+        "button-primary-background",
+        "button-primary-hover-background",
+        "button-secondary-background",
+        "product-card-cta-background",
+        "product-card-cta-hover-background",
+        "product-card-cta-border",
+        "price-current",
+        "price-old",
+        "divider",
+        "border-subtle",
+        "link-text",
+        "link-promo"
+      ]
+    },
+    "accentColorUsageHintList": {
+      "allOf": [
+        { "$ref": "#/$defs/usageHintList" },
+        { "items": { "$ref": "#/$defs/accentColorUsageHint" } }
+      ]
+    },
+    "backgroundColorUsageHint": {
+      "type": "string",
+      "enum": [
+        "canvas-background",
+        "content-background",
+        "header-background",
+        "footer-background",
+        "product-card-surface-background",
+        "promo-surface-background"
+      ]
+    },
+    "backgroundColorUsageHintList": {
+      "allOf": [
+        { "$ref": "#/$defs/usageHintList" },
+        { "items": { "$ref": "#/$defs/backgroundColorUsageHint" } }
+      ]
+    },
+    "textColorUsageHint": {
+      "type": "string",
+      "enum": [
+        "heading-text",
+        "body-text",
+        "link",
+        "link-text",
+        "link-promo",
+        "header-link",
+        "footer-text",
+        "footer-link",
+        "button-primary-text",
+        "button-secondary-text",
+        "product-card-cta-text",
+        "price-current",
+        "price-old"
+      ]
+    },
+    "textColorUsageHintList": {
+      "allOf": [
+        { "$ref": "#/$defs/usageHintList" },
+        { "items": { "$ref": "#/$defs/textColorUsageHint" } }
+      ]
+    },
+    "typographyUsageHint": {
+      "type": "string",
+      "enum": [
+        "body-typography",
+        "heading-typography",
+        "header-typography",
+        "footer-typography",
+        "button-typography",
+        "product-name-typography",
+        "product-price-typography",
+        "product-old-price-typography",
+        "product-card-cta"
+      ]
+    },
+    "typographyUsageHintList": {
+      "allOf": [
+        { "$ref": "#/$defs/usageHintList" },
+        { "items": { "$ref": "#/$defs/typographyUsageHint" } }
+      ]
+    },
+    "buttonUsageHint": {
+      "type": "string",
+      "enum": [
+        "button-primary-background",
+        "button-primary-text",
+        "button-primary-hover-background",
+        "button-secondary-background",
+        "button-secondary-text",
+        "product-card-cta"
+      ]
+    },
+    "buttonUsageHintList": {
+      "allOf": [
+        { "$ref": "#/$defs/usageHintList" },
+        { "items": { "$ref": "#/$defs/buttonUsageHint" } }
+      ]
+    },
+    "simplePadding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["top", "right", "bottom", "left"],
+      "properties": {
+        "top": { "type": "number" },
+        "right": { "type": "number" },
+        "bottom": { "type": "number" },
+        "left": { "type": "number" }
+      }
+    },
+    "brandBaseProperties": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["organization", "logos", "colors", "typography", "components"],
+      "properties": {
+        "organization": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["name", "website"],
+          "properties": {
+            "name": { "type": "string" },
+            "website": { "type": "string" }
+          }
+        },
+        "logos": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["type", "url", "background", "svgPath"],
+            "properties": {
+              "type": { "type": "string", "enum": ["primary", "alternative", "secondary", "favicon"] },
+              "url": { "type": "string" },
+              "background": { "type": "string", "enum": ["light", "dark", "unknown"] },
+              "svgPath": { "type": "string" }
+            }
+          }
+        },
+        "colors": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["accentColors", "backgroundColors", "textColors"],
+          "properties": {
+            "accentColors": { "$ref": "#/$defs/accentColorTokenList" },
+            "backgroundColors": { "$ref": "#/$defs/backgroundColorTokenList" },
+            "textColors": { "$ref": "#/$defs/textColorTokenList" }
+          }
+        },
+        "typography": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/typographyStyle" }
+        },
+        "components": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["button", "productCard"],
+          "properties": {
+            "button": {
+              "type": "array",
+              "items": { "$ref": "#/$defs/buttonStyle" }
+            },
+            "productCard": { "$ref": "#/$defs/productCardStyleList" }
+          }
+        },
+        "brandVoice": { "$ref": "#/$defs/brandVoice" },
+        "businessContext": { "$ref": "#/$defs/businessContext" },
+        "products": { "$ref": "#/$defs/products" }
+      }
+    },
+    "brandFinal": {
+      "allOf": [
+        { "$ref": "#/$defs/brandBaseProperties" },
+        { "required": ["organization", "logos", "colors", "typography", "components", "brandVoice"] }
+      ]
+    },
+    "businessContext": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["customerValue", "revenueModel"],
+      "properties": {
+        "customerValue": { "type": "string" },
+        "revenueModel": { "type": "string" }
+      }
+    },
+    "products": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/product" }
+    },
+    "product": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "url", "imageUrl", "price", "oldPrice", "currency"],
+      "properties": {
+        "name": { "type": "string" },
+        "url": { "type": "string" },
+        "imageUrl": { "type": ["string", "null"] },
+        "price": { "type": "number" },
+        "oldPrice": { "type": ["number", "null"] },
+        "currency": { "type": "string" }
+      }
+    },
+    "brandVoice": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["toneOfVoice", "rulesToFollow", "defaultLanguages", "styles"],
+      "properties": {
+        "toneOfVoice": { "$ref": "#/$defs/stringList" },
+        "rulesToFollow": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["allowed", "forbidden"],
+          "properties": {
+            "allowed": { "$ref": "#/$defs/stringList" },
+            "forbidden": { "$ref": "#/$defs/stringList" }
+          }
+        },
+        "defaultLanguages": { "$ref": "#/$defs/stringList" },
+        "styles": { "$ref": "#/$defs/stringList" }
+      }
+    },
+    "colorToken": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["value", "description", "usageHints"],
+      "properties": {
+        "value": { "type": "string" },
+        "description": { "type": "string" },
+        "usageHints": { "$ref": "#/$defs/colorUsageHintList" }
+      }
+    },
+    "colorTokenList": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/colorToken" }
+    },
+    "accentColorToken": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["value", "description"],
+      "properties": {
+        "value": { "$ref": "#/$defs/colorOrNull" },
+        "description": { "type": "string" },
+        "usageHints": { "$ref": "#/$defs/accentColorUsageHintList" }
+      }
+    },
+    "accentColorTokenList": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/accentColorToken" }
+    },
+    "backgroundColorToken": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["value", "description"],
+      "properties": {
+        "value": { "$ref": "#/$defs/colorOrNull" },
+        "description": { "type": "string" },
+        "usageHints": { "$ref": "#/$defs/backgroundColorUsageHintList" }
+      }
+    },
+    "backgroundColorTokenList": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/backgroundColorToken" }
+    },
+    "textColorToken": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["value", "description"],
+      "properties": {
+        "value": { "$ref": "#/$defs/colorOrNull" },
+        "description": { "type": "string" },
+        "usageHints": { "$ref": "#/$defs/textColorUsageHintList" }
+      }
+    },
+    "textColorTokenList": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/textColorToken" }
+    },
+    "typographyStyle": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["family", "weight", "description"],
+      "properties": {
+        "family": { "type": "string" },
+        "weight": { "$ref": "#/$defs/numberOrNull" },
+        "sizePx": { "$ref": "#/$defs/numberOrNull" },
+        "lineHeightPx": { "$ref": "#/$defs/numberOrNull" },
+        "fontStyle": { "type": "string" },
+        "letterSpacingPx": { "$ref": "#/$defs/numberOrNull" },
+        "textTransform": { "type": "string" },
+        "usageHints": { "$ref": "#/$defs/typographyUsageHintList" },
+        "description": { "type": "string" }
+      }
+    },
+    "buttonLayout": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["intent"],
+      "properties": {
+        "intent": { "type": "string", "enum": ["full-width", "content-sized", "fixed-width", "icon-only", "unknown"] },
+        "isFullWidth": { "type": "boolean" },
+        "computedWidthPx": { "$ref": "#/$defs/numberOrNull" },
+        "computedHeightPx": { "$ref": "#/$defs/numberOrNull" },
+        "parentWidthPx": { "$ref": "#/$defs/numberOrNull" },
+        "widthRatioToParent": { "$ref": "#/$defs/numberOrNull" },
+        "display": { "type": "string" },
+        "cssWidth": { "type": "string" },
+        "cssMinWidth": { "type": "string" },
+        "cssMaxWidth": { "type": "string" },
+        "boxSizing": { "type": "string" },
+        "lineHeightPx": { "$ref": "#/$defs/numberOrNull" },
+        "alignSelf": { "type": "string" },
+        "justifyContent": { "type": "string" },
+        "marginLeftPx": { "$ref": "#/$defs/numberOrNull" },
+        "marginRightPx": { "$ref": "#/$defs/numberOrNull" }
+      }
+    },
+    "buttonStyle": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "backgroundColor",
+        "fontColor",
+        "borderColor",
+        "borderWidth",
+        "borderRadius",
+        "padding",
+        "description"
+      ],
+      "properties": {
+        "backgroundColor": { "$ref": "#/$defs/colorOrNull" },
+        "fontColor": { "$ref": "#/$defs/colorOrNull" },
+        "borderColor": { "type": "string" },
+        "borderWidth": { "type": "number" },
+        "borderRadius": { "type": "number" },
+        "padding": { "$ref": "#/$defs/simplePadding" },
+        "hoverBackgroundColor": { "$ref": "#/$defs/colorOrNull" },
+        "hoverFontColor": { "$ref": "#/$defs/colorOrNull" },
+        "hoverBorderColor": { "$ref": "#/$defs/colorOrNull" },
+        "hoverBorderWidth": { "$ref": "#/$defs/numberOrNull" },
+        "layout": { "$ref": "#/$defs/buttonLayout" },
+        "usageHints": { "$ref": "#/$defs/buttonUsageHintList" },
+        "description": { "type": "string" }
+      }
+    },
+    "neutralSurface": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "properties": {
+        "backgroundColor": { "$ref": "#/$defs/colorOrNull" },
+        "backgroundColorState": { "$ref": "#/$defs/colorMeasurementState" },
+        "borderColor": { "$ref": "#/$defs/colorOrNull" },
+        "borderWidth": { "$ref": "#/$defs/numberOrNull" },
+        "borderStyle": { "type": ["string", "null"] },
+        "borderRadius": { "$ref": "#/$defs/numberOrNull" },
+        "boxShadow": {
+          "type": ["string", "null"],
+          "description": "Captured CSS box-shadow for this selected card container. Preserve supported values and report unavailable evidence; no cross-card shadow synthesis."
+        }
+      }
+    },
+    "neutralTitleTypography": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "properties": {
+        "family": { "type": ["string", "null"] },
+        "weight": { "type": ["string", "number", "null"] },
+        "sizePx": { "$ref": "#/$defs/numberOrNull" },
+        "lineHeightPx": { "$ref": "#/$defs/numberOrNull" },
+        "fontStyle": { "type": ["string", "null"] },
+        "letterSpacingPx": { "$ref": "#/$defs/numberOrNull" },
+        "textTransform": { "type": ["string", "null"] }
+      }
+    },
+    "neutralCta": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "properties": {
+        "text": { "type": ["string", "null"] },
+        "textSource": {
+          "type": ["string", "null"],
+          "enum": ["visible-text", "aria-label", "title", "alt", "inferred", "none", null]
+        },
+        "hasUsableVisibleText": { "type": "boolean", "default": false },
+        "isCompact": { "type": "boolean", "default": false },
+        "isIconLike": { "type": "boolean", "default": false },
+        "hasInlineIcon": {
+          "type": ["boolean", "null"],
+          "description": "Whether this selected control has measured visible text and a decorative inline glyph. Null means unavailable. This does not choose an email variant; the agent decides the representative structure."
+        },
+        "backgroundColor": { "$ref": "#/$defs/colorOrNull" },
+        "backgroundColorState": { "$ref": "#/$defs/colorMeasurementState" },
+        "fontColor": { "$ref": "#/$defs/colorOrNull" },
+        "fontColorState": { "$ref": "#/$defs/colorMeasurementState" },
+        "borderColor": { "$ref": "#/$defs/colorOrNull" },
+        "borderColorState": { "$ref": "#/$defs/colorMeasurementState" },
+        "borderWidth": { "$ref": "#/$defs/numberOrNull" },
+        "borderRadius": { "$ref": "#/$defs/numberOrNull" },
+        "padding": {
+          "anyOf": [
+            { "$ref": "#/$defs/simplePadding" },
+            { "type": "null" }
+          ]
+        },
+        "hoverBackgroundColor": { "$ref": "#/$defs/colorOrNull" },
+        "hoverFontColor": { "$ref": "#/$defs/colorOrNull" },
+        "hoverBorderColor": { "$ref": "#/$defs/colorOrNull" },
+        "layoutIntent": {
+          "type": "string",
+          "enum": ["full-width", "content-sized", "fixed-width", "icon-only", "unknown"]
+        }
+      }
+    },
+    "productCardStyle": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["description"],
+      "properties": {
+        "description": { "type": "string" },
+        "evidenceQuality": { "type": "string", "enum": ["none", "weak", "medium", "strong"] },
+        "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+        "titleColor": { "$ref": "#/$defs/colorOrNull" },
+        "priceColor": { "$ref": "#/$defs/colorOrNull" },
+        "priceColorState": { "$ref": "#/$defs/colorMeasurementState" },
+        "oldPriceColor": { "$ref": "#/$defs/colorOrNull" },
+        "borderColor": { "$ref": "#/$defs/colorOrNull" },
+        "borderWidth": { "$ref": "#/$defs/numberOrNull" },
+        "ctaPadding": {
+          "anyOf": [
+            { "$ref": "#/$defs/simplePadding" },
+            { "type": "null" }
+          ]
+        },
+        "surface": { "$ref": "#/$defs/neutralSurface" },
+        "titleTypography": { "$ref": "#/$defs/neutralTitleTypography" },
+        "priceTypography": { "$ref": "#/$defs/neutralTitleTypography" },
+        "oldPriceTypography": { "$ref": "#/$defs/neutralTitleTypography" },
+        "ctaTypography": { "$ref": "#/$defs/neutralTitleTypography" },
+        "cta": { "$ref": "#/$defs/neutralCta" },
+        "contentAlign": {
+          "type": ["string", "null"],
+          "enum": ["left", "center", null],
+          "description": "Agent-selected alignment for this observed card: left or center, or null when unresolved. No vote across other cards; downstream consumers may apply this explicit choice."
+        },
+        "oldPricePosition": {
+          "type": ["string", "null"],
+          "enum": ["top", "left", "right", null],
+          "description": "Agent-selected old-price placement for this card: top, left or right; null when absent or unresolved. Technical selection separately records observed, absent and unresolved old-price evidence."
+        },
+        "recommendedVariantIndex": {
+          "type": ["integer", "null"],
+          "minimum": 0,
+          "maximum": 4,
+          "description": "Agent-selected existing email product-card module, 0 through 4, with a source-based reason. Public schema null remains valid for old or incomplete kits, but no consumer-side scorer exists: build_product_card_bundle.py raises WorkflowError for --variant auto without an integer 0..4. A null result is not ready for unattended onboarding and needs an explicit supported module choice; do not fabricate that choice merely to validate a partial kit."
+        },
+        "recommendedVariantReason": {
+          "type": ["string", "null"],
+          "description": "Concise agent rationale for the selected card variant and any material structural compromise."
+        },
+        "missingEvidence": { "$ref": "#/$defs/stringList" }
+      }
+    },
+    "productCardStyleList": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/productCardStyle" }
+    },
+    "contacts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["emails", "phones", "addresses"],
+      "properties": {
+        "emails": { "$ref": "#/$defs/stringList", "description": "Canonical usable email facts only; never visible labels or prose." },
+        "phones": { "$ref": "#/$defs/stringList", "description": "Canonical usable phone facts only; never visible labels or prose." },
+        "addresses": { "$ref": "#/$defs/stringList" }
+      }
+    },
+    "socials": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "facebook",
+        "youtube",
+        "instagram",
+        "tiktok",
+        "twitter",
+        "x",
+        "snapchat",
+        "pinterest",
+        "linkedin",
+        "android",
+        "apple",
+        "rss",
+        "yelp",
+        "threads",
+        "discord",
+        "twitch",
+        "whatsapp",
+        "viber",
+        "telegram",
+        "messenger"
+      ],
+      "properties": {
+        "facebook": { "type": "string" },
+        "youtube": { "type": "string" },
+        "instagram": { "type": "string" },
+        "tiktok": { "type": "string" },
+        "twitter": { "type": "string" },
+        "x": { "type": "string" },
+        "snapchat": { "type": "string" },
+        "pinterest": { "type": "string" },
+        "linkedin": { "type": "string" },
+        "android": { "type": "string" },
+        "apple": { "type": "string" },
+        "rss": { "type": "string" },
+        "yelp": { "type": "string" },
+        "threads": { "type": "string" },
+        "discord": { "type": "string" },
+        "twitch": { "type": "string" },
+        "whatsapp": { "type": "string" },
+        "viber": { "type": "string" },
+        "telegram": { "type": "string" },
+        "messenger": { "type": "string" }
+      }
+    },
+    "importantLinks": {
+      "type": "array",
+      "description": "Customer-visible navigation ordered by usefulness for this business. Consumers may display only the first entries.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name", "url"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Concise customer-visible label preserving the observed link's meaning and source language."
+          },
+          "url": { "type": "string" }
+        }
+      }
+    }
+  }
+}
+```
+<!-- source-boundary:schema.json:end -->
+
+<!-- installed-website-section:02:end -->

@@ -16,7 +16,12 @@ model acquisition, persistence, and verification. Follow it for every MCP
 step below; `<bundle-root>/mcp-tools.json` lists the tool names. The bundle contains no MCP
 endpoint or credential; use the Stripo MCP server and authorized file-transfer mechanism
 configured by the consuming agent.
-If the host installs `HOST.md` beside this file, read it for the concrete transfer commands.
+If the host installs `HOST.md` beside this file, read it for the concrete transfer commands and available image workflow.
+
+When repairing a draft created from a reference, retain its chosen Exact, Tailored, or Creative
+regime and original PNG baseline. For Exact, preserve source choices, reuse existing assets or
+crops before considering AI generation, and compare the repaired PNGs with the original source.
+Do not reset the regime or adapt the branding during the repair.
 
 Validation runs the editor's own Document State rules bundled into the SDK. No schema download
 or initialization is required. `bundle.json.editorValidator` records the editor revision.
@@ -31,9 +36,9 @@ installed `skills/` and `packages/` directories.
 
 - The model is a file. Never paste the complete model into the conversation or pass it as an MCP
   argument.
-- The candidate is the complete model. Persistence replaces the whole document by diffing it
-  against the live state, so an optional key that is absent from the candidate is a deletion, not
-  "unchanged" (see Model completeness). Never strip keys or upload a partial document; the runner
+- The candidate and base are complete models. Persistence applies the differences from the base
+  to the candidate on top of the live state. Omitting an acquired optional key requests deletion,
+  not "unchanged" (see Model completeness). Never strip keys or upload a partial document; the runner
   rejects a candidate that lost a key the acquired model had, except for supported explicit clears.
 - Express each request as a small JavaScript module that mutates the supplied `email` SDK handle.
   Return nothing; the runner finishes its tracked session and rejects returned replacement documents.
@@ -74,8 +79,10 @@ Use the inspection report to identify node ids, message areas, block types, visi
 image sources, effective visibility, duplicate ids, and the before-edit census. Inspect relevant
 source nodes directly when exact content matters. IDs belong to this acquisition only.
 
-Do not target inert `moduleId` metadata. Prefer a unique node id. Use a selector only when its
-meaning is intentional for every matched node.
+`moduleId` identifies a saved library module; it is different from a structural node `id`.
+The pinned editor contract makes `moduleId` read-only. Preserve it during ordinary content
+edits. Prefer a unique node id to address an edit; a `moduleId` selector also matches descendants,
+so constrain its node kind and check cardinality before changing content.
 
 ## 2. Write the change module
 
@@ -120,7 +127,8 @@ Use `email.one(selector)` when exactly one match is required, or `email.block(id
 a type-checked block. `within` restricts a selector to a subtree. Use `patchSettings(patch)`
 for supported settings; unknown keys, arbitrary collection arrays and `undefined` are errors.
 Use collection methods for social/menu items, `setSpacerMode` for spacer variants, and
-`resetSettings(paths)` for confirmed resets. `node.describe()` exposes the pinned contract.
+`resetSettings(paths)` for confirmed resets. A line spacer's `settings.mobileBorder` overrides
+its mobile line; `null` inherits `border`. `node.describe()` exposes the pinned contract.
 Each method is atomic. The synchronous module may also receive `transaction` and group
 related changes with `transaction(email => { ... })`; failure restores the whole group.
 All ten native block types are represented. Timer reads and unrelated supported edits are
@@ -272,7 +280,7 @@ and `email.resetSettings(["general.customListStyles"])` disables custom list for
 | `settings.general` | `backgroundImage`, `customListStyles` |
 | `settings.stripes.<area>` (`header`, `content`, `footer`, `infoArea`) | `paragraphBottomSpace` |
 | `settings.stripes.<area>` (`header`, `footer`) | `backgroundImage` |
-| `settings.headings.h1` through `settings.headings.h6` | `fontWeight`, `paragraphBottomSpace` |
+| `settings.headings.h1` through `settings.headings.h6` | `fontWeight`, `paragraphBottomSpace`, `fontSize.desktop`, `fontSize.mobile`, `lineHeight.desktop`, `lineHeight.mobile`, `textAlign.mobile` |
 | `settings.<section>.darkTheme` | every color |
 
 A nested patch works the same way: `email.setTheme("settings.general", {backgroundImage: undefined})`.
@@ -327,8 +335,14 @@ get_screenshot(id=<id>, type=<type>, mode="BOTH")
 Download the fresh model and both PNG artifacts through the authorized transfer path. Inspect
 the model for the exact requested values, link destinations, image URLs, alt text, merge tags, and
 preserved content. Compare its depth-agnostic per-type block census with the acquisition census.
-IDs may change between reads, so compare counts and types rather than ids.
+Structural node IDs may change between reads, so compare counts and types rather than those ids.
+Saved-library `moduleId` values are persistent identities and must still match. For an explicit
+module request, verify the requested ID and content on the final saved target; translated text,
+a matching module count, or a successful write receipt alone cannot establish replacement.
 After a structural edit, compare the census with the intended additions, removals, or duplication.
+The merged result may also contain concurrent edits. Whole-target equality or an unchanged
+block count is not required: verify the requested changes and investigate unexplained loss,
+while preserving unrelated live additions and edits.
 After a metadata edit, compare the fresh model's `metadata.title`, `metadata.preheader.text`, and
 `metadata.preheader.fillSpace` with the requested values and the preserved fields. Hidden metadata
 is verified from JSON; an unchanged screenshot is expected for a metadata-only edit.
@@ -354,7 +368,7 @@ fresh model read is the durable check. `PARTIAL` or unavailable previews mean "s
 verification incomplete" when the model checks pass.
 
 Do not rerun the change module for verification. Report full success only when persistence, model
-checks, and both visual checks pass. If PNG generation, download, or inspection is unavailable or
+checks, and the required visual checks pass. If PNG generation, download, or inspection is unavailable or
 fails after a bounded retry, report "saved, visual verification incomplete" when persistence and
 model checks passed. Keep the same id for a later preview retry. Do not substitute an HTML
 export, inspect HTML as the visual check, or repeat a successful write to obtain a preview.
@@ -367,5 +381,6 @@ export, inspect HTML as the visual check, or repeat a successful write to obtain
   preheader are supported through `email.setMetadata()` and `set_document_state`.
 - Do not use compiled HTML as the editable source of truth.
 - Do not mutate a message that has no native editor model.
-- Do not generate image assets or infer MCP endpoints, credentials, or authentication.
+- Do not generate image assets.
+- Do not infer MCP endpoints, credentials, or authentication.
 - Use `email-from-reference` for a new persisted email.

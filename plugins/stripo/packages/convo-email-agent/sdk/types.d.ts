@@ -208,6 +208,7 @@ export interface EmailDocument {
     block<K extends BlockKind>(id: string, expectedType: K): TypedBlockNode<K>;
     patchSettings(patch: DeepPatch<DocumentState['settings']>): EmailDocument;
     resetSettings(paths: readonly string[]): EmailDocument;
+    /** Replace native font resources. Each fontFamily key matches the complete assigned stack, including fallbacks. */
     setFonts(fonts: NonNullable<NonNullable<DocumentState['resources']>['fonts']>): EmailDocument;
     setContent(id: string, value: string, disambiguateBy?: DisambiguateBy): EmailNode;
     setText(id: string, value: string, disambiguateBy?: DisambiguateBy): EmailNode;
