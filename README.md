@@ -3,8 +3,10 @@
 Skills for creating and editing emails and templates in Stripo with AI agents.
 Requires a connected Stripo MCP server.
 
-The plugin is `stripo`, distributed through the `stripo` marketplace in this repository.
-It includes the skills and their SDK. MCP access is configured separately in each agent.
+The plugin is `stripo`. It includes the skills and their SDK and is built for any agent that
+loads skills in the `SKILL.md` format and can use a shell and MCP tools. Claude Code and Codex
+install it from the `stripo` marketplace in this repository; [other agents](#other-agents) load
+the same package from a checkout. MCP access is configured separately in each agent.
 
 ## Included skills
 
@@ -14,13 +16,14 @@ It includes the skills and their SDK. MCP access is configured separately in eac
 | `email-from-reference` | Create an email from a brief, HTML, screenshot or another authorized reference; rebuild an explicitly selected email or template. |
 | `business-profile` | Read, audit and update a project's business profile using its emails as evidence. |
 
-The current Claude Code/Codex host adapter does not support Business Profile extraction from
-websites. It also provides no image generation or asset-upload workflow. See the packaged
+The packaged host adapter does not support Business Profile extraction from websites. It also
+provides no image generation or asset-upload workflow. See the packaged
 [host capabilities](host/business-profile/HOST.md) before planning those workflows.
 
 ## Requirements
 
-- Claude Code or Codex with plugin support and permission to use a shell, local files and MCP tools.
+- An AI agent that loads skills in the `SKILL.md` format, with permission to use a shell, local
+  files and MCP tools. Claude Code and Codex install the plugin natively.
 - Node.js **20.18.1+**, `curl`, and a POSIX shell, such as on macOS, Linux or WSL.
 - An agent that can inspect the desktop and mobile PNG previews for visual verification.
 - A Stripo organization with MCP enabled, its OAuth client ID, and access to the intended project.
@@ -31,8 +34,7 @@ repository or an npm install inside the plugin. The documented Business Profile 
 does not require Python or browser-runtime setup.
 
 Keep the complete `plugins/stripo/` package together. Copying only `skills/` loses the sibling
-`packages/` directory and breaks the SDK runners. Installation instructions below cover Claude
-Code and Codex; other agents need their own installation and runtime verification.
+`packages/` directory and breaks the SDK runners.
 
 ## Install and connect MCP
 
@@ -49,6 +51,16 @@ In Claude Code:
 /plugin marketplace add stripoinc/agent-plugin
 /plugin install stripo@stripo
 ```
+
+The same from a terminal, which an agent can run when you ask it to install the plugin:
+
+```bash
+claude plugin marketplace add stripoinc/agent-plugin
+claude plugin install stripo@stripo
+```
+
+Third-party marketplaces do not update on their own: turn on
+[automatic updates](#automatic-updates) for `stripo` right after installing.
 
 In a terminal, connect the MCP server using your organization's client ID. `--scope user` makes
 it available in every project, like the plugin; without it the server is registered only for the
@@ -88,6 +100,32 @@ skill by its plugin-prefixed name, for example `$stripo:email-model-editor`. For
 setup, complete login through the bridge; `codex mcp login` is for directly configured HTTP
 servers.
 
+### Other agents
+
+Any agent that loads skills in the `SKILL.md` format can use the package from a checkout. There
+is no native installer for these agents, so check the result in yours before relying on it.
+
+Clone the repository to a permanent location and place the package in the directory that holds
+your agent's `skills/` folder (`<agent-dir>` below; your agent's documentation names it). The
+skills, `packages/`, `mcp-tools.json` and `bundle.json` must end up side by side:
+
+```bash
+git clone https://github.com/stripoinc/agent-plugin.git
+cd agent-plugin/plugins/stripo
+ln -s "$PWD"/skills/* <agent-dir>/skills/
+ln -s "$PWD/packages" "$PWD/mcp-tools.json" "$PWD/bundle.json" <agent-dir>/
+```
+
+Copy the same entries instead when the agent does not follow links; if its folder is then not
+named `skills`, set `CONVO_EMAIL_AGENT_SDK_PATH` to
+`<agent-dir>/packages/convo-email-agent/index.js`. An installer that copies only the skill
+folders leaves the SDK behind.
+
+Connect the Stripo MCP server under the name `stripo-mcp`: the URL is
+`https://mcp.stripo.email/mcp`, with OAuth using your organization's client ID and the
+`mcp:tools` scope. An agent without OAuth support for remote MCP servers can run the
+`mcp-remote` bridge with the command and arguments shown for Codex.
+
 ### Verify the installation
 
 Check the tools on the machine where the agent runs:
@@ -99,6 +137,7 @@ curl --version
 
 For Claude Code, use `claude plugin list` and `claude mcp get stripo-mcp`.
 For Codex, use `codex plugin list` and `codex mcp get stripo-mcp`.
+In another agent, list its skills and MCP servers the way it provides.
 These commands inspect configuration; they do not prove successful authorization.
 
 In a new agent session, ask: **"Use Stripo MCP's `whoami` tool to verify my connection without
@@ -114,6 +153,7 @@ Code, `/reload-plugins` also applies the update):
 | --- | --- | --- |
 | Claude Code | `claude plugin marketplace update stripo`, then `claude plugin update stripo@stripo` | `claude plugin uninstall stripo@stripo` |
 | Codex | `codex plugin marketplace upgrade stripo` (it also reinstalls the plugin) | `codex plugin remove stripo@stripo` |
+| Other agents | `git pull` in the checkout; copy the entries again if you copied them | Remove the links or copies, then the checkout |
 
 Use the same installation scope that you selected initially. To remove the catalog as well,
 run `claude plugin marketplace remove stripo` or `codex plugin marketplace remove stripo`.

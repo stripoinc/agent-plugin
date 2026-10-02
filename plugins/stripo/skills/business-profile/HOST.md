@@ -1,30 +1,39 @@
-# Host notes: Claude Code and Codex
+# Host notes
 
-This skill is installed by the Stripo plugin. Both hosts run its commands with their shell tool
-and call the Stripo MCP tools themselves. This file is the host contract the skill refuses to
-infer. It needs `curl` on `PATH` and nothing else.
+This skill is part of the Stripo agent plugin. These notes apply to any agent that loads it;
+where Claude Code or Codex behave differently, they are named. The agent runs the skill's
+commands with its shell tool and calls the Stripo MCP tools itself. This file is the host
+contract the skill refuses to infer. It needs `curl` on `PATH` and nothing else.
 
 ## Paths
 
 - `${BRANDKIT_SKILL_ROOT}` is the directory holding this file (`${CLAUDE_SKILL_DIR}` in Claude
-  Code; in Codex the directory of `SKILL.md`).
+  Code; in Codex and other agents the directory of `SKILL.md`).
 - `${BRANDKIT_ARTIFACTS_ROOT}` is a fresh temporary directory per task: create it with
   `mktemp -d` and use its absolute path. Read the email procedure's
   `output/brandkit/runs/<UTC_TIMESTAMP>/` as a layout inside it. Do not write run artifacts into
   the user's project.
 
-## Plugin version
+## Plugin updates
 
-The installed plugin version is `version` in
-`${BRANDKIT_SKILL_ROOT}/../../.claude-plugin/plugin.json`. When the `whoami` response carries
-`agentPlugin.latestVersion` and it is newer, tell the user once that a plugin update is available
-and how to apply it after this task, then continue the task with the installed version. Without
-that field, or when `plugin.json` cannot be read, skip the check.
+Codex refreshes the plugin each time it starts. Claude Code updates it in the background only
+when auto-update is enabled for the `stripo` marketplace. An agent that loads the skills from a
+checkout of the plugin repository gets a new version only when that checkout is updated.
+
+When a Stripo MCP call fails in a way this skill does not explain, such as an unknown tool or
+parameter, the installed plugin may be older than the service. Tell the user and offer to update
+it; run the commands only with the user's consent:
 
 - Claude Code: `claude plugin marketplace update stripo`, then `claude plugin update stripo@stripo`
   (add `--scope project` or `--scope local` for a plugin installed at that scope), then
   `/reload-plugins` or a new session.
 - Codex: `codex plugin marketplace upgrade stripo`, then a new session.
+- Other agents: `git pull` in the checkout of https://github.com/stripoinc/agent-plugin the
+  skills were installed from (copy the package again if it was copied rather than linked), then
+  a new session.
+
+When the update reports that the plugin is already current, the failure has another cause:
+report it as the skill describes.
 
 ## What this host runs
 
@@ -77,10 +86,11 @@ sortOrder="desc")`; drafts are excluded unless `draft` is set. When the user ask
 emails instead.
 
 `publisher-runtime` and `publisher-proxy` are the shared text's names for a runtime this host does
-not have; ignore those rules and the `OPENAI_API_KEY` one with them. Authorization is per host,
+not have; ignore those rules and the `OPENAI_API_KEY` one with them. Authorization is per agent,
 through OAuth (Claude Code: `/mcp`; Codex: the browser login the `mcp-remote` bridge opens on its
-first start, or `codex mcp login stripo-mcp` for a server configured by `url`). Never paste tokens
-or credentials into the conversation, command arguments or files.
+first start, or `codex mcp login stripo-mcp` for a server configured by `url`; other agents:
+their own login flow for the server). Never paste tokens or credentials into the conversation,
+command arguments or files.
 
 ## Artifact transfer
 
