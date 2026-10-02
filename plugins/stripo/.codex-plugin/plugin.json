@@ -1,7 +1,7 @@
 {
   "name": "stripo",
   "version": "0.6.0",
-  "description": "Create and edit Stripo emails and templates through the Stripo MCP: native JSON-model skills backed by the bundled SDK.",
+  "description": "Create and edit emails and templates with Stripo.",
   "author": {
     "name": "Stripo",
     "url": "https://stripo.email"
@@ -17,8 +17,8 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "Stripo",
-    "shortDescription": "Create and edit Stripo emails through their native JSON model",
-    "longDescription": "Create new Stripo emails from a text description or an existing email, template, HTML or screenshot, and make bounded copy, link, image and style edits to existing emails and templates. Changes go through the native editor JSON model and the Stripo MCP, then are verified by reading the saved model back and inspecting desktop and mobile previews.",
+    "shortDescription": "Create and edit emails and templates with Stripo.",
+    "longDescription": "Create emails from a brief, template, HTML or screenshot. Edit text, links, images and styles in existing emails and templates, and review desktop and mobile previews. Requires a connected Stripo MCP server.",
     "developerName": "Stripo",
     "category": "Productivity",
     "capabilities": [

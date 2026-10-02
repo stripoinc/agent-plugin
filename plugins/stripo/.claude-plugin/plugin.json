@@ -1,7 +1,7 @@
 {
   "name": "stripo",
   "version": "0.6.0",
-  "description": "Create and edit Stripo emails and templates through the Stripo MCP: native JSON-model skills backed by the bundled SDK.",
+  "description": "Create and edit emails and templates with Stripo.",
   "author": {
     "name": "Stripo",
     "url": "https://stripo.email"

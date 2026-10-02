@@ -1,6 +1,7 @@
-# Stripo agent plugin
+# Stripo Agent Plugin
 
-Marketplace repository for the `stripo` plugin.
+Skills for creating and editing emails and templates in Stripo with AI agents.
+Requires a connected Stripo MCP server.
 
 ## Install
 

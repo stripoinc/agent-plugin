@@ -4,13 +4,13 @@
     "name": "Stripo"
   },
   "metadata": {
-    "description": "Stripo plugins for Claude Code and Codex."
+    "description": "Stripo Agent Plugin for Claude Code and Codex."
   },
   "plugins": [
     {
       "name": "stripo",
       "source": "./plugins/stripo",
-      "description": "Create and edit Stripo emails and templates through the Stripo MCP with native JSON-model skills.",
+      "description": "Create and edit emails and templates with Stripo.",
       "version": "0.6.0",
       "category": "productivity",
       "keywords": [
