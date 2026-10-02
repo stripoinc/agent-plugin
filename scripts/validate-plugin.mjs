@@ -6,7 +6,10 @@ import path from "node:path";
 import {pathToFileURL} from "node:url";
 import semver from "semver";
 import {parseDocument} from "yaml";
-import {ROOT, PLUGIN, bundleSkills, generateMetadata, readJson, requireCondition} from "./lib/plugin.mjs";
+import {ROOT, PLUGIN, bundleSkills, generateMetadata, readJson, requireCondition, walkFiles} from "./lib/plugin.mjs";
+
+// Generated at the plugin root, outside the inventoried bundle items.
+const PLUGIN_ROOT_FILES = [".claude-plugin/plugin.json", ".codex-plugin/plugin.json", ".generated"];
 
 function requirePath(root, relative, kind = "file") {
   requireCondition(typeof relative === "string" && relative.startsWith("./"), `Expected a bundle-relative path: ${relative}`);
@@ -25,10 +28,16 @@ function exportPaths(value) {
 
 export function validatePlugin(root = ROOT) {
   generateMetadata(root, {check: true});
+  // Hosts load hooks/, .mcp.json, commands/ and agents/ from the plugin root by convention,
+  // so the package may hold only the inventoried files and the generated manifests.
+  const expected = new Set([...Object.keys(readJson(root, "bundle-integrity.json").files), ...PLUGIN_ROOT_FILES]);
+  // .DS_Store is gitignored, so Finder metadata never reaches a release.
+  const unexpected = walkFiles(root, PLUGIN).map((file) => file.slice(PLUGIN.length + 1)).filter((file) => !expected.has(file) && path.basename(file) !== ".DS_Store");
+  requireCondition(unexpected.length === 0, `Unexpected files in ${PLUGIN} (not in bundle-integrity.json): ${unexpected.join(", ")}`);
   const bundle = readJson(root, `${PLUGIN}/bundle.json`);
   requireCondition(bundle.brand === "stripo" && bundle.sourceDirty === false, "Release bundle must be a clean Stripo build.");
   requireCondition(/^[a-f0-9]{40}$/u.test(bundle.sourceRevision), "Missing bundle source revision.");
-  requireCondition(bundle.editorValidator?.editorDirty === false && /^[a-f0-9]{64}$/u.test(bundle.editorValidator.bundleSha256), "Missing clean editor-validator provenance.");
+  requireCondition(bundle.editorValidator?.editorDirty === false && /^[a-f0-9]{40}$/u.test(bundle.editorValidator.editorRevision) && /^[a-f0-9]{64}$/u.test(bundle.editorValidator.bundleSha256), "Missing clean editor-validator provenance.");
   const skills = bundleSkills(root);
   const directories = readdirSync(path.join(root, PLUGIN, "skills"), {withFileTypes: true}).filter((entry) => entry.isDirectory()).map((entry) => entry.name).sort();
   requireCondition(JSON.stringify(directories) === JSON.stringify([...skills].sort()), "Skill directories do not match bundle.json.");
@@ -69,7 +78,8 @@ export function validatePlugin(root = ROOT) {
     const env = {...process.env};
     delete env.CONVO_EMAIL_AGENT_SDK_PATH;
     delete env.STRIPO_RUNTIME_PATH;
-    const code = `const sdk = await import(${JSON.stringify(`./plugin/${bundle.sdk.slice(2)}`)});\nfor (const name of ["assertValidEmailModel", "validateEmailDocument", "createEmailSdk"]) { if (typeof sdk[name] !== "function") throw new Error("Missing SDK export: " + name); }`;
+    // The contract comparison ties bundle.json provenance to the validator the SDK actually carries.
+    const code = `const sdk = await import(${JSON.stringify(`./plugin/${bundle.sdk.slice(2)}`)});\nfor (const name of ["assertValidEmailModel", "validateEmailDocument", "createEmailSdk", "getContract"]) { if (typeof sdk[name] !== "function") throw new Error("Missing SDK export: " + name); }\nconst contract = sdk.getContract();\nif (contract.editorRevision !== ${JSON.stringify(bundle.editorValidator.editorRevision)} || contract.validatorSha256 !== ${JSON.stringify(bundle.editorValidator.bundleSha256)}) throw new Error("SDK contract (" + contract.editorRevision + ", " + contract.validatorSha256 + ") differs from bundle.json editorValidator.");`;
     const result = spawnSync(process.execPath, ["--input-type=module", "--eval", code], {cwd: isolated, env, encoding: "utf8"});
     requireCondition(!result.error && result.status === 0, `SDK failed in an isolated installed copy: ${result.error?.message ?? result.stderr}`);
   } finally {

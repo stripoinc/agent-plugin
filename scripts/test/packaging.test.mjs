@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import {execFileSync, spawnSync} from "node:child_process";
-import {chmodSync, cpSync, mkdtempSync, readFileSync, rmSync, statSync, symlinkSync, writeFileSync} from "node:fs";
+import {chmodSync, cpSync, mkdirSync, mkdtempSync, readFileSync, rmSync, statSync, symlinkSync, writeFileSync} from "node:fs";
 import {tmpdir} from "node:os";
 import path from "node:path";
 import test from "node:test";
@@ -61,12 +61,36 @@ test("the integrity inventory detects missing and edited packaged files", (t) =>
   const declaration = path.join(root, PLUGIN, "packages/convo-email-agent/sdk/document.d.ts");
   const original = readFileSync(declaration);
   rmSync(declaration);
-  assert.throws(() => validatePlugin(root), /bundle-integrity.json/u);
+  assert.throws(() => validatePlugin(root), /bundle-integrity.json[\s\S]*sdk\/document\.d\.ts \(missing\)/u);
   writeFileSync(declaration, original);
   writeFileSync(path.join(root, PLUGIN, "packages/convo-email-agent/index.js"), "throw new Error('broken bundle');\n");
-  assert.throws(() => validatePlugin(root), /bundle-integrity.json/u);
+  writeFileSync(path.join(root, PLUGIN, "skills/email-model-editor/extra.md"), "Unlisted\n");
+  assert.throws(() => validatePlugin(root), /bundle-integrity.json[\s\S]*convo-email-agent\/index\.js \(changed\)[\s\S]*extra\.md \(not in the inventory\)/u);
+  rmSync(path.join(root, PLUGIN, "skills/email-model-editor/extra.md"));
   generateMetadata(root);
   assert.throws(() => validatePlugin(root), /SDK failed in an isolated installed copy/u);
+});
+
+test("validation rejects unlisted plugin components and provenance that disagrees with the SDK", (t) => {
+  const root = fixture(t);
+  for (const file of ["hooks/hooks.json", ".mcp.json"]) {
+    const planted = path.join(root, PLUGIN, file);
+    mkdirSync(path.dirname(planted), {recursive: true});
+    writeFileSync(planted, "{}\n");
+    assert.throws(() => validatePlugin(root), (error) => error.message.includes("Unexpected files") && error.message.includes(file));
+    rmSync(planted);
+  }
+  writeFileSync(path.join(root, PLUGIN, ".DS_Store"), "");
+  validatePlugin(root);
+  const original = readJson(root, `${PLUGIN}/bundle.json`);
+  for (const [field, value] of [["bundleSha256", "f".repeat(64)], ["editorRevision", "a".repeat(40)]]) {
+    writeFileSync(path.join(root, PLUGIN, "bundle.json"), json({...original, editorValidator: {...original.editorValidator, [field]: value}}));
+    generateMetadata(root);
+    assert.throws(() => validatePlugin(root), /Error: SDK contract \([a-f0-9]{40}, [a-f0-9]{64}\) differs/u);
+  }
+  writeFileSync(path.join(root, PLUGIN, "bundle.json"), json({...original, editorValidator: {...original.editorValidator, editorRevision: "not-a-sha"}}));
+  generateMetadata(root);
+  assert.throws(() => validatePlugin(root), /Missing clean editor-validator provenance/u);
 });
 
 test("host changes are generated and executable helper permissions are preserved", (t) => {

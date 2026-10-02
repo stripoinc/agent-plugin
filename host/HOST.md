@@ -10,6 +10,18 @@ tool and move files with `curl`. The machine needs Node.js 20.18.1+ and `curl` o
 - In both hosts `<bundle-root>` is two levels above `<skill-dir>`: it holds `skills/`,
   `packages/` and `mcp-tools.json`. Keep that layout; the runners locate the SDK through it.
 
+## Plugin version
+
+The installed plugin version is `version` in `<bundle-root>/.claude-plugin/plugin.json`. When the
+`whoami` response carries `agentPlugin.latestVersion` and it is newer, tell the user once that a
+plugin update is available and how to apply it after this task, then continue the task with the
+installed version. Without that field, or when `plugin.json` cannot be read, skip the check.
+
+- Claude Code: `claude plugin marketplace update stripo`, then `claude plugin update stripo@stripo`
+  (add `--scope project` or `--scope local` for a plugin installed at that scope), then
+  `/reload-plugins` or a new session.
+- Codex: `codex plugin marketplace upgrade stripo`, then a new session.
+
 ## Working directory
 
 Create a fresh temporary directory per task (`mktemp -d`) and keep every file there: the

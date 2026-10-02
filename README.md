@@ -50,14 +50,19 @@ In Claude Code:
 /plugin install stripo@stripo
 ```
 
-In a terminal, connect the MCP server using your organization's client ID:
+In a terminal, connect the MCP server using your organization's client ID. `--scope user` makes
+it available in every project, like the plugin; without it the server is registered only for the
+current project:
 
 ```bash
-claude mcp add-json stripo-mcp '{"type":"http","url":"https://mcp.stripo.email/mcp","oauth":{"clientId":"<CLIENT_ID>","callbackPort":8080,"scopes":"openid profile email mcp:tools"}}'
+claude mcp add-json --scope user stripo-mcp '{"type":"http","url":"https://mcp.stripo.email/mcp","oauth":{"clientId":"<CLIENT_ID>","callbackPort":8080,"scopes":"mcp:tools"}}'
 ```
 
-Open `/mcp` in Claude Code and complete the browser login. Start a new session to load the
-installed skills. Invoke them with the `stripo:` prefix, for example
+If you added the server earlier without `--scope`, remove that entry first in the project where
+you added it: `claude mcp remove stripo-mcp -s local`.
+
+Open `/mcp` in Claude Code and complete the browser login. Run `/reload-plugins` or start a new
+session to load the installed skills. Invoke them with the `stripo:` prefix, for example
 `/stripo:email-model-editor`.
 
 ### Codex
@@ -68,18 +73,20 @@ codex plugin add stripo@stripo
 ```
 
 Add the server to `~/.codex/config.toml`, substituting your organization's client ID. This setup
-uses the `mcp-remote` bridge through `npx` (included with npm):
+uses the `mcp-remote` bridge through `npx` (included with npm). The bridge handles your OAuth
+login, so its version is pinned; raise it deliberately:
 
 ```toml
 [mcp_servers.stripo-mcp]
 command = "npx"
-args = ["-y", "mcp-remote", "https://mcp.stripo.email/mcp", "3334", "--static-oauth-client-info", "{\"client_id\":\"<CLIENT_ID>\"}", "--static-oauth-client-metadata", "{\"scope\":\"openid profile email mcp:tools\"}"]
+args = ["-y", "mcp-remote@0.14.3", "https://mcp.stripo.email/mcp", "3334", "--static-oauth-client-info", "{\"client_id\":\"<CLIENT_ID>\"}", "--static-oauth-client-metadata", "{\"scope\":\"mcp:tools offline_access\"}"]
 startup_timeout_sec = 60
 ```
 
 On its first start the bridge opens the browser login. Start a new Codex session and invoke a
-skill by name, for example `$email-model-editor`. For this bridge setup, complete login through
-the bridge; `codex mcp login` is for directly configured HTTP servers.
+skill by its plugin-prefixed name, for example `$stripo:email-model-editor`. For this bridge
+setup, complete login through the bridge; `codex mcp login` is for directly configured HTTP
+servers.
 
 ### Verify the installation
 
@@ -100,24 +107,54 @@ fails, finish MCP setup before invoking an editing skill.
 
 ## Update or uninstall
 
-Refresh the marketplace and update the installed plugin, then start a new session:
+Refresh the marketplace and update the installed plugin, then start a new session (in Claude
+Code, `/reload-plugins` also applies the update):
 
 | Agent | Update | Uninstall |
 | --- | --- | --- |
 | Claude Code | `claude plugin marketplace update stripo`, then `claude plugin update stripo@stripo` | `claude plugin uninstall stripo@stripo` |
-| Codex | `codex plugin marketplace upgrade stripo`, then `codex plugin add stripo@stripo` | `codex plugin remove stripo@stripo` |
+| Codex | `codex plugin marketplace upgrade stripo` (it also reinstalls the plugin) | `codex plugin remove stripo@stripo` |
 
 Use the same installation scope that you selected initially. To remove the catalog as well,
 run `claude plugin marketplace remove stripo` or `codex plugin marketplace remove stripo`.
 The manually configured MCP connection is separate: remove it with
 `claude mcp remove stripo-mcp` or `codex mcp remove stripo-mcp` when it is no longer needed.
 
+### Automatic updates
+
+Codex refreshes configured Git marketplaces in the background each time it starts and reinstalls
+their plugins when a marketplace changed, so a release is active from the next start at the
+latest.
+
+Claude Code does not auto-update third-party marketplaces by default. Turn it on for `stripo` in
+`/plugin` → **Marketplaces** → `stripo` → **Enable auto-update**, or declare it in
+`~/.claude/settings.json`. On a machine without the plugin the same block also installs it when
+the next interactive session starts:
+
+```json
+{
+  "extraKnownMarketplaces": {
+    "stripo": {
+      "source": {"source": "github", "repo": "stripoinc/agent-plugin"},
+      "autoUpdate": true
+    }
+  },
+  "enabledPlugins": {"stripo@stripo": true}
+}
+```
+
+If `settings.json` already has these keys, merge the entries instead of replacing the file. After
+an install through this block the skills appear in that session, but `claude plugin list` may
+show the plugin only after a later one. Claude Code checks for updates in the background of an
+interactive session, within about ten minutes of your first message; the running session keeps
+its loaded version until `/reload-plugins` or the next session.
+
 ## Troubleshooting
 
 | Symptom | What to check |
 | --- | --- |
 | Marketplace or plugin command is unknown | Update the agent to a version with plugin support. |
-| Skills do not appear, or an old version is still active | Confirm the plugin is installed and enabled, refresh it, and start a new session. Check the installed version against `plugin-metadata.json`. |
+| Skills do not appear, or an old version is still active | Confirm the plugin is installed and enabled, update it, and run `/reload-plugins` (Claude Code) or start a new session. `claude plugin list` or `codex plugin list` prints the installed version; the released one is `version` in [`plugin-metadata.json`](plugin-metadata.json). |
 | The same skill appears twice | Check for earlier manually copied skills in the agent's personal/project skill directories. Remove only the obsolete copies after confirming which plugin supplies the current version. |
 | `stripo-mcp` is missing or reports authentication errors | Check the exact server name, organization client ID and completed browser login. Verify live access with `whoami`. |
 | The Codex bridge does not start | Check `node`/`npx` on the agent's PATH, network access for `mcp-remote`, and port 3334 availability. |
@@ -168,8 +205,11 @@ including prerelease regressions.
 README-only changes do not require a release bump.
 
 Commit the sources and their generated outputs together. `npm run check:generated` checks them
-without writing; `npm run generate` updates the integrity inventory, so review every packaged
-file change rather than using generation to accept unexplained edits or deletions.
+without writing and names the packaged files that differ from the inventory; `npm run generate`
+updates the integrity inventory, so review every packaged file change rather than using
+generation to accept unexplained edits or deletions. Validation also rejects any file in
+`plugins/stripo/` that is neither inventoried nor a generated manifest, such as a stray
+`hooks/` directory or `.mcp.json`, because hosts load those from the plugin root.
 
 ### Sync a new upstream bundle
 
@@ -192,7 +232,8 @@ from the build; do not edit it by hand. `--allow-dirty` is for local investigati
 rejects dirty release bundles.
 
 Public CI validates the committed distribution on Node.js 20.18.1, 22 and 24. It checks generated
-files, skill frontmatter, declared package paths, MCP tool mappings, bundle provenance and SDK
+files, the exact packaged file set, skill frontmatter, declared package paths, MCP tool mappings,
+the format of bundle provenance and its agreement with the packaged SDK contract, and SDK
 loading from an isolated installed copy. PRs changing the bundle, metadata, host files or
 packaging tools require a higher version. CI needs no private checkout, MCP account or OAuth
 credentials. These checks do not verify live MCP persistence or OAuth; exercise those separately

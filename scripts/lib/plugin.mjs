@@ -177,6 +177,21 @@ export function generateMetadata(root = ROOT, {check = false, metadata = loadMet
       if (executable !== null) chmodSync(destination, (lstatSync(destination).mode & ~0o111) | executable);
     }
   }
-  requireCondition(stale.length === 0, `Generated files are out of date:\n${stale.join("\n")}\nRun npm run generate and review the diff.`);
+  // Regeneration re-hashes whatever is on disk, so name the packaged files behind a stale
+  // inventory instead of only pointing at the command that would accept them.
+  const differences = stale.includes("bundle-integrity.json") ? inventoryDifferences(root, files.get("bundle-integrity.json")) : [];
+  const hint = differences.length > 0
+    ? `Inventory entries that would change:\n${differences.join("\n")}\nSkill and SDK files change only through scripts/sync-bundle.mjs: restore an unintended edit. After an intended metadata or host change, run npm run generate and review the diff.`
+    : "Run npm run generate and review the diff.";
+  requireCondition(stale.length === 0, `Generated files are out of date:\n${stale.join("\n")}\n${hint}`);
   return files.size;
+}
+
+function inventoryDifferences(root, computed) {
+  if (!existsSync(path.join(root, "bundle-integrity.json"))) return [];
+  const recorded = readJson(root, "bundle-integrity.json").files ?? {};
+  const current = JSON.parse(computed).files;
+  return [...new Set([...Object.keys(recorded), ...Object.keys(current)])].sort()
+    .filter((file) => recorded[file] !== current[file])
+    .map((file) => `${PLUGIN}/${file} (${file in current ? (file in recorded ? "changed" : "not in the inventory") : "missing"})`);
 }

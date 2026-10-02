@@ -13,6 +13,19 @@ infer. It needs `curl` on `PATH` and nothing else.
   `output/brandkit/runs/<UTC_TIMESTAMP>/` as a layout inside it. Do not write run artifacts into
   the user's project.
 
+## Plugin version
+
+The installed plugin version is `version` in
+`${BRANDKIT_SKILL_ROOT}/../../.claude-plugin/plugin.json`. When the `whoami` response carries
+`agentPlugin.latestVersion` and it is newer, tell the user once that a plugin update is available
+and how to apply it after this task, then continue the task with the installed version. Without
+that field, or when `plugin.json` cannot be read, skip the check.
+
+- Claude Code: `claude plugin marketplace update stripo`, then `claude plugin update stripo@stripo`
+  (add `--scope project` or `--scope local` for a plugin installed at that scope), then
+  `/reload-plugins` or a new session.
+- Codex: `codex plugin marketplace upgrade stripo`, then a new session.
+
 ## What this host runs
 
 - **Email evidence** (read, check/audit, fill, reconcile, update from the project's emails) is
