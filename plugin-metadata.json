@@ -14,8 +14,16 @@
     "email-template",
     "mcp"
   ],
-  "skills": "./skills/",
-  "interface": {
+  "marketplace": {
+    "name": "stripo",
+    "description": "Stripo Agent Plugin for Claude Code and Codex.",
+    "category": "productivity",
+    "policy": {
+      "installation": "AVAILABLE",
+      "authentication": "ON_INSTALL"
+    }
+  },
+  "codexInterface": {
     "displayName": "Stripo",
     "longDescription": "Create emails from a brief, template, HTML or screenshot. Edit text, links, images and styles in existing emails and templates, and review desktop and mobile previews. Requires a connected Stripo MCP server.",
     "category": "Productivity",
@@ -26,9 +34,11 @@
     "defaultPrompt": [
       "Create a new Stripo email from this description",
       "Change the copy, links or images in an existing Stripo email"
-    ],
-    "shortDescription": "Create and edit emails and templates with Stripo.",
-    "developerName": "Stripo",
-    "websiteURL": "https://stripo.email"
+    ]
+  },
+  "mcpDependency": {
+    "type": "mcp",
+    "value": "stripo-mcp",
+    "description": "Stripo MCP server for emails, templates and business profiles. Configure and authorize it in your agent using your organization's OAuth client ID; see the plugin README."
   }
 }

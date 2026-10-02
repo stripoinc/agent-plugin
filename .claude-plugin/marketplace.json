@@ -11,11 +11,12 @@
       "name": "stripo",
       "source": "./plugins/stripo",
       "description": "Create and edit emails and templates with Stripo.",
-      "version": "0.6.0",
+      "version": "0.6.1",
       "category": "productivity",
       "keywords": [
         "stripo",
         "email",
+        "email-template",
         "mcp"
       ]
     }

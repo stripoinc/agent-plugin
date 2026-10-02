@@ -1,7 +1,7 @@
 # Host notes: Claude Code and Codex
 
 This skill is installed by the Stripo plugin. Both hosts run the skill runners with their shell
-tool and move files with `curl`. The machine needs Node.js 20+ and `curl` on `PATH`.
+tool and move files with `curl`. The machine needs Node.js 20.18.1+ and `curl` on `PATH`.
 
 ## Paths
 

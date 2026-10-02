@@ -4,3 +4,8 @@ interface:
   default_prompt: "Use $email-model-editor to edit an existing Stripo email through a generated SDK mutation module and verify the saved model and desktop/mobile PNGs."
 policy:
   allow_implicit_invocation: true
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "stripo-mcp"
+      description: "Stripo MCP server for emails, templates and business profiles. Configure and authorize it in your agent using your organization's OAuth client ID; see the plugin README."

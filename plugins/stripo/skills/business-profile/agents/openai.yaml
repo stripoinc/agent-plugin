@@ -4,3 +4,8 @@ interface:
   default_prompt: "Use $business-profile to build or update the selected business profile from the evidence I provide."
 policy:
   allow_implicit_invocation: true
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "stripo-mcp"
+      description: "Stripo MCP server for emails, templates and business profiles. Configure and authorize it in your agent using your organization's OAuth client ID; see the plugin README."

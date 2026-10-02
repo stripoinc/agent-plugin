@@ -10,9 +10,9 @@
  *
  * The script replaces skills/, packages/, mcp-tools.json and bundle.json under plugins/stripo,
  * adds the host paths paragraph to the SKILL.md files that carry the placeholders, installs the
- * host files beside each skill, checks that the SDK loads from its new location, and writes the
- * version into both plugin manifests and the Claude Code marketplace entry. Nothing else in the
- * repository is touched.
+ * host files beside each skill, checks that the SDK loads from its new location, and updates
+ * plugin-metadata.json. The shared generator refreshes both manifests, both marketplaces,
+ * MCP dependency declarations and bundle-integrity.json.
  *
  * Host files come from host/: a skill with a host/<skill>/ directory gets that directory copied
  * over it (HOST.md plus any helper the skill calls by path), and every other skill gets the
@@ -21,16 +21,11 @@
 import {cpSync, existsSync, readdirSync, readFileSync, rmSync, statSync, writeFileSync} from "node:fs";
 import path from "node:path";
 import {fileURLToPath, pathToFileURL} from "node:url";
+import {generateMetadata, loadMetadata, METADATA, requireVersionIncrease, SYNCED_ITEMS} from "./lib/plugin.mjs";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const PLUGIN = path.join(ROOT, "plugins", "stripo");
 const DEFAULT_BUNDLE = path.join(ROOT, "..", "convo-email-agent", "dist", "convo-email-agent", "stripo");
-const SYNCED_ITEMS = ["skills", "packages", "mcp-tools.json", "bundle.json"];
-const PLUGIN_MANIFESTS = [
-  path.join(PLUGIN, ".claude-plugin", "plugin.json"),
-  path.join(PLUGIN, ".codex-plugin", "plugin.json"),
-];
-const CLAUDE_MARKETPLACE = path.join(ROOT, ".claude-plugin", "marketplace.json");
 const HOST_ROOT = path.join(ROOT, "host");
 const HOST_NOTES = path.join(HOST_ROOT, "HOST.md");
 const SDK_ENTRY = path.join(PLUGIN, "packages", "convo-email-agent", "index.js");
@@ -87,7 +82,7 @@ function addHostParagraph(skillFile) {
   const source = readFileSync(skillFile, "utf8");
   // The paragraph resolves `<skill-dir>` and `<bundle-root>`. The brandkit skills use neither
   // placeholder and name their own roots, so adding it there would only contradict them.
-  if (!source.includes("<skill-dir>")) return;
+  if (!source.includes("<skill-dir>") || source.includes(HOST_PARAGRAPH)) return;
   const lines = source.split("\n");
   if (lines[0] !== "---") fail(`${skillFile} has no frontmatter.`);
   const frontmatterEnd = lines.indexOf("---", 1);
@@ -96,19 +91,6 @@ function addHostParagraph(skillFile) {
   if (heading === -1) fail(`${skillFile} has no top-level heading.`);
   lines.splice(heading + 1, 0, "", HOST_PARAGRAPH);
   writeFileSync(skillFile, lines.join("\n"), "utf8");
-}
-
-function installHostFiles(skill) {
-  const destination = path.join(PLUGIN, "skills", skill);
-  const overlay = path.join(HOST_ROOT, skill);
-  if (existsSync(overlay)) {
-    // The brandkit skills call host-owned helpers by path, so an overlay carries scripts/
-    // beside its HOST.md. cpSync copies the file mode, which keeps the helpers executable.
-    cpSync(overlay, destination, {recursive: true});
-  } else {
-    cpSync(HOST_NOTES, path.join(destination, "HOST.md"));
-  }
-  if (!existsSync(path.join(destination, "HOST.md"))) fail(`Skill ${skill} has no HOST.md after the host overlay.`);
 }
 
 async function checkSdk(skills) {
@@ -126,7 +108,9 @@ async function checkSdk(skills) {
 async function main() {
   const options = parseArgs(process.argv.slice(2));
   const bundle = path.resolve(options.bundle ?? DEFAULT_BUNDLE);
-  for (const file of [...PLUGIN_MANIFESTS, CLAUDE_MARKETPLACE, HOST_NOTES]) {
+  const metadata = loadMetadata(ROOT);
+  if (bundle === PLUGIN || bundle.startsWith(`${PLUGIN}${path.sep}`)) fail("The source bundle must be outside plugins/stripo.");
+  for (const file of [path.join(ROOT, METADATA), HOST_NOTES]) {
     if (!existsSync(file)) fail(`Plugin skeleton is incomplete, missing ${file}`);
   }
 
@@ -151,11 +135,8 @@ async function main() {
   }
 
   const version = options.version ?? manifest.version;
-  if (!/^\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?$/u.test(version)) fail(`Version ${JSON.stringify(version)} is not a semantic version.`);
-  const currentVersion = readJson(PLUGIN_MANIFESTS[0]).version;
-  if (version === currentVersion) {
-    fail(`Plugin version ${version} is unchanged; installed copies would not update. Pass --version <new version>.`);
-  }
+  const currentVersion = metadata.version;
+  requireVersionIncrease(currentVersion, version);
 
   for (const item of SYNCED_ITEMS) {
     const destination = path.join(PLUGIN, item);
@@ -164,20 +145,11 @@ async function main() {
   }
   for (const skill of manifest.skills) {
     addHostParagraph(path.join(PLUGIN, "skills", skill, "SKILL.md"));
-    installHostFiles(skill);
   }
   await checkSdk(manifest.skills.filter((skill) => existsSync(path.join(PLUGIN, "skills", skill, "scripts"))));
-
-  for (const file of PLUGIN_MANIFESTS) {
-    const json = readJson(file);
-    json.version = version;
-    writeJson(file, json);
-  }
-  const marketplace = readJson(CLAUDE_MARKETPLACE);
-  const entry = (marketplace.plugins ?? []).find((plugin) => plugin.name === "stripo");
-  if (!entry) fail(`${CLAUDE_MARKETPLACE} has no plugin named stripo.`);
-  entry.version = version;
-  writeJson(CLAUDE_MARKETPLACE, marketplace);
+  const nextMetadata = {...metadata, version};
+  generateMetadata(ROOT, {metadata: nextMetadata, fromBundleSync: true});
+  writeJson(path.join(ROOT, METADATA), nextMetadata);
 
   console.log(JSON.stringify({
     status: "ok",
@@ -189,4 +161,8 @@ async function main() {
   }, null, 2));
 }
 
-await main();
+try {
+  await main();
+} catch (error) {
+  fail(error.message);
+}
