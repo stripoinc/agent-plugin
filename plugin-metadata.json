@@ -1,6 +1,6 @@
 {
   "name": "stripo",
-  "version": "0.6.1",
+  "version": "0.6.2",
   "description": "Create and edit emails and templates with Stripo.",
   "author": {
     "name": "Stripo",
@@ -16,7 +16,7 @@
   ],
   "marketplace": {
     "name": "stripo",
-    "description": "Stripo Agent Plugin for Claude Code and Codex.",
+    "description": "Stripo Agent Plugin: skills for creating and editing emails with any AI agent.",
     "category": "productivity",
     "policy": {
       "installation": "AVAILABLE",

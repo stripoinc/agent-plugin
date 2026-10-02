@@ -4,14 +4,14 @@
     "name": "Stripo"
   },
   "metadata": {
-    "description": "Stripo Agent Plugin for Claude Code and Codex."
+    "description": "Stripo Agent Plugin: skills for creating and editing emails with any AI agent."
   },
   "plugins": [
     {
       "name": "stripo",
       "source": "./plugins/stripo",
       "description": "Create and edit emails and templates with Stripo.",
-      "version": "0.6.1",
+      "version": "0.6.2",
       "category": "productivity",
       "keywords": [
         "stripo",
