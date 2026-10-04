@@ -1,6 +1,6 @@
 ---
 name: email-model-editor
-description: "Edit an existing Stripo email or template through its native JSON model. Use for document title and preheader, copy, link, image-source, theme, style, and block additions, removals, or duplication when the email or template has an editor document state. Uses a generated SDK mutation module, validated file-based execution, and durable read-back through the Stripo MCP. Use email-from-reference for a new email or full rebuild. Do not use for raw-HTML editing, sending, scheduling, changes to name/project/folder, or content without a native model."
+description: "Edit an existing Stripo email or template through its native JSON model. Use for document title and preheader, copy, link, image-source, AI image generation/editing, theme, style, and block additions, removals, or duplication when the email or template has an editor document state. Uses Stripo MCP image tools for requested visuals and a generated SDK mutation module, validated file-based execution, and durable read-back for model changes. Use email-from-reference for a new email or full rebuild. Do not use for raw-HTML editing, sending, scheduling, changes to name/project/folder, or content without a native model."
 ---
 
 # Email Model Editor
@@ -12,11 +12,12 @@ the working directory and file-transfer commands before the first MCP call.
 
 Edit an existing Stripo email or template through its JSON model without flattening it to HTML.
 `PROVIDER.md` beside this file defines the Stripo MCP contract: reference and target resolution,
-model acquisition, persistence, and verification. Follow it for every MCP
+model acquisition, image jobs, persistence, and verification. Follow it for every MCP
 step below; `<bundle-root>/mcp-tools.json` lists the tool names. The bundle contains no MCP
 endpoint or credential; use the Stripo MCP server and authorized file-transfer mechanism
 configured by the consuming agent.
-If the host installs `HOST.md` beside this file, read it for the concrete transfer commands and available image workflow.
+If the host installs `HOST.md` beside this file, read it for concrete file-transfer commands.
+The image workflow is supplied by `PROVIDER.md` and does not require a host image adapter.
 
 When repairing a draft created from a reference, retain its chosen Exact, Tailored, or Creative
 regime and original PNG baseline. For Exact, preserve source choices, reuse existing assets or
@@ -166,9 +167,23 @@ Rules for the module:
   an integer 0..40 per breakpoint. Social insertion, duplication and deletion are supported;
   `moveSocialNetwork` reorders a network through the collection API.
 - Image sources must be email-safe hosted URLs already supplied or authorized by the user or
-  reused from the reference; the Stripo MCP has no asset-upload tool. WebP, AVIF, and
-  extensionless or otherwise unknown URLs are not confirmed email-safe. Obtain a hosted
-  PNG/JPG/JPEG/GIF before applying an image change with an unsupported source.
+  reused from the reference, or a completed hosted Stripo image-job result. For a requested
+  AI change, follow `PROVIDER.md` before writing the mutation module: `edit_image` changes the
+  current asset, while `generate_image` creates a new composition. Use the current target's
+  `(id, type)`; do not create another email. Inspect the completed image, then reacquire the
+  target model before constructing the SDK mutation. For a replacement, verify that the intended
+  image still exists with the expected source. Report a concurrent deletion or source change
+  instead of overwriting it. Use `setSrc()` and `setAlt()` as needed against that fresh model.
+  For an insertion, verify the intended container/anchor still exists and insert a native image
+  block with the completed URL through the component workflow below. Retain the fresh model
+  unmodified as the persistence base. Preserve unrelated links, layout, and settings.
+  A pending or failed image job is not a replacement; keep the original asset until ready.
+  Use the returned URL directly without reuploading or recompressing it, including during
+  document-write recovery. Image tool calls happen outside the SDK module.
+  The Stripo MCP has no local asset-upload tool. WebP inputs are supported by its image tools,
+  whose completed output is PNG; WebP, AVIF, and extensionless or otherwise unknown URLs are
+  not confirmed email-safe for direct insertion. Obtain a hosted PNG/JPG/JPEG/GIF before
+  applying an image change with an unsupported source; generation is not a lossless conversion.
 
 For insertion, define and export `components` in this same change module. Each named entry is
 `{node, slots, level?}` containing a complete native reference subtree; `level` is `L1` (stripe),
@@ -381,6 +396,7 @@ export, inspect HTML as the visual check, or repeat a successful write to obtain
   preheader are supported through `email.setMetadata()` and `set_document_state`.
 - Do not use compiled HTML as the editable source of truth.
 - Do not mutate a message that has no native editor model.
-- Do not generate image assets.
+- Generate and edit requested visuals through the Stripo image workflow in `PROVIDER.md`.
+  Inspection-only requests must not start image jobs. Keep image-provider calls outside the SDK.
 - Do not infer MCP endpoints, credentials, or authentication.
 - Use `email-from-reference` for a new persisted email.

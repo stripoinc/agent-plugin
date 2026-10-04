@@ -29,6 +29,26 @@ test("generation is repeatable and preserves the complete SDK in an isolated ins
   assert.equal(validatePlugin(root).skills, readJson(root, `${PLUGIN}/bundle.json`).skills.length);
 });
 
+test("packaged email skills expose image tools with matching host and provider contracts", () => {
+  const mapping = readJson(ROOT, `${PLUGIN}/mcp-tools.json`);
+  const bundle = readJson(ROOT, `${PLUGIN}/bundle.json`);
+  const imageTools = {generateImage: "generate_image", editImage: "edit_image", getImageJob: "get_image_job"};
+  const host = readFileSync(path.join(ROOT, "host/HOST.md"), "utf8");
+  assert.doesNotMatch(host, /no image workflow|no image generation|no.*image-generation tool/u);
+  for (const [operation, tool] of Object.entries(imageTools)) {
+    assert.equal(mapping.auxiliaryTools[operation], tool);
+    assert.ok(bundle.requiredMcpTools.includes(tool));
+    assert.ok(host.includes(`\`${tool}\``));
+  }
+  for (const skill of ["email-from-reference", "email-model-editor"]) {
+    const directory = path.join(ROOT, PLUGIN, "skills", skill);
+    assert.equal(readFileSync(path.join(directory, "HOST.md"), "utf8"), host);
+    const provider = readFileSync(path.join(directory, "PROVIDER.md"), "utf8");
+    for (const tool of Object.values(imageTools)) assert.ok(provider.includes(`\`${tool}\``));
+    assert.doesNotMatch(readFileSync(path.join(directory, "SKILL.md"), "utf8"), /Do not generate image|no asset-upload or image-generation tool/u);
+  }
+});
+
 test("MCP dependency updates preserve upstream metadata, policy and other dependencies", () => {
   const original = {
     interface: {display_name: "Custom upstream name", default_prompt: "Use $example."},

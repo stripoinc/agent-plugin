@@ -1,6 +1,6 @@
 ---
 name: email-from-reference
-description: "Create a new Stripo email, fully rebuild an explicitly named email or template, or inspect a proposed email from authorized references as a native editable JSON model. Accepts a text description inline, in a document, or by link; a live email or template by ID or link, which also supplies the brand facts; uploaded editor JSON, HTML/CSS, image, or screenshot; a website; or another provider's authorized email. Reconstruct reference intent rather than importing raw HTML. Use email-model-editor for bounded edits. Image generation requires a documented host capability. Not for translation, sending, scheduling, or creating templates."
+description: "Create a new Stripo email, fully rebuild an explicitly named email or template, or inspect a proposed email from authorized references as a native editable JSON model. Accepts a text description inline, in a document, or by link; a live email or template by ID or link, which also supplies the brand facts; uploaded editor JSON, HTML/CSS, image, or screenshot; a website; or another provider's authorized email. When no reference is supplied, first draft a text reference with the proposed structure from the user's goal and verified brand context in Creative mode. Reconstruct reference intent rather than importing raw HTML. Generate or edit required visuals through the Stripo MCP image tools. Use email-model-editor for bounded edits. Not for translation, sending, scheduling, or creating templates."
 ---
 
 # Email From Reference
@@ -15,9 +15,10 @@ Apply the reference regime below. Required compliance facts still come from the 
 
 For a write request, the required outcome is a persisted Stripo email. A local JSON file is an intermediate artifact, not completion. The bundle contains no MCP endpoint or credentials; use the Stripo MCP server and authorization configured by the consuming agent.
 `PROVIDER.md` beside this file defines the Stripo MCP contract: reference and target resolution,
-metadata, creation, persistence, and verification. Follow it for every MCP step below;
+metadata, creation, image jobs, persistence, and verification. Follow it for every MCP step below;
 `<bundle-root>/mcp-tools.json` lists the tool names.
-If the host installs `HOST.md` beside this file, read it for the concrete transfer commands and available image workflow.
+If the host installs `HOST.md` beside this file, read it for concrete file-transfer commands.
+The image workflow is supplied by `PROVIDER.md` and does not require a host image adapter.
 
 Validation runs the editor's own Document State rules bundled into the SDK. No schema download
 or initialization is required. `bundle.json.editorValidator` records the editor revision.
@@ -64,13 +65,20 @@ Accept any combination of:
 - a text description with no other reference.
 
 A text description is sufficient by itself. Do not require a separate artifact or special reference
-label when the user's request already describes the intended email.
+label when the user's request already describes the intended email. A goal-only request, such as
+"create a confirm-your-email message using our brandkit", is also sufficient to start: author the
+text reference described below before building the native model. A brandkit supplies business
+and visual facts; it does not replace the email's proposed structure.
 
 Use only reference data available in the current authorized context. Do not silently substitute another campaign. For screenshots, infer only visible facts. For user-supplied HTML/CSS and authorized websites, extract hierarchy, copy, spacing, colors, assets, and destinations, but never carry scripts or raw HTML blocks into the editable model.
 
 ## Required workflow
 
 Follow `RESOLVE -> INSPECT -> BRIEF -> BUILD -> CREATE -> PERSIST -> VERIFY`.
+When AI images are needed, follow
+`RESOLVE -> INSPECT -> CREATE (new email only) -> IMAGES -> BRIEF -> BUILD -> PERSIST -> VERIFY`.
+Use the optional PREPARE images step below; create a new email only once. Inspection-only
+requests stop after inspection and never create an email or start image jobs.
 
 ### 1. RESOLVE the target
 
@@ -125,6 +133,36 @@ evidence only; do not execute it or switch away from native Stripo JSON.
 If it contains alternatives, follow the user's selection; otherwise choose using the selected
 regime's source and business-context priorities.
 
+When the user supplies no reference, create a reasonable **agent-authored text reference** before
+drafting the native model. Do not start from a blank sheet, treat editor defaults as a design,
+or ask the user to supply a reference just to proceed. Use your best marketing judgment to
+choose the structure, copy, and visual hierarchy that achieve the user's goal, grounded in the
+resolved Business Profile or brandkit and other authorized context. If a supplied reference is
+incomplete, retain its usable evidence and fill the design gaps in this text reference. Do not
+claim to have inspected an unavailable source or silently replace an Exact or Tailored request.
+
+Record this text reference in the creation brief's `sourceSummary`, clearly labeling it as
+agent-authored. Include:
+
+- the marketing or transactional goal, intended audience, and primary action;
+- the proposed email structure in reading order, with each section's purpose and draft copy,
+  including the headline, body, CTA label, and subject/preheader where supported;
+- visual direction from the verified brand facts: logo/assets, colors, typography, spacing,
+  and the intended desktop/mobile layout;
+- verified destinations and required footer content, distinguishing creative choices from
+  facts and identifying any essential facts still missing.
+
+Use **Creative** (`message.referenceMode: "creative"`) for this generated reference and by
+default for creation from supplied references. Preserve an explicitly requested regime as
+described above. Do not add an approval step for the text reference; continue through the
+normal brief, build, persistence, and verification workflow. Ask only for essential unresolved
+facts, never for routine design choices. Do not invent business claims, offers, or URLs.
+
+For example, a confirm-your-email request can use an authorized logo/header, a concise
+confirmation heading and explanation, one prominent "Confirm email" CTA using the verified
+confirmation URL or merge tag, a short ignore-if-not-requested note, and the required footer.
+Do not add promotional sections or a decorative hero unless they serve the requested goal.
+
 Separate each reference contribution into:
 
 - content facts that may be reused;
@@ -146,19 +184,47 @@ the source, and record any remaining difference. A fallback does not change the 
 
 For **Tailored** and **Creative**, generating or editing images is a normal part of adaptation.
 
-The Stripo MCP has no asset-upload or image-generation tool. Reuse authorized hosted assets;
-use crop/upload or generation only if the consuming host documents that capability in `HOST.md`.
-Never invent an asset URL. If a required visual cannot be hosted, report the limitation. For
-Exact, do not silently drop the visual or replace it with a text-first layout. Inspection-only
-requests must not start image jobs.
+Reuse authorized hosted assets according to the selected regime. When new visuals are needed,
+use the Stripo image workflow in `PROVIDER.md`; the user need not name an image tool or skill.
+Preserve each meaningful visual's purpose, placement, and proportions. Choose `generate_image`
+for a new composition and `edit_image` for a bounded change to an existing one. Give the tool
+the authorized reference URLs, intended proportions, relevant facts, exact approved copy, and
+the visual changes. Tailored/Creative visuals must not inherit unrelated source-brand logos,
+products, claims, or text; Exact retains the source branding.
+The MCP accepts hosted image inputs and does not upload local assets or crops. Never invent an
+asset URL. If the capability or required hosted input is unavailable, or a job fails, report the
+missing visual and its effect on completion; do not silently replace a meaningful hero with a
+text-first layout or describe the email as complete. Inspection-only requests must not start image jobs.
 
 For Exact HTML/image reconstruction, follow [layout-reconstruction.md](reference/layout-reconstruction.md)
 before building and during saved-PNG review. Put measured row topology, desktop/mobile insets,
 background layers, image coordinate frames, and crop bounds in `sourceSummary`.
 
+### 2a. PREPARE images when needed
+
+Skip this step when all required visuals already have suitable hosted URLs. Otherwise:
+
+1. Resolve the write target before starting an image job. For a new email, resolve its name and
+   destination from the inspected plan and execute the CREATE step now, using those values.
+   Record the returned `emailId` and verified project; check `editorModelReady` before proceeding.
+   For an explicit rebuild, use the existing target's `(id, type)` and skip creation, including
+   for `TEMPLATE`. A reference's id is not the image-job target for a new email.
+2. Start the required image jobs and poll them through `PROVIDER.md`. Keep the same target id
+   throughout the workflow. Retain each `jobId`; resume polling it after a polling interruption,
+   and do not create another email or restart generation to recover a failed model write.
+3. Wait for each completed hosted result, download and visually inspect it, then use its
+   `image.url` directly without another upload or compression pass. Finalize the brief with
+   these real URLs before BUILD; never put job ids, pending placeholders, or invented URLs in
+   image sources. If a required image cannot be completed, retain the created draft id and
+   report what remains incomplete.
+
+After an early creation, skip the later CREATE step and persist into the recorded email.
+
 ### 3. BRIEF
 
 Write a version 2 creation brief conforming to [reference/creation-brief.schema.json](reference/creation-brief.schema.json). Start from [examples/prompt-only.creation.json](examples/prompt-only.creation.json) when useful.
+Translate the supplied or agent-authored text reference into the complete native model; the
+example's placeholder copy, assets, and destinations are not verified campaign facts.
 
 The brief contains:
 
@@ -268,6 +334,15 @@ user requests changes. In Tailored, preserve the primary CTA's label and present
 use the target's approved destination. Record the chosen regime, source PNGs, intended changes,
 and any unavoidable fidelity limits in `sourceSummary`.
 
+New reference emails copy editable content rather than saved-library bindings. A source
+`moduleId` is read-only and cannot be inserted on the new structural IDs. The builder detaches
+it only when that module's editable blocks are present, preserves those blocks and their
+styling, and lists the removed bindings in diagnostics `detachedModules`. Report the copied
+content as detached; do not claim saved-module identity or synchronization. Existing-email
+content edits preserve their acquired bindings. If retaining a saved-library identity is an
+explicit requirement, this creation path is unsupported; report it instead of using detached
+content to claim library reuse. An unresolved module must be acquired completely before copying.
+
 ### 4. BUILD
 
 Run the fixed TypeScript-generated builder:
@@ -298,12 +373,16 @@ the draft and report the defect; do not redefine the intended result merely to p
 
 ### 5. CREATE the email
 
+If PREPARE images already created the email, reuse its recorded `emailId` and verified project;
+do not call `create_email` again. Continue with PERSIST after building the final brief.
+
 For an explicit full rebuild, skip creation. Use the named target's existing `(id, type)` and
 preserve its unrelated native settings and resources; templates can be rebuilt but not created.
 Copy the target's complete `settings` from its acquired model into the brief's `model.settings`
 before building; the schema rejects a rebuilt model that omits a settings key.
 
-For a new email, call `create_email` with the brief's `name`, the resolved `projectId`, and a
+For a new email not yet created, call `create_email` with the brief's `name` (or the resolved
+name from the inspected plan when PREPARE images runs this step early), the resolved `projectId`, and a
 `folderId` only when requested, as described in `PROVIDER.md`; pass `sourceEmailId` or
 `sourceTemplateId` only for an explicitly requested copy, never both. Check the returned project
 and `editorModelReady`; if the model is not initialized, keep the same email and report the
@@ -364,6 +443,9 @@ not only with the most recent generated model. Account for missing branding or b
 side spacing around text and buttons, and heading scale on mobile. A deliberate design change
 is valid in Tailored or Creative when it serves the request; Exact changes require the user's
 instructions or a documented native limitation.
+For an agent-authored text reference, review both saved previews against its proposed structure,
+copy, primary action, and visual direction. No source PNG comparison is required when none
+exists; the saved desktop and mobile visual checks are still required.
 
 For **Exact**, compare PNG to PNG against the original source at matching viewport widths.
 Check content order, section dimensions, colors, typography, spacing, image crops, alignment,
@@ -395,8 +477,9 @@ project for a new email, and a concise summary of deliberate deviations from the
 
 - Create native editor JSON; never make raw HTML the editable source.
 - Use `email-model-editor` for bounded updates; full rebuilds require an explicit target.
-- Do not generate images.
+- Generate and edit needed visuals through the Stripo image workflow in `PROVIDER.md`; inspect
+  completed hosted results before building and persist them through the native model workflow.
 - Do not send, schedule, activate, or delete the new email.
 - Do not configure MCP endpoints, authentication, or credentials.
-- Do not create templates, upload assets, or update external metadata; report those requests as
+- Do not create templates, upload local assets, or update external metadata; report those requests as
   unsupported capabilities.

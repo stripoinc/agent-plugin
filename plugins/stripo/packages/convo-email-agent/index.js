@@ -97929,7 +97929,8 @@ function validateChange({ current, target, intent }) {
     }
   }
   for (const entry of after) if (!before.some((node) => node.kind === entry.kind && node.id === entry.id)) {
-    if (!nodeCapability(entry.blockType ?? entry.kind)?.actions.INSERT.runtimes.mergeService) issues.push({
+    const capability = nodeCapability(entry.blockType ?? entry.kind);
+    if (!capability?.actions.INSERT.runtimes.mergeService) issues.push({
       code: "UNSUPPORTED_OPERATION",
       stage: "change",
       input: "target",
@@ -97939,6 +97940,16 @@ function validateChange({ current, target, intent }) {
       reason: "INSERT_UNSUPPORTED",
       message: "Inserting this node is unsupported by merge-service."
     });
+    for (const key of capability?.readOnlyProperties ?? []) {
+      if (entry.element[key] !== void 0) issues.push({
+        code: "READ_ONLY_FIELD",
+        stage: "change",
+        input: "target",
+        path: `${entry.id}.${key}`,
+        nodeId: entry.id,
+        message: "A read-only field cannot be inserted on a new node. Preserve the existing node or create a detached content copy."
+      });
+    }
   }
   for (const effect of d5(currentResult?.success ? currentResult.documentState : { stripes: [] }, candidate)) {
     for (const id2 of effect.affectedBlockIds) issues.push({
@@ -102143,7 +102154,11 @@ var STRIPO_MCP_TOOL_MAPPING = Object.freeze({
     // Resolves the projectId the Business Profile tools require.
     projects: "find_projects",
     // Supported-field updates are auxiliary operations in both provider mappings.
-    patchBrandkit: "patch_business_profile"
+    patchBrandkit: "patch_business_profile",
+    // Stripo hosts completed image jobs in the target letter's gallery.
+    generateImage: "generate_image",
+    editImage: "edit_image",
+    getImageJob: "get_image_job"
   }),
   unsupported: Object.freeze({
     getEmailMessageExport: "No compiled email export tool is available. Read native metadata with getEmailModel.",
@@ -102151,8 +102166,8 @@ var STRIPO_MCP_TOOL_MAPPING = Object.freeze({
     listCustomBlocks: "No saved-module library tool is available in this adapter.",
     listEmailInterfaces: "This editor has no sending interfaces.",
     updateEmailMetadata: "No write tool for name, project, or folder metadata. Native document title/preheader use updateEmailModel.",
-    prepareImageUpload: "Reuse hosted reference assets or user-supplied hosted assets.",
-    uploadImage: "No asset upload tool is available.",
+    prepareImageUpload: "No local asset upload tool. Reuse hosted assets or a completed Stripo image job's URL.",
+    uploadImage: "No local asset upload tool. Stripo image jobs host their own results.",
     createTemplate: "Templates can be read, edited and rebuilt; only emails can be created."
   })
 });

@@ -1,6 +1,6 @@
 {
   "name": "stripo",
-  "version": "0.6.2",
+  "version": "0.7.0",
   "description": "Create and edit emails and templates with Stripo.",
   "author": {
     "name": "Stripo",
@@ -17,7 +17,7 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "Stripo",
-    "longDescription": "Create emails from a brief, template, HTML or screenshot. Edit text, links, images and styles in existing emails and templates, and review desktop and mobile previews. Requires a connected Stripo MCP server.",
+    "longDescription": "Create emails from a brief, template, HTML or screenshot. Generate and edit images, update text, links and styles in existing emails and templates, and review desktop and mobile previews. Requires a connected Stripo MCP server.",
     "category": "Productivity",
     "capabilities": [
       "Read",

@@ -22,6 +22,9 @@ export declare const STRIPO_MCP_TOOL_MAPPING: Readonly<{
         folders: "find_folders";
         projects: "find_projects";
         patchBrandkit: "patch_business_profile";
+        generateImage: "generate_image";
+        editImage: "edit_image";
+        getImageJob: "get_image_job";
     }>;
     unsupported: Readonly<{
         getEmailMessageExport: "No compiled email export tool is available. Read native metadata with getEmailModel.";
@@ -29,8 +32,8 @@ export declare const STRIPO_MCP_TOOL_MAPPING: Readonly<{
         listCustomBlocks: "No saved-module library tool is available in this adapter.";
         listEmailInterfaces: "This editor has no sending interfaces.";
         updateEmailMetadata: "No write tool for name, project, or folder metadata. Native document title/preheader use updateEmailModel.";
-        prepareImageUpload: "Reuse hosted reference assets or user-supplied hosted assets.";
-        uploadImage: "No asset upload tool is available.";
+        prepareImageUpload: "No local asset upload tool. Reuse hosted assets or a completed Stripo image job's URL.";
+        uploadImage: "No local asset upload tool. Stripo image jobs host their own results.";
         createTemplate: "Templates can be read, edited and rebuilt; only emails can be created.";
     }>;
 }>;

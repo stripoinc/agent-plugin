@@ -48,14 +48,15 @@ documentation; validation uses the editor revision recorded in `bundle.json.edit
 The service validates and applies each write against its live state, so follow the rejection
 diagnostics in `PROVIDER.md` and verify the saved model after writing.
 
-## Download: model, screenshots
+## Download: model, screenshots, generated images
 
 ```bash
 curl -fsSL --retry 2 -o <file> '<downloadUrl>'
 ```
 
-Download URLs are temporary. If a download fails after the URL expired, request a new one through
-the same MCP tool.
+Model and screenshot download URLs are temporary. If a download fails after the URL expired,
+request a new one through the same MCP tool. A completed image job's `image.url` is a hosted PNG;
+download that URL to inspect it without starting another generation.
 
 ## Upload: candidate and base models
 
@@ -84,9 +85,23 @@ only if the change is missing, start again from step 1 with fresh tickets for bo
 
 ## Images
 
-This host has no image workflow: no crop upload and no image generation. The Stripo MCP has no
-asset-upload or image-generation tool, and the plugin adds none. Reuse hosted reference assets or
-authorized hosted image URLs, and report a visual that cannot be hosted as `SKILL.md` describes.
+The email skills use `generate_image`, `edit_image`, and `get_image_job` on the connected Stripo
+MCP server. Read `PROVIDER.md` for arguments, target selection, quota, polling, and recovery rules.
+Verify that the selected server exposes all three tools; report a missing capability instead of
+substituting another image provider. No separate image adapter or image-provider credentials are
+required in this host.
+
+Jobs belong to the target email/template. When a new email needs generated visuals, create it
+once before starting the jobs and retain that same id through persistence and recovery. Poll
+with the returned `jobId` and `pollAfterSeconds`; a repeated start is a new quota-consuming job.
+Download and visually inspect a completed PNG using the download command above and the agent's
+image-viewing tool. Insert its hosted `image.url` through the native model workflow without
+reuploading or recompressing it. Generation alone does not place the image into the document.
+
+Local asset and crop uploads remain unavailable. Image references and edit sources must already
+be authorized public HTTPS URLs; the supported formats and limits are in `PROVIDER.md`.
+Reuse suitable hosted assets and report a required visual that cannot be completed as `SKILL.md`
+describes. Inspection-only email requests must not start image jobs.
 
 ## Authentication
 

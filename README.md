@@ -12,13 +12,17 @@ the same package from a checkout. MCP access is configured separately in each ag
 
 | Skill | Use it for |
 | --- | --- |
-| `email-model-editor` | Edit an existing email or template through native JSON models; verify the saved result and desktop/mobile previews. |
-| `email-from-reference` | Create an email from a brief, HTML, screenshot or another authorized reference; rebuild an explicitly selected email or template. |
+| `email-model-editor` | Edit an existing email or template through native JSON models, including generating or editing images; verify the saved result and desktop/mobile previews. |
+| `email-from-reference` | Create an email from a brief, HTML, screenshot or another authorized reference, generating or editing visuals when needed; rebuild an explicitly selected email or template. |
 | `business-profile` | Read, audit and update a project's business profile using its emails as evidence. |
 
-The packaged host adapter does not support Business Profile extraction from websites. It also
-provides no image generation or asset-upload workflow. See the packaged
-[host capabilities](host/business-profile/HOST.md) before planning those workflows.
+The email skills use Stripo MCP's `generate_image`, `edit_image`, and `get_image_job` to produce
+hosted PNGs for the target email/template. These operations require the project's AI image
+permission and available quota. Image inputs must be public HTTPS URLs; local asset/crop upload
+remains unsupported. See the [email host notes](host/HOST.md#images) for the workflow.
+
+The packaged host adapter does not support Business Profile extraction from websites. See its
+[host capabilities](host/business-profile/HOST.md) before planning a profile workflow.
 
 ## Requirements
 
@@ -257,14 +261,14 @@ Build the committed upstream revision in a clean `convo-email-agent` checkout wi
 `npm run build:stripo`, following that repository's build prerequisites. Back in this repository:
 
 ```bash
-node scripts/sync-bundle.mjs --bundle ../convo-email-agent/dist/convo-email-agent/stripo --version 0.6.2
+node scripts/sync-bundle.mjs --bundle ../convo-email-agent/dist/convo-email-agent/stripo --version 0.7.0
 npm run validate
 npm test
 npm run validate:claude
 npm run check:version -- --base origin/main
 ```
 
-Replace `0.6.2` with the next plugin release version. The sync requires a version greater than
+Replace `0.7.0` with the next plugin release version. The sync requires a version greater than
 the one currently in `plugin-metadata.json`; it updates that source and regenerates the host
 files, manifests, dependencies and integrity inventory. `bundle.json.version` is the upstream
 SDK version and is independent of the plugin release version. Keep `bundle.json` provenance

@@ -56,7 +56,11 @@ var STRIPO_MCP_TOOL_MAPPING = Object.freeze({
     // Resolves the projectId the Business Profile tools require.
     projects: "find_projects",
     // Supported-field updates are auxiliary operations in both provider mappings.
-    patchBrandkit: "patch_business_profile"
+    patchBrandkit: "patch_business_profile",
+    // Stripo hosts completed image jobs in the target letter's gallery.
+    generateImage: "generate_image",
+    editImage: "edit_image",
+    getImageJob: "get_image_job"
   }),
   unsupported: Object.freeze({
     getEmailMessageExport: "No compiled email export tool is available. Read native metadata with getEmailModel.",
@@ -64,8 +68,8 @@ var STRIPO_MCP_TOOL_MAPPING = Object.freeze({
     listCustomBlocks: "No saved-module library tool is available in this adapter.",
     listEmailInterfaces: "This editor has no sending interfaces.",
     updateEmailMetadata: "No write tool for name, project, or folder metadata. Native document title/preheader use updateEmailModel.",
-    prepareImageUpload: "Reuse hosted reference assets or user-supplied hosted assets.",
-    uploadImage: "No asset upload tool is available.",
+    prepareImageUpload: "No local asset upload tool. Reuse hosted assets or a completed Stripo image job's URL.",
+    uploadImage: "No local asset upload tool. Stripo image jobs host their own results.",
     createTemplate: "Templates can be read, edited and rebuilt; only emails can be created."
   })
 });
