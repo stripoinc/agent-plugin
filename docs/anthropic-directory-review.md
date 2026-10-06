@@ -1,7 +1,8 @@
 # Anthropic directory review — Stripo 0.7.0
 
-Prepared on 2026-10-06. This document is a local review package, not an Anthropic
-approval or a submitted appeal. The public plugin identifier remains `stripo`.
+Prepared on 2026-10-06. This document records local validation and review evidence;
+it does not establish Anthropic approval or a submitted appeal. The public plugin
+identifier remains `stripo`.
 
 ## Evidence revision and scope
 
@@ -13,9 +14,8 @@ on that draft, retaining its image generation/editing workflows and incorporatin
 the current upstream image-upload contract.
 
 All code links below identify the fixed distribution commit `89c06e8559aebddff106fcfc22f4aec205f2fb37`.
-It is currently local and has not been pushed; its GitHub links become accessible
-only after authorized publication. The document itself can be in a subsequent
-documentation-only commit. If packaging changes again, refresh these links,
+The distribution is included in [PR #8](https://github.com/stripoinc/agent-plugin/pull/8).
+The document itself can be in a subsequent documentation-only commit. If packaging changes again, refresh these links,
 measurements and validation results against the actual submission commit.
 
 The bundled SDK is `convo-email-agent` **0.2.17**, built from clean committed
@@ -171,8 +171,9 @@ Anthropic must still review and validate it under its own directory rules.
 
 The synthetic license and icon used by packaging test fixtures are test data only;
 they do not enter this distribution or waive its real license gate. The new CI
-configuration covers Node 20.18.1, 22 and 24; the updated remote CI has not run
-because these changes have not been pushed. Live OAuth, MCP persistence and an
+configuration covers Node 20.18.1, 22 and 24; see the actual
+[PR checks](https://github.com/stripoinc/agent-plugin/pull/8/checks) for remote CI status.
+Live OAuth, MCP persistence and an
 Anthropic directory scan were not performed by these local checks.
 
 ## Authorized publication and revalidation procedure
