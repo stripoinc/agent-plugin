@@ -1,0 +1,192 @@
+STRIPO AGENT PLUGIN LICENSE
+Version 1.0
+
+Licensor: Stripo Inc
+Copyright (c) 2026 Stripo Inc
+All rights reserved except as expressly granted below.
+
+1. Scope and definitions
+
+"Software" means the parts of the Stripo Agent Plugin that the Licensor owns
+or is authorized to license under these terms and distributes with this
+license. These parts include the skills and prompt instructions, scripts,
+host adapters, configuration, documentation, and bundled SDK and editor
+validator code. Separately licensed components are excluded and are governed
+by Section 6. This license does not cover other Stripo products or private
+source code that is not distributed as part of the Software.
+
+"Stripo Services" means Stripo's email creation and editing products and their
+authorized APIs, MCP endpoints, and integrations, accessed under the applicable
+Stripo service or product agreement.
+
+"Permitted Purpose" means using, evaluating, developing, testing, or adapting
+the Software to interact with Stripo Services or to prepare, inspect, validate,
+create, edit, or manage content as part of a workflow involving Stripo Services.
+It includes local and offline steps in that workflow and exporting resulting
+content for use elsewhere. Each operation need not make a network request.
+Mere compatibility with a Stripo data format does not make an otherwise
+independent product or service a Permitted Purpose.
+
+"You" means the individual or legal entity exercising rights under this
+license. If acting for an entity, you must have authority to act for it.
+
+2. Permission to use and adapt
+
+Subject to these terms, the Licensor grants You a non-exclusive, worldwide,
+royalty-free copyright license to download, install, run, reproduce, modify,
+and create adaptations of the Software for the Permitted Purpose, and to
+distribute it as described in Section 3. You may also inspect the Software
+and perform security and compatibility reviews of it.
+
+These permissions include personal, internal business, and commercial work,
+including paid services for clients. You may use the Software with any agent
+or host capable of supporting it, including a locally operated or hosted
+agent. You may let employees, contractors, and service providers process or
+run the Software on Your behalf within the permissions of this license.
+
+You may develop an integration in Your own product that connects to Stripo
+Services and uses the Software for that connection. Charging for Your product,
+integration, or services is permitted where the Software's role remains within
+the Permitted Purpose. This does not grant a right to sell or license the
+Software or its SDK as a standalone offering.
+
+No license fee is charged under this license. Stripo Services, agent hosts,
+and other services may have separate fees and access conditions.
+
+3. Sharing, installation, and distribution
+
+You may copy and distribute the Software, unchanged or modified, solely to
+enable the Permitted Purpose. This includes repository forks, contributions,
+internal deployments, client integrations, and plugin or agent directories.
+With every distributed copy or substantial portion, You must:
+
+(a) provide this license and retain applicable copyright, attribution, and
+    separately applicable license notices;
+(b) clearly identify any changes You made and avoid presenting a modified
+    version as an official release of the Licensor; and
+(c) make clear that recipients receive the Licensor's Software under this
+    license, without representing that You can grant broader rights in it.
+
+Directory operators, repository hosts, and agent providers may reproduce,
+host, cache, review, test, display, deliver, and install the Software and its
+updates to support discovery and use for the Permitted Purpose. They may
+reproduce the accompanying documentation and use the supplied plugin name
+and branding to identify, describe, and promote the listing and the platform
+on which it is offered, without implying an endorsement that does not exist.
+Any separate agreement with the Licensor governing these activities remains
+applicable.
+
+Recipients receive their rights in the Licensor's Software directly from the
+Licensor under this license. You retain any rights You own in Your original
+contributions. This license does not require publication of private changes
+or grant the Licensor ownership of Your contributions.
+
+4. Uses requiring separate permission
+
+Except as permitted by a separately applicable license or by law that cannot
+be excluded by agreement, You may not:
+
+(a) use or incorporate the Software, including its SDK or editor validator,
+    in a product or service outside the Permitted Purpose;
+(b) extract, repackage, sell, or offer the Software or its components as a
+    standalone SDK, editor, validator, or other independent offering;
+(c) use the Software to supply an independent replacement for Stripo Services;
+(d) remove or obscure required license, copyright, or attribution notices; or
+(e) use the Software to bypass authentication, access controls, usage limits,
+    or payment requirements applicable to Stripo Services.
+
+The Licensor may authorize these uses under a separate written agreement.
+These restrictions apply to the Software, not to independently developed code
+that does not copy or adapt it, and do not limit the rights in Section 6.
+
+5. Emails and other user content
+
+The restrictions on the Software do not apply to emails, templates, images,
+text, business profiles, or other user content merely because the Software
+creates, processes, validates, or exports that content. This license gives
+the Licensor no new ownership rights in Your content.
+
+Rights in content, input materials, third-party assets, and AI-generated
+output remain subject to their own applicable terms and law, including any
+Stripo service terms. Software code copied into an output remains Software;
+embedding code in an output does not remove its license conditions.
+
+6. Separately licensed components
+
+The distribution contains components governed by their own licenses,
+including open-source dependencies and any Licensor-authored components
+expressly distributed under separate terms. Their license texts and notices
+may appear in accompanying files, package metadata, or source-code headers.
+
+Those licenses govern their respective components and take precedence over
+this license for those components. Nothing in this license restricts,
+withdraws, or replaces rights granted under them. You must preserve the
+notices and fulfill the obligations required by those licenses when using,
+modifying, or distributing the relevant components.
+
+7. Ownership, branding, and separate services
+
+The Software is licensed, not sold. The Licensor and other relevant rights
+holders retain their rights in it. Rights not expressly granted are reserved.
+
+Except for the identification and listing uses in Section 3, this license
+does not grant rights to use Stripo trademarks, logos, or branding. You may
+truthfully identify compatibility with Stripo, but must not misrepresent
+ownership, sponsorship, certification, or endorsement.
+
+This license does not grant access to another person's account, data, or
+credentials, or a subscription to Stripo Services. Access to and use of those
+services is governed by the applicable service agreement and privacy terms,
+including, where applicable:
+
+https://stripo.email/terms-of-use/
+https://stripo.email/privacy-policy/
+
+Those terms govern the services; this license governs the Software. Nothing
+here enlarges the rights in separately licensed Stripo products or services.
+
+8. Disclaimer and limitation of liability
+
+To the extent permitted by applicable law, the Software is provided without
+warranties, express or implied, including warranties of merchantability,
+fitness for a particular purpose, title, or non-infringement. The Licensor
+does not promise uninterrupted operation, error-free results, continued
+compatibility, support, maintenance, or updates under this license.
+
+To the extent permitted by applicable law, the Licensor is not liable under
+this license for indirect, incidental, special, consequential, or punitive
+damages, or loss of profits, revenue, business opportunities, or data arising
+from use of or inability to use the Software, even if advised of that risk.
+Nothing in this license excludes or limits liability or rights that cannot
+lawfully be excluded or limited, or overrides a separate written warranty
+or service commitment made by the Licensor.
+
+9. Term and termination
+
+This license applies to the copy of the Software with which it is distributed
+for as long as You comply with its terms. The Licensor may terminate Your
+rights under this license if You materially breach it and do not remedy the
+breach within 30 days after receiving written notice describing the breach.
+Use outside the permissions granted here is not authorized during that period.
+
+After termination, You must stop exercising rights in the Software and remove
+copies under Your control, except copies retained as required by law or in
+inaccessible routine backups until ordinarily overwritten. You may not use
+those retained copies. Termination does not revoke rights in user content or
+separately licensed components, or licenses of recipients who remain compliant.
+Sections 4 through 10 continue to apply to the extent relevant after termination.
+
+New license terms issued for later versions do not retroactively replace this
+license for copies already received under it. Nothing here withdraws rights
+previously granted under another applicable license.
+
+10. General provisions and additional permissions
+
+If a provision cannot be enforced, the remaining provisions continue to apply
+to the extent permitted by law. No provision limits rights that applicable
+law makes non-waivable. A separate written agreement with the Licensor may
+grant additional rights and prevails to the extent it expressly addresses a
+conflict with this license.
+
+For permission to use the Software or SDK in an independent product, contact
+the Licensor through the contact channels at https://stripo.email/.

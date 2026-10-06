@@ -2,10 +2,11 @@
 /**
  * Sync the Stripo bundle built by convo-email-agent into plugins/stripo.
  *
- *   node scripts/sync-bundle.mjs [--bundle <dir>] [--version <x.y.z>] [--allow-dirty]
+ *   node scripts/sync-bundle.mjs [--bundle <dir>] [--version <x.y.z>] [--base <git-ref>] [--allow-dirty]
  *
  * --bundle       bundle directory; default ../convo-email-agent/dist/convo-email-agent/stripo
  * --version      plugin version to publish; default is the bundle version
+ * --base         allow rebuilding an unpublished draft newer than this ancestor
  * --allow-dirty  accept a bundle built from an uncommitted checkout (local testing only)
  *
  * The script replaces skills/, packages/, mcp-tools.json and bundle.json under plugins/stripo,
@@ -19,6 +20,7 @@
  * shared host/HOST.md.
  */
 import {cpSync, existsSync, readdirSync, readFileSync, rmSync, statSync, writeFileSync} from "node:fs";
+import {execFileSync} from 'node:child_process';
 import path from "node:path";
 import {fileURLToPath, pathToFileURL} from "node:url";
 import {generateMetadata, loadMetadata, METADATA, requireVersionIncrease, SYNCED_ITEMS} from "./lib/plugin.mjs";
@@ -37,7 +39,7 @@ const HOST_PARAGRAPH = [
 ].join("\n");
 
 function usage() {
-  return "Usage: node scripts/sync-bundle.mjs [--bundle <dir>] [--version <x.y.z>] [--allow-dirty]";
+  return "Usage: node scripts/sync-bundle.mjs [--bundle <dir>] [--version <x.y.z>] [--base <git-ref>] [--allow-dirty]";
 }
 
 function fail(message) {
@@ -57,10 +59,10 @@ function parseArgs(argv) {
       options.allowDirty = true;
       continue;
     }
-    if (argument === "--bundle" || argument === "--version") {
+    if (argument === "--bundle" || argument === "--version" || argument === '--base') {
       const value = argv[index + 1];
       if (!value || value.startsWith("--")) fail(`Missing value for ${argument}.`);
-      options[argument === "--bundle" ? "bundle" : "version"] = value;
+      options[argument.slice(2)] = value;
       index += 1;
       continue;
     }
@@ -136,7 +138,15 @@ async function main() {
 
   const version = options.version ?? manifest.version;
   const currentVersion = metadata.version;
-  requireVersionIncrease(currentVersion, version);
+  if (version === currentVersion && options.base) {
+    // Rebuild an unreleased draft version only relative to an explicit older
+    // base. Equality is still rejected for a version already on that base.
+    const git = (...args) => execFileSync('git', args, {cwd: ROOT, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe']}).trim();
+    const base = git('rev-parse', '--verify', '--end-of-options', `${options.base}^{commit}`);
+    git('merge-base', '--is-ancestor', base, 'HEAD');
+    const previous = JSON.parse(git('show', `${base}:${METADATA}`)).version;
+    requireVersionIncrease(previous, version);
+  } else requireVersionIncrease(currentVersion, version);
 
   for (const item of SYNCED_ITEMS) {
     const destination = path.join(PLUGIN, item);

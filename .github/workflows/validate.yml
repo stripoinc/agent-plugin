@@ -31,7 +31,7 @@ jobs:
       - name: Validate with the pinned Claude CLI
         if: matrix.node == 22
         run: |
-          npm install --global @anthropic-ai/claude-code@2.1.263
+          npm install --global @anthropic-ai/claude-code@2.1.281
           npm run validate:claude
       - name: Require a higher plugin version for distribution changes
         if: github.event_name == 'pull_request' && matrix.node == 22

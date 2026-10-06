@@ -66,6 +66,16 @@ The creation runner enforces the same text limit before producing a candidate. F
 pass `--baseline <target-model.json>` using the acquired state of the document being replaced;
 only unchanged text from that baseline may exceed the limit. Omit `--baseline` for a new email.
 
+## Upload supplied images
+
+For files attached or pasted into chat, follow [Upload supplied images](reference/image-upload.md).
+This release requires `prepare_image_upload(id, type, name?)` and
+`upload_image(id, type, uploadSessionId, name?)` on the Stripo server. They use the same
+write target and project ownership as image jobs, but preserve supplied artwork without AI
+generation. Transfer the bytes over HTTP between the two MCP calls, then use `data.url`.
+The linked contract defines manifests, limits, failure handling, and host responsibilities.
+Verify the server implements this contract before activating the updated bundle.
+
 ## Generate and edit images
 
 Use the connected Stripo MCP's `generate_image`, `edit_image`, and `get_image_job`; their mapping
@@ -90,9 +100,10 @@ An existing email/template being edited or rebuilt needs no new email.
 
 Inputs must be authorized public HTTPS URLs of PNG, JPEG, or WebP images, up to 20 MB each.
 Do not duplicate reference URLs or repeat `imageUrl` in an edit's references. Local files,
-data URLs, and local crops cannot be supplied or uploaded through these tools. Generation
-does not provide a lossless upload/conversion path. Reuse an authorized hosted asset when
-exact preservation is required; report an unavailable hosted input instead of inventing a URL.
+data URLs, and local crops cannot be passed directly to these generation tools. Host authorized
+local inputs through the upload workflow first. Generation does not provide a lossless
+upload/conversion path. Reuse an authorized hosted asset when exact preservation is required;
+report an unavailable hosted input instead of inventing a URL.
 Describe each reference's role, the intended composition, brand facts, and exact approved copy
 in `prompt`. Use a bounded edit when the existing composition should be preserved; explicitly
 request preservation of text, proportions, and transparency that must remain, then verify them.
@@ -134,8 +145,8 @@ desktop/mobile screenshots through the verification contract below.
 Preserve native font settings/resources. Do not run `normalize-merge-service-fonts.mjs` or apply
 Reteno's font substitutions or sending-metadata rules. Change native fields only when requested
 and supported by the live schema; do not invent an external metadata write capability.
-No local asset-upload tool exists: reuse hosted reference assets, authorized hosted image URLs,
-or completed Stripo image-job URLs as described above.
+Reuse hosted reference assets, authorized hosted image URLs, completed local-image uploads,
+or completed Stripo image-job URLs. Asset tickets are separate from document-state tickets.
 
 1. Call `prepare_document_state_upload(id, type)` twice; require `status=OK` on both and check
    `maxBytes`. One ticket holds one file: the first is for the candidate, the second for the base.

@@ -18,8 +18,8 @@ the same package from a checkout. MCP access is configured separately in each ag
 
 The email skills use Stripo MCP's `generate_image`, `edit_image`, and `get_image_job` to produce
 hosted PNGs for the target email/template. These operations require the project's AI image
-permission and available quota. Image inputs must be public HTTPS URLs; local asset/crop upload
-remains unsupported. See the [email host notes](host/HOST.md#images) for the workflow.
+permission and available quota. Supplied local images and authorized crops use `prepare_image_upload` and `upload_image`
+to obtain hosted URLs before insertion or image editing; verify both tools on the connected server. See the [email host notes](host/HOST.md#images) for the workflow.
 
 The packaged host adapter does not support Business Profile extraction from websites. See its
 [host capabilities](host/business-profile/HOST.md) before planning a profile workflow.
@@ -211,7 +211,8 @@ its loaded version until `/reload-plugins` or the next session.
 
 | Source | Generated output |
 | --- | --- |
-| `plugin-metadata.json` | Claude/Codex plugin manifests, both marketplace catalogs, and the `stripo-mcp` dependency in each `agents/openai.yaml`. |
+| `plugin-metadata.json` | Claude/Codex plugin manifests, both marketplace catalogs, and the `stripo-mcp` dependency in each `agents/openai.yaml`. Claude directory fields are emitted only in the Claude manifest. |
+| Root `LICENSE` and `packaging/`, declared by `packageFiles` in metadata | Plugin-root license, README and approved icon; all are checked and inventoried. |
 | A clean Stripo bundle built by `convo-email-agent` | `plugins/stripo/skills/`, `packages/`, `mcp-tools.json`, and `bundle.json`. |
 | `host/HOST.md` and `host/<skill>/` | Shared host instructions and skill-specific overrides/helpers in the installed skills. |
 | The assembled bundle | `bundle-integrity.json`, a SHA-256 inventory of packaged files; `plugins/stripo/.generated` identifies the sources. |
@@ -242,11 +243,11 @@ npm run validate:claude
 npm run check:version -- --base origin/main
 ```
 
-`validate:claude` requires the Claude CLI; CI pins it to **2.1.263**. `check:version` detects changes
+`validate:claude` requires the Claude CLI; CI pins it to **2.1.281**. `check:version` detects changes
 since the merge base and compares the version with the supplied Git ref. It does not fetch that
 ref; fetch your intended base first when necessary. It rejects unchanged or lower versions,
 including prerelease regressions.
-README-only changes do not require a release bump.
+Root README-only changes do not require a release bump; changes to the packaged README do.
 
 Commit the sources and their generated outputs together. `npm run check:generated` checks them
 without writing and names the packaged files that differ from the inventory; `npm run generate`
@@ -268,17 +269,30 @@ npm run validate:claude
 npm run check:version -- --base origin/main
 ```
 
-Replace `0.7.0` with the next plugin release version. The sync requires a version greater than
+To rebuild the current draft version before it reaches the release base, add `--base origin/main`.
+The explicit base must be an ancestor whose plugin version is lower; an equal or lower version
+already present on the base is rejected. Otherwise, replace `0.7.0` with the next plugin release version. The sync normally requires a version greater than
 the one currently in `plugin-metadata.json`; it updates that source and regenerates the host
 files, manifests, dependencies and integrity inventory. `bundle.json.version` is the upstream
 SDK version and is independent of the plugin release version. Keep `bundle.json` provenance
 from the build; do not edit it by hand. `--allow-dirty` is for local investigation only: CI
 rejects dirty release bundles.
 
+Directory readiness requires an owner-approved LICENSE and manifest identifier plus an approved
+square PNG/JPEG icon (512–2048 px, under 2 MiB). The owner's selected Product Hunt icon is
+packaged as a 512×512 JPEG. The approved [Stripo Agent Plugin License, Version 1.0](LICENSE)
+is copied verbatim from the root `LICENSE`, with identifier `LicenseRef-Stripo-Agent-Plugin-1.0`.
+If required assets or metadata are removed,
+`npm run validate` completes its technical checks and fails with the pending assets named;
+passing unit tests or `validate:claude` does not waive this gate. Keep the approved license
+in root `LICENSE` and the README/icon under `packaging/`; declare their paths in `packageFiles`, set `license` and `claudeDirectory.icon`,
+and regenerate. Keep the validator's third-party NOTICE.txt unchanged. Never select a license
+merely to satisfy the scanner: the canonical editor code is proprietary.
+
 Public CI validates the committed distribution on Node.js 20.18.1, 22 and 24. It checks generated
 files, the exact packaged file set, skill frontmatter, declared package paths, MCP tool mappings,
-the format of bundle provenance and its agreement with the packaged SDK contract, and SDK
-loading from an isolated installed copy. PRs changing the bundle, metadata, host files or
+the format of bundle provenance, every validator module hash and its agreement with the packaged SDK contract,
+the plugin-root README/license/icon, the 256 KiB text-file and 512-file limits, and SDK loading from an isolated installed copy. PRs changing the bundle, metadata, host files or
 packaging tools require a higher version. CI needs no private checkout, MCP account or OAuth
 credentials. These checks do not verify live MCP persistence or OAuth; exercise those separately
 in each supported agent before releasing changes that affect them.

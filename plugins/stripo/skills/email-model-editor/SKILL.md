@@ -19,6 +19,12 @@ configured by the consuming agent.
 If the host installs `HOST.md` beside this file, read it for concrete file-transfer commands.
 The image workflow is supplied by `PROVIDER.md` and does not require a host image adapter.
 
+For an attached or Ctrl+V-pasted replacement image, follow [Upload supplied images](reference/image-upload.md)
+before editing the model. The host must supply the original bytes as a local file. Host that
+file with `prepare_image_upload`, the authorized HTTP transfer, and `upload_image`; use only
+the verified final `data.url`. Reacquire the target and check its current image source before
+replacement. Keep the original asset if hosting fails; do not regenerate a supplied image.
+
 When repairing a draft created from a reference, retain its chosen Exact, Tailored, or Creative
 regime and original PNG baseline. For Exact, preserve source choices, reuse existing assets or
 crops before considering AI generation, and compare the repaired PNGs with the original source.
@@ -180,7 +186,8 @@ Rules for the module:
   A pending or failed image job is not a replacement; keep the original asset until ready.
   Use the returned URL directly without reuploading or recompressing it, including during
   document-write recovery. Image tool calls happen outside the SDK module.
-  The Stripo MCP has no local asset-upload tool. WebP inputs are supported by its image tools,
+  Local attachments and crops use [Upload supplied images](reference/image-upload.md).
+  WebP inputs are supported by its image tools,
   whose completed output is PNG; WebP, AVIF, and extensionless or otherwise unknown URLs are
   not confirmed email-safe for direct insertion. Obtain a hosted PNG/JPG/JPEG/GIF before
   applying an image change with an unsupported source; generation is not a lossless conversion.

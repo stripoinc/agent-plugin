@@ -34,6 +34,32 @@ const devtoolsExecutable =
     path.join(path.dirname(require.resolve('chrome-devtools-mcp/package.json')),
               'build/src/bin/chrome-devtools-mcp.js');
 
+// StdioClientTransport 1.30.0 also inherits its fixed OS defaults. Keep that
+// same set explicit here, adding only temporary-directory discovery. The
+// driver attaches to the host's browser by --ws-endpoint; it needs no browser
+// launcher settings, proxy credentials, Node injection flags or API tokens.
+const DRIVER_ENV_KEYS = process.platform === 'win32'
+    ? ['APPDATA', 'HOMEDRIVE', 'HOMEPATH', 'LOCALAPPDATA', 'PATH',
+       'PROCESSOR_ARCHITECTURE', 'SYSTEMDRIVE', 'SYSTEMROOT', 'TEMP',
+       'USERNAME', 'USERPROFILE', 'PROGRAMFILES', 'TMP']
+    : ['HOME', 'LOGNAME', 'PATH', 'SHELL', 'TERM', 'USER', 'TMPDIR', 'TMP', 'TEMP'];
+
+export function nativeDriverOptions(connectUrl, environment = process.env) {
+  const env = {};
+  for (const key of DRIVER_ENV_KEYS) {
+    const value = environment[key];
+    if (typeof value === 'string' && !value.startsWith('()')) env[key] = value;
+  }
+  return {
+    command: process.execPath,
+    args: [devtoolsExecutable, `--ws-endpoint=${connectUrl}`,
+           '--no-usage-statistics', '--no-performance-crux',
+           '--experimental-structured-content'],
+    env: {...env, CI: '1', CHROME_DEVTOOLS_MCP_NO_UPDATE_CHECKS: '1'},
+    stderr: 'pipe',
+  };
+}
+
 const NATIVE_REQUEST_TIMEOUT_MS = 65000;
 const OPERATION_TIMEOUT_MS = Object.freeze({
   navigate : 120000,
@@ -398,18 +424,7 @@ export async function serveNativeBrowser({
               {uri : pathToFileURL(OUT).href, name : 'Brand Kit run artifacts'}
             ]
           }));
-      driverTransport = new StdioClientTransport({
-        command : process.execPath,
-        args : [
-          devtoolsExecutable,
-          `--ws-endpoint=${session.connectUrl}`,
-          '--no-usage-statistics',
-          '--no-performance-crux',
-          '--experimental-structured-content',
-        ],
-        env : {...process.env, CI : '1'},
-        stderr : 'pipe',
-      });
+      driverTransport = new StdioClientTransport(nativeDriverOptions(session.connectUrl));
       driverTransport.stderr?.on(
           'data', data => fs.appendFileSync(file('driver.log'), redact(data)));
       const connectMs = remainingDeadlineMs(

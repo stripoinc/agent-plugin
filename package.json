@@ -9,7 +9,7 @@
     "generate": "node scripts/generate-metadata.mjs",
     "check:generated": "node scripts/generate-metadata.mjs --check",
     "validate": "node scripts/validate-plugin.mjs",
-    "validate:claude": "claude plugin validate . && claude plugin validate plugins/stripo",
+    "validate:claude": "claude plugin validate --strict . && claude plugin validate --strict plugins/stripo",
     "check:version": "node scripts/check-version-bump.mjs",
     "test": "node --test scripts/test/*.test.mjs"
   },

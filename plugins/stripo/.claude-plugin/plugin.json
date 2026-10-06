@@ -8,10 +8,13 @@
   },
   "homepage": "https://stripo.email",
   "repository": "https://github.com/stripoinc/agent-plugin",
+  "license": "LicenseRef-Stripo-Agent-Plugin-1.0",
   "keywords": [
     "stripo",
     "email",
     "email-template",
     "mcp"
-  ]
+  ],
+  "documentationUrl": "https://github.com/stripoinc/agent-plugin#readme",
+  "icon": "./assets/stripo-icon.jpeg"
 }

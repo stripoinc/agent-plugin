@@ -98,8 +98,11 @@ Download and visually inspect a completed PNG using the download command above a
 image-viewing tool. Insert its hosted `image.url` through the native model workflow without
 reuploading or recompressing it. Generation alone does not place the image into the document.
 
-Local asset and crop uploads remain unavailable. Image references and edit sources must already
-be authorized public HTTPS URLs; the supported formats and limits are in `PROVIDER.md`.
+For supplied local images and authorized crops, use `prepare_image_upload` and `upload_image`
+as described in `reference/image-upload.md` and `PROVIDER.md`. Upload the file using the signed
+ticket's method and fields, then finalize that same upload session to get its hosted URL.
+Require both tools on the connected server; never use document-state tickets for image bytes.
+Image references and edit sources must be authorized hosted URLs before image jobs start.
 Reuse suitable hosted assets and report a required visual that cannot be completed as `SKILL.md`
 describes. Inspection-only email requests must not start image jobs.
 

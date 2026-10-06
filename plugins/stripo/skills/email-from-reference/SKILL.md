@@ -174,6 +174,12 @@ Keep the original reference and a short account of the intended changes as the r
 Retain the enclosing layout, not just individual blocks: zero block padding may rely on padding
 in its structure or container. Preserve that context when reproducing or adapting the reference.
 
+For an attached or Ctrl+V-pasted image that must appear in the email, follow
+[Upload supplied images](reference/image-upload.md) before finalizing the brief. Use the
+original local file exposed by the host and the returned hosted `data.url`; preserve supplied
+artwork without regeneration. Treat a screenshot of an entire reference email as design
+evidence, not automatically as an asset to embed. Inspection-only requests must not upload assets.
+
 For **Exact**, first reuse authorized original assets: images referenced in the HTML, supplied
 images, or exported design assets. If a needed visual is part of a supplied image, crop that
 region without regenerating it, then host it using the available asset-upload workflow. Keep
@@ -191,8 +197,9 @@ for a new composition and `edit_image` for a bounded change to an existing one. 
 the authorized reference URLs, intended proportions, relevant facts, exact approved copy, and
 the visual changes. Tailored/Creative visuals must not inherit unrelated source-brand logos,
 products, claims, or text; Exact retains the source branding.
-The MCP accepts hosted image inputs and does not upload local assets or crops. Never invent an
-asset URL. If the capability or required hosted input is unavailable, or a job fails, report the
+Host supplied files and crops through [Upload supplied images](reference/image-upload.md)
+before using them directly or as an authorized image-job input. Never invent an
+asset URL. If the capability or required input is unavailable, or an upload or job fails, report the
 missing visual and its effect on completion; do not silently replace a meaningful hero with a
 text-first layout or describe the email as complete. Inspection-only requests must not start image jobs.
 
@@ -204,16 +211,18 @@ background layers, image coordinate frames, and crop bounds in `sourceSummary`.
 
 Skip this step when all required visuals already have suitable hosted URLs. Otherwise:
 
-1. Resolve the write target before starting an image job. For a new email, resolve its name and
+1. Resolve the write target before uploading a local asset or starting an image job. For a new email, resolve its name and
    destination from the inspected plan and execute the CREATE step now, using those values.
    Record the returned `emailId` and verified project; check `editorModelReady` before proceeding.
    For an explicit rebuild, use the existing target's `(id, type)` and skip creation, including
    for `TEMPLATE`. A reference's id is not the image-job target for a new email.
-2. Start the required image jobs and poll them through `PROVIDER.md`. Keep the same target id
+2. Upload supplied local images through [Upload supplied images](reference/image-upload.md).
+   Reuse their final `data.url` without generation. Start only the required image jobs and poll
+   them through `PROVIDER.md`. Keep the same target id
    throughout the workflow. Retain each `jobId`; resume polling it after a polling interruption,
    and do not create another email or restart generation to recover a failed model write.
 3. Wait for each completed hosted result, download and visually inspect it, then use its
-   `image.url` directly without another upload or compression pass. Finalize the brief with
+   `data.url` (upload) or `image.url` (image job) directly without another upload or compression pass. Finalize the brief with
    these real URLs before BUILD; never put job ids, pending placeholders, or invented URLs in
    image sources. If a required image cannot be completed, retain the created draft id and
    report what remains incomplete.
@@ -419,7 +428,7 @@ the same ID. A `MERGE_BROKEN` answer carries the editor's `code` and `details` a
 describes: `details.errors[].path` is a dot path into `<new-model.json>`, so correct the brief,
 rebuild, and persist with fresh tickets for both files when rebuilding; do not patch the JSON
 by hand. Report the returned `code`, paths, and messages when the repair retry fails.
-There is no metadata write or asset-upload tool: preserve existing name, project,
+There is no external metadata write tool: preserve existing name, project,
 and folder metadata, report requested metadata changes as unsupported, and reference only hosted
 assets.
 
@@ -481,5 +490,5 @@ project for a new email, and a concise summary of deliberate deviations from the
   completed hosted results before building and persist them through the native model workflow.
 - Do not send, schedule, activate, or delete the new email.
 - Do not configure MCP endpoints, authentication, or credentials.
-- Do not create templates, upload local assets, or update external metadata; report those requests as
+- Do not create templates or update external metadata; report those requests as
   unsupported capabilities.

@@ -9,6 +9,7 @@ export const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "
 export const PLUGIN = "plugins/stripo";
 export const METADATA = "plugin-metadata.json";
 export const SYNCED_ITEMS = ["skills", "packages", "mcp-tools.json", "bundle.json"];
+export const CLAUDE_DIRECTORY_FIELDS = ['icon', 'documentationUrl', 'supportUrl', 'privacyPolicyUrl', 'termsOfServiceUrl'];
 
 export function requireCondition(condition, message) {
   if (!condition) throw new Error(message);
@@ -58,6 +59,20 @@ export function loadMetadata(root = ROOT) {
   requireCondition(metadata.marketplace.policy?.authentication === "ON_INSTALL", "The Stripo marketplace uses ON_INSTALL authentication.");
   const dependency = metadata.mcpDependency;
   requireCondition(dependency?.type === "mcp" && dependency.value === "stripo-mcp" && typeof dependency.description === "string" && dependency.description.trim(), "Declare the stripo-mcp dependency in plugin-metadata.json.");
+  if (metadata.license !== undefined) requireCondition(typeof metadata.license === 'string' && metadata.license.trim(), 'license must be the owner-approved license identifier.');
+  requireCondition(metadata.packageFiles?.['README.md'], 'Declare the packaged README in packageFiles.');
+  for (const [destination, source] of Object.entries(metadata.packageFiles)) {
+    requireCondition(/^(?:README\.md|LICENSE|assets\/[a-zA-Z0-9_-]+\.(?:png|jpe?g))$/u.test(destination), `Unsupported package file: ${destination}`);
+    requireCondition(destination === 'LICENSE' && source === 'LICENSE'
+      || typeof source === 'string' && source.startsWith('packaging/') && !source.split('/').includes('..'),
+      `Package sources must be inside packaging/ or the canonical root LICENSE: ${source}`);
+    walkFiles(root, source);
+  }
+  for (const [field, value] of Object.entries(metadata.claudeDirectory ?? {})) {
+    requireCondition(CLAUDE_DIRECTORY_FIELDS.includes(field), `Unknown Claude directory field: ${field}`);
+    if (field === 'icon') requireCondition(typeof value === 'string' && value.startsWith('./') && metadata.packageFiles[value.slice(2)], 'Claude icon must reference an inventoried package file.');
+    else requireCondition(typeof value === 'string' && new URL(value).protocol === 'https:', `${field} must be an HTTPS URL.`);
+  }
   return metadata;
 }
 
@@ -98,9 +113,9 @@ export function withMcpDependency(source, dependency) {
 
 export function generatedFiles(root = ROOT, metadata = loadMetadata(root), {fromBundleSync = false} = {}) {
   const {name, version, description, author, homepage, repository, keywords, marketplace, codexInterface} = metadata;
-  const shared = {name, version, description, author, homepage, repository, keywords};
+  const shared = {name, version, description, author, homepage, repository, ...(metadata.license ? {license: metadata.license} : {}), keywords};
   const files = new Map([
-    [`${PLUGIN}/.claude-plugin/plugin.json`, json(shared)],
+    [`${PLUGIN}/.claude-plugin/plugin.json`, json({...shared, ...metadata.claudeDirectory})],
     [`${PLUGIN}/.codex-plugin/plugin.json`, json({
       ...shared,
       skills: "./skills/",
@@ -119,6 +134,9 @@ export function generatedFiles(root = ROOT, metadata = loadMetadata(root), {from
     })],
     [`${PLUGIN}/.generated`, "Generated distribution; do not edit packaged files directly.\nSkills, SDK and bundle provenance: convo-email-agent, via scripts/sync-bundle.mjs.\nHost files: host/. Manifests and MCP dependency: plugin-metadata.json.\nRun npm run generate after metadata or host changes. See the root README for releases.\n"],
   ]);
+  for (const [destination, source] of Object.entries(metadata.packageFiles)) {
+    files.set(`${PLUGIN}/${destination}`, readFileSync(path.join(root, source)));
+  }
   const skills = bundleSkills(root);
   const hostOverrides = [];
   for (const entry of readdirSync(path.join(root, "host"), {withFileTypes: true})) {
@@ -144,6 +162,7 @@ export function generatedFiles(root = ROOT, metadata = loadMetadata(root), {from
     requireCondition(removed.length === 0, `Host overrides were removed: ${removed.join(", ")}. Run scripts/sync-bundle.mjs with a clean upstream bundle to restore upstream files and remove obsolete helpers.`);
   }
   const paths = new Set(SYNCED_ITEMS.flatMap((item) => walkFiles(root, `${PLUGIN}/${item}`)));
+  for (const file of Object.keys(metadata.packageFiles)) paths.add(`${PLUGIN}/${file}`);
   for (const file of files.keys()) {
     if (SYNCED_ITEMS.some((item) => file.startsWith(`${PLUGIN}/${item}/`))) paths.add(file);
   }
