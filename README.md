@@ -297,6 +297,10 @@ packaging tools require a higher version. CI needs no private checkout, MCP acco
 credentials. These checks do not verify live MCP persistence or OAuth; exercise those separately
 in each supported agent before releasing changes that affect them.
 
+The [Anthropic review package](docs/anthropic-directory-review.md) records the fixed release
+revision, credential-finding explanations, publisher evidence, local validation and the
+remaining publication/revalidation steps.
+
 ## Format references
 
 - [Claude plugin marketplaces](https://code.claude.com/docs/en/plugin-marketplaces)
