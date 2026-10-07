@@ -99,8 +99,35 @@ test("the bundled MCP server is generated from metadata for both hosts", (t) => 
   assert.throws(() => validatePlugin(root), /Generated files are out of date[\s\S]*\.mcp\.json/u);
   generateMetadata(root);
   validatePlugin(root);
-  writeFileSync(path.join(root, "plugin-metadata.json"), json({...metadata, mcpServer: {...metadata.mcpServer, oauth: {}}}));
-  assert.throws(() => generateMetadata(root), /its OAuth client ID/u);
+});
+
+test("MCP packages allow a connection-managed client ID or an explicit client ID", (t) => {
+  const root = fixture(t);
+  const metadata = readJson(root, "plugin-metadata.json");
+  assert.equal(metadata.mcpServer.oauth?.clientId, undefined, "The shared package must not pin a host's OAuth client ID.");
+  for (const oauth of [undefined, {}, {scopes: "mcp:tools"}, {clientId: "test-client", scopes: "mcp:tools"}]) {
+    const server = {...metadata.mcpServer, oauth};
+    writeFileSync(path.join(root, "plugin-metadata.json"), json({...metadata, mcpServer: server}));
+    generateMetadata(root);
+    validatePlugin(root);
+    const packaged = readJson(root, `${PLUGIN}/.mcp.json`).mcpServers[metadata.mcpDependency.value];
+    assert.deepEqual(packaged.oauth, oauth);
+    assert.equal(packaged.url, metadata.mcpServer.url);
+    assert.deepEqual(packaged.scopes, metadata.mcpServer.scopes);
+  }
+});
+
+test("optional MCP OAuth configuration rejects malformed settings and explicit client IDs", (t) => {
+  const root = fixture(t);
+  const metadata = readJson(root, "plugin-metadata.json");
+  for (const oauth of [null, "test-client", []]) {
+    writeFileSync(path.join(root, "plugin-metadata.json"), json({...metadata, mcpServer: {...metadata.mcpServer, oauth}}));
+    assert.throws(() => generateMetadata(root), /OAuth settings must be an object/u);
+  }
+  for (const clientId of [null, "", "   ", 42]) {
+    writeFileSync(path.join(root, "plugin-metadata.json"), json({...metadata, mcpServer: {...metadata.mcpServer, oauth: {clientId}}}));
+    assert.throws(() => generateMetadata(root), /OAuth client ID must be a non-empty string/u);
+  }
 });
 
 test("validation rejects divergent marketplace metadata and repairs it from the source", (t) => {

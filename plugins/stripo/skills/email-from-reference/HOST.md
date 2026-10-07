@@ -108,9 +108,12 @@ describes. Inspection-only email requests must not start image jobs.
 
 ## Authentication
 
-The plugin bundles the `stripo-mcp` server configuration for Claude Code and Codex. MCP access is
-authorized once per agent through OAuth (Claude Code: `/mcp`, where the bundled server is listed
-as `plugin:stripo:stripo-mcp`; Codex: `codex mcp login stripo-mcp`; other agents: their own login
-flow for the `stripo-mcp` server, or the browser login an `mcp-remote` bridge opens on its first
-start).
+The plugin bundles the `stripo-mcp` endpoint and scopes without a fixed OAuth client ID.
+For pre-registered OAuth clients, configure the client ID in the host's MCP connection using
+the plugin README before login; do not assume automatic client registration is available.
+MCP access is authorized once per agent through OAuth (Claude Code: `/mcp`; Codex:
+`codex mcp login stripo-mcp --scopes mcp:tools,offline_access`; other agents: their own login flow
+for `stripo-mcp`, or the browser login an `mcp-remote` bridge opens on its first start). Claude
+Code lists a bundled connection as `plugin:stripo:stripo-mcp` and a separately configured one
+as `stripo-mcp`.
 Never paste tokens or credentials into the conversation, runner arguments or files.

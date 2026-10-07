@@ -43,11 +43,16 @@ Keep the complete `plugins/stripo/` package together. Copying only `skills/` los
 
 ## Install and connect MCP
 
-The plugin bundles the configuration of the Stripo MCP server: **`stripo-mcp`** at
-`https://mcp.stripo.email/mcp`, with the OAuth client `openai-directory-mcp-client` and the
-`mcp:tools` scope. Claude Code and Codex register it when the plugin is installed, so only the
-browser login remains. Each skill's `agents/openai.yaml` declares its
-dependency on this server.
+The plugin bundles the endpoint and scopes of the Stripo MCP server: **`stripo-mcp`** at
+`https://mcp.stripo.email/mcp`. Each skill's `agents/openai.yaml` declares its dependency on
+this server. The package contains no fixed OAuth client ID, client secret or tokens.
+
+For Stripo's pre-registered OAuth client flow, configure the client ID in the agent's MCP
+connection before signing in. Get the client ID from your organization's **Settings → MCP
+integration**, or use one provisioned for the target host with its callback URL allowed.
+Omitting the client ID from the package does not create an OAuth client or enable automatic
+registration. CIMD or DCR can replace this setup only when the authorization server and host
+support them.
 
 ### Claude Code
 
@@ -68,9 +73,16 @@ claude plugin install stripo@stripo
 Third-party marketplaces do not update on their own: turn on
 [automatic updates](#automatic-updates) for `stripo` right after installing.
 
-Run `/reload-plugins` or start a new session to load the installed skills and the bundled
-server. Open `/mcp`, select `plugin:stripo:stripo-mcp` and complete the browser login. Invoke the
-skills with the `stripo:` prefix, for example `/stripo:email-model-editor`.
+Configure your pre-registered client separately (replace `<CLIENT_ID>`):
+
+```bash
+claude mcp add --transport http --scope user --client-id '<CLIENT_ID>' stripo-mcp https://mcp.stripo.email/mcp
+```
+
+Run `/reload-plugins` or start a new session. Open `/mcp`, select your `stripo-mcp` connection
+and complete the browser login. When using the bundled connection with supported automatic
+registration, its name is `plugin:stripo:stripo-mcp`. Invoke the skills with the `stripo:`
+prefix, for example `/stripo:email-model-editor`.
 
 ### Codex
 
@@ -79,11 +91,18 @@ codex plugin marketplace add stripoinc/agent-plugin
 codex plugin add stripo@stripo
 ```
 
-Codex registers `stripo-mcp` from the plugin. Complete the browser login:
+Configure your pre-registered client separately (replace `<CLIENT_ID>`) and complete the
+browser login. Use the callback URL Codex reports when configuring the OAuth client:
 
 ```bash
-codex mcp login stripo-mcp
+codex mcp add stripo-mcp --url https://mcp.stripo.email/mcp --oauth-client-id '<CLIENT_ID>'
+codex mcp login stripo-mcp --scopes mcp:tools,offline_access
 ```
+
+Codex stores this client ID under `mcp_servers.stripo-mcp.oauth.client_id` in its local
+`config.toml`; it does not belong in the shared plugin files. See the
+[Codex OAuth setup reference](https://learn.chatgpt.com/docs/extend/mcp#oauth-client-registration-and-callbacks).
+If the connection already has the correct client ID, only the login step is needed.
 
 Start a new Codex session and invoke a skill by its plugin-prefixed name, for example
 `$stripo:email-model-editor`.
@@ -94,9 +113,19 @@ A `stripo-mcp` server you configured yourself is used instead of the bundled one
 matches it by URL, Codex by name. Keep it to sign in with the client ID your organization issued
 under **Settings → MCP integration**, as the
 [Stripo guide](https://support.stripo.email/en/articles/15921958-how-to-connect-ai-tools-to-stripo-via-mcp-integration)
-describes. Remove it to use the bundled configuration: `claude mcp remove stripo-mcp` (add
+describes. Do not remove a working entry until another OAuth setup has been verified. To
+switch to the bundled configuration with supported automatic registration, use
+`claude mcp remove stripo-mcp` (add
 `-s local` or `-s project` for an entry at that scope) or `codex mcp remove stripo-mcp`. An
 earlier Codex entry that runs the `mcp-remote` bridge is such an entry.
+
+### OpenAI directory connection
+
+The MCP endpoint stays in the submitted plugin ZIP. Configure and verify OAuth for the
+registered MCP connection in the OpenAI portal before review; do not assume that the portal's
+OAuth settings also configure installations from this GitHub marketplace. If a submission
+requires client metadata in the package, use a host-specific packaging configuration rather
+than adding a directory-specific client ID to the shared package. Keep secrets outside the ZIP.
 
 ### Other agents
 
@@ -138,7 +167,8 @@ node --version
 curl --version
 ```
 
-For Claude Code, use `claude plugin list` and `claude mcp get plugin:stripo:stripo-mcp`.
+For Claude Code, use `claude plugin list` and `claude mcp get stripo-mcp` for your own entry
+(or `claude mcp get plugin:stripo:stripo-mcp` for the bundled connection).
 For Codex, use `codex plugin list` and `codex mcp get stripo-mcp`.
 In another agent, list its skills and MCP servers the way it provides.
 These commands inspect configuration; they do not prove successful authorization.

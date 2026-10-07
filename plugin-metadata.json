@@ -1,6 +1,6 @@
 {
   "name": "stripo",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "description": "Create and edit emails and templates with Stripo.",
   "author": {
     "name": "Stripo",
@@ -57,7 +57,6 @@
     "type": "http",
     "url": "https://mcp.stripo.email/mcp",
     "oauth": {
-      "clientId": "openai-directory-mcp-client",
       "scopes": "mcp:tools"
     },
     "scopes": [

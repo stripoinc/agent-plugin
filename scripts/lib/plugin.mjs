@@ -60,7 +60,13 @@ export function loadMetadata(root = ROOT) {
   const dependency = metadata.mcpDependency;
   requireCondition(dependency?.type === "mcp" && dependency.value === "stripo-mcp" && typeof dependency.description === "string" && dependency.description.trim(), "Declare the stripo-mcp dependency in plugin-metadata.json.");
   const server = metadata.mcpServer;
-  requireCondition(server?.type === "http" && new URL(server.url).protocol === "https:" && typeof server.oauth?.clientId === "string" && server.oauth.clientId.trim(), "Declare the bundled HTTPS MCP server and its OAuth client ID in plugin-metadata.json.");
+  requireCondition(server?.type === "http" && new URL(server.url).protocol === "https:", "Declare the bundled HTTPS MCP server in plugin-metadata.json.");
+  if (server.oauth !== undefined) {
+    requireCondition(server.oauth && typeof server.oauth === "object" && !Array.isArray(server.oauth), "MCP OAuth settings must be an object when specified.");
+    if (server.oauth.clientId !== undefined) {
+      requireCondition(typeof server.oauth.clientId === "string" && server.oauth.clientId.trim(), "MCP OAuth client ID must be a non-empty string when specified.");
+    }
+  }
   if (metadata.license !== undefined) requireCondition(typeof metadata.license === 'string' && metadata.license.trim(), 'license must be the owner-approved license identifier.');
   requireCondition(metadata.packageFiles?.['README.md'], 'Declare the packaged README in packageFiles.');
   for (const [destination, source] of Object.entries(metadata.packageFiles)) {

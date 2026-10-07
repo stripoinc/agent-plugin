@@ -42,21 +42,31 @@ automatically installed by this plugin.
 
 ## Authorize Stripo
 
-Your organization must have MCP access enabled. The plugin bundles the configuration
-of the **stripo-mcp** server at `https://mcp.stripo.email/mcp` with a Stripo OAuth
-client ID and the `mcp:tools` scope. It contains no secret and requests no
-API keys.
+Your organization must have MCP access enabled. The plugin bundles the endpoint and scopes
+of the **stripo-mcp** server at `https://mcp.stripo.email/mcp`, without a fixed OAuth client ID,
+client secret or tokens. For a pre-registered OAuth client, configure its ID in your agent's
+MCP connection. Get it from your organization's **Settings → MCP integration**, or use a
+client provisioned for that host with the correct callback URL.
 
-In Claude Code, open `/mcp`, select `plugin:stripo:stripo-mcp` and finish the
-browser login. In Codex, run:
+In Claude Code, replace `<CLIENT_ID>` and configure the connection:
 
 ```bash
-codex mcp login stripo-mcp
+claude mcp add --transport http --scope user --client-id '<CLIENT_ID>' stripo-mcp https://mcp.stripo.email/mcp
 ```
 
-A `stripo-mcp` server you configured yourself, for example with your organization's
-own client ID, keeps working and is used instead of the bundled one. Authentication
-belongs to the agent's OAuth connection. Do not paste tokens into chat, source files or runner arguments.
+Then open `/mcp`, select `stripo-mcp` and finish the browser login. In Codex, run:
+
+```bash
+codex mcp add stripo-mcp --url https://mcp.stripo.email/mcp --oauth-client-id '<CLIENT_ID>'
+codex mcp login stripo-mcp --scopes mcp:tools,offline_access
+```
+
+An existing `stripo-mcp` connection with the correct client ID can be reused; complete its
+login without adding it again. Authentication belongs to the agent's OAuth connection.
+The bundled connection can use automatic registration only when the authorization server
+and host support it. Omitting a client ID does not enable that support. OpenAI directory
+OAuth setup is separate from these GitHub installation steps.
+Do not paste tokens into chat, source files or runner arguments.
 In a fresh session, ask the agent to call `whoami` without making changes, then
 confirm the account and project before editing.
 

@@ -87,9 +87,12 @@ sortOrder="desc")`; drafts are excluded unless `draft` is set. When the user ask
 emails instead.
 
 `publisher-runtime` and `publisher-proxy` are the shared text's names for a runtime this host does
-not have; ignore those rules and the `OPENAI_API_KEY` one with them. Authorization is per agent,
-through OAuth (Claude Code: `/mcp`; Codex: `codex mcp login stripo-mcp`; other agents: their own
-login flow for the server, or the browser login an `mcp-remote` bridge opens on its first start). Never paste tokens or credentials into the conversation,
+not have; ignore those rules and the `OPENAI_API_KEY` one with them. The plugin bundles the MCP
+endpoint and scopes without a fixed OAuth client ID. Configure a pre-registered client in the
+host's MCP connection as the plugin README describes; do not assume automatic registration.
+Authorization is per agent, through OAuth (Claude Code: `/mcp`; Codex:
+`codex mcp login stripo-mcp --scopes mcp:tools,offline_access`; other agents: their own login flow
+for the server, or the browser login an `mcp-remote` bridge opens on its first start). Never paste tokens or credentials into the conversation,
 command arguments or files.
 
 ## Artifact transfer
