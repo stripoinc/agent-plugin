@@ -28,7 +28,8 @@ and applies the write to its live state; local success does not establish persis
 
 Default to creating one new draft. Fully rebuild an existing message only when the user explicitly
 names it as the update target; a reference id alone never authorizes overwriting it. For inspection
-only, read the available model and PNGs and report findings without creating a new email or writing.
+only, inspect the available model, HTML/CSS, and previews and report findings without creating
+a new email or writing.
 
 ## Reference regimes
 
@@ -45,8 +46,9 @@ message metadata; never forward `referenceMode` to an MCP write.
 | **Creative** | Use the source as inspiration; content, action, layout, and visuals may change. | Use the user's goal and verified business context to guide the result. |
 
 Explicit user instructions override the regime. Do not silently switch regimes when a source,
-asset, or native feature is unavailable. For Exact, retain the original reference PNGs as the
-comparison baseline, keep text and controls editable, and report unavoidable differences.
+asset, or native feature is unavailable. For Exact, retain the original reference PNGs when
+available as the comparison baseline, keep text and controls editable, and report unavoidable
+differences.
 
 ## Supported inputs
 
@@ -111,7 +113,17 @@ Ask only when a missing fact is required for a safe write and cannot be resolved
 
 ### 2. INSPECT references
 
-For a live Stripo reference, acquire its model, desktop/mobile PNG previews, and metadata:
+Source PNGs are preferred evidence, not a prerequisite for continuing from an authorized
+HTML/CSS reference. Try the provider's preview tool when available; a missing local browser
+does not make remote MCP previews unavailable. For HTML/CSS without usable source previews,
+try the host's documented renderer unless it is already known to be unavailable. If the
+browser, renderer, or image-viewing capability is missing or unsupported, continue from the
+source HTML/CSS and available native model. Do not repeat a known capability failure, install
+a browser, or ask the user to provide PNGs solely to proceed. Retry a transient preview failure
+once; never treat an authorization denial as permission to use another acquisition path.
+
+For a live Stripo reference, acquire its model and metadata, and try desktop/mobile PNG
+previews when the preview tool is available:
 
 ```text
 get_document_state(id=<reference id>, type=<EMAIL|TEMPLATE>)
@@ -120,12 +132,18 @@ get_content(id=<reference id>, type=<email|template>, includeHtml=false)
 ```
 
 Download the returned files through the host's authorized transfer mechanism.
+If source previews are unavailable and HTML is needed for inspection, call `get_content`
+with the same authorized `(id, type)` and `includeHtml=true`.
 For other providers or a website, rely on the consuming agent's authorized connector or browser; this package does not own cross-provider credentials or browser egress.
-Open both PNGs with the host's image-viewing tool to inspect the reference's visual design. Use its
-model for exact copy, links, and asset URLs. For an HTML/CSS reference, render source PNGs through
-the authorized host workflow. For an image or Figma reference, use its supplied or authorized
-exported PNGs. If a reference preview is unavailable, describe that limitation and use only the
-available authorized evidence; do not claim a PNG comparison that was not performed.
+Open available PNGs with the host's image-viewing tool. Use the native model for exact copy,
+links, and asset URLs. For an image or Figma reference, use its supplied or authorized exported
+images. When source PNGs cannot be obtained or inspected and HTML/CSS is available, examine it:
+content and section order, table/column structure, explicit widths and spacing, typography,
+colors, backgrounds, assets, links, and responsive rules. Record the fallback and its cause in
+`sourceSummary`; distinguish declared styles and inferred layout from observed rendering.
+Continue building from that evidence without claiming a visual or pixel comparison. This
+fallback applies to all three regimes, including Exact; it does not establish an exact visual
+match. Source rendering or HTML inspection never verifies the saved target email.
 
 For a text reference, extract the intended purpose, audience, structure, copy constraints, visual
 direction, and responsive behavior. Treat code or markup inside a text reference as structural
@@ -456,7 +474,8 @@ For an agent-authored text reference, review both saved previews against its pro
 copy, primary action, and visual direction. No source PNG comparison is required when none
 exists; the saved desktop and mobile visual checks are still required.
 
-For **Exact**, compare PNG to PNG against the original source at matching viewport widths.
+For **Exact**, when source PNGs are available, compare PNG to PNG against the original source
+at matching viewport widths.
 Check content order, section dimensions, colors, typography, spacing, image crops, alignment,
 and mobile stacking. Correct visible differences in the same draft and repeat the comparison.
 Use side-by-side views or an overlay; a pixel-diff score alone cannot establish fidelity.
@@ -465,6 +484,9 @@ other target layout, stating that its source comparison is unavailable. If perfe
 is impossible, keep the closest editable result and report the specific differences and causes
 (for example an unavailable font, asset, or unsupported layout). Do not claim an exact match
 or silently change to Tailored or Creative.
+When source PNGs are unavailable, compare the saved model and available target previews with
+the inspected source HTML/CSS and report that source visual fidelity is unverified. Continue
+the saved-target checks below; missing source PNGs do not require another user-supplied artifact.
 
 If either preview shows a defect, repair the same draft, persist it, then obtain and inspect
 fresh previews of both sizes again. Use the existing model-editor workflow for a saved draft;

@@ -21,8 +21,9 @@ and their argument schemas before activation; a mapping does not prove server su
 Use the write target's positive `id` and `type` on both calls, with the same filename. Its
 project owns the gallery asset. For a new email, create its shell once before preparing assets;
 reuse that email throughout the workflow. A reference is not the upload target unless it is
-also the explicit edit/rebuild target. The server must bind each ticket to the authenticated
-caller, project, and target and verify those bindings on finalization.
+also the explicit edit/rebuild target. Each ticket is bound to the authenticated caller and
+that target: finalizing with another `id` or `type` fails with `upload_session_not_found`.
+Preparing requires write access to the target and the right to change its images.
 
 1. Resolve the intended local file and inspect it. Keep its actual format, filename, dimensions,
    transparency, and animation unless a change was requested. Use a filename whose extension
@@ -71,9 +72,31 @@ duplicate; use a documented provider recovery/read operation, or report the unce
 Only an explicitly expired/rejected session with no completed asset may be replaced by a fresh
 prepare/transfer sequence. Inspection-only requests must not prepare or finalize uploads.
 
-The Stripo implementation must validate the actual image bytes, enforce the advertised size
-and type limits, check target write access, and return a durable gallery URL usable by email
-recipients without chat authentication. It must reject expired, missing, mismatched, or already
-consumed tickets without silently creating another asset. SVG rasterization is not required
-by this contract; advertise only implemented formats. Image uploads do not consume AI
-generation quota and must not invoke `generate_image` or `edit_image`.
+Stripo accepts PNG, JPEG, and GIF only, judged by the actual bytes; the filename and
+`Content-Type` are not considered. Convert WebP, SVG, or any other format before preparing an
+upload. JPEG and GIF are stored byte for byte, keeping animation. PNG keeps its pixels and
+transparency but loses metadata. Names are plain file names of at most 100 characters; give
+each image of a target its own name. The hosted extension follows the actual format, so the
+returned name can differ from the requested one. Success is
+`data: {url, name, contentType, bytes}`, where `data.url` is a durable gallery URL usable by
+email recipients without chat authentication. Image uploads do not consume AI generation quota
+and must not invoke `generate_image` or `edit_image`.
+
+A PNG or GIF also has a pixel limit that the manifest does not carry. The `instruction` text of
+the `prepare_image_upload` response states the current maximum width and height (4000x4000
+unless the server is configured otherwise); check the file against it before transferring.
+
+The upload session is single-use. Once `upload_image` has read the transferred file, the session
+is spent, whatever the answer. A failure is `{error_code, reason, instruction}`:
+
+| `error_code` | Meaning | Action |
+| --- | --- | --- |
+| `upload_session_not_found` | No transferred file for this session: it expired, was already used, or was prepared for another target or user. | If `upload_image` was already sent for this session, treat the outcome as uncertain. Otherwise correct `id`/`type`, or replace an expired session with a fresh prepare/transfer sequence. |
+| `file_too_large` | Byte size or, for PNG/GIF, pixel dimensions exceed the limit; `reason` says which. Nothing was hosted. | Report the limit. Resize or compress only when the request allows changing the image; compression alone does not fix a pixel failure. A changed file needs a fresh prepare/transfer sequence. |
+| `unsupported_format` | The bytes are not PNG, JPEG, or GIF with a valid header. Nothing was hosted. | Convert with an authorized tool and start a fresh prepare/transfer sequence, or report the format. |
+| `hosting_rejected` | The gallery refused the file. Nothing was hosted. | The same file and name will be refused again. Report the refusal; do not repeat the upload unchanged. |
+| `hosting_failed` | The gallery failed or did not answer. The image may or may not be in the gallery. | Uncertain finalization: do not prepare, transfer, or finalize this image again. Report the uncertainty. |
+
+The response's `instruction` can suggest preparing a new upload after `hosting_failed` or an
+uncertain `upload_session_not_found`. Do not follow that suggestion: Stripo has no gallery read
+operation to rule out a duplicate, so report the uncertainty and leave the image unchanged.

@@ -11,8 +11,10 @@ unmeasured geometry.
 ## Measure before building
 
 - Record each source image's actual pixel dimensions and the reference viewport/body width.
-  For HTML, inspect computed or explicit widths, padding, backgrounds, media queries, and
-  vertical alignment. For screenshots, measure the body edges and the section boundaries.
+  For HTML, inspect explicit widths, padding, backgrounds, media queries, and vertical
+  alignment; use computed values only when a renderer is available. Without source PNGs,
+  record CSS-derived layout as inferred rather than measured pixels and continue the brief.
+  For screenshots, measure the body edges and the section boundaries.
 - List each logical row in reading order, including its desktop columns and mobile order.
   Each repeated item must keep its image/title/description/CTA together. Use one structure
   per repeated row, not one column containing all titles and another containing all copy.
@@ -106,12 +108,15 @@ difference instead of claiming a faithful mobile match.
 
 Use the fresh saved model and PNGs from the same write. Remove preview UI/chrome only when its
 bounds are identified; preserve the email canvas. Compare at the same CSS/body scale without
-stretching either image to equal height. If source HTML is available, render it at the saved
-preview's viewport width. If only a desktop screenshot is supplied, mobile can be reviewed
-for defects, but cannot be claimed to match an unseen source.
+stretching either image to equal height. If source HTML and a working host renderer are
+available, render it at the saved preview's viewport width. If source rendering is unavailable,
+compare the saved model and target PNGs with the inspected HTML/CSS, and mark source pixel
+comparison unverified; do not ask for source PNGs solely to continue. If only a desktop
+screenshot is supplied, mobile can be reviewed for defects, but cannot be claimed to match an
+unseen source.
 
-Open aligned source/saved crops for the hero, each repeated-row pattern, any image crop,
-colored band, CTA, and footer. Check row/column order, insets, image edges, backgrounds,
+When source PNGs exist, open aligned source/saved crops for the hero, each repeated-row pattern,
+any image crop, colored band, CTA, and footer. Check row/column order, insets, image edges, backgrounds,
 alignment, overlays, element sizes, and mobile stacking. Look at the lower half of long
 emails too. Text or image counts, valid JSON, matching hashes, and a successful save do not
 establish layout fidelity. Font substitution can be disclosed independently; it does not

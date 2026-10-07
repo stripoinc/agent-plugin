@@ -1196,7 +1196,7 @@ export async function serveNativeBrowser({
             {
               name : 'hover',
               description :
-                  'Move the real native pointer to one agent-selected CURRENT target. Pass the bare ref such as "1_394", without the "uid=" or "ref=" label. Returns snapshot and image of the resulting state. No automatic traversal; inspect a revealed control afterward.',
+                  'Move the real native pointer to one agent-selected CURRENT card or control target. Pass the bare ref such as "1_394", without the "uid=" or "ref=" label. Returns snapshot and image of the resulting state, not new DOM/style measurements. No automatic traversal; inspect a revealed control afterward.',
               inputSchema : {
                 ...properties,
                 properties : {ref : {type : 'string'}},
