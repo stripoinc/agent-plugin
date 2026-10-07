@@ -20,6 +20,7 @@ import {
 } from './browser-delivery.mjs';
 import {captureRequest} from './capture-page.js';
 import {inspectElements} from './inspect-elements.js';
+import {deliverScreenshot} from './screenshot-delivery.mjs';
 import {
   captureSelectedInlineSvgArtwork
 } from './lib/inline-svg-logo-capture.js';
@@ -32,6 +33,32 @@ const require = createRequire(import.meta.url);
 const devtoolsExecutable =
     path.join(path.dirname(require.resolve('chrome-devtools-mcp/package.json')),
               'build/src/bin/chrome-devtools-mcp.js');
+
+// StdioClientTransport 1.30.0 also inherits its fixed OS defaults. Keep that
+// same set explicit here, adding only temporary-directory discovery. The
+// driver attaches to the host's browser by --ws-endpoint; it needs no browser
+// launcher settings, proxy credentials, Node injection flags or API tokens.
+const DRIVER_ENV_KEYS = process.platform === 'win32'
+    ? ['APPDATA', 'HOMEDRIVE', 'HOMEPATH', 'LOCALAPPDATA', 'PATH',
+       'PROCESSOR_ARCHITECTURE', 'SYSTEMDRIVE', 'SYSTEMROOT', 'TEMP',
+       'USERNAME', 'USERPROFILE', 'PROGRAMFILES', 'TMP']
+    : ['HOME', 'LOGNAME', 'PATH', 'SHELL', 'TERM', 'USER', 'TMPDIR', 'TMP', 'TEMP'];
+
+export function nativeDriverOptions(connectUrl, environment = process.env) {
+  const env = {};
+  for (const key of DRIVER_ENV_KEYS) {
+    const value = environment[key];
+    if (typeof value === 'string' && !value.startsWith('()')) env[key] = value;
+  }
+  return {
+    command: process.execPath,
+    args: [devtoolsExecutable, `--ws-endpoint=${connectUrl}`,
+           '--no-usage-statistics', '--no-performance-crux',
+           '--experimental-structured-content'],
+    env: {...env, CI: '1', CHROME_DEVTOOLS_MCP_NO_UPDATE_CHECKS: '1'},
+    stderr: 'pipe',
+  };
+}
 
 const NATIVE_REQUEST_TIMEOUT_MS = 65000;
 const OPERATION_TIMEOUT_MS = Object.freeze({
@@ -397,18 +424,7 @@ export async function serveNativeBrowser({
               {uri : pathToFileURL(OUT).href, name : 'Brand Kit run artifacts'}
             ]
           }));
-      driverTransport = new StdioClientTransport({
-        command : process.execPath,
-        args : [
-          devtoolsExecutable,
-          `--ws-endpoint=${session.connectUrl}`,
-          '--no-usage-statistics',
-          '--no-performance-crux',
-          '--experimental-structured-content',
-        ],
-        env : {...process.env, CI : '1'},
-        stderr : 'pipe',
-      });
+      driverTransport = new StdioClientTransport(nativeDriverOptions(session.connectUrl));
       driverTransport.stderr?.on(
           'data', data => fs.appendFileSync(file('driver.log'), redact(data)));
       const connectMs = remainingDeadlineMs(
@@ -661,15 +677,10 @@ export async function serveNativeBrowser({
       format : 'png',
       ...(ref ? {uid : ref} : {})
     });
-    const bytes = fs.readFileSync(file(n));
-    return {
-      path : publicPath(n),
-      block : {
-        type : 'image',
-        mimeType : 'image/png',
-        data : bytes.toString('base64')
-      }
-    };
+    return deliverScreenshot(file(n), {
+      signal : activeOperation?.signal,
+      deadlineAt : activeOperation?.deadlineAt,
+    });
   }
   function requireBareRef(ref) {
     if (typeof ref !== 'string' || !ref.trim())
@@ -1139,7 +1150,7 @@ export async function serveNativeBrowser({
             {
               name : 'navigate',
               description :
-                  'Navigate the owned browser to a public URL, returning current state, useful native refs, the full snapshot path and the actual viewport image. A large snapshot may be an explicitly incomplete inline navigation view; use its file only for concrete omitted context.',
+                  'Navigate the owned browser to a public URL, returning current state, native refs, bounded preview, actual viewport image, and DOM/style measurements at captureFile. Readiness is unverified. A large snapshot may be an explicitly incomplete inline navigation view; use its full file for concrete omitted context.',
               inputSchema : {
                 ...properties,
                 properties : {url : {type : 'string'}},
@@ -1149,7 +1160,7 @@ export async function serveNativeBrowser({
             {
               name : 'observe',
               description :
-                  'Capture current page directly: an intentionally bounded native snapshot excerpt, actual viewport image and exact source-owned measurements in a local JSON file. Page stability and font readiness are unverified. The response reports exact inline treatment and snapshot omissions; the untouched full snapshot remains at snapshotFile for a concrete missing ref or context. No clicks or automatic role selection.',
+                  'Capture broad current page evidence for a concrete missing or changed observation: a bounded native snapshot excerpt, actual viewport image and exact source-owned measurements at captureFile. It is not required after every click. Page stability and font readiness are unverified. The response reports exact inline treatment and snapshot omissions; the untouched full snapshot remains at snapshotFile for a concrete missing ref or context. No clicks or automatic role selection.',
               inputSchema : properties
             },
             {
@@ -1175,7 +1186,7 @@ export async function serveNativeBrowser({
             {
               name : 'click',
               description :
-                  'Click an agent-selected CURRENT native reference once and return fresh snapshot plus image. Pass the bare ref such as "1_394", without the "uid=" or "ref=" label. A malformed label is a syntax error; a bare ref rejected by the native tool may be stale. Do not replay an uncertain click; a terminal controller error stops the run. No automatic consent selection.',
+                  'Click an agent-selected CURRENT native reference once and return a current snapshot and image, not new DOM/style measurements. Inspect the result first; measure again only for a relevant changed or missing fact, using its current refs. Pass the bare ref such as "1_394", without the "uid=" or "ref=" label. A malformed label is a syntax error; a bare ref rejected by the native tool may be stale. Do not replay an uncertain click; a terminal controller error stops the run. No automatic consent selection.',
               inputSchema : {
                 ...properties,
                 properties : {ref : {type : 'string'}},
@@ -1185,7 +1196,7 @@ export async function serveNativeBrowser({
             {
               name : 'hover',
               description :
-                  'Move the real native pointer to one agent-selected CURRENT target. Pass the bare ref such as "1_394", without the "uid=" or "ref=" label. Returns snapshot and image of the resulting state. No automatic traversal; inspect a revealed control afterward.',
+                  'Move the real native pointer to one agent-selected CURRENT card or control target. Pass the bare ref such as "1_394", without the "uid=" or "ref=" label. Returns snapshot and image of the resulting state, not new DOM/style measurements. No automatic traversal; inspect a revealed control afterward.',
               inputSchema : {
                 ...properties,
                 properties : {ref : {type : 'string'}},

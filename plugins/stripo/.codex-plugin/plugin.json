@@ -1,6 +1,6 @@
 {
   "name": "stripo",
-  "version": "0.6.2",
+  "version": "0.8.0",
   "description": "Create and edit emails and templates with Stripo.",
   "author": {
     "name": "Stripo",
@@ -8,6 +8,7 @@
   },
   "homepage": "https://stripo.email",
   "repository": "https://github.com/stripoinc/agent-plugin",
+  "license": "LicenseRef-Stripo-Agent-Plugin-1.0",
   "keywords": [
     "stripo",
     "email",
@@ -15,9 +16,10 @@
     "mcp"
   ],
   "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
   "interface": {
     "displayName": "Stripo",
-    "longDescription": "Create emails from a brief, template, HTML or screenshot. Edit text, links, images and styles in existing emails and templates, and review desktop and mobile previews. Requires a connected Stripo MCP server.",
+    "longDescription": "Create emails from a brief, template, HTML or screenshot. Generate and edit images, update text, links and styles in existing emails and templates, and review desktop and mobile previews. Requires a connected Stripo MCP server.",
     "category": "Productivity",
     "capabilities": [
       "Read",
@@ -27,6 +29,8 @@
       "Create a new Stripo email from this description",
       "Change the copy, links or images in an existing Stripo email"
     ],
+    "logo": "./assets/stripo-icon.jpeg",
+    "composerIcon": "./assets/stripo-icon.jpeg",
     "shortDescription": "Create and edit emails and templates with Stripo.",
     "developerName": "Stripo",
     "websiteURL": "https://stripo.email"

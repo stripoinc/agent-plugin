@@ -1,15 +1,17 @@
 #!/usr/bin/env node
 import {spawnSync} from "node:child_process";
+import {createHash} from 'node:crypto';
 import {cpSync, existsSync, mkdtempSync, readFileSync, readdirSync, rmSync, statSync} from "node:fs";
 import {tmpdir} from "node:os";
 import path from "node:path";
 import {pathToFileURL} from "node:url";
 import semver from "semver";
 import {parseDocument} from "yaml";
-import {ROOT, PLUGIN, bundleSkills, generateMetadata, readJson, requireCondition, walkFiles} from "./lib/plugin.mjs";
+import {ROOT, PLUGIN, bundleSkills, generateMetadata, loadMetadata, readJson, requireCondition, walkFiles} from "./lib/plugin.mjs";
+import {checkDirectoryAssets, checkPackageLimits} from './lib/directory-checks.mjs';
 
 // Generated at the plugin root, outside the inventoried bundle items.
-const PLUGIN_ROOT_FILES = [".claude-plugin/plugin.json", ".codex-plugin/plugin.json", ".generated"];
+const PLUGIN_ROOT_FILES = [".claude-plugin/plugin.json", ".codex-plugin/plugin.json", ".mcp.json", ".generated"];
 
 function requirePath(root, relative, kind = "file") {
   requireCondition(typeof relative === "string" && relative.startsWith("./"), `Expected a bundle-relative path: ${relative}`);
@@ -28,12 +30,13 @@ function exportPaths(value) {
 
 export function validatePlugin(root = ROOT) {
   generateMetadata(root, {check: true});
-  // Hosts load hooks/, .mcp.json, commands/ and agents/ from the plugin root by convention,
-  // so the package may hold only the inventoried files and the generated manifests.
+  // Hosts load hooks/, .lsp.json, commands/ and agents/ from the plugin root by convention,
+  // so the package may hold only the inventoried files, the generated manifests and .mcp.json.
   const expected = new Set([...Object.keys(readJson(root, "bundle-integrity.json").files), ...PLUGIN_ROOT_FILES]);
   // .DS_Store is gitignored, so Finder metadata never reaches a release.
   const unexpected = walkFiles(root, PLUGIN).map((file) => file.slice(PLUGIN.length + 1)).filter((file) => !expected.has(file) && path.basename(file) !== ".DS_Store");
   requireCondition(unexpected.length === 0, `Unexpected files in ${PLUGIN} (not in bundle-integrity.json): ${unexpected.join(", ")}`);
+  const limits = checkPackageLimits(root);
   const bundle = readJson(root, `${PLUGIN}/bundle.json`);
   requireCondition(bundle.brand === "stripo" && bundle.sourceDirty === false, "Release bundle must be a clean Stripo build.");
   requireCondition(/^[a-f0-9]{40}$/u.test(bundle.sourceRevision), "Missing bundle source revision.");
@@ -54,6 +57,19 @@ export function validatePlugin(root = ROOT) {
     requireCondition(typeof fields.description === "string" && fields.description.trim().length > 0 && fields.description.length <= 1024, `${skill}: description must contain 1-1024 characters.`);
   }
   requirePath(root, bundle.sdk);
+  const validatorRoot = `${PLUGIN}/packages/convo-email-agent/editor-validator`;
+  const validator = readJson(root, `${validatorRoot}/manifest.json`);
+  const hash = bytes => createHash('sha256').update(bytes).digest('hex');
+  requireCondition(validator.format === 'esm-modules-v1' && hash(JSON.stringify(validator.files)) === validator.bundleSha256,
+    'Invalid editor-validator module inventory.');
+  requireCondition(JSON.stringify(validator) === JSON.stringify(bundle.editorValidator), 'Packaged editor-validator manifest differs from bundle provenance.');
+  const validatorFiles = Object.keys(validator.files).sort();
+  requireCondition(JSON.stringify(walkFiles(root, validatorRoot).map(file => file.slice(validatorRoot.length + 1)).sort())
+    === JSON.stringify([...validatorFiles, 'manifest.json'].sort()), 'Editor-validator files differ from its inventory.');
+  for (const file of validatorFiles) {
+    requireCondition(!path.isAbsolute(file) && !file.split('/').includes('..'), `Invalid validator path: ${file}`);
+    requireCondition(hash(readFileSync(path.join(root, validatorRoot, file))) === validator.files[file], `Editor-validator integrity mismatch: ${file}`);
+  }
   const sdkPackage = readJson(root, `${PLUGIN}/packages/convo-email-agent/package.json`);
   requireCondition(sdkPackage.version === bundle.version, "SDK version differs from bundle.json (the plugin release version is independent).");
   requireCondition(semver.satisfies(process.versions.node, sdkPackage.engines.node), `SDK requires Node.js ${sdkPackage.engines.node}.`);
@@ -85,7 +101,9 @@ export function validatePlugin(root = ROOT) {
   } finally {
     rmSync(isolated, {recursive: true, force: true});
   }
-  return {skills: skills.length, sourceRevision: bundle.sourceRevision};
+  const pending = checkDirectoryAssets(root, loadMetadata(root));
+  requireCondition(pending.length === 0, `Technical package checks passed (${limits.files} files; largest text ${limits.largestTextBytes} bytes). Directory readiness is blocked: ${pending.join('; ')}.`);
+  return {skills: skills.length, sourceRevision: bundle.sourceRevision, ...limits};
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) {

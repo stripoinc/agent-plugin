@@ -1,6 +1,6 @@
 {
   "name": "stripo",
-  "version": "0.6.2",
+  "version": "0.8.0",
   "description": "Create and edit emails and templates with Stripo.",
   "author": {
     "name": "Stripo",
@@ -8,6 +8,16 @@
   },
   "homepage": "https://stripo.email",
   "repository": "https://github.com/stripoinc/agent-plugin",
+  "license": "LicenseRef-Stripo-Agent-Plugin-1.0",
+  "packageFiles": {
+    "LICENSE": "LICENSE",
+    "README.md": "packaging/README.md",
+    "assets/stripo-icon.jpeg": "packaging/stripo-icon.jpeg"
+  },
+  "claudeDirectory": {
+    "documentationUrl": "https://github.com/stripoinc/agent-plugin#readme",
+    "icon": "./assets/stripo-icon.jpeg"
+  },
   "keywords": [
     "stripo",
     "email",
@@ -25,7 +35,7 @@
   },
   "codexInterface": {
     "displayName": "Stripo",
-    "longDescription": "Create emails from a brief, template, HTML or screenshot. Edit text, links, images and styles in existing emails and templates, and review desktop and mobile previews. Requires a connected Stripo MCP server.",
+    "longDescription": "Create emails from a brief, template, HTML or screenshot. Generate and edit images, update text, links and styles in existing emails and templates, and review desktop and mobile previews. Requires a connected Stripo MCP server.",
     "category": "Productivity",
     "capabilities": [
       "Read",
@@ -34,11 +44,24 @@
     "defaultPrompt": [
       "Create a new Stripo email from this description",
       "Change the copy, links or images in an existing Stripo email"
-    ]
+    ],
+    "logo": "./assets/stripo-icon.jpeg",
+    "composerIcon": "./assets/stripo-icon.jpeg"
   },
   "mcpDependency": {
     "type": "mcp",
     "value": "stripo-mcp",
-    "description": "Stripo MCP server for emails, templates and business profiles. Configure and authorize it in your agent using your organization's OAuth client ID; see the plugin README."
+    "description": "Stripo MCP server for emails, templates, image generation/editing and business profiles. The plugin bundles its configuration; authorize it in your agent. See the plugin README."
+  },
+  "mcpServer": {
+    "type": "http",
+    "url": "https://mcp.stripo.email/mcp",
+    "oauth": {
+      "scopes": "mcp:tools"
+    },
+    "scopes": [
+      "mcp:tools",
+      "offline_access"
+    ]
   }
 }

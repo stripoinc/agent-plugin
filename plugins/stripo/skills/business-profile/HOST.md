@@ -62,8 +62,9 @@ the request did not name it, ask the user which project to work in. Every profil
 
 ## MCP routing
 
-The host provides the Stripo MCP server as `stripo-mcp`, or `stripo-mcp-dev` / `stripo-mcp-stage`
-when it points at a non-production environment. When more than one of them is connected, ask the
+The host provides the Stripo MCP server as `stripo-mcp` (in Claude Code the server bundled with
+the plugin is `plugin:stripo:stripo-mcp`), or `stripo-mcp-dev` / `stripo-mcp-stage` when it points
+at a non-production environment. When more than one of them is connected, ask the
 user which one to work in before resolving the project. The email procedure names generic tools;
 these are the Stripo ones:
 
@@ -86,10 +87,12 @@ sortOrder="desc")`; drafts are excluded unless `draft` is set. When the user ask
 emails instead.
 
 `publisher-runtime` and `publisher-proxy` are the shared text's names for a runtime this host does
-not have; ignore those rules and the `OPENAI_API_KEY` one with them. Authorization is per agent,
-through OAuth (Claude Code: `/mcp`; Codex: the browser login the `mcp-remote` bridge opens on its
-first start, or `codex mcp login stripo-mcp` for a server configured by `url`; other agents:
-their own login flow for the server). Never paste tokens or credentials into the conversation,
+not have; ignore those rules and the `OPENAI_API_KEY` one with them. The plugin bundles the MCP
+endpoint and scopes without a fixed OAuth client ID. Configure a pre-registered client in the
+host's MCP connection as the plugin README describes; do not assume automatic registration.
+Authorization is per agent, through OAuth (Claude Code: `/mcp`; Codex:
+`codex mcp login stripo-mcp --scopes mcp:tools,offline_access`; other agents: their own login flow
+for the server, or the browser login an `mcp-remote` bridge opens on its first start). Never paste tokens or credentials into the conversation,
 command arguments or files.
 
 ## Artifact transfer

@@ -1,4 +1,4 @@
-/** Available Stripo operations; unsupported capabilities must never be guessed. */
+/** Required Stripo contract; the host verifies server support before activation. */
 export declare const STRIPO_MCP_TOOL_MAPPING: Readonly<{
     brand: "stripo";
     canonicalBrand: "reteno";
@@ -14,6 +14,8 @@ export declare const STRIPO_MCP_TOOL_MAPPING: Readonly<{
         createEmailShell: "create_email";
         prepareEmailModelUpload: "prepare_document_state_upload";
         updateEmailModel: "set_document_state";
+        prepareImageUpload: "prepare_image_upload";
+        uploadImage: "upload_image";
     }>;
     auxiliaryTools: Readonly<{
         identity: "whoami";
@@ -22,6 +24,9 @@ export declare const STRIPO_MCP_TOOL_MAPPING: Readonly<{
         folders: "find_folders";
         projects: "find_projects";
         patchBrandkit: "patch_business_profile";
+        generateImage: "generate_image";
+        editImage: "edit_image";
+        getImageJob: "get_image_job";
     }>;
     unsupported: Readonly<{
         getEmailMessageExport: "No compiled email export tool is available. Read native metadata with getEmailModel.";
@@ -29,8 +34,6 @@ export declare const STRIPO_MCP_TOOL_MAPPING: Readonly<{
         listCustomBlocks: "No saved-module library tool is available in this adapter.";
         listEmailInterfaces: "This editor has no sending interfaces.";
         updateEmailMetadata: "No write tool for name, project, or folder metadata. Native document title/preheader use updateEmailModel.";
-        prepareImageUpload: "Reuse hosted reference assets or user-supplied hosted assets.";
-        uploadImage: "No asset upload tool is available.";
         createTemplate: "Templates can be read, edited and rebuilt; only emails can be created.";
     }>;
 }>;

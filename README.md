@@ -6,19 +6,24 @@ Requires a connected Stripo MCP server.
 The plugin is `stripo`. It includes the skills and their SDK and is built for any agent that
 loads skills in the `SKILL.md` format and can use a shell and MCP tools. Claude Code and Codex
 install it from the `stripo` marketplace in this repository; [other agents](#other-agents) load
-the same package from a checkout. MCP access is configured separately in each agent.
+the same package from a checkout. The plugin bundles the Stripo MCP server configuration for
+Claude Code and Codex; each agent completes its own OAuth login.
 
 ## Included skills
 
 | Skill | Use it for |
 | --- | --- |
-| `email-model-editor` | Edit an existing email or template through native JSON models; verify the saved result and desktop/mobile previews. |
-| `email-from-reference` | Create an email from a brief, HTML, screenshot or another authorized reference; rebuild an explicitly selected email or template. |
+| `email-model-editor` | Edit an existing email or template through native JSON models, including generating or editing images; verify the saved result and desktop/mobile previews. |
+| `email-from-reference` | Create an email from a brief, HTML, screenshot or another authorized reference, generating or editing visuals when needed; rebuild an explicitly selected email or template. |
 | `business-profile` | Read, audit and update a project's business profile using its emails as evidence. |
 
-The packaged host adapter does not support Business Profile extraction from websites. It also
-provides no image generation or asset-upload workflow. See the packaged
-[host capabilities](host/business-profile/HOST.md) before planning those workflows.
+The email skills use Stripo MCP's `generate_image`, `edit_image`, and `get_image_job` to produce
+hosted PNGs for the target email/template. These operations require the project's AI image
+permission and available quota. Supplied local images and authorized crops use `prepare_image_upload` and `upload_image`
+to obtain hosted URLs before insertion or image editing; verify both tools on the connected server. See the [email host notes](host/HOST.md#images) for the workflow.
+
+The packaged host adapter does not support Business Profile extraction from websites. See its
+[host capabilities](host/business-profile/HOST.md) before planning a profile workflow.
 
 ## Requirements
 
@@ -26,7 +31,7 @@ provides no image generation or asset-upload workflow. See the packaged
   files and MCP tools. Claude Code and Codex install the plugin natively.
 - Node.js **20.18.1+**, `curl`, and a POSIX shell, such as on macOS, Linux or WSL.
 - An agent that can inspect the desktop and mobile PNG previews for visual verification.
-- A Stripo organization with MCP enabled, its OAuth client ID, and access to the intended project.
+- A Stripo organization with MCP enabled and access to the intended project.
 - Network access to Stripo MCP and the temporary download/upload URLs returned by its tools.
 
 The SDK is included: installing this plugin does not require the private `convo-email-agent`
@@ -38,10 +43,16 @@ Keep the complete `plugins/stripo/` package together. Copying only `skills/` los
 
 ## Install and connect MCP
 
-The plugin ships no MCP configuration because the OAuth client is issued per organization.
-`<CLIENT_ID>` below is the organization's OAuth client ID from the Stripo account once MCP is
-enabled. Name the server **`stripo-mcp`**. Its dependency is declared in each skill's
-`agents/openai.yaml`; that declaration does not supply the client ID or complete OAuth login.
+The plugin bundles the endpoint and scopes of the Stripo MCP server: **`stripo-mcp`** at
+`https://mcp.stripo.email/mcp`. Each skill's `agents/openai.yaml` declares its dependency on
+this server. The package contains no fixed OAuth client ID, client secret or tokens.
+
+For Stripo's pre-registered OAuth client flow, configure the client ID in the agent's MCP
+connection before signing in. Get the client ID from your organization's **Settings → MCP
+integration**, or use one provisioned for the target host with its callback URL allowed.
+Omitting the client ID from the package does not create an OAuth client or enable automatic
+registration. CIMD or DCR can replace this setup only when the authorization server and host
+support them.
 
 ### Claude Code
 
@@ -62,20 +73,16 @@ claude plugin install stripo@stripo
 Third-party marketplaces do not update on their own: turn on
 [automatic updates](#automatic-updates) for `stripo` right after installing.
 
-In a terminal, connect the MCP server using your organization's client ID. `--scope user` makes
-it available in every project, like the plugin; without it the server is registered only for the
-current project:
+Configure your pre-registered client separately (replace `<CLIENT_ID>`):
 
 ```bash
-claude mcp add-json --scope user stripo-mcp '{"type":"http","url":"https://mcp.stripo.email/mcp","oauth":{"clientId":"<CLIENT_ID>","callbackPort":8080,"scopes":"mcp:tools"}}'
+claude mcp add --transport http --scope user --client-id '<CLIENT_ID>' stripo-mcp https://mcp.stripo.email/mcp
 ```
 
-If you added the server earlier without `--scope`, remove that entry first in the project where
-you added it: `claude mcp remove stripo-mcp -s local`.
-
-Open `/mcp` in Claude Code and complete the browser login. Run `/reload-plugins` or start a new
-session to load the installed skills. Invoke them with the `stripo:` prefix, for example
-`/stripo:email-model-editor`.
+Run `/reload-plugins` or start a new session. Open `/mcp`, select your `stripo-mcp` connection
+and complete the browser login. When using the bundled connection with supported automatic
+registration, its name is `plugin:stripo:stripo-mcp`. Invoke the skills with the `stripo:`
+prefix, for example `/stripo:email-model-editor`.
 
 ### Codex
 
@@ -84,21 +91,41 @@ codex plugin marketplace add stripoinc/agent-plugin
 codex plugin add stripo@stripo
 ```
 
-Add the server to `~/.codex/config.toml`, substituting your organization's client ID. This setup
-uses the `mcp-remote` bridge through `npx` (included with npm). The bridge handles your OAuth
-login, so its version is pinned; raise it deliberately:
+Configure your pre-registered client separately (replace `<CLIENT_ID>`) and complete the
+browser login. Use the callback URL Codex reports when configuring the OAuth client:
 
-```toml
-[mcp_servers.stripo-mcp]
-command = "npx"
-args = ["-y", "mcp-remote@0.14.3", "https://mcp.stripo.email/mcp", "3334", "--static-oauth-client-info", "{\"client_id\":\"<CLIENT_ID>\"}", "--static-oauth-client-metadata", "{\"scope\":\"mcp:tools offline_access\"}"]
-startup_timeout_sec = 60
+```bash
+codex mcp add stripo-mcp --url https://mcp.stripo.email/mcp --oauth-client-id '<CLIENT_ID>'
+codex mcp login stripo-mcp --scopes mcp:tools,offline_access
 ```
 
-On its first start the bridge opens the browser login. Start a new Codex session and invoke a
-skill by its plugin-prefixed name, for example `$stripo:email-model-editor`. For this bridge
-setup, complete login through the bridge; `codex mcp login` is for directly configured HTTP
-servers.
+Codex stores this client ID under `mcp_servers.stripo-mcp.oauth.client_id` in its local
+`config.toml`; it does not belong in the shared plugin files. See the
+[Codex OAuth setup reference](https://learn.chatgpt.com/docs/extend/mcp#oauth-client-registration-and-callbacks).
+If the connection already has the correct client ID, only the login step is needed.
+
+Start a new Codex session and invoke a skill by its plugin-prefixed name, for example
+`$stripo:email-model-editor`.
+
+### Your own `stripo-mcp` entry
+
+A `stripo-mcp` server you configured yourself is used instead of the bundled one: Claude Code
+matches it by URL, Codex by name. Keep it to sign in with the client ID your organization issued
+under **Settings → MCP integration**, as the
+[Stripo guide](https://support.stripo.email/en/articles/15921958-how-to-connect-ai-tools-to-stripo-via-mcp-integration)
+describes. Do not remove a working entry until another OAuth setup has been verified. To
+switch to the bundled configuration with supported automatic registration, use
+`claude mcp remove stripo-mcp` (add
+`-s local` or `-s project` for an entry at that scope) or `codex mcp remove stripo-mcp`. An
+earlier Codex entry that runs the `mcp-remote` bridge is such an entry.
+
+### OpenAI directory connection
+
+The MCP endpoint stays in the submitted plugin ZIP. Configure and verify OAuth for the
+registered MCP connection in the OpenAI portal before review; do not assume that the portal's
+OAuth settings also configure installations from this GitHub marketplace. If a submission
+requires client metadata in the package, use a host-specific packaging configuration rather
+than adding a directory-specific client ID to the shared package. Keep secrets outside the ZIP.
 
 ### Other agents
 
@@ -124,7 +151,12 @@ folders leaves the SDK behind.
 Connect the Stripo MCP server under the name `stripo-mcp`: the URL is
 `https://mcp.stripo.email/mcp`, with OAuth using your organization's client ID and the
 `mcp:tools` scope. An agent without OAuth support for remote MCP servers can run the
-`mcp-remote` bridge with the command and arguments shown for Codex.
+`mcp-remote` bridge through `npx` as a local server, with `<CLIENT_ID>` replaced by that client
+ID. The bridge handles your OAuth login, so its version is pinned; raise it deliberately:
+
+```bash
+npx -y mcp-remote@0.14.3 https://mcp.stripo.email/mcp 3334 --static-oauth-client-info '{"client_id":"<CLIENT_ID>"}' --static-oauth-client-metadata '{"scope":"mcp:tools offline_access"}'
+```
 
 ### Verify the installation
 
@@ -135,7 +167,8 @@ node --version
 curl --version
 ```
 
-For Claude Code, use `claude plugin list` and `claude mcp get stripo-mcp`.
+For Claude Code, use `claude plugin list` and `claude mcp get stripo-mcp` for your own entry
+(or `claude mcp get plugin:stripo:stripo-mcp` for the bundled connection).
 For Codex, use `codex plugin list` and `codex mcp get stripo-mcp`.
 In another agent, list its skills and MCP servers the way it provides.
 These commands inspect configuration; they do not prove successful authorization.
@@ -157,8 +190,9 @@ Code, `/reload-plugins` also applies the update):
 
 Use the same installation scope that you selected initially. To remove the catalog as well,
 run `claude plugin marketplace remove stripo` or `codex plugin marketplace remove stripo`.
-The manually configured MCP connection is separate: remove it with
-`claude mcp remove stripo-mcp` or `codex mcp remove stripo-mcp` when it is no longer needed.
+The bundled MCP server is removed with the plugin. A `stripo-mcp` entry you added yourself is
+separate: remove it with `claude mcp remove stripo-mcp` or `codex mcp remove stripo-mcp` when it
+is no longer needed.
 
 ### Automatic updates
 
@@ -196,8 +230,8 @@ its loaded version until `/reload-plugins` or the next session.
 | Marketplace or plugin command is unknown | Update the agent to a version with plugin support. |
 | Skills do not appear, or an old version is still active | Confirm the plugin is installed and enabled, update it, and run `/reload-plugins` (Claude Code) or start a new session. `claude plugin list` or `codex plugin list` prints the installed version; the released one is `version` in [`plugin-metadata.json`](plugin-metadata.json). |
 | The same skill appears twice | Check for earlier manually copied skills in the agent's personal/project skill directories. Remove only the obsolete copies after confirming which plugin supplies the current version. |
-| `stripo-mcp` is missing or reports authentication errors | Check the exact server name, organization client ID and completed browser login. Verify live access with `whoami`. |
-| The Codex bridge does not start | Check `node`/`npx` on the agent's PATH, network access for `mcp-remote`, and port 3334 availability. |
+| `stripo-mcp` is missing or reports authentication errors | Confirm the plugin is enabled and the browser login is complete: `/mcp` in Claude Code, `codex mcp login stripo-mcp` in Codex. For an entry you added yourself, check its name and client ID. Verify live access with `whoami`. |
+| The `mcp-remote` bridge does not start | Check `node`/`npx` on the agent's PATH, network access for `mcp-remote`, and port 3334 availability. |
 | `Cannot find the packaged convo-email-agent SDK` | Reinstall the whole plugin. Keep `skills/` and `packages/` together; remove an obsolete `CONVO_EMAIL_AGENT_SDK_PATH` override if one is set. |
 | Business Profile website extraction is unavailable | The current host adapter supports email evidence only; installing browser/Python dependencies alone does not add a website adapter. |
 
@@ -207,7 +241,8 @@ its loaded version until `/reload-plugins` or the next session.
 
 | Source | Generated output |
 | --- | --- |
-| `plugin-metadata.json` | Claude/Codex plugin manifests, both marketplace catalogs, and the `stripo-mcp` dependency in each `agents/openai.yaml`. |
+| `plugin-metadata.json` | Claude/Codex plugin manifests, both marketplace catalogs, the bundled `.mcp.json` (`mcpServer`), and the `stripo-mcp` dependency in each `agents/openai.yaml`. Claude directory fields are emitted only in the Claude manifest. |
+| Root `LICENSE` and `packaging/`, declared by `packageFiles` in metadata | Plugin-root license, README and approved icon; all are checked and inventoried. |
 | A clean Stripo bundle built by `convo-email-agent` | `plugins/stripo/skills/`, `packages/`, `mcp-tools.json`, and `bundle.json`. |
 | `host/HOST.md` and `host/<skill>/` | Shared host instructions and skill-specific overrides/helpers in the installed skills. |
 | The assembled bundle | `bundle-integrity.json`, a SHA-256 inventory of packaged files; `plugins/stripo/.generated` identifies the sources. |
@@ -238,18 +273,18 @@ npm run validate:claude
 npm run check:version -- --base origin/main
 ```
 
-`validate:claude` requires the Claude CLI; CI pins it to **2.1.263**. `check:version` detects changes
+`validate:claude` requires the Claude CLI; CI pins it to **2.1.281**. `check:version` detects changes
 since the merge base and compares the version with the supplied Git ref. It does not fetch that
 ref; fetch your intended base first when necessary. It rejects unchanged or lower versions,
 including prerelease regressions.
-README-only changes do not require a release bump.
+Root README-only changes do not require a release bump; changes to the packaged README do.
 
 Commit the sources and their generated outputs together. `npm run check:generated` checks them
 without writing and names the packaged files that differ from the inventory; `npm run generate`
 updates the integrity inventory, so review every packaged file change rather than using
 generation to accept unexplained edits or deletions. Validation also rejects any file in
-`plugins/stripo/` that is neither inventoried nor a generated manifest, such as a stray
-`hooks/` directory or `.mcp.json`, because hosts load those from the plugin root.
+`plugins/stripo/` that is neither inventoried nor generated from metadata, such as a stray
+`hooks/` directory or `.lsp.json`, because hosts load those from the plugin root.
 
 ### Sync a new upstream bundle
 
@@ -257,27 +292,44 @@ Build the committed upstream revision in a clean `convo-email-agent` checkout wi
 `npm run build:stripo`, following that repository's build prerequisites. Back in this repository:
 
 ```bash
-node scripts/sync-bundle.mjs --bundle ../convo-email-agent/dist/convo-email-agent/stripo --version 0.6.2
+node scripts/sync-bundle.mjs --bundle ../convo-email-agent/dist/convo-email-agent/stripo --version 0.7.0
 npm run validate
 npm test
 npm run validate:claude
 npm run check:version -- --base origin/main
 ```
 
-Replace `0.6.2` with the next plugin release version. The sync requires a version greater than
+To rebuild the current draft version before it reaches the release base, add `--base origin/main`.
+The explicit base must be an ancestor whose plugin version is lower; an equal or lower version
+already present on the base is rejected. Otherwise, replace `0.7.0` with the next plugin release version. The sync normally requires a version greater than
 the one currently in `plugin-metadata.json`; it updates that source and regenerates the host
 files, manifests, dependencies and integrity inventory. `bundle.json.version` is the upstream
 SDK version and is independent of the plugin release version. Keep `bundle.json` provenance
 from the build; do not edit it by hand. `--allow-dirty` is for local investigation only: CI
 rejects dirty release bundles.
 
+Directory readiness requires an owner-approved LICENSE and manifest identifier plus an approved
+square PNG/JPEG icon (512–2048 px, under 2 MiB). The owner's selected Product Hunt icon is
+packaged as a 512×512 JPEG. The approved [Stripo Agent Plugin License, Version 1.0](LICENSE)
+is copied verbatim from the root `LICENSE`, with identifier `LicenseRef-Stripo-Agent-Plugin-1.0`.
+If required assets or metadata are removed,
+`npm run validate` completes its technical checks and fails with the pending assets named;
+passing unit tests or `validate:claude` does not waive this gate. Keep the approved license
+in root `LICENSE` and the README/icon under `packaging/`; declare their paths in `packageFiles`, set `license` and `claudeDirectory.icon`,
+and regenerate. Keep the validator's third-party NOTICE.txt unchanged. Never select a license
+merely to satisfy the scanner: the canonical editor code is proprietary.
+
 Public CI validates the committed distribution on Node.js 20.18.1, 22 and 24. It checks generated
 files, the exact packaged file set, skill frontmatter, declared package paths, MCP tool mappings,
-the format of bundle provenance and its agreement with the packaged SDK contract, and SDK
-loading from an isolated installed copy. PRs changing the bundle, metadata, host files or
+the format of bundle provenance, every validator module hash and its agreement with the packaged SDK contract,
+the plugin-root README/license/icon, the 256 KiB text-file and 512-file limits, and SDK loading from an isolated installed copy. PRs changing the bundle, metadata, host files or
 packaging tools require a higher version. CI needs no private checkout, MCP account or OAuth
 credentials. These checks do not verify live MCP persistence or OAuth; exercise those separately
 in each supported agent before releasing changes that affect them.
+
+The [Anthropic review package](docs/anthropic-directory-review.md) records the fixed release
+revision, credential-finding explanations, publisher evidence, local validation and the
+remaining publication/revalidation steps.
 
 ## Format references
 

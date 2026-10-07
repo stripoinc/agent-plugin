@@ -385,6 +385,31 @@ function isObject3(value) {
 function nonEmptyString(value) {
   return typeof value === "string" && value.trim() !== "" ? value.trim() : void 0;
 }
+function detachReferenceModules(model) {
+  const detached = [];
+  const children = ["stripes", "structures", "columns", "containers", "blocks"];
+  const hasBlocks = (node) => children.some((key) => Array.isArray(node[key]) && node[key].some((value) => isObject3(value) && (key === "blocks" || hasBlocks(value))));
+  const visit = (node, path2, kind) => {
+    if (["stripes", "structures", "containers"].includes(kind) && Object.hasOwn(node, "moduleId")) {
+      if (typeof node.moduleId !== "number" || !Number.isFinite(node.moduleId)) {
+        throw new Error(`${path2}.moduleId: expected a finite saved-module ID`);
+      }
+      if (!hasBlocks(node)) {
+        throw new Error(`${path2}.moduleId: cannot copy an unresolved saved module; acquire its complete editable content first`);
+      }
+      detached.push({ path: `${path2}.moduleId`, sourceNodeId: nonEmptyString(node.id), moduleId: node.moduleId });
+      delete node.moduleId;
+    }
+    for (const key of children) {
+      const rows = node[key];
+      if (Array.isArray(rows)) rows.forEach((value, index) => {
+        if (isObject3(value)) visit(value, `${path2}.${key}[${index}]`, key);
+      });
+    }
+  };
+  visit(model, "brief.model", "model");
+  return detached;
+}
 function backgroundImageFindings(model, exact) {
   const findings = [];
   const stripes = Array.isArray(model.stripes) ? model.stripes : [];
@@ -503,8 +528,10 @@ async function main() {
     const sdk = await loadSdk(sdkPath);
     const baselineEmailJson = baselinePath === void 0 ? void 0 : readJson(baselinePath);
     const baselineStripes = isObject3(baselineEmailJson) && Array.isArray(baselineEmailJson.stripes) ? baselineEmailJson.stripes : [];
+    const creationModel = structuredClone(typedBrief.model);
+    const detachedModules = detachReferenceModules(creationModel);
     const emailJson = sdk.createEmailFromDraft({
-      emailJson: typedBrief.model,
+      emailJson: creationModel,
       baselineEmailJson,
       intent: { removeNodes: baselineStripes.filter(isObject3).map((stripe) => String(stripe.id)) },
       regenerateIds: true,
@@ -530,6 +557,7 @@ async function main() {
       outputPath,
       sdkPath,
       message: typedBrief.message,
+      detachedModules,
       summary,
       validation,
       verification: prepared.verification

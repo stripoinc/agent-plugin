@@ -120,6 +120,7 @@ export declare function createMinimalEmailSeed(options?: CreateMinimalEmailSeedO
  * for email button targets, which require a mailto: URI. Missing IDs and settings
  * receive defaults; the bundled editor schema validates the completed document.
  * With regenerateIds, structural nodes receive new IDs from the ID factory.
+ * Saved-module identities are read-only and cannot be copied onto new nodes.
  * Native block kinds without draft defaults keep their supplied settings.
  * The caller's draft is untouched.
  */

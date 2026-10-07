@@ -1,4 +1,4 @@
 Generated distribution; do not edit packaged files directly.
 Skills, SDK and bundle provenance: convo-email-agent, via scripts/sync-bundle.mjs.
-Host files: host/. Manifests and MCP dependency: plugin-metadata.json.
+Host files: host/. Manifests, MCP server and MCP dependency: plugin-metadata.json.
 Run npm run generate after metadata or host changes. See the root README for releases.

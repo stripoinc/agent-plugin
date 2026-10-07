@@ -12,7 +12,9 @@
     "getEmailMessagePreview": "get_screenshot",
     "createEmailShell": "create_email",
     "prepareEmailModelUpload": "prepare_document_state_upload",
-    "updateEmailModel": "set_document_state"
+    "updateEmailModel": "set_document_state",
+    "prepareImageUpload": "prepare_image_upload",
+    "uploadImage": "upload_image"
   },
   "auxiliaryTools": {
     "identity": "whoami",
@@ -20,7 +22,10 @@
     "recoverCreatedEmail": "find_content",
     "folders": "find_folders",
     "projects": "find_projects",
-    "patchBrandkit": "patch_business_profile"
+    "patchBrandkit": "patch_business_profile",
+    "generateImage": "generate_image",
+    "editImage": "edit_image",
+    "getImageJob": "get_image_job"
   },
   "unsupported": {
     "getEmailMessageExport": "No compiled email export tool is available. Read native metadata with getEmailModel.",
@@ -28,8 +33,6 @@
     "listCustomBlocks": "No saved-module library tool is available in this adapter.",
     "listEmailInterfaces": "This editor has no sending interfaces.",
     "updateEmailMetadata": "No write tool for name, project, or folder metadata. Native document title/preheader use updateEmailModel.",
-    "prepareImageUpload": "Reuse hosted reference assets or user-supplied hosted assets.",
-    "uploadImage": "No asset upload tool is available.",
     "createTemplate": "Templates can be read, edited and rebuilt; only emails can be created."
   }
 }

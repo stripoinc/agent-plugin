@@ -1,0 +1,15 @@
+{
+  "mcpServers": {
+    "stripo-mcp": {
+      "type": "http",
+      "url": "https://mcp.stripo.email/mcp",
+      "oauth": {
+        "scopes": "mcp:tools"
+      },
+      "scopes": [
+        "mcp:tools",
+        "offline_access"
+      ]
+    }
+  }
+}

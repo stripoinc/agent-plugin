@@ -4,8 +4,8 @@ import path from "node:path";
 import {pathToFileURL} from "node:url";
 import {ROOT, METADATA, loadMetadata, requireVersionIncrease} from "./lib/plugin.mjs";
 
-const RELEASE_PREFIXES = ["plugins/", "host/", "scripts/", ".agents/", ".claude-plugin/"];
-const RELEASE_FILES = [METADATA, "bundle-integrity.json", "package.json", "package-lock.json"];
+const RELEASE_PREFIXES = ["plugins/", "host/", "packaging/", "scripts/", ".agents/", ".claude-plugin/"];
+const RELEASE_FILES = [METADATA, "LICENSE", "bundle-integrity.json", "package.json", "package-lock.json"];
 
 export function checkVersionBump(root = ROOT, base = process.env.PLUGIN_BASE_REF ?? "origin/main") {
   const git = (...args) => execFileSync("git", args, {cwd: root, encoding: "utf8", stdio: ["ignore", "pipe", "pipe"]}).trim();
