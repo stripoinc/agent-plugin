@@ -51,6 +51,18 @@
   "mcpDependency": {
     "type": "mcp",
     "value": "stripo-mcp",
-    "description": "Stripo MCP server for emails, templates, image generation/editing and business profiles. Configure and authorize it in your agent using your organization's OAuth client ID; see the plugin README."
+    "description": "Stripo MCP server for emails, templates, image generation/editing and business profiles. The plugin bundles its configuration; authorize it in your agent. See the plugin README."
+  },
+  "mcpServer": {
+    "type": "http",
+    "url": "https://mcp.stripo.email/mcp",
+    "oauth": {
+      "clientId": "openai-directory-mcp-client",
+      "scopes": "mcp:tools"
+    },
+    "scopes": [
+      "mcp:tools",
+      "offline_access"
+    ]
   }
 }

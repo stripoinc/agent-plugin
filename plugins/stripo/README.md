@@ -36,24 +36,27 @@ codex plugin add stripo@stripo
 
 Start a new agent session after installation. In Claude Code, `/reload-plugins`
 also reloads the skills. See the [installation guide](https://github.com/stripoinc/agent-plugin#install-and-connect-mcp)
-for Codex's separately configured, version-pinned OAuth bridge and other agents.
-Installing that optional bridge downloads its pinned package; it is not part of
-the local SDK or automatically installed by this plugin.
+for other agents and their optional, version-pinned OAuth bridge. Installing that
+bridge downloads its pinned package; it is not part of the local SDK or
+automatically installed by this plugin.
 
 ## Authorize Stripo
 
-Your organization must enable MCP access and supply its OAuth client ID. Configure
-the server as **stripo-mcp**, using `https://mcp.stripo.email/mcp`. The plugin does
-not ship an organization-specific MCP configuration or request API keys.
+Your organization must have MCP access enabled. The plugin bundles the configuration
+of the **stripo-mcp** server at `https://mcp.stripo.email/mcp` with a Stripo OAuth
+client ID and the `mcp:tools` scope. It contains no secret and requests no
+API keys.
 
-For Claude Code, substitute your organization's client ID, then run:
+In Claude Code, open `/mcp`, select `plugin:stripo:stripo-mcp` and finish the
+browser login. In Codex, run:
 
 ```bash
-claude mcp add-json --scope user stripo-mcp '{"type":"http","url":"https://mcp.stripo.email/mcp","oauth":{"clientId":"<CLIENT_ID>","callbackPort":8080,"scopes":"mcp:tools"}}'
+codex mcp login stripo-mcp
 ```
 
-Open `/mcp` and finish the browser login. Authentication belongs to the agent's
-OAuth connection. Do not paste tokens into chat, source files or runner arguments.
+A `stripo-mcp` server you configured yourself, for example with your organization's
+own client ID, keeps working and is used instead of the bundled one. Authentication
+belongs to the agent's OAuth connection. Do not paste tokens into chat, source files or runner arguments.
 In a fresh session, ask the agent to call `whoami` without making changes, then
 confirm the account and project before editing.
 

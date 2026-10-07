@@ -59,6 +59,8 @@ export function loadMetadata(root = ROOT) {
   requireCondition(metadata.marketplace.policy?.authentication === "ON_INSTALL", "The Stripo marketplace uses ON_INSTALL authentication.");
   const dependency = metadata.mcpDependency;
   requireCondition(dependency?.type === "mcp" && dependency.value === "stripo-mcp" && typeof dependency.description === "string" && dependency.description.trim(), "Declare the stripo-mcp dependency in plugin-metadata.json.");
+  const server = metadata.mcpServer;
+  requireCondition(server?.type === "http" && new URL(server.url).protocol === "https:" && typeof server.oauth?.clientId === "string" && server.oauth.clientId.trim(), "Declare the bundled HTTPS MCP server and its OAuth client ID in plugin-metadata.json.");
   if (metadata.license !== undefined) requireCondition(typeof metadata.license === 'string' && metadata.license.trim(), 'license must be the owner-approved license identifier.');
   requireCondition(metadata.packageFiles?.['README.md'], 'Declare the packaged README in packageFiles.');
   for (const [destination, source] of Object.entries(metadata.packageFiles)) {
@@ -119,8 +121,11 @@ export function generatedFiles(root = ROOT, metadata = loadMetadata(root), {from
     [`${PLUGIN}/.codex-plugin/plugin.json`, json({
       ...shared,
       skills: "./skills/",
+      mcpServers: "./.mcp.json",
       interface: {...codexInterface, shortDescription: description, developerName: author.name, websiteURL: homepage},
     })],
+    // Claude Code loads the plugin-root .mcp.json by convention; the Codex manifest names it.
+    [`${PLUGIN}/.mcp.json`, json({mcpServers: {[metadata.mcpDependency.value]: metadata.mcpServer}})],
     [".claude-plugin/marketplace.json", json({
       name: marketplace.name,
       owner: {name: author.name},
@@ -132,7 +137,7 @@ export function generatedFiles(root = ROOT, metadata = loadMetadata(root), {from
       interface: {displayName: codexInterface.displayName},
       plugins: [{name, source: {source: "local", path: `./${PLUGIN}`}, policy: marketplace.policy, category: codexInterface.category}],
     })],
-    [`${PLUGIN}/.generated`, "Generated distribution; do not edit packaged files directly.\nSkills, SDK and bundle provenance: convo-email-agent, via scripts/sync-bundle.mjs.\nHost files: host/. Manifests and MCP dependency: plugin-metadata.json.\nRun npm run generate after metadata or host changes. See the root README for releases.\n"],
+    [`${PLUGIN}/.generated`, "Generated distribution; do not edit packaged files directly.\nSkills, SDK and bundle provenance: convo-email-agent, via scripts/sync-bundle.mjs.\nHost files: host/. Manifests, MCP server and MCP dependency: plugin-metadata.json.\nRun npm run generate after metadata or host changes. See the root README for releases.\n"],
   ]);
   for (const [destination, source] of Object.entries(metadata.packageFiles)) {
     files.set(`${PLUGIN}/${destination}`, readFileSync(path.join(root, source)));

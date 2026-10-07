@@ -8,4 +8,4 @@ dependencies:
   tools:
     - type: "mcp"
       value: "stripo-mcp"
-      description: "Stripo MCP server for emails, templates, image generation/editing and business profiles. Configure and authorize it in your agent using your organization's OAuth client ID; see the plugin README."
+      description: "Stripo MCP server for emails, templates, image generation/editing and business profiles. The plugin bundles its configuration; authorize it in your agent. See the plugin README."

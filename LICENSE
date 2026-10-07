@@ -27,6 +27,11 @@ content for use elsewhere. Each operation need not make a network request.
 Mere compatibility with a Stripo data format does not make an otherwise
 independent product or service a Permitted Purpose.
 
+Permitted Purpose does not include using the Software as a general-purpose
+SDK, framework, editor, validator, automation component, or other independent
+technology where the primary purpose of such use is unrelated to interacting
+with Stripo Services or supporting a workflow involving Stripo Services.
+
 "You" means the individual or legal entity exercising rights under this
 license. If acting for an entity, you must have authority to act for it.
 
@@ -167,6 +172,11 @@ This license applies to the copy of the Software with which it is distributed
 for as long as You comply with its terms. The Licensor may terminate Your
 rights under this license if You materially breach it and do not remedy the
 breach within 30 days after receiving written notice describing the breach.
+However, the Licensor may terminate Your rights under this license immediately
+upon written notice for a material breach of this license that cannot reasonably
+be cured, as reasonably determined by the Licensor, or for unauthorized use by
+You that materially threatens the Licensor's intellectual property, Stripo
+Services, security, access controls, or trademarks.
 Use outside the permissions granted here is not authorized during that period.
 
 After termination, You must stop exercising rights in the Software and remove
@@ -180,6 +190,9 @@ New license terms issued for later versions do not retroactively replace this
 license for copies already received under it. Nothing here withdraws rights
 previously granted under another applicable license.
 
+Termination does not limit any other rights or remedies available to the
+Licensor under applicable law or a separate agreement.
+
 10. General provisions and additional permissions
 
 If a provision cannot be enforced, the remaining provisions continue to apply
@@ -187,6 +200,12 @@ to the extent permitted by law. No provision limits rights that applicable
 law makes non-waivable. A separate written agreement with the Licensor may
 grant additional rights and prevails to the extent it expressly addresses a
 conflict with this license.
+
+Governing Law and Venue. This license and any dispute arising out of or
+relating to it are governed by the laws of the State of Delaware, USA, without
+regard to its conflict-of-laws rules. To the extent permitted by applicable
+law, the state and federal courts located in the State of Delaware, USA shall
+have exclusive jurisdiction over such disputes.
 
 For permission to use the Software or SDK in an independent product, contact
 the Licensor through the contact channels at https://stripo.email/.

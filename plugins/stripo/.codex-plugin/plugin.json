@@ -16,6 +16,7 @@
     "mcp"
   ],
   "skills": "./skills/",
+  "mcpServers": "./.mcp.json",
   "interface": {
     "displayName": "Stripo",
     "longDescription": "Create emails from a brief, template, HTML or screenshot. Generate and edit images, update text, links and styles in existing emails and templates, and review desktop and mobile previews. Requires a connected Stripo MCP server.",

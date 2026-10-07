@@ -89,6 +89,20 @@ test("MCP dependency updates preserve upstream metadata, policy and other depend
   assert.throws(() => withMcpDependency("dependencies: {tools: broken}\n", dependency), /must be an array/u);
 });
 
+test("the bundled MCP server is generated from metadata for both hosts", (t) => {
+  const root = fixture(t);
+  const metadata = readJson(root, "plugin-metadata.json");
+  const file = `${PLUGIN}/.mcp.json`;
+  assert.deepEqual(readJson(root, file), {mcpServers: {"stripo-mcp": metadata.mcpServer}});
+  assert.equal(readJson(root, `${PLUGIN}/.codex-plugin/plugin.json`).mcpServers, "./.mcp.json");
+  writeFileSync(path.join(root, file), json({mcpServers: {"stripo-mcp": {...metadata.mcpServer, url: "https://example.invalid/mcp"}}}));
+  assert.throws(() => validatePlugin(root), /Generated files are out of date[\s\S]*\.mcp\.json/u);
+  generateMetadata(root);
+  validatePlugin(root);
+  writeFileSync(path.join(root, "plugin-metadata.json"), json({...metadata, mcpServer: {...metadata.mcpServer, oauth: {}}}));
+  assert.throws(() => generateMetadata(root), /its OAuth client ID/u);
+});
+
 test("validation rejects divergent marketplace metadata and repairs it from the source", (t) => {
   const root = fixture(t);
   const file = ".agents/plugins/marketplace.json";
@@ -117,7 +131,7 @@ test("the integrity inventory detects missing and edited packaged files", (t) =>
 
 test("validation rejects unlisted plugin components and provenance that disagrees with the SDK", (t) => {
   const root = fixture(t);
-  for (const file of ["hooks/hooks.json", ".mcp.json"]) {
+  for (const file of ["hooks/hooks.json", ".lsp.json"]) {
     const planted = path.join(root, PLUGIN, file);
     mkdirSync(path.dirname(planted), {recursive: true});
     writeFileSync(planted, "{}\n");
