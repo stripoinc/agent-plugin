@@ -1,5 +1,5 @@
 {
-  "sourceRevision": "04d0e9f06569f3a736e59e0120773519869cfd72",
+  "sourceRevision": "89881b619970cb117b2737cc1247a01d7e448e53",
   "hostOverrides": [
     "host/business-profile/HOST.md",
     "host/business-profile/scripts/download_via_proxy.sh"
@@ -8,7 +8,7 @@
     "LICENSE": "81d2760fbd1543712315f5f20edfc5bbf1dadd6b16095fb3f75d095156b88ed8",
     "README.md": "e233eafd12ede5873f6398046f011e6019bdf1cfd21f848859be09789df678b7",
     "assets/stripo-icon.jpeg": "5df347d74fb49cc5cf730350934430e5e968a8e7613a395beed81c7a559d956d",
-    "bundle.json": "765ce1b6d3da493247331bd92964d5ffb57c659b1708eebb7bf515026e6dd778",
+    "bundle.json": "75e196974d115dff5ed6ab8e6179c6b35efd55bfd3a66850ace5fedb4b254e32",
     "mcp-tools.json": "af808053ce0cec25caa6eab8016673bf876a3285c076d3dc0084268e91fa6c56",
     "packages/brandkit-runtime/brandkit_runtime/__init__.py": "1c8d6cdda666d0801d65eeca4c7a1376112a10c31b050b1c6ad1f62be3e964da",
     "packages/brandkit-runtime/brandkit_runtime/__main__.py": "ddc6f1b19159e781bf9be8097acb6a3e1845f2311b5c2004291d531b2f1e8154",

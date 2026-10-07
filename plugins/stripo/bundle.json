@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "package": "@ardas/convo-email-agent",
   "version": "0.2.18",
-  "sourceRevision": "04d0e9f06569f3a736e59e0120773519869cfd72",
-  "sourceDirty": true,
+  "sourceRevision": "89881b619970cb117b2737cc1247a01d7e448e53",
+  "sourceDirty": false,
   "editorValidator": {
     "editorRevision": "9fe0771bd1219868d7053ef7e323dc3406329de3",
     "editorDirty": false,
