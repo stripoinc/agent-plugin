@@ -68,8 +68,12 @@ test("packaged email skills expose image tools with matching host and provider c
     const directory = path.join(ROOT, PLUGIN, "skills", skill);
     assert.equal(readFileSync(path.join(directory, "HOST.md"), "utf8"), host);
     const provider = readFileSync(path.join(directory, "PROVIDER.md"), "utf8");
-    for (const tool of Object.values(imageTools)) assert.ok(provider.includes(`\`${tool}\``));
-    assert.doesNotMatch(readFileSync(path.join(directory, "SKILL.md"), "utf8"), /Do not generate image|no asset-upload or image-generation tool/u);
+    assert.ok(provider.includes("](reference/stripo-images.md)"));
+    const images = readFileSync(path.join(directory, "reference/stripo-images.md"), "utf8");
+    for (const tool of Object.values(imageTools)) assert.ok(images.includes(`\`${tool}\``));
+    const instructions = readFileSync(path.join(directory, "SKILL.md"), "utf8");
+    assert.ok(instructions.includes("](PROVIDER.md)"));
+    assert.doesNotMatch(instructions, /Do not generate image|no asset-upload or image-generation tool/u);
   }
 });
 

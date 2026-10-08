@@ -40,7 +40,9 @@ For products, use only homepage cards and their same-page scroll, reveal, or hov
 
 Select product-card variants using the existing variant map. Action meaning outranks visual similarity: wishlist evidence cannot become purchase evidence. Before reporting a CTA gap or borrowing button styling, apply the selected-card hover check in the variant map. A reasonable email CTA or style adaptation may use another explicitly selected measured control. Put the intended label in `cta.text`, set `textSource: "inferred"`, keep the original source meaning clear, and explain material trade-offs. A reason string alone does not supply a label. Preserve a supported card with a local CTA gap when no responsible adaptation exists.
 
-Contacts need not be exhaustive. Include homepage contact details when actually observed; hidden text is only a lead until verified on that page. Leave unsupported optional contacts empty rather than visiting a contact destination. Ground company claims in page evidence. Derive Brand voice only from captured wording and recurring communication patterns. Put extraction limitations, source decisions, and gaps in source/gap notes or component fields, not in `brandVoice`.
+Contacts need not be exhaustive. Include homepage contact details when actually observed; hidden text is only a lead until verified on that page. Leave unsupported optional contacts empty rather than visiting a contact destination. Ground company claims in page evidence.
+
+For a full profile, derive Brand voice from captured wording and recurring communication patterns; generic accuracy or safety instructions and extraction limitations are not brand voice. Set `brand.brandVoice.defaultLanguages` to the same chosen list as top-level `languages`. Keep each Business context value brief and independently grounded: `customerValue` explains the customer benefit and `revenueModel` explains how the business earns money. Leave unsupported entries empty and put evidence decisions or gaps in source/gap notes. Extraction-only and Visual-identity-only requests retain their prescribed empty voice/context structures.
 
 ## Use the existing assembly helpers
 
