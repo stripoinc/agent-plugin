@@ -1,9 +1,14 @@
 ## Upload and verification contract
 
-The [packaged save workflow](stripo-file-workflows.md) implements one candidate/base transfer,
-write and read-back through the host's existing MCP connection. Use it when the host supports
-the documented adapter; otherwise use the same transfer helper between the MCP calls below.
-It never repeats an uncertain write or removes the required base.
+For [focused operations](../PROVIDER.md#focused-operations), use the necessary prepare/upload/set
+calls below and finish on `set_document_state` with `status=OK`. Keep local SDK validation and
+the untouched base; no post-write read-back or screenshots are required unless requested.
+Empty creation needs no model upload and follows [creation](stripo-creation.md).
+
+The [packaged save workflow](stripo-file-workflows.md) always includes read-back. Use it when
+that check is needed and the host supports the adapter. For a focused edit, use individual MCP
+calls and the same transfer helper so the prepared workflow does not add an unrequested read.
+Neither path repeats an uncertain write or removes the required base.
 
 Preserve native font settings/resources. Do not run `normalize-merge-service-fonts.mjs` or apply
 Reteno's font substitutions or sending-metadata rules. Change native fields only when requested
@@ -33,8 +38,8 @@ needs a fresh candidate ticket and, when using a base, a fresh base ticket; do n
 possibly successful mutation blindly.
 Follow refusal/error statuses and allow at most one repair retry before reporting the failure.
 After `OK` acquire again before the next edit: the old acquisition is no longer the letter's state
-and must not be reused as a base. Keep the read-to-write gap short, change only requested
-content, and re-read after writing, as the MCP guide recommends.
+and must not be reused as a base. This acquisition is for a subsequent edit, not a confirmation
+step after a focused operation. Keep the read-to-write gap short and change only requested content.
 
 Expected `set_document_state` outcomes are returned as a `status`. `OK` carries
 `generatedPatchesCount` and echoes `baseUploadId` when the write was applied as a delta.
@@ -97,8 +102,14 @@ writing `null` (`email.setTheme(path, undefined)` or `email.resetSettings(paths)
 font weight, and dark-theme colors. Its Model completeness section lists the supported paths.
 The runner still rejects accidentally absent fields and unsupported resets.
 
-Re-read with `get_document_state(id, type)`; IDs can change across reads. After a write with a
-base the durable state may legitimately contain other people's edits made since the acquisition:
+## Additional verification
+
+Use these checks for broader changes, a full build/rebuild, or when requested. A focused operation ends on the
+successful write above; do not label it incomplete because unrequested checks were omitted.
+For an explicit verification request, use only the checks needed for that request.
+
+Re-read with `get_document_state(id, type)` when checking the saved model; IDs can change across
+reads. After a write with a base the durable state may legitimately contain other people's edits made since the acquisition:
 verify the requested changes and the preserved content the change module did not touch, and do
 not treat a difference outside the delta as a loss unless the acquisition had it and the current
 state lacks it without another author's change being possible.

@@ -36,7 +36,7 @@ report it as `SKILL.md` describes.
 
 ## Working directory
 
-Create a fresh temporary directory per task (`mktemp -d`) and keep every file there: the
+When local files are needed, create a fresh task directory (`mktemp -d`) and keep every file there: the
 untouched model, the change module or brief, the candidate, the diagnostics and the PNG
 previews. Do not write these files into the user's project.
 
@@ -46,7 +46,8 @@ The SDK bundles the editor's executable Document State validator. The runners ne
 download or `--schema` argument. `get_document_state_schema()` is available for field
 documentation; validation uses the editor revision recorded in `bundle.json.editorValidator`.
 The service validates and applies each write against its live state, so follow the rejection
-diagnostics in `PROVIDER.md` and verify the saved model after writing.
+diagnostics and verification scope in `PROVIDER.md`. Focused edits finish on `set_document_state`
+with `status=OK`; read-back and previews are for requested checks or broader workflows.
 
 ## File transfers
 

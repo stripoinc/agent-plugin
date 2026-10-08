@@ -1,30 +1,44 @@
 # Stripo MCP guide
 
-Shared MCP context for both email skills. Read this once, then open only the topic needed for
-the next operation. The connected server supplies tool schemas; this bundle supplies the
-workflow and `<bundle-root>/mcp-tools.json` supplies exact tool names and unsupported capabilities.
+The server supplies tool schemas; this bundle supplies workflows and `mcp-tools.json` tool names.
+Read only the topic needed for the next operation.
 
-- Call `whoami` once to resolve identity and access; never supply your own user ID.
-- Read the connected Stripo server's `stripo://guide/start-here` once when available. Read a
-  relevant recipe from `stripo://guide/recipes` only when the selected workflow needs it.
-- Discover tools by exact name or the Stripo server namespace. Do not search every description
-  for a tool name: a shared server introduction can mention that name in every result.
-- For resource discovery, limit the request to the Stripo server when the host supports it.
-  Inspect names/URIs first and read the selected resource, not every resource body.
-- Keep full tool results and models in variables or local files. Return only the needed fields
-  or bounded excerpts to the conversation; retain the original for later inspection.
-- Keep `(id, type)` together. A reference is not a write target without an explicit edit/rebuild
-  request. Model JSON travels through files and temporary URLs, never inline in MCP arguments.
-- Use the host's configured endpoint, credentials and transfer mechanism. Successful MCP access
-  does not establish shell network access; check the download topic before the first transfer.
+## Focused operations
 
-| Operation | Read before the operation |
+A focused request creates an email without changes inside it, replaces text in a block, inserts
+an attachment into a specified image block, changes a button color, or makes a similar local edit.
+Use only the calls needed to complete it. A successful `create_email` response with
+`editorModelReady=true`, or `set_document_state` with `status=OK`, completes the operation.
+Report the actual result and stop. Do not add confirmation reads, screenshots, exports, or
+artifact downloads. Omitted unrequested checks do not make the result incomplete.
+
+Keep the necessary preparation: resolve an unknown target, acquire the current model for an
+edit, validate the SDK change, upload supplied assets when needed, and upload the candidate and
+untouched base. A local change or image upload alone does not complete the document edit.
+Use `whoami`, searches, or server guides only when missing context requires them; never supply
+your own user ID. With no requested destination, `create_email` may use its default project.
+Optional follow-up suggestions in a successful tool response do not expand the user's request.
+
+Perform additional checks when the user requests them, within the requested scope. Full email
+builds/rebuilds and broader redesigns retain their model and desktop/mobile verification,
+including repairs made to complete that workflow. A refusal, timeout, or unknown write outcome is not success: follow
+the operation's recovery rules and read back before retrying an uncertain document write.
+
+## Tool and topic selection
+
+- For full workflows, resolve access with `whoami` once and read `stripo://guide/start-here`.
+  Read `stripo://guide/recipes` only for the selected workflow.
+- Discover exact tool names or the Stripo namespace, not every tool description. Limit resource
+  discovery to Stripo; inspect names/URIs before reading selected resources.
+- Keep full results in variables/task files and print bounded excerpts. Keep `(id, type)`
+  together. Models travel through files and temporary URLs, never inline in MCP arguments.
+- Use configured credentials and host transfers. MCP access does not establish shell network
+  access; check the download topic before a transfer.
+
+| Operation | Topic |
 | --- | --- |
-| Transfer local files or execute prepared MCP sequences | [File transfer helper and host workflows](reference/stripo-file-workflows.md) |
-| Resolve a reference/target; download model, preview, or image | [Acquisition and network access](reference/stripo-acquisition.md) |
-| Create an email, including an empty one; set native title/preheader | [Creation and native metadata](reference/stripo-creation.md) |
-| Upload a supplied image, generate a visual, or edit an image | [Images and job recovery](reference/stripo-images.md) |
-| Upload a model, handle a write failure, or verify persistence | [Persistence and verification](reference/stripo-persistence.md) |
-
-Follow the selected skill's SDK workflow and these provider topics together. Read the write
-contract before preparing upload tickets; an uncertain outcome must be checked before retrying.
+| File transfers and prepared sequences | [File workflows](reference/stripo-file-workflows.md) |
+| Resolve or acquire a target/reference | [Acquisition](reference/stripo-acquisition.md) |
+| Create an email; native title/preheader | [Creation](reference/stripo-creation.md) |
+| Upload, generate, or edit an image | [Images](reference/stripo-images.md) |
+| Write, recover, or verify a model | [Persistence](reference/stripo-persistence.md) |

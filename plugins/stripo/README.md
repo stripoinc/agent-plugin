@@ -7,7 +7,7 @@ It contains three skills and their local Document State SDK:
 - **email-from-reference** creates an email from a brief, an authorized reference,
   HTML, a screenshot or supplied images, and can rebuild a selected email.
 - **email-model-editor** changes an existing email or template, including copy,
-  links, layout and images, then checks saved content and available previews.
+  links, layout and images, with verification appropriate to the requested scope.
 - **business-profile** reads, audits and updates a Stripo project's business
   profile using the project's emails as evidence.
 
@@ -67,8 +67,8 @@ The bundled connection can use automatic registration only when the authorizatio
 and host support it. Omitting a client ID does not enable that support. OpenAI directory
 OAuth setup is separate from these GitHub installation steps.
 Do not paste tokens into chat, source files or runner arguments.
-In a fresh session, ask the agent to call `whoami` without making changes, then
-confirm the account and project before editing.
+To check the connection in a fresh session, ask the agent to call `whoami` without
+making changes, then confirm the returned account and project.
 
 ## What runs and where data goes
 
@@ -76,8 +76,9 @@ The agent reads these skills, runs local Node.js SDK commands, and calls your
 authorized Stripo MCP server. Model JSON, references and screenshots are downloaded
 to local task files from signed URLs returned by Stripo. Approved candidate models
 and unchanged base models are uploaded through separate signed upload tickets;
-Stripo persists the resulting changes. The plugin then reads back saved state and
-inspects available desktop and mobile screenshots. Signed URLs are temporary.
+Stripo persists the resulting changes. Focused operations complete on a successful creation
+or document write. Saved-state and desktop/mobile checks apply to full builds, broader changes,
+or explicit verification requests. Signed URLs are temporary.
 
 Image generation and editing run through Stripo's `generate_image`, `edit_image`
 and `get_image_job` tools. They consume the project's image quota. Supplied local

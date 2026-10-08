@@ -1,6 +1,6 @@
 ---
 name: email-from-reference
-description: "Create a new Stripo email, fully rebuild an explicitly named email or template, or inspect a proposed email from authorized references as a native editable JSON model. Accepts a text description inline, in a document, or by link; a live email or template by ID or link, which also supplies the brand facts; uploaded editor JSON, HTML/CSS, image, or screenshot; a website; or another provider's authorized email. When no reference is supplied, first draft a text reference with the proposed structure from the user's goal and verified brand context in Creative mode. Reconstruct reference intent rather than importing raw HTML. Generate or edit required visuals through the Stripo MCP image tools. Use email-model-editor for bounded edits. Not for translation, sending, scheduling, or creating templates."
+description: "Create a new Stripo email, fully rebuild an explicitly named email or template, or inspect a proposed email from authorized references as a native editable JSON model. Accepts a text description inline, in a document, or by link; a live email or template by ID or link, which also supplies the brand facts; uploaded editor JSON, HTML/CSS, image, or screenshot; a website; or another provider's authorized email. For content creation without a reference, first draft a text reference with the proposed structure from the user's goal and verified brand context in Creative mode. An explicitly empty email needs only creation. Reconstruct reference intent rather than importing raw HTML. Generate or edit required visuals through the Stripo MCP image tools. Use email-model-editor for bounded edits. Not for translation, sending, scheduling, or creating templates."
 ---
 
 # Email From Reference
@@ -8,7 +8,7 @@ description: "Create a new Stripo email, fully rebuild an explicitly named email
 Host paths: in Claude Code `<skill-dir>` is `${CLAUDE_SKILL_DIR}` and `<bundle-root>` is
 `${CLAUDE_PLUGIN_ROOT}`. In Codex `<skill-dir>` is the directory of this `SKILL.md`. In both
 hosts `<bundle-root>` is two levels above `<skill-dir>`. Read `HOST.md` beside this file for
-the working directory and file-transfer commands before the first MCP call.
+the working directory and file-transfer commands before local file work or transfers.
 
 Create one editable Stripo email, fully rebuild an explicit target, or inspect authorized
 references. Use `email-model-editor` for bounded edits. A reference alone never authorizes
@@ -17,6 +17,13 @@ overwriting it. Inspection-only requests must not create an email, write a model
 Read only the topic needed for the current stage, then continue to the next stage. Do not load
 all references or the full tool/resource catalog at startup.
 
+For a new email with no requested changes inside it, call `create_email` once with the name and
+known destination, or use its default project. A successful response with `editorModelReady=true`
+completes the request: report the returned ID, actual name, and project, then stop. No brief,
+onboarding calls, model reads, or previews are needed. Resolve a named destination only if its ID
+is unknown. For failures use [creation recovery](reference/stripo-creation.md); for other focused
+operations use `email-model-editor` and [focused operations](PROVIDER.md#focused-operations).
+
 | Stage | Read when needed |
 | --- | --- |
 | Resolve and inspect | [Reference regimes, inputs, target, assets](reference/resolve-and-inspect.md) before using a reference or drafting content. |
@@ -24,7 +31,7 @@ all references or the full tool/resource catalog at startup.
 | Create and save | [Creation, persistence, recovery, verification](reference/persist-and-verify.md) before creating or changing remote content. |
 | Attached or Ctrl+V image | [Upload supplied images](reference/image-upload.md) before hosting original bytes or local crops. |
 
-Start with the shared [Stripo MCP guide](PROVIDER.md); select its relevant topic for each MCP step.
+For content creation/rebuild, start with the shared [Stripo MCP guide](PROVIDER.md).
 If the host installs `HOST.md` beside this file, use its concrete transfer commands.
 The image workflow is supplied by `PROVIDER.md` and does not require a host image adapter.
 For an explicitly empty email, follow [blank creation](reference/stripo-creation.md#explicitly-empty-email)
@@ -40,8 +47,9 @@ Keep these rules throughout:
   precedence. Do not invent brand facts, destinations, or compliance content.
 - Keep native text and controls editable. Use the bundled editor validator; no schema download
   or initialization is required. A rebuild uses the acquired target as `--baseline`.
-- For a write request, the outcome is a persisted email. Local JSON and local validation are
-  intermediate results. Verify the saved model and desktop/mobile PNGs as the persistence topic requires.
+- For a write request, the outcome is a persisted email. Empty creation finishes on the
+  successful response above. For content creation/rebuild, verify the saved model and
+  desktop/mobile PNGs as the persistence topic requires.
 - Report missing capabilities or incomplete verification accurately; keep a known target's ID
   during recovery instead of creating another email.
 

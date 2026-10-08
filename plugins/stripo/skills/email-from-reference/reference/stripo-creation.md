@@ -1,8 +1,10 @@
 ## Creation and capabilities
 
-For a new email, call `create_email(name, projectId, folderId?)`, then write to the returned
-`emailId` using the [persistence flow](stripo-persistence.md). Resolve the project from the user's destination or the
-reference's verified project when creating alongside it; ask if the destination is ambiguous.
+For a new email, call `create_email(name, projectId?, folderId?)`. Write to the returned `emailId`
+through [persistence](stripo-persistence.md) only when content or native-model changes are requested.
+Use the requested destination or the reference's verified project when creating alongside it;
+resolve an unknown named destination, and ask if it is ambiguous. With no requested destination,
+use the tool's default project without a preliminary lookup.
 There are no sender, subject, or sending-interface arguments. Pass a folder only when requested;
 use `find_folders` to resolve it. For an explicitly requested copy, `sourceEmailId` or
 `sourceTemplateId` can preserve the source before editing. Never supply both. Check the returned
@@ -24,19 +26,23 @@ existing model, or `model.metadata` in a creation brief. Omitted fields keep the
 Both preheader fields are required; `fillSpace` controls the editor's invisible filler after the text.
 New or changed title/preheader text is limited to 500 UTF-16 code units; unchanged imported text
 may be longer. Empty `title` clears the title; `{text: "", fillSpace: false}` clears the preheader.
-Keep the metadata keys in the candidate when clearing values. Check support in the downloaded
-schema and verify the exact metadata values with `get_document_state` after writing.
+Keep the metadata keys in the candidate when clearing values. Use the bundled field contract;
+fetch schema documentation only when needed. A focused metadata edit completes on `set_document_state` with `status=OK`. Read back exact values when
+verification was requested or is part of a full build/rebuild.
 The creation runner enforces the same text limit before producing a candidate. For a full rebuild,
 pass `--baseline <target-model.json>` using the acquired state of the document being replaced;
 only unchanged text from that baseline may exceed the limit. Omit `--baseline` for a new email.
 
 ## Explicitly empty email
 
-When the user requests an empty email, call `create_email` with its name and destination,
-without `sourceEmailId` or `sourceTemplateId`. Follow the returned readiness/instruction and
-keep the returned `emailId`. Check the name/project with `get_content` and the empty native model
-with `get_document_state`; download it through the [authorized transfer path](stripo-acquisition.md#network-access-before-downloading).
-Verify zero content blocks and no unintended title or preheader. Inspect desktop/mobile PNGs
-with `get_screenshot` before reporting full verification; if unavailable, report the limitation.
-No content brief, brand lookup, image job, SDK build, or document upload is needed to keep an
-already empty model empty. The uncertain-create recovery above still applies.
+Apply [focused operations](../PROVIDER.md#focused-operations). Call `create_email` with the
+requested name and known destination, without `sourceEmailId` or `sourceTemplateId`. A successful
+response with `editorModelReady=true` is sufficient confirmation: report its `emailId`, actual
+`name`, and `projectId`, then stop. No `whoami`, guide discovery, content brief, brand lookup,
+model/schema read, image job, SDK build, document upload, or screenshot is needed for confirmation.
+Resolve an unknown explicitly named destination only when necessary.
+
+Optional instructions to fill or inspect the newly created email do not authorize more work.
+If `editorModelReady` is false or absent, retain the ID and follow the readiness instruction;
+do not claim readiness or create another email. The uncertain-create recovery above still applies.
+Perform previews or other checks only when the user asks for them.

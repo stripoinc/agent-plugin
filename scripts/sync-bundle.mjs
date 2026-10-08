@@ -35,7 +35,7 @@ const HOST_PARAGRAPH = [
   "Host paths: in Claude Code `<skill-dir>` is `${CLAUDE_SKILL_DIR}` and `<bundle-root>` is",
   "`${CLAUDE_PLUGIN_ROOT}`. In Codex `<skill-dir>` is the directory of this `SKILL.md`. In both",
   "hosts `<bundle-root>` is two levels above `<skill-dir>`. Read `HOST.md` beside this file for",
-  "the working directory and file-transfer commands before the first MCP call.",
+  "the working directory and file-transfer commands before local file work or transfers.",
 ].join("\n");
 
 function usage() {

@@ -34,9 +34,15 @@ protocol or transport error. Use two fresh tickets for repairs after `INVALID_ST
 and `SIDE_EFFECT_UNAVAILABLE` as well. Never drop `baseUploadId` to force a write. Allow at
 most one repair retry before reporting the failure with the returned `code`, paths, and messages.
 
-## 5. Verify durable state
+## 5. Complete the requested operation
 
-Read both surfaces after persistence:
+For a focused edit, `set_document_state` with `status=OK` completes the request. Report the saved
+change and stop; no confirmation read or preview is required. If the acquired model already
+has the requested values and the runner reports `skipped`, report that result without a write.
+An uncertain response still requires the recovery above.
+
+The checks below apply to broader changes, full builds/rebuilds, or user-requested verification. For an explicit check, inspect only the requested surface; for full verification,
+read both surfaces and follow the complete procedure:
 
 ```text
 get_document_state(id=<id>, type=<type>)

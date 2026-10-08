@@ -1,6 +1,6 @@
 ---
 name: email-model-editor
-description: "Edit an existing Stripo email or template through its native JSON model. Use for document title and preheader, copy, link, image-source, AI image generation/editing, theme, style, and block additions, removals, or duplication when the email or template has an editor document state. Uses Stripo MCP image tools for requested visuals and a generated SDK mutation module, validated file-based execution, and durable read-back for model changes. Use email-from-reference for a new email or full rebuild. Do not use for raw-HTML editing, sending, scheduling, changes to name/project/folder, or content without a native model."
+description: "Edit an existing Stripo email or template through its native JSON model. Use for document title and preheader, copy, link, image-source, AI image generation/editing, theme, style, and block additions, removals, or duplication when the email or template has an editor document state. Uses Stripo MCP image tools for requested visuals and a generated SDK mutation module, validated file-based execution, and verification appropriate to the requested scope. Use email-from-reference for a new email or full rebuild. Do not use for raw-HTML editing, sending, scheduling, changes to name/project/folder, or content without a native model."
 ---
 
 # Email Model Editor
@@ -8,11 +8,16 @@ description: "Edit an existing Stripo email or template through its native JSON 
 Host paths: in Claude Code `<skill-dir>` is `${CLAUDE_SKILL_DIR}` and `<bundle-root>` is
 `${CLAUDE_PLUGIN_ROOT}`. In Codex `<skill-dir>` is the directory of this `SKILL.md`. In both
 hosts `<bundle-root>` is two levels above `<skill-dir>`. Read `HOST.md` beside this file for
-the working directory and file-transfer commands before the first MCP call.
+the working directory and file-transfer commands before local file work or transfers.
 
 Edit an existing Stripo email through its native JSON model. Use `email-from-reference` for
 a new email or full rebuild. Read the topic for the current stage; do not load all references
 or the full tool/resource catalog at startup.
+
+For a focused edit, follow [focused operations](PROVIDER.md#focused-operations): acquire the
+current model, make and validate the requested change, upload the candidate and untouched base,
+and finish on `set_document_state` with `status=OK`. Add asset uploads only when needed.
+Do not run a full verification cycle unless requested or completing a full build/rebuild.
 
 | Stage | Read when needed |
 | --- | --- |
@@ -44,8 +49,9 @@ The image workflow is supplied by `PROVIDER.md` and does not require a host imag
   A model without blocks permits metadata edits only; other edits must leave at least one block.
 - Keep the acquired model untouched as the baseline for the before/after comparison and as the
   base file the write uploads next to the candidate.
-- A successful local mutation is not completion. Verify the saved model and inspect fresh
-  desktop and mobile PNG previews of the persisted email.
+- A successful local mutation is not completion. Persist the change; for a focused edit,
+  `set_document_state` with `status=OK` is sufficient. Apply the additional checks required by
+  the user's request or the full build/rebuild workflow.
 
 ## Boundaries
 

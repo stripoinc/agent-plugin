@@ -1,5 +1,9 @@
 # Create, persist, and verify
 
+This procedure covers content creation and full rebuilds. Creating an email with no changes
+inside it follows [focused operations](../PROVIDER.md#focused-operations) and ends on a successful
+`create_email` response with `editorModelReady=true`; it does not enter PERSIST or VERIFY.
+
 ### 5. CREATE the email
 
 If PREPARE images already created the email, reuse its recorded `emailId` and verified project;

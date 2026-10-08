@@ -57,11 +57,14 @@ Preparing requires write access to the target and the right to change its images
    successful result must contain `data.url`, an absolute HTTPS hosted asset URL. A signed
    staging `uploadUrl` is not the final asset. Treat MCP errors, `{error_code, reason}`, and
    missing or invalid `data.url` as failures. Never invent a fallback URL.
-5. Verify the hosted image through the host's authorized download/viewing mechanism. Use the
-   exact returned URL in the email's native image `settings.src` (or the SDK's `setSrc()`).
-   For replacement, reacquire the model after hosting and verify the selected image still has
-   the expected source before editing. Preserve unrelated links, alt text, and layout. Save
-   with the usual base/target workflow, re-read the model, and inspect desktop/mobile previews.
+5. Use the exact returned `data.url` in the native image `settings.src` (or the SDK's `setSrc()`).
+   Acquire the target model after hosting; for replacement, check the selected image still
+   exists and any previously observed source is unchanged. Preserve unrelated links, alt text,
+   and layout. Validate and save with the usual candidate/base workflow. For a focused image
+   insertion or replacement, `set_document_state` with `status=OK` completes the request:
+   no hosted-image download, model read-back, or desktop/mobile previews are required.
+   Perform extra checks only when requested or completing a full build/rebuild; that workflow
+   also verifies the hosted image through the authorized download/viewing mechanism.
 
 For multiple attachments, keep a separate filename, ticket, upload URL, and final URL for each.
 Do not mix files or sessions. After successful hosting, reuse the final URL during document

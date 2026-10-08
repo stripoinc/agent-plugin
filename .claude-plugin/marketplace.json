@@ -11,7 +11,7 @@
       "name": "stripo",
       "source": "./plugins/stripo",
       "description": "Create and edit emails and templates with Stripo.",
-      "version": "0.8.1",
+      "version": "0.8.2",
       "category": "productivity",
       "keywords": [
         "stripo",

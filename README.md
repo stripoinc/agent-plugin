@@ -13,7 +13,7 @@ Claude Code and Codex; each agent completes its own OAuth login.
 
 | Skill | Use it for |
 | --- | --- |
-| `email-model-editor` | Edit an existing email or template through native JSON models, including generating or editing images; verify the saved result and desktop/mobile previews. |
+| `email-model-editor` | Edit an existing email or template through native JSON models, including generating or editing images; use verification appropriate to the requested scope. |
 | `email-from-reference` | Create an email from a brief, HTML, screenshot or another authorized reference, generating or editing visuals when needed; rebuild an explicitly selected email or template. |
 | `business-profile` | Read, audit and update a project's business profile using its emails as evidence. |
 

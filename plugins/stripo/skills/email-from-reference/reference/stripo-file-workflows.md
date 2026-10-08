@@ -63,8 +63,8 @@ recovery rules for expired URLs, failed PUTs and unknown outcomes.
 
 `scripts/file-workflows.mjs` exports three functions. They contain no filesystem, network,
 OAuth or SDK runtime: the host supplies the existing capabilities as callbacks.
-Resolve identity/access with `whoami` once and select the authorized target before invoking a
-workflow. Check the selected server's tool names and schemas as described in `PROVIDER.md`.
+Select the authorized target and resolve missing access/destination context only when needed,
+as described in [the MCP guide](../PROVIDER.md#focused-operations).
 
 Code-mode hosts without an ESM loader can load the same bundled implementation from
 `scripts/file-workflows.global.js`; evaluating this file exposes `StripoFileWorkflows`.
@@ -78,6 +78,13 @@ callbacks below to the host's tools before invoking it. Host-specific bindings s
 | `downloadEmailArtifacts(input, host)` | `directory`, optional `maxBytes` | Read metadata, model and BOTH previews concurrently; then transfer available files. Never create a new email. |
 | `uploadImage(input, host)` | `file`, `name`, PNG/GIF `imageLimits` | Prepare once, transfer original bytes, finalize once. Returns the hosted URL; does not insert it into an email. |
 | `saveDocumentState(input, host)` | `candidateFile`, `mode`, `readbackFile`, `baseFile` for edits | Validate, prepare separate tickets, transfer candidate/base, write once and read back. |
+
+Choose a prepared workflow only when all of its calls are needed. `downloadEmailArtifacts`
+always requests metadata and both previews; `saveDocumentState` always reads back after writing.
+For focused edits, call `get_document_state` and the necessary prepare/upload/set operations
+individually with `transfer.mjs`; finish on `set_document_state` with `status=OK`. Keep candidate
+validation, the untouched base, and uncertain-write recovery. `uploadImage` remains suitable
+for a supplied attachment. Empty creation needs none of these file workflows.
 
 ```js
 const result = await downloadEmailArtifacts(
@@ -111,8 +118,9 @@ MCP calls and the packaged transfer command; do not generate another transfer im
 
 ## Results and recovery
 
-- `OK` means the requested transfer/write calls completed. Inspect the saved model semantically
-  and both PNGs visually before reporting a fully verified email.
+- `OK` means the workflow's requested calls completed. A transfer or image upload alone does
+  not persist a document edit. For a full build/rebuild, inspect the saved model and both PNGs;
+  for an explicitly requested check, inspect only the requested surface.
 - `PARTIAL` retains successful files when a preview or post-write read-back is unavailable.
   Report the missing verification and reuse the known target.
 - `FAILED` contains a returned refusal, validation error or transfer failure. Failed PUTs never

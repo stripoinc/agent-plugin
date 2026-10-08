@@ -176,7 +176,8 @@ On any preparation failure, the runner removes stale output. Diagnostics disting
 schema, capability, loss and optional runtime stages; inspect `diagnostics.error.issues`.
 Local contract validation is against the pinned revision. `--runtime-snapshot <file>` plus
 `STRIPO_RUNTIME_PATH` explicitly requests model preflight and fails if context is missing.
-Only a successful server set followed by get confirms persistence.
+A focused edit completes when `set_document_state` returns `status=OK`. Read-back and previews
+follow the requested verification scope; unknown write outcomes still require recovery.
 
 Repair schema errors without removing intended content. Use `diagnostics.error.errors` and
 the untouched acquired model to repair the failing fields. Do not delete a logo or another

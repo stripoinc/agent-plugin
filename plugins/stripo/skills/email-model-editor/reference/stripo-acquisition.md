@@ -5,8 +5,13 @@ the link; ask when either is unclear. Keep `(id, type)` together on every call: 
 or `TEMPLATE` for document/preview tools and lowercase for `get_content`. A reference identifies
 source material; only an explicit edit/rebuild request makes it the write target.
 
-Read the destination project's Business Profile with `get_business_profile(projectId)`; it is
-scoped to one project, and `businessProfileId: null` means the project has none and
+For a focused edit, acquire only the model needed to locate and change the target. Skip Business
+Profile, metadata, and preview calls unless required to resolve the request. Use the model GET
+and transfer helper directly; `downloadEmailArtifacts` also fetches metadata and both previews.
+
+For content creation/rebuild, read the destination project's Business Profile with
+`get_business_profile(projectId)`; it is scoped to one project. `businessProfileId: null` means
+the project has none and
 `businessProfile` carries defaults only. Its brand, contacts, socials, important links and
 languages are authorized facts. Derive whatever it does not carry — colors, fonts, assets, layout,
 identity, destinations and footer content — from the designated reference model and its previews;
@@ -24,8 +29,9 @@ write uploads next to the candidate (see [persistence](stripo-persistence.md)). 
 broken model is not an empty reference. The runners validate with the editor rules bundled in
 the SDK. `get_document_state_schema()` remains available for field documentation.
 
-Use `get_content(id, type, includeHtml=false)` for name and project/folder metadata.
-Use `get_screenshot(id, type, mode="BOTH")` for reference and final desktop/mobile inspection.
+Use `get_content(id, type, includeHtml=false)` when name or project/folder metadata is needed.
+Use `get_screenshot(id, type, mode="BOTH")` for a full reference/build inspection, or request only
+the preview mode the user asked for. Neither call is a prerequisite for a focused edit.
 
 ## Network access before downloading
 

@@ -2,7 +2,7 @@
 
 Use the [packaged image upload workflow](stripo-file-workflows.md) with the host's MCP adapter,
 or its transfer helper between the two calls. It preserves original bytes and records timing;
-hosting still requires the verification and separate model edit below.
+hosting still requires the separate model edit below; verification follows the request scope.
 
 For files attached or pasted into chat, follow [Upload supplied images](image-upload.md).
 This release requires `prepare_image_upload(id, type, name?)` and
@@ -73,5 +73,6 @@ deleted or changed while the job ran, report the conflict instead of retargeting
 Otherwise create the SDK mutation against this fresh model using `setSrc()` and `setAlt()` as
 needed; preserve unrelated links, layout, and settings. Upload the untouched fresh model as
 `baseUploadId` alongside the candidate. Reuse a completed image URL during model-write recovery;
-a failed document write must not start another image job. Finish with model read-back and both
-desktop/mobile screenshots through the [verification contract](stripo-persistence.md).
+a failed document write must not start another image job. A focused replacement finishes on
+`set_document_state` with `status=OK`. Run model read-back or previews only when requested or
+completing a full build/rebuild, following [verification](stripo-persistence.md#additional-verification).
