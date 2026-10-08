@@ -20,6 +20,7 @@ workflow and `<bundle-root>/mcp-tools.json` supplies exact tool names and unsupp
 
 | Operation | Read before the operation |
 | --- | --- |
+| Transfer local files or execute prepared MCP sequences | [File transfer helper and host workflows](reference/stripo-file-workflows.md) |
 | Resolve a reference/target; download model, preview, or image | [Acquisition and network access](reference/stripo-acquisition.md) |
 | Create an email, including an empty one; set native title/preheader | [Creation and native metadata](reference/stripo-creation.md) |
 | Upload a supplied image, generate a visual, or edit an image | [Images and job recovery](reference/stripo-images.md) |

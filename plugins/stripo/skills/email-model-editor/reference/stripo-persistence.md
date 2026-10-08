@@ -1,5 +1,10 @@
 ## Upload and verification contract
 
+The [packaged save workflow](stripo-file-workflows.md) implements one candidate/base transfer,
+write and read-back through the host's existing MCP connection. Use it when the host supports
+the documented adapter; otherwise use the same transfer helper between the MCP calls below.
+It never repeats an uncertain write or removes the required base.
+
 Preserve native font settings/resources. Do not run `normalize-merge-service-fonts.mjs` or apply
 Reteno's font substitutions or sending-metadata rules. Change native fields only when requested
 and supported by the live schema; do not invent an external metadata write capability.

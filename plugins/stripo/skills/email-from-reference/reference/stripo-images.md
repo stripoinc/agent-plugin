@@ -1,5 +1,9 @@
 ## Upload supplied images
 
+Use the [packaged image upload workflow](stripo-file-workflows.md) with the host's MCP adapter,
+or its transfer helper between the two calls. It preserves original bytes and records timing;
+hosting still requires the verification and separate model edit below.
+
 For files attached or pasted into chat, follow [Upload supplied images](image-upload.md).
 This release requires `prepare_image_upload(id, type, name?)` and
 `upload_image(id, type, uploadSessionId, name?)` on the Stripo server. They use the same

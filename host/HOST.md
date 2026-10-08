@@ -2,8 +2,8 @@
 
 This skill is part of the Stripo agent plugin. These notes apply to any agent that loads it;
 where Claude Code or Codex behave differently, they are named. The agent runs the skill runners
-with its shell tool and moves files with `curl`. The machine needs Node.js 20.18.1+ and `curl`
-on `PATH`.
+and the packaged file-transfer helper with its shell tool. The machine needs Node.js 20.18.1+
+on `PATH` and a POSIX shell.
 
 ## Paths
 
@@ -48,11 +48,30 @@ documentation; validation uses the editor revision recorded in `bundle.json.edit
 The service validates and applies each write against its live state, so follow the rejection
 diagnostics in `PROVIDER.md` and verify the saved model after writing.
 
-## Download: model, screenshots, generated images
+## File transfers
+
+Use `scripts/transfer.mjs` for downloads and uploads. Read
+`reference/stripo-file-workflows.md` for the request fields, limits and recovery rules. Keep
+signed URLs in a private request file (mode 0600) in the task directory and run:
 
 ```bash
-curl -fsSL --retry 2 -o <file> '<downloadUrl>'
+node <skill-dir>/scripts/transfer.mjs --request <task-dir>/transfer.json --result <task-dir>/transfer-result.json
 ```
+
+Hosts that can pass stdin may use `--request -`. Parse the JSON report even when the command
+exits with status 1; do not repeat a failed transfer automatically. The helper checks inputs,
+preserves original upload bytes and publishes only complete downloads.
+
+Hosts with programmatic MCP and shell access can bind the prepared functions in
+`scripts/file-workflows.mjs` or `scripts/file-workflows.global.js` as described in the reference.
+Otherwise call MCP tools individually and use the same packaged transfer command. A local Node
+process does not inherit access to the agent's authenticated MCP tools.
+
+## Download: model, screenshots, generated images
+
+Use GET transfers with absolute destination paths and explicit size limits: `format: "json"`
+for models and `format: "png"` for screenshots and generated images. Pass the returned expiry
+when available. Inspect downloaded models and images with the host's normal tools.
 
 Model and screenshot download URLs are temporary. If a download fails after the URL expired,
 request a new one through the same MCP tool. A completed image job's `image.url` is a hosted PNG;
@@ -66,14 +85,10 @@ download that URL to inspect it without starting another generation.
    created email built from a brief has no base and needs one ticket. Check the sizes against
    `maxBytes` first (`wc -c <candidate.json> <downloaded-model.json>`); with a base, both files
    together must fit.
-2. Upload each file to its own `uploadUrl` with the method the tool returned. The current
-   presigned URL is a plain `PUT` with no extra headers:
-
-   ```bash
-   curl -fsS -X PUT --upload-file <candidate.json> '<candidate uploadUrl>'
-   curl -fsS -X PUT --upload-file <downloaded-model.json> '<base uploadUrl>'
-   ```
-
+2. Upload each file to its own `uploadUrl` through `transfer.mjs`, using the ticket's method,
+   expiry, limit and required headers. The current document ticket uses `PUT` with no extra
+   headers: use `format: "json"` and do not add Content-Type. Set `maxTotalUploadBytes` to the
+   smaller ticket limit for a candidate/base pair. Continue only after both transfers succeed.
 3. `set_document_state(id, type, uploadId=<candidate ticket>, baseUploadId=<base ticket>)`, or
    `set_document_state(id, type, uploadId)` without a base. Never swap the two ids.
 
@@ -94,13 +109,15 @@ required in this host.
 Jobs belong to the target email/template. When a new email needs generated visuals, create it
 once before starting the jobs and retain that same id through persistence and recovery. Poll
 with the returned `jobId` and `pollAfterSeconds`; a repeated start is a new quota-consuming job.
-Download and visually inspect a completed PNG using the download command above and the agent's
+Download and visually inspect a completed PNG using the transfer helper above and the agent's
 image-viewing tool. Insert its hosted `image.url` through the native model workflow without
 reuploading or recompressing it. Generation alone does not place the image into the document.
 
 For supplied local images and authorized crops, use `prepare_image_upload` and `upload_image`
-as described in `reference/image-upload.md` and `PROVIDER.md`. Upload the file using the signed
-ticket's method and fields, then finalize that same upload session to get its hosted URL.
+as described in `reference/image-upload.md` and `PROVIDER.md`. Upload the file through
+`transfer.mjs` with `format: "image"`, using the signed ticket's method and fields, advertised
+content types and PNG/GIF pixel limits. Finalize that same upload session only after a successful
+transfer to get its hosted URL.
 Require both tools on the connected server; never use document-state tickets for image bytes.
 Image references and edit sources must be authorized hosted URLs before image jobs start.
 Reuse suitable hosted assets and report a required visual that cannot be completed as `SKILL.md`

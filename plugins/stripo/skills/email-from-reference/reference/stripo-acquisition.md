@@ -29,6 +29,11 @@ Use `get_screenshot(id, type, mode="BOTH")` for reference and final desktop/mobi
 
 ## Network access before downloading
 
+Use the [packaged file helper and download workflow](stripo-file-workflows.md) for model and
+preview transfers. Keep the returned MCP responses in variables/task files and run the prepared
+sequence; do not write another download loop or timing wrapper. Host permission checks below
+still apply, and downloaded PNGs still require visual inspection.
+
 Successful Stripo MCP calls do not establish network access for local shell commands.
 Before the first model, schema, preview or hosted-image download, inspect the host's effective
 network policy and transfer instructions (`HOST.md` when installed). If the download needs
