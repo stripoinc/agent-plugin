@@ -9,11 +9,21 @@ export declare const SOCIAL_ALT_MAX_LENGTH = 500;
 export declare const SOCIAL_BLOCK_DEFAULT_SETTINGS: Readonly<JsonObject>;
 /** Caller-facing network description accepted by socialBlock() and addSocialNetwork(). */
 export interface SocialNetworkInput {
+    /** Exact native social network enum (e.g. instagram, xcom, tripAdvisor) or custom; case-sensitive, not an arbitrary label. */
     type: string;
+    /**
+     * Omit or use empty string for no link. Non-empty values must be trimmed and match linkType.
+     * Social links also support deep links through other; non-social URL restrictions do not apply here.
+     */
     url?: string;
+    /**
+     * site, anchor, email, phone, file, sms, telegram, viber or other. Inferred from url when omitted;
+     * the editor may re-derive the type on read-back, so a forced type is not a persistence guarantee.
+     */
     linkType?: string;
+    /** At most 100 UTF-16 code units; omitted values use the network's default title. */
     title?: string;
-    /** Only when textCustomization is enabled on the block. */
+    /** At most 500 UTF-16 code units; only when textCustomization is enabled on the block. */
     alt?: string;
     /** Required for type "custom", rejected for every other type. */
     icon?: string;

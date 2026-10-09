@@ -1,4 +1,5 @@
 // convo-email-agent/src/sdk/errors.ts
+var LINE_HEIGHT_HINT = "lineHeight uses a finite, unitless multiplier between 0 and 5; use 1.5 for 150%.";
 var EmailSdkError = class extends Error {
   code = "INVALID_OPERATION";
   stage = "change";
@@ -106,6 +107,7 @@ function assertMetadataTextLimits(metadata, baseline) {
 }
 
 export {
+  LINE_HEIGHT_HINT,
   EmailSdkError,
   isObject,
   objectValue,

@@ -34,7 +34,16 @@ export declare class DocumentStateError extends Error {
     constructor(issues: readonly DocumentIssue[]);
 }
 export declare function jsonIssues(value: unknown, input?: 'current' | 'target'): DocumentIssue[];
+/**
+ * Validate a complete acquired Document State snapshot against the pinned native contract.
+ * unknown is a boundary type, not permission for partial/non-JSON data; no creation defaults are added.
+ */
 export declare function validateSnapshot(document: unknown): ValidationResult;
+/**
+ * Validate a complete target against its acquired current snapshot, including preservation and operation support.
+ * Omit current only for creation; intent names exact intentional losses and cannot bypass native restrictions.
+ * Success returns normalized Document State and contract evidence, not proof of remote persistence or visual fidelity.
+ */
 export declare function validateChange({ current, target, intent }: {
     current?: unknown;
     target: unknown;

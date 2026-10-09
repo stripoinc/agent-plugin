@@ -70,10 +70,10 @@ photo crop after this adjustment.
 
 For desktop two-column image/quote rows, check `structure.settings.responsiveMobile` in the
 saved mobile preview. If it is false, text can remain in a narrow column and wrap vertically;
-enable stacking and set inversion deliberately to keep each image with its own quote. Check
-text contrast against the actual saved panel, including inline colors that override block
-settings. If the source has decorative social icons but supplies no link destinations, an
-uploaded crop of just that icon row can preserve its visible geometry as an editable image;
+enable stacking and set inversion deliberately to keep each image with its own quote. Follow
+[Color consistency](color-consistency.md) for the panel's colors. If the source has decorative
+social icons but supplies no link destinations, an uploaded crop of just that icon row can
+preserve its visible geometry as an editable image;
 disclose that its individual destinations remain unverified.
 When a desktop row of cards or counters stacks on mobile, set each container's mobile vertical
 padding from the source mobile design. Reusing large desktop top/bottom padding on every stacked

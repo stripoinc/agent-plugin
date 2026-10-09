@@ -126,13 +126,35 @@ export function surface(root) {
 
 // Pass null for an icon-only control's label. Choose a fallback control separately;
 // these helpers never infer an action from accessibleName, class names or shape.
-export function button(root, labelOwner, description, usageHints, layoutChoice) {
+export function button(root, labelOwner, description, usageHints, layoutChoice, backdropOwner) {
   const paint = surface(root);
   if (paint.borderColor == null || paint.borderStyle == null
       || (paint.borderWidth > 0 && paint.borderStyle !== 'solid')
       || !Number.isFinite(paint.borderWidth) || !Number.isFinite(paint.borderRadius)
       || !sides.every(s => Number.isFinite(root.paddingPx?.[s]))) {
     throw Error('Button schema cannot represent missing/asymmetric geometry or non-solid visible borders; choose another evidenced component or omit it');
+  }
+  let backdropColor;
+  if (backdropOwner !== undefined) {
+    // Narrow checks only: the author must corroborate ancestry, coverage and intervening paint.
+    for (const owner of [root, backdropOwner]) {
+      if (!owner || typeof owner !== 'object' || Array.isArray(owner)) {
+        throw Error('Choose a measured control and backdrop owner with known solid background context');
+      }
+      const images = [owner.backgroundImage, owner.styles?.backgroundImage].filter(v => v !== undefined);
+      const opacities = [owner.opacity, owner.styles?.opacity].filter(v => v !== undefined);
+      if (!images.length || images.some(v => v !== 'none') || !opacities.length
+          || opacities.some(v => v !== 1 && (typeof v !== 'string' || !/^1(?:\.0+)?$/u.test(v)))) {
+        throw Error('Backdrop context requires measured backgroundImage none and unit opacity on both owners');
+      }
+    }
+    const paints = [backdropOwner.backgroundColor, backdropOwner.styles?.backgroundColor].filter(v => v !== undefined);
+    const colors = paints.map(v => typeof v === 'string' ? color(v) : null);
+    if (!colors.length || colors.some(v => typeof v !== 'string' || !/^#[0-9a-f]{6}$/iu.test(v))
+        || colors.some(v => v.toLowerCase() !== colors[0].toLowerCase())) {
+      throw Error('Choose a measured opaque six-digit hex or RGB backdrop; omit unresolved context');
+    }
+    backdropColor = colors[0];
   }
   let layout;
   if (layoutChoice !== undefined) {
@@ -170,6 +192,7 @@ export function button(root, labelOwner, description, usageHints, layoutChoice) 
   }
   return {
     backgroundColor: paint.backgroundColor,
+    ...(backdropColor !== undefined ? {backdropColor} : {}),
     fontColor: labelOwner == null ? null : color(measuredTextOwner(labelOwner).color),
     borderColor: paint.borderColor, borderWidth: paint.borderWidth,
     borderRadius: paint.borderRadius,
@@ -187,7 +210,7 @@ export function productCta(buttonStyle, authored = {}) {
     if (!fields.includes(key)) throw Error(`CTA authoring field ${key} is not a semantic label/shape choice; derive styling and layout from the chosen button`);
   }
   const projected = {...authored};
-  for (const key of ['backgroundColor', 'fontColor', 'borderColor', 'borderWidth', 'borderRadius', 'padding',
+  for (const key of ['backgroundColor', 'backdropColor', 'fontColor', 'borderColor', 'borderWidth', 'borderRadius', 'padding',
     'hoverBackgroundColor', 'hoverFontColor', 'hoverBorderColor']) {
     if (buttonStyle[key] !== undefined) projected[key] = structuredClone(buttonStyle[key]);
   }
@@ -218,7 +241,7 @@ export function writeKit(kit, directory) {
 // textOwners, links and images arrays; join by styleId or ownerId, not array index.
 // Available signatures: color(value); typography(owner, description?, usageHints?);
 // textColor(owner, description, usageHints); surface(root);
-// button(root, labelOwner, description, usageHints, layoutChoice);
+// button(root, labelOwner, description, usageHints, layoutChoice, backdropOwner?);
 // productCta(buttonStyle, authored).
 // productCta authored accepts only text, textSource, hasUsableVisibleText,
 // isCompact, isIconLike and hasInlineIcon. Pass a chosen button for its styling

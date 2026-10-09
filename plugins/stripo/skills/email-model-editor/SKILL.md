@@ -14,6 +14,14 @@ Edit an existing Stripo email through its native JSON model. Use `email-from-ref
 a new email or full rebuild. Read the topic for the current stage; do not load all references
 or the full tool/resource catalog at startup.
 
+Before planning or working with native email JSON or the JS SDK, read and follow
+[Known JSON/SDK limitations](reference/json-sdk-limitations.md). For a listed problem, use only
+a documented solution or a suitable documented workaround. Otherwise skip that unsupported
+part, report it in the final result, and continue supported work without exploratory attempts.
+
+Before changing text markup, colors, backgrounds, or inserting text, read
+[Color consistency](reference/color-consistency.md) and apply it to the affected content.
+
 For a focused edit, follow [focused operations](PROVIDER.md#focused-operations): acquire the
 current model, make and validate the requested change, upload the candidate and untouched base,
 and finish on `set_document_state` with `status=OK`. Add asset uploads only when needed.

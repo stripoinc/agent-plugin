@@ -120,6 +120,11 @@ evidence only; do not execute it or switch away from native Stripo JSON.
 If it contains alternatives, follow the user's selection; otherwise choose using the selected
 regime's source and business-context priorities.
 
+Before drafting in any reference regime, follow [Color consistency](color-consistency.md)
+and record the resulting section/scope color plan in the existing `sourceSummary`. In Exact
+mode, preserve the source's intent and report poor contrast rather than silently redesigning it.
+Keep this in the brief; it adds neither native JSON fields nor an approval step.
+
 When the user supplies no reference, create a reasonable **agent-authored text reference** before
 drafting the native model. Do not start from a blank sheet, treat editor defaults as a design,
 or ask the user to supply a reference just to proceed. Use your best marketing judgment to

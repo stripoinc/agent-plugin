@@ -17,6 +17,14 @@ overwriting it. Inspection-only requests must not create an email, write a model
 Read only the topic needed for the current stage, then continue to the next stage. Do not load
 all references or the full tool/resource catalog at startup.
 
+Before planning or working with native email JSON or the JS SDK, read and follow
+[Known JSON/SDK limitations](reference/json-sdk-limitations.md). For a listed problem, use only
+a documented solution or a suitable documented workaround. Otherwise skip that unsupported
+part, report it in the final result, and continue supported work without exploratory attempts.
+
+For content creation or rebuild, read [Color consistency](reference/color-consistency.md)
+before planning colors and apply its candidate check before upload.
+
 For a new email with no requested changes inside it, call `create_email` once with the name and
 known destination, or use its default project. A successful response with `editorModelReady=true`
 completes the request: report the returned ID, actual name, and project, then stop. No brief,

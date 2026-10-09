@@ -71,8 +71,7 @@ Rules for the module:
   `{ email }`; the module's only job is to call SDK mutation methods.
 - Preserve unrelated content, links, merge tags, visibility, and compliance content unless they
   are explicit targets. Make structural changes as needed to fulfill the user's request.
-- Prefer a theme edit for a broad change and a node edit for an exception. Render precedence is
-  inline HTML, block, container, structure, stripe, area theme, then general theme.
+- Prefer a theme edit for a broad change and a node edit for an exception.
 - For a text block, responsive `textAlign` accepts `left`, `center`, `right`, or `justify`; font size
   remains part of the semantic HTML passed to `node.setContent`.
 - For a social block, edit networks through `setSocialNetwork(typeOrIndex, {url, title, alt, icon})`,
@@ -106,6 +105,11 @@ Rules for the module:
   whose completed output is PNG; WebP, AVIF, and extensionless or otherwise unknown URLs are
   not confirmed email-safe for direct insertion. Obtain a hosted PNG/JPG/JPEG/GIF before
   applying an image change with an unsupported source; generation is not a lossless conversion.
+
+For affected text, colors, backgrounds, or inserted text, follow
+[Color consistency](color-consistency.md) using the acquired model to scope the change.
+Express supported block-color writes through `node.setStyle("fontColor", color)` and semantic
+content changes through `node.setContent(...)` in the mutation module.
 
 For insertion, define and export `components` in this same change module. Each named entry is
 `{node, slots, level?}` containing a complete native reference subtree; `level` is `L1` (stripe),
@@ -169,6 +173,11 @@ Require exit code 0 and confirm:
 - `inputSummary` and `outputSummary` show the intended content, block types, and counts,
   including any additions, removals, or duplication needed for the request.
 
+Before uploading an edit that changes text markup, colors, backgrounds, or inserts text, apply
+the shared [candidate color check](color-consistency.md#check-the-completed-candidate-before-upload)
+only to affected content and its relevant backgrounds. Use the acquired model to identify that
+scope. Correct conflicts in the change module and rerun it before upload.
+
 If the requested result already exists, call the supplied `skip(reason)` and return. The runner
 reports `skipped` and produces no uploadable output. A setter that silently changes nothing is an
 error. Keep the acquired model, inspection, module, candidate and diagnostics as task artifacts.
@@ -204,10 +213,10 @@ Social `networks` is replaced as a complete list: replacing or reordering networ
 including multiple custom networks. Every resulting network still has to pass schema validation
 and the editor's icon, alt, and link rules.
 
-Colors live in the theme branches. Change a light color at its `lightTheme` path, for example
-`email.setTheme("settings.stripes.lightTheme.content.linkColor", "#2457d6")`, and set a dark-mode
-override at the matching `darkTheme` path, where `null` means no override. Switch the button hover
-effect with the boolean `settings.buttons.hoverButtonStyles`.
+Write a theme-color edit through `email.setTheme`, for example
+`email.setTheme("settings.stripes.lightTheme.content.linkColor", "#2457d6")`, using the scope
+selected under [Color consistency](color-consistency.md). Switch the button hover effect with
+the boolean `settings.buttons.hoverButtonStyles`.
 
 For an intentional reset, write `undefined` or `null` to a nullable setting below. For example,
 `email.setTheme("settings.general.backgroundImage", undefined)` clears the email's background image,

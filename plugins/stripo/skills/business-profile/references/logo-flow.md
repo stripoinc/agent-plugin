@@ -10,4 +10,4 @@ The finalizer owns primary-logo preflight and any authorized hosting. It checks 
 
 Do not upload the logo separately or edit a finalizer-owned URL. For local-only requests, return preserved artwork with its limitations; no remote conversion is implied. A missing asset, suppressed export or unavailable conversion must remain explicit rather than triggering replacement with unrelated artwork.
 
-Read `finalize-report.json.logo_hosting` for the actual outcome. A nonempty `svgPath`, a captured URL or a locally valid SVG is not proof that an email can render the logo. Return the existing [logo outcome line](report-lines.md#logo-outcome--a-missing-brand-logo-is-said-out-loud-not-footnoted) with the final profile status.
+Use the returned finalizer outcome; consult `finalize-report.json.logo_hosting` when diagnosis is needed. A nonempty `svgPath`, a captured URL or a locally valid SVG is not proof that an email can render the logo. Follow [Phase 5](phase-5-save.md) for completion and [Report lines](report-lines.md#logo-outcome) for diagnostic meaning; surface a missing usable logo when it prevents the requested branding.

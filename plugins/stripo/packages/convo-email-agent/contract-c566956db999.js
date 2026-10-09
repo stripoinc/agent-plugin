@@ -2,6 +2,7 @@ import {
   collectSocialDocumentIssues
 } from "./social-f4a8e0da8c68.js";
 import {
+  LINE_HEIGHT_HINT,
   cloneJson,
   deepFreeze,
   describeNodeKind,
@@ -320,6 +321,9 @@ var DISCRIMINATOR_MESSAGE = /^Invalid discriminator value\. Expected (.+)$/u;
 var TYPE_MESSAGE = /^Invalid input: expected (.+?), received (.+)$/u;
 function formatIssue(issue) {
   const path = dotPath(issue.path);
+  if (/^settings\.(?:stripes|headings\.h[1-6])\.lineHeight(?:\.(?:desktop|mobile))?$/u.test(path) && issue.code !== "unrecognized_keys") {
+    return [{ path, code: issue.code, message: `${issue.message} ${LINE_HEIGHT_HINT}` }];
+  }
   if (issue.code === "unrecognized_keys" && issue.keys && issue.keys.length > 0) {
     return issue.keys.map((key) => ({ path, code: issue.code, message: `unsupported property ${JSON.stringify(key)}` }));
   }

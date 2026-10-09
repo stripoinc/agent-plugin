@@ -789,7 +789,12 @@ function createEmailBuilder(options = {}) {
     setTheme(path, value) {
       assertNotSealed();
       assertNonEmptyString(path, "Theme path");
-      setPath(draft, path.split("."), value);
+      const issues = jsonIssues(value);
+      if (issues.length) throw new DocumentStateError(issues);
+      const candidate = cloneJson(draft);
+      setPath(candidate, path.split("."), value);
+      assertValidEmailModel(candidate);
+      draft = candidate;
       mutationCount += 1;
       return builder;
     },
