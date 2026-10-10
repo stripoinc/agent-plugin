@@ -4,7 +4,6 @@ import { createReadStream, existsSync, realpathSync } from "node:fs";
 import { link, mkdir, open, readFile, rm, stat, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { Readable } from "node:stream";
-import { pathToFileURL } from "node:url";
 var TransferFailure = class extends Error {
   constructor(code, message) {
     super(message);
@@ -227,8 +226,7 @@ async function runTransfers(request, transport = fetch) {
   await Promise.all(Array.from({ length: Math.min(request.concurrency ?? 3, prepared.length) }, worker));
   return { status: results.every((result) => result.status === "OK") ? "OK" : "FAILED", startedAt, endedAt: (/* @__PURE__ */ new Date()).toISOString(), durationMs: Math.round((performance.now() - started) * 1e3) / 1e3, results };
 }
-async function main() {
-  const args = process.argv.slice(2);
+async function runTransferCommand(args) {
   if (args.length === 1 && args[0] === "--help") {
     console.log("Usage: node transfer.mjs --request <request.json|-> --result <result.json>\nUse - to read the request from stdin. Transfers HTTPS files only; MCP calls, OAuth and network permission remain with the host.");
     return;
@@ -258,13 +256,9 @@ async function main() {
   console.log(JSON.stringify(report));
   if (report.status !== "OK") process.exitCode = 1;
 }
-if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) {
-  main().catch((error) => {
-    console.error(JSON.stringify({ status: "FAILED", error: transferError(error) }));
-    process.exitCode = 1;
-  });
-}
-export {
-  runTransfers,
-  transferError
-};
+
+// src/skill-scripts/stripo/transfer-cli.ts
+runTransferCommand(process.argv.slice(2)).catch((error) => {
+  console.error(JSON.stringify({ status: "FAILED", error: transferError(error) }));
+  process.exitCode = 1;
+});

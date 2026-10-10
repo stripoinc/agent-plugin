@@ -1,3 +1,14 @@
+// src/skill-scripts/stripo/hosted-image-url.ts
+function isHostedImageUrl(value, uploadUrl) {
+  try {
+    if (typeof value !== "string") return false;
+    const url = new URL(value);
+    return url.protocol === "https:" && !url.username && !url.password && url.href !== uploadUrl && ![...url.searchParams.keys()].some((key) => /^x-(amz|goog)-/iu.test(key));
+  } catch {
+    return false;
+  }
+}
+
 // src/skill-scripts/stripo/file-workflows.ts
 var WorkflowFailure = class extends Error {
   constructor(code, message, details) {
@@ -77,23 +88,27 @@ function upload(id, response, file) {
 var Workflow = class {
   constructor(host) {
     this.host = host;
+    this.clockSource = host.now ? "host" : typeof globalThis.performance?.now === "function" ? "monotonic" : "wall";
+    this.now = host.now ? () => host.now() : this.clockSource === "monotonic" ? () => globalThis.performance.now() : () => Date.now();
   }
   host;
   steps = [];
+  clockSource;
+  now;
   async event(step) {
     this.steps.push(step);
     await this.host.recordEvent?.(step);
   }
   async step(name, action, args) {
-    const start = performance.now();
+    const start = this.now();
     await this.event({ name, phase: "started", at: (/* @__PURE__ */ new Date()).toISOString(), ...args ? { arguments: args } : {} });
     try {
       const result = await action();
       const outcome = object(result) ? result.status ?? result.error_code : void 0;
-      await this.event({ name, phase: "completed", at: (/* @__PURE__ */ new Date()).toISOString(), durationMs: performance.now() - start, ...typeof outcome === "string" ? { outcome } : {} });
+      await this.event({ name, phase: "completed", at: (/* @__PURE__ */ new Date()).toISOString(), durationMs: Math.max(0, this.now() - start), ...typeof outcome === "string" ? { outcome } : {} });
       return result;
     } catch (error) {
-      await this.event({ name, phase: "failed", at: (/* @__PURE__ */ new Date()).toISOString(), durationMs: performance.now() - start, error: failure(error) });
+      await this.event({ name, phase: "failed", at: (/* @__PURE__ */ new Date()).toISOString(), durationMs: Math.max(0, this.now() - start), error: failure(error) });
       throw error;
     }
   }
@@ -122,16 +137,16 @@ function requireTransfers(report) {
   }
 }
 async function execute(input, host, action) {
-  const started = performance.now();
   const target = targetOf(input);
   const workflow = new Workflow(host);
+  const started = workflow.now();
   let result;
   try {
     result = await action(workflow, target);
   } catch (error) {
     result = { status: "FAILED", error: failure(error) };
   }
-  return { ...result, status: result.status, target, durationMs: performance.now() - started, steps: workflow.steps };
+  return { ...result, status: result.status, target, durationMs: Math.max(0, workflow.now() - started), clockSource: workflow.clockSource, steps: workflow.steps };
 }
 function downloadEmailArtifacts(input, host) {
   return execute(input, host, async (workflow, target) => {
@@ -198,12 +213,14 @@ function uploadImage(input, host) {
       return { status: "WRITE_UNCONFIRMED", uploadSessionId: session, error: failure(error), transfer };
     }
     if (hosted.error_code) return { status: ["hosting_failed", "upload_session_not_found"].includes(String(hosted.error_code)) ? "WRITE_UNCONFIRMED" : "FAILED", uploadSessionId: session, error: redacted(hosted), transfer };
-    let url;
+    const urls = { url: object(hosted.data) ? hosted.data.url : void 0, uploadUrl: entry.uploadUrl };
+    let validUrl = false;
     try {
-      if (object(hosted.data)) url = new URL(String(hosted.data.url));
-    } catch {
+      validUrl = host.validateImageUrl ? await host.validateImageUrl(urls) : isHostedImageUrl(urls.url, urls.uploadUrl);
+    } catch (error) {
+      return { status: "WRITE_UNCONFIRMED", uploadSessionId: session, error: failure(error), transfer };
     }
-    if (!url || url.protocol !== "https:" || url.username || url.password || url.href === entry.uploadUrl || [...url.searchParams.keys()].some((key) => /^x-(amz|goog)-/iu.test(key))) return { status: "WRITE_UNCONFIRMED", uploadSessionId: session, error: { code: "INVALID_HOSTED_URL", message: "Finalization returned no valid hosted HTTPS URL; do not upload again." }, transfer };
+    if (!validUrl) return { status: "WRITE_UNCONFIRMED", uploadSessionId: session, error: { code: "INVALID_HOSTED_URL", message: "Finalization returned no valid hosted HTTPS URL; do not upload again." }, transfer };
     return { status: "OK", image: hosted.data, transfer, requiresVisualInspectionAndModelInsertion: true };
   });
 }
@@ -212,7 +229,7 @@ function saveDocumentState(input, host) {
     requireValue(input.mode === "create" || input.mode === "edit", "INVALID_MODE", "Choose create or edit explicitly.");
     requireValue(input.mode === "edit" ? Boolean(input.baseFile) : input.baseFile === void 0, "BASE_REQUIRED", "Edits require the untouched acquired base; create is only for a newly created, unacquired email.");
     requireValue(host.validateDocument, "VALIDATOR_REQUIRED", "The host must validate the candidate against its base with the native SDK before preparing tickets.");
-    const validation = await workflow.step("validate_document", () => host.validateDocument({ candidateFile: input.candidateFile, baseFile: input.baseFile, mode: input.mode }));
+    const validation = await workflow.step("validate_document", () => host.validateDocument({ candidateFile: input.candidateFile, baseFile: input.baseFile, mode: input.mode, ...input.intent ? { intent: input.intent } : {} }));
     if (validation.valid !== true) throw new WorkflowFailure("VALIDATION_FAILED", "Native document validation failed.", validation.errors);
     const candidate = ok(await workflow.call("prepare_document_state_upload", target));
     const uploadId = string(candidate.uploadId, "uploadId");

@@ -63,10 +63,14 @@ Hosts that can pass stdin may use `--request -`. Parse the JSON report even when
 exits with status 1; do not repeat a failed transfer automatically. The helper checks inputs,
 preserves original upload bytes and publishes only complete downloads.
 
-Hosts with programmatic MCP and shell access can bind the prepared functions in
-`scripts/file-workflows.mjs` or `scripts/file-workflows.global.js` as described in the reference.
-Otherwise call MCP tools individually and use the same packaged transfer command. A local Node
-process does not inherit access to the agent's authenticated MCP tools.
+For prepared workflows, use the packaged bootstrap described in the reference instead of
+writing a host adapter. Codex code mode uses `scripts/codex-host.global.js` and `createHost`.
+Claude Code and other agents with shell and MCP tools use `scripts/shell-host.mjs` with
+`start`, `reply` and `next`: execute the returned MCP calls through the current connection and
+return their original responses. Both routes use the same validation, transfers and recovery
+rules. A local Node process does not inherit access to the agent's authenticated MCP tools.
+For focused operations, keep the individual MCP calls and `transfer.mjs` described in
+`PROVIDER.md`; prepared acquisition/save workflows include additional verification.
 
 ## Download: model, screenshots, generated images
 

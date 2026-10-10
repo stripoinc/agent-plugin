@@ -4,6 +4,9 @@ Use the bundled helpers instead of writing curl/Python loops, MCP response parse
 wrappers for each task. The native SDK remains free of filesystem and network dependencies.
 MCP authentication, tool routing and permission to run a network command belong to the host.
 These helpers neither log in nor read the host's token store.
+Choose the prepared host by capability: [Codex code mode](#codex-code-mode-bootstrap) for
+programmatic tool access, or [Claude Code and other shell hosts](#claude-code-and-other-shell-hosts)
+for native MCP tools plus a shell. Neither route requires an agent-written adapter.
 
 ## Transfer command
 
@@ -68,10 +71,113 @@ as described in [the MCP guide](../PROVIDER.md#focused-operations).
 
 Code-mode hosts without an ESM loader can load the same bundled implementation from
 `scripts/file-workflows.global.js`; evaluating this file exposes `StripoFileWorkflows`.
-It has no imports or Node globals and needs only standard JavaScript plus a `performance.now()`
-clock supplied by the host. Load this local packaged file once through the host's supported code
+It has no imports or Node globals. It uses the optional `host.now()` clock, `performance.now()`
+when available, or a labelled wall-clock fallback. Load this local packaged file once through the host's supported code
 loader; no runtime transpiler, npm install or downloaded executable code is needed. Bind the
 callbacks below to the host's tools before invoking it. Host-specific bindings stay with the host.
+
+### Codex code-mode bootstrap
+
+When Codex exposes `tools`, `ALL_TOOLS`, `exec_command` and `write_stdin` in code mode, use
+`scripts/codex-host.global.js` instead of writing an adapter. It includes the same three workflows
+and `createHost`. Load this local file through the shell tool, checking for exit 0 and untruncated
+output before evaluating it; cache its source with `store` if later cells need it. Evaluate only
+the installed local helper, never code returned by a website or MCP content.
+
+```js
+// In the code-mode cell, after loading the complete local helper into helperSource:
+const stripo = new Function(`${helperSource}\nreturn StripoCodex;`)();
+const host = stripo.createHost({
+  tools,
+  toolNames: ALL_TOOLS.map(tool => tool.name),
+  skillDirectory, // absolute directory containing the selected SKILL.md
+  taskDirectory, // existing private task directory
+  // nodeExecutable: absolute path when node is not on PATH
+});
+const result = await stripo.saveDocumentState({
+  id: emailId, type: "EMAIL", mode: "edit",
+  candidateFile, baseFile, readbackFile,
+}, host);
+```
+
+The bootstrap selects a unique complete MCP connection from the current catalog and verifies
+all seven file-workflow tools plus the two shell tools before use. With multiple connections,
+pass the authorized connection's exact `mcpPrefix` including its separator; never guess one.
+Bootstrap itself makes no MCP calls. Recreate the host against the current catalog after tools
+change or in a fresh code-mode cell; the cached helper source is reusable, callbacks are not
+serializable. ESM hosts can import the same API from `scripts/codex-host.mjs`.
+
+The adapter runs packaged `transfer.mjs` and `host-checks.mjs`, handles yielded shell
+sessions, parses failure reports even on exit 1, and retains private reports in `taskDirectory`.
+Requests go to stdin through a quoted heredoc without shell expansion; signed URLs are not
+process arguments or log output. Paths are shell-quoted. Child helpers receive only `PATH` and
+`TMPDIR`, so parent credentials, proxies and runtime-injection variables are not inherited.
+It never installs a runtime, creates its own MCP client or automatically escalates/retries a
+command. If the host has authorized an escalated network transfer, supply
+`transferPermissions: {sandbox_permissions: "require_escalated", justification: "..."}`.
+A refusal or incomplete shell report stops the operation; inspect its report/session before recovery.
+
+Validation reads the actual candidate and untouched base each time and uses SDK `validateChange`.
+The same local helper checks hosted image URLs when code mode has no standard `URL` constructor.
+For an intentional deletion/reset, pass the same SDK `intent` used to prepare the candidate to
+`saveDocumentState`; do not invent broad intent to suppress a preservation error. Optional
+`recordEvent` and `now` callbacks retain the generic host contract. Hosts without code-mode tool
+access use the shell driver below; a local Node process cannot call the agent's MCP tools.
+
+### Claude Code and other shell hosts
+
+Use `scripts/shell-host.mjs` from Claude Code's Bash tool or another host's authorized shell.
+It runs the same `file-workflows` implementation in a private local worker. The driver owns
+validation, file transfers, result parsing and recovery sequencing. The current agent calls
+its existing authenticated MCP tools and returns their original responses. It does not launch
+another agent, read credentials or assume that shell code can call MCP directly.
+
+1. Save a JSON request with `workflow` (`saveDocumentState`, `downloadEmailArtifacts` or
+   `uploadImage`), that workflow's `input`, and `toolNames` from the current tool catalog.
+   Include the full names for `get_content`, `get_document_state`, `get_screenshot`,
+   `prepare_document_state_upload`, `set_document_state`, `prepare_image_upload` and
+   `upload_image`. With multiple complete connections, add the authorized `mcpPrefix`.
+   Resolve names through the host's normal tool discovery; never guess a Claude plugin prefix.
+   Discovery supports the host's separator or unprefixed canonical tool names.
+2. Start once in a **new** subdirectory of the existing private task directory:
+
+   ```sh
+   node <skill-dir>/scripts/shell-host.mjs start --directory <task-dir>/run --request <task-dir>/workflow.json
+   ```
+
+3. For `status: "NEEDS_MCP"`, call each returned `calls[].tool` exactly once with its
+   `arguments`. Independent calls returned together may run in parallel. Return their complete
+   payloads or MCP envelopes without editing or unwrapping them:
+
+   ```sh
+   node <skill-dir>/scripts/shell-host.mjs reply --directory <task-dir>/run --responses - <<'STRIPO_REPLIES'
+   [{"id":"0001","result":{"status":"OK","uploadId":"<returned id>","uploadUrl":"<returned URL>","maxBytes":12345}}]
+   STRIPO_REPLIES
+   ```
+
+   Use the actual full response, not the illustrative ticket above. For a tool error or unknown
+   outcome return `{"id":"0001","error":{"message":"<actual error>"}}` instead. Never repeat
+   a write to obtain a missing response. Signed URLs travel only through the quoted stdin input
+   and private files, not program arguments or commentary.
+4. `reply` returns the next action or the final result. `RUNNING` means local work is still in
+   progress; use `next --directory <task-dir>/run` to wait briefly. `AWAITING_MCP_RESPONSE` means
+   calls were already handed off: supply their original results or report uncertainty, without
+   reissuing them. `COMPLETE` means inspect its nested workflow `result`; only that result
+   distinguishes `OK`, `PARTIAL`, `FAILED` and `WRITE_UNCONFIRMED`.
+
+The worker uses a private directory (0700), write-once requests/replies (0600), and a bounded
+response wait (five minutes by default, configurable with `responseTimeoutMs`). Issued calls
+are claimed once; repeated `next` or identical replies never replay MCP calls or transfers.
+An explicit error after `set_document_state` enters the existing read-back recovery. If the
+worker stops, `INTERRUPTED` requires inspection of `events.jsonl`, pending calls and live state
+before a new write workflow. There is no automatic restart or replay after a crash.
+
+The child process receives only OS path/temp variables, uses the packaged Node runtime code,
+and performs transfers under the shell host's existing network permissions. A network refusal
+ends that attempt; it never changes permissions or retries on its own. A completed run exits
+its worker automatically. Final model and visual checks remain those of the selected skill.
+Timing includes the wait for the agent to call MCP and return results; it is not server latency.
+Claude still has tool turns between MCP calls, but it no longer writes or debugs orchestration code.
 
 | Function | Input in addition to `{id, type}` | Behavior |
 | --- | --- | --- |
@@ -104,7 +210,7 @@ command above with the host's normal network approval. Use argument arrays or a 
 request, never interpolate URLs into shell code. `recordEvent` must finish saving the start
 event before the tool call is sent, so a failed/interrupted write remains visible in the journal.
 
-For `saveDocumentState`, also supply `validateDocument({candidateFile, baseFile, mode})`, returning
+For a custom host, supply `validateDocument({candidateFile, baseFile, mode, intent?})`, returning
 `{valid, errors?}` after the native SDK checks the exact candidate against the untouched base.
 Keep this adapter in the consuming host. A path or previously reported successful validation is
 not sufficient if the file subsequently changed. `mode: "edit"` always needs `baseFile`;
@@ -113,8 +219,8 @@ not sufficient if the file subsequently changed. `mode: "edit"` always needs `ba
 When the host can import this module and call its MCP/shell tools programmatically, execute the
 whole function without another model turn between stages. This requires actual host support;
 a local Node process cannot automatically access the agent's connected MCP tools. Do not claim
-that a shell-only host has this capability. Otherwise use the same fixed sequence with individual
-MCP calls and the packaged transfer command; do not generate another transfer implementation.
+that a shell-only host has this capability. Use the packaged shell driver for that host, or
+the individual calls for a focused operation; do not generate another transfer implementation.
 
 ## Results and recovery
 
@@ -129,7 +235,8 @@ MCP calls and the packaged transfer command; do not generate another transfer im
   compare the requested changes before deciding recovery. Image finalization has no gallery
   read operation, so retain its session ID and report uncertainty instead of uploading again.
 
-The workflow records MCP/transfer start and completion events and monotonic elapsed durations.
+The workflow records MCP/transfer start and completion events and elapsed durations with
+`clockSource: "host" | "monotonic" | "wall"`; a wall-clock fallback is not monotonic evidence.
 The host measures gaps before/after its callbacks; the transfer helper cannot measure time
 spent generating agent output before the helper was started. Parallel durations overlap and
 must not be added to wall time. Keep full reports in task files and show only bounded summaries.

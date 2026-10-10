@@ -37,7 +37,7 @@ the operation's recovery rules and read back before retrying an uncertain docume
 
 | Operation | Topic |
 | --- | --- |
-| File transfers and prepared sequences | [File workflows](reference/stripo-file-workflows.md) |
+| File transfers and bootstrap for Codex, Claude Code and shell hosts | [File workflows](reference/stripo-file-workflows.md) |
 | Resolve or acquire a target/reference | [Acquisition](reference/stripo-acquisition.md) |
 | Create an email; native title/preheader | [Creation](reference/stripo-creation.md) |
 | Upload, generate, or edit an image | [Images](reference/stripo-images.md) |

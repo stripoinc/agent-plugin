@@ -22,7 +22,9 @@ defines the editor model. Put global styles in `model.settings` and content unde
 `model.stripes[].structures[].columns[].containers[].blocks[]`.
 
 The builder supplies omitted node IDs and default settings. Supply the complete intended
-topology, each column's `settings.width` in pixels, and the content of every block:
+topology, each column's positive `settings.width` as a relative layout weight, and the content
+of every block. On write, widths such as `1, 1` or `2, 1` express proportions, not absolute
+pixels; a saved model read returns the current absolute widths in pixels.
 
 - Text: `type: "text"` with `content` containing semantic HTML.
 - Image: `type: "image"` with `settings.src`; optional `settings.altText.text` and native `settings.link`.
