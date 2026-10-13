@@ -5,14 +5,7 @@ import {
 // editor/ui-editor-ui/node_modules/postcss/lib/stringifier.js
 var require_stringifier = __commonJS({
   "../editor/ui-editor-ui/node_modules/postcss/lib/stringifier.js"(exports, module) {
-    var STYLE_TAG = /(<)(\/?style\b)/gi;
-    var COMMENT_OPEN = /(<)(!--)/g;
     var AT_NAME_END = /[\t\n\f\r "#'()/;[\\\]{}]/;
-    function escapeHTMLInCSS(str) {
-      if (typeof str !== "string") return str;
-      if (!str.includes("<")) return str;
-      return str.replace(STYLE_TAG, "\\3c $2").replace(COMMENT_OPEN, "\\3c $2");
-    }
     var DEFAULT_RAW = {
       after: "\n",
       beforeClose: "\n",
@@ -44,7 +37,7 @@ var require_stringifier = __commonJS({
     function isCustomProperty(node) {
       if (!node.prop.startsWith("--")) return false;
       let before = node.raws.before;
-      return typeof before === "undefined" || !/\S$/.test(before);
+      return typeof before === "undefined" || !/[^\s;]$/.test(before);
     }
     function pushBody(str, stack, node) {
       let nodes = node.nodes;
@@ -70,14 +63,14 @@ var require_stringifier = __commonJS({
     }
     function pushBlock(str, stack, node, start) {
       let between = str.raw(node, "between", "beforeOpen");
-      str.builder(escapeHTMLInCSS(start + between) + "{", node, "start");
+      str.builder(start + between + "{", node, "start");
       let hasNodes = node.nodes && node.nodes.length;
       let close = () => {
         let after = hasNodes ? str.raw(node, "after") : str.raw(node, "after", "emptyBody");
-        if (after) str.builder(escapeHTMLInCSS(after));
+        if (after) str.builder(after);
         str.builder("}", node, "end");
         if (node.type === "rule" && node.raws.ownSemicolon) {
-          str.builder(escapeHTMLInCSS(node.raws.ownSemicolon), node, "end");
+          str.builder(node.raws.ownSemicolon, node, "end");
         }
       };
       if (hasNodes) {
@@ -97,7 +90,7 @@ var require_stringifier = __commonJS({
           this.block(node, start);
         } else {
           let end = (node.raws.between || "") + (semicolon ? ";" : "");
-          this.builder(escapeHTMLInCSS(start + end), node);
+          this.builder(start + end, node);
         }
       }
       beforeAfter(node, detect) {
@@ -127,7 +120,7 @@ var require_stringifier = __commonJS({
       }
       block(node, start) {
         let between = this.raw(node, "between", "beforeOpen");
-        this.builder(escapeHTMLInCSS(start + between) + "{", node, "start");
+        this.builder(start + between + "{", node, "start");
         let after;
         if (node.nodes && node.nodes.length) {
           this.body(node);
@@ -135,7 +128,7 @@ var require_stringifier = __commonJS({
         } else {
           after = this.raw(node, "after", "emptyBody");
         }
-        if (after) this.builder(escapeHTMLInCSS(after));
+        if (after) this.builder(after);
         this.builder("}", node, "end");
       }
       body(node) {
@@ -154,7 +147,7 @@ var require_stringifier = __commonJS({
           let child = entry.node;
           let before = this.raw(child, "before");
           if (before) {
-            this.builder(entry.document ? before : escapeHTMLInCSS(before));
+            this.builder(before);
           }
           if (expandable && child.type === "rule") {
             pushBlock(this, stack, child, this.rawValue(child, "selector"));
@@ -168,7 +161,7 @@ var require_stringifier = __commonJS({
       comment(node) {
         let left = this.raw(node, "left", "commentLeft");
         let right = this.raw(node, "right", "commentRight");
-        this.builder(escapeHTMLInCSS("/*" + left + node.text + right + "*/"), node);
+        this.builder("/*" + left + node.text + right + "*/", node);
       }
       decl(node, semicolon) {
         let raws = node.raws;
@@ -178,7 +171,7 @@ var require_stringifier = __commonJS({
           string += raws.important || " !important";
         }
         if (semicolon) string += ";";
-        this.builder(escapeHTMLInCSS(string), node);
+        this.builder(string, node);
       }
       document(node) {
         this.body(node);
@@ -355,20 +348,19 @@ var require_stringifier = __commonJS({
         return value;
       }
       root(node) {
-        if (node.source && node.source.input.hasBOM) {
+        let inDocument = node.parent && node.parent.type === "document";
+        if (!inDocument && node.source && node.source.input.hasBOM) {
           this.builder("\uFEFF", node, "start");
         }
         this.body(node);
         if (node.raws.after) {
-          let after = node.raws.after;
-          let isDocument = node.parent && node.parent.type === "document";
-          this.builder(isDocument ? after : escapeHTMLInCSS(after));
+          this.builder(node.raws.after);
         }
       }
       rule(node) {
         this.block(node, this.rawValue(node, "selector"));
         if (node.raws.ownSemicolon) {
-          this.builder(escapeHTMLInCSS(node.raws.ownSemicolon), node, "end");
+          this.builder(node.raws.ownSemicolon, node, "end");
         }
       }
       stringify(node, semicolon) {

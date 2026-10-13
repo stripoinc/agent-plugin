@@ -82,7 +82,7 @@ function copyBlob(blob, _state) {
   return blob.slice(0, blob.size, blob.type);
 }
 function copyDataView(dataView, state) {
-  return new state.Constructor(copyArrayBuffer(dataView.buffer));
+  return new state.Constructor(copyArrayBuffer(dataView.buffer), dataView.byteOffset, dataView.byteLength);
 }
 function copyDate(date, state) {
   return new state.Constructor(date.getTime());

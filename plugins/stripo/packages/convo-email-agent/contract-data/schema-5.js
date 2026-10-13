@@ -1,5 +1,136 @@
 import value0 from './schema-2.js';
 export default {
+["mobilePadding"]: {
+  "type": "object",
+  "properties": {
+    "mobile": {
+      "$ref": "#/definitions/fullSideValues"
+    }
+  },
+  "required": [
+    "mobile"
+  ],
+  "additionalProperties": false,
+  "description": "Mobile-only top, right, bottom, and left side values."
+},
+["fullSideValues"]: {
+  "type": "object",
+  "properties": {
+    "top": {
+      "$ref": "#/definitions/__schema43"
+    },
+    "right": {
+      "$ref": "#/definitions/__schema44"
+    },
+    "bottom": {
+      "$ref": "#/definitions/__schema45"
+    },
+    "left": {
+      "$ref": "#/definitions/__schema46"
+    }
+  },
+  "required": [
+    "top",
+    "right",
+    "bottom",
+    "left"
+  ],
+  "additionalProperties": false,
+  "description": "Numeric values for top, right, bottom, and left sides."
+},
+["__schema43"]: {
+  "type": "number"
+},
+["__schema44"]: {
+  "type": "number"
+},
+["__schema45"]: {
+  "type": "number"
+},
+["__schema46"]: {
+  "type": "number"
+},
+["__schema47"]: {
+  "type": "string",
+  "description": "Valid CSS color value that allows transparent values."
+},
+["colorValueAllowTransparent"]: {
+  "type": "string",
+  "description": "Valid CSS color value that allows transparent values."
+},
+["__schema48"]: {
+  "type": "string",
+  "description": "Valid CSS color value that allows transparent values."
+},
+["__schema49"]: {
+  "type": "object",
+  "properties": {
+    "path": {
+      "$ref": "#/definitions/__schema50"
+    },
+    "repeat": {
+      "type": "boolean"
+    },
+    "x": {
+      "$ref": "#/definitions/__schema53"
+    },
+    "y": {
+      "$ref": "#/definitions/__schema54"
+    },
+    "sizeX": {
+      "type": "string"
+    },
+    "sizeY": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "path",
+    "repeat",
+    "x",
+    "y",
+    "sizeX",
+    "sizeY"
+  ],
+  "additionalProperties": false,
+  "description": "Background image settings."
+},
+["backgroundImage"]: {
+  "type": "object",
+  "properties": {
+    "path": {
+      "$ref": "#/definitions/__schema50"
+    },
+    "repeat": {
+      "type": "boolean"
+    },
+    "x": {
+      "$ref": "#/definitions/__schema53"
+    },
+    "y": {
+      "$ref": "#/definitions/__schema54"
+    },
+    "sizeX": {
+      "type": "string"
+    },
+    "sizeY": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "path",
+    "repeat",
+    "x",
+    "y",
+    "sizeX",
+    "sizeY"
+  ],
+  "additionalProperties": false,
+  "description": "Background image settings."
+},
+["__schema50"]: {
+  "type": "string"
+},
 ["__schema51"]: {
   "type": [
     "boolean",
@@ -7,7 +138,10 @@ export default {
   ]
 },
 ["__schema52"]: {
-  "type": "string"
+  "type": [
+    "boolean",
+    "string"
+  ]
 },
 ["__schema53"]: {
   "type": "string"
@@ -25,6 +159,9 @@ export default {
   "type": "string"
 },
 ["__schema58"]: {
+  "type": "string"
+},
+["__schema59"]: {
   "type": "object",
   "properties": {
     "top": {
@@ -40,7 +177,7 @@ export default {
       "$ref": "#/definitions/borderSide"
     },
     "style": {
-      "$ref": "#/definitions/__schema60"
+      "$ref": "#/definitions/__schema61"
     }
   },
   "required": [
@@ -69,7 +206,7 @@ export default {
       "$ref": "#/definitions/borderSide"
     },
     "style": {
-      "$ref": "#/definitions/__schema60"
+      "$ref": "#/definitions/__schema61"
     }
   },
   "required": [
@@ -86,7 +223,7 @@ export default {
   "type": "object",
   "properties": {
     "width": {
-      "$ref": "#/definitions/__schema59"
+      "$ref": "#/definitions/__schema60"
     },
     "color": {
       "$ref": "#/definitions/colorValueAllowTransparent"
@@ -99,12 +236,12 @@ export default {
   "additionalProperties": false,
   "description": "Border settings for a single side."
 },
-["__schema59"]: {
+["__schema60"]: {
   "type": "number",
   "minimum": 0,
   "maximum": 100
 },
-["__schema60"]: {
+["__schema61"]: {
   "type": "string",
   "enum": [
     "solid",
@@ -112,10 +249,10 @@ export default {
     "dotted"
   ]
 },
-["__schema61"]: {
+["__schema62"]: {
   "type": "number"
 },
-["__schema62"]: {
+["__schema63"]: {
   "minItems": 1,
   "type": "array",
   "items": {
@@ -126,17 +263,17 @@ export default {
   "type": "object",
   "properties": {
     "id": {
-      "$ref": "#/definitions/__schema63"
-    },
-    "settings": {
       "$ref": "#/definitions/__schema64"
     },
+    "settings": {
+      "$ref": "#/definitions/__schema65"
+    },
     "moduleId": {
-      "$ref": "#/definitions/__schema79",
+      "$ref": "#/definitions/__schema80",
       "readOnly": true
     },
     "columns": {
-      "$ref": "#/definitions/__schema80"
+      "$ref": "#/definitions/__schema81"
     }
   },
   "required": [
@@ -187,18 +324,18 @@ export default {
     }
   }
 },
-["__schema63"]: {
+["__schema64"]: {
   "type": "string",
   "minLength": 1
 },
-["__schema64"]: {
+["__schema65"]: {
   "type": "object",
   "properties": {
     "backgroundColor": {
       "$ref": "#/definitions/colorValueAllowTransparent"
     },
     "backgroundImage": {
-      "$ref": "#/definitions/__schema65"
+      "$ref": "#/definitions/__schema66"
     },
     "border": {
       "$ref": "#/definitions/border"
@@ -207,25 +344,25 @@ export default {
       "$ref": "#/definitions/borderRadius"
     },
     "columnsGap": {
-      "$ref": "#/definitions/__schema70"
+      "$ref": "#/definitions/__schema71"
     },
     "responsiveMobile": {
-      "$ref": "#/definitions/__schema73"
-    },
-    "responsiveMobileContainersInversion": {
       "$ref": "#/definitions/__schema74"
     },
-    "padding": {
+    "responsiveMobileContainersInversion": {
       "$ref": "#/definitions/__schema75"
     },
-    "margins": {
+    "padding": {
       "$ref": "#/definitions/__schema76"
     },
-    "includeInOutput": {
+    "margins": {
       "$ref": "#/definitions/__schema77"
     },
-    "hideElement": {
+    "includeInOutput": {
       "$ref": "#/definitions/__schema78"
+    },
+    "hideElement": {
+      "$ref": "#/definitions/__schema79"
     }
   },
   "required": [
@@ -235,20 +372,20 @@ export default {
   ],
   "additionalProperties": false
 },
-["__schema65"]: {
+["__schema66"]: {
   "type": "object",
   "properties": {
     "path": {
-      "$ref": "#/definitions/__schema49"
+      "$ref": "#/definitions/__schema50"
     },
     "repeat": {
       "type": "boolean"
     },
     "x": {
-      "$ref": "#/definitions/__schema52"
+      "$ref": "#/definitions/__schema53"
     },
     "y": {
-      "$ref": "#/definitions/__schema53"
+      "$ref": "#/definitions/__schema54"
     },
     "sizeX": {
       "type": "string"
@@ -272,16 +409,16 @@ export default {
   "type": "object",
   "properties": {
     "topLeft": {
-      "$ref": "#/definitions/__schema66"
-    },
-    "topRight": {
       "$ref": "#/definitions/__schema67"
     },
-    "bottomRight": {
+    "topRight": {
       "$ref": "#/definitions/__schema68"
     },
-    "bottomLeft": {
+    "bottomRight": {
       "$ref": "#/definitions/__schema69"
+    },
+    "bottomLeft": {
+      "$ref": "#/definitions/__schema70"
     }
   },
   "required": [
@@ -292,11 +429,6 @@ export default {
   ],
   "additionalProperties": false,
   "description": "Border radius values for each corner."
-},
-["__schema66"]: {
-  "type": "number",
-  "minimum": 0,
-  "maximum": 1000
 },
 ["__schema67"]: {
   "type": "number",
@@ -314,13 +446,18 @@ export default {
   "maximum": 1000
 },
 ["__schema70"]: {
+  "type": "number",
+  "minimum": 0,
+  "maximum": 1000
+},
+["__schema71"]: {
   "type": "object",
   "properties": {
     "desktop": {
-      "$ref": "#/definitions/__schema71"
+      "$ref": "#/definitions/__schema72"
     },
     "mobile": {
-      "$ref": "#/definitions/__schema72"
+      "$ref": "#/definitions/__schema73"
     }
   },
   "required": [
@@ -334,10 +471,10 @@ export default {
   "type": "object",
   "properties": {
     "desktop": {
-      "$ref": "#/definitions/__schema71"
+      "$ref": "#/definitions/__schema72"
     },
     "mobile": {
-      "$ref": "#/definitions/__schema72"
+      "$ref": "#/definitions/__schema73"
     }
   },
   "required": [
@@ -347,19 +484,19 @@ export default {
   "additionalProperties": false,
   "description": "Responsive numeric values for desktop and mobile."
 },
-["__schema71"]: {
-  "type": "number"
-},
 ["__schema72"]: {
   "type": "number"
 },
 ["__schema73"]: {
-  "type": "boolean"
+  "type": "number"
 },
 ["__schema74"]: {
   "type": "boolean"
 },
 ["__schema75"]: {
+  "type": "boolean"
+},
+["__schema76"]: {
   "type": "object",
   "properties": {
     "desktop": {
@@ -393,7 +530,7 @@ export default {
   "additionalProperties": false,
   "description": "Responsive top, right, bottom, and left side values for desktop and mobile."
 },
-["__schema76"]: {
+["__schema77"]: {
   "type": "object",
   "properties": {
     "desktop": {
@@ -410,7 +547,7 @@ export default {
   "additionalProperties": false,
   "description": "Responsive top, right, bottom, and left side values for desktop and mobile."
 },
-["__schema77"]: {
+["__schema78"]: {
   "type": "string",
   "enum": [
     "both",
@@ -419,7 +556,7 @@ export default {
   ],
   "description": "Include in email output formats: both, html, or ampHtml."
 },
-["__schema78"]: {
+["__schema79"]: {
   "type": "string",
   "enum": [
     "no",
@@ -428,10 +565,10 @@ export default {
   ],
   "description": "Hide element mode: no, desktop, or mobile."
 },
-["__schema79"]: {
+["__schema80"]: {
   "type": "number"
 },
-["__schema80"]: {
+["__schema81"]: {
   "minItems": 1,
   "maxItems": 11,
   "type": "array",
@@ -443,13 +580,13 @@ export default {
   "type": "object",
   "properties": {
     "id": {
-      "$ref": "#/definitions/__schema81"
-    },
-    "settings": {
       "$ref": "#/definitions/__schema82"
     },
+    "settings": {
+      "$ref": "#/definitions/__schema83"
+    },
     "containers": {
-      "$ref": "#/definitions/__schema84"
+      "$ref": "#/definitions/__schema85"
     }
   },
   "required": [
@@ -501,15 +638,15 @@ export default {
     }
   }
 },
-["__schema81"]: {
+["__schema82"]: {
   "type": "string",
   "minLength": 1
 },
-["__schema82"]: {
+["__schema83"]: {
   "type": "object",
   "properties": {
     "width": {
-      "$ref": "#/definitions/__schema83",
+      "$ref": "#/definitions/__schema84",
       "description": "Informational column width. In setDocumentState this value is treated as a ratio weight rather than absolute pixels. The actual widths in the resulting email can differ from the values passed in the schema. getDocumentState returns the current absolute widths in px."
     }
   },
@@ -518,10 +655,10 @@ export default {
   ],
   "additionalProperties": false
 },
-["__schema83"]: {
+["__schema84"]: {
   "type": "number"
 },
-["__schema84"]: {
+["__schema85"]: {
   "minItems": 1,
   "type": "array",
   "items": {
@@ -532,17 +669,17 @@ export default {
   "type": "object",
   "properties": {
     "id": {
-      "$ref": "#/definitions/__schema85"
-    },
-    "settings": {
       "$ref": "#/definitions/__schema86"
     },
+    "settings": {
+      "$ref": "#/definitions/__schema87"
+    },
     "moduleId": {
-      "$ref": "#/definitions/__schema88",
+      "$ref": "#/definitions/__schema89",
       "readOnly": true
     },
     "blocks": {
-      "$ref": "#/definitions/__schema89"
+      "$ref": "#/definitions/__schema90"
     }
   },
   "required": [
@@ -594,11 +731,11 @@ export default {
   },
   "additionalProperties": false
 },
-["__schema85"]: {
+["__schema86"]: {
   "type": "string",
   "minLength": 1
 },
-["__schema86"]: {
+["__schema87"]: {
   "type": "object",
   "properties": {
     "padding": {
@@ -614,7 +751,7 @@ export default {
       "$ref": "#/definitions/colorValueAllowTransparent"
     },
     "backgroundImage": {
-      "$ref": "#/definitions/__schema87"
+      "$ref": "#/definitions/__schema88"
     },
     "border": {
       "$ref": "#/definitions/border"
@@ -633,20 +770,20 @@ export default {
   ],
   "additionalProperties": false
 },
-["__schema87"]: {
+["__schema88"]: {
   "type": "object",
   "properties": {
     "path": {
-      "$ref": "#/definitions/__schema49"
+      "$ref": "#/definitions/__schema50"
     },
     "repeat": {
       "type": "boolean"
     },
     "x": {
-      "$ref": "#/definitions/__schema52"
+      "$ref": "#/definitions/__schema53"
     },
     "y": {
-      "$ref": "#/definitions/__schema53"
+      "$ref": "#/definitions/__schema54"
     },
     "sizeX": {
       "type": "string"
@@ -666,10 +803,10 @@ export default {
   "additionalProperties": false,
   "description": "Background image settings."
 },
-["__schema88"]: {
+["__schema89"]: {
   "type": "number"
 },
-["__schema89"]: {
+["__schema90"]: {
   "type": "array",
   "items": {
     "$ref": "#/definitions/block"
@@ -713,16 +850,16 @@ export default {
   "type": "object",
   "properties": {
     "id": {
-      "$ref": "#/definitions/__schema90"
-    },
-    "type": {
       "$ref": "#/definitions/__schema91"
     },
-    "settings": {
+    "type": {
       "$ref": "#/definitions/__schema92"
     },
+    "settings": {
+      "$ref": "#/definitions/__schema93"
+    },
     "content": {
-      "$ref": "#/definitions/__schema103"
+      "$ref": "#/definitions/__schema104"
     }
   },
   "required": [
@@ -774,15 +911,15 @@ export default {
   },
   "additionalProperties": false
 },
-["__schema90"]: {
+["__schema91"]: {
   "type": "string",
   "minLength": 1
 },
-["__schema91"]: {
+["__schema92"]: {
   "type": "string",
   "const": "text"
 },
-["__schema92"]: {
+["__schema93"]: {
   "type": "object",
   "properties": {
     "fontColor": {
@@ -799,10 +936,10 @@ export default {
       "type": "object",
       "properties": {
         "desktop": {
-          "$ref": "#/definitions/__schema93"
+          "$ref": "#/definitions/__schema94"
         },
         "mobile": {
-          "$ref": "#/definitions/__schema93"
+          "$ref": "#/definitions/__schema94"
         }
       },
       "required": [
@@ -815,10 +952,10 @@ export default {
       "type": "object",
       "properties": {
         "desktop": {
-          "$ref": "#/definitions/__schema94"
+          "$ref": "#/definitions/__schema95"
         },
         "mobile": {
-          "$ref": "#/definitions/__schema98"
+          "$ref": "#/definitions/__schema99"
         }
       },
       "additionalProperties": false,
@@ -829,10 +966,10 @@ export default {
       "type": "object",
       "properties": {
         "desktop": {
-          "$ref": "#/definitions/__schema99"
+          "$ref": "#/definitions/__schema100"
         },
         "mobile": {
-          "$ref": "#/definitions/__schema99"
+          "$ref": "#/definitions/__schema100"
         }
       },
       "required": [
@@ -851,10 +988,10 @@ export default {
       "type": "object",
       "properties": {
         "value": {
-          "$ref": "#/definitions/__schema101"
+          "$ref": "#/definitions/__schema102"
         },
         "unit": {
-          "$ref": "#/definitions/__schema102"
+          "$ref": "#/definitions/__schema103"
         }
       },
       "required": [
@@ -878,7 +1015,7 @@ export default {
   "type": "string",
   "description": "Valid CSS color value that does not allow transparency."
 },
-["__schema93"]: {
+["__schema94"]: {
   "type": "string",
   "enum": [
     "left",
@@ -887,14 +1024,14 @@ export default {
     "justify"
   ]
 },
-["__schema94"]: {
+["__schema95"]: {
   "type": "object",
   "properties": {
     "height": {
-      "$ref": "#/definitions/__schema96"
+      "$ref": "#/definitions/__schema97"
     },
     "verticalAlignment": {
-      "$ref": "#/definitions/__schema97"
+      "$ref": "#/definitions/__schema98"
     }
   },
   "required": [
@@ -903,14 +1040,14 @@ export default {
   "additionalProperties": false,
   "description": "Text fixed-height mode. Omitted verticalAlignment preserves the previous effective alignment; top is used when none exists."
 },
-["__schema95"]: {
+["__schema96"]: {
   "type": "object",
   "properties": {
     "height": {
-      "$ref": "#/definitions/__schema96"
+      "$ref": "#/definitions/__schema97"
     },
     "verticalAlignment": {
-      "$ref": "#/definitions/__schema97"
+      "$ref": "#/definitions/__schema98"
     }
   },
   "required": [
@@ -918,12 +1055,12 @@ export default {
   ],
   "additionalProperties": false
 },
-["__schema96"]: {
+["__schema97"]: {
   "type": "integer",
   "minimum": 0,
   "maximum": 9007199254740991
 },
-["__schema97"]: {
+["__schema98"]: {
   "type": "string",
   "enum": [
     "top",
@@ -931,14 +1068,14 @@ export default {
     "bottom"
   ]
 },
-["__schema98"]: {
+["__schema99"]: {
   "type": "object",
   "properties": {
     "height": {
-      "$ref": "#/definitions/__schema96"
+      "$ref": "#/definitions/__schema97"
     },
     "verticalAlignment": {
-      "$ref": "#/definitions/__schema97"
+      "$ref": "#/definitions/__schema98"
     }
   },
   "required": [
@@ -947,20 +1084,20 @@ export default {
   "additionalProperties": false,
   "description": "Text fixed-height mode. Omitted verticalAlignment preserves the previous effective alignment; top is used when none exists."
 },
-["__schema99"]: {
+["__schema100"]: {
   "type": "object",
   "properties": {
     "top": {
-      "$ref": "#/definitions/__schema100"
+      "$ref": "#/definitions/__schema101"
     },
     "right": {
-      "$ref": "#/definitions/__schema100"
+      "$ref": "#/definitions/__schema101"
     },
     "bottom": {
-      "$ref": "#/definitions/__schema100"
+      "$ref": "#/definitions/__schema101"
     },
     "left": {
-      "$ref": "#/definitions/__schema100"
+      "$ref": "#/definitions/__schema101"
     }
   },
   "required": [
@@ -971,7 +1108,7 @@ export default {
   ],
   "additionalProperties": false
 },
-["__schema100"]: {
+["__schema101"]: {
   "type": "number",
   "minimum": 0,
   "maximum": 1000
@@ -980,10 +1117,10 @@ export default {
   "type": "object",
   "properties": {
     "value": {
-      "$ref": "#/definitions/__schema101"
+      "$ref": "#/definitions/__schema102"
     },
     "unit": {
-      "$ref": "#/definitions/__schema102"
+      "$ref": "#/definitions/__schema103"
     }
   },
   "required": [
@@ -993,30 +1130,30 @@ export default {
   "additionalProperties": false,
   "description": "Spacing value with a numeric value and unit."
 },
-["__schema101"]: {
+["__schema102"]: {
   "type": "number"
 },
-["__schema102"]: {
+["__schema103"]: {
   "type": "string",
   "enum": [
     "px",
     "em"
   ]
 },
-["__schema103"]: {
+["__schema104"]: {
   "type": "string"
 },
 ["imageBlock"]: {
   "type": "object",
   "properties": {
     "id": {
-      "$ref": "#/definitions/__schema90"
+      "$ref": "#/definitions/__schema91"
     },
     "type": {
-      "$ref": "#/definitions/__schema104"
+      "$ref": "#/definitions/__schema105"
     },
     "settings": {
-      "$ref": "#/definitions/__schema105"
+      "$ref": "#/definitions/__schema106"
     }
   },
   "required": [
@@ -1069,45 +1206,45 @@ export default {
   },
   "additionalProperties": false
 },
-["__schema104"]: {
+["__schema105"]: {
   "type": "string",
   "const": "image"
 },
-["__schema105"]: {
+["__schema106"]: {
   "type": "object",
   "properties": {
     "src": {
-      "$ref": "#/definitions/__schema106"
-    },
-    "link": {
       "$ref": "#/definitions/__schema107"
     },
+    "link": {
+      "$ref": "#/definitions/__schema108"
+    },
     "altText": {
-      "$ref": "#/definitions/__schema111"
+      "$ref": "#/definitions/__schema112"
     },
     "size": {
-      "$ref": "#/definitions/__schema114"
+      "$ref": "#/definitions/__schema115"
     },
     "alignment": {
-      "$ref": "#/definitions/__schema118"
+      "$ref": "#/definitions/__schema119"
     },
     "radius": {
-      "$ref": "#/definitions/__schema120"
+      "$ref": "#/definitions/__schema121"
     },
     "hideElement": {
       "$ref": "#/definitions/hideElement"
     },
     "margins": {
-      "$ref": "#/definitions/__schema121"
+      "$ref": "#/definitions/__schema122"
     },
     "includeInOutput": {
       "$ref": "#/definitions/outputInclusion"
     },
     "anchorLinkName": {
-      "$ref": "#/definitions/__schema127"
+      "$ref": "#/definitions/__schema128"
     },
     "responsiveMobile": {
-      "$ref": "#/definitions/__schema128"
+      "$ref": "#/definitions/__schema129"
     }
   },
   "required": [
@@ -1124,33 +1261,17 @@ export default {
   ],
   "additionalProperties": false
 },
-["__schema106"]: {
-  "type": "string"
-},
 ["__schema107"]: {
-  "type": "object",
-  "properties": {
-    "type": {
-      "$ref": "#/definitions/__schema109"
-    },
-    "href": {
-      "$ref": "#/definitions/__schema110"
-    }
-  },
-  "required": [
-    "type",
-    "href"
-  ],
-  "additionalProperties": false
+  "type": "string"
 },
 ["__schema108"]: {
   "type": "object",
   "properties": {
     "type": {
-      "$ref": "#/definitions/__schema109"
+      "$ref": "#/definitions/__schema110"
     },
     "href": {
-      "$ref": "#/definitions/__schema110"
+      "$ref": "#/definitions/__schema111"
     }
   },
   "required": [
@@ -1160,6 +1281,22 @@ export default {
   "additionalProperties": false
 },
 ["__schema109"]: {
+  "type": "object",
+  "properties": {
+    "type": {
+      "$ref": "#/definitions/__schema110"
+    },
+    "href": {
+      "$ref": "#/definitions/__schema111"
+    }
+  },
+  "required": [
+    "type",
+    "href"
+  ],
+  "additionalProperties": false
+},
+["__schema110"]: {
   "type": "string",
   "enum": [
     "site",
@@ -1173,18 +1310,18 @@ export default {
     "other"
   ]
 },
-["__schema110"]: {
+["__schema111"]: {
   "type": "string",
   "minLength": 1
 },
-["__schema111"]: {
+["__schema112"]: {
   "type": "object",
   "properties": {
     "text": {
-      "$ref": "#/definitions/__schema112"
+      "$ref": "#/definitions/__schema113"
     },
     "addToTitle": {
-      "$ref": "#/definitions/__schema113"
+      "$ref": "#/definitions/__schema114"
     }
   },
   "required": [
@@ -1193,21 +1330,21 @@ export default {
   ],
   "additionalProperties": false
 },
-["__schema112"]: {
+["__schema113"]: {
   "type": "string",
   "maxLength": 500
 },
-["__schema113"]: {
+["__schema114"]: {
   "type": "boolean"
 },
-["__schema114"]: {
+["__schema115"]: {
   "type": "object",
   "properties": {
     "desktop": {
-      "$ref": "#/definitions/__schema115"
+      "$ref": "#/definitions/__schema116"
     },
     "mobile": {
-      "$ref": "#/definitions/__schema115"
+      "$ref": "#/definitions/__schema116"
     }
   },
   "required": [
@@ -1216,14 +1353,14 @@ export default {
   ],
   "additionalProperties": false
 },
-["__schema115"]: {
+["__schema116"]: {
   "type": "object",
   "properties": {
     "mode": {
-      "$ref": "#/definitions/__schema116"
+      "$ref": "#/definitions/__schema117"
     },
     "px": {
-      "$ref": "#/definitions/__schema117"
+      "$ref": "#/definitions/__schema118"
     }
   },
   "required": [
@@ -1232,26 +1369,26 @@ export default {
   ],
   "additionalProperties": false
 },
-["__schema116"]: {
+["__schema117"]: {
   "type": "string",
   "enum": [
     "width",
     "height"
   ]
 },
-["__schema117"]: {
+["__schema118"]: {
   "type": "integer",
   "minimum": 3,
   "maximum": 9007199254740991
 },
-["__schema118"]: {
+["__schema119"]: {
   "type": "object",
   "properties": {
     "desktop": {
-      "$ref": "#/definitions/__schema119"
+      "$ref": "#/definitions/__schema120"
     },
     "mobile": {
-      "$ref": "#/definitions/__schema119"
+      "$ref": "#/definitions/__schema120"
     }
   },
   "required": [
@@ -1260,7 +1397,7 @@ export default {
   ],
   "additionalProperties": false
 },
-["__schema119"]: {
+["__schema120"]: {
   "type": "string",
   "enum": [
     "left",
@@ -1268,30 +1405,14 @@ export default {
     "right"
   ]
 },
-["__schema120"]: {
-  "type": "object",
-  "properties": {
-    "desktop": {
-      "$ref": "#/definitions/borderRadius"
-    },
-    "mobile": {
-      "$ref": "#/definitions/borderRadius"
-    }
-  },
-  "required": [
-    "desktop",
-    "mobile"
-  ],
-  "additionalProperties": false
-},
 ["__schema121"]: {
   "type": "object",
   "properties": {
     "desktop": {
-      "$ref": "#/definitions/__schema122"
+      "$ref": "#/definitions/borderRadius"
     },
     "mobile": {
-      "$ref": "#/definitions/__schema122"
+      "$ref": "#/definitions/borderRadius"
     }
   },
   "required": [
@@ -1303,17 +1424,33 @@ export default {
 ["__schema122"]: {
   "type": "object",
   "properties": {
-    "top": {
+    "desktop": {
       "$ref": "#/definitions/__schema123"
     },
-    "right": {
+    "mobile": {
+      "$ref": "#/definitions/__schema123"
+    }
+  },
+  "required": [
+    "desktop",
+    "mobile"
+  ],
+  "additionalProperties": false
+},
+["__schema123"]: {
+  "type": "object",
+  "properties": {
+    "top": {
       "$ref": "#/definitions/__schema124"
     },
-    "bottom": {
+    "right": {
       "$ref": "#/definitions/__schema125"
     },
-    "left": {
+    "bottom": {
       "$ref": "#/definitions/__schema126"
+    },
+    "left": {
+      "$ref": "#/definitions/__schema127"
     }
   },
   "required": [
@@ -1323,11 +1460,6 @@ export default {
     "left"
   ],
   "additionalProperties": false
-},
-["__schema123"]: {
-  "type": "number",
-  "minimum": 0,
-  "maximum": 1000
 },
 ["__schema124"]: {
   "type": "number",
@@ -1345,20 +1477,25 @@ export default {
   "maximum": 1000
 },
 ["__schema127"]: {
+  "type": "number",
+  "minimum": 0,
+  "maximum": 1000
+},
+["__schema128"]: {
   "type": "string",
   "maxLength": 150
 },
-["__schema128"]: {
+["__schema129"]: {
   "type": "boolean"
 },
 ["videoBlock"]: {
   "type": "object",
   "properties": {
     "id": {
-      "$ref": "#/definitions/__schema90"
+      "$ref": "#/definitions/__schema91"
     },
     "type": {
-      "$ref": "#/definitions/__schema129"
+      "$ref": "#/definitions/__schema130"
     },
     "settings": {
       "$ref": "#/definitions/videoBlockSettings"
@@ -1418,7 +1555,7 @@ export default {
   },
   "additionalProperties": false
 },
-["__schema129"]: {
+["__schema130"]: {
   "type": "string",
   "const": "video"
 },
@@ -1426,40 +1563,40 @@ export default {
   "type": "object",
   "properties": {
     "videoLink": {
-      "$ref": "#/definitions/__schema130"
-    },
-    "altText": {
-      "$ref": "#/definitions/__schema111"
-    },
-    "customThumbnail": {
       "$ref": "#/definitions/__schema131"
     },
+    "altText": {
+      "$ref": "#/definitions/__schema112"
+    },
+    "customThumbnail": {
+      "$ref": "#/definitions/__schema132"
+    },
     "playButtonStyle": {
-      "$ref": "#/definitions/__schema133"
+      "$ref": "#/definitions/__schema134"
     },
     "size": {
-      "$ref": "#/definitions/__schema114"
+      "$ref": "#/definitions/__schema115"
     },
     "alignment": {
-      "$ref": "#/definitions/__schema118"
+      "$ref": "#/definitions/__schema119"
     },
     "radius": {
-      "$ref": "#/definitions/__schema120"
+      "$ref": "#/definitions/__schema121"
     },
     "hideElement": {
       "$ref": "#/definitions/hideElement"
     },
     "paddings": {
-      "$ref": "#/definitions/__schema134"
+      "$ref": "#/definitions/__schema135"
     },
     "includeInOutput": {
       "$ref": "#/definitions/outputInclusion"
     },
     "anchorLinkName": {
-      "$ref": "#/definitions/__schema127"
+      "$ref": "#/definitions/__schema128"
     },
     "responsiveMobile": {
-      "$ref": "#/definitions/__schema135"
+      "$ref": "#/definitions/__schema136"
     }
   },
   "required": [
@@ -1478,14 +1615,14 @@ export default {
   "additionalProperties": false,
   "description": "Video block settings."
 },
-["__schema130"]: {
+["__schema131"]: {
   "type": "string"
 },
-["__schema131"]: {
+["__schema132"]: {
   "type": "object",
   "properties": {
     "src": {
-      "$ref": "#/definitions/__schema132"
+      "$ref": "#/definitions/__schema133"
     }
   },
   "required": [
@@ -1498,7 +1635,7 @@ export default {
   "type": "object",
   "properties": {
     "src": {
-      "$ref": "#/definitions/__schema132"
+      "$ref": "#/definitions/__schema133"
     }
   },
   "required": [
@@ -1507,10 +1644,10 @@ export default {
   "additionalProperties": false,
   "description": "Custom thumbnail settings for a video block. Absence disables custom thumbnail."
 },
-["__schema132"]: {
+["__schema133"]: {
   "type": "string"
 },
-["__schema133"]: {
+["__schema134"]: {
   "type": "string",
   "enum": [
     "NONE",
@@ -1524,14 +1661,14 @@ export default {
     "blackCircleInverse"
   ]
 },
-["__schema134"]: {
+["__schema135"]: {
   "type": "object",
   "properties": {
     "desktop": {
-      "$ref": "#/definitions/__schema122"
+      "$ref": "#/definitions/__schema123"
     },
     "mobile": {
-      "$ref": "#/definitions/__schema122"
+      "$ref": "#/definitions/__schema123"
     }
   },
   "required": [
@@ -1540,17 +1677,17 @@ export default {
   ],
   "additionalProperties": false
 },
-["__schema135"]: {
+["__schema136"]: {
   "type": "boolean"
 },
 ["timerBlock"]: {
   "type": "object",
   "properties": {
     "id": {
-      "$ref": "#/definitions/__schema90"
+      "$ref": "#/definitions/__schema91"
     },
     "type": {
-      "$ref": "#/definitions/__schema136"
+      "$ref": "#/definitions/__schema137"
     },
     "settings": {
       "$ref": "#/definitions/timerBlockSettings"
@@ -1608,7 +1745,7 @@ export default {
   },
   "additionalProperties": false
 },
-["__schema136"]: {
+["__schema137"]: {
   "type": "string",
   "const": "timer"
 },
@@ -1616,46 +1753,46 @@ export default {
   "type": "object",
   "properties": {
     "altText": {
-      "$ref": "#/definitions/__schema111"
+      "$ref": "#/definitions/__schema112"
     },
     "responsiveMobile": {
-      "$ref": "#/definitions/__schema137"
-    },
-    "size": {
-      "$ref": "#/definitions/__schema114"
-    },
-    "alignment": {
-      "$ref": "#/definitions/__schema118"
-    },
-    "margins": {
-      "$ref": "#/definitions/__schema121"
-    },
-    "endDate": {
       "$ref": "#/definitions/__schema138"
     },
-    "timeZone": {
+    "size": {
+      "$ref": "#/definitions/__schema115"
+    },
+    "alignment": {
+      "$ref": "#/definitions/__schema119"
+    },
+    "margins": {
+      "$ref": "#/definitions/__schema122"
+    },
+    "endDate": {
       "$ref": "#/definitions/__schema139"
     },
-    "link": {
+    "timeZone": {
       "$ref": "#/definitions/__schema140"
     },
-    "displayDays": {
+    "link": {
       "$ref": "#/definitions/__schema141"
     },
-    "labelsLetterCase": {
+    "displayDays": {
       "$ref": "#/definitions/__schema142"
     },
-    "separator": {
+    "labelsLetterCase": {
       "$ref": "#/definitions/__schema143"
     },
-    "labelsLanguage": {
+    "separator": {
       "$ref": "#/definitions/__schema144"
     },
-    "retinaDisplaySupport": {
+    "labelsLanguage": {
       "$ref": "#/definitions/__schema145"
     },
+    "retinaDisplaySupport": {
+      "$ref": "#/definitions/__schema146"
+    },
     "expirationImageSrc": {
-      "$ref": "#/definitions/__schema106"
+      "$ref": "#/definitions/__schema107"
     },
     "hideElement": {
       "$ref": "#/definitions/hideElement"
@@ -1664,37 +1801,37 @@ export default {
       "$ref": "#/definitions/outputInclusion"
     },
     "anchorLinkName": {
-      "$ref": "#/definitions/__schema127"
+      "$ref": "#/definitions/__schema128"
     },
     "digitsFontFamily": {
-      "$ref": "#/definitions/__schema146"
+      "$ref": "#/definitions/__schema147"
     },
     "digitsFontSize": {
-      "$ref": "#/definitions/__schema147"
+      "$ref": "#/definitions/__schema148"
     },
     "digitsFontColor": {
       "$ref": "#/definitions/colorValueDisallowTransparent"
     },
     "digitsAdvancedColorSettings": {
-      "$ref": "#/definitions/__schema148"
+      "$ref": "#/definitions/__schema149"
     },
     "labelsFontFamily": {
-      "$ref": "#/definitions/__schema146"
+      "$ref": "#/definitions/__schema147"
     },
     "labelsFontSize": {
-      "$ref": "#/definitions/__schema147"
+      "$ref": "#/definitions/__schema148"
     },
     "labelsFontColor": {
       "$ref": "#/definitions/colorValueDisallowTransparent"
     },
     "labelsAdvancedColorSettings": {
-      "$ref": "#/definitions/__schema150"
+      "$ref": "#/definitions/__schema151"
     },
     "separatorFontFamily": {
-      "$ref": "#/definitions/__schema146"
+      "$ref": "#/definitions/__schema147"
     },
     "separatorFontSize": {
-      "$ref": "#/definitions/__schema147"
+      "$ref": "#/definitions/__schema148"
     },
     "separatorFontColor": {
       "$ref": "#/definitions/colorValueDisallowTransparent"
@@ -1734,13 +1871,13 @@ export default {
   "additionalProperties": false,
   "description": "Timer block settings."
 },
-["__schema137"]: {
+["__schema138"]: {
   "type": "boolean"
 },
-["__schema138"]: {
+["__schema139"]: {
   "type": "string"
 },
-["__schema139"]: {
+["__schema140"]: {
   "type": "string",
   "enum": [
     "Africa/Abidjan",
@@ -2186,20 +2323,20 @@ export default {
     "UTC"
   ]
 },
-["__schema140"]: {
+["__schema141"]: {
   "anyOf": [
     {
-      "$ref": "#/definitions/__schema108"
+      "$ref": "#/definitions/__schema109"
     },
     {
       "type": "null"
     }
   ]
 },
-["__schema141"]: {
+["__schema142"]: {
   "type": "boolean"
 },
-["__schema142"]: {
+["__schema143"]: {
   "type": "string",
   "enum": [
     "CAPITALIZE",
@@ -2207,11 +2344,11 @@ export default {
     "LOWER"
   ]
 },
-["__schema143"]: {
+["__schema144"]: {
   "type": "string",
   "maxLength": 100
 },
-["__schema144"]: {
+["__schema145"]: {
   "type": "string",
   "enum": [
     "id",
@@ -2253,10 +2390,10 @@ export default {
     "ko"
   ]
 },
-["__schema145"]: {
+["__schema146"]: {
   "type": "boolean"
 },
-["__schema146"]: {
+["__schema147"]: {
   "type": "string",
   "enum": [
     "arial,'helvetica neue',helvetica,sans-serif",
@@ -2281,34 +2418,10 @@ export default {
     "'source sans pro','helvetica neue',helvetica,arial,sans-serif"
   ]
 },
-["__schema147"]: {
+["__schema148"]: {
   "type": "integer",
   "minimum": 8,
   "maximum": 72
-},
-["__schema148"]: {
-  "type": "object",
-  "properties": {
-    "days": {
-      "$ref": "#/definitions/colorValueDisallowTransparent"
-    },
-    "hours": {
-      "$ref": "#/definitions/colorValueDisallowTransparent"
-    },
-    "minutes": {
-      "$ref": "#/definitions/colorValueDisallowTransparent"
-    },
-    "seconds": {
-      "$ref": "#/definitions/colorValueDisallowTransparent"
-    }
-  },
-  "required": [
-    "days",
-    "hours",
-    "minutes",
-    "seconds"
-  ],
-  "additionalProperties": false
 },
 ["__schema149"]: {
   "type": "object",
@@ -2357,72 +2470,5 @@ export default {
     "seconds"
   ],
   "additionalProperties": false
-},
-["socialBlock"]: {
-  "type": "object",
-  "properties": {
-    "id": {
-      "$ref": "#/definitions/__schema90"
-    },
-    "type": {
-      "$ref": "#/definitions/__schema151"
-    },
-    "settings": {
-      "$ref": "#/definitions/__schema152"
-    }
-  },
-  "required": [
-    "id",
-    "type",
-    "settings"
-  ],
-  "description": "Social block.",
-  "x-stripo-setDocumentState": {
-    "insert": "supported",
-    "delete": "supported",
-    "update": "supported",
-    "move": "supported"
-  },
-  "x-stripo-setDocumentStateRuntimes": {
-    "insert": {
-      "browser": true,
-      "mergeService": true
-    },
-    "delete": {
-      "browser": true,
-      "mergeService": true
-    },
-    "update": {
-      "browser": true,
-      "mergeService": true
-    },
-    "move": {
-      "browser": true,
-      "mergeService": true
-    }
-  },
-  "x-stripo-setDocumentStateUnavailableSideEffects": {
-    "insert": {
-      "browser": [],
-      "mergeService": []
-    },
-    "delete": {
-      "browser": [],
-      "mergeService": []
-    },
-    "update": {
-      "browser": [],
-      "mergeService": []
-    },
-    "move": {
-      "browser": [],
-      "mergeService": []
-    }
-  },
-  "additionalProperties": false
-},
-["__schema151"]: {
-  "type": "string",
-  "const": "social"
 }
 };

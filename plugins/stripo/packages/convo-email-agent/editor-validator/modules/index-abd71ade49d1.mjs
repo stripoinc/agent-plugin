@@ -1,9 +1,9 @@
 import {
-  ru_default
-} from "./ru-bc4e3a9b0c5d.mjs";
-import {
   ta_default
 } from "./ta-db52cb61dd13.mjs";
+import {
+  tg_default
+} from "./tg-a3abd3dcaab9.mjs";
 import {
   th_default
 } from "./th-0b76e62dab96.mjs";
@@ -20,8 +20,8 @@ import {
   yo_default
 } from "./yo-9342d8b90769.mjs";
 import {
-  ko_default
-} from "./ko-27b7a94f5634.mjs";
+  zh_TW_default
+} from "./zh-TW-74f07ebb2b3a.mjs";
 import {
   lt_default
 } from "./lt-52aa05368ec0.mjs";
@@ -44,8 +44,8 @@ import {
   pt_default
 } from "./pt-2b6363a9f827.mjs";
 import {
-  gu_default
-} from "./gu-0e230c44f6bd.mjs";
+  ru_default
+} from "./ru-bc4e3a9b0c5d.mjs";
 import {
   he_default
 } from "./he-3eb1c1845d9e.mjs";
@@ -68,8 +68,8 @@ import {
   kn_default
 } from "./kn-ccd0d66753b1.mjs";
 import {
-  be_default
-} from "./be-72979be88390.mjs";
+  ko_default
+} from "./ko-27b7a94f5634.mjs";
 import {
   bg_default
 } from "./bg-542c84614fee.mjs";
@@ -92,21 +92,14 @@ import {
   fr_default
 } from "./fr-4b4663c3d230.mjs";
 import {
-  allProcessors,
-  toJSONSchema
-} from "./json-schema-processors-0c244c7c3151.mjs";
-import {
-  createStandardJSONSchemaMethod,
-  createToJSONSchemaMethod,
-  extractDefs,
-  finalize,
-  handleUnrepresentable,
-  initializeContext,
-  process
-} from "./to-json-schema-b5fe38b46dc6.mjs";
+  gu_default
+} from "./gu-0e230c44f6bd.mjs";
 import {
   ar_default
 } from "./ar-e1d58fdd0495.mjs";
+import {
+  be_default
+} from "./be-72979be88390.mjs";
 import {
   TimePrecision,
   _any,
@@ -142,6 +135,7 @@ import {
   _gt,
   _gte,
   _guid,
+  _iban,
   _includes,
   _int,
   _int32,
@@ -227,18 +221,12 @@ import {
   meta
 } from "./api-7ec6d993fe84.mjs";
 import {
-  $ZodRegistry,
-  $input,
-  $output,
-  globalRegistry,
-  registry
-} from "./registries-3ceb92ae3dab.mjs";
-import {
   INVALID,
   ZodCompileAsyncError,
   ZodCompileUnsupportedError,
   compile,
-  compileFn
+  compileFn,
+  withParser
 } from "./compile-fe1f1936d44e.mjs";
 import {
   $ZodCyclicError,
@@ -246,6 +234,26 @@ import {
   isRecursiveSchema,
   memoizer
 } from "./memoizer-c00f0bc54290.mjs";
+import {
+  allProcessors,
+  toJSONSchema
+} from "./json-schema-processors-0c244c7c3151.mjs";
+import {
+  createStandardJSONSchemaMethod,
+  createToJSONSchemaMethod,
+  extractDefs,
+  finalize,
+  handleUnrepresentable,
+  initializeContext,
+  processSchema
+} from "./to-json-schema-b5fe38b46dc6.mjs";
+import {
+  $ZodRegistry,
+  $input,
+  $output,
+  globalRegistry,
+  registry
+} from "./registries-3ceb92ae3dab.mjs";
 import {
   $ZodAny,
   $ZodArray,
@@ -274,6 +282,7 @@ import {
   $ZodFile,
   $ZodFunction,
   $ZodGUID,
+  $ZodIBAN,
   $ZodIPv4,
   $ZodIPv6,
   $ZodISODate,
@@ -325,11 +334,15 @@ import {
   Doc,
   URL_BAD_FORMAT,
   URL_UNPARSEABLE,
+  base64Charset,
+  base64urlCharset,
+  canParseURL,
   getDiscriminatedOption,
   isValidBase64,
   isValidBase64URL,
   isValidCIDRv6,
   isValidCreditCard,
+  isValidIBAN,
   isValidIPv6,
   isValidJWT,
   mergeValues,
@@ -338,6 +351,7 @@ import {
   stripTabAndNewline,
   urlHostnameOk,
   urlProtocolOk,
+  validateURL,
   version
 } from "./doc-85ae2b2bbd32.mjs";
 import {
@@ -385,6 +399,7 @@ import {
   $ZodCheckMultipleOf,
   $ZodCheckNumberFormat,
   $ZodCheckOverwrite,
+  $ZodCheckProperties,
   $ZodCheckProperty,
   $ZodCheckRegex,
   $ZodCheckSizeEquals,
@@ -455,6 +470,7 @@ __export(core_exports, {
   $ZodCheckMultipleOf: () => $ZodCheckMultipleOf,
   $ZodCheckNumberFormat: () => $ZodCheckNumberFormat,
   $ZodCheckOverwrite: () => $ZodCheckOverwrite,
+  $ZodCheckProperties: () => $ZodCheckProperties,
   $ZodCheckProperty: () => $ZodCheckProperty,
   $ZodCheckRegex: () => $ZodCheckRegex,
   $ZodCheckSizeEquals: () => $ZodCheckSizeEquals,
@@ -479,6 +495,7 @@ __export(core_exports, {
   $ZodFile: () => $ZodFile,
   $ZodFunction: () => $ZodFunction,
   $ZodGUID: () => $ZodGUID,
+  $ZodIBAN: () => $ZodIBAN,
   $ZodIPv4: () => $ZodIPv4,
   $ZodIPv6: () => $ZodIPv6,
   $ZodISODate: () => $ZodISODate,
@@ -580,6 +597,7 @@ __export(core_exports, {
   _gt: () => _gt,
   _gte: () => _gte,
   _guid: () => _guid,
+  _iban: () => _iban,
   _includes: () => _includes,
   _int: () => _int,
   _int32: () => _int32,
@@ -671,6 +689,9 @@ __export(core_exports, {
   _void: () => _void,
   _xid: () => _xid,
   _xor: () => _xor,
+  base64Charset: () => base64Charset,
+  base64urlCharset: () => base64urlCharset,
+  canParseURL: () => canParseURL,
   clone: () => clone,
   compile: () => compile,
   compileFn: () => compileFn,
@@ -697,6 +718,7 @@ __export(core_exports, {
   isValidBase64URL: () => isValidBase64URL,
   isValidCIDRv6: () => isValidCIDRv6,
   isValidCreditCard: () => isValidCreditCard,
+  isValidIBAN: () => isValidIBAN,
   isValidIPv6: () => isValidIPv6,
   isValidJWT: () => isValidJWT,
   locales: () => locales_exports,
@@ -707,7 +729,8 @@ __export(core_exports, {
   parseAsync: () => parseAsync,
   parseURLObject: () => parseURLObject,
   prettifyError: () => prettifyError,
-  process: () => process,
+  process: () => processSchema,
+  processSchema: () => processSchema,
   regexes: () => regexes_exports,
   registry: () => registry,
   safeDecode: () => safeDecode,
@@ -727,7 +750,9 @@ __export(core_exports, {
   util: () => util_exports,
   validate: () => validate,
   validateAsync: () => validateAsync,
-  version: () => version
+  validateURL: () => validateURL,
+  version: () => version,
+  withParser: () => withParser
 });
 
 // editor/ui-editor-ui/node_modules/zod/v4/locales/index.js
@@ -784,6 +809,7 @@ __export(locales_exports, {
   sl: () => sl_default,
   sv: () => sv_default,
   ta: () => ta_default,
+  tg: () => tg_default,
   th: () => th_default,
   tk: () => tk_default,
   tr: () => tr_default,
@@ -838,6 +864,8 @@ var error = () => {
     json_string: "JSON string",
     e164: "E.164 number",
     credit_card: "kredit kart\u0131 n\xF6mr\u0259si",
+    currency_code: "valyuta kodu",
+    iban: "IBAN",
     jwt: "JWT",
     template_literal: "input"
   };
@@ -947,6 +975,8 @@ var error2 = () => {
     json_string: "cadena JSON",
     e164: "n\xFAmero E.164",
     credit_card: "n\xFAmero de targeta de cr\xE8dit",
+    currency_code: "codi de moneda",
+    iban: "IBAN",
     jwt: "JWT",
     template_literal: "entrada"
   };
@@ -1059,6 +1089,8 @@ var error3 = () => {
     json_string: "\u0159et\u011Bzec ve form\xE1tu JSON",
     e164: "\u010D\xEDslo E.164",
     credit_card: "\u010D\xEDslo kreditn\xED karty",
+    currency_code: "k\xF3d m\u011Bny",
+    iban: "IBAN",
     jwt: "JWT",
     template_literal: "vstup"
   };
@@ -1174,6 +1206,8 @@ var error4 = () => {
     json_string: "JSON-streng",
     e164: "E.164-nummer",
     credit_card: "kreditkortnummer",
+    currency_code: "valutakode",
+    iban: "IBAN",
     jwt: "JWT",
     template_literal: "input"
   };
@@ -1293,6 +1327,8 @@ var error5 = () => {
     json_string: "JSON-String",
     e164: "E.164-Nummer",
     credit_card: "Kreditkartennummer",
+    currency_code: "W\xE4hrungscode",
+    iban: "IBAN",
     jwt: "JWT",
     template_literal: "Eingabe"
   };
@@ -1404,7 +1440,9 @@ var error6 = () => {
     base64url: "base64url-encoded string",
     json_string: "JSON string",
     e164: "E.164 number",
+    currency_code: "currency code",
     credit_card: "credit card number",
+    iban: "IBAN",
     jwt: "JWT",
     template_literal: "input"
   };
@@ -1528,6 +1566,8 @@ var error7 = () => {
     json_string: "JSON-karaktraro",
     e164: "E.164-nombro",
     credit_card: "kreditkarta numero",
+    currency_code: "valuta kodo",
+    iban: "IBAN",
     jwt: "JWT",
     template_literal: "enigo"
   };
@@ -1645,6 +1685,8 @@ var error8 = () => {
     json_string: "JSON-merkkijono",
     e164: "E.164-luku",
     credit_card: "luottokortin numero",
+    currency_code: "valuuttakoodi",
+    iban: "IBAN",
     jwt: "JWT",
     template_literal: "templaattimerkkijono"
   };
@@ -1757,6 +1799,8 @@ var error9 = () => {
     json_string: "cha\xEEne JSON",
     e164: "num\xE9ro E.164",
     credit_card: "num\xE9ro de carte de cr\xE9dit",
+    currency_code: "code de devise",
+    iban: "IBAN",
     jwt: "JWT",
     template_literal: "entr\xE9e"
   };
@@ -1867,6 +1911,8 @@ var error10 = () => {
     json_string: "JSON tekst",
     e164: "E.164 broj",
     credit_card: "broj kreditne kartice",
+    currency_code: "kod valute",
+    iban: "IBAN",
     jwt: "JWT",
     template_literal: "unos"
   };
@@ -1993,6 +2039,8 @@ var error11 = () => {
     json_string: "JSON string",
     e164: "E.164 sz\xE1m",
     credit_card: "hitelk\xE1rtyasz\xE1m",
+    currency_code: "p\xE9nznemk\xF3d",
+    iban: "IBAN",
     jwt: "JWT",
     template_literal: "bemenet"
   };
@@ -2105,6 +2153,8 @@ var error12 = () => {
     json_string: "string JSON",
     e164: "angka E.164",
     credit_card: "nomor kartu kredit",
+    currency_code: "kode mata uang",
+    iban: "IBAN",
     jwt: "JWT",
     template_literal: "input"
   };
@@ -2215,6 +2265,8 @@ var error13 = () => {
     json_string: "JSON strengur",
     e164: "E.164 t\xF6lugildi",
     credit_card: "kreditkortan\xFAmer",
+    currency_code: "gjaldmi\xF0ilsk\xF3\xF0i",
+    iban: "IBAN",
     jwt: "JWT",
     template_literal: "gildi"
   };
@@ -2328,6 +2380,8 @@ var error14 = () => {
     json_string: "stringa JSON",
     e164: "numero E.164",
     credit_card: "numero di carta di credito",
+    currency_code: "codice valuta",
+    iban: "IBAN",
     jwt: "JWT",
     template_literal: "input"
   };
@@ -2445,6 +2499,8 @@ var error15 = () => {
     json_string: "string JSON",
     e164: "nombor E.164",
     credit_card: "nombor kad kredit",
+    currency_code: "kod mata wang",
+    iban: "IBAN",
     jwt: "JWT",
     template_literal: "input"
   };
@@ -2556,6 +2612,8 @@ var error16 = () => {
     json_string: "JSON string",
     e164: "E.164-nummer",
     credit_card: "creditcardnummer",
+    currency_code: "valutacode",
+    iban: "IBAN",
     jwt: "JWT",
     template_literal: "invoer"
   };
@@ -2670,6 +2728,8 @@ var error17 = () => {
     json_string: "JSON-streng",
     e164: "E.164-nummer",
     credit_card: "kredittkortnummer",
+    currency_code: "valutakode",
+    iban: "IBAN",
     jwt: "JWT",
     template_literal: "input"
   };
@@ -2782,6 +2842,8 @@ var error18 = () => {
     json_string: "JSON-streng",
     e164: "E.164-nummer",
     credit_card: "kredittkortnummer",
+    currency_code: "valutakode",
+    iban: "IBAN",
     jwt: "JWT",
     template_literal: "input"
   };
@@ -2894,6 +2956,8 @@ var error19 = () => {
     json_string: "JSON metin",
     e164: "E.164 say\u0131s\u0131",
     credit_card: "i'tib\xE2r kart\u0131 numaras\u0131",
+    currency_code: "para birimi kodu",
+    iban: "IBAN",
     jwt: "JWT",
     template_literal: "giren"
   };
@@ -3007,6 +3071,8 @@ var error20 = () => {
     json_string: "\u0219ir JSON",
     e164: "num\u0103r E.164",
     credit_card: "num\u0103r de card de credit",
+    currency_code: "cod valutar",
+    iban: "IBAN",
     jwt: "JWT",
     template_literal: "intrare"
   };
@@ -3128,6 +3194,8 @@ var error21 = () => {
     json_string: "re\u0165azec vo form\xE1te JSON",
     e164: "\u010D\xEDslo E.164",
     credit_card: "\u010D\xEDslo kreditnej karty",
+    currency_code: "k\xF3d meny",
+    iban: "IBAN",
     jwt: "JWT",
     template_literal: "vstup"
   };
@@ -3243,6 +3311,8 @@ var error22 = () => {
     json_string: "JSON niz",
     e164: "E.164 \u0161tevilka",
     credit_card: "\u0161tevilka kreditne kartice",
+    currency_code: "koda valute",
+    iban: "IBAN",
     jwt: "JWT",
     template_literal: "vnos"
   };
@@ -3356,6 +3426,8 @@ var error23 = () => {
     json_string: "JSON-str\xE4ng",
     e164: "E.164-nummer",
     credit_card: "kreditkortsnummer",
+    currency_code: "valutakod",
+    iban: "IBAN",
     jwt: "JWT",
     template_literal: "mall-literal"
   };
@@ -3470,6 +3542,8 @@ var error24 = () => {
     json_string: "JSON setiri",
     e164: "E.164 nomeri",
     credit_card: "kredit kartyny\u0148 nomeri",
+    currency_code: "wal\xFDuta kody",
+    iban: "IBAN",
     jwt: "JWT",
     template_literal: "\u015Fablon"
   };
@@ -3576,6 +3650,8 @@ var error25 = () => {
     json_string: "JSON dizesi",
     e164: "E.164 say\u0131s\u0131",
     credit_card: "kredi kart\u0131 numaras\u0131",
+    currency_code: "para birimi kodu",
+    iban: "IBAN",
     jwt: "JWT",
     template_literal: "\u015Eablon dizesi"
   };
@@ -3690,6 +3766,8 @@ var error26 = () => {
     json_string: "JSON satr",
     e164: "E.164 raqam",
     credit_card: "kredit karta raqami",
+    currency_code: "valyuta kodi",
+    iban: "IBAN",
     jwt: "JWT",
     template_literal: "kirish"
   };
@@ -3802,6 +3880,8 @@ var error27 = () => {
     json_string: "JSON\u5B57\u7B26\u4E32",
     e164: "E.164\u53F7\u7801",
     credit_card: "\u4FE1\u7528\u5361\u53F7",
+    currency_code: "\u8D27\u5E01\u4EE3\u7801",
+    iban: "IBAN",
     jwt: "JWT",
     template_literal: "\u8F93\u5165"
   };
@@ -3874,117 +3954,6 @@ function zh_CN_default() {
   };
 }
 
-// editor/ui-editor-ui/node_modules/zod/v4/locales/zh-TW.js
-var error28 = () => {
-  const Sizable = {
-    string: { unit: "\u5B57\u5143", verb: "\u64C1\u6709" },
-    file: { unit: "\u4F4D\u5143\u7D44", verb: "\u64C1\u6709" },
-    array: { unit: "\u9805\u76EE", verb: "\u64C1\u6709" },
-    set: { unit: "\u9805\u76EE", verb: "\u64C1\u6709" },
-    map: { unit: "\u9805\u76EE", verb: "\u64C1\u6709" }
-  };
-  function getSizing(origin) {
-    return Sizable[origin] ?? null;
-  }
-  const FormatDictionary = {
-    regex: "\u8F38\u5165",
-    email: "\u90F5\u4EF6\u5730\u5740",
-    url: "URL",
-    emoji: "emoji",
-    uuid: "UUID",
-    uuidv4: "UUIDv4",
-    uuidv6: "UUIDv6",
-    nanoid: "nanoid",
-    guid: "GUID",
-    cuid: "cuid",
-    cuid2: "cuid2",
-    ulid: "ULID",
-    xid: "XID",
-    ksuid: "KSUID",
-    datetime: "ISO \u65E5\u671F\u6642\u9593",
-    date: "ISO \u65E5\u671F",
-    time: "ISO \u6642\u9593",
-    duration: "ISO \u671F\u9593",
-    ipv4: "IPv4 \u4F4D\u5740",
-    ipv6: "IPv6 \u4F4D\u5740",
-    mac: "MAC \u4F4D\u5740",
-    cidrv4: "IPv4 \u7BC4\u570D",
-    cidrv6: "IPv6 \u7BC4\u570D",
-    base64: "base64 \u7DE8\u78BC\u5B57\u4E32",
-    base64url: "base64url \u7DE8\u78BC\u5B57\u4E32",
-    json_string: "JSON \u5B57\u4E32",
-    e164: "E.164 \u6578\u503C",
-    credit_card: "\u4FE1\u7528\u5361\u865F",
-    jwt: "JWT",
-    template_literal: "\u8F38\u5165"
-  };
-  const TypeDictionary = {
-    nan: "NaN"
-  };
-  return (issue) => {
-    switch (issue.code) {
-      case "invalid_type": {
-        const expected = TypeDictionary[issue.expected] ?? issue.expected;
-        const receivedType = parsedType(issue.input);
-        const received = TypeDictionary[receivedType] ?? receivedType;
-        if (/^[A-Z]/.test(issue.expected)) {
-          return "\u7121\u6548\u7684\u8F38\u5165\u503C\uFF1A\u9810\u671F\u70BA instanceof ".concat(issue.expected, "\uFF0C\u4F46\u6536\u5230 ").concat(received);
-        }
-        return "\u7121\u6548\u7684\u8F38\u5165\u503C\uFF1A\u9810\u671F\u70BA ".concat(expected, "\uFF0C\u4F46\u6536\u5230 ").concat(received);
-      }
-      case "invalid_value":
-        if (issue.values.length === 1)
-          return "\u7121\u6548\u7684\u8F38\u5165\u503C\uFF1A\u9810\u671F\u70BA ".concat(stringifyPrimitive(issue.values[0]));
-        return "\u7121\u6548\u7684\u9078\u9805\uFF1A\u9810\u671F\u70BA\u4EE5\u4E0B\u5176\u4E2D\u4E4B\u4E00 ".concat(joinValues(issue.values, "|"));
-      case "too_big": {
-        const adj = issue.inclusive ? "<=" : "<";
-        const sizing = getSizing(issue.origin);
-        if (sizing)
-          return "\u6578\u503C\u904E\u5927\uFF1A\u9810\u671F ".concat(issue.origin ?? "\u503C", " \u61C9\u70BA ").concat(adj).concat(issue.maximum.toString(), " ").concat(sizing.unit ?? "\u500B\u5143\u7D20");
-        return "\u6578\u503C\u904E\u5927\uFF1A\u9810\u671F ".concat(issue.origin ?? "\u503C", " \u61C9\u70BA ").concat(adj).concat(issue.maximum.toString());
-      }
-      case "too_small": {
-        const adj = issue.inclusive ? ">=" : ">";
-        const sizing = getSizing(issue.origin);
-        if (sizing) {
-          return "\u6578\u503C\u904E\u5C0F\uFF1A\u9810\u671F ".concat(issue.origin, " \u61C9\u70BA ").concat(adj).concat(issue.minimum.toString(), " ").concat(sizing.unit);
-        }
-        return "\u6578\u503C\u904E\u5C0F\uFF1A\u9810\u671F ".concat(issue.origin, " \u61C9\u70BA ").concat(adj).concat(issue.minimum.toString());
-      }
-      case "invalid_format": {
-        const _issue = issue;
-        if (_issue.format === "starts_with") {
-          return '\u7121\u6548\u7684\u5B57\u4E32\uFF1A\u5FC5\u9808\u4EE5 "'.concat(_issue.prefix, '" \u958B\u982D');
-        }
-        if (_issue.format === "ends_with")
-          return '\u7121\u6548\u7684\u5B57\u4E32\uFF1A\u5FC5\u9808\u4EE5 "'.concat(_issue.suffix, '" \u7D50\u5C3E');
-        if (_issue.format === "includes")
-          return '\u7121\u6548\u7684\u5B57\u4E32\uFF1A\u5FC5\u9808\u5305\u542B "'.concat(_issue.includes, '"');
-        if (_issue.format === "regex")
-          return "\u7121\u6548\u7684\u5B57\u4E32\uFF1A\u5FC5\u9808\u7B26\u5408\u683C\u5F0F ".concat(_issue.pattern);
-        return "\u7121\u6548\u7684 ".concat(FormatDictionary[_issue.format] ?? issue.format);
-      }
-      case "not_multiple_of":
-        return "\u7121\u6548\u7684\u6578\u5B57\uFF1A\u5FC5\u9808\u70BA ".concat(issue.divisor, " \u7684\u500D\u6578");
-      case "unrecognized_keys":
-        return "\u7121\u6CD5\u8B58\u5225\u7684\u9375\u503C".concat(issue.keys.length > 1 ? "\u5011" : "", "\uFF1A").concat(joinValues(issue.keys, "\u3001"));
-      case "invalid_key":
-        return "".concat(issue.origin, " \u4E2D\u6709\u7121\u6548\u7684\u9375\u503C");
-      case "invalid_union":
-        return "\u7121\u6548\u7684\u8F38\u5165\u503C";
-      case "invalid_element":
-        return "".concat(issue.origin, " \u4E2D\u6709\u7121\u6548\u7684\u503C");
-      default:
-        return "\u7121\u6548\u7684\u8F38\u5165\u503C";
-    }
-  };
-};
-function zh_TW_default() {
-  return {
-    localeError: error28()
-  };
-}
-
 // editor/ui-editor-ui/node_modules/zod/v4/core/json-schema-generator.js
 var JSONSchemaGenerator = class {
   /** @deprecated Access via ctx instead */
@@ -4039,7 +4008,7 @@ var JSONSchemaGenerator = class {
    * This must be called before emit().
    */
   process(schema, _params = { path: [], schemaPath: [] }) {
-    return process(schema, this.ctx, _params);
+    return processSchema(schema, this.ctx, _params);
   }
   /**
    * Emit the final JSON Schema after processing.

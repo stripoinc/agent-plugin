@@ -8,6 +8,9 @@ import {
   transformColorToHoverColor
 } from "./ColorUtils-a33f32974f73.mjs";
 import {
+  html
+} from "./master-80783f73f1e0.mjs";
+import {
   HEAD_SELECTOR,
   LINK_TAG_SELECTOR
 } from "./CSSConverter-608b83714731.mjs";
@@ -21,11 +24,11 @@ import {
   SGGetConnectToModelInfoPermissions
 } from "./ue-proto-87c1854705b4.mjs";
 import {
-  html
-} from "./master-80783f73f1e0.mjs";
-import {
   external_exports
 } from "./coerce-d38c736de753.mjs";
+import {
+  require_parse as require_parse2
+} from "./parse-8126121d6d62.mjs";
 import {
   require_document,
   require_lazy_result,
@@ -43,9 +46,6 @@ import {
   require_root,
   require_rule
 } from "./at-rule-2b1e381bfcd5.mjs";
-import {
-  require_parse as require_parse2
-} from "./parse-8126121d6d62.mjs";
 import {
   require_comment,
   require_container,
@@ -473,7 +473,7 @@ var require_processor = __commonJS({
     var Root3 = require_root();
     var Processor2 = class {
       constructor(plugins = []) {
-        this.version = "8.5.28";
+        this.version = "8.5.29";
         this.plugins = this.normalize(plugins);
       }
       normalize(plugins) {
@@ -1607,10 +1607,10 @@ function getCommentBlockCRDT(parent) {
 var STRIPO_DEBUG_MODE = "STRIPO_DEBUG_MODE";
 var debug = {};
 for (const prop in console) {
-  if (console[prop].call) {
+  if (typeof console[prop] === "function") {
     debug[prop] = function(...args) {
       if (isDebugModeEnabled()) {
-        const result = console[prop].call(console, ...args);
+        const result = Reflect.apply(console[prop], console, args);
         if (prop === "error") {
           console.groupCollapsed("Error trace");
           console.trace();
@@ -1936,6 +1936,7 @@ var BODY_SELECTOR = [q.select.descendants().tag("body").end()];
 var COMMENT_WRAPPER_COUNT = 2;
 var FONT_FAMILY_DECLARATION_REGEXP = /font-family\s*:\s*([^;{}<"]+)/gi;
 var FONT_FACE_ATTR_REGEXP = /<font[^>]*\sface\s*=\s*["']([^"']+)["']/gi;
+var FONT_FAMILY_ATTR_REGEXP = /\sfont-family\s*=\s*"([^"]+)"/gi;
 var QUOTE_ENTITY_REGEXP = /&(?:quot|apos|#0*34|#0*39);/gi;
 var GENERIC_FONT_FAMILIES = /* @__PURE__ */ new Set([
   "serif",
@@ -2437,7 +2438,8 @@ var FontUtils = class _FontUtils {
     const html2 = bodyString.replace(QUOTE_ENTITY_REGEXP, "");
     return [
       ...Array.from(html2.matchAll(FONT_FAMILY_DECLARATION_REGEXP)),
-      ...Array.from(html2.matchAll(FONT_FACE_ATTR_REGEXP))
+      ...Array.from(html2.matchAll(FONT_FACE_ATTR_REGEXP)),
+      ...Array.from(html2.matchAll(FONT_FAMILY_ATTR_REGEXP))
     ].map((match) => (match[1] || "").trim());
   }
   /**
@@ -3253,6 +3255,25 @@ function setDescriptorSettingsPathValue(target, path, value) {
   });
 }
 
+// editor/ui-editor-ui/src/app/services/api/editor-copilot-api/schema/theme-background-image.contract.ts
+var canonicalBackgroundImageSizeSchema = external_exports.string().refine(
+  (value) => Boolean(value) && value === value.trim(),
+  { message: "Expected a non-empty normalized background image size." }
+);
+var canonicalBackgroundImagePathSchema = external_exports.string().refine(
+  (value) => Boolean(value) && value === value.trim(),
+  { message: "Expected a non-empty normalized background image path." }
+);
+var canonicalBackgroundImageSchema = external_exports.object({
+  path: canonicalBackgroundImagePathSchema,
+  repeat: external_exports.boolean(),
+  x: external_exports.string(),
+  y: external_exports.string(),
+  sizeX: canonicalBackgroundImageSizeSchema,
+  sizeY: canonicalBackgroundImageSizeSchema
+}).strict();
+var canonicalDarkThemeBackgroundImageSchema = canonicalBackgroundImagePathSchema.nullable().optional();
+
 // editor/ui-editor-ui/src/app/services/api/editor-copilot-api/schema/email-template-settings.schema.ts
 var THEME_SETTINGS_SECTIONS = /* @__PURE__ */ new Set([
   "general",
@@ -3301,22 +3322,6 @@ function materializeStrictObjectSchema(shape) {
     value instanceof external_exports.ZodType ? value : materializeStrictObjectSchema(value)
   ]))).strict();
 }
-var canonicalBackgroundImageSizeSchema = external_exports.string().refine(
-  (value) => Boolean(value) && value === value.trim(),
-  { message: "Expected a non-empty normalized background image size." }
-);
-var canonicalBackgroundImagePathSchema = external_exports.string().refine(
-  (value) => Boolean(value) && value === value.trim(),
-  { message: "Expected a non-empty normalized background image path." }
-);
-var canonicalBackgroundImageSchema = external_exports.object({
-  path: canonicalBackgroundImagePathSchema,
-  repeat: external_exports.boolean(),
-  x: external_exports.string(),
-  y: external_exports.string(),
-  sizeX: canonicalBackgroundImageSizeSchema,
-  sizeY: canonicalBackgroundImageSizeSchema
-}).strict();
 var canonicalFullSideValuesSchema = external_exports.object({
   top: external_exports.number(),
   right: external_exports.number(),
@@ -3534,7 +3539,9 @@ function createEmailTemplateSettingsSchemas(colorMergeTagValues = /* @__PURE__ *
   const canonicalEmailTemplateSettingsSchema2 = external_exports.object({
     general: generalNonThemeSchema.extend({
       lightTheme: createThemeBranchSchema("general", false),
-      darkTheme: createThemeBranchSchema("general", true)
+      darkTheme: createThemeBranchSchema("general", true).extend({
+        backgroundImage: canonicalDarkThemeBackgroundImageSchema
+      })
     }).strict(),
     stripes: stripesNonThemeSchema.extend({
       lightTheme: createThemeBranchSchema("stripes", false),
@@ -3699,6 +3706,7 @@ function createEmailTemplateSettingsSchemas(colorMergeTagValues = /* @__PURE__ *
     }
   }).describe("Frozen production light-only email template settings.");
   return {
+    colorMergeTagValues,
     canonicalThemeBackgroundSchema: canonicalThemeBackgroundSchema2,
     getDescriptorValueSchema,
     canonicalEmailTemplateSettingsSchema: canonicalEmailTemplateSettingsSchema2,
@@ -3724,8 +3732,8 @@ function normalizeLegacyThemeValue(value, descriptor, colorMergeTagValues = /* @
   }
   return normalized;
 }
-function resolveThemeDescriptorValues(readDirectValue, colorMergeTagValues = /* @__PURE__ */ new Set()) {
-  const { getDescriptorValueSchema } = createEmailTemplateSettingsSchemas(colorMergeTagValues);
+function resolveThemeDescriptorValues(readDirectValue, schemas) {
+  const { getDescriptorValueSchema, colorMergeTagValues } = schemas;
   const descriptorsByOwner = new Map(THEME_VARIABLE_DESCRIPTORS.map((descriptor) => [
     descriptor.semanticOwner,
     descriptor
@@ -3777,14 +3785,14 @@ function resolveThemeDescriptorValues(readDirectValue, colorMergeTagValues = /* 
   THEME_VARIABLE_DESCRIPTORS.forEach((descriptor) => resolveValue(descriptor.semanticOwner));
   return resolvedValues;
 }
-function createCanonicalThemeBranches(legacy, section, colorMergeTagValues = /* @__PURE__ */ new Set()) {
+function createCanonicalThemeBranches(legacy, section, schemas) {
   const lightTheme = {};
   const darkTheme = {};
   const resolvedValues = resolveThemeDescriptorValues((descriptor) => {
     const legacySection = legacy[getThemeDescriptorSection(descriptor)];
     const directValue = getDescriptorSettingsPathValue(legacySection, descriptor.settings.legacyPath);
-    return typeof directValue === "string" ? normalizeLegacyThemeValue(directValue, descriptor, colorMergeTagValues) : void 0;
-  }, colorMergeTagValues);
+    return typeof directValue === "string" ? normalizeLegacyThemeValue(directValue, descriptor, schemas.colorMergeTagValues) : void 0;
+  }, schemas);
   THEME_VARIABLE_DESCRIPTORS.filter((descriptor) => getThemeDescriptorSection(descriptor) === section).forEach((descriptor) => {
     const value = resolvedValues.get(descriptor.semanticOwner);
     if (value === void 0) {
@@ -3837,8 +3845,8 @@ function createCanonicalHeadingNonThemeSection(legacySection, heading) {
     paragraphBottomSpace: legacySection?.paragraphBottomSpace ?? null
   };
 }
-function normalizeLegacySettings(legacy, colorMergeTagValues = /* @__PURE__ */ new Set()) {
-  const { canonicalEmailTemplateSettingsSchema: canonicalEmailTemplateSettingsSchema2 } = createEmailTemplateSettingsSchemas(colorMergeTagValues);
+function normalizeLegacySettings(legacy, schemas) {
+  const { canonicalEmailTemplateSettingsSchema: canonicalEmailTemplateSettingsSchema2 } = schemas;
   if (!legacy.stripes || !legacy.headings || !legacy.buttons) {
     throw new Error("Production legacy settings passed validation without their required sections.");
   }
@@ -3848,7 +3856,7 @@ function normalizeLegacySettings(legacy, colorMergeTagValues = /* @__PURE__ */ n
     hideImageDownloadIcons: legacy.general.hideImageDownloadIcons ?? getDefaultGeneralHideImageDownloadIcons(),
     backgroundImage: normalizeLegacyBackgroundImage(legacy.general.backgroundImage),
     customListStyles: generalCustomListStyles,
-    ...createCanonicalThemeBranches(legacy, "general", colorMergeTagValues)
+    ...createCanonicalThemeBranches(legacy, "general", schemas)
   };
   const stripes = {
     letterSpacing: legacy.stripes.letterSpacing ?? getDefaultLetterSpacingValue(),
@@ -3862,7 +3870,7 @@ function normalizeLegacySettings(legacy, colorMergeTagValues = /* @__PURE__ */ n
     content: createCanonicalStripeNonThemeSection(legacy.stripes.content, "content"),
     footer: createCanonicalStripeNonThemeSection(legacy.stripes.footer, "footer"),
     infoArea: createCanonicalStripeNonThemeSection(legacy.stripes.infoArea, "infoArea"),
-    ...createCanonicalThemeBranches(legacy, "stripes", colorMergeTagValues)
+    ...createCanonicalThemeBranches(legacy, "stripes", schemas)
   };
   const headings = {
     letterSpacing: legacy.headings.letterSpacing ?? getDefaultLetterSpacingValue(),
@@ -3873,7 +3881,7 @@ function normalizeLegacySettings(legacy, colorMergeTagValues = /* @__PURE__ */ n
     h4: createCanonicalHeadingNonThemeSection(legacy.headings.h4, "h4"),
     h5: createCanonicalHeadingNonThemeSection(legacy.headings.h5, "h5"),
     h6: createCanonicalHeadingNonThemeSection(legacy.headings.h6, "h6"),
-    ...createCanonicalThemeBranches(legacy, "headings", colorMergeTagValues)
+    ...createCanonicalThemeBranches(legacy, "headings", schemas)
   };
   const border = {
     top: omitKeys(legacy.buttons.border.top, ["color"]),
@@ -3903,7 +3911,7 @@ function normalizeLegacySettings(legacy, colorMergeTagValues = /* @__PURE__ */ n
       desktop: getDefaultButtonsPadding("desktop"),
       mobile: getDefaultButtonsPadding("mobile")
     },
-    ...createCanonicalThemeBranches(legacy, "buttons", colorMergeTagValues)
+    ...createCanonicalThemeBranches(legacy, "buttons", schemas)
   };
   return canonicalEmailTemplateSettingsSchema2.parse({ general, stripes, headings, buttons });
 }
@@ -3940,11 +3948,12 @@ function normalizeReleasedHeadingTextStyles(value) {
   return normalizedHeadings ? { ...settings, headings: normalizedHeadings } : value;
 }
 function materializeCanonicalNonThemeSettings(legacy, colorMergeTagValues = /* @__PURE__ */ new Set()) {
-  const { productionLegacyEmailTemplateSettingsSchema: productionLegacyEmailTemplateSettingsSchema2, canonicalEmailTemplateSettingsSchema: canonicalEmailTemplateSettingsSchema2 } = createEmailTemplateSettingsSchemas(colorMergeTagValues);
+  const schemas = createEmailTemplateSettingsSchemas(colorMergeTagValues);
+  const { productionLegacyEmailTemplateSettingsSchema: productionLegacyEmailTemplateSettingsSchema2, canonicalEmailTemplateSettingsSchema: canonicalEmailTemplateSettingsSchema2 } = schemas;
   const hoverStylesEnabled = legacy.buttons?.hoverButtonStyles !== void 0;
   const customListStylesEnabled = Boolean(legacy.general.customListStyles);
   const projection = JSON.parse(JSON.stringify(legacy));
-  const defaultThemeValues = resolveThemeDescriptorValues(() => void 0, colorMergeTagValues);
+  const defaultThemeValues = resolveThemeDescriptorValues(() => void 0, schemas);
   THEME_VARIABLE_DESCRIPTORS.forEach((descriptor) => {
     if (descriptor.displayPolicy?.settingsActivation === "custom-list-styles" && !customListStylesEnabled || descriptor.displayPolicy?.settingsActivation === "button-hover-styles" && !hoverStylesEnabled) {
       return;
@@ -3957,7 +3966,7 @@ function materializeCanonicalNonThemeSettings(legacy, colorMergeTagValues = /* @
     setDescriptorSettingsPathValue(section, descriptor.settings.legacyPath, value);
   });
   const parsedProjection = productionLegacyEmailTemplateSettingsSchema2.parse(projection);
-  const canonical = normalizeLegacySettings(parsedProjection, colorMergeTagValues);
+  const canonical = normalizeLegacySettings(parsedProjection, schemas);
   canonical.buttons.hoverButtonStyles = hoverStylesEnabled;
   if (!customListStylesEnabled) {
     canonical.general.customListStyles = null;
@@ -3973,7 +3982,8 @@ var SettingsNormalizationError = class extends Error {
   }
 };
 function settingsNormalization(value, colorMergeTagValues = /* @__PURE__ */ new Set()) {
-  const { canonicalEmailTemplateSettingsSchema: canonicalEmailTemplateSettingsSchema2, productionLegacyEmailTemplateSettingsSchema: productionLegacyEmailTemplateSettingsSchema2 } = createEmailTemplateSettingsSchemas(colorMergeTagValues);
+  const schemas = createEmailTemplateSettingsSchemas(colorMergeTagValues);
+  const { canonicalEmailTemplateSettingsSchema: canonicalEmailTemplateSettingsSchema2, productionLegacyEmailTemplateSettingsSchema: productionLegacyEmailTemplateSettingsSchema2 } = schemas;
   const canonicalResult = canonicalEmailTemplateSettingsSchema2.safeParse(value);
   if (canonicalResult.success) {
     return value;
@@ -3981,7 +3991,7 @@ function settingsNormalization(value, colorMergeTagValues = /* @__PURE__ */ new 
   const legacyCompatibleValue = normalizeReleasedHeadingTextStyles(value);
   const legacyResult = productionLegacyEmailTemplateSettingsSchema2.safeParse(legacyCompatibleValue);
   if (legacyResult.success) {
-    return normalizeLegacySettings(legacyResult.data, colorMergeTagValues);
+    return normalizeLegacySettings(legacyResult.data, schemas);
   }
   throw new SettingsNormalizationError(canonicalResult.error.issues, legacyResult.error.issues);
 }

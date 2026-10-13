@@ -1,67 +1,87 @@
 
 export default {
+["container.blocks[]|2.id"]: {
+  "hash": "47a0beb31908710a9be580e8dc0f320092577c8f5ab4bca36a32e1e6f229f42c",
+  "group": "shape"
+},
+["container.blocks[]|2.type"]: {
+  "hash": "60efd466cb1026d0e8a0ba66b175056e2efbdb862406ee124a9b8ee35864a19a",
+  "group": "shape"
+},
+["container.blocks[]|2.settings"]: {
+  "hash": "07a535f05c5a37ea3270cb1be2f09296f9ec47d28a57ad5f95c89b1abbf5016c",
+  "group": "patch"
+},
+["container.blocks[]|2.settings.videoLink"]: {
+  "hash": "f94f0aa342def5a0a0937d1717936d1ecea0ec0af14f46709b358bafc3611bbb",
+  "group": "effects"
+},
+["container.blocks[]|2.settings.altText"]: {
+  "hash": "d71c2e8a1e14cd2fc9488ee427f7774abf04c394a2db29d2d37d1d133daff602",
+  "group": "patch"
+},
 ["container.blocks[]|2.settings.altText.text"]: {
-  "hash": "ad4040707bb96cd022c8b9ebe06688b468cda4fd0a26705e96d65ced5078629f",
+  "hash": "598982a750ef7e051d1e61cf6a35ecc8d5fe7e6947557b24fb00116e996b7a29",
   "group": "patch"
 },
 ["container.blocks[]|2.settings.altText.addToTitle"]: {
-  "hash": "979f3583364eb4a6508bb3f4d11df9a9020b36b6eb5aeeac8595922d966bed2a",
+  "hash": "7fd0f8ab45e8febace9c2a15d2ac3afee6864d92e620387c70a9c17215a23d24",
   "group": "patch"
 },
 ["container.blocks[]|2.settings.customThumbnail"]: {
-  "hash": "58dd06516b2248dddb1d180998422cd369934493ac1daaba562345e8f0c9f866",
+  "hash": "9eec2d74f639b08ab550b3db2be3c39cb62cf19f835ef73c203124a2d819002b",
   "group": "effects"
 },
 ["container.blocks[]|2.settings.customThumbnail.src"]: {
-  "hash": "a78c4dd579f7fc42a37ae1995132cf98d8ef8c1caea10e1e56bb4f275e75583d",
+  "hash": "f5dbdddb7e18bd6ad7019619704aa9bffe6a09420a73b2dedfbbad628ba741b5",
   "group": "effects"
 },
 ["container.blocks[]|2.settings.playButtonStyle"]: {
-  "hash": "5d8888fc9c70f88245f6713df3b28b093c59d837c7b69bb2cb43392845a8c13e",
+  "hash": "c08a1468774620d03f8c8addc586fabb334e6d3ac9d3bcd6ce271cb01fe74e8c",
   "group": "effects"
 },
 ["container.blocks[]|2.settings.size"]: {
-  "hash": "8f0f34c835347d626e7db4182aaa674eb81b855651ff22a4a7af88e49139d7f2",
+  "hash": "0bc5b7f0587b1a292399ffef9833cef462e56e8a940ef148a1b04af544637914",
   "group": "patch"
 },
 ["container.blocks[]|2.settings.size.desktop"]: {
-  "hash": "0bc5b7f0587b1a292399ffef9833cef462e56e8a940ef148a1b04af544637914",
+  "hash": "8a164c26061e10aac0a7be823b5948dc3434cfd6075812870204f5e0c88891c3",
   "group": "patch"
 },
 ["container.blocks[]|2.settings.size.desktop.mode"]: {
-  "hash": "18e3019e5e243ab9f5ab980a9f5094c72fbda49730477260ec68f7d05b4d65c7",
+  "hash": "e5f72d9794836761d42625a099a31570f51f54d6cc0ddb38b4f3d0f8364871ea",
   "group": "patch"
 },
 ["container.blocks[]|2.settings.size.desktop.px"]: {
-  "hash": "51cdd0c07df17b9e8e2a549200f37997160c366d7574c970c8a91267899131cc",
+  "hash": "c9831a8449939bb97ce9092cbd742386fbb4fa5beddde543cd63764deb4f094a",
   "group": "patch"
 },
 ["container.blocks[]|2.settings.size.mobile"]: {
-  "hash": "0bc5b7f0587b1a292399ffef9833cef462e56e8a940ef148a1b04af544637914",
+  "hash": "8a164c26061e10aac0a7be823b5948dc3434cfd6075812870204f5e0c88891c3",
   "group": "patch"
 },
 ["container.blocks[]|2.settings.size.mobile.mode"]: {
-  "hash": "18e3019e5e243ab9f5ab980a9f5094c72fbda49730477260ec68f7d05b4d65c7",
+  "hash": "e5f72d9794836761d42625a099a31570f51f54d6cc0ddb38b4f3d0f8364871ea",
   "group": "patch"
 },
 ["container.blocks[]|2.settings.size.mobile.px"]: {
-  "hash": "51cdd0c07df17b9e8e2a549200f37997160c366d7574c970c8a91267899131cc",
+  "hash": "c9831a8449939bb97ce9092cbd742386fbb4fa5beddde543cd63764deb4f094a",
   "group": "patch"
 },
 ["container.blocks[]|2.settings.alignment"]: {
-  "hash": "cf688d54a8f50df5c7cbb0da3fe59eb27df18078023a4d0ea3ad81bed4931131",
+  "hash": "689099a7eee09c45fdc931056fcb71367acaec780af32f65472c4bf91202e369",
   "group": "patch"
 },
 ["container.blocks[]|2.settings.alignment.desktop"]: {
-  "hash": "3aa17f96e75721013ff598b1d83dde478d3ceba5ebe6d6b044bc158bfd922209",
+  "hash": "22716cc88dc73da6770c32eec62c77a7717def34e5fe9163f3a4904bf45dc37d",
   "group": "patch"
 },
 ["container.blocks[]|2.settings.alignment.mobile"]: {
-  "hash": "3aa17f96e75721013ff598b1d83dde478d3ceba5ebe6d6b044bc158bfd922209",
+  "hash": "22716cc88dc73da6770c32eec62c77a7717def34e5fe9163f3a4904bf45dc37d",
   "group": "patch"
 },
 ["container.blocks[]|2.settings.radius"]: {
-  "hash": "6afb647bd653765b09e4b83f12f891a6cc23855bacf6bf8c910a865b705ddeff",
+  "hash": "60c652de6fbcc5408abf7064c83b2ffc8eed5e90aca2245a0f9af4ed7cafe58c",
   "group": "patch"
 },
 ["container.blocks[]|2.settings.radius.desktop"]: {
@@ -69,19 +89,19 @@ export default {
   "group": "patch"
 },
 ["container.blocks[]|2.settings.radius.desktop.topLeft"]: {
-  "hash": "93fd6673c1d3e032429ab34f6497c75fa284c3eafb9ac3b661c93b1c72935167",
-  "group": "patch"
-},
-["container.blocks[]|2.settings.radius.desktop.topRight"]: {
   "hash": "3f17dbd3d098f1ccfa264a604aac56d6c5b5368425ce120c1c066332be408243",
   "group": "patch"
 },
-["container.blocks[]|2.settings.radius.desktop.bottomRight"]: {
+["container.blocks[]|2.settings.radius.desktop.topRight"]: {
   "hash": "d61fd865902321b64df120b6691df9fed3a6e398988390700196dd2b4a26647f",
   "group": "patch"
 },
-["container.blocks[]|2.settings.radius.desktop.bottomLeft"]: {
+["container.blocks[]|2.settings.radius.desktop.bottomRight"]: {
   "hash": "90da3b9939d1002c475db7b21954e487c4341edd188d4eba882beda66310344c",
+  "group": "patch"
+},
+["container.blocks[]|2.settings.radius.desktop.bottomLeft"]: {
+  "hash": "137b9d2592910769c815a933143ad8eaa3c108a4b2f0dab23401c6751a256089",
   "group": "patch"
 },
 ["container.blocks[]|2.settings.radius.mobile"]: {
@@ -89,19 +109,19 @@ export default {
   "group": "patch"
 },
 ["container.blocks[]|2.settings.radius.mobile.topLeft"]: {
-  "hash": "93fd6673c1d3e032429ab34f6497c75fa284c3eafb9ac3b661c93b1c72935167",
-  "group": "patch"
-},
-["container.blocks[]|2.settings.radius.mobile.topRight"]: {
   "hash": "3f17dbd3d098f1ccfa264a604aac56d6c5b5368425ce120c1c066332be408243",
   "group": "patch"
 },
-["container.blocks[]|2.settings.radius.mobile.bottomRight"]: {
+["container.blocks[]|2.settings.radius.mobile.topRight"]: {
   "hash": "d61fd865902321b64df120b6691df9fed3a6e398988390700196dd2b4a26647f",
   "group": "patch"
 },
-["container.blocks[]|2.settings.radius.mobile.bottomLeft"]: {
+["container.blocks[]|2.settings.radius.mobile.bottomRight"]: {
   "hash": "90da3b9939d1002c475db7b21954e487c4341edd188d4eba882beda66310344c",
+  "group": "patch"
+},
+["container.blocks[]|2.settings.radius.mobile.bottomLeft"]: {
+  "hash": "137b9d2592910769c815a933143ad8eaa3c108a4b2f0dab23401c6751a256089",
   "group": "patch"
 },
 ["container.blocks[]|2.settings.hideElement"]: {
@@ -109,47 +129,47 @@ export default {
   "group": "patch"
 },
 ["container.blocks[]|2.settings.paddings"]: {
-  "hash": "c329d895d40b2f1a41cd29343f3dc30e88582ec9348f0c0b09b3ff0fae954ccb",
+  "hash": "31da28adc27f193170553e0d353a391e7b472ba30663a3475c5fe73c4e1b6f56",
   "group": "patch"
 },
 ["container.blocks[]|2.settings.paddings.desktop"]: {
-  "hash": "8fd51c58651fd5620809426d3f5811e3d10c88c578caef917cd40df7c3233c58",
+  "hash": "5291430aa5d1612e996a36539e299d4c72f76580d6330b22c1ee4a6e35d7fee6",
   "group": "patch"
 },
 ["container.blocks[]|2.settings.paddings.desktop.top"]: {
-  "hash": "cae6528ec63db61af2bae0183ecb231ccb21a3f7d1c4b55037b9f6a0db23842f",
+  "hash": "7f4f7479f832d405028ffc4b74221f8b173423a1f6b87e5bddfb52eea9190fe9",
   "group": "patch"
 },
 ["container.blocks[]|2.settings.paddings.desktop.right"]: {
-  "hash": "7f4f7479f832d405028ffc4b74221f8b173423a1f6b87e5bddfb52eea9190fe9",
+  "hash": "78b59b05dcd0760cd65b76d54b3f30be13b560562501ee2f4e91ecc2bc0d43c7",
   "group": "patch"
 },
 ["container.blocks[]|2.settings.paddings.desktop.bottom"]: {
-  "hash": "78b59b05dcd0760cd65b76d54b3f30be13b560562501ee2f4e91ecc2bc0d43c7",
+  "hash": "b594ccb7655933ecb3f2077e0d62f18d64160e57a6a74e405eb8edc56a72394b",
   "group": "patch"
 },
 ["container.blocks[]|2.settings.paddings.desktop.left"]: {
-  "hash": "b594ccb7655933ecb3f2077e0d62f18d64160e57a6a74e405eb8edc56a72394b",
+  "hash": "cc708a674de0375118a48f9e4c6b7fcb1257a96da0d761c63ee7d3a21e07ee0c",
   "group": "patch"
 },
 ["container.blocks[]|2.settings.paddings.mobile"]: {
-  "hash": "8fd51c58651fd5620809426d3f5811e3d10c88c578caef917cd40df7c3233c58",
+  "hash": "5291430aa5d1612e996a36539e299d4c72f76580d6330b22c1ee4a6e35d7fee6",
   "group": "patch"
 },
 ["container.blocks[]|2.settings.paddings.mobile.top"]: {
-  "hash": "cae6528ec63db61af2bae0183ecb231ccb21a3f7d1c4b55037b9f6a0db23842f",
-  "group": "patch"
-},
-["container.blocks[]|2.settings.paddings.mobile.right"]: {
   "hash": "7f4f7479f832d405028ffc4b74221f8b173423a1f6b87e5bddfb52eea9190fe9",
   "group": "patch"
 },
-["container.blocks[]|2.settings.paddings.mobile.bottom"]: {
+["container.blocks[]|2.settings.paddings.mobile.right"]: {
   "hash": "78b59b05dcd0760cd65b76d54b3f30be13b560562501ee2f4e91ecc2bc0d43c7",
   "group": "patch"
 },
-["container.blocks[]|2.settings.paddings.mobile.left"]: {
+["container.blocks[]|2.settings.paddings.mobile.bottom"]: {
   "hash": "b594ccb7655933ecb3f2077e0d62f18d64160e57a6a74e405eb8edc56a72394b",
+  "group": "patch"
+},
+["container.blocks[]|2.settings.paddings.mobile.left"]: {
+  "hash": "cc708a674de0375118a48f9e4c6b7fcb1257a96da0d761c63ee7d3a21e07ee0c",
   "group": "patch"
 },
 ["container.blocks[]|2.settings.includeInOutput"]: {
@@ -157,11 +177,11 @@ export default {
   "group": "patch"
 },
 ["container.blocks[]|2.settings.anchorLinkName"]: {
-  "hash": "2467ead083b340b4c98dcac8dfe318cca8922f50f1429c9c982492e5d3cff016",
+  "hash": "106002c12790f4c343b120fadf609c6ef01560b97e08bb5a4455a007fc1477a4",
   "group": "patch"
 },
 ["container.blocks[]|2.settings.responsiveMobile"]: {
-  "hash": "9b22f378555b92ff95b95a1c42a1aec70ec7823e66d822b947ecad5123f7125b",
+  "hash": "c7dccfa134bf8f8b771dc94e3a19dd2a5a602bc1da183c33304b656ac54f3d36",
   "group": "patch"
 },
 ["container.blocks[]|3"]: {
@@ -169,11 +189,11 @@ export default {
   "group": "shape"
 },
 ["container.blocks[]|3.id"]: {
-  "hash": "50d275dd50975a609167c558c087457ad683df51092f23b0223eebe150f94838",
+  "hash": "47a0beb31908710a9be580e8dc0f320092577c8f5ab4bca36a32e1e6f229f42c",
   "group": "shape"
 },
 ["container.blocks[]|3.type"]: {
-  "hash": "a4c2652efae38fb59b708e1a5ee76ec5b84ebee5142022485b3beb2031021a2f",
+  "hash": "d92a18f5b758da2bc4709829da1253ad361d1c811a448891e64a10e43e4e8e00",
   "group": "shape"
 },
 ["container.blocks[]|3.settings"]: {
@@ -181,127 +201,127 @@ export default {
   "group": "patch"
 },
 ["container.blocks[]|3.settings.altText"]: {
-  "hash": "9cdaadb823f448f82163da85912c743d972a3ce0752ed3a5de772875ab446424",
+  "hash": "d71c2e8a1e14cd2fc9488ee427f7774abf04c394a2db29d2d37d1d133daff602",
   "group": "patch"
 },
 ["container.blocks[]|3.settings.altText.text"]: {
-  "hash": "ad4040707bb96cd022c8b9ebe06688b468cda4fd0a26705e96d65ced5078629f",
+  "hash": "598982a750ef7e051d1e61cf6a35ecc8d5fe7e6947557b24fb00116e996b7a29",
   "group": "patch"
 },
 ["container.blocks[]|3.settings.altText.addToTitle"]: {
-  "hash": "979f3583364eb4a6508bb3f4d11df9a9020b36b6eb5aeeac8595922d966bed2a",
+  "hash": "7fd0f8ab45e8febace9c2a15d2ac3afee6864d92e620387c70a9c17215a23d24",
   "group": "patch"
 },
 ["container.blocks[]|3.settings.responsiveMobile"]: {
-  "hash": "5283992c17b87bde8c5c74d818a4e7f4dd7d777c6bc4ca07c751e6a20b1b8993",
+  "hash": "276a3c48e831b52c803dd6eca0430a3bfaa8dcd53d69d22ba0fca63a58d5feaa",
   "group": "patch"
 },
 ["container.blocks[]|3.settings.size"]: {
-  "hash": "8f0f34c835347d626e7db4182aaa674eb81b855651ff22a4a7af88e49139d7f2",
+  "hash": "0bc5b7f0587b1a292399ffef9833cef462e56e8a940ef148a1b04af544637914",
   "group": "patch"
 },
 ["container.blocks[]|3.settings.size.desktop"]: {
-  "hash": "0bc5b7f0587b1a292399ffef9833cef462e56e8a940ef148a1b04af544637914",
+  "hash": "8a164c26061e10aac0a7be823b5948dc3434cfd6075812870204f5e0c88891c3",
   "group": "patch"
 },
 ["container.blocks[]|3.settings.size.desktop.mode"]: {
-  "hash": "18e3019e5e243ab9f5ab980a9f5094c72fbda49730477260ec68f7d05b4d65c7",
+  "hash": "e5f72d9794836761d42625a099a31570f51f54d6cc0ddb38b4f3d0f8364871ea",
   "group": "patch"
 },
 ["container.blocks[]|3.settings.size.desktop.px"]: {
-  "hash": "51cdd0c07df17b9e8e2a549200f37997160c366d7574c970c8a91267899131cc",
+  "hash": "c9831a8449939bb97ce9092cbd742386fbb4fa5beddde543cd63764deb4f094a",
   "group": "patch"
 },
 ["container.blocks[]|3.settings.size.mobile"]: {
-  "hash": "0bc5b7f0587b1a292399ffef9833cef462e56e8a940ef148a1b04af544637914",
+  "hash": "8a164c26061e10aac0a7be823b5948dc3434cfd6075812870204f5e0c88891c3",
   "group": "patch"
 },
 ["container.blocks[]|3.settings.size.mobile.mode"]: {
-  "hash": "18e3019e5e243ab9f5ab980a9f5094c72fbda49730477260ec68f7d05b4d65c7",
+  "hash": "e5f72d9794836761d42625a099a31570f51f54d6cc0ddb38b4f3d0f8364871ea",
   "group": "patch"
 },
 ["container.blocks[]|3.settings.size.mobile.px"]: {
-  "hash": "51cdd0c07df17b9e8e2a549200f37997160c366d7574c970c8a91267899131cc",
+  "hash": "c9831a8449939bb97ce9092cbd742386fbb4fa5beddde543cd63764deb4f094a",
   "group": "patch"
 },
 ["container.blocks[]|3.settings.alignment"]: {
-  "hash": "cf688d54a8f50df5c7cbb0da3fe59eb27df18078023a4d0ea3ad81bed4931131",
+  "hash": "689099a7eee09c45fdc931056fcb71367acaec780af32f65472c4bf91202e369",
   "group": "patch"
 },
 ["container.blocks[]|3.settings.alignment.desktop"]: {
-  "hash": "3aa17f96e75721013ff598b1d83dde478d3ceba5ebe6d6b044bc158bfd922209",
+  "hash": "22716cc88dc73da6770c32eec62c77a7717def34e5fe9163f3a4904bf45dc37d",
   "group": "patch"
 },
 ["container.blocks[]|3.settings.alignment.mobile"]: {
-  "hash": "3aa17f96e75721013ff598b1d83dde478d3ceba5ebe6d6b044bc158bfd922209",
+  "hash": "22716cc88dc73da6770c32eec62c77a7717def34e5fe9163f3a4904bf45dc37d",
   "group": "patch"
 },
 ["container.blocks[]|3.settings.margins"]: {
-  "hash": "60c652de6fbcc5408abf7064c83b2ffc8eed5e90aca2245a0f9af4ed7cafe58c",
+  "hash": "8fd51c58651fd5620809426d3f5811e3d10c88c578caef917cd40df7c3233c58",
   "group": "patch"
 },
 ["container.blocks[]|3.settings.margins.desktop"]: {
-  "hash": "8fd51c58651fd5620809426d3f5811e3d10c88c578caef917cd40df7c3233c58",
+  "hash": "5291430aa5d1612e996a36539e299d4c72f76580d6330b22c1ee4a6e35d7fee6",
   "group": "patch"
 },
 ["container.blocks[]|3.settings.margins.desktop.top"]: {
-  "hash": "cae6528ec63db61af2bae0183ecb231ccb21a3f7d1c4b55037b9f6a0db23842f",
+  "hash": "7f4f7479f832d405028ffc4b74221f8b173423a1f6b87e5bddfb52eea9190fe9",
   "group": "patch"
 },
 ["container.blocks[]|3.settings.margins.desktop.right"]: {
-  "hash": "7f4f7479f832d405028ffc4b74221f8b173423a1f6b87e5bddfb52eea9190fe9",
+  "hash": "78b59b05dcd0760cd65b76d54b3f30be13b560562501ee2f4e91ecc2bc0d43c7",
   "group": "patch"
 },
 ["container.blocks[]|3.settings.margins.desktop.bottom"]: {
-  "hash": "78b59b05dcd0760cd65b76d54b3f30be13b560562501ee2f4e91ecc2bc0d43c7",
+  "hash": "b594ccb7655933ecb3f2077e0d62f18d64160e57a6a74e405eb8edc56a72394b",
   "group": "patch"
 },
 ["container.blocks[]|3.settings.margins.desktop.left"]: {
-  "hash": "b594ccb7655933ecb3f2077e0d62f18d64160e57a6a74e405eb8edc56a72394b",
+  "hash": "cc708a674de0375118a48f9e4c6b7fcb1257a96da0d761c63ee7d3a21e07ee0c",
   "group": "patch"
 },
 ["container.blocks[]|3.settings.margins.mobile"]: {
-  "hash": "8fd51c58651fd5620809426d3f5811e3d10c88c578caef917cd40df7c3233c58",
+  "hash": "5291430aa5d1612e996a36539e299d4c72f76580d6330b22c1ee4a6e35d7fee6",
   "group": "patch"
 },
 ["container.blocks[]|3.settings.margins.mobile.top"]: {
-  "hash": "cae6528ec63db61af2bae0183ecb231ccb21a3f7d1c4b55037b9f6a0db23842f",
-  "group": "patch"
-},
-["container.blocks[]|3.settings.margins.mobile.right"]: {
   "hash": "7f4f7479f832d405028ffc4b74221f8b173423a1f6b87e5bddfb52eea9190fe9",
   "group": "patch"
 },
-["container.blocks[]|3.settings.margins.mobile.bottom"]: {
+["container.blocks[]|3.settings.margins.mobile.right"]: {
   "hash": "78b59b05dcd0760cd65b76d54b3f30be13b560562501ee2f4e91ecc2bc0d43c7",
   "group": "patch"
 },
-["container.blocks[]|3.settings.margins.mobile.left"]: {
+["container.blocks[]|3.settings.margins.mobile.bottom"]: {
   "hash": "b594ccb7655933ecb3f2077e0d62f18d64160e57a6a74e405eb8edc56a72394b",
   "group": "patch"
 },
+["container.blocks[]|3.settings.margins.mobile.left"]: {
+  "hash": "cc708a674de0375118a48f9e4c6b7fcb1257a96da0d761c63ee7d3a21e07ee0c",
+  "group": "patch"
+},
 ["container.blocks[]|3.settings.endDate"]: {
-  "hash": "f3d51694886ff91a8b13fa5c8ab3327c42cd2c61e5c4ff1e535a6fa9b6cb96c3",
+  "hash": "0d619b8f5c4ed2cb8ea344cd4ef909848b74fa288ce9272d6c7a14f40cc9397e",
   "group": "effects"
 },
 ["container.blocks[]|3.settings.timeZone"]: {
-  "hash": "a6965b5be75d2aec9f86f2cda8475f6343343725a9c7edc5dce801c6fe7377b6",
+  "hash": "e87021d47bdf0b111528b29160116b7902f321fa80a86a020671faf83d56a113",
   "group": "effects"
 },
 ["container.blocks[]|3.settings.link"]: {
-  "hash": "e5e919e41abfbfbfa24fd07268fc52f242942806ad8a7c9d792e45d1a4453d27",
+  "hash": "a9358acc7f60fd9cba699eb3e6f79e242119cc2a753e5520037b3f51f7922c37",
   "group": "patch"
 },
 ["container.blocks[]|3.settings.link|0"]: {
-  "hash": "e4bc8cf8fd7b8bd7309be105a547b77931f3e59255c6949a7d3941978d2bb314",
+  "hash": "68010250e1f0dadbd6b1a04f209ff2c04a5a648c54d9da49f58de9c7f57c4e2d",
   "group": "patch"
 },
 ["container.blocks[]|3.settings.link|0.type"]: {
-  "hash": "1fcc8c383f0572ae51abcd6f71024d38750ee47cee704bff6702ef8bf8f436c2",
+  "hash": "198e23e00322ce7935fe1992fb816895317e5cb43b5155b2baec02cc6e298d5b",
   "group": "patch"
 },
 ["container.blocks[]|3.settings.link|0.href"]: {
-  "hash": "c5e70d5a7b79e6ebd151eeed194853b5d5e1d862d9070276184ea33d6772b09d",
+  "hash": "cebdf73e91401ac95aff4e96185413943bacb3c36202e72b6139906dcaa39aee",
   "group": "patch"
 },
 ["container.blocks[]|3.settings.link|1"]: {
@@ -309,27 +329,27 @@ export default {
   "group": "patch"
 },
 ["container.blocks[]|3.settings.displayDays"]: {
-  "hash": "af84abe5cf5f4fa6f2e9f1a85aa44d830ef7377bc3c5a71a6ff4c5451ca6b9d6",
+  "hash": "9571b376f19fb406026bd8a12b1ec9f77d46d74373e028cd466567b846ab6f50",
   "group": "effects"
 },
 ["container.blocks[]|3.settings.labelsLetterCase"]: {
-  "hash": "366339366ff75b66c455b91ae936cf56c8877573540c5997e56f93fd2d0ee05e",
+  "hash": "029a07c8fcf4136852aa13e4976da36ce7165c19604d59864f50cb92a066ef0f",
   "group": "patch"
 },
 ["container.blocks[]|3.settings.separator"]: {
-  "hash": "7dc5eb1e79053a183ca80df64b13a7aa1904eb2b117dd8763a9d937afbcad92f",
+  "hash": "b48bb363a367ad4b247a3629bfdca572c4b8fb933be6efc5e88b183f2cd2b14a",
   "group": "patch"
 },
 ["container.blocks[]|3.settings.labelsLanguage"]: {
-  "hash": "f50987809c572ce1b2da924cb2fc57db8a8041e4d8e6b862369ca051b556eb04",
+  "hash": "99d38186745a47c2207bc5e083b10774a57e4ddc72a7d6ed45267f77d3d67f3a",
   "group": "patch"
 },
 ["container.blocks[]|3.settings.retinaDisplaySupport"]: {
-  "hash": "5524196029427c880427802dce1842398a553e9543d4d4fcd29f58ce82e100f6",
+  "hash": "52c2c62e0982a7e0bfe73c955a5bb2de99d1494ba3b7d52bfe8f5724295e5ba4",
   "group": "patch"
 },
 ["container.blocks[]|3.settings.expirationImageSrc"]: {
-  "hash": "08d4e51c6d355b9888f081ccfff30e56ee6e881c8b8f935375ed55ef8a55a100",
+  "hash": "824823693c805641d8ada4f40cab0dc0259c404db45bc5a172c4736eea000d2e",
   "group": "patch"
 },
 ["container.blocks[]|3.settings.hideElement"]: {
@@ -341,15 +361,15 @@ export default {
   "group": "patch"
 },
 ["container.blocks[]|3.settings.anchorLinkName"]: {
-  "hash": "2467ead083b340b4c98dcac8dfe318cca8922f50f1429c9c982492e5d3cff016",
+  "hash": "106002c12790f4c343b120fadf609c6ef01560b97e08bb5a4455a007fc1477a4",
   "group": "patch"
 },
 ["container.blocks[]|3.settings.digitsFontFamily"]: {
-  "hash": "2f4eae4df1296bb4c3d160c845b1de5e6fbb2ceaf1e1ec9eab62a7e8b34069fa",
+  "hash": "fe3030f4b2bee7db72b67119b12963c25d7c03f15cdbdc1d52bf7614b86da931",
   "group": "patch"
 },
 ["container.blocks[]|3.settings.digitsFontSize"]: {
-  "hash": "f62fb0c285b76a5fd00fbe0c68c32fe508d16e3b03de75d02a1689565fae4673",
+  "hash": "2d53be87f0f2c9258503b2c8b357c789a32977d5d20a67db96f58929974ebbfd",
   "group": "patch"
 },
 ["container.blocks[]|3.settings.digitsFontColor"]: {
@@ -357,7 +377,7 @@ export default {
   "group": "patch"
 },
 ["container.blocks[]|3.settings.digitsAdvancedColorSettings"]: {
-  "hash": "dbb6936ec93debd0427b45335359f8af72f833f681e2496ca45b2a679c4b35f3",
+  "hash": "566117bdc24a0896662e230381552cf37fef0ecf4c4133cd5ad5ed3a7babaeff",
   "group": "patch"
 },
 ["container.blocks[]|3.settings.digitsAdvancedColorSettings.days"]: {
@@ -377,11 +397,11 @@ export default {
   "group": "patch"
 },
 ["container.blocks[]|3.settings.labelsFontFamily"]: {
-  "hash": "2f4eae4df1296bb4c3d160c845b1de5e6fbb2ceaf1e1ec9eab62a7e8b34069fa",
+  "hash": "fe3030f4b2bee7db72b67119b12963c25d7c03f15cdbdc1d52bf7614b86da931",
   "group": "patch"
 },
 ["container.blocks[]|3.settings.labelsFontSize"]: {
-  "hash": "f62fb0c285b76a5fd00fbe0c68c32fe508d16e3b03de75d02a1689565fae4673",
+  "hash": "2d53be87f0f2c9258503b2c8b357c789a32977d5d20a67db96f58929974ebbfd",
   "group": "patch"
 },
 ["container.blocks[]|3.settings.labelsFontColor"]: {
@@ -389,7 +409,7 @@ export default {
   "group": "patch"
 },
 ["container.blocks[]|3.settings.labelsAdvancedColorSettings"]: {
-  "hash": "867330c41932701d84304cf2caa9028da42ea05acc43afbfcdd0c53df5d5808b",
+  "hash": "bb46e5e18c1c95706020481c403f6550c502774d943c71b600c889af76a11f59",
   "group": "patch"
 },
 ["container.blocks[]|3.settings.labelsAdvancedColorSettings.days"]: {
@@ -409,11 +429,11 @@ export default {
   "group": "patch"
 },
 ["container.blocks[]|3.settings.separatorFontFamily"]: {
-  "hash": "2f4eae4df1296bb4c3d160c845b1de5e6fbb2ceaf1e1ec9eab62a7e8b34069fa",
+  "hash": "fe3030f4b2bee7db72b67119b12963c25d7c03f15cdbdc1d52bf7614b86da931",
   "group": "patch"
 },
 ["container.blocks[]|3.settings.separatorFontSize"]: {
-  "hash": "f62fb0c285b76a5fd00fbe0c68c32fe508d16e3b03de75d02a1689565fae4673",
+  "hash": "2d53be87f0f2c9258503b2c8b357c789a32977d5d20a67db96f58929974ebbfd",
   "group": "patch"
 },
 ["container.blocks[]|3.settings.separatorFontColor"]: {
@@ -429,87 +449,87 @@ export default {
   "group": "shape"
 },
 ["container.blocks[]|4.id"]: {
-  "hash": "50d275dd50975a609167c558c087457ad683df51092f23b0223eebe150f94838",
+  "hash": "47a0beb31908710a9be580e8dc0f320092577c8f5ab4bca36a32e1e6f229f42c",
   "group": "shape"
 },
 ["container.blocks[]|4.type"]: {
-  "hash": "ff743ddaba4c919f61891858a8251e9eeacee2e99e3570201a563c2ef3beeb4a",
+  "hash": "12e811233e9b497d5265bf7d135381d84c86f8ff44895cfb9d1bf0b070ee94f3",
   "group": "shape"
 },
 ["container.blocks[]|4.settings"]: {
-  "hash": "e8aacae48c9c52766a148ccd725ecd20a0c35ca81d77277010147f4a9d114f93",
+  "hash": "59d3d16084b6e61bec8f665506b5affb7c2285b7e0920358be2b2093425ab4e1",
   "group": "patch"
 },
 ["container.blocks[]|4.settings.networks"]: {
-  "hash": "2eebb378e4eb37d569c446706bd68a049f4f7fde0ea3265882f06bccce66c541",
+  "hash": "c0ef62b43268ce97221581582591a36b05b62702a607e4276e18b20178b4c2f1",
   "group": "social"
 },
 ["container.blocks[]|4.settings.networks[]"]: {
-  "hash": "76394a21c56915ddee0f942e5ac83f53346f6c232444427b786f3e6b41110e3f",
+  "hash": "9f087309ce6afcfa8a7f8cdc5e44464cd27c8ab60f3c7dfe7ce89302f651d487",
   "group": "social"
 },
 ["container.blocks[]|4.settings.networks[].type"]: {
-  "hash": "f7513a3698cd8f70ed6950b36c7e74218018d0fec228b77605e05538781cbe93",
+  "hash": "a14615bcfc8fc747c07467e4612db54dc413aa02a3c92703267f89615d1e99ef",
   "group": "social"
 },
 ["container.blocks[]|4.settings.networks[].link"]: {
-  "hash": "0be7d18689c47ba33bce17f5edaecca83157951dc69552b709b37a0be6e9d237",
+  "hash": "78d73e466e79059977a163c55570f18a57245a5fba4c5bf30704eee5759981e2",
   "group": "social"
 },
 ["container.blocks[]|4.settings.networks[].link.type"]: {
-  "hash": "1fcc8c383f0572ae51abcd6f71024d38750ee47cee704bff6702ef8bf8f436c2",
+  "hash": "198e23e00322ce7935fe1992fb816895317e5cb43b5155b2baec02cc6e298d5b",
   "group": "social"
 },
 ["container.blocks[]|4.settings.networks[].link.href"]: {
-  "hash": "f8be083792f7598c56824322980e9e3f95126a3a4557a3778b4ef7542e4b2870",
+  "hash": "3e9b357c01bc92fa9770698a319a838acee1cc53d94e18e511fa6a3e896ec88d",
   "group": "social"
 },
 ["container.blocks[]|4.settings.networks[].icon"]: {
-  "hash": "f4e3b6ef3bd55693011a20a455213a0e9a6935742f48324d22dd960b1b9b1fc2",
+  "hash": "8d18fe3e7747a83d22554d22efcec48418a4a871fe6908af9cdb7320c44916a9",
   "group": "social"
 },
 ["container.blocks[]|4.settings.networks[].title"]: {
-  "hash": "f72e7ad214f078a261fa2f9ed185392501d36d026fe80ac97bb74bd29e8288b2",
+  "hash": "ed3e8848868b488a110e36535e82d042b9a27f94bcc68682ea498c34f29a67e0",
   "group": "social"
 },
 ["container.blocks[]|4.settings.networks[].alt"]: {
-  "hash": "66594f3c91ea13fe475962d140012913edb8697e2b66fb5f66723c9646cd941c",
+  "hash": "bea7da8608180204eae47e9ea31697c21bacf940132fb523b1a7a0f6be8f5713",
   "group": "social"
 },
 ["container.blocks[]|4.settings.style"]: {
-  "hash": "fcbb211d21bbcc126f1f4289f101848284d62f79345ed3aea141554660b51313",
+  "hash": "89aa4a690b4f3942dce2a65c6c6e10c369fb93c46e2d6328be1ccb178f805fd5",
   "group": "patch"
 },
 ["container.blocks[]|4.settings.iconSize"]: {
-  "hash": "1327d4e0dce5fa99c5b7e1c7bfa6c1544f7e33d0de65bc62d46c440a5c597f88",
+  "hash": "e87f4fe3dd02a5c07a301771a809daff4afc214d15d89910f9e4446471bf8de2",
   "group": "patch"
 },
 ["container.blocks[]|4.settings.spaceBetweenIcons"]: {
-  "hash": "3cfb51a49c711083dd971bcbfc759614121433d68d617492a785eb57d12ac5c7",
+  "hash": "31eecf2d4185a92f6607bc942acf88b35a3f90265b1df9860240d8389520aec6",
   "group": "patch"
 },
 ["container.blocks[]|4.settings.spaceBetweenIcons.desktop"]: {
-  "hash": "f4fb3ad5d488aecc7fc537addf11e115eb8820bd36c169452f46a644395f241e",
-  "group": "patch"
-},
-["container.blocks[]|4.settings.spaceBetweenIcons.mobile"]: {
   "hash": "9f835d57af689da5e8c622960e71d6249600c0275a12b0fe2b18bb499aa1ff81",
   "group": "patch"
 },
+["container.blocks[]|4.settings.spaceBetweenIcons.mobile"]: {
+  "hash": "0ec6694c556c6c14cd599bf13b3f87e1c582e944553b896c00c06b5451b5967c",
+  "group": "patch"
+},
 ["container.blocks[]|4.settings.textCustomization"]: {
-  "hash": "4925950bb26e99e7f7aaafb2ef84db7cfcddddbac6311afe02d1a06cfb7d8102",
+  "hash": "b8e50f76f0760d97f64afb9ea950847ea65b42e3519dbc210ec2bc43935a1b69",
   "group": "patch"
 },
 ["container.blocks[]|4.settings.alignment"]: {
-  "hash": "4e6273d5a31629b1560f70c7feae816300bd5c0f99dbe9ebbe4e2b911b0d54f1",
+  "hash": "9b49103887dcf21e50b79e14acb2b67ce2c0a625e88d6d56f75c7891c53cda2a",
   "group": "patch"
 },
 ["container.blocks[]|4.settings.alignment.desktop"]: {
-  "hash": "3aa17f96e75721013ff598b1d83dde478d3ceba5ebe6d6b044bc158bfd922209",
+  "hash": "22716cc88dc73da6770c32eec62c77a7717def34e5fe9163f3a4904bf45dc37d",
   "group": "patch"
 },
 ["container.blocks[]|4.settings.alignment.mobile"]: {
-  "hash": "3aa17f96e75721013ff598b1d83dde478d3ceba5ebe6d6b044bc158bfd922209",
+  "hash": "22716cc88dc73da6770c32eec62c77a7717def34e5fe9163f3a4904bf45dc37d",
   "group": "patch"
 },
 ["container.blocks[]|4.settings.backgroundColor"]: {
@@ -521,47 +541,47 @@ export default {
   "group": "patch"
 },
 ["container.blocks[]|4.settings.margins"]: {
-  "hash": "9b49103887dcf21e50b79e14acb2b67ce2c0a625e88d6d56f75c7891c53cda2a",
+  "hash": "b72630f4db4c3aea12ebe6afc3f504eed7e1efc917830a23975f4a441fe0ec1e",
   "group": "patch"
 },
 ["container.blocks[]|4.settings.margins.desktop"]: {
-  "hash": "b72630f4db4c3aea12ebe6afc3f504eed7e1efc917830a23975f4a441fe0ec1e",
+  "hash": "142c02ad97d9c8fe96988ba3d1a39005d7c6a1b92e0077e0126e37d12cc28748",
   "group": "patch"
 },
 ["container.blocks[]|4.settings.margins.desktop.top"]: {
-  "hash": "a6bea1a941f0fe747cf84690d16c5a07d5e51330e14da1a256351dd6a85326fe",
+  "hash": "e79af1d47332549c90654d087e72cc6ed45fc60914b3bb9758b14cbf88167309",
   "group": "patch"
 },
 ["container.blocks[]|4.settings.margins.desktop.right"]: {
-  "hash": "e79af1d47332549c90654d087e72cc6ed45fc60914b3bb9758b14cbf88167309",
+  "hash": "2350cdea9b8c19b17c9eff5ef96f37477899d4460c7d324f9ffcda02aeb5cfab",
   "group": "patch"
 },
 ["container.blocks[]|4.settings.margins.desktop.bottom"]: {
-  "hash": "2350cdea9b8c19b17c9eff5ef96f37477899d4460c7d324f9ffcda02aeb5cfab",
+  "hash": "d83d2ce090e41b2f02a79246f77ec2937ff8bd6266606ad980d813de06051ee8",
   "group": "patch"
 },
 ["container.blocks[]|4.settings.margins.desktop.left"]: {
-  "hash": "d83d2ce090e41b2f02a79246f77ec2937ff8bd6266606ad980d813de06051ee8",
+  "hash": "c7cb316256830deabe77aa292385251a2e3b1a61d4b91c5cfab5467293855968",
   "group": "patch"
 },
 ["container.blocks[]|4.settings.margins.mobile"]: {
-  "hash": "b72630f4db4c3aea12ebe6afc3f504eed7e1efc917830a23975f4a441fe0ec1e",
+  "hash": "142c02ad97d9c8fe96988ba3d1a39005d7c6a1b92e0077e0126e37d12cc28748",
   "group": "patch"
 },
 ["container.blocks[]|4.settings.margins.mobile.top"]: {
-  "hash": "a6bea1a941f0fe747cf84690d16c5a07d5e51330e14da1a256351dd6a85326fe",
-  "group": "patch"
-},
-["container.blocks[]|4.settings.margins.mobile.right"]: {
   "hash": "e79af1d47332549c90654d087e72cc6ed45fc60914b3bb9758b14cbf88167309",
   "group": "patch"
 },
-["container.blocks[]|4.settings.margins.mobile.bottom"]: {
+["container.blocks[]|4.settings.margins.mobile.right"]: {
   "hash": "2350cdea9b8c19b17c9eff5ef96f37477899d4460c7d324f9ffcda02aeb5cfab",
   "group": "patch"
 },
-["container.blocks[]|4.settings.margins.mobile.left"]: {
+["container.blocks[]|4.settings.margins.mobile.bottom"]: {
   "hash": "d83d2ce090e41b2f02a79246f77ec2937ff8bd6266606ad980d813de06051ee8",
+  "group": "patch"
+},
+["container.blocks[]|4.settings.margins.mobile.left"]: {
+  "hash": "c7cb316256830deabe77aa292385251a2e3b1a61d4b91c5cfab5467293855968",
   "group": "patch"
 },
 ["container.blocks[]|4.settings.includeInOutput"]: {
@@ -569,7 +589,7 @@ export default {
   "group": "patch"
 },
 ["container.blocks[]|4.settings.anchorLinkName"]: {
-  "hash": "2467ead083b340b4c98dcac8dfe318cca8922f50f1429c9c982492e5d3cff016",
+  "hash": "106002c12790f4c343b120fadf609c6ef01560b97e08bb5a4455a007fc1477a4",
   "group": "patch"
 },
 ["container.blocks[]|5"]: {
@@ -577,59 +597,59 @@ export default {
   "group": "shape"
 },
 ["container.blocks[]|5.id"]: {
-  "hash": "50d275dd50975a609167c558c087457ad683df51092f23b0223eebe150f94838",
+  "hash": "47a0beb31908710a9be580e8dc0f320092577c8f5ab4bca36a32e1e6f229f42c",
   "group": "shape"
 },
 ["container.blocks[]|5.type"]: {
-  "hash": "23be1d513664ffc5e41366e397ce15e8adedbcaf0f87398536026d0c17168bb9",
+  "hash": "e6342b4066523d1360d84de448b460b1f6e45b6c274d7c555b3d00f2b8e91ae9",
   "group": "shape"
 },
 ["container.blocks[]|5.settings"]: {
-  "hash": "6bef9c80a1908335ff6412e951b2ef2834ee6904b68712d6e1545acf1cebaa00",
+  "hash": "eb95d4056efc1f68cd64ff210084ad2f14c27832f1bd0b57d0c5e3dff08a7a35",
   "group": "patch"
 },
 ["container.blocks[]|5.settings.margins"]: {
-  "hash": "60c652de6fbcc5408abf7064c83b2ffc8eed5e90aca2245a0f9af4ed7cafe58c",
+  "hash": "8fd51c58651fd5620809426d3f5811e3d10c88c578caef917cd40df7c3233c58",
   "group": "patch"
 },
 ["container.blocks[]|5.settings.margins.desktop"]: {
-  "hash": "8fd51c58651fd5620809426d3f5811e3d10c88c578caef917cd40df7c3233c58",
+  "hash": "5291430aa5d1612e996a36539e299d4c72f76580d6330b22c1ee4a6e35d7fee6",
   "group": "patch"
 },
 ["container.blocks[]|5.settings.margins.desktop.top"]: {
-  "hash": "cae6528ec63db61af2bae0183ecb231ccb21a3f7d1c4b55037b9f6a0db23842f",
+  "hash": "7f4f7479f832d405028ffc4b74221f8b173423a1f6b87e5bddfb52eea9190fe9",
   "group": "patch"
 },
 ["container.blocks[]|5.settings.margins.desktop.right"]: {
-  "hash": "7f4f7479f832d405028ffc4b74221f8b173423a1f6b87e5bddfb52eea9190fe9",
+  "hash": "78b59b05dcd0760cd65b76d54b3f30be13b560562501ee2f4e91ecc2bc0d43c7",
   "group": "patch"
 },
 ["container.blocks[]|5.settings.margins.desktop.bottom"]: {
-  "hash": "78b59b05dcd0760cd65b76d54b3f30be13b560562501ee2f4e91ecc2bc0d43c7",
+  "hash": "b594ccb7655933ecb3f2077e0d62f18d64160e57a6a74e405eb8edc56a72394b",
   "group": "patch"
 },
 ["container.blocks[]|5.settings.margins.desktop.left"]: {
-  "hash": "b594ccb7655933ecb3f2077e0d62f18d64160e57a6a74e405eb8edc56a72394b",
+  "hash": "cc708a674de0375118a48f9e4c6b7fcb1257a96da0d761c63ee7d3a21e07ee0c",
   "group": "patch"
 },
 ["container.blocks[]|5.settings.margins.mobile"]: {
-  "hash": "8fd51c58651fd5620809426d3f5811e3d10c88c578caef917cd40df7c3233c58",
+  "hash": "5291430aa5d1612e996a36539e299d4c72f76580d6330b22c1ee4a6e35d7fee6",
   "group": "patch"
 },
 ["container.blocks[]|5.settings.margins.mobile.top"]: {
-  "hash": "cae6528ec63db61af2bae0183ecb231ccb21a3f7d1c4b55037b9f6a0db23842f",
-  "group": "patch"
-},
-["container.blocks[]|5.settings.margins.mobile.right"]: {
   "hash": "7f4f7479f832d405028ffc4b74221f8b173423a1f6b87e5bddfb52eea9190fe9",
   "group": "patch"
 },
-["container.blocks[]|5.settings.margins.mobile.bottom"]: {
+["container.blocks[]|5.settings.margins.mobile.right"]: {
   "hash": "78b59b05dcd0760cd65b76d54b3f30be13b560562501ee2f4e91ecc2bc0d43c7",
   "group": "patch"
 },
-["container.blocks[]|5.settings.margins.mobile.left"]: {
+["container.blocks[]|5.settings.margins.mobile.bottom"]: {
   "hash": "b594ccb7655933ecb3f2077e0d62f18d64160e57a6a74e405eb8edc56a72394b",
+  "group": "patch"
+},
+["container.blocks[]|5.settings.margins.mobile.left"]: {
+  "hash": "cc708a674de0375118a48f9e4c6b7fcb1257a96da0d761c63ee7d3a21e07ee0c",
   "group": "patch"
 },
 ["container.blocks[]|5.settings.includeInOutput"]: {
@@ -641,11 +661,11 @@ export default {
   "group": "patch"
 },
 ["container.blocks[]|5.settings.anchorLinkName"]: {
-  "hash": "2467ead083b340b4c98dcac8dfe318cca8922f50f1429c9c982492e5d3cff016",
+  "hash": "106002c12790f4c343b120fadf609c6ef01560b97e08bb5a4455a007fc1477a4",
   "group": "patch"
 },
 ["container.blocks[]|5.content"]: {
-  "hash": "fe9c1288774bee0e33e2b1de6f16371694233276e5a0c091aba6b95d2b106dd5",
+  "hash": "be24a73264e12871e69c3eb4103c18e1bd0807dc763e24197c87194fc2ba9f6c",
   "group": "content"
 },
 ["container.blocks[]|6"]: {
@@ -653,11 +673,11 @@ export default {
   "group": "shape"
 },
 ["container.blocks[]|6.id"]: {
-  "hash": "50d275dd50975a609167c558c087457ad683df51092f23b0223eebe150f94838",
+  "hash": "47a0beb31908710a9be580e8dc0f320092577c8f5ab4bca36a32e1e6f229f42c",
   "group": "shape"
 },
 ["container.blocks[]|6.type"]: {
-  "hash": "209600cd1e02f5dd3e8713212e7eb22ce05455df3d3697c15cf2e439035960fc",
+  "hash": "fcf933d273d68622196bf4fcb2b44218566f2b6f4d341e611bfbb4beaede6c3b",
   "group": "shape"
 },
 ["container.blocks[]|6.settings"]: {
@@ -665,95 +685,95 @@ export default {
   "group": "patch"
 },
 ["container.blocks[]|6.settings.link"]: {
-  "hash": "f7e00a6b8a46530c317cd65ff27662b798ee4f8ff476a81334670cb54d8da56c",
+  "hash": "2b5958cea2b0e8c0a557155e377fe4c669af21594063f3a46a7f72bbd2ebedfc",
   "group": "patch"
 },
 ["container.blocks[]|6.settings.link|0"]: {
-  "hash": "0e00985c4754cdd19d24a6d676a16b3ca3eebd15cfc7c4dd5a94210e915ba1fd",
+  "hash": "0a4cdde9ff4296daa7a6f51561ebcc803d32abac034f094fd5ed282566a1022a",
   "group": "patch"
 },
 ["container.blocks[]|6.settings.link|0.type"]: {
-  "hash": "984bd3b24b5e45f009c9d26c92fa33f2762d2dfb107d7369dbe9cbb91d212f23",
+  "hash": "74acf53bd85ca6c96bb19c51a73b50b46a01cdee4eaf19a8c46e7188b0e8e9c3",
   "group": "patch"
 },
 ["container.blocks[]|6.settings.link|0.value"]: {
-  "hash": "b1cced6d552efae251cb83edf4c4bda1ccedbfc3fb16299b83445ff4c4f1f597",
+  "hash": "77faaf177665b9f97a492f6322e92828b31815d50b669b29cc0dfbd31bcccdfe",
   "group": "patch"
 },
 ["container.blocks[]|6.settings.link|1"]: {
-  "hash": "6f5596428c31f0621b833ec4eadee3aef62e90387928bd30f3f8afda45a60112",
+  "hash": "6de10b5a62ea8024bf409dc0460493d3a721b1be2e9b67ce12f3bcb5b9f78302",
   "group": "patch"
 },
 ["container.blocks[]|6.settings.link|1.type"]: {
-  "hash": "3faf393dfc84fd9745dafb4226abc25e4193185ce1e5a2a4b2db5d450563bbf4",
+  "hash": "94c7ad49f3eb8f43833d59103c0ec94e9c84f0d580fee36b0c4712ff4a4112b0",
   "group": "patch"
 },
 ["container.blocks[]|6.settings.link|1.value"]: {
-  "hash": "61bc7b26a75526ea62f141e443eab0fce3e68069879aec772c25f33ef3c0d5ff",
+  "hash": "dd701f1f060fa2c09d27308d1e485d852b4f3acaaa12aa119b4423ce7177c584",
   "group": "patch"
 },
 ["container.blocks[]|6.settings.link|1.salesforce"]: {
-  "hash": "c12bdc67caa218728e9d7ddfd1a427279d1ec521620ecc1983f34b28e6180216",
+  "hash": "82e6edb637e5ac34c7b5b7689e26f7a096c8eeabd7c8ad70b8bd17703224f5c9",
   "group": "patch"
 },
 ["container.blocks[]|6.settings.link|1.salesforce.trackingAlias"]: {
-  "hash": "939b4358493eadd16539fcc6585ee98294cc956c6c816ced5f9727f6719812f5",
-  "group": "patch"
-},
-["container.blocks[]|6.settings.link|1.salesforce.linkTo"]: {
   "hash": "8b301e7fdfff5a699dfea64311022dda45eb2a90b1505b1f44bbdab319909023",
   "group": "patch"
 },
+["container.blocks[]|6.settings.link|1.salesforce.linkTo"]: {
+  "hash": "169c90478bb93f68d727d3eb5127b1a0aadffbe9e43c2344d2e068e3a070b19c",
+  "group": "patch"
+},
 ["container.blocks[]|6.settings.link|1.salesforce.conversion"]: {
-  "hash": "8fbdb4a8aa764fe7bb644bf550f9ae3fcd0408763c6955da936cd67286dfc0b9",
+  "hash": "c2ec107bfa5f1c4beebf0ea7e9c566c7889219f4d2a03a87452189e0d2f94553",
   "group": "patch"
 },
 ["container.blocks[]|6.settings.text"]: {
-  "hash": "50f7d7d7ec20aba96c8166679bb9d0f5117ac2c7714049ab6811e9480e12abfc",
+  "hash": "4d017f132336c2c3509c19e31108b55238f7d6df5bc4ec13662db01e96a36e16",
   "group": "patch"
 },
 ["container.blocks[]|6.settings.alignment"]: {
-  "hash": "44d68f603058c58906fa4549e7d78e2d287681aa446b3a5ee75b124954132093",
+  "hash": "1eeab0b972b8993087afcd542811280a2f39462b08781082fb93732c63952589",
   "group": "patch"
 },
 ["container.blocks[]|6.settings.alignment.desktop"]: {
-  "hash": "3aa17f96e75721013ff598b1d83dde478d3ceba5ebe6d6b044bc158bfd922209",
+  "hash": "22716cc88dc73da6770c32eec62c77a7717def34e5fe9163f3a4904bf45dc37d",
   "group": "patch"
 },
 ["container.blocks[]|6.settings.alignment.mobile"]: {
-  "hash": "3aa17f96e75721013ff598b1d83dde478d3ceba5ebe6d6b044bc158bfd922209",
+  "hash": "22716cc88dc73da6770c32eec62c77a7717def34e5fe9163f3a4904bf45dc37d",
   "group": "patch"
 },
 ["container.blocks[]|6.settings.fixedHeight"]: {
-  "hash": "80139bbd1afb25d05878970cceb9de5e07f8ba1bd7623bfa29bf97643266d73e",
+  "hash": "48429251a3f4234d5f603bed98865f922a6c934b00eb3767c4b63250e8883cde",
   "group": "patch"
 },
 ["container.blocks[]|6.settings.fixedHeight.height"]: {
-  "hash": "88e46a62f227e39ee4233deb530285693e064ffd5a50ac8775dac862ff1afd70",
+  "hash": "8d3f2cef628d02e12aeb75118131e468310f33ae957a864b1f23446019682e6e",
   "group": "patch"
 },
 ["container.blocks[]|6.settings.fixedHeight.alignment"]: {
-  "hash": "fd2d4c404456d3a69a8b5187aa4a31d9eedeb89f360337c34062ac3f9a1a7833",
+  "hash": "4da6f1b38d2ca20ef292884e3c8d04b6b9b8493a97cc5bb63c335d56cc473187",
   "group": "patch"
 },
 ["container.blocks[]|6.settings.icon"]: {
-  "hash": "0fbbf0ab911ebad0e9ac994287efc8f9e7674ba32a91f3e1559d5d4768dcde36",
+  "hash": "702a697f65cfc1e3116c815c2078e9c77e474b67aca4bac1a658655f9b307512",
   "group": "patch"
 },
 ["container.blocks[]|6.settings.icon.src"]: {
-  "hash": "8dd1ccf4350b0bbe2818c1b5e7eac1e4c2a04e9734da6810958ecf7997a93182",
+  "hash": "d22b53b2dda34007893a4b18c98c7c4757a3d2eea4218d8e35f293fa74cd3992",
   "group": "patch"
 },
 ["container.blocks[]|6.settings.icon.width"]: {
-  "hash": "067be96479a468c41b21cf34207e877cb8b1901320158995bd5cbfddfae5dd33",
+  "hash": "ae8b7db56db1f986f65b4b1c96b079fc1b8459c5eba699bdf67c9b8f2e4ca515",
   "group": "patch"
 },
 ["container.blocks[]|6.settings.icon.align"]: {
-  "hash": "f24257c367caaefc11417b108291e6af3684503be6684793b64c5719e153ec70",
+  "hash": "bddb1c835d9e63b134de8c7b28915b70daa21c93e9d73ca4f969721935d5f907",
   "group": "patch"
 },
 ["container.blocks[]|6.settings.icon.indent"]: {
-  "hash": "9fc863fcaa21d7844ab830e5158c3d5defb6968567262633849a72ceb0af3dcc",
+  "hash": "9a0d765eb5f6496741a667f1691e54a88086a301929e397b82466ce1660f747f",
   "group": "patch"
 },
 ["container.blocks[]|6.settings.hideElement"]: {
@@ -761,91 +781,91 @@ export default {
   "group": "patch"
 },
 ["container.blocks[]|6.settings.padding"]: {
-  "hash": "470fa9835413f7c912c1fef63ce70bafb9ad39474f0c4e46489ec2fa82e18bb0",
+  "hash": "498e86540accf8973ce3fe117c540a3a3e08e58ab328004b87210b226e5c95c0",
   "group": "patch"
 },
 ["container.blocks[]|6.settings.padding.desktop"]: {
-  "hash": "498e86540accf8973ce3fe117c540a3a3e08e58ab328004b87210b226e5c95c0",
+  "hash": "fbe20126191449b5473906e43bf6df6883a43d2bfe0d9b091c7212cb7563e220",
   "group": "patch"
 },
 ["container.blocks[]|6.settings.padding.desktop.top"]: {
-  "hash": "4e84f038becf149307d149617b6dd20dea141d56703d8af41981ac085ee5c6db",
+  "hash": "e4cf3861225073277f7c3782995ed9ff0dc8091204cb7daa2fad3370b00c677d",
   "group": "patch"
 },
 ["container.blocks[]|6.settings.padding.desktop.right"]: {
-  "hash": "4e84f038becf149307d149617b6dd20dea141d56703d8af41981ac085ee5c6db",
+  "hash": "e4cf3861225073277f7c3782995ed9ff0dc8091204cb7daa2fad3370b00c677d",
   "group": "patch"
 },
 ["container.blocks[]|6.settings.padding.desktop.bottom"]: {
-  "hash": "4e84f038becf149307d149617b6dd20dea141d56703d8af41981ac085ee5c6db",
+  "hash": "e4cf3861225073277f7c3782995ed9ff0dc8091204cb7daa2fad3370b00c677d",
   "group": "patch"
 },
 ["container.blocks[]|6.settings.padding.desktop.left"]: {
-  "hash": "4e84f038becf149307d149617b6dd20dea141d56703d8af41981ac085ee5c6db",
+  "hash": "e4cf3861225073277f7c3782995ed9ff0dc8091204cb7daa2fad3370b00c677d",
   "group": "patch"
 },
 ["container.blocks[]|6.settings.padding.mobile"]: {
-  "hash": "498e86540accf8973ce3fe117c540a3a3e08e58ab328004b87210b226e5c95c0",
+  "hash": "fbe20126191449b5473906e43bf6df6883a43d2bfe0d9b091c7212cb7563e220",
   "group": "patch"
 },
 ["container.blocks[]|6.settings.padding.mobile.top"]: {
-  "hash": "4e84f038becf149307d149617b6dd20dea141d56703d8af41981ac085ee5c6db",
+  "hash": "e4cf3861225073277f7c3782995ed9ff0dc8091204cb7daa2fad3370b00c677d",
   "group": "patch"
 },
 ["container.blocks[]|6.settings.padding.mobile.right"]: {
-  "hash": "4e84f038becf149307d149617b6dd20dea141d56703d8af41981ac085ee5c6db",
+  "hash": "e4cf3861225073277f7c3782995ed9ff0dc8091204cb7daa2fad3370b00c677d",
   "group": "patch"
 },
 ["container.blocks[]|6.settings.padding.mobile.bottom"]: {
-  "hash": "4e84f038becf149307d149617b6dd20dea141d56703d8af41981ac085ee5c6db",
+  "hash": "e4cf3861225073277f7c3782995ed9ff0dc8091204cb7daa2fad3370b00c677d",
   "group": "patch"
 },
 ["container.blocks[]|6.settings.padding.mobile.left"]: {
-  "hash": "4e84f038becf149307d149617b6dd20dea141d56703d8af41981ac085ee5c6db",
+  "hash": "e4cf3861225073277f7c3782995ed9ff0dc8091204cb7daa2fad3370b00c677d",
   "group": "patch"
 },
 ["container.blocks[]|6.settings.margins"]: {
-  "hash": "470fa9835413f7c912c1fef63ce70bafb9ad39474f0c4e46489ec2fa82e18bb0",
+  "hash": "498e86540accf8973ce3fe117c540a3a3e08e58ab328004b87210b226e5c95c0",
   "group": "patch"
 },
 ["container.blocks[]|6.settings.margins.desktop"]: {
-  "hash": "498e86540accf8973ce3fe117c540a3a3e08e58ab328004b87210b226e5c95c0",
+  "hash": "fbe20126191449b5473906e43bf6df6883a43d2bfe0d9b091c7212cb7563e220",
   "group": "patch"
 },
 ["container.blocks[]|6.settings.margins.desktop.top"]: {
-  "hash": "4e84f038becf149307d149617b6dd20dea141d56703d8af41981ac085ee5c6db",
+  "hash": "e4cf3861225073277f7c3782995ed9ff0dc8091204cb7daa2fad3370b00c677d",
   "group": "patch"
 },
 ["container.blocks[]|6.settings.margins.desktop.right"]: {
-  "hash": "4e84f038becf149307d149617b6dd20dea141d56703d8af41981ac085ee5c6db",
+  "hash": "e4cf3861225073277f7c3782995ed9ff0dc8091204cb7daa2fad3370b00c677d",
   "group": "patch"
 },
 ["container.blocks[]|6.settings.margins.desktop.bottom"]: {
-  "hash": "4e84f038becf149307d149617b6dd20dea141d56703d8af41981ac085ee5c6db",
+  "hash": "e4cf3861225073277f7c3782995ed9ff0dc8091204cb7daa2fad3370b00c677d",
   "group": "patch"
 },
 ["container.blocks[]|6.settings.margins.desktop.left"]: {
-  "hash": "4e84f038becf149307d149617b6dd20dea141d56703d8af41981ac085ee5c6db",
+  "hash": "e4cf3861225073277f7c3782995ed9ff0dc8091204cb7daa2fad3370b00c677d",
   "group": "patch"
 },
 ["container.blocks[]|6.settings.margins.mobile"]: {
-  "hash": "498e86540accf8973ce3fe117c540a3a3e08e58ab328004b87210b226e5c95c0",
+  "hash": "fbe20126191449b5473906e43bf6df6883a43d2bfe0d9b091c7212cb7563e220",
   "group": "patch"
 },
 ["container.blocks[]|6.settings.margins.mobile.top"]: {
-  "hash": "4e84f038becf149307d149617b6dd20dea141d56703d8af41981ac085ee5c6db",
+  "hash": "e4cf3861225073277f7c3782995ed9ff0dc8091204cb7daa2fad3370b00c677d",
   "group": "patch"
 },
 ["container.blocks[]|6.settings.margins.mobile.right"]: {
-  "hash": "4e84f038becf149307d149617b6dd20dea141d56703d8af41981ac085ee5c6db",
+  "hash": "e4cf3861225073277f7c3782995ed9ff0dc8091204cb7daa2fad3370b00c677d",
   "group": "patch"
 },
 ["container.blocks[]|6.settings.margins.mobile.bottom"]: {
-  "hash": "4e84f038becf149307d149617b6dd20dea141d56703d8af41981ac085ee5c6db",
+  "hash": "e4cf3861225073277f7c3782995ed9ff0dc8091204cb7daa2fad3370b00c677d",
   "group": "patch"
 },
 ["container.blocks[]|6.settings.margins.mobile.left"]: {
-  "hash": "4e84f038becf149307d149617b6dd20dea141d56703d8af41981ac085ee5c6db",
+  "hash": "e4cf3861225073277f7c3782995ed9ff0dc8091204cb7daa2fad3370b00c677d",
   "group": "patch"
 },
 ["container.blocks[]|6.settings.includeInOutput"]: {
@@ -853,7 +873,7 @@ export default {
   "group": "patch"
 },
 ["container.blocks[]|6.settings.anchorLink"]: {
-  "hash": "1a5d9b8ca9634af8eb713c4b2818950339bb56eba942c7d4f9fe99bd6c2d90c2",
+  "hash": "d86c5a0bd9a3b0167860fa769ae33ad9afa6efe0f3ba462b86582fcbab7ce532",
   "group": "patch"
 },
 ["container.blocks[]|6.settings.backgroundColor"]: {
@@ -869,11 +889,11 @@ export default {
   "group": "patch"
 },
 ["container.blocks[]|6.settings.fontSize.desktop"]: {
-  "hash": "ab83426f51c08225ce7618f5b68b5cdc7d9be56d2da5fa7df2702a4180b8467e",
+  "hash": "ec09750bc292e3d9341b2b0a89d50789242ef7c8b6b4f2db34699967af3c143c",
   "group": "patch"
 },
 ["container.blocks[]|6.settings.fontSize.mobile"]: {
-  "hash": "ec09750bc292e3d9341b2b0a89d50789242ef7c8b6b4f2db34699967af3c143c",
+  "hash": "d844f38ecb13867c0032bb396225280af8fc4ad0f86cadfd940ffbde854aaa18",
   "group": "patch"
 },
 ["container.blocks[]|6.settings.textStyle"]: {
@@ -881,11 +901,11 @@ export default {
   "group": "patch"
 },
 ["container.blocks[]|6.settings.textStyle.bold"]: {
-  "hash": "9c6f040847c0a73d8626055c299ef64a8cfb1ef2e9e6c1f654d146a5d7b63b21",
+  "hash": "05bcdbf64387df58bc0722e8a00124c1d1895129ad59b131cde5828d327cdfb2",
   "group": "patch"
 },
 ["container.blocks[]|6.settings.textStyle.italic"]: {
-  "hash": "05bcdbf64387df58bc0722e8a00124c1d1895129ad59b131cde5828d327cdfb2",
+  "hash": "27e052a6f34c32bdc5d277e020fb65f23601c4eb9b766487ff1da64ed4857415",
   "group": "patch"
 },
 ["container.blocks[]|6.settings.fitContainer"]: {
@@ -893,11 +913,11 @@ export default {
   "group": "patch"
 },
 ["container.blocks[]|6.settings.fitContainer.desktop"]: {
-  "hash": "27e052a6f34c32bdc5d277e020fb65f23601c4eb9b766487ff1da64ed4857415",
+  "hash": "cc05a1506d51c0487a24f1b0187c9131aef9eb32600625addd04d5db1e3cdc2b",
   "group": "patch"
 },
 ["container.blocks[]|6.settings.fitContainer.mobile"]: {
-  "hash": "cc05a1506d51c0487a24f1b0187c9131aef9eb32600625addd04d5db1e3cdc2b",
+  "hash": "e1f54c9e9b3790fd9a54985bf44db72a03bba76dddd0e5504a88d9e1ede5194c",
   "group": "patch"
 },
 ["container.blocks[]|6.settings.blockBackgroundColor"]: {
@@ -909,19 +929,19 @@ export default {
   "group": "patch"
 },
 ["container.blocks[]|6.settings.borderRadius.topLeft"]: {
-  "hash": "93fd6673c1d3e032429ab34f6497c75fa284c3eafb9ac3b661c93b1c72935167",
-  "group": "patch"
-},
-["container.blocks[]|6.settings.borderRadius.topRight"]: {
   "hash": "3f17dbd3d098f1ccfa264a604aac56d6c5b5368425ce120c1c066332be408243",
   "group": "patch"
 },
-["container.blocks[]|6.settings.borderRadius.bottomRight"]: {
+["container.blocks[]|6.settings.borderRadius.topRight"]: {
   "hash": "d61fd865902321b64df120b6691df9fed3a6e398988390700196dd2b4a26647f",
   "group": "patch"
 },
-["container.blocks[]|6.settings.borderRadius.bottomLeft"]: {
+["container.blocks[]|6.settings.borderRadius.bottomRight"]: {
   "hash": "90da3b9939d1002c475db7b21954e487c4341edd188d4eba882beda66310344c",
+  "group": "patch"
+},
+["container.blocks[]|6.settings.borderRadius.bottomLeft"]: {
+  "hash": "137b9d2592910769c815a933143ad8eaa3c108a4b2f0dab23401c6751a256089",
   "group": "patch"
 },
 ["container.blocks[]|6.settings.border"]: {
@@ -933,7 +953,7 @@ export default {
   "group": "patch"
 },
 ["container.blocks[]|6.settings.border.top.width"]: {
-  "hash": "20807dcbb157d535aaa8b671ca717f0b2482110bd827fb480f186bfd29a5ec88",
+  "hash": "cf5e994947ee0a3e924f9d5b5e4cf49fc9fa5309a29408096662a474ccee6205",
   "group": "patch"
 },
 ["container.blocks[]|6.settings.border.top.color"]: {
@@ -945,7 +965,7 @@ export default {
   "group": "patch"
 },
 ["container.blocks[]|6.settings.border.right.width"]: {
-  "hash": "20807dcbb157d535aaa8b671ca717f0b2482110bd827fb480f186bfd29a5ec88",
+  "hash": "cf5e994947ee0a3e924f9d5b5e4cf49fc9fa5309a29408096662a474ccee6205",
   "group": "patch"
 },
 ["container.blocks[]|6.settings.border.right.color"]: {
@@ -957,7 +977,7 @@ export default {
   "group": "patch"
 },
 ["container.blocks[]|6.settings.border.bottom.width"]: {
-  "hash": "20807dcbb157d535aaa8b671ca717f0b2482110bd827fb480f186bfd29a5ec88",
+  "hash": "cf5e994947ee0a3e924f9d5b5e4cf49fc9fa5309a29408096662a474ccee6205",
   "group": "patch"
 },
 ["container.blocks[]|6.settings.border.bottom.color"]: {
@@ -969,7 +989,7 @@ export default {
   "group": "patch"
 },
 ["container.blocks[]|6.settings.border.left.width"]: {
-  "hash": "20807dcbb157d535aaa8b671ca717f0b2482110bd827fb480f186bfd29a5ec88",
+  "hash": "cf5e994947ee0a3e924f9d5b5e4cf49fc9fa5309a29408096662a474ccee6205",
   "group": "patch"
 },
 ["container.blocks[]|6.settings.border.left.color"]: {
@@ -977,7 +997,7 @@ export default {
   "group": "patch"
 },
 ["container.blocks[]|6.settings.border.style"]: {
-  "hash": "0cd27b2e175f6a9ea558b5557d0db06999e5fbd160d8901dee0e60e9196eb8a3",
+  "hash": "2ecfd390d78065356c119e0c89a07ddd2c0732868238de385e8047d588d4a240",
   "group": "patch"
 },
 ["container.blocks[]|6.settings.fontColor"]: {
@@ -989,71 +1009,71 @@ export default {
   "group": "shape"
 },
 ["container.blocks[]|7.id"]: {
-  "hash": "50d275dd50975a609167c558c087457ad683df51092f23b0223eebe150f94838",
+  "hash": "47a0beb31908710a9be580e8dc0f320092577c8f5ab4bca36a32e1e6f229f42c",
   "group": "shape"
 },
 ["container.blocks[]|7.type"]: {
-  "hash": "f0f775f154f6a93a00fdc8537284d3864ff98fd4f24848c5dc1cb552045d6865",
+  "hash": "be8fc2df9b4bebf973e373e64668961fba047d6599d36b58a021fb8f766d4192",
   "group": "shape"
 },
 ["container.blocks[]|7.settings"]: {
-  "hash": "6abf41540929c892b970d277dc6cd0ff692f65e7dbb135c62e3a3d1eed77fdf3",
+  "hash": "8b47f40f135882f4e9dcbf2af8e184262596efcc915421f12b80cabef5675b6a",
   "group": "patch"
 },
 ["container.blocks[]|7.settings.mode"]: {
-  "hash": "a93dea5860a7260a9b15e09274bef6b575fddd64dc8c368ce7538cef979bfdb3",
+  "hash": "934583bd5ecf3cfcb8ad3edf5aefbf9001f70eac8d96a5211d3d49db401cbab8",
   "group": "patch"
 },
 ["container.blocks[]|7.settings.width"]: {
-  "hash": "c98401b250da2f10fb16674aa6a1cf46989044c1c986aad54246ef84aac763f9",
+  "hash": "0d894e95e12e0bf7ad275f0fa75552c984ec07e799c51ac841abc544861685ac",
   "group": "patch"
 },
 ["container.blocks[]|7.settings.width.desktop"]: {
-  "hash": "2dd19f19fd208e1651792088bde34106473b2e6bcb51c88fd60b6a70e4c2e2d2",
+  "hash": "4e1821e83be7aff3a90dcd5182101db6a3fd27808bac4b599677f1158749eb69",
   "group": "patch"
 },
 ["container.blocks[]|7.settings.width.desktop.value"]: {
-  "hash": "28e25ebc8f92a8d1d94be646e64df10652b00af1e41a890370a64e9dae3abbf8",
+  "hash": "f564224aa2cc7bdccbaee209d438cbdd00257093f679075cb3c143989da05f07",
   "group": "patch"
 },
 ["container.blocks[]|7.settings.width.desktop.unit"]: {
-  "hash": "038bd727c3a7f75a7df1298afbdc09029c0e0bf214c183ed56f39bc943207371",
+  "hash": "b5a3567abb88608f1c0a5b00a6f5b6d255b3fad3544ed8f412605cb7aa3d5989",
   "group": "patch"
 },
 ["container.blocks[]|7.settings.width.mobile"]: {
-  "hash": "d0247b3d8ec8a9601c2242b5964c252f34161413e239c1675843ec4a7bb7f919",
+  "hash": "3871504d3db18d6873fa5f9d62dec0a936aecd9ce144a63c0d36aa51a17f4033",
   "group": "patch"
 },
 ["container.blocks[]|7.settings.width.mobile.value"]: {
-  "hash": "28e25ebc8f92a8d1d94be646e64df10652b00af1e41a890370a64e9dae3abbf8",
+  "hash": "f564224aa2cc7bdccbaee209d438cbdd00257093f679075cb3c143989da05f07",
   "group": "patch"
 },
 ["container.blocks[]|7.settings.width.mobile.unit"]: {
-  "hash": "038bd727c3a7f75a7df1298afbdc09029c0e0bf214c183ed56f39bc943207371",
+  "hash": "b5a3567abb88608f1c0a5b00a6f5b6d255b3fad3544ed8f412605cb7aa3d5989",
   "group": "patch"
 },
 ["container.blocks[]|7.settings.height"]: {
-  "hash": "8175493f7a4e6097911a2a71e926bb7be6e7153dd296ca0dd1411348f7a44468",
+  "hash": "22e24f43911d49e326742caa301f85319b0f7d5d4ff878ea1c8cefe097ddb4f8",
   "group": "patch"
 },
 ["container.blocks[]|7.settings.height.desktop"]: {
-  "hash": "d321b6e0755f86419acdf76ff29896e2b64dfc5fe7e861650a926aeec0f67964",
-  "group": "patch"
-},
-["container.blocks[]|7.settings.height.mobile"]: {
   "hash": "3565506938b4757034099c1e31939c3d65929395f0a5fa3fdee91dad60e1efac",
   "group": "patch"
 },
+["container.blocks[]|7.settings.height.mobile"]: {
+  "hash": "cd3a0b85e95188b5c2cf5210ff2dca78487db1fdf41936223273f8e9f528ae3e",
+  "group": "patch"
+},
 ["container.blocks[]|7.settings.border"]: {
-  "hash": "56a67a7a73a48f9ab789903379e555a648371ba4b09afb6ebb3e489d634bdfe6",
+  "hash": "70448b393650cafdcca21003ec304ca6aad97d4e71484e6d842c7361c7d2d7e0",
   "group": "patch"
 },
 ["container.blocks[]|7.settings.border.size"]: {
-  "hash": "63ca2afe231a746eaf4036e71fc8496cdfb1359673a08f58f6945af1a739943f",
+  "hash": "5476a5873562bd661c359b9a3d8fc89ec0bb87a7b78d707518d59d77fe3c3310",
   "group": "patch"
 },
 ["container.blocks[]|7.settings.border.style"]: {
-  "hash": "0cd27b2e175f6a9ea558b5557d0db06999e5fbd160d8901dee0e60e9196eb8a3",
+  "hash": "2ecfd390d78065356c119e0c89a07ddd2c0732868238de385e8047d588d4a240",
   "group": "patch"
 },
 ["container.blocks[]|7.settings.border.color"]: {
@@ -1061,19 +1081,19 @@ export default {
   "group": "patch"
 },
 ["container.blocks[]|7.settings.mobileBorder"]: {
-  "hash": "f03d6957009fe5a55c834e113ff02e2bf844a6abf9738fc4393a02ebec1de549",
+  "hash": "27a81092f5a75d5b655b7e82e6de338687bb13069e0b4f735ac97e2ccf281d3a",
   "group": "patch"
 },
 ["container.blocks[]|7.settings.mobileBorder|0"]: {
-  "hash": "70448b393650cafdcca21003ec304ca6aad97d4e71484e6d842c7361c7d2d7e0",
+  "hash": "b02e1fe8a5e5d2c2090dfa64829c6b733e62c7467f553b234bfec4c510a4cd6e",
   "group": "patch"
 },
 ["container.blocks[]|7.settings.mobileBorder|0.size"]: {
-  "hash": "63ca2afe231a746eaf4036e71fc8496cdfb1359673a08f58f6945af1a739943f",
+  "hash": "5476a5873562bd661c359b9a3d8fc89ec0bb87a7b78d707518d59d77fe3c3310",
   "group": "patch"
 },
 ["container.blocks[]|7.settings.mobileBorder|0.style"]: {
-  "hash": "0cd27b2e175f6a9ea558b5557d0db06999e5fbd160d8901dee0e60e9196eb8a3",
+  "hash": "2ecfd390d78065356c119e0c89a07ddd2c0732868238de385e8047d588d4a240",
   "group": "patch"
 },
 ["container.blocks[]|7.settings.mobileBorder|0.color"]: {
@@ -1085,15 +1105,15 @@ export default {
   "group": "patch"
 },
 ["container.blocks[]|7.settings.alignment"]: {
-  "hash": "aa8c2d2255bfaf9629261b374926a24956cde31d94f5004d7da85c39122e50a1",
+  "hash": "630a4c3a06115c80ac4c226037b89607282fa46f1f962245e0d423921ee6dd55",
   "group": "patch"
 },
 ["container.blocks[]|7.settings.alignment.desktop"]: {
-  "hash": "3aa17f96e75721013ff598b1d83dde478d3ceba5ebe6d6b044bc158bfd922209",
+  "hash": "22716cc88dc73da6770c32eec62c77a7717def34e5fe9163f3a4904bf45dc37d",
   "group": "patch"
 },
 ["container.blocks[]|7.settings.alignment.mobile"]: {
-  "hash": "3aa17f96e75721013ff598b1d83dde478d3ceba5ebe6d6b044bc158bfd922209",
+  "hash": "22716cc88dc73da6770c32eec62c77a7717def34e5fe9163f3a4904bf45dc37d",
   "group": "patch"
 },
 ["container.blocks[]|7.settings.backgroundColor"]: {
@@ -1101,51 +1121,51 @@ export default {
   "group": "patch"
 },
 ["container.blocks[]|7.settings.margins"]: {
-  "hash": "a9c7173acdd2b8541923987cde70363fec1c6cd317e681d09299a1fb8f63a236",
+  "hash": "81a8519829fb5b9d070ae21c7cf95a18e5b931060c80ff9b66a36ea1162f4345",
   "group": "patch"
 },
 ["container.blocks[]|7.settings.margins.desktop"]: {
-  "hash": "81a8519829fb5b9d070ae21c7cf95a18e5b931060c80ff9b66a36ea1162f4345",
+  "hash": "4f7cb7a92b9c7268af88883f5b63a4632bf8ea59c65523ce5793efadbf129a13",
   "group": "patch"
 },
 ["container.blocks[]|7.settings.margins.desktop.top"]: {
-  "hash": "63ad97b95d6ba3002f305f22b385972a8971a2e3af3060ce9e5621d3ad8b0313",
+  "hash": "bac4edd25f3170b7bdc8fd014b24fd022405c1b66a9cef6d2023a340685deac9",
   "group": "patch"
 },
 ["container.blocks[]|7.settings.margins.desktop.right"]: {
-  "hash": "bac4edd25f3170b7bdc8fd014b24fd022405c1b66a9cef6d2023a340685deac9",
+  "hash": "25698dfd9a6d9ddecc9ee843279ce4e20fba8336ccfb4e0629af82ffecc02d27",
   "group": "patch"
 },
 ["container.blocks[]|7.settings.margins.desktop.bottom"]: {
-  "hash": "25698dfd9a6d9ddecc9ee843279ce4e20fba8336ccfb4e0629af82ffecc02d27",
+  "hash": "8e71ad9d0d5efe6b5240d364b087fe367c8ca3d44ba190941794e3f3744014e8",
   "group": "patch"
 },
 ["container.blocks[]|7.settings.margins.desktop.left"]: {
-  "hash": "8e71ad9d0d5efe6b5240d364b087fe367c8ca3d44ba190941794e3f3744014e8",
+  "hash": "9a39b05a34500cac7e896c0084cef1554fb801e4dc86bfa7cf0c7e302cd41366",
   "group": "patch"
 },
 ["container.blocks[]|7.settings.margins.mobile"]: {
-  "hash": "81a8519829fb5b9d070ae21c7cf95a18e5b931060c80ff9b66a36ea1162f4345",
+  "hash": "4f7cb7a92b9c7268af88883f5b63a4632bf8ea59c65523ce5793efadbf129a13",
   "group": "patch"
 },
 ["container.blocks[]|7.settings.margins.mobile.top"]: {
-  "hash": "63ad97b95d6ba3002f305f22b385972a8971a2e3af3060ce9e5621d3ad8b0313",
-  "group": "patch"
-},
-["container.blocks[]|7.settings.margins.mobile.right"]: {
   "hash": "bac4edd25f3170b7bdc8fd014b24fd022405c1b66a9cef6d2023a340685deac9",
   "group": "patch"
 },
-["container.blocks[]|7.settings.margins.mobile.bottom"]: {
+["container.blocks[]|7.settings.margins.mobile.right"]: {
   "hash": "25698dfd9a6d9ddecc9ee843279ce4e20fba8336ccfb4e0629af82ffecc02d27",
   "group": "patch"
 },
-["container.blocks[]|7.settings.margins.mobile.left"]: {
+["container.blocks[]|7.settings.margins.mobile.bottom"]: {
   "hash": "8e71ad9d0d5efe6b5240d364b087fe367c8ca3d44ba190941794e3f3744014e8",
   "group": "patch"
 },
+["container.blocks[]|7.settings.margins.mobile.left"]: {
+  "hash": "9a39b05a34500cac7e896c0084cef1554fb801e4dc86bfa7cf0c7e302cd41366",
+  "group": "patch"
+},
 ["container.blocks[]|7.settings.anchorLinkName"]: {
-  "hash": "2467ead083b340b4c98dcac8dfe318cca8922f50f1429c9c982492e5d3cff016",
+  "hash": "106002c12790f4c343b120fadf609c6ef01560b97e08bb5a4455a007fc1477a4",
   "group": "patch"
 },
 ["container.blocks[]|7.settings.includeInOutput"]: {
@@ -1161,11 +1181,11 @@ export default {
   "group": "shape"
 },
 ["container.blocks[]|8.id"]: {
-  "hash": "50d275dd50975a609167c558c087457ad683df51092f23b0223eebe150f94838",
+  "hash": "47a0beb31908710a9be580e8dc0f320092577c8f5ab4bca36a32e1e6f229f42c",
   "group": "shape"
 },
 ["container.blocks[]|8.type"]: {
-  "hash": "3281cded3bec37e9b3808563259da920ffc495590cf9f8c56ad6e56947106e74",
+  "hash": "b4264c7af07ee3a7227aafafddf09d89b8bbc049592563bc493f78c3579563c0",
   "group": "shape"
 },
 ["container.blocks[]|8.settings"]: {
@@ -1173,15 +1193,15 @@ export default {
   "group": "patch"
 },
 ["container.blocks[]|8.settings.responsiveMenu"]: {
-  "hash": "d433a7840801cd0bb2fbf309d9f7dcfe37fe7a202241c84cc301689bc39b2169",
+  "hash": "3bf1464c545e97eecec6f599da2224243dad1d446330d40b6f6d3486a2d94b4c",
   "group": "patch"
 },
 ["container.blocks[]|8.settings.itemType"]: {
-  "hash": "b8d5125951e06b333874651cdc6c35ffc75b96e4ee68de459349c5a53851ba3f",
+  "hash": "0bda60aae2bf764e66dff0c4513042bc263fed1f1fbc7ef0cebb84bea9b96465",
   "group": "menu"
 },
 ["container.blocks[]|8.settings.itemType|0"]: {
-  "hash": "17be3f638a32897f41269d0d88897dc6f4879af7218fa79d9c0871c6956209c6",
+  "hash": "7a9ba2af71c5026ce4ee8fce4e43d41cd0e23be0bfcc01074b94bfc51eeca0e8",
   "group": "menu"
 },
 ["container.blocks[]|8.settings.itemType|0.mode"]: {
@@ -1193,7 +1213,7 @@ export default {
   "group": "menu"
 },
 ["container.blocks[]|8.settings.itemType|1"]: {
-  "hash": "7a9ba2af71c5026ce4ee8fce4e43d41cd0e23be0bfcc01074b94bfc51eeca0e8",
+  "hash": "290fcd11fc6b67157a9c8df940ea4f4244fb83f627411de75c72b2d3852facec",
   "group": "menu"
 },
 ["container.blocks[]|8.settings.itemType|1.mode"]: {
@@ -1201,107 +1221,87 @@ export default {
   "group": "menu"
 },
 ["container.blocks[]|8.settings.fitToContainer"]: {
-  "hash": "248726e599cc05ae831cf3ae0576cef74a7c79fd3c47dcb53252be4715693983",
+  "hash": "4957b8981f3268eb5ee8d3a40e98a9ccbd93124d87694d8378a4bfa2564fe9de",
   "group": "patch"
 },
 ["container.blocks[]|8.settings.itemPadding"]: {
-  "hash": "1b77a403208efe1db02f8baa4ff681794079d272fc96b08e63d1e777f11327fc",
+  "hash": "777532382c5e73bce243a0ddd43cf528e14c4490ce1bc8b2f1c96c40602ee2bf",
   "group": "patch"
 },
 ["container.blocks[]|8.settings.itemPadding.desktop"]: {
-  "hash": "777532382c5e73bce243a0ddd43cf528e14c4490ce1bc8b2f1c96c40602ee2bf",
+  "hash": "ff294eec038445e4e3e7bdea210969ee2c93802f4b2122438c8b50a243cdc40a",
   "group": "patch"
 },
 ["container.blocks[]|8.settings.itemPadding.desktop.top"]: {
-  "hash": "c363f2ad1a041b9d9b1253599270e623edaa88139dc08a3f174a77fe39d459b7",
+  "hash": "1e5fd372e86d8a129f255bd015b6ab04e153800634aa08a2ea98919c2d9bffc1",
   "group": "patch"
 },
 ["container.blocks[]|8.settings.itemPadding.desktop.right"]: {
-  "hash": "c363f2ad1a041b9d9b1253599270e623edaa88139dc08a3f174a77fe39d459b7",
+  "hash": "1e5fd372e86d8a129f255bd015b6ab04e153800634aa08a2ea98919c2d9bffc1",
   "group": "patch"
 },
 ["container.blocks[]|8.settings.itemPadding.desktop.bottom"]: {
-  "hash": "c363f2ad1a041b9d9b1253599270e623edaa88139dc08a3f174a77fe39d459b7",
+  "hash": "1e5fd372e86d8a129f255bd015b6ab04e153800634aa08a2ea98919c2d9bffc1",
   "group": "patch"
 },
 ["container.blocks[]|8.settings.itemPadding.desktop.left"]: {
-  "hash": "c363f2ad1a041b9d9b1253599270e623edaa88139dc08a3f174a77fe39d459b7",
+  "hash": "1e5fd372e86d8a129f255bd015b6ab04e153800634aa08a2ea98919c2d9bffc1",
   "group": "patch"
 },
 ["container.blocks[]|8.settings.itemPadding.mobile"]: {
-  "hash": "777532382c5e73bce243a0ddd43cf528e14c4490ce1bc8b2f1c96c40602ee2bf",
+  "hash": "ff294eec038445e4e3e7bdea210969ee2c93802f4b2122438c8b50a243cdc40a",
   "group": "patch"
 },
 ["container.blocks[]|8.settings.itemPadding.mobile.top"]: {
-  "hash": "c363f2ad1a041b9d9b1253599270e623edaa88139dc08a3f174a77fe39d459b7",
+  "hash": "1e5fd372e86d8a129f255bd015b6ab04e153800634aa08a2ea98919c2d9bffc1",
   "group": "patch"
 },
 ["container.blocks[]|8.settings.itemPadding.mobile.right"]: {
-  "hash": "c363f2ad1a041b9d9b1253599270e623edaa88139dc08a3f174a77fe39d459b7",
+  "hash": "1e5fd372e86d8a129f255bd015b6ab04e153800634aa08a2ea98919c2d9bffc1",
   "group": "patch"
 },
 ["container.blocks[]|8.settings.itemPadding.mobile.bottom"]: {
-  "hash": "c363f2ad1a041b9d9b1253599270e623edaa88139dc08a3f174a77fe39d459b7",
+  "hash": "1e5fd372e86d8a129f255bd015b6ab04e153800634aa08a2ea98919c2d9bffc1",
   "group": "patch"
 },
 ["container.blocks[]|8.settings.itemPadding.mobile.left"]: {
-  "hash": "c363f2ad1a041b9d9b1253599270e623edaa88139dc08a3f174a77fe39d459b7",
+  "hash": "1e5fd372e86d8a129f255bd015b6ab04e153800634aa08a2ea98919c2d9bffc1",
   "group": "patch"
 },
 ["container.blocks[]|8.settings.margins"]: {
-  "hash": "1b77a403208efe1db02f8baa4ff681794079d272fc96b08e63d1e777f11327fc",
+  "hash": "777532382c5e73bce243a0ddd43cf528e14c4490ce1bc8b2f1c96c40602ee2bf",
   "group": "patch"
 },
 ["container.blocks[]|8.settings.margins.desktop"]: {
-  "hash": "777532382c5e73bce243a0ddd43cf528e14c4490ce1bc8b2f1c96c40602ee2bf",
+  "hash": "ff294eec038445e4e3e7bdea210969ee2c93802f4b2122438c8b50a243cdc40a",
   "group": "patch"
 },
 ["container.blocks[]|8.settings.margins.desktop.top"]: {
-  "hash": "c363f2ad1a041b9d9b1253599270e623edaa88139dc08a3f174a77fe39d459b7",
+  "hash": "1e5fd372e86d8a129f255bd015b6ab04e153800634aa08a2ea98919c2d9bffc1",
   "group": "patch"
 },
 ["container.blocks[]|8.settings.margins.desktop.right"]: {
-  "hash": "c363f2ad1a041b9d9b1253599270e623edaa88139dc08a3f174a77fe39d459b7",
+  "hash": "1e5fd372e86d8a129f255bd015b6ab04e153800634aa08a2ea98919c2d9bffc1",
   "group": "patch"
 },
 ["container.blocks[]|8.settings.margins.desktop.bottom"]: {
-  "hash": "c363f2ad1a041b9d9b1253599270e623edaa88139dc08a3f174a77fe39d459b7",
+  "hash": "1e5fd372e86d8a129f255bd015b6ab04e153800634aa08a2ea98919c2d9bffc1",
   "group": "patch"
 },
 ["container.blocks[]|8.settings.margins.desktop.left"]: {
-  "hash": "c363f2ad1a041b9d9b1253599270e623edaa88139dc08a3f174a77fe39d459b7",
+  "hash": "1e5fd372e86d8a129f255bd015b6ab04e153800634aa08a2ea98919c2d9bffc1",
   "group": "patch"
 },
 ["container.blocks[]|8.settings.margins.mobile"]: {
-  "hash": "777532382c5e73bce243a0ddd43cf528e14c4490ce1bc8b2f1c96c40602ee2bf",
+  "hash": "ff294eec038445e4e3e7bdea210969ee2c93802f4b2122438c8b50a243cdc40a",
   "group": "patch"
 },
 ["container.blocks[]|8.settings.margins.mobile.top"]: {
-  "hash": "c363f2ad1a041b9d9b1253599270e623edaa88139dc08a3f174a77fe39d459b7",
+  "hash": "1e5fd372e86d8a129f255bd015b6ab04e153800634aa08a2ea98919c2d9bffc1",
   "group": "patch"
 },
 ["container.blocks[]|8.settings.margins.mobile.right"]: {
-  "hash": "c363f2ad1a041b9d9b1253599270e623edaa88139dc08a3f174a77fe39d459b7",
-  "group": "patch"
-},
-["container.blocks[]|8.settings.margins.mobile.bottom"]: {
-  "hash": "c363f2ad1a041b9d9b1253599270e623edaa88139dc08a3f174a77fe39d459b7",
-  "group": "patch"
-},
-["container.blocks[]|8.settings.margins.mobile.left"]: {
-  "hash": "c363f2ad1a041b9d9b1253599270e623edaa88139dc08a3f174a77fe39d459b7",
-  "group": "patch"
-},
-["container.blocks[]|8.settings.anchorLinkName"]: {
-  "hash": "2467ead083b340b4c98dcac8dfe318cca8922f50f1429c9c982492e5d3cff016",
-  "group": "patch"
-},
-["container.blocks[]|8.settings.includeInOutput"]: {
-  "hash": "43ef4403126741fefe20c0302c6adbb7935cc896bec8a4f40a212e25b3da47df",
-  "group": "patch"
-},
-["container.blocks[]|8.settings.separator"]: {
-  "hash": "a787d51ec59b2fdcd45efcbff2bdff074a4b44738e6584b516a56caf935f92d8",
+  "hash": "1e5fd372e86d8a129f255bd015b6ab04e153800634aa08a2ea98919c2d9bffc1",
   "group": "patch"
 }
 };

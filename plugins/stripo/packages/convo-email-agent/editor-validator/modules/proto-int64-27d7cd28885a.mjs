@@ -879,8 +879,9 @@ function assertFloat32(arg) {
   } else if (typeof arg != "number") {
     throw new Error("invalid float32: " + typeof arg);
   }
-  if (Number.isFinite(arg) && (arg > FLOAT32_MAX || arg < FLOAT32_MIN))
+  if (!Number.isFinite(Math.fround(arg)) && Number.isFinite(arg)) {
     throw new Error("invalid float32: " + arg);
+  }
 }
 
 export {

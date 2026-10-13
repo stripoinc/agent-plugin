@@ -1434,7 +1434,7 @@ var VariablesUtils = class _VariablesUtils {
         {
           selectors: [".es-button-border:hover > a.es-button"],
           varValueFunc: ((buttonsHasHover, variables) => {
-            return !buttonsHasHover && LINK_COLOR_HOVER_VARS.some((varName) => variables[varName]);
+            return !buttonsHasHover && LINK_COLOR_HOVER_VARS.some((varName) => variables?.[varName]);
           })
         }
       ],
@@ -1571,14 +1571,15 @@ var VariablesUtils = class _VariablesUtils {
     return _VariablesUtils.getMinifiedSelector(s1) === _VariablesUtils.getMinifiedSelector(compare);
   }
   static getValue(variables, name) {
-    const value = variables[name];
+    const variablesByName = variables;
+    const value = variablesByName[name];
     if (isNumber(value)) {
       return value;
     }
     if (isString(value)) {
       const referenceVariable = value?.match(/var\((.+)\)/)?.[1];
       if (referenceVariable) {
-        return variables[referenceVariable];
+        return variablesByName[referenceVariable];
       }
     }
     return value;

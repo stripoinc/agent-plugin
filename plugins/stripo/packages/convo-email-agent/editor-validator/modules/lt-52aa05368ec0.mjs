@@ -127,6 +127,8 @@ var error = () => {
     json_string: "JSON eilut\u0117",
     e164: "E.164 numeris",
     credit_card: "kredito kortel\u0117s numeris",
+    currency_code: "valiutos kodas",
+    iban: "IBAN",
     jwt: "JWT",
     template_literal: "\u012Fvestis"
   };

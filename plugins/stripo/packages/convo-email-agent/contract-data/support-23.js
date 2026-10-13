@@ -1,5 +1,29 @@
 
 export default {
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(patchMetadata).notificationEventsRelatedMetadata|1.eventMetadata?|2.commentReply.threadUserIds"]: {
+  "hash": "31f2907b41218f3deeca96fa6d3fa16e7dc2bea64037058fc172d9818efe23d7",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(patchMetadata).notificationEventsRelatedMetadata|1.eventMetadata?|2.commentReply.initialCommentAuthorId"]: {
+  "hash": "27705690421c3f5f0b07e61ae86428378b1bbe473efd88ed21af1300e5fbed4c",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(patchMetadata).notificationEventsRelatedMetadata|1.eventMetadata?|2.commentReply.initialCommentCreationDate"]: {
+  "hash": "27705690421c3f5f0b07e61ae86428378b1bbe473efd88ed21af1300e5fbed4c",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(patchMetadata).notificationEventsRelatedMetadata|1.eventMetadata?|2.commentReply.anonymousUserList"]: {
+  "hash": "9c3d077617b13ddef0e32dfb2790e7dce357959fd35743bcab2e384c878ae0f5",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(patchMetadata).notificationEventsRelatedMetadata|1.eventMetadata?|2.commentReply.replyAuthorIdStr"]: {
+  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(patchMetadata).notificationEventsRelatedMetadata|1.eventMetadata?|2.commentReply.taggedUserIdsStr"]: {
+  "hash": "2f66b41966a90abaa8087407bd4236ee55d4992f5dc7acd9e4126413e1f61a85",
+  "group": "apiMutation"
+},
 ["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(patchMetadata).notificationEventsRelatedMetadata|1.eventMetadata?|2.commentReply.threadUserIdsStr"]: {
   "hash": "2f66b41966a90abaa8087407bd4236ee55d4992f5dc7acd9e4126413e1f61a85",
   "group": "apiMutation"
@@ -834,38 +858,6 @@ export default {
 },
 ["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.getDirtyHtmlCss#0(html)|1.getConfig#0(key):constraint|29"]: {
   "hash": "43c96b72915157a256ae7ebbc9e3bc594e7406365e66031f1ac27fa6f9762926",
-  "group": "apiRead"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.getDirtyHtmlCss#0(html)|1.getConfig#0(key):constraint|30"]: {
-  "hash": "3b089650961ad6bef9451a42e5de174f17f566d3c05fdac86d78fb617a40fbc1",
-  "group": "apiRead"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.getDirtyHtmlCss#0(html)|1.getConfig#0(key):constraint|31"]: {
-  "hash": "1cb2a71245bf769a4df4501701ea85fb036debd29fe858c158ac888c2d01cc0f",
-  "group": "apiRead"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.getDirtyHtmlCss#0(html)|1.getConfig#0(key):constraint|32"]: {
-  "hash": "e8174147a564882d79aeab2d639fa125dae9151528aadf374c8d588b36e78fdd",
-  "group": "apiRead"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.getDirtyHtmlCss#0(html)|1.getConfig#0(key):constraint|33"]: {
-  "hash": "2753d28071b01b2378da52bb20529a87e55817e1030ab217548a5af0210f6746",
-  "group": "apiRead"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.getDirtyHtmlCss#0(html)|1.getConfig#0(key):constraint|34"]: {
-  "hash": "e66ed79ca20ec0024603e7537eca2fd3c702af02d35b0e3a0cc0c27bab3d6c34",
-  "group": "apiRead"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.getDirtyHtmlCss#0(html)|1.getConfig#0(key):constraint|35"]: {
-  "hash": "8ddf4f91b789098f9e38390972cab567c02af80f46a4d94f4f501153689e10e6",
-  "group": "apiRead"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.getDirtyHtmlCss#0(html)|1.getConfig#0(key):constraint|36"]: {
-  "hash": "71aa025a623dd70353bded2c39c9b6b75f4ff5547cc06e62e1be0d2eb1d803cf",
-  "group": "apiRead"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.getDirtyHtmlCss#0(html)|1.getConfig#0(key):constraint|37"]: {
-  "hash": "9cf209dc6e802a9b89079c2463dd1cb930daa316c349bd319ed5d61a5db4e822",
   "group": "apiRead"
 }
 };

@@ -18,16 +18,12 @@ var _messageDesc = {
   enumerable: true,
   configurable: true
 };
-var _zodDesc = { value: void 0, enumerable: false };
 var _issuesDesc = { value: void 0, enumerable: false };
 var _installedToString = /* @__PURE__ */ new WeakSet([Object.prototype, Error.prototype]);
 var initializer = (inst, def) => {
   inst.name = "$ZodError";
-  _zodDesc.value = inst._zod;
-  Object.defineProperty(inst, "_zod", _zodDesc);
   _issuesDesc.value = def;
   Object.defineProperty(inst, "issues", _issuesDesc);
-  _zodDesc.value = void 0;
   _issuesDesc.value = void 0;
   Object.defineProperty(inst, "message", _messageDesc);
   const proto = Object.getPrototypeOf(inst);

@@ -90,6 +90,9 @@ function isTransparentColor(color) {
   if (DEFINED_COLOR_VALUES.includes(normalizedColor)) {
     return false;
   }
+  if (isCssGradient(normalizedColor) || splitTopLevelCsv(normalizedColor).length > 1) {
+    return false;
+  }
   const colorVal = tinycolor(normalizedColor);
   if (!colorVal.isValid()) {
     return false;
@@ -212,7 +215,7 @@ function rgbSequence2hex(r, g, b) {
   return color.toHexString();
 }
 function colorToRGBSequence(color) {
-  const colorVal = tinycolor(color);
+  const colorVal = tinycolor(color ?? "");
   const RGB = colorVal.toRgb();
   return [RGB.r, RGB.g, RGB.b];
 }
@@ -224,15 +227,15 @@ function transformColorToSystem(color) {
 }
 function colorToHexString(color, colorMergeTagValues = /* @__PURE__ */ new Set()) {
   if (isMergeTagColorToken(color, colorMergeTagValues)) {
-    return color;
+    return color ?? "";
   }
-  return tinycolor(color).toHexString();
+  return tinycolor(color ?? "").toHexString();
 }
 function colorToHsl(color) {
   return tinycolor(color).toHsl();
 }
 function isColorValid(color, colorMergeTagValues = /* @__PURE__ */ new Set()) {
-  const colorVal = tinycolor(color);
+  const colorVal = tinycolor(color ?? "");
   return colorVal.isValid() || isMergeTagColorToken(color, colorMergeTagValues);
 }
 var isHex = (color) => /^#[0-9A-F]{6}$|#[0-9A-F]{3}$/i.test(color);
@@ -381,7 +384,7 @@ function normalizeGradientAngle(angle, maxAngle = DEFAULT_GRADIENT_ANGLE_MAX) {
   const safeAngle = Number.isFinite(+angle) ? Math.round(+angle) : 0;
   return (safeAngle % (maxAngle + 1) + (maxAngle + 1)) % (maxAngle + 1);
 }
-function splitTopLevelCsv(value) {
+function splitTopLevelCsv(value, preserveEmptyParts = false) {
   const parts = [];
   let current = "";
   let depth = 0;
@@ -425,14 +428,14 @@ function splitTopLevelCsv(value) {
       depth--;
     } else if (char === "," && depth === 0) {
       current = current.slice(0, -1);
-      if (current.trim()) {
+      if (current.trim() || preserveEmptyParts) {
         parts.push(current.trim());
       }
       current = "";
       continue;
     }
   }
-  if (current.trim()) {
+  if (current.trim() || preserveEmptyParts) {
     parts.push(current.trim());
   }
   return parts;

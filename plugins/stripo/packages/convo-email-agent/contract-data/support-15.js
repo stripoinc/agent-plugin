@@ -20,4 +20,5 @@ import part18 from './support-34.js';
 import part19 from './support-35.js';
 import part20 from './support-36.js';
 import part21 from './support-37.js';
-export default {...part0, ...part1, ...part2, ...part3, ...part4, ...part5, ...part6, ...part7, ...part8, ...part9, ...part10, ...part11, ...part12, ...part13, ...part14, ...part15, ...part16, ...part17, ...part18, ...part19, ...part20, ...part21};
+import part22 from './support-38.js';
+export default {...part0, ...part1, ...part2, ...part3, ...part4, ...part5, ...part6, ...part7, ...part8, ...part9, ...part10, ...part11, ...part12, ...part13, ...part14, ...part15, ...part16, ...part17, ...part18, ...part19, ...part20, ...part21, ...part22};

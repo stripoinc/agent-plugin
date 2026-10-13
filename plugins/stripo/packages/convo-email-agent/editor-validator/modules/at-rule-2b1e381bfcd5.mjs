@@ -118,7 +118,18 @@ var require_list = __commonJS({
         let inQuote = false;
         let prevQuote = "";
         let escape = false;
-        for (let letter of string) {
+        let inComment = false;
+        for (let i = 0; i < string.length; i++) {
+          let letter = string[i];
+          if (inComment) {
+            current += letter;
+            if (letter === "*" && string[i + 1] === "/") {
+              current += "/";
+              i += 1;
+              inComment = false;
+            }
+            continue;
+          }
           if (escape) {
             escape = false;
           } else if (letter === "\\") {
@@ -130,6 +141,11 @@ var require_list = __commonJS({
           } else if (letter === '"' || letter === "'") {
             inQuote = true;
             prevQuote = letter;
+          } else if (letter === "/" && string[i + 1] === "*") {
+            current += "/*";
+            i += 1;
+            inComment = true;
+            continue;
           } else if (letter === "(") {
             func += 1;
           } else if (letter === ")") {
@@ -609,6 +625,7 @@ var require_parser = __commonJS({
         let token, type;
         let length = tokens.length;
         let value = "";
+        let last = "";
         let clean = true;
         let next, prev;
         for (let i = 0; i < length; i += 1) {
@@ -620,16 +637,18 @@ var require_parser = __commonJS({
             prev = tokens[i - 1] ? tokens[i - 1][0] : "empty";
             next = tokens[i + 1] ? tokens[i + 1][0] : "empty";
             if (!SAFE_COMMENT_NEIGHBOR[prev] && !SAFE_COMMENT_NEIGHBOR[next]) {
-              if (value.slice(-1) === ",") {
+              if (last === ",") {
                 clean = false;
               } else {
                 value += token[1];
+                last = token[1].slice(-1);
               }
             } else {
               clean = false;
             }
           } else {
             value += token[1];
+            last = token[1].slice(-1);
           }
         }
         if (!clean) {

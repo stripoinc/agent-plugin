@@ -2434,9 +2434,6 @@ function getMaskedSourceForDocumentScan(source, documentScan) {
   MASKED_SOURCE_BY_DOCUMENT_SCAN.set(documentScan, maskedSource);
   return maskedSource;
 }
-function tokenizeHtmlDocumentEntities(source) {
-  return [...scanHtmlDocumentEntities(source).occurrences];
-}
 function tokenizeHtmlDocumentEntitiesAtOffset(source, offset, documentScan = scanHtmlDocumentEntities(source)) {
   const maskedSource = getMaskedSourceForDocumentScan(source, documentScan);
   const occurrences = [...documentScan.occurrences];
@@ -2600,7 +2597,6 @@ export {
   preserveConfiguredHtmlEntityLexemes,
   getHTMLAttributeValueRange,
   scanHtmlDocumentEntities,
-  tokenizeHtmlDocumentEntities,
   tokenizeHtmlDocumentEntitiesAtOffset,
   containsControlledHtmlEntityCharacter,
   normalizeHtmlEntitiesInRanges

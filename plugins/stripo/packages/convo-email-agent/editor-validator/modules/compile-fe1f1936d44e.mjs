@@ -8,13 +8,14 @@ import {
   isValidBase64URL,
   isValidCIDRv6,
   isValidCreditCard,
+  isValidIBAN,
   isValidIPv6,
   isValidJWT,
   mergeValues,
-  parseURLObject,
   stripTabAndNewline,
   urlHostnameOk,
-  urlProtocolOk
+  urlProtocolOk,
+  validateURL
 } from "./doc-85ae2b2bbd32.mjs";
 import {
   number
@@ -56,37 +57,45 @@ function compileValidator(schema, parser) {
 function compile(schema, options) {
   try {
     const parser = compileFn(schema);
-    const clone2 = clone(schema);
-    const liveRun = schema._zod.run;
-    const originalRun = liveRun.__originalRun ?? liveRun;
-    const wrapped = (payload, ctx) => {
-      if (ctx?.async || ctx?.direction === "backward" || ctx?.skipChecks || ctx?.[FALLBACK_FLAG]) {
-        return originalRun(payload, ctx);
-      }
-      if (ctx && isBackEdge(ctx, payload.value)) {
-        return originalRun(payload, ctx);
-      }
-      const out = parser(payload.value);
-      if (out !== INVALID) {
-        payload.value = out;
-        return payload;
-      }
-      if (ctx)
-        ctx[FALLBACK_FLAG] = true;
-      return originalRun(payload, ctx);
-    };
-    wrapped.__originalRun = originalRun;
-    clone2._zod.bag.fallbackRun = originalRun;
+    const clone2 = withParser(schema, parser);
     clone2._zod.bag.validator = compileValidator(schema, parser);
-    clone2._zod.run = wrapped;
-    if (!liveRun.__originalRun)
-      installCompiledUserMethods(clone2, schema, parser);
     return clone2;
   } catch (err) {
     if (options?.strict)
       throw err;
     return schema;
   }
+}
+function withParser(schema, parser) {
+  if (isRecursiveSchema(schema)) {
+    throw new ZodCompileUnsupportedError("a schema whose subtree contains a reference cycle");
+  }
+  const clone2 = clone(schema);
+  const liveRun = schema._zod.run;
+  const originalRun = liveRun.__originalRun ?? liveRun;
+  const wrapped = (payload, ctx) => {
+    if (ctx?.async || ctx?.direction === "backward" || ctx?.skipChecks || ctx?.[FALLBACK_FLAG]) {
+      return originalRun(payload, ctx);
+    }
+    if (ctx && isBackEdge(ctx, payload.value)) {
+      return originalRun(payload, ctx);
+    }
+    const out = parser(payload.value);
+    if (out !== INVALID) {
+      payload.value = out;
+      return payload;
+    }
+    if (ctx)
+      ctx[FALLBACK_FLAG] = true;
+    return originalRun(payload, ctx);
+  };
+  wrapped.__originalRun = originalRun;
+  clone2._zod.bag.fallbackRun = originalRun;
+  clone2._zod.bag.validator = parser;
+  clone2._zod.run = wrapped;
+  if (!liveRun.__originalRun)
+    installCompiledUserMethods(clone2, schema, parser);
+  return clone2;
 }
 function installCompiledUserMethods(target, source, parser) {
   const targetAny = target;
@@ -124,7 +133,8 @@ function compileFn(schema, options) {
   const ctx = {
     constants: /* @__PURE__ */ new Map(),
     constantCounter: 0,
-    varCounter: 0
+    varCounter: 0,
+    definite: true
   };
   const doc = new Doc(["input"]);
   const outputAccessor = generateCheck(doc, ctx, schema, "input", !options?.assertOnly);
@@ -145,6 +155,7 @@ function compileFn(schema, options) {
   if (options?.debug) {
     fn.code = fullCode;
   }
+  fn.definite = ctx.definite;
   return fn;
 }
 function addConstant(ctx, value) {
@@ -155,6 +166,10 @@ function addConstant(ctx, value) {
   const name = "c".concat(ctx.constantCounter++);
   ctx.constants.set(name, value);
   return name;
+}
+function addUserConstant(ctx, fn) {
+  ctx.definite = false;
+  return addConstant(ctx, fn);
 }
 function newVar(ctx) {
   return "v".concat(ctx.varCounter++);
@@ -188,6 +203,7 @@ function compileChild(doc, ctx, schema, accessor, needsValue = true) {
   }
 }
 function emitRuntimeIsland(doc, ctx, schema, accessor) {
+  ctx.definite = false;
   const schemaConst = addConstant(ctx, schema);
   const runConst = addConstant(ctx, runtimeRun);
   const outVar = newVar(ctx);
@@ -267,6 +283,9 @@ function generateChecks(doc, ctx, schema, accessor) {
         break;
       case "property":
         generatePropertyCheck(doc, ctx, def, currentAccessor);
+        break;
+      case "properties":
+        generatePropertiesChecks(doc, ctx, def, currentAccessor);
         break;
       case "overwrite": {
         const newAccessor = newVar(ctx);
@@ -376,6 +395,19 @@ function generateMimeTypeCheck(doc, ctx, def, accessor) {
     doc.write("if (!".concat(mimeSet, ".has(").concat(accessor, ".type)) return INVALID;"));
   }
 }
+function generatePropertiesChecks(doc, ctx, def, accessor) {
+  if (def.when) {
+    throw new ZodCompileUnsupportedError('check with a custom "when" condition');
+  }
+  doc.write("if (".concat(accessor, " == null) return INVALID;"));
+  const shape = def.shape;
+  for (const key of Reflect.ownKeys(shape)) {
+    const keyExpr = typeof key === "symbol" ? addConstant(ctx, key) : esc(key);
+    const inputVar = newVar(ctx);
+    doc.write("const ".concat(inputVar, " = ").concat(accessor, "[").concat(keyExpr, "];"));
+    compileChild(doc, ctx, shape[key], inputVar, false);
+  }
+}
 function generatePropertyCheck(doc, ctx, def, accessor) {
   const propAccessor = "".concat(accessor, "[").concat(JSON.stringify(def.property), "]");
   generateCheck(doc, ctx, def.schema, propAccessor);
@@ -403,7 +435,7 @@ function generateCustomRefineCheck(doc, ctx, check, accessor) {
     if (isAsyncFunction(def.fn)) {
       throw new ZodCompileAsyncError("z.compile: async .refine() predicates are not supported");
     }
-    const fnConst = addConstant(ctx, def.fn);
+    const fnConst = addUserConstant(ctx, def.fn);
     const throwAsyncConst = addConstant(ctx, throwAsync);
     const resVar = newVar(ctx);
     doc.write("const ".concat(resVar, " = ").concat(fnConst, "(").concat(accessor, ");"));
@@ -423,7 +455,7 @@ function generateCustomRefineCheck(doc, ctx, check, accessor) {
         throwAsync();
       return fakePayload.issues.length === 0 ? fakePayload.value : INVALID;
     };
-    const helperConst = addConstant(ctx, helperFn);
+    const helperConst = addUserConstant(ctx, helperFn);
     const outVar = newVar(ctx);
     doc.write("const ".concat(outVar, " = ").concat(helperConst, "(").concat(accessor, ");"));
     doc.write("if (".concat(outVar, " === INVALID) return INVALID;"));
@@ -457,7 +489,7 @@ var PATTERN_IS_COMPLETE = /* @__PURE__ */ new Set([
   "uuid",
   "xid"
 ]);
-function generateStringFormatCheck(doc, ctx, def, accessor) {
+function generateStringFormatCheck(doc, ctx, def, accessor, needsValue = true) {
   const fmt = def.format;
   if (fmt === "base64") {
     const validator = addConstant(ctx, isValidBase64);
@@ -490,9 +522,14 @@ function generateStringFormatCheck(doc, ctx, def, accessor) {
     doc.write("if (!".concat(validator, "(").concat(accessor, ")) return INVALID;"));
     return accessor;
   }
+  if (fmt === "iban") {
+    const validator = addConstant(ctx, isValidIBAN);
+    doc.write("if (!".concat(validator, "(").concat(accessor, ")) return INVALID;"));
+    return accessor;
+  }
   const formatDef = def;
   if (fmt === "url" || fmt === "httpurl" || formatDef.normalize || formatDef.hostname !== void 0 || formatDef.protocol !== void 0) {
-    const parseConst = addConstant(ctx, parseURLObject);
+    const parseConst = addConstant(ctx, validateURL);
     const defConst = addConstant(ctx, def);
     const trimVar = newVar(ctx);
     const urlVar = newVar(ctx);
@@ -507,6 +544,8 @@ function generateStringFormatCheck(doc, ctx, def, accessor) {
       const protocolConst = addConstant(ctx, urlProtocolOk);
       doc.write("if (!".concat(protocolConst, "(").concat(urlVar, ", ").concat(defConst, ".protocol)) return INVALID;"));
     }
+    if (!needsValue)
+      return null;
     const outputVar = newVar(ctx);
     const outputExpr = formatDef.normalize ? "".concat(urlVar, ".href") : "".concat(addConstant(ctx, stripTabAndNewline), "(").concat(trimVar, ")");
     doc.write("const ".concat(outputVar, " = ").concat(outputExpr, ";"));
@@ -566,7 +605,7 @@ function generateCheck(doc, ctx, schema, accessor, needsValue = true) {
   let typeAccessor;
   switch (type) {
     case "string":
-      typeAccessor = generateStringCheck(doc, ctx, schema, accessor);
+      typeAccessor = generateStringCheck(doc, ctx, schema, accessor, buildsValue);
       break;
     case "number":
       typeAccessor = generateNumberCheck(doc, schema, accessor);
@@ -687,12 +726,12 @@ function generateCheck(doc, ctx, schema, accessor, needsValue = true) {
     return null;
   return generateChecks(doc, ctx, schema, typeAccessor);
 }
-function generateStringCheck(doc, ctx, schema, accessor) {
+function generateStringCheck(doc, ctx, schema, accessor, needsValue = true) {
   doc.write("if (typeof ".concat(accessor, ' !== "string") return INVALID;'));
   const def = schema._zod.def;
   if (def.format === void 0)
     return accessor;
-  return generateStringFormatCheck(doc, ctx, def, accessor);
+  return generateStringFormatCheck(doc, ctx, def, accessor, needsValue);
 }
 function generateNumberCheck(doc, schema, accessor) {
   doc.write("if (typeof ".concat(accessor, ' !== "number" || !Number.isFinite(').concat(accessor, ")) return INVALID;"));
@@ -810,7 +849,7 @@ function generateObjectCheck(doc, ctx, schema, accessor, buildsValue = true) {
     }
   }
   const outputVar = newVar(ctx);
-  const hasConditionalKeys = allKeys.some((k) => mayOutputUndefined(propShape[k]) || dropsWhenAbsent(propShape[k]));
+  const hasConditionalKeys = allKeys.some((k) => mayOmitUndefined(propShape[k]) || dropsWhenAbsent(propShape[k]));
   if (!buildsValue) {
     if (unknownKeysMode === "schema") {
       const knownSet = keys.length > 0 ? addConstant(ctx, new Set(keys)) : null;
@@ -837,7 +876,7 @@ function generateObjectCheck(doc, ctx, schema, accessor, buildsValue = true) {
       const out = propOutputs.get(k);
       if (dropsWhenAbsent(propShape[k])) {
         doc.write("if (".concat(kx, " in ").concat(accessor, ") ").concat(outputVar, "[").concat(kx, "] = ").concat(out, ";"));
-      } else if (mayOutputUndefined(propShape[k])) {
+      } else if (mayOmitUndefined(propShape[k])) {
         doc.write("if (".concat(out, " !== undefined || ").concat(kx, " in ").concat(accessor, ") ").concat(outputVar, "[").concat(kx, "] = ").concat(out, ";"));
       } else {
         doc.write("".concat(outputVar, "[").concat(kx, "] = ").concat(out, ";"));
@@ -969,6 +1008,9 @@ function fastPathAcceptsAbsence(schema) {
 }
 function dropsWhenAbsent(schema) {
   return schema._zod.optin === "optional" && schema._zod.optout === "optional";
+}
+function mayOmitUndefined(schema) {
+  return (schema._zod.optin !== "defaulted" || schema._zod.optout === "optional") && mayOutputUndefined(schema);
 }
 function mayOutputUndefined(schema) {
   const def = schema._zod.def;
@@ -1312,6 +1354,7 @@ function literalEquality(ctx, accessor, value) {
 }
 function generateIntersectionCheck(doc, ctx, schema, accessor) {
   const def = schema._zod.def;
+  ctx.definite = false;
   const leftOutput = compileChild(doc, ctx, def.left, accessor);
   const rightOutput = compileChild(doc, ctx, def.right, accessor);
   const mergeConst = addConstant(ctx, mergeValues);
@@ -1365,14 +1408,13 @@ function generateRecordCheck(doc, ctx, schema, accessor) {
   const keyIsBareString = keyDef.type === "string" && keyDef.format === void 0 && !keyDef.coerce && (keyDef.checks?.length ?? 0) === 0;
   if (!keyIsBareString) {
     const isLoose = def.mode === "loose";
-    const keyFast = addConstant(ctx, compileFn(def.keyType));
+    const keyFn = compileFn(def.keyType);
+    if (keyFn.definite === false)
+      ctx.definite = false;
+    const keyFast = addConstant(ctx, keyFn);
     const numericConst = addConstant(ctx, number);
-    const propIsEnumerableConst = addConstant(ctx, Object.prototype.propertyIsEnumerable);
     const outKeyVar = newVar(ctx);
-    doc.write("for (const ".concat(kVar, " of Reflect.ownKeys(").concat(accessor, ")) {"));
-    doc.indented((d) => {
-      d.write("if (".concat(kVar, ' === "__proto__") continue;'));
-      d.write("if (!".concat(propIsEnumerableConst, ".call(").concat(accessor, ", ").concat(kVar, ")) continue;"));
+    emitOwnKeys(doc, ctx, accessor, kVar, (d) => {
       d.write("let ".concat(outKeyVar, " = ").concat(keyFast, "(").concat(kVar, ");"));
       d.write("if (".concat(outKeyVar, " === INVALID && typeof ").concat(kVar, ' === "string" && ').concat(numericConst, ".test(").concat(kVar, ")) ").concat(outKeyVar, " = ").concat(keyFast, "(Number(").concat(kVar, "));"));
       if (isLoose) {
@@ -1386,21 +1428,39 @@ function generateRecordCheck(doc, ctx, schema, accessor) {
       const valOutput = compileChild(d, ctx, def.valueType, valueVar);
       d.write("".concat(outputVar, "[").concat(outKeyVar, "] = ").concat(valOutput, ";"));
     });
-    doc.write("}");
     return outputVar;
   }
-  const propIsEnumerable = addConstant(ctx, Object.prototype.propertyIsEnumerable);
-  doc.write("for (const ".concat(kVar, " of Reflect.ownKeys(").concat(accessor, ")) {"));
-  doc.indented((d) => {
-    d.write("if (".concat(kVar, ' === "__proto__") continue;'));
-    d.write("if (!".concat(propIsEnumerable, ".call(").concat(accessor, ", ").concat(kVar, ")) continue;"));
-    d.write("if (typeof ".concat(kVar, ' !== "string") return INVALID;'));
+  emitOwnKeys(doc, ctx, accessor, kVar, (d) => {
     d.write("const ".concat(valVar, " = ").concat(accessor, "[").concat(kVar, "];"));
     const valOutput = compileChild(d, ctx, def.valueType, valVar);
     d.write("".concat(outputVar, "[").concat(kVar, "] = ").concat(valOutput, ";"));
+  }, "return INVALID;");
+  return outputVar;
+}
+function emitOwnKeys(doc, ctx, accessor, kVar, body, onSymbol) {
+  const propIsEnumerableConst = addConstant(ctx, Object.prototype.propertyIsEnumerable);
+  const symsVar = newVar(ctx);
+  const keysVar = newVar(ctx);
+  const iVar = newVar(ctx);
+  doc.write("const ".concat(symsVar, " = Object.getOwnPropertySymbols(").concat(accessor, ");"));
+  doc.write("const ".concat(keysVar, " = Object.getOwnPropertyNames(").concat(accessor, ");"));
+  doc.write("for (let ".concat(iVar, " = 0; ").concat(iVar, " < ").concat(keysVar, ".length; ").concat(iVar, "++) {"));
+  doc.indented((d) => {
+    d.write("const ".concat(kVar, " = ").concat(keysVar, "[").concat(iVar, "];"));
+    d.write("if (".concat(kVar, ' === "__proto__" || !').concat(propIsEnumerableConst, ".call(").concat(accessor, ", ").concat(kVar, ")) continue;"));
+    body(d);
   });
   doc.write("}");
-  return outputVar;
+  doc.write("for (let ".concat(iVar, " = 0; ").concat(iVar, " < ").concat(symsVar, ".length; ").concat(iVar, "++) {"));
+  doc.indented((d) => {
+    d.write("const ".concat(kVar, " = ").concat(symsVar, "[").concat(iVar, "];"));
+    d.write("if (!".concat(propIsEnumerableConst, ".call(").concat(accessor, ", ").concat(kVar, ")) continue;"));
+    if (onSymbol)
+      d.write(onSymbol);
+    else
+      body(d);
+  });
+  doc.write("}");
 }
 function literalPropertyKey(ctx, key) {
   if (typeof key === "string")
@@ -1453,7 +1513,7 @@ function generateTemplateLiteralCheck(doc, ctx, schema, accessor) {
 }
 function generateLazyCheck(doc, ctx, schema, accessor) {
   const def = schema._zod.def;
-  const getterConst = addConstant(ctx, def.getter);
+  const getterConst = addUserConstant(ctx, def.getter);
   const cacheConst = addConstant(ctx, { parser: null });
   doc.write("if (!".concat(cacheConst, ".parser) {"));
   doc.indented((d) => {
@@ -1486,7 +1546,7 @@ function generatePipeCheck(doc, ctx, schema, accessor) {
         return INVALID;
       return fakePayload.issues.length === 0 ? result : INVALID;
     };
-    const helperConst = addConstant(ctx, helperFn);
+    const helperConst = addUserConstant(ctx, helperFn);
     const transformedVar = newVar(ctx);
     doc.write("const ".concat(transformedVar, " = ").concat(helperConst, "(").concat(inputOutput, ");"));
     doc.write("if (".concat(transformedVar, " === INVALID) return INVALID;"));
@@ -1504,7 +1564,7 @@ function generateCustomCheck(doc, ctx, schema, accessor) {
     if (isAsyncFunction(def.fn)) {
       throw new ZodCompileAsyncError("z.compile: async custom predicates are not supported");
     }
-    const fnConst = addConstant(ctx, def.fn);
+    const fnConst = addUserConstant(ctx, def.fn);
     const throwAsyncConst = addConstant(ctx, throwAsync);
     const resVar = newVar(ctx);
     doc.write("const ".concat(resVar, " = ").concat(fnConst, "(").concat(accessor, ");"));
@@ -1537,7 +1597,7 @@ function generateCatchCheck(doc, ctx, schema, accessor) {
   });
   doc.write("})();");
   const innerConst = addConstant(ctx, def.innerType);
-  const catchConst = addConstant(ctx, def.catchValue);
+  const catchConst = addUserConstant(ctx, def.catchValue);
   const catchHelperConst = addConstant(ctx, runtimeCatch);
   doc.write("if (".concat(outputVar, " === INVALID) {"));
   doc.indented((d) => {
@@ -1561,7 +1621,7 @@ function generateTransformCheck(doc, ctx, schema, accessor) {
         return INVALID;
       return fakePayload.issues.length === 0 ? result : INVALID;
     };
-    const helperConst = addConstant(ctx, helperFn);
+    const helperConst = addUserConstant(ctx, helperFn);
     const outputVar = newVar(ctx);
     doc.write("const ".concat(outputVar, " = ").concat(helperConst, "(").concat(accessor, ");"));
     doc.write("if (".concat(outputVar, " === INVALID) return INVALID;"));
@@ -1575,5 +1635,6 @@ export {
   ZodCompileAsyncError,
   ZodCompileUnsupportedError,
   compile,
+  withParser,
   compileFn
 };

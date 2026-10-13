@@ -2,16 +2,16 @@ export default {
   "type": "object",
   "properties": {
     "letterSpacing": {
-      "$ref": "#/definitions/__schema20"
+      "$ref": "#/definitions/__schema21"
     },
     "lineHeight": {
       "type": "object",
       "properties": {
         "desktop": {
-          "$ref": "#/definitions/__schema21"
+          "$ref": "#/definitions/__schema22"
         },
         "mobile": {
-          "$ref": "#/definitions/__schema22"
+          "$ref": "#/definitions/__schema23"
         }
       },
       "required": [
@@ -21,7 +21,7 @@ export default {
       "additionalProperties": false
     },
     "fontFamily": {
-      "$ref": "#/definitions/__schema23",
+      "$ref": "#/definitions/__schema24",
       "x-stripo-setDocumentState": {
         "insert": "supported",
         "delete": "unsupported",
@@ -66,16 +66,16 @@ export default {
       }
     },
     "fontWeight": {
-      "$ref": "#/definitions/__schema24"
+      "$ref": "#/definitions/__schema25"
     },
     "header": {
       "type": "object",
       "properties": {
         "fontSize": {
-          "$ref": "#/definitions/__schema25"
+          "$ref": "#/definitions/__schema26"
         },
         "paragraphBottomSpace": {
-          "$ref": "#/definitions/__schema28"
+          "$ref": "#/definitions/__schema29"
         },
         "backgroundImage": {
           "anyOf": [
@@ -99,10 +99,10 @@ export default {
       "type": "object",
       "properties": {
         "fontSize": {
-          "$ref": "#/definitions/__schema25"
+          "$ref": "#/definitions/__schema26"
         },
         "paragraphBottomSpace": {
-          "$ref": "#/definitions/__schema28"
+          "$ref": "#/definitions/__schema29"
         }
       },
       "required": [
@@ -115,10 +115,10 @@ export default {
       "type": "object",
       "properties": {
         "fontSize": {
-          "$ref": "#/definitions/__schema25"
+          "$ref": "#/definitions/__schema26"
         },
         "paragraphBottomSpace": {
-          "$ref": "#/definitions/__schema28"
+          "$ref": "#/definitions/__schema29"
         },
         "backgroundImage": {
           "anyOf": [
@@ -142,10 +142,10 @@ export default {
       "type": "object",
       "properties": {
         "fontSize": {
-          "$ref": "#/definitions/__schema25"
+          "$ref": "#/definitions/__schema26"
         },
         "paragraphBottomSpace": {
-          "$ref": "#/definitions/__schema28"
+          "$ref": "#/definitions/__schema29"
         }
       },
       "required": [
@@ -161,7 +161,7 @@ export default {
           "type": "object",
           "properties": {
             "stripeBackgroundColor": {
-              "$ref": "#/definitions/__schema17",
+              "$ref": "#/definitions/__schema18",
               "x-stripo-setDocumentState": {
                 "insert": "unsupported",
                 "delete": "unsupported",
@@ -206,7 +206,7 @@ export default {
               }
             },
             "contentBackgroundColor": {
-              "$ref": "#/definitions/__schema17",
+              "$ref": "#/definitions/__schema18",
               "x-stripo-setDocumentState": {
                 "insert": "unsupported",
                 "delete": "unsupported",
@@ -251,7 +251,7 @@ export default {
               }
             },
             "fontColor": {
-              "$ref": "#/definitions/__schema30",
+              "$ref": "#/definitions/__schema31",
               "x-stripo-setDocumentState": {
                 "insert": "unsupported",
                 "delete": "unsupported",
@@ -296,7 +296,7 @@ export default {
               }
             },
             "linkColor": {
-              "$ref": "#/definitions/__schema30",
+              "$ref": "#/definitions/__schema31",
               "x-stripo-setDocumentState": {
                 "insert": "unsupported",
                 "delete": "unsupported",
@@ -341,7 +341,7 @@ export default {
               }
             },
             "linkColorHover": {
-              "$ref": "#/definitions/__schema30",
+              "$ref": "#/definitions/__schema31",
               "x-stripo-setDocumentState": {
                 "insert": "unsupported",
                 "delete": "unsupported",
@@ -399,7 +399,7 @@ export default {
           "type": "object",
           "properties": {
             "contentBackgroundColor": {
-              "$ref": "#/definitions/__schema17",
+              "$ref": "#/definitions/__schema18",
               "x-stripo-setDocumentState": {
                 "insert": "unsupported",
                 "delete": "unsupported",
@@ -444,7 +444,7 @@ export default {
               }
             },
             "fontColor": {
-              "$ref": "#/definitions/__schema30",
+              "$ref": "#/definitions/__schema31",
               "x-stripo-setDocumentState": {
                 "insert": "unsupported",
                 "delete": "unsupported",
@@ -489,7 +489,7 @@ export default {
               }
             },
             "linkColor": {
-              "$ref": "#/definitions/__schema30",
+              "$ref": "#/definitions/__schema31",
               "x-stripo-setDocumentState": {
                 "insert": "unsupported",
                 "delete": "unsupported",
@@ -534,7 +534,7 @@ export default {
               }
             },
             "linkColorHover": {
-              "$ref": "#/definitions/__schema30",
+              "$ref": "#/definitions/__schema31",
               "x-stripo-setDocumentState": {
                 "insert": "unsupported",
                 "delete": "unsupported",
@@ -591,7 +591,7 @@ export default {
           "type": "object",
           "properties": {
             "stripeBackgroundColor": {
-              "$ref": "#/definitions/__schema17",
+              "$ref": "#/definitions/__schema18",
               "x-stripo-setDocumentState": {
                 "insert": "unsupported",
                 "delete": "unsupported",
@@ -636,7 +636,7 @@ export default {
               }
             },
             "contentBackgroundColor": {
-              "$ref": "#/definitions/__schema17",
+              "$ref": "#/definitions/__schema18",
               "x-stripo-setDocumentState": {
                 "insert": "unsupported",
                 "delete": "unsupported",
@@ -681,7 +681,7 @@ export default {
               }
             },
             "fontColor": {
-              "$ref": "#/definitions/__schema30",
+              "$ref": "#/definitions/__schema31",
               "x-stripo-setDocumentState": {
                 "insert": "unsupported",
                 "delete": "unsupported",
@@ -726,7 +726,7 @@ export default {
               }
             },
             "linkColor": {
-              "$ref": "#/definitions/__schema30",
+              "$ref": "#/definitions/__schema31",
               "x-stripo-setDocumentState": {
                 "insert": "unsupported",
                 "delete": "unsupported",
@@ -771,7 +771,7 @@ export default {
               }
             },
             "linkColorHover": {
-              "$ref": "#/definitions/__schema30",
+              "$ref": "#/definitions/__schema31",
               "x-stripo-setDocumentState": {
                 "insert": "unsupported",
                 "delete": "unsupported",
@@ -829,7 +829,7 @@ export default {
           "type": "object",
           "properties": {
             "fontColor": {
-              "$ref": "#/definitions/__schema30",
+              "$ref": "#/definitions/__schema31",
               "x-stripo-setDocumentState": {
                 "insert": "unsupported",
                 "delete": "unsupported",
@@ -874,7 +874,7 @@ export default {
               }
             },
             "linkColor": {
-              "$ref": "#/definitions/__schema30",
+              "$ref": "#/definitions/__schema31",
               "x-stripo-setDocumentState": {
                 "insert": "unsupported",
                 "delete": "unsupported",
@@ -919,7 +919,7 @@ export default {
               }
             },
             "linkColorHover": {
-              "$ref": "#/definitions/__schema30",
+              "$ref": "#/definitions/__schema31",
               "x-stripo-setDocumentState": {
                 "insert": "unsupported",
                 "delete": "unsupported",
@@ -989,7 +989,7 @@ export default {
             "stripeBackgroundColor": {
               "anyOf": [
                 {
-                  "$ref": "#/definitions/__schema17"
+                  "$ref": "#/definitions/__schema18"
                 },
                 {
                   "type": "null"
@@ -1041,7 +1041,7 @@ export default {
             "contentBackgroundColor": {
               "anyOf": [
                 {
-                  "$ref": "#/definitions/__schema17"
+                  "$ref": "#/definitions/__schema18"
                 },
                 {
                   "type": "null"
@@ -1093,7 +1093,7 @@ export default {
             "fontColor": {
               "anyOf": [
                 {
-                  "$ref": "#/definitions/__schema30"
+                  "$ref": "#/definitions/__schema31"
                 },
                 {
                   "type": "null"
@@ -1145,7 +1145,7 @@ export default {
             "linkColor": {
               "anyOf": [
                 {
-                  "$ref": "#/definitions/__schema30"
+                  "$ref": "#/definitions/__schema31"
                 },
                 {
                   "type": "null"
@@ -1197,7 +1197,7 @@ export default {
             "linkColorHover": {
               "anyOf": [
                 {
-                  "$ref": "#/definitions/__schema30"
+                  "$ref": "#/definitions/__schema31"
                 },
                 {
                   "type": "null"
@@ -1262,7 +1262,7 @@ export default {
             "contentBackgroundColor": {
               "anyOf": [
                 {
-                  "$ref": "#/definitions/__schema17"
+                  "$ref": "#/definitions/__schema18"
                 },
                 {
                   "type": "null"
@@ -1314,7 +1314,7 @@ export default {
             "fontColor": {
               "anyOf": [
                 {
-                  "$ref": "#/definitions/__schema30"
+                  "$ref": "#/definitions/__schema31"
                 },
                 {
                   "type": "null"
@@ -1366,7 +1366,7 @@ export default {
             "linkColor": {
               "anyOf": [
                 {
-                  "$ref": "#/definitions/__schema30"
+                  "$ref": "#/definitions/__schema31"
                 },
                 {
                   "type": "null"
@@ -1418,7 +1418,7 @@ export default {
             "linkColorHover": {
               "anyOf": [
                 {
-                  "$ref": "#/definitions/__schema30"
+                  "$ref": "#/definitions/__schema31"
                 },
                 {
                   "type": "null"
@@ -1482,7 +1482,7 @@ export default {
             "stripeBackgroundColor": {
               "anyOf": [
                 {
-                  "$ref": "#/definitions/__schema17"
+                  "$ref": "#/definitions/__schema18"
                 },
                 {
                   "type": "null"
@@ -1534,7 +1534,7 @@ export default {
             "contentBackgroundColor": {
               "anyOf": [
                 {
-                  "$ref": "#/definitions/__schema17"
+                  "$ref": "#/definitions/__schema18"
                 },
                 {
                   "type": "null"
@@ -1586,7 +1586,7 @@ export default {
             "fontColor": {
               "anyOf": [
                 {
-                  "$ref": "#/definitions/__schema30"
+                  "$ref": "#/definitions/__schema31"
                 },
                 {
                   "type": "null"
@@ -1638,7 +1638,7 @@ export default {
             "linkColor": {
               "anyOf": [
                 {
-                  "$ref": "#/definitions/__schema30"
+                  "$ref": "#/definitions/__schema31"
                 },
                 {
                   "type": "null"
@@ -1690,7 +1690,7 @@ export default {
             "linkColorHover": {
               "anyOf": [
                 {
-                  "$ref": "#/definitions/__schema30"
+                  "$ref": "#/definitions/__schema31"
                 },
                 {
                   "type": "null"
@@ -1755,7 +1755,7 @@ export default {
             "fontColor": {
               "anyOf": [
                 {
-                  "$ref": "#/definitions/__schema30"
+                  "$ref": "#/definitions/__schema31"
                 },
                 {
                   "type": "null"
@@ -1807,7 +1807,7 @@ export default {
             "linkColor": {
               "anyOf": [
                 {
-                  "$ref": "#/definitions/__schema30"
+                  "$ref": "#/definitions/__schema31"
                 },
                 {
                   "type": "null"
@@ -1859,7 +1859,7 @@ export default {
             "linkColorHover": {
               "anyOf": [
                 {
-                  "$ref": "#/definitions/__schema30"
+                  "$ref": "#/definitions/__schema31"
                 },
                 {
                   "type": "null"

@@ -1,25 +1,116 @@
 import value0 from './schema-2.js';
 export default {
+["__schema151"]: {
+  "type": "object",
+  "properties": {
+    "days": {
+      "$ref": "#/definitions/colorValueDisallowTransparent"
+    },
+    "hours": {
+      "$ref": "#/definitions/colorValueDisallowTransparent"
+    },
+    "minutes": {
+      "$ref": "#/definitions/colorValueDisallowTransparent"
+    },
+    "seconds": {
+      "$ref": "#/definitions/colorValueDisallowTransparent"
+    }
+  },
+  "required": [
+    "days",
+    "hours",
+    "minutes",
+    "seconds"
+  ],
+  "additionalProperties": false
+},
+["socialBlock"]: {
+  "type": "object",
+  "properties": {
+    "id": {
+      "$ref": "#/definitions/__schema91"
+    },
+    "type": {
+      "$ref": "#/definitions/__schema152"
+    },
+    "settings": {
+      "$ref": "#/definitions/__schema153"
+    }
+  },
+  "required": [
+    "id",
+    "type",
+    "settings"
+  ],
+  "description": "Social block.",
+  "x-stripo-setDocumentState": {
+    "insert": "supported",
+    "delete": "supported",
+    "update": "supported",
+    "move": "supported"
+  },
+  "x-stripo-setDocumentStateRuntimes": {
+    "insert": {
+      "browser": true,
+      "mergeService": true
+    },
+    "delete": {
+      "browser": true,
+      "mergeService": true
+    },
+    "update": {
+      "browser": true,
+      "mergeService": true
+    },
+    "move": {
+      "browser": true,
+      "mergeService": true
+    }
+  },
+  "x-stripo-setDocumentStateUnavailableSideEffects": {
+    "insert": {
+      "browser": [],
+      "mergeService": []
+    },
+    "delete": {
+      "browser": [],
+      "mergeService": []
+    },
+    "update": {
+      "browser": [],
+      "mergeService": []
+    },
+    "move": {
+      "browser": [],
+      "mergeService": []
+    }
+  },
+  "additionalProperties": false
+},
 ["__schema152"]: {
+  "type": "string",
+  "const": "social"
+},
+["__schema153"]: {
   "type": "object",
   "properties": {
     "networks": {
-      "$ref": "#/definitions/__schema153"
+      "$ref": "#/definitions/__schema154"
     },
     "style": {
-      "$ref": "#/definitions/__schema161"
-    },
-    "iconSize": {
       "$ref": "#/definitions/__schema162"
     },
-    "spaceBetweenIcons": {
+    "iconSize": {
       "$ref": "#/definitions/__schema163"
     },
+    "spaceBetweenIcons": {
+      "$ref": "#/definitions/__schema164"
+    },
     "textCustomization": {
-      "$ref": "#/definitions/__schema166"
+      "$ref": "#/definitions/__schema167"
     },
     "alignment": {
-      "$ref": "#/definitions/__schema167"
+      "$ref": "#/definitions/__schema168"
     },
     "backgroundColor": {
       "$ref": "#/definitions/colorValueAllowTransparent"
@@ -28,13 +119,13 @@ export default {
       "$ref": "#/definitions/hideElement"
     },
     "margins": {
-      "$ref": "#/definitions/__schema168"
+      "$ref": "#/definitions/__schema169"
     },
     "includeInOutput": {
       "$ref": "#/definitions/outputInclusion"
     },
     "anchorLinkName": {
-      "$ref": "#/definitions/__schema127"
+      "$ref": "#/definitions/__schema128"
     }
   },
   "required": [
@@ -52,30 +143,30 @@ export default {
   ],
   "additionalProperties": false
 },
-["__schema153"]: {
+["__schema154"]: {
   "minItems": 1,
   "type": "array",
   "items": {
-    "$ref": "#/definitions/__schema154"
+    "$ref": "#/definitions/__schema155"
   }
 },
-["__schema154"]: {
+["__schema155"]: {
   "type": "object",
   "properties": {
     "type": {
-      "$ref": "#/definitions/__schema155"
-    },
-    "link": {
       "$ref": "#/definitions/__schema156"
     },
-    "icon": {
-      "$ref": "#/definitions/__schema158"
+    "link": {
+      "$ref": "#/definitions/__schema157"
     },
-    "title": {
+    "icon": {
       "$ref": "#/definitions/__schema159"
     },
-    "alt": {
+    "title": {
       "$ref": "#/definitions/__schema160"
+    },
+    "alt": {
+      "$ref": "#/definitions/__schema161"
     }
   },
   "required": [
@@ -84,7 +175,7 @@ export default {
   ],
   "additionalProperties": false
 },
-["__schema155"]: {
+["__schema156"]: {
   "type": "string",
   "enum": [
     "twitter",
@@ -170,14 +261,14 @@ export default {
     "meet"
   ]
 },
-["__schema156"]: {
+["__schema157"]: {
   "type": "object",
   "properties": {
     "type": {
-      "$ref": "#/definitions/__schema109"
+      "$ref": "#/definitions/__schema110"
     },
     "href": {
-      "$ref": "#/definitions/__schema157"
+      "$ref": "#/definitions/__schema158"
     }
   },
   "required": [
@@ -186,22 +277,22 @@ export default {
   ],
   "additionalProperties": false
 },
-["__schema157"]: {
+["__schema158"]: {
   "type": "string",
   "minLength": 1
 },
-["__schema158"]: {
-  "type": "string"
-},
 ["__schema159"]: {
-  "type": "string",
-  "maxLength": 100
+  "type": "string"
 },
 ["__schema160"]: {
   "type": "string",
-  "maxLength": 500
+  "maxLength": 100
 },
 ["__schema161"]: {
+  "type": "string",
+  "maxLength": 500
+},
+["__schema162"]: {
   "type": "string",
   "enum": [
     "custom",
@@ -235,19 +326,19 @@ export default {
     "squareWhiteBordered"
   ]
 },
-["__schema162"]: {
+["__schema163"]: {
   "type": "integer",
   "minimum": 16,
   "maximum": 64
 },
-["__schema163"]: {
+["__schema164"]: {
   "type": "object",
   "properties": {
     "desktop": {
-      "$ref": "#/definitions/__schema164"
+      "$ref": "#/definitions/__schema165"
     },
     "mobile": {
-      "$ref": "#/definitions/__schema165"
+      "$ref": "#/definitions/__schema166"
     }
   },
   "required": [
@@ -255,11 +346,6 @@ export default {
     "mobile"
   ],
   "additionalProperties": false
-},
-["__schema164"]: {
-  "type": "integer",
-  "minimum": 0,
-  "maximum": 40
 },
 ["__schema165"]: {
   "type": "integer",
@@ -267,32 +353,21 @@ export default {
   "maximum": 40
 },
 ["__schema166"]: {
-  "type": "boolean"
+  "type": "integer",
+  "minimum": 0,
+  "maximum": 40
 },
 ["__schema167"]: {
-  "type": "object",
-  "properties": {
-    "desktop": {
-      "$ref": "#/definitions/__schema119"
-    },
-    "mobile": {
-      "$ref": "#/definitions/__schema119"
-    }
-  },
-  "required": [
-    "desktop",
-    "mobile"
-  ],
-  "additionalProperties": false
+  "type": "boolean"
 },
 ["__schema168"]: {
   "type": "object",
   "properties": {
     "desktop": {
-      "$ref": "#/definitions/__schema169"
+      "$ref": "#/definitions/__schema120"
     },
     "mobile": {
-      "$ref": "#/definitions/__schema169"
+      "$ref": "#/definitions/__schema120"
     }
   },
   "required": [
@@ -304,17 +379,33 @@ export default {
 ["__schema169"]: {
   "type": "object",
   "properties": {
-    "top": {
+    "desktop": {
       "$ref": "#/definitions/__schema170"
     },
-    "right": {
+    "mobile": {
+      "$ref": "#/definitions/__schema170"
+    }
+  },
+  "required": [
+    "desktop",
+    "mobile"
+  ],
+  "additionalProperties": false
+},
+["__schema170"]: {
+  "type": "object",
+  "properties": {
+    "top": {
       "$ref": "#/definitions/__schema171"
     },
-    "bottom": {
+    "right": {
       "$ref": "#/definitions/__schema172"
     },
-    "left": {
+    "bottom": {
       "$ref": "#/definitions/__schema173"
+    },
+    "left": {
+      "$ref": "#/definitions/__schema174"
     }
   },
   "required": [
@@ -324,11 +415,6 @@ export default {
     "left"
   ],
   "additionalProperties": false
-},
-["__schema170"]: {
-  "type": "number",
-  "minimum": 0,
-  "maximum": 1000
 },
 ["__schema171"]: {
   "type": "number",
@@ -345,20 +431,25 @@ export default {
   "minimum": 0,
   "maximum": 1000
 },
+["__schema174"]: {
+  "type": "number",
+  "minimum": 0,
+  "maximum": 1000
+},
 ["htmlBlock"]: {
   "type": "object",
   "properties": {
     "id": {
-      "$ref": "#/definitions/__schema90"
+      "$ref": "#/definitions/__schema91"
     },
     "type": {
-      "$ref": "#/definitions/__schema174"
-    },
-    "settings": {
       "$ref": "#/definitions/__schema175"
     },
-    "content": {
+    "settings": {
       "$ref": "#/definitions/__schema176"
+    },
+    "content": {
+      "$ref": "#/definitions/__schema177"
     }
   },
   "required": [
@@ -411,15 +502,15 @@ export default {
   },
   "additionalProperties": false
 },
-["__schema174"]: {
+["__schema175"]: {
   "type": "string",
   "const": "html"
 },
-["__schema175"]: {
+["__schema176"]: {
   "type": "object",
   "properties": {
     "margins": {
-      "$ref": "#/definitions/__schema121"
+      "$ref": "#/definitions/__schema122"
     },
     "includeInOutput": {
       "$ref": "#/definitions/outputInclusion"
@@ -428,7 +519,7 @@ export default {
       "$ref": "#/definitions/hideElement"
     },
     "anchorLinkName": {
-      "$ref": "#/definitions/__schema127"
+      "$ref": "#/definitions/__schema128"
     }
   },
   "required": [
@@ -439,17 +530,17 @@ export default {
   ],
   "additionalProperties": false
 },
-["__schema176"]: {
+["__schema177"]: {
   "type": "string"
 },
 ["buttonBlock"]: {
   "type": "object",
   "properties": {
     "id": {
-      "$ref": "#/definitions/__schema90"
+      "$ref": "#/definitions/__schema91"
     },
     "type": {
-      "$ref": "#/definitions/__schema177"
+      "$ref": "#/definitions/__schema178"
     },
     "settings": {
       "$ref": "#/definitions/buttonBlockSettings"
@@ -505,7 +596,7 @@ export default {
   },
   "additionalProperties": false
 },
-["__schema177"]: {
+["__schema178"]: {
   "type": "string",
   "const": "button"
 },
@@ -513,34 +604,34 @@ export default {
   "type": "object",
   "properties": {
     "link": {
-      "$ref": "#/definitions/__schema178"
+      "$ref": "#/definitions/__schema179"
     },
     "text": {
-      "$ref": "#/definitions/__schema190"
-    },
-    "alignment": {
       "$ref": "#/definitions/__schema191"
     },
-    "fixedHeight": {
+    "alignment": {
       "$ref": "#/definitions/__schema192"
     },
+    "fixedHeight": {
+      "$ref": "#/definitions/__schema193"
+    },
     "icon": {
-      "$ref": "#/definitions/__schema195"
+      "$ref": "#/definitions/__schema196"
     },
     "hideElement": {
       "$ref": "#/definitions/hideElement"
     },
     "padding": {
-      "$ref": "#/definitions/__schema200"
+      "$ref": "#/definitions/__schema201"
     },
     "margins": {
-      "$ref": "#/definitions/__schema200"
+      "$ref": "#/definitions/__schema201"
     },
     "includeInOutput": {
       "$ref": "#/definitions/outputInclusion"
     },
     "anchorLink": {
-      "$ref": "#/definitions/__schema203"
+      "$ref": "#/definitions/__schema204"
     },
     "backgroundColor": {
       "$ref": "#/definitions/colorValueAllowTransparent"
@@ -591,34 +682,34 @@ export default {
   "additionalProperties": false,
   "description": "Button block settings."
 },
-["__schema178"]: {
-  "anyOf": [
-    {
-      "$ref": "#/definitions/__schema180"
-    },
-    {
-      "$ref": "#/definitions/__schema183"
-    }
-  ]
-},
 ["__schema179"]: {
   "anyOf": [
     {
-      "$ref": "#/definitions/__schema180"
+      "$ref": "#/definitions/__schema181"
     },
     {
-      "$ref": "#/definitions/__schema183"
+      "$ref": "#/definitions/__schema184"
     }
   ]
 },
 ["__schema180"]: {
+  "anyOf": [
+    {
+      "$ref": "#/definitions/__schema181"
+    },
+    {
+      "$ref": "#/definitions/__schema184"
+    }
+  ]
+},
+["__schema181"]: {
   "type": "object",
   "properties": {
     "type": {
-      "$ref": "#/definitions/__schema181"
+      "$ref": "#/definitions/__schema182"
     },
     "value": {
-      "$ref": "#/definitions/__schema182"
+      "$ref": "#/definitions/__schema183"
     }
   },
   "required": [
@@ -627,7 +718,7 @@ export default {
   ],
   "additionalProperties": false
 },
-["__schema181"]: {
+["__schema182"]: {
   "type": "string",
   "enum": [
     "site",
@@ -641,20 +732,20 @@ export default {
     "other"
   ]
 },
-["__schema182"]: {
+["__schema183"]: {
   "type": "string"
 },
-["__schema183"]: {
+["__schema184"]: {
   "type": "object",
   "properties": {
     "type": {
-      "$ref": "#/definitions/__schema184"
-    },
-    "value": {
       "$ref": "#/definitions/__schema185"
     },
-    "salesforce": {
+    "value": {
       "$ref": "#/definitions/__schema186"
+    },
+    "salesforce": {
+      "$ref": "#/definitions/__schema187"
     }
   },
   "required": [
@@ -664,24 +755,24 @@ export default {
   ],
   "additionalProperties": false
 },
-["__schema184"]: {
+["__schema185"]: {
   "type": "string",
   "const": "salesforce_mc"
 },
-["__schema185"]: {
+["__schema186"]: {
   "type": "string"
 },
-["__schema186"]: {
+["__schema187"]: {
   "type": "object",
   "properties": {
     "trackingAlias": {
-      "$ref": "#/definitions/__schema187"
-    },
-    "linkTo": {
       "$ref": "#/definitions/__schema188"
     },
-    "conversion": {
+    "linkTo": {
       "$ref": "#/definitions/__schema189"
+    },
+    "conversion": {
+      "$ref": "#/definitions/__schema190"
     }
   },
   "required": [
@@ -691,27 +782,27 @@ export default {
   ],
   "additionalProperties": false
 },
-["__schema187"]: {
+["__schema188"]: {
   "type": "string",
   "maxLength": 100
 },
-["__schema188"]: {
-  "type": "string"
-},
 ["__schema189"]: {
-  "type": "boolean"
+  "type": "string"
 },
 ["__schema190"]: {
-  "type": "string"
+  "type": "boolean"
 },
 ["__schema191"]: {
+  "type": "string"
+},
+["__schema192"]: {
   "type": "object",
   "properties": {
     "desktop": {
-      "$ref": "#/definitions/__schema119"
+      "$ref": "#/definitions/__schema120"
     },
     "mobile": {
-      "$ref": "#/definitions/__schema119"
+      "$ref": "#/definitions/__schema120"
     }
   },
   "required": [
@@ -720,14 +811,14 @@ export default {
   ],
   "additionalProperties": false
 },
-["__schema192"]: {
+["__schema193"]: {
   "type": "object",
   "properties": {
     "height": {
-      "$ref": "#/definitions/__schema193"
+      "$ref": "#/definitions/__schema194"
     },
     "alignment": {
-      "$ref": "#/definitions/__schema194"
+      "$ref": "#/definitions/__schema195"
     }
   },
   "required": [
@@ -735,12 +826,12 @@ export default {
   ],
   "additionalProperties": false
 },
-["__schema193"]: {
+["__schema194"]: {
   "type": "integer",
   "minimum": 0,
   "maximum": 9007199254740991
 },
-["__schema194"]: {
+["__schema195"]: {
   "type": "string",
   "enum": [
     "top",
@@ -748,20 +839,20 @@ export default {
     "bottom"
   ]
 },
-["__schema195"]: {
+["__schema196"]: {
   "type": "object",
   "properties": {
     "src": {
-      "$ref": "#/definitions/__schema196"
-    },
-    "width": {
       "$ref": "#/definitions/__schema197"
     },
-    "align": {
+    "width": {
       "$ref": "#/definitions/__schema198"
     },
-    "indent": {
+    "align": {
       "$ref": "#/definitions/__schema199"
+    },
+    "indent": {
+      "$ref": "#/definitions/__schema200"
     }
   },
   "required": [
@@ -772,35 +863,35 @@ export default {
   ],
   "additionalProperties": false
 },
-["__schema196"]: {
+["__schema197"]: {
   "type": "string",
   "minLength": 1
 },
-["__schema197"]: {
+["__schema198"]: {
   "type": "integer",
   "minimum": 3,
   "maximum": 128
 },
-["__schema198"]: {
+["__schema199"]: {
   "type": "string",
   "enum": [
     "left",
     "right"
   ]
 },
-["__schema199"]: {
+["__schema200"]: {
   "type": "integer",
   "minimum": 0,
   "maximum": 400
 },
-["__schema200"]: {
+["__schema201"]: {
   "type": "object",
   "properties": {
     "desktop": {
-      "$ref": "#/definitions/__schema201"
+      "$ref": "#/definitions/__schema202"
     },
     "mobile": {
-      "$ref": "#/definitions/__schema201"
+      "$ref": "#/definitions/__schema202"
     }
   },
   "required": [
@@ -809,20 +900,20 @@ export default {
   ],
   "additionalProperties": false
 },
-["__schema201"]: {
+["__schema202"]: {
   "type": "object",
   "properties": {
     "top": {
-      "$ref": "#/definitions/__schema202"
+      "$ref": "#/definitions/__schema203"
     },
     "right": {
-      "$ref": "#/definitions/__schema202"
+      "$ref": "#/definitions/__schema203"
     },
     "bottom": {
-      "$ref": "#/definitions/__schema202"
+      "$ref": "#/definitions/__schema203"
     },
     "left": {
-      "$ref": "#/definitions/__schema202"
+      "$ref": "#/definitions/__schema203"
     }
   },
   "required": [
@@ -833,12 +924,12 @@ export default {
   ],
   "additionalProperties": false
 },
-["__schema202"]: {
+["__schema203"]: {
   "type": "number",
   "minimum": 0,
   "maximum": 1000
 },
-["__schema203"]: {
+["__schema204"]: {
   "type": "string",
   "maxLength": 150
 },
@@ -846,10 +937,10 @@ export default {
   "type": "object",
   "properties": {
     "desktop": {
-      "$ref": "#/definitions/__schema204"
+      "$ref": "#/definitions/__schema205"
     },
     "mobile": {
-      "$ref": "#/definitions/__schema205"
+      "$ref": "#/definitions/__schema206"
     }
   },
   "required": [
@@ -859,12 +950,12 @@ export default {
   "additionalProperties": false,
   "description": "Responsive font sizes for desktop and mobile."
 },
-["__schema204"]: {
+["__schema205"]: {
   "type": "number",
   "minimum": 8,
   "maximum": 72
 },
-["__schema205"]: {
+["__schema206"]: {
   "type": "number",
   "minimum": 8,
   "maximum": 72
@@ -873,10 +964,10 @@ export default {
   "type": "object",
   "properties": {
     "bold": {
-      "$ref": "#/definitions/__schema206"
+      "$ref": "#/definitions/__schema207"
     },
     "italic": {
-      "$ref": "#/definitions/__schema207"
+      "$ref": "#/definitions/__schema208"
     }
   },
   "required": [
@@ -886,20 +977,20 @@ export default {
   "additionalProperties": false,
   "description": "Button text style settings."
 },
-["__schema206"]: {
+["__schema207"]: {
   "type": "boolean"
 },
-["__schema207"]: {
+["__schema208"]: {
   "type": "boolean"
 },
 ["responsiveBoolean"]: {
   "type": "object",
   "properties": {
     "desktop": {
-      "$ref": "#/definitions/__schema208"
+      "$ref": "#/definitions/__schema209"
     },
     "mobile": {
-      "$ref": "#/definitions/__schema209"
+      "$ref": "#/definitions/__schema210"
     }
   },
   "required": [
@@ -909,23 +1000,23 @@ export default {
   "additionalProperties": false,
   "description": "Responsive boolean values for desktop and mobile."
 },
-["__schema208"]: {
+["__schema209"]: {
   "type": "boolean"
 },
-["__schema209"]: {
+["__schema210"]: {
   "type": "boolean"
 },
 ["spacerBlock"]: {
   "type": "object",
   "properties": {
     "id": {
-      "$ref": "#/definitions/__schema90"
+      "$ref": "#/definitions/__schema91"
     },
     "type": {
-      "$ref": "#/definitions/__schema210"
+      "$ref": "#/definitions/__schema211"
     },
     "settings": {
-      "$ref": "#/definitions/__schema211"
+      "$ref": "#/definitions/__schema212"
     }
   },
   "required": [
@@ -978,39 +1069,39 @@ export default {
   },
   "additionalProperties": false
 },
-["__schema210"]: {
+["__schema211"]: {
   "type": "string",
   "const": "spacer"
 },
-["__schema211"]: {
+["__schema212"]: {
   "type": "object",
   "properties": {
     "mode": {
-      "$ref": "#/definitions/__schema212"
-    },
-    "width": {
       "$ref": "#/definitions/__schema213"
     },
+    "width": {
+      "$ref": "#/definitions/__schema214"
+    },
     "height": {
-      "$ref": "#/definitions/__schema219"
+      "$ref": "#/definitions/__schema220"
     },
     "border": {
-      "$ref": "#/definitions/__schema222"
+      "$ref": "#/definitions/__schema223"
     },
     "mobileBorder": {
-      "$ref": "#/definitions/__schema225"
+      "$ref": "#/definitions/__schema226"
     },
     "alignment": {
-      "$ref": "#/definitions/__schema227"
+      "$ref": "#/definitions/__schema228"
     },
     "backgroundColor": {
       "$ref": "#/definitions/colorValueAllowTransparent"
     },
     "margins": {
-      "$ref": "#/definitions/__schema228"
+      "$ref": "#/definitions/__schema229"
     },
     "anchorLinkName": {
-      "$ref": "#/definitions/__schema127"
+      "$ref": "#/definitions/__schema128"
     },
     "includeInOutput": {
       "$ref": "#/definitions/outputInclusion"
@@ -1029,21 +1120,21 @@ export default {
   ],
   "additionalProperties": false
 },
-["__schema212"]: {
+["__schema213"]: {
   "type": "string",
   "enum": [
     "line",
     "space"
   ]
 },
-["__schema213"]: {
+["__schema214"]: {
   "type": "object",
   "properties": {
     "desktop": {
-      "$ref": "#/definitions/__schema214"
+      "$ref": "#/definitions/__schema215"
     },
     "mobile": {
-      "$ref": "#/definitions/__schema218"
+      "$ref": "#/definitions/__schema219"
     }
   },
   "required": [
@@ -1052,14 +1143,14 @@ export default {
   ],
   "additionalProperties": false
 },
-["__schema214"]: {
+["__schema215"]: {
   "type": "object",
   "properties": {
     "value": {
-      "$ref": "#/definitions/__schema215"
+      "$ref": "#/definitions/__schema216"
     },
     "unit": {
-      "$ref": "#/definitions/__schema216"
+      "$ref": "#/definitions/__schema217"
     }
   },
   "required": [
@@ -1068,42 +1159,26 @@ export default {
   ],
   "additionalProperties": false
 },
-["__schema215"]: {
+["__schema216"]: {
   "type": "integer",
   "minimum": 5,
   "maximum": 1000
 },
-["__schema216"]: {
+["__schema217"]: {
   "type": "string",
   "enum": [
     "percent",
     "px"
   ]
 },
-["__schema217"]: {
-  "type": "object",
-  "properties": {
-    "value": {
-      "$ref": "#/definitions/__schema215"
-    },
-    "unit": {
-      "$ref": "#/definitions/__schema216"
-    }
-  },
-  "required": [
-    "value",
-    "unit"
-  ],
-  "additionalProperties": false
-},
 ["__schema218"]: {
   "type": "object",
   "properties": {
     "value": {
-      "$ref": "#/definitions/__schema215"
+      "$ref": "#/definitions/__schema216"
     },
     "unit": {
-      "$ref": "#/definitions/__schema216"
+      "$ref": "#/definitions/__schema217"
     }
   },
   "required": [
@@ -1115,11 +1190,27 @@ export default {
 ["__schema219"]: {
   "type": "object",
   "properties": {
+    "value": {
+      "$ref": "#/definitions/__schema216"
+    },
+    "unit": {
+      "$ref": "#/definitions/__schema217"
+    }
+  },
+  "required": [
+    "value",
+    "unit"
+  ],
+  "additionalProperties": false
+},
+["__schema220"]: {
+  "type": "object",
+  "properties": {
     "desktop": {
-      "$ref": "#/definitions/__schema220"
+      "$ref": "#/definitions/__schema221"
     },
     "mobile": {
-      "$ref": "#/definitions/__schema221"
+      "$ref": "#/definitions/__schema222"
     }
   },
   "required": [
@@ -1128,44 +1219,24 @@ export default {
   ],
   "additionalProperties": false
 },
-["__schema220"]: {
-  "type": "integer",
-  "minimum": 5,
-  "maximum": 1000
-},
 ["__schema221"]: {
   "type": "integer",
   "minimum": 5,
   "maximum": 1000
 },
 ["__schema222"]: {
-  "type": "object",
-  "properties": {
-    "size": {
-      "$ref": "#/definitions/__schema224"
-    },
-    "style": {
-      "$ref": "#/definitions/__schema60"
-    },
-    "color": {
-      "$ref": "#/definitions/colorValueDisallowTransparent"
-    }
-  },
-  "required": [
-    "size",
-    "style",
-    "color"
-  ],
-  "additionalProperties": false
+  "type": "integer",
+  "minimum": 5,
+  "maximum": 1000
 },
 ["__schema223"]: {
   "type": "object",
   "properties": {
     "size": {
-      "$ref": "#/definitions/__schema224"
+      "$ref": "#/definitions/__schema225"
     },
     "style": {
-      "$ref": "#/definitions/__schema60"
+      "$ref": "#/definitions/__schema61"
     },
     "color": {
       "$ref": "#/definitions/colorValueDisallowTransparent"
@@ -1179,24 +1250,34 @@ export default {
   "additionalProperties": false
 },
 ["__schema224"]: {
+  "type": "object",
+  "properties": {
+    "size": {
+      "$ref": "#/definitions/__schema225"
+    },
+    "style": {
+      "$ref": "#/definitions/__schema61"
+    },
+    "color": {
+      "$ref": "#/definitions/colorValueDisallowTransparent"
+    }
+  },
+  "required": [
+    "size",
+    "style",
+    "color"
+  ],
+  "additionalProperties": false
+},
+["__schema225"]: {
   "type": "integer",
   "minimum": 1,
   "maximum": 40
 },
-["__schema225"]: {
-  "anyOf": [
-    {
-      "$ref": "#/definitions/__schema223"
-    },
-    {
-      "type": "null"
-    }
-  ]
-},
 ["__schema226"]: {
   "anyOf": [
     {
-      "$ref": "#/definitions/__schema223"
+      "$ref": "#/definitions/__schema224"
     },
     {
       "type": "null"
@@ -1204,29 +1285,23 @@ export default {
   ]
 },
 ["__schema227"]: {
-  "type": "object",
-  "properties": {
-    "desktop": {
-      "$ref": "#/definitions/__schema119"
+  "anyOf": [
+    {
+      "$ref": "#/definitions/__schema224"
     },
-    "mobile": {
-      "$ref": "#/definitions/__schema119"
+    {
+      "type": "null"
     }
-  },
-  "required": [
-    "desktop",
-    "mobile"
-  ],
-  "additionalProperties": false
+  ]
 },
 ["__schema228"]: {
   "type": "object",
   "properties": {
     "desktop": {
-      "$ref": "#/definitions/__schema229"
+      "$ref": "#/definitions/__schema120"
     },
     "mobile": {
-      "$ref": "#/definitions/__schema229"
+      "$ref": "#/definitions/__schema120"
     }
   },
   "required": [
@@ -1238,17 +1313,33 @@ export default {
 ["__schema229"]: {
   "type": "object",
   "properties": {
-    "top": {
+    "desktop": {
       "$ref": "#/definitions/__schema230"
     },
-    "right": {
+    "mobile": {
+      "$ref": "#/definitions/__schema230"
+    }
+  },
+  "required": [
+    "desktop",
+    "mobile"
+  ],
+  "additionalProperties": false
+},
+["__schema230"]: {
+  "type": "object",
+  "properties": {
+    "top": {
       "$ref": "#/definitions/__schema231"
     },
-    "bottom": {
+    "right": {
       "$ref": "#/definitions/__schema232"
     },
-    "left": {
+    "bottom": {
       "$ref": "#/definitions/__schema233"
+    },
+    "left": {
+      "$ref": "#/definitions/__schema234"
     }
   },
   "required": [
@@ -1258,11 +1349,6 @@ export default {
     "left"
   ],
   "additionalProperties": false
-},
-["__schema230"]: {
-  "type": "integer",
-  "minimum": 0,
-  "maximum": 1000
 },
 ["__schema231"]: {
   "type": "integer",
@@ -1279,14 +1365,19 @@ export default {
   "minimum": 0,
   "maximum": 1000
 },
+["__schema234"]: {
+  "type": "integer",
+  "minimum": 0,
+  "maximum": 1000
+},
 ["menuBlock"]: {
   "type": "object",
   "properties": {
     "id": {
-      "$ref": "#/definitions/__schema90"
+      "$ref": "#/definitions/__schema91"
     },
     "type": {
-      "$ref": "#/definitions/__schema234"
+      "$ref": "#/definitions/__schema235"
     },
     "settings": {
       "$ref": "#/definitions/menuBlockSettings"
@@ -1342,7 +1433,7 @@ export default {
   },
   "additionalProperties": false
 },
-["__schema234"]: {
+["__schema235"]: {
   "type": "string",
   "const": "menu"
 },
@@ -1350,22 +1441,22 @@ export default {
   "type": "object",
   "properties": {
     "responsiveMenu": {
-      "$ref": "#/definitions/__schema235"
-    },
-    "itemType": {
       "$ref": "#/definitions/__schema236"
     },
+    "itemType": {
+      "$ref": "#/definitions/__schema237"
+    },
     "fitToContainer": {
-      "$ref": "#/definitions/__schema239"
+      "$ref": "#/definitions/__schema240"
     },
     "itemPadding": {
-      "$ref": "#/definitions/__schema240"
+      "$ref": "#/definitions/__schema241"
     },
     "margins": {
-      "$ref": "#/definitions/__schema240"
+      "$ref": "#/definitions/__schema241"
     },
     "anchorLinkName": {
-      "$ref": "#/definitions/__schema127"
+      "$ref": "#/definitions/__schema128"
     },
     "includeInOutput": {
       "$ref": "#/definitions/outputInclusion"
@@ -1386,10 +1477,10 @@ export default {
       "$ref": "#/definitions/buttonsTextStyle"
     },
     "colors": {
-      "$ref": "#/definitions/__schema245"
+      "$ref": "#/definitions/__schema246"
     },
     "items": {
-      "$ref": "#/definitions/__schema248"
+      "$ref": "#/definitions/__schema249"
     }
   },
   "required": [
@@ -1411,20 +1502,20 @@ export default {
   "additionalProperties": false,
   "description": "Menu block settings."
 },
-["__schema235"]: {
+["__schema236"]: {
   "type": "boolean"
 },
-["__schema236"]: {
+["__schema237"]: {
   "oneOf": [
     {
-      "$ref": "#/definitions/__schema237"
+      "$ref": "#/definitions/__schema238"
     },
     {
-      "$ref": "#/definitions/__schema238"
+      "$ref": "#/definitions/__schema239"
     }
   ]
 },
-["__schema237"]: {
+["__schema238"]: {
   "type": "object",
   "properties": {
     "mode": {
@@ -1450,7 +1541,7 @@ export default {
   ],
   "description": "Menu item type: links, icons, or links with icons."
 },
-["__schema238"]: {
+["__schema239"]: {
   "type": "object",
   "properties": {
     "mode": {
@@ -1463,17 +1554,17 @@ export default {
   ],
   "additionalProperties": false
 },
-["__schema239"]: {
+["__schema240"]: {
   "type": "boolean"
 },
-["__schema240"]: {
+["__schema241"]: {
   "type": "object",
   "properties": {
     "desktop": {
-      "$ref": "#/definitions/__schema241"
+      "$ref": "#/definitions/__schema242"
     },
     "mobile": {
-      "$ref": "#/definitions/__schema241"
+      "$ref": "#/definitions/__schema242"
     }
   },
   "required": [
@@ -1482,20 +1573,20 @@ export default {
   ],
   "additionalProperties": false
 },
-["__schema241"]: {
+["__schema242"]: {
   "type": "object",
   "properties": {
     "top": {
-      "$ref": "#/definitions/__schema242"
+      "$ref": "#/definitions/__schema243"
     },
     "right": {
-      "$ref": "#/definitions/__schema242"
+      "$ref": "#/definitions/__schema243"
     },
     "bottom": {
-      "$ref": "#/definitions/__schema242"
+      "$ref": "#/definitions/__schema243"
     },
     "left": {
-      "$ref": "#/definitions/__schema242"
+      "$ref": "#/definitions/__schema243"
     }
   },
   "required": [
@@ -1506,7 +1597,7 @@ export default {
   ],
   "additionalProperties": false
 },
-["__schema242"]: {
+["__schema243"]: {
   "type": "number",
   "minimum": 0,
   "maximum": 1000
@@ -1515,10 +1606,10 @@ export default {
   "type": "object",
   "properties": {
     "width": {
-      "$ref": "#/definitions/__schema243"
+      "$ref": "#/definitions/__schema244"
     },
     "style": {
-      "$ref": "#/definitions/__schema244"
+      "$ref": "#/definitions/__schema245"
     },
     "color": {
       "$ref": "#/definitions/colorValueDisallowTransparent"
@@ -1532,12 +1623,12 @@ export default {
   "additionalProperties": false,
   "description": "Menu separator settings."
 },
-["__schema243"]: {
+["__schema244"]: {
   "type": "integer",
   "minimum": 0,
   "maximum": 20
 },
-["__schema244"]: {
+["__schema245"]: {
   "type": "string",
   "enum": [
     "none",
@@ -1546,17 +1637,17 @@ export default {
     "dotted"
   ]
 },
-["__schema245"]: {
+["__schema246"]: {
   "oneOf": [
     {
-      "$ref": "#/definitions/__schema246"
+      "$ref": "#/definitions/__schema247"
     },
     {
-      "$ref": "#/definitions/__schema247"
+      "$ref": "#/definitions/__schema248"
     }
   ]
 },
-["__schema246"]: {
+["__schema247"]: {
   "type": "object",
   "properties": {
     "mode": {
@@ -1573,7 +1664,7 @@ export default {
   ],
   "additionalProperties": false
 },
-["__schema247"]: {
+["__schema248"]: {
   "type": "object",
   "properties": {
     "mode": {
@@ -1586,7 +1677,7 @@ export default {
   ],
   "additionalProperties": false
 },
-["__schema248"]: {
+["__schema249"]: {
   "minItems": 1,
   "maxItems": 30,
   "type": "array",
@@ -1598,22 +1689,22 @@ export default {
   "type": "object",
   "properties": {
     "type": {
-      "$ref": "#/definitions/__schema249"
+      "$ref": "#/definitions/__schema250"
     },
     "name": {
-      "$ref": "#/definitions/__schema250"
+      "$ref": "#/definitions/__schema251"
     },
     "link": {
       "$ref": "#/definitions/menuLink"
     },
     "image": {
-      "$ref": "#/definitions/__schema253"
+      "$ref": "#/definitions/__schema254"
     },
     "hideElement": {
       "$ref": "#/definitions/hideElement"
     },
     "colors": {
-      "$ref": "#/definitions/__schema260"
+      "$ref": "#/definitions/__schema261"
     }
   },
   "required": [
@@ -1624,7 +1715,7 @@ export default {
   "additionalProperties": false,
   "description": "Menu item settings."
 },
-["__schema249"]: {
+["__schema250"]: {
   "type": "string",
   "enum": [
     "links",
@@ -1633,7 +1724,7 @@ export default {
   ],
   "description": "Menu item type: links, icons, or links with icons."
 },
-["__schema250"]: {
+["__schema251"]: {
   "type": "string",
   "maxLength": 500
 },
@@ -1641,10 +1732,10 @@ export default {
   "type": "object",
   "properties": {
     "type": {
-      "$ref": "#/definitions/__schema251"
+      "$ref": "#/definitions/__schema252"
     },
     "value": {
-      "$ref": "#/definitions/__schema252"
+      "$ref": "#/definitions/__schema253"
     }
   },
   "required": [
@@ -1654,7 +1745,7 @@ export default {
   "additionalProperties": false,
   "description": "Menu item link type and URL/value."
 },
-["__schema251"]: {
+["__schema252"]: {
   "type": "string",
   "enum": [
     "site",
@@ -1663,26 +1754,26 @@ export default {
     "anchor"
   ]
 },
-["__schema252"]: {
+["__schema253"]: {
   "type": "string"
 },
-["__schema253"]: {
+["__schema254"]: {
   "type": "object",
   "properties": {
     "src": {
-      "$ref": "#/definitions/__schema254"
+      "$ref": "#/definitions/__schema255"
     },
     "size": {
       "$ref": "#/definitions/menuImageSize"
     },
     "alignment": {
-      "$ref": "#/definitions/__schema257"
-    },
-    "indent": {
       "$ref": "#/definitions/__schema258"
     },
-    "altText": {
+    "indent": {
       "$ref": "#/definitions/__schema259"
+    },
+    "altText": {
+      "$ref": "#/definitions/__schema260"
     }
   },
   "required": [
@@ -1699,19 +1790,19 @@ export default {
   "type": "object",
   "properties": {
     "src": {
-      "$ref": "#/definitions/__schema254"
+      "$ref": "#/definitions/__schema255"
     },
     "size": {
       "$ref": "#/definitions/menuImageSize"
     },
     "alignment": {
-      "$ref": "#/definitions/__schema257"
-    },
-    "indent": {
       "$ref": "#/definitions/__schema258"
     },
-    "altText": {
+    "indent": {
       "$ref": "#/definitions/__schema259"
+    },
+    "altText": {
+      "$ref": "#/definitions/__schema260"
     }
   },
   "required": [
@@ -1724,7 +1815,7 @@ export default {
   "additionalProperties": false,
   "description": "Menu item image settings."
 },
-["__schema254"]: {
+["__schema255"]: {
   "type": "string",
   "minLength": 1
 },
@@ -1732,10 +1823,10 @@ export default {
   "type": "object",
   "properties": {
     "mode": {
-      "$ref": "#/definitions/__schema255"
+      "$ref": "#/definitions/__schema256"
     },
     "px": {
-      "$ref": "#/definitions/__schema256"
+      "$ref": "#/definitions/__schema257"
     }
   },
   "required": [
@@ -1745,19 +1836,19 @@ export default {
   "additionalProperties": false,
   "description": "Menu item image size settings."
 },
-["__schema255"]: {
+["__schema256"]: {
   "type": "string",
   "enum": [
     "width",
     "height"
   ]
 },
-["__schema256"]: {
+["__schema257"]: {
   "type": "integer",
   "minimum": 3,
   "maximum": 100
 },
-["__schema257"]: {
+["__schema258"]: {
   "type": "string",
   "enum": [
     "left",
@@ -1765,16 +1856,16 @@ export default {
     "right"
   ]
 },
-["__schema258"]: {
+["__schema259"]: {
   "type": "integer",
   "minimum": 0,
   "maximum": 1000
 },
-["__schema259"]: {
+["__schema260"]: {
   "type": "string",
   "maxLength": 500
 },
-["__schema260"]: {
+["__schema261"]: {
   "type": "object",
   "properties": {
     "link": {
@@ -1794,19 +1885,19 @@ export default {
   "type": "object",
   "properties": {
     "id": {
-      "$ref": "#/definitions/__schema90"
+      "$ref": "#/definitions/__schema91"
     },
     "type": {
-      "$ref": "#/definitions/__schema261"
-    },
-    "settings": {
       "$ref": "#/definitions/__schema262"
     },
+    "settings": {
+      "$ref": "#/definitions/__schema263"
+    },
     "content": {
-      "$ref": "#/definitions/__schema265"
+      "$ref": "#/definitions/__schema266"
     },
     "extension": {
-      "$ref": "#/definitions/__schema266"
+      "$ref": "#/definitions/__schema267"
     }
   },
   "required": [
@@ -1860,27 +1951,27 @@ export default {
     }
   }
 },
-["__schema261"]: {
+["__schema262"]: {
   "type": "string",
   "const": "unknown"
 },
-["__schema262"]: {
+["__schema263"]: {
   "type": "object",
   "propertyNames": {
-    "$ref": "#/definitions/__schema263"
+    "$ref": "#/definitions/__schema264"
   },
   "additionalProperties": {
-    "$ref": "#/definitions/__schema264"
+    "$ref": "#/definitions/__schema265"
   }
 },
-["__schema263"]: {
+["__schema264"]: {
   "type": "string"
 },
-["__schema264"]: {},
-["__schema265"]: {
-  "type": "string"
-},
+["__schema265"]: {},
 ["__schema266"]: {
+  "type": "string"
+},
+["__schema267"]: {
   "type": "boolean"
 }
 };

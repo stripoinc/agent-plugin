@@ -17,7 +17,7 @@ import {
   require_basePropertyOf,
   require_postcss,
   require_toString
-} from "./ArrayUtils-759cc5f22881.mjs";
+} from "./ArrayUtils-8063398e6404.mjs";
 import {
   IMG_SELECTOR,
   QUERY_HTML_NODE_TEXT_NODE_SELECTOR
@@ -30,17 +30,14 @@ import {
   external_exports
 } from "./coerce-d38c736de753.mjs";
 import {
+  copy
+} from "./index-83a196bff650.mjs";
+import {
   require_parser
 } from "./at-rule-2b1e381bfcd5.mjs";
 import {
   require_tokenize
 } from "./tokenize-acf2d687b44d.mjs";
-import {
-  UIElementType
-} from "./index-604a083968ff.mjs";
-import {
-  copy
-} from "./index-83a196bff650.mjs";
 import {
   require_comment
 } from "./comment-c2c2abaee17f.mjs";
@@ -62,6 +59,9 @@ import {
 import {
   q
 } from "./builders-6d4dedaf957f.mjs";
+import {
+  UIElementType
+} from "./index-604a083968ff.mjs";
 import {
   __commonJS,
   __toESM
@@ -222,7 +222,7 @@ var require_safe_parser = __commonJS({
         for (nextStart = colon - 1; nextStart >= 0; nextStart--) {
           if (tokens[nextStart][0] === "word") break;
         }
-        if (nextStart === 0 || nextStart < 0) return;
+        if (nextStart <= 0) return;
         for (prevEnd = nextStart - 1; prevEnd >= 0; prevEnd--) {
           if (tokens[prevEnd][0] !== "space") {
             prevEnd += 1;
@@ -660,9 +660,7 @@ var UIObjectType = ((UIObjectType2) => {
   UIObjectType2["DESCRIPTION"] = "UE-DESCRIPTION";
   UIObjectType2["MENU"] = "UE-MENU";
   UIObjectType2["BLOCK_THUMB_HINT"] = "UE-BLOCK-THUMB-HINT";
-  UIObjectType2["IMG_HINT"] = "UE-IMG-HINT";
   UIObjectType2["CONTEXT_MENU"] = "UE-CONTEXT-MENU";
-  UIObjectType2["MODULE_HINT"] = "UE-MODULE-HINT";
   UIObjectType2["SOCIAL_ICONS_PICKER"] = "UE-SOCIAL-ICONS-PICKER";
   UIObjectType2["INSERT_NEW_ELEMENT"] = "UE-INSERT-NEW-ELEMENT";
   UIObjectType2["TEXT_AI_TOGGLE"] = "TEXT-AI-TOGGLE";
@@ -742,6 +740,12 @@ var RUNTIME_EDITOR_MODE_CAPABILITIES = {
     otacKind: "interactive-preview",
     uiKind: "interactive-preview"
   }
+};
+var EDITOR_ANALYTICS_CHANNELS = {
+  ["account" /* ACCOUNT */]: "account",
+  ["demo" /* DEMO */]: "demo",
+  ["plugin" /* PLUGIN */]: "plugin",
+  ["interactive_preview" /* INTERACTIVE_PREVIEW */]: "live_preview"
 };
 
 // editor/ui-editor-ui/src/app/tools/utils/UsedFontsGetter.node-safe.ts
@@ -910,6 +914,23 @@ var AttributeConfigMigration = class {
   }
 };
 
+// editor/ui-editor-common/node-config/ButtonPaddingStyleMigration.ts
+var BUTTON_CLASS_NAME = "es-button";
+var ButtonPaddingStyleMigration = class {
+  migrateFromOldToNew(htmlObject) {
+    const attributes = htmlObject.attributes;
+    const classes = (attributes?.class || "").split(" ");
+    if (!classes.length || classes.indexOf(BUTTON_CLASS_NAME) === -1) {
+      return;
+    }
+    if (attributes?.style) {
+      attributes.style = attributes.style.replace("border-width:", "padding:");
+    }
+  }
+  migrateFromNewToOld(_htmlObject) {
+  }
+};
+
 // editor/ui-editor-common/node-config/ClassConfigMigration.ts
 var ClassConfigMigration = class {
   constructor(config, classname) {
@@ -928,7 +949,11 @@ var ClassConfigMigration = class {
     if (classes.indexOf(this.classname) !== -1) {
       ensureConfig(htmlObject)[this.config] = true;
       const newClas = classes.filter((clazz) => clazz !== this.classname).join(" ").trim();
-      newClas ? attributes.class = newClas : delete attributes.class;
+      if (newClas) {
+        attributes.class = newClas;
+      } else {
+        delete attributes.class;
+      }
     }
   }
   migrateFromNewToOld(htmlObject) {
@@ -941,6 +966,21 @@ var ClassConfigMigration = class {
       return;
     }
     attributes.class = "".concat(attributes.class, " ").concat(this.classname);
+  }
+};
+
+// editor/ui-editor-common/node-config/EmptyImageConfigMigration.ts
+var EmptyImageConfigMigration = class extends ClassConfigMigration {
+  constructor() {
+    super("IMG_EMPTY" /* IMG_EMPTY */, "esdev-empty-img");
+  }
+  migrateFromOldToNew(htmlObject) {
+    super.migrateFromOldToNew(htmlObject);
+    if (htmlObject?.config?.IMG_EMPTY && htmlObject?.attributes?.style) {
+      let style = htmlObject.attributes.style;
+      style = style.replace(/display:\snone;/, "");
+      htmlObject.attributes.style = style;
+    }
   }
 };
 
@@ -1021,10 +1061,10 @@ var MenuTypeConfigMigration = class _MenuTypeConfigMigration {
         if (classes.indexOf(className) !== -1) {
           const menuItems = NodeUtils.find(htmlObject, (n) => n.tag === DefaultBlock.BLOCK_MENU_ITEM);
           const isLinks = menuItems.every((v) => v.children.every((m) => m.children.every((e) => e.tag !== "IMG" /* IMG */)));
-          const isIcons = menuItems.every((v) => v.children.every((m) => m.children.every((e) => e.tag == "IMG" /* IMG */)));
+          const isIcons = menuItems.every((v) => v.children.every((m) => m.children.every((e) => e.tag === "IMG" /* IMG */)));
           const isLinksAndIcons = menuItems.every((v) => {
-            const imgTag = NodeUtils.find(v, (el) => el.tag == "IMG" /* IMG */);
-            const textNode = NodeUtils.find(v, (el) => el.type == 3 /* TEXT_NODE */);
+            const imgTag = NodeUtils.find(v, (el) => el.tag === "IMG" /* IMG */);
+            const textNode = NodeUtils.find(v, (el) => el.type === 3 /* TEXT_NODE */);
             return imgTag.length > 0 && textNode.length > 0;
           });
           const config = ensureConfig(htmlObject);
@@ -1033,7 +1073,11 @@ var MenuTypeConfigMigration = class _MenuTypeConfigMigration {
         }
       });
       const newClas = classes.filter((cls) => !_MenuTypeConfigMigration.menuClassTypeMap[cls]).join(" ").trim();
-      newClas ? attributes.class = newClas : delete attributes.class;
+      if (newClas) {
+        attributes.class = newClas;
+      } else {
+        delete attributes.class;
+      }
     }
   }
   migrateFromNewToOld(htmlObject) {
@@ -1071,212 +1115,6 @@ var MenuTypeConfigMigration = class _MenuTypeConfigMigration {
   }
 };
 
-// editor/ui-editor-common/node-config/EmptyImageConfigMigration.ts
-var EmptyImageConfigMigration = class extends ClassConfigMigration {
-  constructor() {
-    super("IMG_EMPTY" /* IMG_EMPTY */, "esdev-empty-img");
-  }
-  migrateFromOldToNew(htmlObject) {
-    super.migrateFromOldToNew(htmlObject);
-    if (htmlObject?.config?.IMG_EMPTY && htmlObject?.attributes?.style) {
-      let style = htmlObject.attributes.style;
-      style = style.replace(/display:\snone;/, "");
-      htmlObject.attributes.style = style;
-    }
-  }
-};
-
-// editor/ui-editor-common/node-config/ButtonPaddingStyleMigration.ts
-var BUTTON_CLASS_NAME = "es-button";
-var ButtonPaddingStyleMigration = class {
-  migrateFromOldToNew(htmlObject) {
-    const attributes = htmlObject.attributes;
-    const classes = (attributes?.class || "").split(" ");
-    if (!classes.length || classes.indexOf(BUTTON_CLASS_NAME) === -1) {
-      return;
-    }
-    if (attributes?.style) {
-      attributes.style = attributes.style.replace("border-width:", "padding:");
-    }
-  }
-  migrateFromNewToOld(_htmlObject) {
-  }
-};
-
-// editor/ui-editor-common/tools/node-utils/SocialUtils.ts
-var SocialUtils = class _SocialUtils {
-  static getIconStyleBySrc(src) {
-    const test = src.match(/\/(social-icons|other-icons|messenger-icons)\/([^/]*)/);
-    const socStyle = test && test[2];
-    if (socStyle && SOCIAL_NETWORK_STYLES.includes(socStyle)) {
-      return socStyle;
-    }
-    const alias = socStyle && SOCIAL_NETWORK_ALIASES[socStyle];
-    if (socStyle && SOCIAL_NETWORK_STYLES.includes(alias)) {
-      return alias;
-    }
-    return "custom" /* custom */;
-  }
-  static getSocialIconsStyleFromBlock(htmlObject) {
-    if (htmlObject.tag !== "BLOCK_SOCIAL") {
-      return void 0;
-    }
-    const imgs = NodeUtils.find(htmlObject, (n) => n.tag === "IMG" /* IMG */).filter((icon) => typeof icon.attributes?.src === "string");
-    for (const img of imgs) {
-      const src = img.attributes?.src;
-      if (!src) {
-        continue;
-      }
-      const iconStyle = _SocialUtils.getIconStyleBySrc(src);
-      if (iconStyle && iconStyle !== "custom" /* custom */) {
-        return iconStyle;
-      }
-    }
-    return "custom" /* custom */;
-  }
-  static getIconTypeBySrc(src) {
-    const style = this.getIconStyleBySrc(src);
-    if (style === "custom" /* custom */) {
-      return null;
-    }
-    for (const iconType in SOCIAL_ICONS_DATA) {
-      if (src.indexOf(SOCIAL_ICONS_DATA[iconType].icons[style]) !== -1) {
-        return SocialNetworkType3[Number(iconType)];
-      }
-    }
-    return null;
-  }
-};
-
-// editor/ui-editor-common/node-config/SocialTypeMigration.ts
-var SocialTypeMigration = class {
-  constructor(config, attribute) {
-    this.config = config;
-    this.attribute = attribute;
-  }
-  migrateFromOldToNew(htmlObject) {
-    if (htmlObject.tag !== "BLOCK_SOCIAL") {
-      return;
-    }
-    const cells = NodeUtils.find(htmlObject, (n) => n.tag === "TD" /* TD */);
-    cells.forEach((cell) => {
-      const imgNode = NodeUtils.findFirst(cell, (n) => n.tag === "IMG" /* IMG */);
-      const src = imgNode?.attributes?.src;
-      if (!src) {
-        return;
-      }
-      const cellAttrValue = cell.attributes?.["esd-tmp-icon-type"] ?? SocialUtils.getIconTypeBySrc(src);
-      if (cellAttrValue !== null && cellAttrValue !== void 0) {
-        ensureConfig(cell)["type" /* SOCIAL_TYPE */] = cellAttrValue;
-      }
-      if (cell.attributes) {
-        delete cell.attributes["esd-tmp-icon-type"];
-      }
-    });
-  }
-  migrateFromNewToOld(htmlObject) {
-    if (htmlObject.tag !== "BLOCK_SOCIAL") {
-      return;
-    }
-    const cells = NodeUtils.find(htmlObject, (n) => n.tag === "TD" /* TD */);
-    cells.forEach((cell) => {
-      const cellConfigValue = cell.config?.[this.config];
-      if (!cellConfigValue || !isAttributeValue(cellConfigValue)) {
-        return;
-      }
-      ensureAttributes(cell)[this.attribute] = cellConfigValue;
-    });
-  }
-};
-
-// editor/ui-editor-common/node-config/SynchronizedModuleConfigMigration.ts
-var ESD_SYNCHRONIZABLE_MODULE = "esd-synchronizable-module";
-var ESD_SYNCHRONIZABLE_MODULE_DISABLED = "esd-disabled-synchronizable-module";
-var SynchronizedModuleConfigMigration = class {
-  migrateFromOldToNew(htmlObject) {
-    if (!htmlObject?.attributes?.["esd-custom-block-id"] && !htmlObject.config?.MODULE_ID) {
-      return;
-    }
-    const classes = (htmlObject.attributes?.class || "").split(" ");
-    if (!classes.length) {
-      return;
-    }
-    const setConfigByClass = (className, configValue) => {
-      if (classes.indexOf(className) !== -1) {
-        ensureConfig(htmlObject).SYNCHRONIZABLE_MODULE = configValue;
-        this.removeClassName(htmlObject, className);
-      }
-    };
-    setConfigByClass(ESD_SYNCHRONIZABLE_MODULE, "ON_WITHOUT_CHANGES" /* ON_WITHOUT_CHANGES */);
-    setConfigByClass(ESD_SYNCHRONIZABLE_MODULE_DISABLED, "ON_WITH_CHANGES" /* ON_WITH_CHANGES */);
-  }
-  migrateFromNewToOld(htmlObject) {
-    if (htmlObject.config?.SYNCHRONIZABLE_MODULE === "ON_WITHOUT_CHANGES" /* ON_WITHOUT_CHANGES */) {
-      this.setClassName(htmlObject, "esd-synchronizable-module");
-    }
-    if (htmlObject.config?.SYNCHRONIZABLE_MODULE === "ON_WITH_CHANGES" /* ON_WITH_CHANGES */) {
-      this.setClassName(htmlObject, "esd-disabled-synchronizable-module");
-    }
-  }
-  setClassName(htmlObject, className) {
-    const attributes = ensureAttributes(htmlObject);
-    if (!attributes.class) {
-      attributes.class = className;
-      return;
-    }
-    attributes.class = "".concat(attributes.class, " ").concat(className);
-  }
-  removeClassName(htmlObject, className) {
-    const attributes = htmlObject.attributes;
-    const classes = (attributes?.class || "").split(" ");
-    const newClas = classes.filter((clazz) => clazz !== className).join(" ").trim();
-    if (attributes) {
-      newClas ? attributes.class = newClas : delete attributes.class;
-    }
-  }
-};
-
-// editor/ui-editor-common/node-config/SocialIconsPaddingMigration.ts
-var SocialIconsPaddingMigration = class {
-  constructor(config, attribute) {
-    this.config = config;
-    this.attribute = attribute;
-  }
-  migrateFromOldToNew(htmlObject) {
-    if (htmlObject.tag !== "BLOCK_SOCIAL") {
-      return;
-    }
-    const cells = NodeUtils.find(htmlObject, (n) => n.tag === "TD" /* TD */);
-    if (htmlObject.attributes) {
-      delete htmlObject.attributes[this.attribute];
-    }
-    const config = ensureConfig(htmlObject);
-    if (cells.length <= 1) {
-      config[this.config] = 0;
-      return;
-    }
-    const firstIcon = cells[0];
-    const paddingClassNameDesktop = firstIcon?.attributes?.class?.split(/\s+/)?.filter((name) => /es-p[0-9]*r/g.test(name)) || [];
-    config["d-indent" /* SOCIAL_D_INDENT */] = this.parseNumberPadding(paddingClassNameDesktop[0]);
-    const paddingClassNameMobile = firstIcon?.attributes?.class?.split(/\s+/)?.filter((name) => /es-m-p[0-9]*r/g.test(name)) || [];
-    config["m-indent" /* SOCIAL_M_INDENT */] = this.parseNumberPadding(paddingClassNameMobile[0]);
-  }
-  migrateFromNewToOld(htmlObject) {
-    if (htmlObject.tag !== "BLOCK_SOCIAL") {
-      return;
-    }
-    const configValue = htmlObject.config?.[this.config];
-    if (typeof configValue !== "number" || !Number.isInteger(configValue)) {
-      return;
-    }
-    ensureAttributes(htmlObject)[this.attribute] = configValue;
-  }
-  parseNumberPadding(name) {
-    const padding = name?.match(/\d+/)?.[0];
-    return padding && parseInt(padding, 10) || 0;
-  }
-};
-
 // editor/ui-editor-common/node-config/MimeTypeConfigMigration.ts
 var HTML_ONLY = "es-visible-simple-html-only";
 var AMP_HTML_ONLY = "es-visible-amp-html-only";
@@ -1305,7 +1143,9 @@ var MimeTypeConfigMigration = class {
         let node;
         if (forChild) {
           node = htmlObject.children?.length && htmlObject.children.find((n) => !!n.tag);
-          !node && console.error("cant find node child for node", htmlObject);
+          if (!node) {
+            console.error("cant find node child for node", htmlObject);
+          }
         } else {
           node = htmlObject;
         }
@@ -1321,10 +1161,10 @@ var MimeTypeConfigMigration = class {
       setConfigByClass(HTML_ONLY, "HTML" /* HTML */, true);
       setConfigByClass(AMP_HTML_ONLY, "AMP_HTML" /* AMP_HTML */, true);
     }
-    Object.keys(BLOCKS_CLASSES_MAP).forEach((block) => {
+    Object.entries(BLOCKS_CLASSES_MAP).forEach(([block, blockClasses]) => {
       if (htmlObject.tag?.toLowerCase() === block) {
-        setConfigByClass(BLOCKS_CLASSES_MAP[block]["HTML" /* HTML */], "HTML" /* HTML */);
-        setConfigByClass(BLOCKS_CLASSES_MAP[block]["AMP_HTML" /* AMP_HTML */], "AMP_HTML" /* AMP_HTML */);
+        setConfigByClass(blockClasses["HTML" /* HTML */], "HTML" /* HTML */);
+        setConfigByClass(blockClasses["AMP_HTML" /* AMP_HTML */], "AMP_HTML" /* AMP_HTML */);
       }
     });
   }
@@ -1337,9 +1177,9 @@ var MimeTypeConfigMigration = class {
     if (mimeType !== "HTML" /* HTML */ && mimeType !== "AMP_HTML" /* AMP_HTML */) {
       return;
     }
-    Object.keys(BLOCKS_CLASSES_MAP).forEach((block) => {
+    Object.entries(BLOCKS_CLASSES_MAP).forEach(([block, blockClasses]) => {
       if (htmlObject.tag?.toLowerCase() === block) {
-        this.setClassName(htmlObject, BLOCKS_CLASSES_MAP[block][mimeType]);
+        this.setClassName(htmlObject, blockClasses[mimeType]);
       }
     });
   }
@@ -1355,7 +1195,11 @@ var MimeTypeConfigMigration = class {
     if (!childConfig) {
       return;
     }
-    childConfig.MIME_TYPE === "HTML" /* HTML */ ? this.setClassName(htmlObject, HTML_ONLY) : this.setClassName(htmlObject, AMP_HTML_ONLY);
+    if (childConfig.MIME_TYPE === "HTML" /* HTML */) {
+      this.setClassName(htmlObject, HTML_ONLY);
+    } else {
+      this.setClassName(htmlObject, AMP_HTML_ONLY);
+    }
   }
   setClassName(htmlObject, className) {
     const attributes = ensureAttributes(htmlObject);
@@ -1373,7 +1217,11 @@ var MimeTypeConfigMigration = class {
     const classes = (attributes?.class || "").split(" ");
     const newClas = classes.filter((clazz) => clazz !== className).join(" ").trim();
     if (attributes) {
-      newClas ? attributes.class = newClas : delete attributes.class;
+      if (newClas) {
+        attributes.class = newClas;
+      } else {
+        delete attributes.class;
+      }
     }
   }
 };
@@ -1430,39 +1278,6 @@ function unescapeJSON(escaped) {
   return escaped.replace(/&quot;/g, '"');
 }
 
-// editor/ui-editor-common/node-config/SmartBlockMigration.ts
-var SMART_BLOCK_ATTRIBUTE = "esd-dynamic-block";
-var SmartBlockMigration = class {
-  constructor(attribute = SMART_BLOCK_ATTRIBUTE) {
-    this.attribute = attribute;
-  }
-  migrateFromOldToNew(htmlObject) {
-    if (!htmlObject.attributes) {
-      return;
-    }
-    const attributes = htmlObject.attributes;
-    Object.keys(attributes).filter((attributeName) => attributeName === SMART_BLOCK_ATTRIBUTE).forEach((attributeName) => {
-      const attributeValue = attributes[attributeName];
-      if (typeof attributeValue !== "string") {
-        return;
-      }
-      try {
-        ensureConfig(htmlObject)["SMART_BLOCK" /* SMART_BLOCK */] = JSON.parse(unescapeJSON(attributeValue));
-      } catch (e) {
-        console.error("Cannot get smart block config from attribute: ".concat(attributeName, ". Value: ").concat(attributeValue));
-      }
-      delete attributes[attributeName];
-    });
-  }
-  migrateFromNewToOld(htmlObject) {
-    const value = htmlObject?.config && htmlObject?.config["SMART_BLOCK" /* SMART_BLOCK */];
-    if (!value) {
-      return;
-    }
-    ensureAttributes(htmlObject)[this.attribute] = escapeJSON(JSON.stringify(value));
-  }
-};
-
 // editor/ui-editor-common/node-config/NodeHiddenConfigMigration.ts
 var NodeHiddenConfigMigration = class {
   migrateFromOldToNew(htmlObject) {
@@ -1481,11 +1296,175 @@ var NodeHiddenConfigMigration = class {
       if (classes.indexOf(className) !== -1) {
         ensureConfig(htmlObject)[config] = true;
         const newClas = classes.filter((name) => name !== className).join(" ").trim();
-        newClas ? attributes.class = newClas : delete attributes.class;
+        if (newClas) {
+          attributes.class = newClas;
+        } else {
+          delete attributes.class;
+        }
       }
     });
   }
   migrateFromNewToOld() {
+  }
+};
+
+// editor/ui-editor-common/node-config/SmartBlockMigration.ts
+var SMART_BLOCK_ATTRIBUTE = "esd-dynamic-block";
+var SmartBlockMigration = class {
+  constructor(attribute = SMART_BLOCK_ATTRIBUTE) {
+    this.attribute = attribute;
+  }
+  migrateFromOldToNew(htmlObject) {
+    if (!htmlObject.attributes) {
+      return;
+    }
+    const attributes = htmlObject.attributes;
+    Object.keys(attributes).filter((attributeName) => attributeName === SMART_BLOCK_ATTRIBUTE).forEach((attributeName) => {
+      const attributeValue = attributes[attributeName];
+      if (typeof attributeValue !== "string") {
+        return;
+      }
+      try {
+        ensureConfig(htmlObject)["SMART_BLOCK" /* SMART_BLOCK */] = JSON.parse(unescapeJSON(attributeValue));
+      } catch {
+        console.error("Cannot get smart block config from attribute: ".concat(attributeName, ". Value: ").concat(attributeValue));
+      }
+      delete attributes[attributeName];
+    });
+  }
+  migrateFromNewToOld(htmlObject) {
+    const value = htmlObject?.config && htmlObject?.config["SMART_BLOCK" /* SMART_BLOCK */];
+    if (!value) {
+      return;
+    }
+    ensureAttributes(htmlObject)[this.attribute] = escapeJSON(JSON.stringify(value));
+  }
+};
+
+// editor/ui-editor-common/node-config/SocialIconsPaddingMigration.ts
+var SocialIconsPaddingMigration = class {
+  constructor(config, attribute) {
+    this.config = config;
+    this.attribute = attribute;
+  }
+  migrateFromOldToNew(htmlObject) {
+    if (htmlObject.tag !== "BLOCK_SOCIAL") {
+      return;
+    }
+    const cells = NodeUtils.find(htmlObject, (n) => n.tag === "TD" /* TD */);
+    if (htmlObject.attributes) {
+      delete htmlObject.attributes[this.attribute];
+    }
+    const config = ensureConfig(htmlObject);
+    if (cells.length <= 1) {
+      config[this.config] = 0;
+      return;
+    }
+    const firstIcon = cells[0];
+    const paddingClassNameDesktop = firstIcon?.attributes?.class?.split(/\s+/)?.filter((name) => /es-p[0-9]*r/g.test(name)) || [];
+    config["d-indent" /* SOCIAL_D_INDENT */] = this.parseNumberPadding(paddingClassNameDesktop[0]);
+    const paddingClassNameMobile = firstIcon?.attributes?.class?.split(/\s+/)?.filter((name) => /es-m-p[0-9]*r/g.test(name)) || [];
+    config["m-indent" /* SOCIAL_M_INDENT */] = this.parseNumberPadding(paddingClassNameMobile[0]);
+  }
+  migrateFromNewToOld(htmlObject) {
+    if (htmlObject.tag !== "BLOCK_SOCIAL") {
+      return;
+    }
+    const configValue = htmlObject.config?.[this.config];
+    if (typeof configValue !== "number" || !Number.isInteger(configValue)) {
+      return;
+    }
+    ensureAttributes(htmlObject)[this.attribute] = configValue;
+  }
+  parseNumberPadding(name) {
+    const padding = name?.match(/\d+/)?.[0];
+    return padding && parseInt(padding, 10) || 0;
+  }
+};
+
+// editor/ui-editor-common/tools/node-utils/SocialUtils.ts
+var SocialUtils = class _SocialUtils {
+  static getIconStyleBySrc(src) {
+    const test = src.match(/\/(social-icons|other-icons|messenger-icons)\/([^/]*)/);
+    const socStyle = test && test[2];
+    if (socStyle && SOCIAL_NETWORK_STYLES.includes(socStyle)) {
+      return socStyle;
+    }
+    const alias = socStyle && SOCIAL_NETWORK_ALIASES[socStyle];
+    if (socStyle && SOCIAL_NETWORK_STYLES.includes(alias)) {
+      return alias;
+    }
+    return "custom" /* custom */;
+  }
+  static getSocialIconsStyleFromBlock(htmlObject) {
+    if (htmlObject.tag !== "BLOCK_SOCIAL") {
+      return void 0;
+    }
+    const imgs = NodeUtils.find(htmlObject, (n) => n.tag === "IMG" /* IMG */).filter((icon) => typeof icon.attributes?.src === "string");
+    for (const img of imgs) {
+      const src = img.attributes?.src;
+      if (!src) {
+        continue;
+      }
+      const iconStyle = _SocialUtils.getIconStyleBySrc(src);
+      if (iconStyle && iconStyle !== "custom" /* custom */) {
+        return iconStyle;
+      }
+    }
+    return "custom" /* custom */;
+  }
+  static getIconTypeBySrc(src) {
+    const style = this.getIconStyleBySrc(src);
+    if (style === "custom" /* custom */) {
+      return null;
+    }
+    for (const [iconType, iconData] of Object.entries(SOCIAL_ICONS_DATA)) {
+      if (src.indexOf(iconData.icons[style]) !== -1) {
+        return SocialNetworkType3[Number(iconType)];
+      }
+    }
+    return null;
+  }
+};
+
+// editor/ui-editor-common/node-config/SocialTypeMigration.ts
+var SocialTypeMigration = class {
+  constructor(config, attribute) {
+    this.config = config;
+    this.attribute = attribute;
+  }
+  migrateFromOldToNew(htmlObject) {
+    if (htmlObject.tag !== "BLOCK_SOCIAL") {
+      return;
+    }
+    const cells = NodeUtils.find(htmlObject, (n) => n.tag === "TD" /* TD */);
+    cells.forEach((cell) => {
+      const imgNode = NodeUtils.findFirst(cell, (n) => n.tag === "IMG" /* IMG */);
+      const src = imgNode?.attributes?.src;
+      if (!src) {
+        return;
+      }
+      const cellAttrValue = cell.attributes?.["esd-tmp-icon-type"] ?? SocialUtils.getIconTypeBySrc(src);
+      if (cellAttrValue !== null && cellAttrValue !== void 0) {
+        ensureConfig(cell)["type" /* SOCIAL_TYPE */] = cellAttrValue;
+      }
+      if (cell.attributes) {
+        delete cell.attributes["esd-tmp-icon-type"];
+      }
+    });
+  }
+  migrateFromNewToOld(htmlObject) {
+    if (htmlObject.tag !== "BLOCK_SOCIAL") {
+      return;
+    }
+    const cells = NodeUtils.find(htmlObject, (n) => n.tag === "TD" /* TD */);
+    cells.forEach((cell) => {
+      const cellConfigValue = cell.config?.[this.config];
+      if (!cellConfigValue || !isAttributeValue(cellConfigValue)) {
+        return;
+      }
+      ensureAttributes(cell)[this.attribute] = cellConfigValue;
+    });
   }
 };
 
@@ -1503,7 +1482,6 @@ var StructureGapConfigMigration = class {
   setConfigByMsoIfNeeded(target) {
     let wasSetConfig = false;
     let deskTopGapConfig = 0;
-    let mobileGapConfig;
     const msoTable = target.children.find((n) => {
       const classes = (n.attributes?.class || "").split(" ");
       return classes.includes(ESDEV_MSO_CLASS_TABLE);
@@ -1526,13 +1504,14 @@ var StructureGapConfigMigration = class {
   }
   setConfigByNoneMsoIfNeeded(target) {
     const comments = target.children.filter((n) => n.type === 8 /* COMMENT_NODE */);
-    const [firstContainer] = NodeUtils.find(target, (n) => n.tag === "CONTAINER");
     const widths = comments?.reverse().map((n) => {
       const res = n.content ? COMMENT_WIDTH_REGEXP.exec(n.content) : null;
       return res ? res[1] : null;
     });
     const gapFromComment = widths?.find((width) => width !== null);
-    gapFromComment && this.setConfig(target, "GAP" /* GAP */, parseInt(gapFromComment, 10));
+    if (gapFromComment) {
+      this.setConfig(target, "GAP" /* GAP */, parseInt(gapFromComment, 10));
+    }
     return {
       wasSetConfig: true
     };
@@ -1548,6 +1527,57 @@ var StructureGapConfigMigration = class {
     this.setConfigByNoneMsoIfNeeded(htmlObject);
   }
   migrateFromNewToOld(_htmlObject) {
+  }
+};
+
+// editor/ui-editor-common/node-config/SynchronizedModuleConfigMigration.ts
+var ESD_SYNCHRONIZABLE_MODULE = "esd-synchronizable-module";
+var ESD_SYNCHRONIZABLE_MODULE_DISABLED = "esd-disabled-synchronizable-module";
+var SynchronizedModuleConfigMigration = class {
+  migrateFromOldToNew(htmlObject) {
+    if (!htmlObject?.attributes?.["esd-custom-block-id"] && !htmlObject.config?.MODULE_ID) {
+      return;
+    }
+    const classes = (htmlObject.attributes?.class || "").split(" ");
+    if (!classes.length) {
+      return;
+    }
+    const setConfigByClass = (className, configValue) => {
+      if (classes.indexOf(className) !== -1) {
+        ensureConfig(htmlObject).SYNCHRONIZABLE_MODULE = configValue;
+        this.removeClassName(htmlObject, className);
+      }
+    };
+    setConfigByClass(ESD_SYNCHRONIZABLE_MODULE, "ON_WITHOUT_CHANGES" /* ON_WITHOUT_CHANGES */);
+    setConfigByClass(ESD_SYNCHRONIZABLE_MODULE_DISABLED, "ON_WITH_CHANGES" /* ON_WITH_CHANGES */);
+  }
+  migrateFromNewToOld(htmlObject) {
+    if (htmlObject.config?.SYNCHRONIZABLE_MODULE === "ON_WITHOUT_CHANGES" /* ON_WITHOUT_CHANGES */) {
+      this.setClassName(htmlObject, "esd-synchronizable-module");
+    }
+    if (htmlObject.config?.SYNCHRONIZABLE_MODULE === "ON_WITH_CHANGES" /* ON_WITH_CHANGES */) {
+      this.setClassName(htmlObject, "esd-disabled-synchronizable-module");
+    }
+  }
+  setClassName(htmlObject, className) {
+    const attributes = ensureAttributes(htmlObject);
+    if (!attributes.class) {
+      attributes.class = className;
+      return;
+    }
+    attributes.class = "".concat(attributes.class, " ").concat(className);
+  }
+  removeClassName(htmlObject, className) {
+    const attributes = htmlObject.attributes;
+    const classes = (attributes?.class || "").split(" ");
+    const newClas = classes.filter((clazz) => clazz !== className).join(" ").trim();
+    if (attributes) {
+      if (newClas) {
+        attributes.class = newClas;
+      } else {
+        delete attributes.class;
+      }
+    }
   }
 };
 
@@ -3129,7 +3159,7 @@ function createEmailTemplateSchemas(colorMergeTagValues = /* @__PURE__ */ new Se
     type: external_exports.literal("text"),
     content: external_exports.string().optional(),
     settings: external_exports.object({
-      fontColor: colorSchemaDisallowTransparent3.optional(),
+      fontColor: colorSchemaDisallowTransparent3.optional().describe("Explicit inline font color owned by this block; inherited values are omitted."),
       hideElement: hideElementSchema,
       rightToLeftTextDirection: external_exports.boolean(),
       alignment: textBlockAlignmentSchema.optional(),

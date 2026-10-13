@@ -13,9 +13,55 @@ var require_stringify = __commonJS({
   "../editor/ui-editor-ui/node_modules/postcss/lib/stringify.js"(exports, module) {
     "use strict";
     var Stringifier = require_stringifier();
+    var STYLE_TAG = /(<)(\/?style\b)/gi;
+    var COMMENT_OPEN = /(<)(!--)/g;
+    function escapeHTMLInCSS(str) {
+      if (!str.includes("<")) return str;
+      return str.replace(STYLE_TAG, "\\3c $2").replace(COMMENT_OPEN, "\\3c $2");
+    }
+    var SafeStringifier = class extends Stringifier {
+      escapeHTML(node, print) {
+        let builder = this.builder;
+        let chunks, css;
+        this.builder = (str, child, type) => {
+          if (chunks) {
+            css += str;
+            chunks.push(str, child, type);
+          } else if (str.includes("<")) {
+            css = str;
+            chunks = [str, child, type];
+          } else {
+            builder(str, child, type);
+          }
+        };
+        print();
+        this.builder = builder;
+        if (!chunks) return;
+        let escaped = escapeHTMLInCSS(css);
+        if (escaped === css) {
+          for (let i = 0; i < chunks.length; i += 3) {
+            builder(chunks[i], chunks[i + 1], chunks[i + 2]);
+          }
+        } else {
+          builder(escaped, node);
+        }
+      }
+      root(node) {
+        if (node.parent && node.parent.type === "document") {
+          this.escapeHTML(node, () => this.body(node));
+          if (node.raws.after) this.builder(node.raws.after);
+        } else {
+          this.escapeHTML(node, () => super.root(node));
+        }
+      }
+    };
     function stringify(node, builder) {
-      let str = new Stringifier(builder);
-      str.stringify(node);
+      let str = new SafeStringifier(builder);
+      if (node.type === "root" || node.type === "document") {
+        str.stringify(node);
+      } else {
+        str.escapeHTML(node, () => str.stringify(node));
+      }
     }
     module.exports = stringify;
     stringify.default = stringify;

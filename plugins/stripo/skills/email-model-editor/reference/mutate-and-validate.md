@@ -219,7 +219,9 @@ intended block just to obtain a valid model; report an unresolved defect if repa
 the editor applies the difference between it and the candidate to the live state.
 The editor diffs the uploaded JSON against the full acquired state. Settings are canonical and complete:
 every key of `general`, `stripes`, `headings`, and `buttons`, including their `lightTheme` and
-`darkTheme` branches, is required, so a missing settings key fails validation before upload. A
+`darkTheme` branches, is required, so a missing settings key fails validation before upload. The
+one optional key is `settings.general.darkTheme.backgroundImage`, the dark-mode background image
+URL or `null`. Never add it to a model acquired without it: that editor does not accept it yet. A
 stripe's `messageArea`, `includeInOutput`, `padding`, `stripeBackgroundColor`, and
 `contentBackgroundColor`, and a column's `settings.width`, must also stay present.
 
@@ -250,6 +252,7 @@ and `email.resetSettings(["general.customListStyles"])` disables custom list for
 | `settings.stripes.<area>` (`header`, `footer`) | `backgroundImage` |
 | `settings.headings.h1` through `settings.headings.h6` | `fontWeight`, `paragraphBottomSpace`, `fontSize.desktop`, `fontSize.mobile`, `lineHeight.desktop`, `lineHeight.mobile`, `textAlign.mobile` |
 | `settings.<section>.darkTheme` | every color |
+| `settings.general.darkTheme` | `backgroundImage` |
 
 A nested patch works the same way: `email.setTheme("settings.general", {backgroundImage: undefined})`.
 Every other setting, including light-theme colors, global `fontFamily`, `general.hideImageDownloadIcons`, and

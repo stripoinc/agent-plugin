@@ -709,6 +709,7 @@ var SGResponseError_SGErrorCode;
   SGResponseError_SGErrorCode2[SGResponseError_SGErrorCode2["DISCONNECTED"] = 15] = "DISCONNECTED";
   SGResponseError_SGErrorCode2[SGResponseError_SGErrorCode2["PATCH_GROUPS_REQUEST_FAILED"] = 16] = "PATCH_GROUPS_REQUEST_FAILED";
   SGResponseError_SGErrorCode2[SGResponseError_SGErrorCode2["TEMPLATE_THEMES_LIMIT_REACHED"] = 17] = "TEMPLATE_THEMES_LIMIT_REACHED";
+  SGResponseError_SGErrorCode2[SGResponseError_SGErrorCode2["MODEL_DELETING"] = 18] = "MODEL_DELETING";
 })(SGResponseError_SGErrorCode || (SGResponseError_SGErrorCode = {}));
 var SGResponseError_SGErrorReason;
 (function(SGResponseError_SGErrorReason2) {
