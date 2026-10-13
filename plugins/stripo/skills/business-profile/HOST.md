@@ -106,6 +106,24 @@ helper this host installs beside the skill:
 
 When a URL has expired, ask the tool for a new one instead of retrying the download.
 
+## Progress
+
+`SKILL.md` lists the stages to show as a checklist. The task tool depends on the agent:
+
+- Claude Code: `TaskCreate` once per stage in a single turn (`subject` = stage name,
+  `activeForm` in present continuous), then `TaskUpdate` with `status: "completed"` after each
+  gate. Where the session exposes `TodoWrite` instead, send the whole list in one call, then one
+  call per completed stage with that item `completed` and the next one `in_progress`.
+- Codex: `update_plan` with the whole list (`pending`), then one `update_plan` per completed
+  stage; keep at most one step `in_progress`.
+- Other agents: their plan or todo tool when they have one.
+
+A session that exposes none of these tools (some headless and desktop sessions do not) uses the
+one-line fallback described in `SKILL.md`.
+
+Budget: one turn to create the list and one call per completed stage. Items name the stage and
+a short outcome only.
+
 ## Approvals
 
 The host's own permission prompt gates every write; there is no Slack card here. A denial arrives

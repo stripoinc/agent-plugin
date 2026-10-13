@@ -156,6 +156,10 @@ Before upload, apply the shared [candidate color check](color-consistency.md#che
 to the completed model, including builder-added defaults, and compare it with `sourceSummary`.
 Correct the brief and rebuild before upload; do not patch generated JSON ad hoc.
 
+For requested inline CSS, apply the shared [inline-style candidate checks](../../email-model-editor/reference/mutate-and-validate.md#inline-style-candidate-checks)
+to the builder output before persistence. Check a fresh build against the intended brief and
+request; no acquired edit baseline is required.
+
 The builder assigns fresh structural IDs to copied or rebuilt content so reference IDs cannot
 collide with existing blocks in the destination. Reuse the generated model file for persistence
 retries; rebuilding assigns new IDs. Bounded edits use `email-model-editor` and retain target IDs.

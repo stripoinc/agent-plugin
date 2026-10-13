@@ -56,6 +56,13 @@ related changes with `transaction(email => { ... })`; failure restores the whole
 All ten native block types are represented. Timer reads and unrelated supported edits are
 allowed, but preview-dependent changes and unsupported structural actions fail explicitly.
 
+Text-block `setContent()` and `setText()` transplant acquired formatting for copy edits;
+supplied new inline CSS and span wrappers are dropped. For intentional inline HTML styling,
+derive `updatedHtml` from the block's fresh acquired `content`, preserving unrelated markup,
+text, attributes, links, and literal merge expressions. Use `node.setHtml(updatedHtml)` and
+assert `node.inspect().element.content === updatedHtml`. This edits native JSON block content
+through the SDK; continue through the native-model persistence workflow.
+
 Rules for the module:
 
 - Use the full `EmailDocument` API declared in
@@ -72,8 +79,9 @@ Rules for the module:
 - Preserve unrelated content, links, merge tags, visibility, and compliance content unless they
   are explicit targets. Make structural changes as needed to fulfill the user's request.
 - Prefer a theme edit for a broad change and a node edit for an exception.
-- For a text block, responsive `textAlign` accepts `left`, `center`, `right`, or `justify`; font size
-  remains part of the semantic HTML passed to `node.setContent`.
+- For a text block, responsive `textAlign` accepts `left`, `center`, `right`, or `justify`.
+  Use supported `node.style` or `email.theme.style` methods for native styles; intentional inline
+  font-size changes use the complete block HTML passed to `node.setHtml()`, not `setContent()`.
 - For a social block, edit networks through `setSocialNetwork(typeOrIndex, {url, title, alt, icon})`,
   `addSocialNetwork({type, url, title}, {after | before})`, `removeSocialNetwork(typeOrIndex)`, and
   `setSocialShared({style, iconSize, spaceBetweenIcons, textCustomization})`; `setLink({url, network})`
@@ -187,6 +195,19 @@ Local contract validation is against the pinned revision. `--runtime-snapshot <f
 `STRIPO_RUNTIME_PATH` explicitly requests model preflight and fails if context is missing.
 A focused edit completes when `set_document_state` returns `status=OK`. Read-back and previews
 follow the requested verification scope; unknown write outcomes still require recovery.
+
+### Inline-style candidate checks
+
+Before uploading requested inline styling, inspect the actual generated candidate for the
+exact requested CSS properties, values or removals on the intended elements and the expected
+target cardinality. Allow only request-authorized model and HTML differences; preserve
+unrequested fields, markup, text, links, and literal merge expressions. For an edit limited
+to inline CSS changes on existing HTML elements, compare with the acquisition: only approved
+block content strings may differ, and their HTML differences must be the planned CSS additions,
+replacements or removals. For a new build, check the intended styles against the brief and
+request without requiring an acquired edit baseline. Valid schema and mutation diagnostics
+do not prove the requested styling is correct. Correct any local styling mismatch before
+uploading.
 
 Repair schema errors without removing intended content. Use `diagnostics.error.errors` and
 the untouched acquired model to repair the failing fields. Do not delete a logo or another

@@ -63,6 +63,30 @@ Keep these rules throughout:
 
 `<skill-dir>` is this installed skill directory; `<bundle-root>` contains `skills/` and `packages/`.
 
+## Progress
+
+For a request that writes (a new email with content or a rebuild), show the stages below as a
+checklist in the task tool that `HOST.md` names: create the whole list in one call before the
+first stage starts, and mark each stage completed right after its gate, before reading the
+next topic. Skip stages the request does not need. If `HOST.md` names no task tool, print one
+short line per completed stage instead (`✓ Build: 12 blocks`). Inspection-only requests need no
+checklist. Items carry the stage name and a short outcome: never model JSON, file contents,
+signed URLs, or ticket ids.
+
+| Stage | Completed when |
+| --- | --- |
+| Resolve | the reference regime, inputs, and target are resolved |
+| Inspect | reference content and assets are inspected |
+| Brief | the creation brief is written and validated |
+| Images | requested image jobs or uploads produced hosted URLs (only when the request needs visuals) |
+| Build | `create-from-brief.mjs` printed `status: "ok"` (its `stage` field names this stage) |
+| Create | `create_email` returned the new id (a rebuild of an existing target skips it) |
+| Persist | `set_document_state` returned `status=OK` |
+| Verify | the saved model and desktop/mobile previews are inspected |
+
+An explicitly empty email is one `create_email` call and needs no checklist. Mark stages in
+the order they complete; the table shows the usual order.
+
 ## Boundaries
 
 - Create native editor JSON; never make raw HTML the editable source.

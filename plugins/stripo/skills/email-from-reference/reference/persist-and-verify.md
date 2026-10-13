@@ -67,6 +67,9 @@ unsubscribe link, and postal/legal detail. Compare the per-type block census wit
 model.
 Verify the stored name and project with `get_content`; do not infer hidden metadata from an image.
 
+For intentional inline styling, follow the shared [inline-style verification](../../email-model-editor/reference/persist-and-verify.md#inline-style-verification)
+before judging the saved previews.
+
 Open and visually inspect both PNGs with the host's image-viewing tool. Compare the desktop and
 mobile layouts with the reference intent, including readable text, loaded images, spacing,
 alignment, clipping, and the CTA. A successful tool call or download alone is not visual

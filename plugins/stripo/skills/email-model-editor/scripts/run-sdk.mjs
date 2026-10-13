@@ -523,6 +523,7 @@ async function main() {
     writeJson(diagnosticsPath, diagnostics);
     console.log(JSON.stringify({
       status: "ok",
+      stage: "Mutate",
       mode,
       outputPath,
       diagnosticsPath,

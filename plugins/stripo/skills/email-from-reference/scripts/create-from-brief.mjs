@@ -564,6 +564,7 @@ async function main() {
     });
     console.log(JSON.stringify({
       status: "ok",
+      stage: "Build",
       outputPath,
       diagnosticsPath,
       counts: summary.counts

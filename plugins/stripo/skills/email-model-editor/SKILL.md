@@ -40,6 +40,24 @@ The image workflow is supplied by `PROVIDER.md` and does not require a host imag
 
 `<skill-dir>` is this installed skill directory; `<bundle-root>` contains `skills/` and `packages/`.
 
+## Progress
+
+For a request that writes (an edit, a rebuild, or a requested verification), show the stages
+below as a checklist in the task tool that `HOST.md` names: create the whole list in one call
+before the first stage starts, and mark each stage completed right after its gate, before
+reading the next topic. Skip stages the request does not need. If `HOST.md` names no task tool,
+print one short line per completed stage instead (`✓ Mutate: 2 blocks changed`).
+Inspection-only requests need no checklist. Items carry the stage name and a short outcome:
+never model JSON, file contents, signed URLs, or ticket ids.
+
+| Stage | Completed when |
+| --- | --- |
+| Acquire | the current model is downloaded and inspected |
+| Images | requested image jobs or uploads produced hosted URLs (only when the request needs visuals) |
+| Mutate | `run-sdk.mjs` printed `status: "ok"` (its `stage` field names this stage) |
+| Persist | `set_document_state` returned `status=OK` |
+| Verify | read-back and desktop/mobile previews are inspected (only when the request or workflow requires it) |
+
 ## Invariants
 
 - The model is a file. Never paste the complete model into the conversation or pass it as an MCP
