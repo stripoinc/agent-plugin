@@ -128,24 +128,6 @@ Image references and edit sources must be authorized hosted URLs before image jo
 Reuse suitable hosted assets and report a required visual that cannot be completed as `SKILL.md`
 describes. Inspection-only email requests must not start image jobs.
 
-## Progress
-
-Each `SKILL.md` lists the stages to show as a checklist. The task tool depends on the agent:
-
-- Claude Code: `TaskCreate` once per stage in a single turn (`subject` = stage name,
-  `activeForm` in present continuous), then `TaskUpdate` with `status: "completed"` after each
-  gate. Where the session exposes `TodoWrite` instead, send the whole list in one call, then one
-  call per completed stage with that item `completed` and the next one `in_progress`.
-- Codex: `update_plan` with the whole list (`pending`), then one `update_plan` per completed
-  stage; keep at most one step `in_progress`.
-- Other agents: their plan or todo tool when they have one.
-
-A session that exposes none of these tools (some headless and desktop sessions do not) uses the
-one-line fallback described in `SKILL.md`.
-
-Budget: one turn to create the list and one call per completed stage. Items name the stage and
-a short outcome only.
-
 ## Authentication
 
 The plugin bundles the `stripo-mcp` endpoint and scopes without a fixed OAuth client ID.

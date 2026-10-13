@@ -28,11 +28,4 @@ Never route a refused, incomplete, partial, or standalone website result through
 
 ## Progress
 
-For a request that builds or updates a profile, show the stages below as a checklist in the task tool that `HOST.md` names: create the whole list in one call before the first stage starts, and mark each stage completed right after its gate. Skip stages the request does not need. If `HOST.md` names no task tool, print one short line per completed stage instead (`✓ Evidence: 5 emails read`). Reads and audits need no checklist. Items carry the stage name and a short outcome: never profile JSON, file contents, signed URLs, or ticket ids.
-
-| Stage | Completed when |
-| --- | --- |
-| Evidence | the selected emails or website pages are read |
-| Author | the profile sections are authored and validated |
-| Finalize | finalization, including required logo hosting, reported its outcome |
-| Save | the profile write returned success (only when a save is requested and approved) |
+Tell the user in words how the work is going, in the language they write in. When the work starts, say what you are about to do. Each time a stage finishes (evidence read, sections authored, finalization, save), write one or two short sentences: what you found or produced, with a concrete detail, and what comes next (for example, "I read five recent emails: the tone is friendly and direct. Now I am comparing it with the stored profile."). These updates are reply text between tool calls, not reasoning; do not save them for the final answer. Keep profile JSON, file contents, signed URLs, and ticket ids out of them. Reads and audits need no updates.
