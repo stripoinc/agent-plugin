@@ -107,8 +107,10 @@ client_id = "<CLIENT_ID>"
 **Cursor**: edit the global `~/.cursor/mcp.json` (create it when missing; the project's
 `.cursor/mcp.json` only when the user asks for a project-only connection). Keep every other
 server and add or replace the `stripo-mcp` entry inside `mcpServers`. Cursor needs the `auth`
-object in exactly this shape, with the scopes pinned; the file is outside the workspace, so
-write it with a terminal command and use the host's approval flow.
+object in exactly this shape, with the scopes pinned. The file is outside the workspace and
+Cursor's sandbox denies writes to it: write it with a terminal command, and when the sandbox
+blocks the write, ask the user to approve rerunning the command outside the sandbox instead of
+stopping.
 
 ```json
 {
