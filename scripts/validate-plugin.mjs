@@ -7,11 +7,12 @@ import path from "node:path";
 import {pathToFileURL} from "node:url";
 import semver from "semver";
 import {parseDocument} from "yaml";
-import {ROOT, PLUGIN, bundleSkills, generateMetadata, loadMetadata, readJson, requireCondition, walkFiles} from "./lib/plugin.mjs";
+import {ROOT, PLUGIN, bundleSkills, generateMetadata, loadMetadata, readJson, repositorySkills, requireCondition, walkFiles} from "./lib/plugin.mjs";
 import {checkDirectoryAssets, checkPackageLimits} from './lib/directory-checks.mjs';
 
-// Generated at the plugin root, outside the inventoried bundle items.
-const PLUGIN_ROOT_FILES = [".claude-plugin/plugin.json", ".codex-plugin/plugin.json", ".mcp.json", ".generated"];
+// Generated at the plugin root, outside the inventoried bundle items. The package carries no
+// .mcp.json: the connect skill registers stripo-mcp with the organization's client ID.
+const PLUGIN_ROOT_FILES = [".claude-plugin/plugin.json", ".codex-plugin/plugin.json", ".generated"];
 
 function requirePath(root, relative, kind = "file") {
   requireCondition(typeof relative === "string" && relative.startsWith("./"), `Expected a bundle-relative path: ${relative}`);
@@ -29,9 +30,10 @@ function exportPaths(value) {
 }
 
 export function validatePlugin(root = ROOT) {
-  generateMetadata(root, {check: true});
-  // Hosts load hooks/, .lsp.json, commands/ and agents/ from the plugin root by convention,
-  // so the package may hold only the inventoried files, the generated manifests and .mcp.json.
+  const metadata = loadMetadata(root);
+  generateMetadata(root, {check: true, metadata});
+  // Hosts load hooks/, .lsp.json, .mcp.json, commands/ and agents/ from the plugin root by
+  // convention, so the package may hold only the inventoried files and the generated manifests.
   const expected = new Set([...Object.keys(readJson(root, "bundle-integrity.json").files), ...PLUGIN_ROOT_FILES]);
   // .DS_Store is gitignored, so Finder metadata never reaches a release.
   const unexpected = walkFiles(root, PLUGIN).map((file) => file.slice(PLUGIN.length + 1)).filter((file) => !expected.has(file) && path.basename(file) !== ".DS_Store");
@@ -42,11 +44,13 @@ export function validatePlugin(root = ROOT) {
   requireCondition(/^[a-f0-9]{40}$/u.test(bundle.sourceRevision), "Missing bundle source revision.");
   requireCondition(bundle.editorValidator?.editorDirty === false && /^[a-f0-9]{40}$/u.test(bundle.editorValidator.editorRevision) && /^[a-f0-9]{64}$/u.test(bundle.editorValidator.bundleSha256), "Missing clean editor-validator provenance.");
   const skills = bundleSkills(root);
+  const packaged = [...skills, ...repositorySkills(root)].sort();
   const directories = readdirSync(path.join(root, PLUGIN, "skills"), {withFileTypes: true}).filter((entry) => entry.isDirectory()).map((entry) => entry.name).sort();
-  requireCondition(JSON.stringify(directories) === JSON.stringify([...skills].sort()), "Skill directories do not match bundle.json.");
-  for (const skill of skills) {
+  requireCondition(JSON.stringify(directories) === JSON.stringify(packaged), "Skill directories do not match bundle.json plus the repository skills.");
+  requirePath(root, metadata.onboardingSkill);
+  for (const skill of packaged) {
     const entry = requirePath(root, `./skills/${skill}/SKILL.md`);
-    requirePath(root, `./skills/${skill}/HOST.md`);
+    if (skills.includes(skill)) requirePath(root, `./skills/${skill}/HOST.md`);
     requirePath(root, `./skills/${skill}/agents/openai.yaml`);
     const frontmatter = readFileSync(entry, "utf8").match(/^---\r?\n([\s\S]*?)\r?\n---(?:\r?\n|$)/u);
     requireCondition(frontmatter, `${skill}: missing YAML frontmatter.`);
@@ -101,9 +105,9 @@ export function validatePlugin(root = ROOT) {
   } finally {
     rmSync(isolated, {recursive: true, force: true});
   }
-  const pending = checkDirectoryAssets(root, loadMetadata(root));
+  const pending = checkDirectoryAssets(root, metadata);
   requireCondition(pending.length === 0, `Technical package checks passed (${limits.files} files; largest text ${limits.largestTextBytes} bytes). Directory readiness is blocked: ${pending.join('; ')}.`);
-  return {skills: skills.length, sourceRevision: bundle.sourceRevision, ...limits};
+  return {skills: packaged.length, sourceRevision: bundle.sourceRevision, ...limits};
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) {

@@ -1,6 +1,6 @@
 {
   "name": "stripo",
-  "version": "0.8.0",
+  "version": "0.10.0",
   "description": "Create and edit emails and templates with Stripo.",
   "author": {
     "name": "Stripo",
@@ -16,10 +16,14 @@
     "mcp"
   ],
   "skills": "./skills/",
-  "mcpServers": "./.mcp.json",
+  "extensions": {
+    "com.openai": {
+      "onboardingSkill": "./skills/connect/SKILL.md"
+    }
+  },
   "interface": {
     "displayName": "Stripo",
-    "longDescription": "Create emails from a brief, template, HTML or screenshot. Generate and edit images, update text, links and styles in existing emails and templates, and review desktop and mobile previews. Requires a connected Stripo MCP server.",
+    "longDescription": "Create emails from a brief, template, HTML or screenshot. Generate and edit images, update text, links and styles in existing emails and templates, and review desktop and mobile previews. The connect skill registers the Stripo MCP server with your organization's Client ID.",
     "category": "Productivity",
     "capabilities": [
       "Read",

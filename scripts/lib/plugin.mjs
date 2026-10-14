@@ -1,5 +1,5 @@
 import {createHash} from "node:crypto";
-import {chmodSync, existsSync, lstatSync, mkdirSync, readFileSync, readdirSync, writeFileSync} from "node:fs";
+import {chmodSync, existsSync, lstatSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync} from "node:fs";
 import path from "node:path";
 import {fileURLToPath} from "node:url";
 import semver from "semver";
@@ -9,6 +9,9 @@ export const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "
 export const PLUGIN = "plugins/stripo";
 export const METADATA = "plugin-metadata.json";
 export const SYNCED_ITEMS = ["skills", "packages", "mcp-tools.json", "bundle.json"];
+// Skills this repository owns (such as connect); packaged beside the bundled skills.
+export const REPOSITORY_SKILLS = "skills";
+export const USER_CONFIG_TYPES = ["string", "number", "boolean", "directory", "file"];
 export const CLAUDE_DIRECTORY_FIELDS = ['icon', 'documentationUrl', 'supportUrl', 'privacyPolicyUrl', 'termsOfServiceUrl'];
 
 export function requireCondition(condition, message) {
@@ -59,14 +62,18 @@ export function loadMetadata(root = ROOT) {
   requireCondition(metadata.marketplace.policy?.authentication === "ON_INSTALL", "The Stripo marketplace uses ON_INSTALL authentication.");
   const dependency = metadata.mcpDependency;
   requireCondition(dependency?.type === "mcp" && dependency.value === "stripo-mcp" && typeof dependency.description === "string" && dependency.description.trim(), "Declare the stripo-mcp dependency in plugin-metadata.json.");
-  const server = metadata.mcpServer;
-  requireCondition(server?.type === "http" && new URL(server.url).protocol === "https:", "Declare the bundled HTTPS MCP server in plugin-metadata.json.");
-  if (server.oauth !== undefined) {
-    requireCondition(server.oauth && typeof server.oauth === "object" && !Array.isArray(server.oauth), "MCP OAuth settings must be an object when specified.");
-    if (server.oauth.clientId !== undefined) {
-      requireCondition(typeof server.oauth.clientId === "string" && server.oauth.clientId.trim(), "MCP OAuth client ID must be a non-empty string when specified.");
-    }
+  // Stripo authenticates each organization with its own OAuth client ID, which no host can fill
+  // into a bundled server entry; the connect skill registers stripo-mcp in the agent instead.
+  requireCondition(metadata.mcpServer === undefined, `${METADATA}: the package carries no MCP server entry; the connect skill registers stripo-mcp.`);
+  const userConfig = metadata.userConfig ?? {};
+  requireCondition(userConfig && typeof userConfig === "object" && !Array.isArray(userConfig), `${METADATA}: userConfig must be an object.`);
+  for (const [key, option] of Object.entries(userConfig)) {
+    requireCondition(/^[A-Za-z_][A-Za-z0-9_]*$/u.test(key), `${METADATA}: invalid userConfig key ${key}.`);
+    requireCondition(USER_CONFIG_TYPES.includes(option?.type) && typeof option.title === "string" && option.title.trim() && typeof option.description === "string" && option.description.trim(), `${METADATA}: userConfig.${key} needs type, title and description.`);
   }
+  const onboarding = metadata.onboardingSkill;
+  const onboardingSkill = typeof onboarding === "string" ? onboarding.match(/^\.\/skills\/([a-z0-9]+(?:-[a-z0-9]+)*)\/SKILL\.md$/u)?.[1] : undefined;
+  requireCondition(onboardingSkill !== undefined && repositorySkills(root).includes(onboardingSkill), `${METADATA}: onboardingSkill must be ./skills/<name>/SKILL.md of a skill in ${REPOSITORY_SKILLS}/.`);
   if (metadata.license !== undefined) requireCondition(typeof metadata.license === 'string' && metadata.license.trim(), 'license must be the owner-approved license identifier.');
   requireCondition(metadata.packageFiles?.['README.md'], 'Declare the packaged README in packageFiles.');
   for (const [destination, source] of Object.entries(metadata.packageFiles)) {
@@ -103,6 +110,17 @@ export function bundleSkills(root = ROOT) {
   return skills;
 }
 
+export function repositorySkills(root = ROOT) {
+  const directory = path.join(root, REPOSITORY_SKILLS);
+  if (!existsSync(directory)) return [];
+  const names = readdirSync(directory, {withFileTypes: true}).filter((entry) => entry.isDirectory()).map((entry) => entry.name).sort();
+  for (const name of names) {
+    requireCondition(/^[a-z0-9]+(?:-[a-z0-9]+)*$/u.test(name), `Invalid repository skill name: ${name}`);
+    requireCondition(existsSync(path.join(directory, name, "SKILL.md")), `Repository skill ${name} lacks SKILL.md.`);
+  }
+  return names;
+}
+
 export function withMcpDependency(source, dependency) {
   const document = parseDocument(source);
   requireCondition(document.errors.length === 0, `Invalid agents/openai.yaml: ${document.errors.map((error) => error.message).join(", ")}`);
@@ -119,19 +137,42 @@ export function withMcpDependency(source, dependency) {
   return document.toString({defaultStringType: "QUOTE_DOUBLE", defaultKeyType: "PLAIN", lineWidth: 0});
 }
 
+function obsoleteRepositorySkillPaths(root, files) {
+  const bundled = new Set(bundleSkills(root));
+  const inventory = existsSync(path.join(root, "bundle-integrity.json")) ? readJson(root, "bundle-integrity.json") : {};
+  // Older inventories have no ownership list; their non-bundled skills were repository-owned.
+  const recorded = inventory.repositorySkills ?? [...new Set(Object.keys(inventory.files ?? {})
+    .map((file) => file.match(/^skills\/([a-z0-9]+(?:-[a-z0-9]+)*)\//u)?.[1])
+    .filter((skill) => skill && !bundled.has(skill)))];
+  requireCondition(Array.isArray(recorded) && recorded.every((skill) => typeof skill === "string" && /^[a-z0-9]+(?:-[a-z0-9]+)*$/u.test(skill)), "Invalid repository skill ownership inventory.");
+  const owned = new Set([...repositorySkills(root), ...recorded].filter((skill) => !bundled.has(skill)));
+  const expected = [...files.keys()];
+  const visit = (relative) => {
+    const full = path.join(root, relative);
+    if (!existsSync(full)) return [];
+    const stat = lstatSync(full);
+    requireCondition(!stat.isSymbolicLink(), `Packaged files must not be symlinks: ${relative}`);
+    if (stat.isDirectory()) {
+      if (!expected.some((file) => file.startsWith(`${relative}/`))) return [relative];
+      return readdirSync(full).sort().flatMap((name) => visit(`${relative}/${name}`));
+    }
+    return files.has(relative) ? [] : [relative];
+  };
+  return [...owned].sort().flatMap((skill) => visit(`${PLUGIN}/skills/${skill}`));
+}
+
 export function generatedFiles(root = ROOT, metadata = loadMetadata(root), {fromBundleSync = false} = {}) {
   const {name, version, description, author, homepage, repository, keywords, marketplace, codexInterface} = metadata;
   const shared = {name, version, description, author, homepage, repository, ...(metadata.license ? {license: metadata.license} : {}), keywords};
   const files = new Map([
-    [`${PLUGIN}/.claude-plugin/plugin.json`, json({...shared, ...metadata.claudeDirectory})],
+    // Claude Code prompts for userConfig at install; Codex runs the onboarding skill as the plugin's setup step.
+    [`${PLUGIN}/.claude-plugin/plugin.json`, json({...shared, ...metadata.claudeDirectory, userConfig: metadata.userConfig})],
     [`${PLUGIN}/.codex-plugin/plugin.json`, json({
       ...shared,
       skills: "./skills/",
-      mcpServers: "./.mcp.json",
+      extensions: {"com.openai": {onboardingSkill: metadata.onboardingSkill}},
       interface: {...codexInterface, shortDescription: description, developerName: author.name, websiteURL: homepage},
     })],
-    // Claude Code loads the plugin-root .mcp.json by convention; the Codex manifest names it.
-    [`${PLUGIN}/.mcp.json`, json({mcpServers: {[metadata.mcpDependency.value]: metadata.mcpServer}})],
     [".claude-plugin/marketplace.json", json({
       name: marketplace.name,
       owner: {name: author.name},
@@ -143,7 +184,7 @@ export function generatedFiles(root = ROOT, metadata = loadMetadata(root), {from
       interface: {displayName: codexInterface.displayName},
       plugins: [{name, source: {source: "local", path: `./${PLUGIN}`}, policy: marketplace.policy, category: codexInterface.category}],
     })],
-    [`${PLUGIN}/.generated`, "Generated distribution; do not edit packaged files directly.\nSkills, SDK and bundle provenance: convo-email-agent, via scripts/sync-bundle.mjs.\nHost files: host/. Manifests, MCP server and MCP dependency: plugin-metadata.json.\nRun npm run generate after metadata or host changes. See the root README for releases.\n"],
+    [`${PLUGIN}/.generated`, "Generated distribution; do not edit packaged files directly.\nBundled skills, SDK and bundle provenance: convo-email-agent, via scripts/sync-bundle.mjs.\nRepository skills: skills/. Host files: host/. Manifests, user configuration, onboarding skill and MCP dependency: plugin-metadata.json.\nRun npm run generate after metadata, skill or host changes. See the root README for releases.\n"],
   ]);
   for (const [destination, source] of Object.entries(metadata.packageFiles)) {
     files.set(`${PLUGIN}/${destination}`, readFileSync(path.join(root, source)));
@@ -167,12 +208,22 @@ export function generatedFiles(root = ROOT, metadata = loadMetadata(root), {from
     const source = files.get(agentFile)?.toString() ?? readFileSync(path.join(root, agentFile), "utf8");
     files.set(agentFile, withMcpDependency(source, metadata.mcpDependency));
   }
+  // Repository skills are packaged as they are: no shared HOST.md and no stripo-mcp dependency.
+  const localSkills = repositorySkills(root);
+  for (const skill of localSkills) {
+    requireCondition(!skills.includes(skill), `${REPOSITORY_SKILLS}/${skill} collides with a bundled skill.`);
+    for (const file of walkFiles(root, `${REPOSITORY_SKILLS}/${skill}`)) {
+      files.set(`${PLUGIN}/skills/${file.slice(REPOSITORY_SKILLS.length + 1)}`, readFileSync(path.join(root, file)));
+    }
+  }
   if (!fromBundleSync && existsSync(path.join(root, "bundle-integrity.json"))) {
     const previous = readJson(root, "bundle-integrity.json").hostOverrides ?? [];
     const removed = previous.filter((file) => !hostOverrides.includes(file));
     requireCondition(removed.length === 0, `Host overrides were removed: ${removed.join(", ")}. Run scripts/sync-bundle.mjs with a clean upstream bundle to restore upstream files and remove obsolete helpers.`);
   }
-  const paths = new Set(SYNCED_ITEMS.flatMap((item) => walkFiles(root, `${PLUGIN}/${item}`)));
+  const obsolete = obsoleteRepositorySkillPaths(root, files);
+  const paths = new Set(SYNCED_ITEMS.flatMap((item) => walkFiles(root, `${PLUGIN}/${item}`))
+    .filter((file) => !obsolete.some((removed) => file === removed || file.startsWith(`${removed}/`))));
   for (const file of Object.keys(metadata.packageFiles)) paths.add(`${PLUGIN}/${file}`);
   for (const file of files.keys()) {
     if (SYNCED_ITEMS.some((item) => file.startsWith(`${PLUGIN}/${item}/`))) paths.add(file);
@@ -181,6 +232,7 @@ export function generatedFiles(root = ROOT, metadata = loadMetadata(root), {from
   files.set("bundle-integrity.json", json({
     sourceRevision: bundle.sourceRevision,
     hostOverrides: hostOverrides.sort(),
+    repositorySkills: localSkills,
     files: Object.fromEntries([...paths].sort().map((file) => [
       file.slice(PLUGIN.length + 1),
       createHash("sha256").update(files.get(file) ?? readFileSync(path.join(root, file))).digest("hex"),
@@ -192,10 +244,15 @@ export function generatedFiles(root = ROOT, metadata = loadMetadata(root), {from
 export function generateMetadata(root = ROOT, {check = false, metadata = loadMetadata(root), fromBundleSync = false} = {}) {
   const files = generatedFiles(root, metadata, {fromBundleSync});
   const stale = [];
+  for (const relative of obsoleteRepositorySkillPaths(root, files)) {
+    if (check) stale.push(`${relative} (obsolete)`);
+    else rmSync(path.join(root, relative), {recursive: true, force: true});
+  }
   for (const [relative, contents] of files) {
     const destination = path.join(root, relative);
-    const overlay = relative.startsWith(`${PLUGIN}/skills/`) ? path.join(root, "host", relative.slice(`${PLUGIN}/skills/`.length)) : null;
-    const executable = overlay && existsSync(overlay) ? lstatSync(overlay).mode & 0o111 : null;
+    const skillFile = relative.startsWith(`${PLUGIN}/skills/`) ? relative.slice(`${PLUGIN}/skills/`.length) : null;
+    const overlay = skillFile ? [path.join(root, "host", skillFile), path.join(root, REPOSITORY_SKILLS, skillFile)].find((file) => existsSync(file)) : undefined;
+    const executable = overlay ? lstatSync(overlay).mode & 0o111 : null;
     const present = existsSync(destination);
     const sameContent = present && readFileSync(destination).equals(Buffer.from(contents));
     const sameMode = executable === null || (present && (lstatSync(destination).mode & 0o111) === executable);
@@ -211,7 +268,7 @@ export function generateMetadata(root = ROOT, {check = false, metadata = loadMet
   // inventory instead of only pointing at the command that would accept them.
   const differences = stale.includes("bundle-integrity.json") ? inventoryDifferences(root, files.get("bundle-integrity.json")) : [];
   const hint = differences.length > 0
-    ? `Inventory entries that would change:\n${differences.join("\n")}\nSkill and SDK files change only through scripts/sync-bundle.mjs: restore an unintended edit. After an intended metadata or host change, run npm run generate and review the diff.`
+    ? `Inventory entries that would change:\n${differences.join("\n")}\nBundled skill and SDK files change only through scripts/sync-bundle.mjs: restore an unintended edit. After an intended metadata, repository skill or host change, run npm run generate and review the diff.`
     : "Run npm run generate and review the diff.";
   requireCondition(stale.length === 0, `Generated files are out of date:\n${stale.join("\n")}\n${hint}`);
   return files.size;

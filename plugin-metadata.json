@@ -1,6 +1,6 @@
 {
   "name": "stripo",
-  "version": "0.8.0",
+  "version": "0.10.0",
   "description": "Create and edit emails and templates with Stripo.",
   "author": {
     "name": "Stripo",
@@ -35,7 +35,7 @@
   },
   "codexInterface": {
     "displayName": "Stripo",
-    "longDescription": "Create emails from a brief, template, HTML or screenshot. Generate and edit images, update text, links and styles in existing emails and templates, and review desktop and mobile previews. Requires a connected Stripo MCP server.",
+    "longDescription": "Create emails from a brief, template, HTML or screenshot. Generate and edit images, update text, links and styles in existing emails and templates, and review desktop and mobile previews. The connect skill registers the Stripo MCP server with your organization's Client ID.",
     "category": "Productivity",
     "capabilities": [
       "Read",
@@ -48,20 +48,17 @@
     "logo": "./assets/stripo-icon.jpeg",
     "composerIcon": "./assets/stripo-icon.jpeg"
   },
+  "userConfig": {
+    "client_id": {
+      "type": "string",
+      "title": "Stripo Client ID",
+      "description": "Your organization's MCP Client ID from Stripo Workspace Settings → MCP integration (an Owner or Admin copies it). /stripo:connect registers the stripo-mcp server with it; leave it empty if stripo-mcp is already configured."
+    }
+  },
+  "onboardingSkill": "./skills/connect/SKILL.md",
   "mcpDependency": {
     "type": "mcp",
     "value": "stripo-mcp",
-    "description": "Stripo MCP server for emails, templates, image generation/editing and business profiles. The plugin bundles its configuration; authorize it in your agent. See the plugin README."
-  },
-  "mcpServer": {
-    "type": "http",
-    "url": "https://mcp.stripo.email/mcp",
-    "oauth": {
-      "scopes": "mcp:tools"
-    },
-    "scopes": [
-      "mcp:tools",
-      "offline_access"
-    ]
+    "description": "Stripo MCP server for emails, templates, image generation/editing and business profiles. Register it with the plugin's connect skill and your organization's Client ID, then authorize it in your agent. See the plugin README."
   }
 }

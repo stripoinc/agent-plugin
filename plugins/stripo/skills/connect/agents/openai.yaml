@@ -1,0 +1,6 @@
+interface:
+  display_name: "Connect Stripo"
+  short_description: "Register the Stripo MCP server with your organization's Client ID"
+  default_prompt: "Use $connect to register the Stripo MCP server (stripo-mcp) with my organization's Client ID and tell me how to sign in."
+policy:
+  allow_implicit_invocation: true

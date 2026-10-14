@@ -4,7 +4,7 @@ import path from "node:path";
 import {pathToFileURL} from "node:url";
 import {ROOT, METADATA, loadMetadata, requireVersionIncrease} from "./lib/plugin.mjs";
 
-const RELEASE_PREFIXES = ["plugins/", "host/", "packaging/", "scripts/", ".agents/", ".claude-plugin/"];
+const RELEASE_PREFIXES = ["plugins/", "host/", "skills/", "packaging/", "scripts/", ".agents/", ".claude-plugin/"];
 const RELEASE_FILES = [METADATA, "LICENSE", "bundle-integrity.json", "package.json", "package-lock.json"];
 
 export function checkVersionBump(root = ROOT, base = process.env.PLUGIN_BASE_REF ?? "origin/main") {

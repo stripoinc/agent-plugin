@@ -1,6 +1,6 @@
 {
   "name": "stripo",
-  "version": "0.8.0",
+  "version": "0.10.0",
   "description": "Create and edit emails and templates with Stripo.",
   "author": {
     "name": "Stripo",
@@ -16,5 +16,12 @@
     "mcp"
   ],
   "documentationUrl": "https://github.com/stripoinc/agent-plugin#readme",
-  "icon": "./assets/stripo-icon.jpeg"
+  "icon": "./assets/stripo-icon.jpeg",
+  "userConfig": {
+    "client_id": {
+      "type": "string",
+      "title": "Stripo Client ID",
+      "description": "Your organization's MCP Client ID from Stripo Workspace Settings → MCP integration (an Owner or Admin copies it). /stripo:connect registers the stripo-mcp server with it; leave it empty if stripo-mcp is already configured."
+    }
+  }
 }

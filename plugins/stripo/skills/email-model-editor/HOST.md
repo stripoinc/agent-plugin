@@ -108,12 +108,13 @@ describes. Inspection-only email requests must not start image jobs.
 
 ## Authentication
 
-The plugin bundles the `stripo-mcp` endpoint and scopes without a fixed OAuth client ID.
-For pre-registered OAuth clients, configure the client ID in the host's MCP connection using
-the plugin README before login; do not assume automatic client registration is available.
-MCP access is authorized once per agent through OAuth (Claude Code: `/mcp`; Codex:
-`codex mcp login stripo-mcp --scopes mcp:tools,offline_access`; other agents: their own login flow
-for `stripo-mcp`, or the browser login an `mcp-remote` bridge opens on its first start). Claude
-Code lists a bundled connection as `plugin:stripo:stripo-mcp` and a separately configured one
-as `stripo-mcp`.
+The plugin ships no MCP server entry: Stripo authenticates each organization with its own
+OAuth client ID, which no host can fill into a bundled entry. The plugin's `connect` skill
+(`/stripo:connect` in Claude Code, `$stripo:connect` or the plugin's setup step in Codex)
+registers `stripo-mcp` at user scope, reusing a saved Client ID before asking for one, and gives
+other agents the values to configure. When `stripo-mcp` is missing or not authenticated, run or suggest `connect` instead of
+guessing a configuration. MCP access is then authorized once per agent through OAuth (Claude
+Code: `/mcp`; Codex: `codex mcp login stripo-mcp --scopes mcp:tools,offline_access`; other agents:
+their own login flow for `stripo-mcp`, or the browser login an `mcp-remote` bridge opens on its
+first start).
 Never paste tokens or credentials into the conversation, runner arguments or files.

@@ -2,7 +2,7 @@
 
 Create and edit native, editable Stripo emails with an AI agent. The plugin is
 published by Stripo through the [stripoinc organization](https://github.com/stripoinc).
-It contains three skills and their local Document State SDK:
+It contains three email skills, a `connect` setup skill, and their local Document State SDK:
 
 - **email-from-reference** creates an email from a brief, an authorized reference,
   HTML, a screenshot or supplied images, and can rebuild a selected email.
@@ -10,6 +10,8 @@ It contains three skills and their local Document State SDK:
   links, layout and images, then checks saved content and available previews.
 - **business-profile** reads, audits and updates a Stripo project's business
   profile using the project's emails as evidence.
+- **connect** registers the Stripo MCP server in your agent with your organization's
+  Client ID and tells you how to sign in.
 
 ## Install
 
@@ -42,30 +44,31 @@ automatically installed by this plugin.
 
 ## Authorize Stripo
 
-Your organization must have MCP access enabled. The plugin bundles the endpoint and scopes
-of the **stripo-mcp** server at `https://mcp.stripo.email/mcp`, without a fixed OAuth client ID,
-client secret or tokens. For a pre-registered OAuth client, configure its ID in your agent's
-MCP connection. Get it from your organization's **Settings → MCP integration**, or use a
-client provisioned for that host with the correct callback URL.
+Your organization must have MCP access enabled. The skill first reuses the **Client ID** saved
+in your existing connection; it asks only when no ID is available. For a new connection, an
+Owner or Admin copies the ID from **Workspace Settings → MCP integration** after turning on
+*Connect AI tools*. The plugin ships no MCP server entry, client ID, client secret or tokens: the
+**connect** skill registers the **stripo-mcp** server (`https://mcp.stripo.email/mcp`, scopes
+`mcp:tools` and `offline_access`) at user scope in your agent with that Client ID.
 
-In Claude Code, replace `<CLIENT_ID>` and configure the connection:
+- Claude Code: leave the plugin's Client ID empty to reuse an existing connection's ID, or
+  configure a new one with `/plugin configure stripo@stripo`, then run `/stripo:connect`.
+  When sign-in is needed, restart Claude Code, open
+  `/mcp`, select `stripo-mcp` and finish the browser login.
+- Codex: run the plugin's setup step, or ask for `$stripo:connect` in a new session. The skill
+  reuses the saved Client ID and writes the entry to your user configuration
+  (`$CODEX_HOME/config.toml`, or `~/.codex/config.toml` by default). If sign-in is needed, run
+  `codex mcp login stripo-mcp --scopes mcp:tools,offline_access` and start a new session.
+- Other agents: the skill gives you the values for the agent's own MCP settings.
 
-```bash
-claude mcp add --transport http --scope user --client-id '<CLIENT_ID>' stripo-mcp https://mcp.stripo.email/mcp
-```
-
-Then open `/mcp`, select `stripo-mcp` and finish the browser login. In Codex, run:
-
-```bash
-codex mcp add stripo-mcp --url https://mcp.stripo.email/mcp --oauth-client-id '<CLIENT_ID>'
-codex mcp login stripo-mcp --scopes mcp:tools,offline_access
-```
-
-An existing `stripo-mcp` connection with the correct client ID can be reused; complete its
-login without adding it again. Authentication belongs to the agent's OAuth connection.
-The bundled connection can use automatic registration only when the authorization server
-and host support it. Omitting a client ID does not enable that support. OpenAI directory
-OAuth setup is separate from these GitHub installation steps.
+Prefer to configure the server yourself? Run
+`claude mcp add --transport http --scope user --client-id '<CLIENT_ID>' stripo-mcp https://mcp.stripo.email/mcp`
+or `codex mcp add stripo-mcp --url https://mcp.stripo.email/mcp --oauth-client-id '<CLIENT_ID>'`
+in a terminal. A correct user-scope HTTP entry is kept; local/project entries and `mcp-remote`
+bridges are migrated to user scope with their saved Client ID. The current project's overrides
+are removed after the user entry is saved. An already available connection is checked with
+`whoami` without another login. Authentication belongs to the agent's OAuth connection, never to the plugin
+files. OpenAI directory OAuth setup is separate from these GitHub installation steps.
 Do not paste tokens into chat, source files or runner arguments.
 In a fresh session, ask the agent to call `whoami` without making changes, then
 confirm the account and project before editing.

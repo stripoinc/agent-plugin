@@ -17,7 +17,8 @@
  *
  * Host files come from host/: a skill with a host/<skill>/ directory gets that directory copied
  * over it (HOST.md plus any helper the skill calls by path), and every other skill gets the
- * shared host/HOST.md.
+ * shared host/HOST.md. Repository-owned skills under skills/ (such as connect) are not part of
+ * the bundle; the generator packages them again after skills/ has been replaced.
  */
 import {cpSync, existsSync, readdirSync, readFileSync, rmSync, statSync, writeFileSync} from "node:fs";
 import {execFileSync} from 'node:child_process';

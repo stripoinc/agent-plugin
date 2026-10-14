@@ -1,12 +1,12 @@
 import assert from "node:assert/strict";
 import {execFileSync, spawnSync} from "node:child_process";
-import {chmodSync, cpSync, mkdirSync, mkdtempSync, readFileSync, rmSync, statSync, symlinkSync, writeFileSync} from "node:fs";
+import {chmodSync, cpSync, existsSync, mkdirSync, mkdtempSync, readFileSync, renameSync, rmSync, statSync, symlinkSync, writeFileSync} from "node:fs";
 import {tmpdir} from "node:os";
 import path from "node:path";
 import test from "node:test";
 import {deflateSync} from 'node:zlib';
 import {parse} from "yaml";
-import {ROOT, PLUGIN, generateMetadata, json, readJson, requireVersionIncrease, withMcpDependency} from "../lib/plugin.mjs";
+import {ROOT, PLUGIN, generateMetadata, json, readJson, repositorySkills, requireVersionIncrease, withMcpDependency} from "../lib/plugin.mjs";
 import {checkVersionBump} from "../check-version-bump.mjs";
 import {validatePlugin} from "../validate-plugin.mjs";
 import {checkDirectoryAssets, checkPackageLimits} from '../lib/directory-checks.mjs';
@@ -28,7 +28,7 @@ function testIcon(width = 512, height = 512) {
 function fixture(t) {
   const root = mkdtempSync(path.join(tmpdir(), "stripo-packaging-test-"));
   t.after(() => rmSync(root, {recursive: true, force: true}));
-  for (const entry of ["plugin-metadata.json", "packaging", "plugins", "host", ".agents", ".claude-plugin", "bundle-integrity.json"]) {
+  for (const entry of ["plugin-metadata.json", "packaging", "plugins", "host", "skills", ".agents", ".claude-plugin", "bundle-integrity.json"]) {
     cpSync(path.join(ROOT, entry), path.join(root, entry), {recursive: true});
   }
   // A fixed fixture release keeps these scenarios useful after real plugin version bumps.
@@ -50,7 +50,7 @@ test("generation is repeatable and preserves the complete SDK in an isolated ins
   const root = fixture(t);
   generateMetadata(root);
   generateMetadata(root, {check: true});
-  assert.equal(validatePlugin(root).skills, readJson(root, `${PLUGIN}/bundle.json`).skills.length);
+  assert.equal(validatePlugin(root).skills, readJson(root, `${PLUGIN}/bundle.json`).skills.length + repositorySkills(root).length);
 });
 
 test("packaged email skills expose image tools with matching host and provider contracts", () => {
@@ -89,45 +89,109 @@ test("MCP dependency updates preserve upstream metadata, policy and other depend
   assert.throws(() => withMcpDependency("dependencies: {tools: broken}\n", dependency), /must be an array/u);
 });
 
-test("the bundled MCP server is generated from metadata for both hosts", (t) => {
+test("the connect skill is packaged from skills/ and the package carries no MCP server entry", (t) => {
   const root = fixture(t);
   const metadata = readJson(root, "plugin-metadata.json");
-  const file = `${PLUGIN}/.mcp.json`;
-  assert.deepEqual(readJson(root, file), {mcpServers: {"stripo-mcp": metadata.mcpServer}});
-  assert.equal(readJson(root, `${PLUGIN}/.codex-plugin/plugin.json`).mcpServers, "./.mcp.json");
-  writeFileSync(path.join(root, file), json({mcpServers: {"stripo-mcp": {...metadata.mcpServer, url: "https://example.invalid/mcp"}}}));
-  assert.throws(() => validatePlugin(root), /Generated files are out of date[\s\S]*\.mcp\.json/u);
+  assert.equal(metadata.onboardingSkill, "./skills/connect/SKILL.md");
+  const packaged = path.join(root, PLUGIN, "skills/connect/SKILL.md");
+  assert.equal(readFileSync(packaged, "utf8"), readFileSync(path.join(root, "skills/connect/SKILL.md"), "utf8"));
+  assert.ok(readJson(root, "bundle-integrity.json").files["skills/connect/SKILL.md"]);
+  assert.ok(!existsSync(path.join(root, PLUGIN, "skills/connect/HOST.md")));
+  assert.equal(parse(readFileSync(path.join(root, PLUGIN, "skills/connect/agents/openai.yaml"), "utf8")).dependencies, undefined);
+  assert.ok(!existsSync(path.join(root, PLUGIN, ".mcp.json")));
+  const claude = readJson(root, `${PLUGIN}/.claude-plugin/plugin.json`);
+  assert.equal(claude.userConfig.client_id.type, "string");
+  assert.equal(claude.mcpServers, undefined);
+  const codex = readJson(root, `${PLUGIN}/.codex-plugin/plugin.json`);
+  assert.equal(codex.mcpServers, undefined);
+  assert.equal(codex.userConfig, undefined);
+  assert.equal(codex.extensions["com.openai"].onboardingSkill, metadata.onboardingSkill);
+  writeFileSync(path.join(root, PLUGIN, ".mcp.json"), json({mcpServers: {"stripo-mcp": {type: "http", url: "https://mcp.stripo.email/mcp"}}}));
+  assert.throws(() => validatePlugin(root), (error) => error.message.includes("Unexpected files") && error.message.includes(".mcp.json"));
+  rmSync(path.join(root, PLUGIN, ".mcp.json"));
+  writeFileSync(packaged, "Edited in the package\n");
+  assert.throws(() => generateMetadata(root, {check: true}), /skills\/connect\/SKILL\.md/u);
+  generateMetadata(root);
+  validatePlugin(root);
+  rmSync(path.join(root, "skills/connect"), {recursive: true});
+  assert.throws(() => generateMetadata(root), /onboardingSkill/u);
+});
+
+test("a removed repository skill file cannot be hidden by its stale packaged copy", (t) => {
+  const root = fixture(t);
+  const relative = "skills/connect/agents/openai.yaml";
+  const source = path.join(root, relative);
+  const packaged = path.join(root, PLUGIN, relative);
+  const original = readFileSync(source);
+  rmSync(source);
+  assert.throws(() => generateMetadata(root, {check: true}), /skills\/connect\/agents\/openai\.yaml/u);
+  assert.throws(() => validatePlugin(root), /skills\/connect\/agents\/openai\.yaml/u);
+  assert.ok(existsSync(packaged), "Check mode must not remove files.");
+  generateMetadata(root);
+  assert.ok(!existsSync(packaged));
+  assert.equal(readJson(root, "bundle-integrity.json").files[relative], undefined);
+  assert.throws(() => validatePlugin(root), /Missing packaged file.*skills\/connect\/agents\/openai\.yaml/u);
+  writeFileSync(source, original);
   generateMetadata(root);
   validatePlugin(root);
 });
 
-test("MCP packages allow a connection-managed client ID or an explicit client ID", (t) => {
+test("repository skill resource renames remove obsolete files and empty directories", (t) => {
   const root = fixture(t);
-  const metadata = readJson(root, "plugin-metadata.json");
-  assert.equal(metadata.mcpServer.oauth?.clientId, undefined, "The shared package must not pin a host's OAuth client ID.");
-  for (const oauth of [undefined, {}, {scopes: "mcp:tools"}, {clientId: "test-client", scopes: "mcp:tools"}]) {
-    const server = {...metadata.mcpServer, oauth};
-    writeFileSync(path.join(root, "plugin-metadata.json"), json({...metadata, mcpServer: server}));
-    generateMetadata(root);
-    validatePlugin(root);
-    const packaged = readJson(root, `${PLUGIN}/.mcp.json`).mcpServers[metadata.mcpDependency.value];
-    assert.deepEqual(packaged.oauth, oauth);
-    assert.equal(packaged.url, metadata.mcpServer.url);
-    assert.deepEqual(packaged.scopes, metadata.mcpServer.scopes);
-  }
+  const oldDirectory = "skills/connect/references/old";
+  const newDirectory = "skills/connect/references/current";
+  mkdirSync(path.join(root, oldDirectory), {recursive: true});
+  writeFileSync(path.join(root, oldDirectory, "setup.md"), "Setup reference\n");
+  generateMetadata(root);
+  renameSync(path.join(root, oldDirectory), path.join(root, newDirectory));
+  assert.throws(() => generateMetadata(root, {check: true}), /references\/old.*obsolete/u);
+  assert.ok(existsSync(path.join(root, PLUGIN, oldDirectory)), "Check mode must preserve obsolete directories.");
+  generateMetadata(root);
+  assert.ok(!existsSync(path.join(root, PLUGIN, oldDirectory)));
+  assert.equal(readFileSync(path.join(root, PLUGIN, newDirectory, "setup.md"), "utf8"), "Setup reference\n");
+  const inventory = readJson(root, "bundle-integrity.json").files;
+  assert.equal(inventory[`${oldDirectory}/setup.md`], undefined);
+  assert.ok(inventory[`${newDirectory}/setup.md`]);
+  generateMetadata(root, {check: true});
+  validatePlugin(root);
 });
 
-test("optional MCP OAuth configuration rejects malformed settings and explicit client IDs", (t) => {
+test("retired repository skills are pruned without changing bundled skills", (t) => {
+  const root = fixture(t);
+  const upstream = path.join(root, PLUGIN, "skills/email-model-editor/SKILL.md");
+  const original = readFileSync(upstream);
+  const directory = "skills/retired";
+  mkdirSync(path.join(root, directory, "agents"), {recursive: true});
+  writeFileSync(path.join(root, directory, "SKILL.md"), "---\nname: retired\ndescription: A temporary test skill.\n---\n\n# Test skill\n");
+  writeFileSync(path.join(root, directory, "agents/openai.yaml"), "interface:\n  display_name: Test\n");
+  generateMetadata(root);
+  assert.equal(validatePlugin(root).skills, 5);
+  rmSync(path.join(root, directory), {recursive: true});
+  assert.throws(() => generateMetadata(root, {check: true}), /skills\/retired \(obsolete\)/u);
+  generateMetadata(root);
+  assert.ok(!existsSync(path.join(root, PLUGIN, directory)));
+  const inventory = readJson(root, "bundle-integrity.json");
+  assert.ok(!inventory.repositorySkills.includes("retired"));
+  assert.ok(!Object.keys(inventory.files).some((file) => file.startsWith(`${directory}/`)));
+  assert.deepEqual(readFileSync(upstream), original);
+  generateMetadata(root, {check: true});
+  assert.equal(validatePlugin(root).skills, 4);
+});
+
+test("metadata rejects a bundled MCP server, malformed user configuration and an unknown onboarding skill", (t) => {
   const root = fixture(t);
   const metadata = readJson(root, "plugin-metadata.json");
-  for (const oauth of [null, "test-client", []]) {
-    writeFileSync(path.join(root, "plugin-metadata.json"), json({...metadata, mcpServer: {...metadata.mcpServer, oauth}}));
-    assert.throws(() => generateMetadata(root), /OAuth settings must be an object/u);
-  }
-  for (const clientId of [null, "", "   ", 42]) {
-    writeFileSync(path.join(root, "plugin-metadata.json"), json({...metadata, mcpServer: {...metadata.mcpServer, oauth: {clientId}}}));
-    assert.throws(() => generateMetadata(root), /OAuth client ID must be a non-empty string/u);
-  }
+  const attempt = (changes, pattern) => {
+    writeFileSync(path.join(root, "plugin-metadata.json"), json({...metadata, ...changes}));
+    assert.throws(() => generateMetadata(root), pattern);
+  };
+  attempt({mcpServer: {type: "http", url: "https://mcp.stripo.email/mcp"}}, /no MCP server entry/u);
+  attempt({userConfig: []}, /userConfig must be an object/u);
+  attempt({userConfig: {"client id": {type: "string", title: "x", description: "y"}}}, /invalid userConfig key/u);
+  attempt({userConfig: {client_id: {type: "secret", title: "x", description: "y"}}}, /needs type, title and description/u);
+  attempt({onboardingSkill: "./skills/missing/SKILL.md"}, /onboardingSkill/u);
+  attempt({onboardingSkill: "./skills/connect"}, /onboardingSkill/u);
+  attempt({onboardingSkill: undefined}, /onboardingSkill/u);
 });
 
 test("validation rejects divergent marketplace metadata and repairs it from the source", (t) => {
@@ -158,7 +222,7 @@ test("the integrity inventory detects missing and edited packaged files", (t) =>
 
 test("validation rejects unlisted plugin components and provenance that disagrees with the SDK", (t) => {
   const root = fixture(t);
-  for (const file of ["hooks/hooks.json", ".lsp.json"]) {
+  for (const file of ["hooks/hooks.json", ".lsp.json", ".mcp.json"]) {
     const planted = path.join(root, PLUGIN, file);
     mkdirSync(path.dirname(planted), {recursive: true});
     writeFileSync(planted, "{}\n");
@@ -278,6 +342,9 @@ test("Git release gate covers host and packaging changes, skips docs, and suppor
   writeFileSync(path.join(root, "host/HOST.md"), "Changed host contract\n");
   assert.throws(() => checkVersionBump(root, "HEAD"), /version must increase/u);
   git("restore", "host/HOST.md");
+  writeFileSync(path.join(root, "skills/connect/SKILL.md"), "Changed repository skill\n");
+  assert.throws(() => checkVersionBump(root, "HEAD"), /version must increase/u);
+  git("restore", "skills/connect/SKILL.md");
   writeFileSync(path.join(root, "package.json"), "{}\n");
   assert.throws(() => checkVersionBump(root, "HEAD"), /version must increase/u);
   assert.throws(() => checkVersionBump(root, "missing-base-ref"));
@@ -314,6 +381,8 @@ test("release sync regenerates dependency declarations and rejects downgrades be
     delete fields.dependencies;
     writeFileSync(file, json(fields));
   }
+  // A real upstream bundle does not carry the repository skills; the generator packages them again.
+  rmSync(path.join(upstream, "skills", "connect"), {recursive: true});
   const before = readFileSync(path.join(root, "plugin-metadata.json"), "utf8");
   const run = (version, extra = []) => spawnSync(process.execPath, [path.join(root, "scripts/sync-bundle.mjs"), "--bundle", upstream, "--version", version, ...extra], {cwd: root, encoding: "utf8"});
   const rejected = run("0.5.0");
@@ -324,6 +393,7 @@ test("release sync regenerates dependency declarations and rejects downgrades be
   assert.equal(released.status, 0, released.stderr);
   assert.equal(readJson(root, "plugin-metadata.json").version, "0.6.2");
   assert.equal(readJson(root, `${PLUGIN}/.codex-plugin/plugin.json`).version, "0.6.2");
+  assert.equal(readFileSync(path.join(root, PLUGIN, "skills/connect/SKILL.md"), "utf8"), readFileSync(path.join(root, "skills/connect/SKILL.md"), "utf8"));
   assert.equal(run('0.6.2').status, 1);
   const rebuilt = run('0.6.2', ['--base', base]);
   assert.equal(rebuilt.status, 0, rebuilt.stderr);
@@ -332,7 +402,7 @@ test("release sync regenerates dependency declarations and rejects downgrades be
   git('add', 'plugin-metadata.json');
   git('-c', 'commit.gpgsign=false', 'commit', '--quiet', '-m', 'Published version');
   assert.equal(run('0.6.2', ['--base', 'HEAD']).status, 1);
-  assert.equal(validatePlugin(root).skills, readJson(root, `${PLUGIN}/bundle.json`).skills.length);
+  assert.equal(validatePlugin(root).skills, readJson(root, `${PLUGIN}/bundle.json`).skills.length + repositorySkills(root).length);
   const agent = parse(readFileSync(path.join(root, PLUGIN, "skills/email-model-editor/agents/openai.yaml"), "utf8"));
   assert.equal(agent.dependencies.tools[0].value, "stripo-mcp");
   const skill = readFileSync(path.join(root, PLUGIN, "skills/email-model-editor/SKILL.md"), "utf8");
