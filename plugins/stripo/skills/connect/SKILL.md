@@ -1,6 +1,6 @@
 ---
 name: connect
-description: Connect this agent to the Stripo MCP server (stripo-mcp) with the organization's Client ID, or check an existing connection. Use when stripo-mcp is missing, not authenticated or rejecting calls, when the user shares a Stripo Client ID, or before the first Stripo task after installing the plugin. Never signs in on the user's behalf.
+description: Connect this agent (Claude Code, Codex, Cursor, VS Code or another MCP-capable agent) to the Stripo MCP server (stripo-mcp) with the organization's Client ID, or check an existing connection. Use when stripo-mcp is missing, not authenticated or rejecting calls, when the user shares a Stripo Client ID, or before the first Stripo task after installing the plugin. Never signs in on the user's behalf.
 allowed-tools: Bash(claude mcp add:*), Bash(claude mcp get:*), Bash(claude mcp list:*), Bash(claude mcp remove:*), Bash(codex mcp get:*), Bash(codex mcp list:*)
 ---
 
@@ -31,6 +31,13 @@ other than the agent's own MCP configuration, and out of public repositories.
   configuration (`$CODEX_HOME/config.toml` when set, otherwise `~/.codex/config.toml`) and any
   project configuration overriding it. The native Client ID is `oauth.client_id`; `mcp get`
   does not display it.
+- Cursor: inspect the `stripo-mcp` entry in the global `~/.cursor/mcp.json` and in the
+  project's `.cursor/mcp.json`. The native Client ID is `auth.CLIENT_ID`.
+- VS Code (GitHub Copilot): inspect the `stripo-mcp` entry in the user-level `mcp.json` that
+  **MCP: Open User Configuration** opens (for a default install: macOS
+  `~/Library/Application Support/Code/User/mcp.json`, Linux `~/.config/Code/User/mcp.json`,
+  Windows `%APPDATA%\Code\User\mcp.json`) and in the workspace's `.vscode/mcp.json`. The native
+  Client ID is `oauth.clientId`.
 - Other agents: inspect the existing server in the agent's MCP settings.
 - For an existing `mcp-remote` entry, recover `client_id` from its
   `--static-oauth-client-info` argument. Read only the relevant connection fields; never dump
@@ -97,6 +104,43 @@ scopes = ["mcp:tools", "offline_access"]
 client_id = "<CLIENT_ID>"
 ```
 
+**Cursor**: edit the global `~/.cursor/mcp.json` (create it when missing; the project's
+`.cursor/mcp.json` only when the user asks for a project-only connection). Keep every other
+server and add or replace the `stripo-mcp` entry inside `mcpServers`. Cursor needs the `auth`
+object in exactly this shape, with the scopes pinned; the file is outside the workspace, so
+write it with a terminal command and use the host's approval flow.
+
+```json
+{
+  "mcpServers": {
+    "stripo-mcp": {
+      "url": "https://mcp.stripo.email/mcp",
+      "auth": {
+        "CLIENT_ID": "<CLIENT_ID>",
+        "scopes": ["mcp:tools", "offline_access"]
+      }
+    }
+  }
+}
+```
+
+**VS Code (GitHub Copilot)**: edit the user-level `mcp.json` located in step 1 (create it when
+missing; the workspace's `.vscode/mcp.json` only when the user wants Stripo in one project).
+Keep every other server and add or replace `stripo-mcp` inside `servers`. VS Code takes the
+scopes from the server itself and reads `oauth.clientId` from version 1.123 on.
+
+```json
+{
+  "servers": {
+    "stripo-mcp": {
+      "type": "http",
+      "url": "https://mcp.stripo.email/mcp",
+      "oauth": { "clientId": "<CLIENT_ID>" }
+    }
+  }
+}
+```
+
 **Other agents**: add a user-level HTTP MCP server named `stripo-mcp` with the URL above, the saved
 Client ID as a pre-registered OAuth client without a secret, and the scopes `mcp:tools offline_access`, in the
 agent's own MCP settings. When the agent cannot write its settings, give the user these values.
@@ -113,6 +157,12 @@ Tell the user what to do next; do not run it:
 - Codex: run `codex mcp login stripo-mcp --scopes mcp:tools,offline_access` in a terminal, or
   choose **Authenticate** next to `stripo-mcp` in the Codex app's MCP settings, then start a new
   session.
+- Cursor: restart Cursor, open **Customize → MCPs**, find `stripo-mcp` under **Needs Attention**,
+  click **Authenticate**, sign in to Stripo in the browser tab and click **Return to Cursor**
+  (port 8787 must be free for the return).
+- VS Code: click **Start** above the `stripo-mcp` entry (or **MCP: List Servers → stripo-mcp →
+  Start Server**), confirm that the server is trusted, click **Allow** when VS Code asks to
+  authenticate, and sign in to Stripo in the browser. Ignore the **Set Client Secret** action.
 - Other agents: start the server or connection and complete the browser sign-in it opens.
 
 ## 5. Verify

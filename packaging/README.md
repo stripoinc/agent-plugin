@@ -10,8 +10,8 @@ It contains three email skills, a `connect` setup skill, and their local Documen
   links, layout and images, then checks saved content and available previews.
 - **business-profile** reads, audits and updates a Stripo project's business
   profile using the project's emails as evidence.
-- **connect** registers the Stripo MCP server in your agent with your organization's
-  Client ID and tells you how to sign in.
+- **connect** registers the Stripo MCP server with your organization's Client ID in
+  Claude Code, Codex, Cursor or VS Code (GitHub Copilot) and tells you how to sign in.
 
 ## Install
 

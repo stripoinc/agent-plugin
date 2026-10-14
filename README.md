@@ -17,7 +17,7 @@ completes its own OAuth login.
 | `email-model-editor` | Edit an existing email or template through native JSON models, including generating or editing images; verify the saved result and desktop/mobile previews. |
 | `email-from-reference` | Create an email from a brief, HTML, screenshot or another authorized reference, generating or editing visuals when needed; rebuild an explicitly selected email or template. |
 | `business-profile` | Read, audit and update a project's business profile using its emails as evidence. |
-| `connect` | Register the Stripo MCP server (`stripo-mcp`) in the agent with your organization's Client ID, check an existing entry, and hand over the sign-in. |
+| `connect` | Register the Stripo MCP server (`stripo-mcp`) with your organization's Client ID in Claude Code, Codex, Cursor or VS Code (GitHub Copilot), check an existing entry, and hand over the sign-in. |
 
 The email skills use Stripo MCP's `generate_image`, `edit_image`, and `get_image_job` to produce
 hosted PNGs for the target email/template. These operations require the project's AI image

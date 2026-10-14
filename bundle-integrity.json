@@ -9,7 +9,7 @@
   ],
   "files": {
     "LICENSE": "81d2760fbd1543712315f5f20edfc5bbf1dadd6b16095fb3f75d095156b88ed8",
-    "README.md": "c4671da9078516f85897232ee1546fdba766c4bfa8aac7856f3dcd2c30d8ec2b",
+    "README.md": "94346639b79dd71ae598bec1d8a89ca644abdb73e57292b342438eb8811cb8ba",
     "assets/stripo-icon.jpeg": "5df347d74fb49cc5cf730350934430e5e968a8e7613a395beed81c7a559d956d",
     "bundle.json": "75e196974d115dff5ed6ab8e6179c6b35efd55bfd3a66850ace5fedb4b254e32",
     "mcp-tools.json": "af808053ce0cec25caa6eab8016673bf876a3285c076d3dc0084268e91fa6c56",
@@ -258,7 +258,7 @@
     "skills/business-profile/scripts/screenshot-delivery.mjs": "c6f156dd9fcfc9364996c2d46f073b07f671eea0b9f12c304b60384c1bee6b49",
     "skills/business-profile/scripts/selected-artwork.js": "58aa554f28455befb7cf715ddd355a775a3da45bbe42557581ecb8ebccd9e4af",
     "skills/business-profile/scripts/validate-brandkit.js": "2384c89196082b1ca290fe238ce4915d5a94c1c0b59d8b79fa649b38e93570e8",
-    "skills/connect/SKILL.md": "4b852ea0d4b475daaecb4111cf4e4d8eab393cb26585d5574a46d31b8de673ad",
+    "skills/connect/SKILL.md": "3651ce3f4fa442ff12a19340505f67bfe9b1345e5cff8afbef7cb55b1163359a",
     "skills/connect/agents/openai.yaml": "35a2104d58daeefa7b9dacac2fbb8568581287771a34c8bd383269b1200fb32a",
     "skills/email-from-reference/HOST.md": "51c77e01ba3e3ee33dfd220b327a3aaa2a7c071a64902231de691ed4f50ed92d",
     "skills/email-from-reference/PROVIDER.md": "c0ad91c054b8fd7e11697f597489eca3952ce6ae78da55e6a89bcfa4a852a1cc",
