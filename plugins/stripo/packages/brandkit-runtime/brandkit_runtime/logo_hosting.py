@@ -686,13 +686,14 @@ def prepare_primary_logo(
                 source_svg_sha256=unique_over_cap.sidecar.svg_path_sha256,
                 keeps_original_url_as_alternative=True,
             )
+        reasons = list(dict.fromkeys(
+            reason for url, reason in evidence.capture_rejections if url == original_url
+        ))
+        reason = "primary logo has no exact source SVG binding to host"
+        if reasons:
+            reason += "; selected source capture rejected: " + ", ".join(reasons)
         return LogoHostingPreflight.finished(
-            LogoHostingResult(
-                None,
-                False,
-                "skipped-no-sidecar",
-                reason="primary logo has no exact source SVG binding to host",
-            )
+            LogoHostingResult(None, False, "skipped-no-sidecar", reason=reason)
         )
 
     evidence = logo_evidence or load_logo_asset_evidence(technical_dir)

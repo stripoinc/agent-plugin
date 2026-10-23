@@ -773,11 +773,11 @@ export async function preserveSelectedArtwork(probe, {
         renderingContext,
         additionalSkipped : diagnostics,
       });
-      if (selectedKind === 'css-background-resource' && !entry) {
+      if (!entry) {
         for (const row of Array.isArray(artifact?.skipped) ? artifact.skipped
                                                            : []) {
           diagnostics.push({
-            reason : row.reason || 'selected-background-resource-unavailable',
+            reason : row.reason || 'selected-resource-unavailable',
             detail : row.detail ?? '',
           });
         }

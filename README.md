@@ -250,10 +250,10 @@ its loaded version until `/reload-plugins` or the next session.
 
 | Source | Generated output |
 | --- | --- |
-| `plugin-metadata.json` | Claude/Codex plugin manifests (`userConfig` only in the Claude manifest, the `onboardingSkill` extension only in the Codex manifest), both marketplace catalogs, and the `stripo-mcp` dependency in each bundled skill's `agents/openai.yaml`. Claude directory fields are emitted only in the Claude manifest. |
+| `plugin-metadata.json` | The Claude manifest (`.claude-plugin/plugin.json`, with `userConfig`), OpenAI's portable Agent Plugins manifest (`plugin.json`) and the Codex compatibility manifest (`.codex-plugin/plugin.json`), both marketplace catalogs, and the `stripo-mcp` dependency in each bundled skill's `agents/openai.yaml`. Both OpenAI manifests carry the same `interface` and `onboardingSkill`. Claude directory fields (`icon`, `documentationUrl`) are emitted only in the Claude manifest; its support, privacy and terms URLs also fill OpenAI's `supportURL`, `privacyPolicyURL` and `termsOfServiceURL`. The plugin version is set only in the manifests, not in the marketplace entries. |
 | `skills/<name>/` | Repository-owned skills (`connect`), mirrored beside the bundled ones without the shared `HOST.md` or the `stripo-mcp` dependency. Generation removes their obsolete packaged files and directories; bundle sync packages them again. |
 | Root `LICENSE` and `packaging/`, declared by `packageFiles` in metadata | Plugin-root license, README and approved icon; all are checked and inventoried. |
-| A clean Stripo bundle built by `convo-email-agent` | `plugins/stripo/skills/`, `packages/`, `mcp-tools.json`, and `bundle.json`. |
+| A clean Stripo bundle built by `convo-email-agent` | `plugins/stripo/skills/`, `packages/`, `mcp-tools.json`, and `bundle.json`. The sync drops each skill's `agents/claude.yaml`, a Reteno-agent prompt file that Claude Code does not read. |
 | `host/HOST.md` and `host/<skill>/` | Shared host instructions and skill-specific overrides/helpers in the installed skills. |
 | The assembled bundle | `bundle-integrity.json`, a SHA-256 inventory of packaged files; `plugins/stripo/.generated` identifies the sources. |
 
@@ -318,8 +318,10 @@ SDK version and is independent of the plugin release version. Keep `bundle.json`
 from the build; do not edit it by hand. `--allow-dirty` is for local investigation only: CI
 rejects dirty release bundles.
 
-Directory readiness requires an owner-approved LICENSE and manifest identifier plus an approved
-square PNG/JPEG icon (512–2048 px, under 2 MiB). The owner's selected Product Hunt icon is
+Directory readiness requires an owner-approved LICENSE and manifest identifier, an approved
+square PNG/JPEG icon (512–2048 px, under 2 MiB), and the support, privacy policy and terms URLs
+in `claudeDirectory`. OpenAI's listing limits are enforced at generation: `displayName` and
+`codexInterface.shortDescription` up to 30 characters, at most three default prompts. The owner's selected Product Hunt icon is
 packaged as a 512×512 JPEG. The approved [Stripo Agent Plugin License, Version 1.0](LICENSE)
 is copied verbatim from the root `LICENSE`, with identifier `LicenseRef-Stripo-Agent-Plugin-1.0`.
 If required assets or metadata are removed,
@@ -337,6 +339,34 @@ files or packaging tools require a higher version. CI needs no private checkout,
 credentials. These checks do not verify live MCP persistence or OAuth; exercise those separately
 in each supported agent before releasing changes that affect them.
 
+### Behaviour evals
+
+`evals/` holds a [`claude plugin eval`](https://code.claude.com/docs/en/plugin-evals) suite that
+checks routing rather than live MCP results: each email request reaches the right skill, `connect`
+asks for the Client ID without signing in, and out-of-scope requests (sending, unrelated coding)
+start no Stripo skill. The suite lives outside `plugins/stripo/` so it is not distributed; each
+case loads the package through its `plugins` field. Run it from the repository root with the
+Claude CLI signed in (`claude auth login`); every run is a real model call on that account:
+
+```bash
+npm run eval:smoke
+```
+
+The runs have no Stripo MCP connection, so the cases grade skill selection and replies, not email
+persistence. Results go to `evals/results/`, which is ignored. Run the suite after changing skill
+descriptions or syncing a bundle that changes them.
+
+The `indirect` cases never name Stripo: they ask for an email from a screenshot, a website, a
+plain brief or old HTML, which is where the skill description decides the routing. Run them
+five times each, because a single run cannot show a difference between two descriptions:
+
+```bash
+npm run eval:indirect
+```
+
+`--scaffold` lets `rebuild-from-screenshot/fixture.sh` write the screenshot into the run's
+workspace; the script runs as you, outside the agent's sandbox, and only writes that PNG.
+
 The [Anthropic review package](docs/anthropic-directory-review.md) records the fixed release
 revision, credential-finding explanations, publisher evidence, local validation and the
 remaining publication/revalidation steps.
@@ -344,5 +374,6 @@ remaining publication/revalidation steps.
 ## Format references
 
 - [Claude plugin marketplaces](https://code.claude.com/docs/en/plugin-marketplaces)
-- [OpenAI plugin packaging](https://developers.openai.com/plugins/build/plugins)
+- [Claude plugin manifest](https://code.claude.com/docs/en/plugins-reference) and [plugin pre-submission checklist](https://claude.com/docs/plugins/pre-submission-checklist)
+- [OpenAI plugin packaging](https://developers.openai.com/plugins/build/plugins) and [submission fields](https://developers.openai.com/plugins/deploy/submission#manifest-fields)
 - [OpenAI skill MCP dependencies](https://developers.openai.com/plugins/build/skills#connect-skills-to-mcp-tools)

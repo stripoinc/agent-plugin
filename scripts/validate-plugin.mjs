@@ -11,8 +11,8 @@ import {ROOT, PLUGIN, bundleSkills, generateMetadata, loadMetadata, readJson, re
 import {checkDirectoryAssets, checkPackageLimits} from './lib/directory-checks.mjs';
 
 // Generated at the plugin root, outside the inventoried bundle items. The package carries no
-// .mcp.json: the connect skill registers stripo-mcp with the organization's client ID.
-const PLUGIN_ROOT_FILES = [".claude-plugin/plugin.json", ".codex-plugin/plugin.json", ".generated"];
+// .mcp.json or mcp.json: the connect skill registers stripo-mcp with the organization's client ID.
+const PLUGIN_ROOT_FILES = [".claude-plugin/plugin.json", ".codex-plugin/plugin.json", "plugin.json", ".generated"];
 
 function requirePath(root, relative, kind = "file") {
   requireCondition(typeof relative === "string" && relative.startsWith("./"), `Expected a bundle-relative path: ${relative}`);
@@ -113,7 +113,7 @@ export function validatePlugin(root = ROOT) {
 if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) {
   try {
     const result = validatePlugin();
-    console.log(`Validated both manifest formats, package integrity, ${result.skills} skills and isolated SDK loading.`);
+    console.log(`Validated the Claude, Codex and portable manifests, package integrity, ${result.skills} skills and isolated SDK loading.`);
   } catch (error) {
     console.error(`validate-plugin: ${error.message}`);
     process.exitCode = 1;

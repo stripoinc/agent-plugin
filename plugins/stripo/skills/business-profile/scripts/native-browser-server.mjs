@@ -100,6 +100,30 @@ export function selectedNetworkProbeUrl(probe) {
              : '';
 }
 
+// Serialized into the page. Render only the already decoded resource, without
+// cropping it, modifying the document, or replacing the preserved source URL.
+export function declaredLogoPreview(image) {
+  try {
+    const scale = Math.min(1, 1024 / Math.max(image.naturalWidth, image.naturalHeight));
+    const canvas = document.createElement('canvas');
+    canvas.width = Math.max(1, Math.round(image.naturalWidth * scale));
+    canvas.height = Math.max(1, Math.round(image.naturalHeight * scale));
+    const context = canvas.getContext('2d');
+    if (!context) return {status:'unavailable',reason:'canvas-context-unavailable'};
+    context.drawImage(image, 0, 0, canvas.width, canvas.height);
+    const dataUrl = canvas.toDataURL('image/png');
+    if (!dataUrl.startsWith('data:image/png;base64,'))
+      return {status:'unavailable',reason:'canvas-encoding-unavailable'};
+    if (dataUrl.length > 2 * 1024 * 1024)
+      return {status:'unavailable',reason:'preview-over-cap'};
+    return {status:'captured',source:'decoded-image',mimeType:'image/png',
+      width:canvas.width,height:canvas.height,data:dataUrl.slice(dataUrl.indexOf(',') + 1)};
+  } catch (error) {
+    return {status:'unavailable',reason:error?.name === 'SecurityError'
+      ? 'cross-origin-canvas-blocked' : 'canvas-render-failed'};
+  }
+}
+
 export async function captureActionResult({
   kind,
   act,
@@ -151,7 +175,14 @@ export function prepareAssemblyFile(
   const assemblyFile = path.join(runRoot, 'assemble-brandkit.mjs');
   let created = false;
   try {
-    fs.copyFileSync(template, assemblyFile, fs.constants.COPYFILE_EXCL);
+    const source = fs.readFileSync(template, 'utf8');
+    const start = source.indexOf('// AUTHORING REGION START');
+    if (start < 0) throw Error('Packaged assembly authoring region is unavailable');
+    const names = 'readSelection, readCaptureOwner, readCaptureEvidence, readTextPair, color, typography, textColor, surface, button, productCta, writeKit';
+    const entry = `import fs from 'node:fs';\nimport path from 'node:path';\nimport {pathToFileURL} from 'node:url';\n`
+      + `import {${names}} from ${JSON.stringify(pathToFileURL(template).href)};\n`
+      + `export {${names}};\n\n` + source.slice(start);
+    fs.writeFileSync(assemblyFile, entry, {flag : 'wx'});
     created = true;
   } catch (error) {
     if (error?.code !== 'EEXIST')
@@ -519,6 +550,8 @@ export async function serveNativeBrowser({
         void stopController(error);
         throw stoppedError(error);
       }
+      if (r?.isError && (name === 'click' || name === 'hover'))
+        error.code = 'browser_action_failed';
       throw error;
     } finally {
       fs.appendFileSync(file('browser-calls.jsonl'), JSON.stringify({
@@ -852,6 +885,58 @@ export async function serveNativeBrowser({
         fs.rmSync(requestedFile, {force : true});
     }
   }
+  async function inspectDeclaredLogo(requestedUrl) {
+    const before = await pageState();
+    const declaration = await evaluate(
+        `()=>(${inspectElements.toString()})({mode:'declared-logos'})`, 'declared-logos');
+    const source = declaration.value?.logos?.find(row => row.url === requestedUrl);
+    if (!source || !sameState(before, await pageState(), declaration.value?.url))
+      throw Error('Logo URL is not an exact current-page JSON-LD logo declaration');
+    requireAllowedUrl(source.url, 'Declared logo resource URL');
+    const result = await evaluate(`async()=>{
+      const inspect=${inspectElements.toString()};
+      const image=new Image(); image.referrerPolicy='no-referrer';
+      await new Promise((resolve,reject)=>{
+        const timer=setTimeout(()=>{image.onload=null;image.onerror=null;image.src='';reject(Error('Declared logo image did not load within 8 seconds'))},8000);
+        image.onload=()=>{clearTimeout(timer);resolve()};
+        image.onerror=()=>{clearTimeout(timer);reject(Error('Declared logo image failed to decode'))};
+        image.src=${JSON.stringify(source.url)};
+      });
+      if(!image.naturalWidth||!image.naturalHeight)throw Error('Declared logo has no decoded image dimensions');
+      if(!inspect({mode:'declared-logos'}).logos.some(logo=>logo.url===${JSON.stringify(source.url)}&&logo.scriptIndex===${source.scriptIndex}&&logo.path===${JSON.stringify(source.path)}))
+        throw Error('JSON-LD logo declaration changed while loading the image');
+      const root=[...document.querySelectorAll('script[type="application/ld+json" i]')][${source.scriptIndex}];
+      return {measurement:inspect([],root),
+        context:{source:'JSON-LD logo declaration; image loaded separately without altering the document',images:[{src:image.currentSrc||image.src,naturalWidth:image.naturalWidth,naturalHeight:image.naturalHeight}]},
+        preview:(${declaredLogoPreview.toString()})(image),
+        image:{url:image.currentSrc||image.src,width:image.naturalWidth,height:image.naturalHeight}};
+    }`, 'declared-logo');
+    const after = await pageState();
+    if (!sameState(before, after, result.value.measurement?.url) || result.value.image?.url !== source.url)
+      throw Error('Page or declared logo resource changed during inspection');
+    const probe = {kind:'image-resource',status:'captured',currentSrc:source.url,diagnostics:[]};
+    const resource = await selectedNetworkResource(probe);
+    const artwork = await preserveSelectedArtwork(probe, {
+      runRoot: OUT, selectionFile: result.path, networkResource: resource,
+    });
+    const {data, ...decodedPreview} = result.value.preview ||
+      {status:'unavailable',reason:'decoded-preview-unavailable'};
+    const originalAvailable = resource?.status === 'captured' &&
+      ['image/png','image/jpeg','image/webp','image/gif'].includes(resource.contentType);
+    const preview = originalAvailable
+      ? {status:'captured',source:'network-response',mimeType:resource.contentType,
+          width:result.value.image.width,height:result.value.image.height}
+      : decodedPreview;
+    const document = {...result.value, preview, source, artwork};
+    fs.writeFileSync(result.path, JSON.stringify(document, null, 2));
+    const content = [text({file:result.path,source,artwork,image:document.image,preview,
+      state:{before:publicState(before),after:publicState(after)}})];
+    if (originalAvailable)
+      content.push({type:'image',mimeType:resource.contentType,data:resource.buffer.toString('base64')});
+    else if (preview.status === 'captured' && data)
+      content.push({type:'image',mimeType:'image/png',data});
+    return {content};
+  }
   async function prepareSelectedRegion(root, deadlineMs = 1500) {
     if (!root?.isConnected)
       throw Error('Selected target is no longer connected');
@@ -1176,11 +1261,11 @@ export async function serveNativeBrowser({
             {
               name : 'inspect',
               description :
-                  'Measure one exact CURRENT native snapshot ref in the current state. Pass only the bare ref, for example "1_394". This host requests no scrolling or readiness wait and captures no image. It returns the existing complete selected-root/text-owner measurement envelope and context accepted by readSelection. Use reveal when the view must deliberately change or visual corroboration is needed. No semantic role is selected.',
+                  'Inspect one exact CURRENT native ref, or pass logoUrl from the current capture page.declaredLogos to verify and preserve a declared JSON-LD brand logo. Supply exactly one of ref or logoUrl. Ref inspection requests no scrolling and captures no image. Declared-logo inspection loads only the exact site-declared permitted resource, returns decoded dimensions and available image bytes, and preserves source provenance without changing the homepage.',
               inputSchema : {
                 ...properties,
-                properties : {ref : {type : 'string'}},
-                required : [ 'ref' ]
+                properties : {ref : {type : 'string'}, logoUrl : {type : 'string'}},
+                oneOf : [{required:['ref']},{required:['logoUrl']}]
               }
             },
             {
@@ -1247,8 +1332,11 @@ export async function serveNativeBrowser({
       return observe();
     if (name === 'reveal')
       return reveal(requireBareRef(a.ref));
-    if (name === 'inspect')
-      return inspect(requireBareRef(a.ref));
+    if (name === 'inspect') {
+      if ((a.ref !== undefined) === (a.logoUrl !== undefined))
+        throw Error('Inspect requires exactly one of ref or logoUrl');
+      return a.logoUrl !== undefined ? inspectDeclaredLogo(a.logoUrl) : inspect(requireBareRef(a.ref));
+    }
     if (name === 'snapshot') {
       const before = await pageState(), s = await snapshot(),
             after = await pageState();
@@ -1335,6 +1423,9 @@ export async function serveNativeBrowser({
   }
   function safeHostError(error) {
     const envelope = {error : redact(error)};
+    if (error?.code === 'browser_action_failed' && !controllerFailure) {
+      envelope.recovery = 'Action outcome is unverified. Read a fresh snapshot before deciding what to do next; do not replay the uncertain action. Use current refs to reveal accessible homepage regions and continue missing evidence. A failed interaction does not establish that products, body copy or footer evidence are unavailable.';
+    }
     if (typeof error?.code === 'string' &&
         /^[a-z][a-z0-9_]{0,63}$/u.test(error.code))
       envelope.code = error.code;

@@ -5,7 +5,7 @@ import {promises as fs} from 'node:fs';
 import path from 'node:path';
 
 import {looksLikeSvgMarkup, svgPathPayloadFromMarkup} from './svg-path-extract.js';
-import {canonicalizeSvgForSafetyScan, SVG_DANGEROUS_PATTERNS, svgInnerMarkupIsUnsafe} from './svg-safety.js';
+import {canonicalizeSvgForSafetyScan, SVG_DANGEROUS_PATTERNS, svgInnerMarkupIsUnsafe, svgDocumentIsUnsafe} from './svg-safety.js';
 import {findFirstUnsafePublicString} from './unsafe-public-strings.js';
 
 export const LOGO_ASSET_MAX_BYTES = 256 * 1024;
@@ -78,8 +78,7 @@ export function isPubliclySafeSvgDocument(
     return false;
   const canonical = canonicalizeSvgForSafetyScan(markup);
   if (SVG_DANGEROUS_PATTERNS.some(x => x.regex.test(canonical))) return false;
-  return !svgInnerMarkupIsUnsafe(
-      markup.replace(/^\uFEFF?\s*<\?xml(?:\s[^?]*)?\?>/iu, ''));
+  return !svgDocumentIsUnsafe(markup);
 }
 
 export function svgPathSuppressionReason(markup, svgPath) {

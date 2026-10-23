@@ -1066,9 +1066,23 @@ def _validate_standalone_svg_document(svg: str) -> None:
     parser.ProcessingInstructionHandler = lambda _target, _data: reject(
         "document contains a processing instruction"
     )
-    parser.StartDoctypeDeclHandler = lambda *_args: reject(
-        "document contains a doctype declaration"
-    )
+    def check_doctype(
+        name: str, system_id: str | None, public_id: str | None, internal: int
+    ) -> None:
+        # Match the producer's narrow SVG 1.1 declaration allowance. Expat
+        # never resolves the DTD; custom declarations/entities stay refused.
+        if (
+            name != "svg"
+            or internal
+            or public_id != "-//W3C//DTD SVG 1.1//EN"
+            or system_id not in {
+                "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd",
+                "https://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd",
+            }
+        ):
+            reject("document contains an unsupported doctype declaration")
+
+    parser.StartDoctypeDeclHandler = check_doctype
     parser.EntityDeclHandler = lambda *_args: reject(
         "document contains an entity declaration"
     )
@@ -1428,6 +1442,8 @@ class LogoAssetEvidence:
     # finalizer may convert and upload.
     verified_raster_assets: tuple[VerifiedLogoRasterAsset, ...] = ()
     verified_over_cap_svg_assets: tuple[VerifiedLogoSvgAsset, ...] = ()
+    # Diagnostic codes only. These never authorize a URL or asset.
+    capture_rejections: tuple[tuple[str, str], ...] = ()
 
 def _logo_asset_evidence_from_payloads(
     logo_assets: Any,
@@ -1520,6 +1536,15 @@ def _logo_asset_evidence_from_payloads(
         else:
             authorized_inline_svg_hashes.add(sidecar.svg_path_sha256)
 
+    capture_rejections: list[tuple[str, str]] = []
+    skipped = logo_assets.get("skipped") if isinstance(logo_assets, dict) else None
+    for row in skipped if isinstance(skipped, list) else []:
+        if not isinstance(row, dict):
+            continue
+        url, reason = _exact_public_asset_url(row.get("url")), row.get("reason")
+        if url and isinstance(reason, str) and re.fullmatch(r"[a-z][a-z0-9-]{0,79}", reason):
+            capture_rejections.append((url, reason))
+
     return LogoAssetEvidence(
         authorized_urls=frozenset(authorized_urls),
         authorized_svg_bindings=frozenset(authorized_svg_bindings),
@@ -1527,6 +1552,7 @@ def _logo_asset_evidence_from_payloads(
         verified_svg_assets=tuple(verified_svg_assets),
         verified_raster_assets=tuple(verified_raster_assets),
         verified_over_cap_svg_assets=tuple(verified_over_cap_svg_assets),
+        capture_rejections=tuple(dict.fromkeys(capture_rejections)),
     )
 
 def load_logo_asset_evidence(technical_dir: Path) -> LogoAssetEvidence:

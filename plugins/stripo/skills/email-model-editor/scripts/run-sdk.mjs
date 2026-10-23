@@ -1,7 +1,7 @@
 // src/skill-scripts/email-model-editor/run-sdk.ts
 import path2 from "node:path";
 import { pathToFileURL as pathToFileURL2 } from "node:url";
-import { isDeepStrictEqual } from "node:util";
+import { isDeepStrictEqual as isDeepStrictEqual2 } from "node:util";
 import { rmSync as rmSync2 } from "node:fs";
 
 // src/skill-scripts/shared/runtime.ts
@@ -380,6 +380,49 @@ function summarizeEditorJson(value) {
   return summary;
 }
 
+// src/skill-scripts/shared/change-report.ts
+import { isDeepStrictEqual } from "node:util";
+function changeReport(before, after) {
+  const changes = [];
+  let count2 = 0;
+  let truncated = false;
+  const preview = (value) => {
+    if (typeof value === "string" && value.length > 160) {
+      truncated = true;
+      return value.slice(0, 160) + "\u2026";
+    }
+    if (value !== null && typeof value === "object") {
+      truncated = true;
+      return Array.isArray(value) ? { type: "array", length: value.length } : { type: "object", keys: Object.keys(value).slice(0, 8) };
+    }
+    return value;
+  };
+  function walk(a, b, pointer) {
+    if (isDeepStrictEqual(a, b)) return;
+    if (a !== null && b !== null && typeof a === "object" && typeof b === "object" && Array.isArray(a) === Array.isArray(b)) {
+      const left = a;
+      const right = b;
+      for (const key of /* @__PURE__ */ new Set([...Object.keys(left), ...Object.keys(right)])) {
+        walk(Object.hasOwn(left, key) ? left[key] : void 0, Object.hasOwn(right, key) ? right[key] : void 0, pointer + "/" + key.replaceAll("~", "~0").replaceAll("/", "~1"));
+      }
+      return;
+    }
+    count2 += 1;
+    if (changes.length === 40) {
+      truncated = true;
+      return;
+    }
+    changes.push({
+      path: pointer,
+      operation: a === void 0 ? "add" : b === void 0 ? "remove" : "replace",
+      ...a === void 0 ? {} : { before: preview(a) },
+      ...b === void 0 ? {} : { after: preview(b) }
+    });
+  }
+  walk(before, after, "");
+  return { count: count2, changes, truncated };
+}
+
 // src/skill-scripts/email-model-editor/run-sdk.ts
 function isEditorJson(value) {
   return isObject(value) && isObject(value.settings) && (value.stripes === void 0 || Array.isArray(value.stripes));
@@ -496,9 +539,9 @@ async function main() {
       if ((sdkDiagnostics?.selectorMisses.length ?? 0) > 0) {
         throw new Error(`Edit recorded ${sdkDiagnostics?.selectorMisses.length} selector miss(es).`);
       }
-      if (isDeepStrictEqual(inputJson, resultJson)) throw new Error("Requested SDK mutations produced no document change.");
+      if (isDeepStrictEqual2(inputJson, resultJson)) throw new Error("Requested SDK mutations produced no document change.");
       if (inputSummary?.counts.blocks === 0) {
-        if (!isDeepStrictEqual(
+        if (!isDeepStrictEqual2(
           { ...inputJson, metadata: void 0 },
           { ...resultJson, metadata: void 0 }
         )) throw new Error("Edits to a model without blocks must only change metadata.");
@@ -514,6 +557,7 @@ async function main() {
       outputPath,
       sdkPath,
       changed: inputJson === void 0 ? true : JSON.stringify(inputJson) !== JSON.stringify(resultJson),
+      changes: inputJson === void 0 ? void 0 : changeReport(inputJson, resultJson),
       inputSummary,
       outputSummary,
       sdkDiagnostics,
@@ -527,7 +571,10 @@ async function main() {
       outputPath,
       diagnosticsPath,
       changed: diagnostics.changed,
-      counts: outputSummary.counts
+      counts: outputSummary.counts,
+      validation,
+      sdkDiagnostics,
+      changes: diagnostics.changes
     }));
   } catch (error) {
     rmSync2(outputPath, { force: true });

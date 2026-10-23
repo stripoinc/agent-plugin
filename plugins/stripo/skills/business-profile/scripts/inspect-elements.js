@@ -6,6 +6,52 @@ import { pathToFileURL } from "node:url";
 // paths here gives targeted and page capture one physical measurement policy.
 export function inspectElements(request, nativeTarget = null) {
   const compact = (text) => String(text || "").replace(/\s+/gu, " ").trim();
+  // These are explicit site declarations, not rendered logo selections. Keep
+  // their source separate until the host verifies an agent-selected resource.
+  const declaredLogos = () => {
+    const logos = [], seen = new Set();
+    let visited = 0, totalChars = 0;
+    const scripts = [...document.querySelectorAll('script[type="application/ld+json" i]')].slice(0, 32);
+    const siteTypes = new Set(['Organization', 'Brand', 'Corporation', 'LocalBusiness', 'Store', 'OnlineStore']);
+    const visit = (value, scriptIndex, path, depth) => {
+      if (!value || typeof value !== 'object' || depth > 8 || ++visited > 2048 || logos.length >= 8) return;
+      if (Array.isArray(value)) {
+        value.slice(0, 128).forEach((item, index) => visit(item, scriptIndex, `${path}[${index}]`, depth + 1));
+        return;
+      }
+      const types = (Array.isArray(value['@type']) ? value['@type'] : [value['@type']])
+        .filter(type => typeof type === 'string').map(type => type.replace(/^https?:\/\/schema\.org\//u, ''));
+      if (types.some(type => siteTypes.has(type))) {
+        const values = Array.isArray(value.logo) ? value.logo.slice(0, 8) : [value.logo];
+        for (const logo of values) {
+          const raw = typeof logo === 'string' ? logo : logo?.url || logo?.contentUrl;
+          if (typeof raw !== 'string' || raw.length > 4096) continue;
+          try {
+            const url = new URL(raw, location.href);
+            if (!['http:', 'https:'].includes(url.protocol) || url.username || url.password || seen.has(url.href)) continue;
+            seen.add(url.href);
+            logos.push({url: url.href, source: 'json-ld-logo', scriptIndex, path: `${path}.logo`,
+              organizationName: compact(value.name).slice(0, 200),
+              organizationUrl: typeof value.url === 'string' ? value.url.slice(0, 4096) : null});
+            if (logos.length >= 8) break;
+          } catch { /* malformed declarations grant no resource */ }
+        }
+      }
+      for (const [key, child] of Object.entries(value).slice(0, 128)) {
+        if (key !== 'logo') visit(child, scriptIndex, `${path}.${key}`, depth + 1);
+      }
+    };
+    scripts.forEach((script, index) => {
+      const raw = script.textContent || '';
+      totalChars += raw.length;
+      if (raw.length > 262144 || totalChars > 1048576) return;
+      try { visit(JSON.parse(raw), index, '$', 0); } catch { /* one bad block must not hide another */ }
+    });
+    return logos;
+  };
+  if (request?.mode === 'declared-logos') {
+    return {url: location.href, logos: declaredLogos()};
+  }
   const finite = (value) => Number.isFinite(value) ? value : null;
   const box = (rect) => ({
     x: finite(rect?.x), y: finite(rect?.y),
@@ -433,6 +479,7 @@ export function inspectElements(request, nativeTarget = null) {
     identityScope: "Capture-local n-prefixed IDs; these are not native snapshot references.",
     page: {
       url: location.href, title: document.title, language: document.documentElement.lang || null,
+      declaredLogos: declaredLogos(),
       startedAt, capturedAt: new Date().toISOString(), readyState: document.readyState,
       viewport: { width: window.innerWidth, height: window.innerHeight, devicePixelRatio: window.devicePixelRatio },
       scroll: { x: window.scrollX, y: window.scrollY },

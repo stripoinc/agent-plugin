@@ -113,7 +113,19 @@ const SVG_FRAGMENT_WRAPPER_START =
     '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">';
 const SVG_ASCII_XML_NAME_RE = /^[A-Za-z_][A-Za-z0-9_.:-]*$/;
 
+// Saxes does not load external DTDs. Permit only the standard inert SVG 1.1
+// declaration; custom DTDs and internal subsets remain refused.
+const SVG_11_DOCTYPE = /^\s*svg\s+PUBLIC\s+(['"])-\/\/W3C\/\/DTD SVG 1\.1\/\/EN\1\s+(['"])https?:\/\/www\.w3\.org\/Graphics\/SVG\/1\.1\/DTD\/svg11\.dtd\2\s*$/u;
+
 export function svgInnerMarkupIsUnsafe(svg) {
+  return svgMarkupIsUnsafe(svg, false);
+}
+
+export function svgDocumentIsUnsafe(svg) {
+  return svgMarkupIsUnsafe(svg, true);
+}
+
+function svgMarkupIsUnsafe(svg, document) {
   if (typeof svg !== "string")
     return true;
   let failed = false;
@@ -130,9 +142,18 @@ export function svgInnerMarkupIsUnsafe(svg) {
             .some((name) => !SVG_ASCII_XML_NAME_RE.test(name))) {
       failed = true;
     }
+    if (document && openElements.length === 0 && tag.name !== "svg") {
+      failed = true;
+    }
     openElements.push(tag.name.toLowerCase());
   });
   parser.on("closetag", () => { openElements.pop(); });
+  parser.on("doctype", declaration => {
+    if (!document || !SVG_11_DOCTYPE.test(declaration)) failed = true;
+  });
+  parser.on("xmldecl", declaration => {
+    if (declaration.encoding && !/^utf-8$/iu.test(declaration.encoding)) failed = true;
+  });
   parser.on("processinginstruction", () => { unsafeHtmlEmbedding = true; });
   parser.on("cdata", () => {
     if (openElements.some((name) => name === "title" || name === "desc")) {
@@ -140,7 +161,7 @@ export function svgInnerMarkupIsUnsafe(svg) {
     }
   });
   try {
-    parser.write(`${SVG_FRAGMENT_WRAPPER_START}${svg}</svg>`).close();
+    parser.write(document ? svg : `${SVG_FRAGMENT_WRAPPER_START}${svg}</svg>`).close();
   } catch {
     return true;
   }

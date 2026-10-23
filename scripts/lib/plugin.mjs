@@ -13,6 +13,11 @@ export const SYNCED_ITEMS = ["skills", "packages", "mcp-tools.json", "bundle.jso
 export const REPOSITORY_SKILLS = "skills";
 export const USER_CONFIG_TYPES = ["string", "number", "boolean", "directory", "file"];
 export const CLAUDE_DIRECTORY_FIELDS = ['icon', 'documentationUrl', 'supportUrl', 'privacyPolicyUrl', 'termsOfServiceUrl'];
+// The same listing pages under OpenAI's interface field names.
+export const CODEX_LISTING_URLS = {supportUrl: 'supportURL', privacyPolicyUrl: 'privacyPolicyURL', termsOfServiceUrl: 'termsOfServiceURL'};
+export const AGENT_PLUGINS_SCHEMA = "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json";
+// OpenAI's public submission limits for the listing text.
+export const CODEX_TEXT_LIMITS = {displayName: 30, shortDescription: 30, longDescription: 4000};
 
 export function requireCondition(condition, message) {
   if (!condition) throw new Error(message);
@@ -45,10 +50,19 @@ export function loadMetadata(root = ROOT) {
     marketplaceName: metadata.marketplace?.name,
     marketplaceDescription: metadata.marketplace?.description,
     marketplaceCategory: metadata.marketplace?.category,
-    displayName: metadata.codexInterface?.displayName,
+    displayName: metadata.displayName,
+    shortDescription: metadata.codexInterface?.shortDescription,
     longDescription: metadata.codexInterface?.longDescription,
     codexCategory: metadata.codexInterface?.category,
   })) requireCondition(typeof value === "string" && value.trim().length > 0, `${METADATA}: ${label} is required.`);
+  for (const [field, limit] of Object.entries(CODEX_TEXT_LIMITS)) {
+    const value = field === "displayName" ? metadata.displayName : metadata.codexInterface[field];
+    requireCondition(value.length <= limit, `${METADATA}: ${field} must be at most ${limit} characters.`);
+  }
+  // The generator derives these from top-level metadata, so the interface must not repeat them.
+  for (const field of ["displayName", "developerName", "websiteURL", ...Object.values(CODEX_LISTING_URLS)]) {
+    requireCondition(!(field in metadata.codexInterface), `${METADATA}: codexInterface.${field} is generated; set it at the top level or in claudeDirectory.`);
+  }
   for (const field of ["homepage", "repository"]) {
     requireCondition(typeof metadata[field] === "string" && new URL(metadata[field]).protocol === "https:", `${METADATA}: ${field} must be an HTTPS URL.`);
   }
@@ -58,6 +72,8 @@ export function loadMetadata(root = ROOT) {
     capabilities: metadata.codexInterface.capabilities,
     defaultPrompt: metadata.codexInterface.defaultPrompt,
   })) requireCondition(Array.isArray(values) && values.length > 0 && values.every((value) => typeof value === "string" && value.trim()), `${METADATA}: invalid ${label}.`);
+  requireCondition(metadata.codexInterface.capabilities.length <= 20 && metadata.codexInterface.capabilities.every((value) => value.length <= 120), `${METADATA}: at most 20 capabilities of up to 120 characters.`);
+  requireCondition(metadata.codexInterface.defaultPrompt.length <= 3 && metadata.codexInterface.defaultPrompt.every((value) => value.length <= 128), `${METADATA}: at most 3 default prompts of up to 128 characters.`);
   requireCondition(["AVAILABLE", "INSTALLED_BY_DEFAULT", "NOT_AVAILABLE"].includes(metadata.marketplace.policy?.installation), "Invalid marketplace installation policy.");
   requireCondition(metadata.marketplace.policy?.authentication === "ON_INSTALL", "The Stripo marketplace uses ON_INSTALL authentication.");
   const dependency = metadata.mcpDependency;
@@ -162,29 +178,40 @@ function obsoleteRepositorySkillPaths(root, files) {
 }
 
 export function generatedFiles(root = ROOT, metadata = loadMetadata(root), {fromBundleSync = false} = {}) {
-  const {name, version, description, author, homepage, repository, keywords, marketplace, codexInterface} = metadata;
+  const {name, displayName, version, description, author, homepage, repository, keywords, marketplace, codexInterface} = metadata;
   const shared = {name, version, description, author, homepage, repository, ...(metadata.license ? {license: metadata.license} : {}), keywords};
+  const listingUrls = Object.fromEntries(Object.entries(CODEX_LISTING_URLS)
+    .filter(([field]) => metadata.claudeDirectory?.[field]).map(([field, codexField]) => [codexField, metadata.claudeDirectory[field]]));
+  const codexListing = {displayName, ...codexInterface, developerName: author.name, websiteURL: homepage, ...listingUrls};
   const files = new Map([
     // Claude Code prompts for userConfig at install; Codex runs the onboarding skill as the plugin's setup step.
-    [`${PLUGIN}/.claude-plugin/plugin.json`, json({...shared, ...metadata.claudeDirectory, userConfig: metadata.userConfig})],
+    [`${PLUGIN}/.claude-plugin/plugin.json`, json({name, displayName, ...shared, ...metadata.claudeDirectory, userConfig: metadata.userConfig})],
+    // The portable Agent Plugins manifest OpenAI recommends; Claude Code reads .claude-plugin/ instead.
+    [`${PLUGIN}/plugin.json`, json({
+      $schema: AGENT_PLUGINS_SCHEMA,
+      ...shared,
+      extensions: {"com.openai": {interface: codexListing, onboardingSkill: metadata.onboardingSkill}},
+    })],
+    // Codex compatibility manifest for clients that predate the portable root manifest.
     [`${PLUGIN}/.codex-plugin/plugin.json`, json({
       ...shared,
       skills: "./skills/",
       extensions: {"com.openai": {onboardingSkill: metadata.onboardingSkill}},
-      interface: {...codexInterface, shortDescription: description, developerName: author.name, websiteURL: homepage},
+      interface: codexListing,
     })],
+    // The version lives only in plugin.json: Claude Code reads it first, and a second copy can drift.
     [".claude-plugin/marketplace.json", json({
       name: marketplace.name,
       owner: {name: author.name},
       metadata: {description: marketplace.description},
-      plugins: [{name, source: `./${PLUGIN}`, description, version, category: marketplace.category, keywords}],
+      plugins: [{name, source: `./${PLUGIN}`, description, category: marketplace.category, keywords}],
     })],
     [".agents/plugins/marketplace.json", json({
       name: marketplace.name,
-      interface: {displayName: codexInterface.displayName},
+      interface: {displayName},
       plugins: [{name, source: {source: "local", path: `./${PLUGIN}`}, policy: marketplace.policy, category: codexInterface.category}],
     })],
-    [`${PLUGIN}/.generated`, "Generated distribution; do not edit packaged files directly.\nBundled skills, SDK and bundle provenance: convo-email-agent, via scripts/sync-bundle.mjs.\nRepository skills: skills/. Host files: host/. Manifests, user configuration, onboarding skill and MCP dependency: plugin-metadata.json.\nRun npm run generate after metadata, skill or host changes. See the root README for releases.\n"],
+    [`${PLUGIN}/.generated`, "Generated distribution; do not edit packaged files directly.\nBundled skills, SDK and bundle provenance: convo-email-agent, via scripts/sync-bundle.mjs.\nRepository skills: skills/. Host files: host/. Manifests (.claude-plugin/, .codex-plugin/ and plugin.json), user configuration, onboarding skill and MCP dependency: plugin-metadata.json.\nRun npm run generate after metadata, skill or host changes. See the root README for releases.\n"],
   ]);
   for (const [destination, source] of Object.entries(metadata.packageFiles)) {
     files.set(`${PLUGIN}/${destination}`, readFileSync(path.join(root, source)));

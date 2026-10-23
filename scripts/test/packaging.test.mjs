@@ -67,8 +67,11 @@ test("packaged email skills expose image tools with matching host and provider c
   for (const skill of ["email-from-reference", "email-model-editor"]) {
     const directory = path.join(ROOT, PLUGIN, "skills", skill);
     assert.equal(readFileSync(path.join(directory, "HOST.md"), "utf8"), host);
+    // PROVIDER.md routes image work to its stage reference, which names the tools.
     const provider = readFileSync(path.join(directory, "PROVIDER.md"), "utf8");
-    for (const tool of Object.values(imageTools)) assert.ok(provider.includes(`\`${tool}\``));
+    assert.ok(provider.includes("(reference/stripo-images.md)"));
+    const images = readFileSync(path.join(directory, "reference/stripo-images.md"), "utf8");
+    for (const tool of Object.values(imageTools)) assert.ok(images.includes(`\`${tool}\``));
     assert.doesNotMatch(readFileSync(path.join(directory, "SKILL.md"), "utf8"), /Do not generate image|no asset-upload or image-generation tool/u);
   }
 });
@@ -192,6 +195,10 @@ test("metadata rejects a bundled MCP server, malformed user configuration and an
   attempt({onboardingSkill: "./skills/missing/SKILL.md"}, /onboardingSkill/u);
   attempt({onboardingSkill: "./skills/connect"}, /onboardingSkill/u);
   attempt({onboardingSkill: undefined}, /onboardingSkill/u);
+  attempt({displayName: "S".repeat(31)}, /displayName must be at most 30 characters/u);
+  attempt({codexInterface: {...metadata.codexInterface, shortDescription: "Create and edit emails and templates"}}, /shortDescription must be at most 30 characters/u);
+  attempt({codexInterface: {...metadata.codexInterface, supportURL: "https://example.com"}}, /codexInterface\.supportURL is generated/u);
+  attempt({codexInterface: {...metadata.codexInterface, defaultPrompt: ["a", "b", "c", "d"]}}, /at most 3 default prompts/u);
 });
 
 test("validation rejects divergent marketplace metadata and repairs it from the source", (t) => {
@@ -251,13 +258,26 @@ test('directory metadata and assets survive generation without Claude fields lea
   assert.equal(codex.license, metadata.license);
   assert.equal(codex.icon, undefined);
   assert.equal(codex.documentationUrl, undefined);
-  assert.equal(readJson(root, `${PLUGIN}/.claude-plugin/plugin.json`).icon, metadata.claudeDirectory.icon);
+  // The listing pages reach Codex under OpenAI's field names; the portable manifest carries the same interface.
+  assert.equal(codex.interface.supportURL, metadata.claudeDirectory.supportUrl);
+  assert.equal(codex.interface.privacyPolicyURL, metadata.claudeDirectory.privacyPolicyUrl);
+  assert.equal(codex.interface.termsOfServiceURL, metadata.claudeDirectory.termsOfServiceUrl);
+  assert.equal(codex.interface.displayName, metadata.displayName);
+  const portable = readJson(root, `${PLUGIN}/plugin.json`);
+  assert.match(portable.$schema, /agent-plugins\.org/u);
+  assert.deepEqual(portable.extensions['com.openai'].interface, codex.interface);
+  assert.equal(portable.extensions['com.openai'].onboardingSkill, metadata.onboardingSkill);
+  const claude = readJson(root, `${PLUGIN}/.claude-plugin/plugin.json`);
+  assert.equal(claude.icon, metadata.claudeDirectory.icon);
+  assert.equal(claude.displayName, metadata.displayName);
+  assert.equal(readJson(root, '.claude-plugin/marketplace.json').plugins[0].version, undefined);
   assert.ok(readJson(root, 'bundle-integrity.json').files['README.md']);
   assert.ok(readJson(root, 'bundle-integrity.json').files.LICENSE);
   const incomplete = {...metadata, license: undefined, claudeDirectory: {}};
   writeFileSync(path.join(root, 'plugin-metadata.json'), json(incomplete));
   generateMetadata(root);
-  assert.equal(checkDirectoryAssets(root, incomplete).length, 2);
+  assert.equal(readJson(root, `${PLUGIN}/plugin.json`).extensions['com.openai'].interface.supportURL, undefined);
+  assert.equal(checkDirectoryAssets(root, incomplete).length, 3);
   assert.throws(() => validatePlugin(root), /Directory readiness is blocked/u);
 });
 
@@ -383,6 +403,8 @@ test("release sync regenerates dependency declarations and rejects downgrades be
   }
   // A real upstream bundle does not carry the repository skills; the generator packages them again.
   rmSync(path.join(upstream, "skills", "connect"), {recursive: true});
+  // Upstream bundles also carry the Reteno agent's prompt file, which the public package drops.
+  writeFileSync(path.join(upstream, "skills/email-model-editor/agents/claude.yaml"), "interface:\n  display_name: Reteno only\n");
   const before = readFileSync(path.join(root, "plugin-metadata.json"), "utf8");
   const run = (version, extra = []) => spawnSync(process.execPath, [path.join(root, "scripts/sync-bundle.mjs"), "--bundle", upstream, "--version", version, ...extra], {cwd: root, encoding: "utf8"});
   const rejected = run("0.5.0");
@@ -393,6 +415,8 @@ test("release sync regenerates dependency declarations and rejects downgrades be
   assert.equal(released.status, 0, released.stderr);
   assert.equal(readJson(root, "plugin-metadata.json").version, "0.6.2");
   assert.equal(readJson(root, `${PLUGIN}/.codex-plugin/plugin.json`).version, "0.6.2");
+  assert.equal(readJson(root, `${PLUGIN}/plugin.json`).version, "0.6.2");
+  assert.equal(existsSync(path.join(root, PLUGIN, "skills/email-model-editor/agents/claude.yaml")), false);
   assert.equal(readFileSync(path.join(root, PLUGIN, "skills/connect/SKILL.md"), "utf8"), readFileSync(path.join(root, "skills/connect/SKILL.md"), "utf8"));
   assert.equal(run('0.6.2').status, 1);
   const rebuilt = run('0.6.2', ['--base', base]);

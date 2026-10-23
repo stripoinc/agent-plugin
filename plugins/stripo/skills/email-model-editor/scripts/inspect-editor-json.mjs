@@ -75,6 +75,56 @@ async function validateEditorJson(emailJson, sdkPath, options = {}) {
   }
 }
 
+// src/skill-scripts/shared/sdk-method-reference.ts
+import { readFileSync as readFileSync2 } from "node:fs";
+import path2 from "node:path";
+var METHODS_BY_TYPE = {
+  text: ["setText", "setContent", "setHtml", "replaceText", "setTextLink"],
+  button: ["setText", "setHref", "setLink", "setTitle"],
+  image: ["setSrc", "setHref", "setLink", "setAlt", "setTitle"],
+  html: ["setHtml", "setContent"],
+  menu: ["setMenuMode", "addMenuItem", "updateMenuItem", "removeMenuItem", "moveMenuItem", "setMenuItem", "setMenuShared"],
+  social: ["setSocialNetwork", "addSocialNetwork", "removeSocialNetwork", "moveSocialNetwork", "setSocialShared"],
+  spacer: ["setSpacerMode"]
+};
+function sdkMethodReference(sdkPath, blockTypes) {
+  const declarationsPath = path2.join(path2.dirname(sdkPath), "sdk/types.d.ts");
+  const declarations = readFileSync2(declarationsPath, "utf8");
+  function signatures(owner, methods) {
+    const body = declarations.match(new RegExp(String.raw`export interface ${owner} \{([\s\S]*?)^\}`, "m"))?.[1];
+    if (!body) throw new Error(`Packaged SDK declaration missing: ${owner}`);
+    return methods.map((name) => {
+      const start = body.search(new RegExp(String.raw`^\s*${name}[<(]`, "m"));
+      const candidate = start < 0 ? "" : body.slice(start).trimStart();
+      let depth = 0;
+      let quote = "";
+      for (let index = 0; index < Math.min(candidate.length, 500); index++) {
+        const character = candidate[index];
+        if (quote) {
+          if (character === "\\") index++;
+          else if (character === quote) quote = "";
+        } else if (character === '"' || character === "'" || character === "`") {
+          quote = character;
+        } else if ("({[".includes(character)) {
+          depth++;
+        } else if (")}]".includes(character)) {
+          if (--depth < 0) break;
+        } else if (character === ";" && depth === 0) {
+          return candidate.slice(0, index + 1);
+        }
+      }
+      throw new Error(`Unsupported packaged SDK signature: ${owner}.${name}`);
+    });
+  }
+  return {
+    declarationsPath,
+    selectors: signatures("EmailDocument", ["block", "byId", "one", "select"]),
+    common: signatures("EmailNode", ["inspect", "describe", "patchSettings", "resetSettings", "setStyle", "remove", "repeat"]),
+    byBlockType: Object.fromEntries([...new Set(blockTypes)].sort().filter((type) => Object.hasOwn(METHODS_BY_TYPE, type)).map((type) => [type, signatures("EmailNode", METHODS_BY_TYPE[type])])),
+    note: "Reference signatures are not capability or scope approval. Use node.describe() and the full declarations for settings, argument types or unlisted operations; preserve validation and saved-state checks."
+  };
+}
+
 // src/sdk/model-utils.ts
 function isObject2(value) {
   return value !== null && typeof value === "object" && !Array.isArray(value);
@@ -349,11 +399,13 @@ async function main(argv = process.argv.slice(2)) {
   const outputPath = optionalString(args, "output");
   const sdkPath = resolveSdkDist();
   const emailJson = readJson(inputPath);
+  const summary = summarizeEditorJson(emailJson);
   const result = {
     inputPath,
     sdkPath,
     schema: await validateEditorJson(emailJson, sdkPath, { current: emailJson }),
-    summary: summarizeEditorJson(emailJson)
+    summary,
+    sdkMethods: sdkMethodReference(sdkPath, Object.keys(summary.blockTypes))
   };
   if (outputPath) writeJson(outputPath, result);
   console.log(JSON.stringify({
@@ -362,7 +414,10 @@ async function main(argv = process.argv.slice(2)) {
     schemaValid: result.schema.valid,
     metadata: result.summary.metadata,
     counts: result.summary.counts,
-    blockTypes: result.summary.blockTypes
+    blockTypes: result.summary.blockTypes,
+    inventories: result.summary.inventories,
+    limitations: result.summary.limitations,
+    sdkMethods: result.sdkMethods
   }));
   if (!result.schema.valid) process.exitCode = 1;
 }

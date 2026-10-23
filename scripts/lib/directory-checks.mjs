@@ -73,6 +73,9 @@ export function checkDirectoryAssets(root, metadata) {
     requireCondition(width === height && width >= 512 && width <= 2048, 'Listing icon must be square, 512–2048 px.');
     requireCondition(format === 'png' ? /\.png$/iu.test(icon) : /\.jpe?g$/iu.test(icon), 'Listing icon extension does not match its contents.');
   }
+  // Both directories list support, privacy and terms pages; OpenAI requires them for MCP review.
+  const pages = ['supportUrl', 'privacyPolicyUrl', 'termsOfServiceUrl'].filter(field => !metadata.claudeDirectory?.[field]);
+  if (pages.length) missing.push(`listing URLs: ${pages.join(', ')}`);
   const claude = readJson(root, `${PLUGIN}/.claude-plugin/plugin.json`);
   requireCondition(claude.license === metadata.license && claude.icon === icon, 'Directory metadata differs from plugin-metadata.json.');
   return missing;

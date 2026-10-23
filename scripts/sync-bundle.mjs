@@ -10,10 +10,10 @@
  * --allow-dirty  accept a bundle built from an uncommitted checkout (local testing only)
  *
  * The script replaces skills/, packages/, mcp-tools.json and bundle.json under plugins/stripo,
- * adds the host paths paragraph to the SKILL.md files that carry the placeholders, installs the
- * host files beside each skill, checks that the SDK loads from its new location, and updates
- * plugin-metadata.json. The shared generator refreshes both manifests, both marketplaces,
- * MCP dependency declarations and bundle-integrity.json.
+ * adds the host paths paragraph to the SKILL.md files that carry the placeholders, drops the
+ * Reteno-only agents/claude.yaml, installs the host files beside each skill, checks that the SDK
+ * loads from its new location, and updates plugin-metadata.json. The shared generator refreshes
+ * the three manifests, both marketplaces, MCP dependency declarations and bundle-integrity.json.
  *
  * Host files come from host/: a skill with a host/<skill>/ directory gets that directory copied
  * over it (HOST.md plus any helper the skill calls by path), and every other skill gets the
@@ -156,6 +156,9 @@ async function main() {
   }
   for (const skill of manifest.skills) {
     addHostParagraph(path.join(PLUGIN, "skills", skill, "SKILL.md"));
+    // agents/claude.yaml carries the Reteno agent's default prompt. Claude Code reads only
+    // SKILL.md, so the public package leaves the file out.
+    rmSync(path.join(PLUGIN, "skills", skill, "agents", "claude.yaml"), {force: true});
   }
   await checkSdk(manifest.skills.filter((skill) => existsSync(path.join(PLUGIN, "skills", skill, "scripts"))));
   const nextMetadata = {...metadata, version};

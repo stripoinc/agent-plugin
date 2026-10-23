@@ -449,6 +449,11 @@
       ],
       "properties": {
         "backgroundColor": { "$ref": "#/$defs/colorOrNull" },
+        "backdropColor": {
+          "type": ["string", "null"],
+          "pattern": "^#[0-9A-Fa-f]{6}$",
+          "description": "Explicitly selected opaque solid background behind this control in its observed default state, distinct from its own backgroundColor. Not a computed effective color or a hover measurement; omit unresolved context."
+        },
         "fontColor": { "$ref": "#/$defs/colorOrNull" },
         "borderColor": { "type": "string" },
         "borderWidth": { "type": "number" },
@@ -509,6 +514,11 @@
           "description": "Whether this selected control has measured visible text and a decorative inline glyph. Null means unavailable. This does not choose an email variant; the agent decides the representative structure."
         },
         "backgroundColor": { "$ref": "#/$defs/colorOrNull" },
+        "backdropColor": {
+          "type": ["string", "null"],
+          "pattern": "^#[0-9A-Fa-f]{6}$",
+          "description": "Explicitly selected opaque solid background behind this control in its observed default state, distinct from its own backgroundColor. Not a computed effective color or a hover measurement; omit unresolved context."
+        },
         "backgroundColorState": { "$ref": "#/$defs/colorMeasurementState" },
         "fontColor": { "$ref": "#/$defs/colorOrNull" },
         "fontColorState": { "$ref": "#/$defs/colorMeasurementState" },

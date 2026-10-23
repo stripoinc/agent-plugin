@@ -1,0 +1,45 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "stripo",
+  "version": "0.11.0",
+  "description": "Create and edit emails and templates with Stripo.",
+  "author": {
+    "name": "Stripo",
+    "url": "https://stripo.email"
+  },
+  "homepage": "https://stripo.email",
+  "repository": "https://github.com/stripoinc/agent-plugin",
+  "license": "LicenseRef-Stripo-Agent-Plugin-1.0",
+  "keywords": [
+    "stripo",
+    "email",
+    "email-template",
+    "mcp"
+  ],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Stripo",
+        "shortDescription": "Create and edit Stripo emails",
+        "longDescription": "Create emails from a brief, template, HTML or screenshot. Generate and edit images, update text, links and styles in existing emails and templates, and review desktop and mobile previews. The connect skill registers the Stripo MCP server with your organization's Client ID.",
+        "category": "Productivity",
+        "capabilities": [
+          "Read",
+          "Write"
+        ],
+        "defaultPrompt": [
+          "Create a new Stripo email from this description",
+          "Change the copy, links or images in an existing Stripo email"
+        ],
+        "logo": "./assets/stripo-icon.jpeg",
+        "composerIcon": "./assets/stripo-icon.jpeg",
+        "developerName": "Stripo",
+        "websiteURL": "https://stripo.email",
+        "supportURL": "https://support.stripo.email",
+        "privacyPolicyURL": "https://stripo.email/privacy-policy/",
+        "termsOfServiceURL": "https://stripo.email/terms-of-use/"
+      },
+      "onboardingSkill": "./skills/connect/SKILL.md"
+    }
+  }
+}

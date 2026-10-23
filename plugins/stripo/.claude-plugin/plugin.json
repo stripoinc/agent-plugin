@@ -1,6 +1,7 @@
 {
   "name": "stripo",
-  "version": "0.10.1",
+  "displayName": "Stripo",
+  "version": "0.11.0",
   "description": "Create and edit emails and templates with Stripo.",
   "author": {
     "name": "Stripo",
@@ -17,6 +18,9 @@
   ],
   "documentationUrl": "https://github.com/stripoinc/agent-plugin#readme",
   "icon": "./assets/stripo-icon.jpeg",
+  "supportUrl": "https://support.stripo.email",
+  "privacyPolicyUrl": "https://stripo.email/privacy-policy/",
+  "termsOfServiceUrl": "https://stripo.email/terms-of-use/",
   "userConfig": {
     "client_id": {
       "type": "string",
