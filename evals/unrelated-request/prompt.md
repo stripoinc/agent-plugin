@@ -1,7 +1,7 @@
 ---
 description: An unrelated coding request triggers no Stripo skill.
 tags: [smoke, negative]
-plugins: ["../../plugins/stripo"]
+plugins: ["../.."]
 max_turns: 4
 allowed_tools: [Read, Glob, Grep, Skill]
 ---

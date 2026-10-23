@@ -9,7 +9,7 @@
   "plugins": [
     {
       "name": "stripo",
-      "source": "./plugins/stripo",
+      "source": "./",
       "description": "Create and edit emails and templates with Stripo.",
       "category": "productivity",
       "keywords": [

@@ -1,7 +1,7 @@
 ---
 description: A website as the brand reference, without the product name, routes to email-from-reference.
 tags: [routing, indirect]
-plugins: ["../../plugins/stripo"]
+plugins: ["../.."]
 max_turns: 6
 allowed_tools: [Read, Glob, Grep, Skill]
 ---

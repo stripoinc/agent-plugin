@@ -1,7 +1,7 @@
 import {readFileSync} from 'node:fs';
 import path from 'node:path';
 import {inflateSync} from 'node:zlib';
-import {PLUGIN, readJson, requireCondition, walkFiles} from './plugin.mjs';
+import {RELEASE, packageFiles, readJson, requireCondition} from './plugin.mjs';
 
 export const TEXT_FILE_LIMIT = 256 * 1024;
 export const FILE_COUNT_LIMIT = 512;
@@ -42,7 +42,7 @@ export function iconDimensions(bytes) {
 }
 
 export function checkPackageLimits(root) {
-  const files = walkFiles(root, PLUGIN).filter(file => path.basename(file) !== '.DS_Store');
+  const files = [...packageFiles(root), RELEASE];
   requireCondition(files.length <= FILE_COUNT_LIMIT, `Plugin has ${files.length} files; limit is ${FILE_COUNT_LIMIT}.`);
   let largestTextBytes = 0;
   for (const file of files) {
@@ -57,26 +57,26 @@ export function checkPackageLimits(root) {
   return {files: files.length, largestTextBytes};
 }
 
-export function checkDirectoryAssets(root, metadata) {
-  const readme = readFileSync(path.join(root, PLUGIN, 'README.md'), 'utf8');
+export function checkDirectoryAssets(root, manifest) {
+  const readme = readFileSync(path.join(root, 'README.md'), 'utf8');
   const prose = readme.replace(/^```[^\n]*\n[\s\S]*?^```\s*$/gmu, '');
   requireCondition(prose.split(/\s+/u).filter(Boolean).length >= 40, 'Packaged README must contain at least 40 words outside code blocks.');
   const missing = [];
-  if (!metadata.license || !metadata.packageFiles.LICENSE) missing.push('owner-approved LICENSE and manifest license');
-  else requireCondition(readFileSync(path.join(root, PLUGIN, 'LICENSE'), 'utf8').trim().length > 0, 'LICENSE is empty.');
-  const icon = metadata.claudeDirectory?.icon;
+  if (!manifest.license) missing.push('owner-approved LICENSE and manifest license');
+  else requireCondition(readFileSync(path.join(root, 'LICENSE'), 'utf8').trim().length > 0, 'LICENSE is empty.');
+  const claude = readJson(root, '.claude-plugin/plugin.json');
+  const icon = claude.icon;
   if (!icon) missing.push('approved Stripo listing icon');
   else {
-    const bytes = readFileSync(path.join(root, PLUGIN, icon.slice(2)));
+    const bytes = readFileSync(path.join(root, icon.slice(2)));
     requireCondition(bytes.length < 2 * 1024 * 1024, 'Listing icon must be smaller than 2 MiB.');
     const {width, height, format} = iconDimensions(bytes);
     requireCondition(width === height && width >= 512 && width <= 2048, 'Listing icon must be square, 512–2048 px.');
     requireCondition(format === 'png' ? /\.png$/iu.test(icon) : /\.jpe?g$/iu.test(icon), 'Listing icon extension does not match its contents.');
   }
   // Both directories list support, privacy and terms pages; OpenAI requires them for MCP review.
-  const pages = ['supportUrl', 'privacyPolicyUrl', 'termsOfServiceUrl'].filter(field => !metadata.claudeDirectory?.[field]);
+  const pages = ['supportUrl', 'privacyPolicyUrl', 'termsOfServiceUrl'].filter(field => !claude[field]);
   if (pages.length) missing.push(`listing URLs: ${pages.join(', ')}`);
-  const claude = readJson(root, `${PLUGIN}/.claude-plugin/plugin.json`);
-  requireCondition(claude.license === metadata.license && claude.icon === icon, 'Directory metadata differs from plugin-metadata.json.');
+  requireCondition(claude.license === manifest.license && claude.icon === icon, 'Directory metadata differs from plugin.json.');
   return missing;
 }

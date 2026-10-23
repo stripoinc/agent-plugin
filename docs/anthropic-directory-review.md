@@ -1,5 +1,8 @@
 # Anthropic directory review — Stripo 0.7.0
 
+> Historical review of the pinned release below. The current plugin lives at the repository
+> root; its supported runtime and validation procedure are described in [maintenance](maintaining.md).
+
 Prepared on 2026-10-06. This document records local validation and review evidence;
 it does not establish Anthropic approval or a submitted appeal. The public plugin
 identifier remains `stripo`.

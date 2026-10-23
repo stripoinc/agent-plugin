@@ -1,4 +1,0 @@
-Generated distribution; do not edit packaged files directly.
-Bundled skills, SDK and bundle provenance: convo-email-agent, via scripts/sync-bundle.mjs.
-Repository skills: skills/. Host files: host/. Manifests (.claude-plugin/, .codex-plugin/ and plugin.json), user configuration, onboarding skill and MCP dependency: plugin-metadata.json.
-Run npm run generate after metadata, skill or host changes. See the root README for releases.

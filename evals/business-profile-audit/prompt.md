@@ -1,7 +1,7 @@
 ---
 description: A brand-kit audit routes to business-profile.
 tags: [smoke, routing]
-plugins: ["../../plugins/stripo"]
+plugins: ["../.."]
 max_turns: 6
 allowed_tools: [Read, Glob, Grep, Skill]
 ---

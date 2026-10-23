@@ -1,7 +1,7 @@
 ---
 description: A bounded change to a named email routes to email-model-editor.
 tags: [smoke, routing]
-plugins: ["../../plugins/stripo"]
+plugins: ["../.."]
 max_turns: 6
 allowed_tools: [Read, Glob, Grep, Skill]
 ---

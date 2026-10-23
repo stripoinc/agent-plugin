@@ -1,7 +1,7 @@
 ---
 description: Sending is out of scope; the email skills must not start and the reply says so.
 tags: [smoke, negative]
-plugins: ["../../plugins/stripo"]
+plugins: ["../.."]
 max_turns: 6
 allowed_tools: [Read, Glob, Grep, Skill]
 ---

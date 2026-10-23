@@ -1,7 +1,7 @@
 ---
 description: Raw HTML of an old email, without the product name, routes to email-from-reference rather than the editor.
 tags: [routing, indirect]
-plugins: ["../../plugins/stripo"]
+plugins: ["../.."]
 max_turns: 6
 allowed_tools: [Read, Glob, Grep, Skill]
 ---

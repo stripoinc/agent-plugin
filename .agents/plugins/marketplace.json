@@ -8,7 +8,7 @@
       "name": "stripo",
       "source": {
         "source": "local",
-        "path": "./plugins/stripo"
+        "path": "./"
       },
       "policy": {
         "installation": "AVAILABLE",

@@ -1,7 +1,7 @@
 ---
 description: A brief for a new email routes to email-from-reference.
 tags: [smoke, routing]
-plugins: ["../../plugins/stripo"]
+plugins: ["../.."]
 max_turns: 6
 allowed_tools: [Read, Glob, Grep, Skill]
 ---

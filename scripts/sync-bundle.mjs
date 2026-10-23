@@ -1,182 +1,99 @@
 #!/usr/bin/env node
-/**
- * Sync the Stripo bundle built by convo-email-agent into plugins/stripo.
- *
- *   node scripts/sync-bundle.mjs [--bundle <dir>] [--version <x.y.z>] [--base <git-ref>] [--allow-dirty]
- *
- * --bundle       bundle directory; default ../convo-email-agent/dist/convo-email-agent/stripo
- * --version      plugin version to publish; default is the bundle version
- * --base         allow rebuilding an unpublished draft newer than this ancestor
- * --allow-dirty  accept a bundle built from an uncommitted checkout (local testing only)
- *
- * The script replaces skills/, packages/, mcp-tools.json and bundle.json under plugins/stripo,
- * adds the host paths paragraph to the SKILL.md files that carry the placeholders, drops the
- * Reteno-only agents/claude.yaml, installs the host files beside each skill, checks that the SDK
- * loads from its new location, and updates plugin-metadata.json. The shared generator refreshes
- * the three manifests, both marketplaces, MCP dependency declarations and bundle-integrity.json.
- *
- * Host files come from host/: a skill with a host/<skill>/ directory gets that directory copied
- * over it (HOST.md plus any helper the skill calls by path), and every other skill gets the
- * shared host/HOST.md. Repository-owned skills under skills/ (such as connect) are not part of
- * the bundle; the generator packages them again after skills/ has been replaced.
- */
-import {cpSync, existsSync, readdirSync, readFileSync, rmSync, statSync, writeFileSync} from "node:fs";
+// Import the shared SDK and executable helpers. Never overwrite Stripo-owned instructions.
 import {execFileSync} from 'node:child_process';
-import path from "node:path";
-import {fileURLToPath, pathToFileURL} from "node:url";
-import {generateMetadata, loadMetadata, METADATA, requireVersionIncrease, SYNCED_ITEMS} from "./lib/plugin.mjs";
+import {cpSync, mkdirSync, mkdtempSync, rmSync, writeFileSync} from 'node:fs';
+import {tmpdir} from 'node:os';
+import path from 'node:path';
+import {pathToFileURL} from 'node:url';
+import {ROOT, RELEASE, IMPORTED_ITEMS, copyPackage, generateMetadata, hashes, importedFiles, json, loadManifest, readJson, requireCondition, requireVersionIncrease, walkFiles} from './lib/plugin.mjs';
+import {validatePlugin} from './validate-plugin.mjs';
 
-const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const PLUGIN = path.join(ROOT, "plugins", "stripo");
-const DEFAULT_BUNDLE = path.join(ROOT, "..", "convo-email-agent", "dist", "convo-email-agent", "stripo");
-const HOST_ROOT = path.join(ROOT, "host");
-const HOST_NOTES = path.join(HOST_ROOT, "HOST.md");
-const SDK_ENTRY = path.join(PLUGIN, "packages", "convo-email-agent", "index.js");
-const HOST_PARAGRAPH = [
-  "Host paths: in Claude Code `<skill-dir>` is `${CLAUDE_SKILL_DIR}` and `<bundle-root>` is",
-  "`${CLAUDE_PLUGIN_ROOT}`. In Codex `<skill-dir>` is the directory of this `SKILL.md`. In both",
-  "hosts `<bundle-root>` is two levels above `<skill-dir>`. Read `HOST.md` beside this file for",
-  "the working directory and file-transfer commands before the first MCP call.",
-].join("\n");
+const USAGE = 'Usage: node scripts/sync-bundle.mjs [--bundle <dir>] --version <x.y.z> [--base <git-ref>] [--allow-dirty]';
 
-function usage() {
-  return "Usage: node scripts/sync-bundle.mjs [--bundle <dir>] [--version <x.y.z>] [--base <git-ref>] [--allow-dirty]";
-}
-
-function fail(message) {
-  console.error(`sync-bundle: ${message}`);
-  process.exit(1);
-}
-
-function parseArgs(argv) {
-  const options = {bundle: undefined, version: undefined, allowDirty: false};
-  for (let index = 0; index < argv.length; index += 1) {
-    const argument = argv[index];
-    if (argument === "--help" || argument === "-h") {
-      console.log(usage());
-      process.exit(0);
-    }
-    if (argument === "--allow-dirty") {
-      options.allowDirty = true;
-      continue;
-    }
-    if (argument === "--bundle" || argument === "--version" || argument === '--base') {
-      const value = argv[index + 1];
-      if (!value || value.startsWith("--")) fail(`Missing value for ${argument}.`);
-      options[argument.slice(2)] = value;
-      index += 1;
-      continue;
-    }
-    fail(`Unknown argument: ${argument}\n${usage()}`);
+function parseArgs(args) {
+  const options = {};
+  for (let i = 0; i < args.length; i++) {
+    const flag = args[i];
+    if (flag === '--allow-dirty') options.allowDirty = true;
+    else if (['--bundle', '--version', '--base'].includes(flag) && args[i + 1] && !args[i + 1].startsWith('--')) options[flag.slice(2)] = args[++i];
+    else throw new Error(USAGE);
   }
+  requireCondition(options.version, USAGE);
   return options;
 }
 
-function readJson(file) {
-  if (!existsSync(file)) fail(`Missing file: ${file}`);
-  return JSON.parse(readFileSync(file, "utf8"));
-}
-
-function writeJson(file, value) {
-  writeFileSync(file, `${JSON.stringify(value, null, 2)}\n`, "utf8");
-}
-
-function addHostParagraph(skillFile) {
-  const source = readFileSync(skillFile, "utf8");
-  // The paragraph resolves `<skill-dir>` and `<bundle-root>`. The brandkit skills use neither
-  // placeholder and name their own roots, so adding it there would only contradict them.
-  if (!source.includes("<skill-dir>") || source.includes(HOST_PARAGRAPH)) return;
-  const lines = source.split("\n");
-  if (lines[0] !== "---") fail(`${skillFile} has no frontmatter.`);
-  const frontmatterEnd = lines.indexOf("---", 1);
-  if (frontmatterEnd === -1) fail(`${skillFile} has an unterminated frontmatter block.`);
-  const heading = lines.findIndex((line, index) => index > frontmatterEnd && line.startsWith("# "));
-  if (heading === -1) fail(`${skillFile} has no top-level heading.`);
-  lines.splice(heading + 1, 0, "", HOST_PARAGRAPH);
-  writeFileSync(skillFile, lines.join("\n"), "utf8");
-}
-
-async function checkSdk(skills) {
-  const sdk = await import(pathToFileURL(SDK_ENTRY).href);
-  for (const name of ["assertValidEmailModel", "validateEmailDocument", "createEmailSdk"]) {
-    if (typeof sdk[name] !== "function") fail(`SDK at ${SDK_ENTRY} does not export ${name}.`);
-  }
-  for (const skill of skills) {
-    // The runners resolve the SDK relative to their own scripts/ directory (resolveSdkDist).
-    const resolved = path.resolve(PLUGIN, "skills", skill, "scripts", "../../../packages/convo-email-agent/index.js");
-    if (resolved !== SDK_ENTRY) fail(`Skill ${skill} cannot reach the SDK: ${resolved}`);
-  }
-}
-
-async function main() {
-  const options = parseArgs(process.argv.slice(2));
-  const bundle = path.resolve(options.bundle ?? DEFAULT_BUNDLE);
-  const metadata = loadMetadata(ROOT);
-  if (bundle === PLUGIN || bundle.startsWith(`${PLUGIN}${path.sep}`)) fail("The source bundle must be outside plugins/stripo.");
-  for (const file of [path.join(ROOT, METADATA), HOST_NOTES]) {
-    if (!existsSync(file)) fail(`Plugin skeleton is incomplete, missing ${file}`);
-  }
-
-  const manifest = readJson(path.join(bundle, "bundle.json"));
-  if (manifest.brand !== "stripo") fail(`Bundle at ${bundle} is for brand ${JSON.stringify(manifest.brand)}, expected stripo.`);
-  if (manifest.sourceDirty !== false && !options.allowDirty) {
-    fail("Bundle was built from an uncommitted checkout (sourceDirty is not false). Commit and rebuild, or pass --allow-dirty for a local test.");
-  }
-  if (!Array.isArray(manifest.skills) || manifest.skills.length === 0) fail("bundle.json lists no skills.");
-  for (const item of SYNCED_ITEMS) {
-    if (!existsSync(path.join(bundle, item))) fail(`Bundle is missing ${item}.`);
-  }
-  for (const skill of manifest.skills) {
-    const skillDir = path.join(bundle, "skills", skill);
-    if (!existsSync(path.join(skillDir, "SKILL.md"))) fail(`Bundle skill ${skill} lacks SKILL.md.`);
-    // A skill may be prompt-only and ship no scripts/ directory.
-    const scripts = path.join(skillDir, "scripts");
-    if (existsSync(scripts) && !statSync(scripts).isDirectory()) fail(`Bundle skill ${skill} has a scripts/ that is not a directory.`);
-  }
-  for (const entry of readdirSync(HOST_ROOT, {withFileTypes: true})) {
-    if (entry.isDirectory() && !manifest.skills.includes(entry.name)) fail(`host/${entry.name} matches no skill in the bundle.`);
-  }
-
-  const version = options.version ?? manifest.version;
-  const currentVersion = metadata.version;
-  if (version === currentVersion && options.base) {
-    // Rebuild an unreleased draft version only relative to an explicit older
-    // base. Equality is still rejected for a version already on that base.
-    const git = (...args) => execFileSync('git', args, {cwd: ROOT, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe']}).trim();
+export function syncBundle(root = ROOT, options) {
+  const bundle = path.resolve(options.bundle ?? path.join(root, '../convo-email-agent/dist/convo-email-agent/stripo'));
+  const relative = path.relative(root, bundle);
+  requireCondition(relative && (relative === '..' || relative.startsWith(`..${path.sep}`) || path.isAbsolute(relative)), 'The upstream bundle must be outside the plugin.');
+  const source = readJson(bundle, 'bundle.json');
+  requireCondition(source.brand === 'stripo', 'Expected a Stripo upstream bundle.');
+  requireCondition(source.sourceDirty === false || options.allowDirty && source.sourceDirty === true, 'Bundle is dirty; rebuild from a clean checkout, or use --allow-dirty for local testing.');
+  for (const item of IMPORTED_ITEMS) walkFiles(bundle, item);
+  const current = loadManifest(root);
+  const version = options.version;
+  if (version === current.version && options.base) {
+    const git = (...args) => execFileSync('git', args, {cwd: root, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe']}).trim();
     const base = git('rev-parse', '--verify', '--end-of-options', `${options.base}^{commit}`);
     git('merge-base', '--is-ancestor', base, 'HEAD');
-    const previous = JSON.parse(git('show', `${base}:${METADATA}`)).version;
-    requireVersionIncrease(previous, version);
-  } else requireVersionIncrease(currentVersion, version);
+    const versionFile = ['plugin.json', 'plugin-metadata.json', 'plugins/stripo/.claude-plugin/plugin.json']
+      .find(file => git('ls-tree', '--name-only', base, '--', file));
+    requireCondition(versionFile, 'Base has no previous plugin version.');
+    requireVersionIncrease(JSON.parse(git('show', `${base}:${versionFile}`)).version, version);
+  } else requireVersionIncrease(current.version, version);
 
-  for (const item of SYNCED_ITEMS) {
-    const destination = path.join(PLUGIN, item);
-    rmSync(destination, {recursive: true, force: true});
-    cpSync(path.join(bundle, item), destination, {recursive: true});
+  const temporary = mkdtempSync(path.join(tmpdir(), 'stripo-sync-'));
+  const staged = path.join(temporary, 'plugin');
+  try {
+    copyPackage(root, staged);
+    for (const item of IMPORTED_ITEMS) {
+      const destination = path.join(staged, item);
+      rmSync(destination, {recursive: true, force: true});
+      mkdirSync(path.dirname(destination), {recursive: true});
+      cpSync(path.join(bundle, item), destination, {recursive: true});
+    }
+    for (const file of ['plugin.json', '.claude-plugin/plugin.json']) {
+      writeFileSync(path.join(staged, file), json({...readJson(staged, file), version}));
+    }
+    const {package: packageName, version: sdkVersion, brand, sourceRevision, sourceDirty, editorValidator} = source;
+    const upstream = {package: packageName, version: sdkVersion, brand, sourceRevision, sourceDirty,
+      editorValidator: {editorRevision: editorValidator?.editorRevision, editorDirty: editorValidator?.editorDirty, bundleSha256: editorValidator?.bundleSha256}};
+    const imported = importedFiles(staged);
+    writeFileSync(path.join(staged, RELEASE), json({upstream, importedFiles: imported, files: hashes(staged, imported)}));
+    generateMetadata(staged);
+    validatePlugin(staged, {allowDirty: options.allowDirty});
+    // Invalid candidates never reach the working tree. Keep a rollback copy for filesystem errors.
+    const changed = [...IMPORTED_ITEMS, 'plugin.json', '.claude-plugin/plugin.json', '.codex-plugin/plugin.json', RELEASE];
+    const backup = path.join(temporary, 'backup');
+    for (const item of changed) {
+      mkdirSync(path.dirname(path.join(backup, item)), {recursive: true});
+      cpSync(path.join(root, item), path.join(backup, item), {recursive: true});
+    }
+    try {
+      for (const item of changed) {
+        rmSync(path.join(root, item), {recursive: true, force: true});
+        cpSync(path.join(staged, item), path.join(root, item), {recursive: true});
+      }
+    } catch (error) {
+      for (const item of changed) {
+        rmSync(path.join(root, item), {recursive: true, force: true});
+        cpSync(path.join(backup, item), path.join(root, item), {recursive: true});
+      }
+      throw error;
+    }
+    return {version, previousVersion: current.version, upstream, importedFiles: imported.length,
+      note: 'Stripo skills and evals preserved. Review upstream workflow documentation for any SDK behavior changes.'};
+  } finally {
+    rmSync(temporary, {recursive: true, force: true});
   }
-  for (const skill of manifest.skills) {
-    addHostParagraph(path.join(PLUGIN, "skills", skill, "SKILL.md"));
-    // agents/claude.yaml carries the Reteno agent's default prompt. Claude Code reads only
-    // SKILL.md, so the public package leaves the file out.
-    rmSync(path.join(PLUGIN, "skills", skill, "agents", "claude.yaml"), {force: true});
-  }
-  await checkSdk(manifest.skills.filter((skill) => existsSync(path.join(PLUGIN, "skills", skill, "scripts"))));
-  const nextMetadata = {...metadata, version};
-  generateMetadata(ROOT, {metadata: nextMetadata, fromBundleSync: true});
-  writeJson(path.join(ROOT, METADATA), nextMetadata);
-
-  console.log(JSON.stringify({
-    status: "ok",
-    version,
-    previousVersion: currentVersion,
-    bundleVersion: manifest.version,
-    sourceRevision: manifest.sourceRevision,
-    skills: manifest.skills,
-  }, null, 2));
 }
 
-try {
-  await main();
-} catch (error) {
-  fail(error.message);
+if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) {
+  try {
+    if (process.argv.includes('--help')) console.log(USAGE);
+    else console.log(json(syncBundle(ROOT, parseArgs(process.argv.slice(2)))));
+  } catch (error) {
+    console.error(`sync-bundle: ${error.message}`);
+    process.exitCode = 1;
+  }
 }
