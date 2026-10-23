@@ -2,10 +2,10 @@
   "name": "stripo",
   "displayName": "Stripo",
   "version": "0.12.0",
-  "description": "Create and edit emails and templates with Stripo.",
+  "description": "Stripo email creation, editing, localization, images, Business Profile updates",
   "author": {
     "name": "Stripo",
-    "url": "https://stripo.email"
+    "email": "support@stripo.email"
   },
   "homepage": "https://stripo.email",
   "repository": "https://github.com/stripoinc/agent-plugin",
@@ -14,18 +14,11 @@
     "stripo",
     "email",
     "email-template",
-    "mcp"
+    "mcp",
+    "marketing"
   ],
-  "documentationUrl": "https://github.com/stripoinc/agent-plugin#readme",
   "icon": "./assets/stripo-icon.jpeg",
   "supportUrl": "https://support.stripo.email",
   "privacyPolicyUrl": "https://stripo.email/privacy-policy/",
-  "termsOfServiceUrl": "https://stripo.email/terms-of-use/",
-  "userConfig": {
-    "client_id": {
-      "type": "string",
-      "title": "Stripo Client ID",
-      "description": "Your organization's MCP Client ID from Stripo Workspace Settings \u2192 MCP integration (an Owner or Admin copies it). /stripo:connect registers the stripo-mcp server with it; leave it empty if stripo-mcp is already configured."
-    }
-  }
+  "termsOfServiceUrl": "https://stripo.email/terms-of-use/"
 }

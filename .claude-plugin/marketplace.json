@@ -1,7 +1,9 @@
 {
   "name": "stripo",
   "owner": {
-    "name": "Stripo"
+    "name": "Stripo",
+    "url": "https://stripo.email",
+    "email": "support@stripo.email"
   },
   "metadata": {
     "description": "Stripo Agent Plugin: skills for creating and editing emails with any AI agent."
@@ -10,13 +12,14 @@
     {
       "name": "stripo",
       "source": "./",
-      "description": "Create and edit emails and templates with Stripo.",
-      "category": "productivity",
+      "description": "Stripo email creation, editing, localization, images, Business Profile updates",
+      "category": "marketing",
       "keywords": [
         "stripo",
         "email",
         "email-template",
-        "mcp"
+        "mcp",
+        "marketing"
       ]
     }
   ]

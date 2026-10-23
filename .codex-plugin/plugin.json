@@ -1,10 +1,10 @@
 {
   "name": "stripo",
   "version": "0.12.0",
-  "description": "Create and edit emails and templates with Stripo.",
+  "description": "Stripo email creation, editing, localization, images, Business Profile updates",
   "author": {
     "name": "Stripo",
-    "url": "https://stripo.email"
+    "email": "support@stripo.email"
   },
   "homepage": "https://stripo.email",
   "repository": "https://github.com/stripoinc/agent-plugin",
@@ -13,26 +13,23 @@
     "stripo",
     "email",
     "email-template",
-    "mcp"
+    "mcp",
+    "marketing"
   ],
   "skills": "./skills/",
-  "extensions": {
-    "com.openai": {
-      "onboardingSkill": "./skills/connect/SKILL.md"
-    }
-  },
   "interface": {
     "displayName": "Stripo",
-    "shortDescription": "Create and edit Stripo emails",
-    "longDescription": "Create emails from a brief, template, HTML or screenshot. Generate and edit images, update text, links and styles in existing emails and templates, and review desktop and mobile previews. The connect skill registers the Stripo MCP server with your organization's Client ID.",
-    "category": "Productivity",
+    "shortDescription": "Stripo's AI agent. Create and edit Stripo emails",
+    "longDescription": "Create emails from a brief, template, HTML or screenshot. Generate and edit images, update text, links and styles in existing emails and templates, and review desktop and mobile previews.",
+    "category": "Marketing",
     "capabilities": [
       "Read",
       "Write"
     ],
     "defaultPrompt": [
-      "Create a new Stripo email from this description",
-      "Change the copy, links or images in an existing Stripo email"
+      "Create a Stripo email from my reference and verify its saved desktop and mobile previews.",
+      "Translate and clone a Stripo email while preserving every language.",
+      "Update my Stripo Business Profile from the information I provide."
     ],
     "logo": "./assets/stripo-icon.jpeg",
     "composerIcon": "./assets/stripo-icon.jpeg",
