@@ -1,0 +1,11 @@
+interface:
+  display_name: "Business profile"
+  short_description: "Read and update a Stripo business profile"
+  default_prompt: "Use $business-profile to audit or update the selected Stripo project profile from my supplied information or emails."
+policy:
+  allow_implicit_invocation: true
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "stripo-mcp"
+      description: "Stripo MCP server for emails, templates, image generation/editing and business profiles. Register it with the plugin's connect skill and your organization's Client ID, then authorize it in your agent. See the plugin README."
