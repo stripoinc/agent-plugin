@@ -31,8 +31,8 @@
       "Translate and clone a Stripo email while preserving every language.",
       "Update my Stripo Business Profile from the information I provide."
     ],
-    "logo": "./assets/stripo-icon.jpeg",
-    "composerIcon": "./assets/stripo-icon.jpeg",
+    "logo": "./assets/stripo.svg",
+    "composerIcon": "./assets/stripo.svg",
     "developerName": "Stripo",
     "websiteURL": "https://stripo.email",
     "supportURL": "https://support.stripo.email",

@@ -19,9 +19,9 @@ not supported. The email creation skill can still use an authorized website as a
 
 ## Install and connect MCP
 
-Requirements: Node.js 20.18.1+, curl, and an agent with shell, file, image inspection and MCP tools.
+Requirements: Node.js 20.18.1+ and an agent with shell, file, image inspection and MCP tools.
 The supplied shell examples use POSIX syntax; on Windows use WSL or an equivalent shell.
-No npm install, Python runtime or private source checkout is needed to use the plugin.
+No npm install, curl, Python runtime or private source checkout is needed to use the plugin.
 
 Claude Code:
 
@@ -58,6 +58,12 @@ Other clients can load `skills/` from this repository and use
 Run `node scripts/doctor.mjs` from the plugin directory to check local prerequisites. In a new
 agent session, ask for a read-only `whoami` check and verify the intended account/project before
 editing. Local prerequisite checks do not prove MCP authentication or write access.
+
+The bundled `scripts/transfer.mjs` downloads models, references and previews and uploads prepared
+files using the exact HTTPS URLs returned by MCP. It supports direct S3 links, keeps file bytes
+unchanged, checks size limits and optional download checksums, and replaces downloads atomically.
+It returns compact JSON without printing signed URLs. See the
+[host instructions](skills/email-model-editor/HOST.md) for commands and upload finalization.
 
 ## Examples
 

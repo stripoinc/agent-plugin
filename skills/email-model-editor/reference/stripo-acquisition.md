@@ -37,7 +37,7 @@ with the first download command. Do not run a command merely to demonstrate a kn
 Request only the access needed for the returned URL. Respect approval denials and report a
 blocked transfer when access is unavailable; these instructions do not grant permissions.
 
-A `curl` exit code `6` (`Could not resolve host`) is a DNS/transfer failure, not an invalid editor
+A transfer helper `ENOTFOUND` or `EAI_AGAIN` error is a DNS/transfer failure, not an invalid editor
 model or proof of an expired URL. Check the execution context before retrying; do not repeat
 under a known unchanged restriction. Use bounded retries only for transient failures on a
 permitted network path.

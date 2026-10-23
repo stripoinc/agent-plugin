@@ -17,7 +17,7 @@
     "mcp",
     "marketing"
   ],
-  "icon": "./assets/stripo-icon.jpeg",
+  "icon": "./assets/stripo.svg",
   "supportUrl": "https://support.stripo.email",
   "privacyPolicyUrl": "https://stripo.email/privacy-policy/",
   "termsOfServiceUrl": "https://stripo.email/terms-of-use/"
