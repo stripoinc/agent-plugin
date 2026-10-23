@@ -8,7 +8,8 @@ description: Read, audit, fill or update a Stripo project's Business Profile usi
 Use the authenticated Stripo MCP connection. Call `whoami`, resolve the requested project with
 `find_projects`, and read `get_business_profile(projectId)` before proposing changes. Use the
 single project when unambiguous; otherwise ask which project. Keep that `projectId` throughout.
-For a missing connection, use [connect](../connect/SKILL.md).
+If the connection is missing or unauthenticated, explain that it must be configured or authorized
+in the agent before calling Stripo tools.
 
 Choose the scope from the request:
 

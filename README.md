@@ -11,13 +11,12 @@ editor validator. It does not send emails or schedule campaigns.
 | `email-from-reference` | Create an email from a brief, website, template, HTML, screenshot or supplied images; rebuild an explicitly selected email or template; verify saved desktop/mobile previews. |
 | `email-model-editor` | Edit native copy, links, images, layout, styles, document title and preheader in existing emails and templates. |
 | `business-profile` | Read, audit, fill or update a project's Business Profile from supplied information or selected Stripo emails, preserving unrelated fields. |
-| `connect` | Register or check Stripo MCP in Claude Code, Codex, Cursor, VS Code and other clients; reuse the saved organization Client ID. |
 
 Image generation and editing use Stripo MCP. Supplied images are hosted as original assets;
 requests to inspect content do not start image jobs. Business Profile website extraction is
 not supported. The email creation skill can still use an authorized website as a reference.
 
-## Install and connect MCP
+## Install
 
 Requirements: Node.js 20.18.1+ and an agent with shell, file, image inspection and MCP tools.
 The supplied shell examples use POSIX syntax; on Windows use WSL or an equivalent shell.
@@ -30,9 +29,7 @@ Claude Code:
 /plugin install stripo@stripo
 ```
 
-Run `/stripo:connect`. If needed, configure the Client ID with `/plugin configure stripo@stripo`;
-leave it empty to reuse an existing connection. Restart Claude Code and authenticate `stripo-mcp`
-through `/mcp` when prompted. `/reload-plugins` reloads changed skills.
+`/reload-plugins` reloads changed skills.
 
 Codex:
 
@@ -41,18 +38,15 @@ codex plugin marketplace add stripoinc/agent-plugin
 codex plugin add stripo@stripo
 ```
 
-Start a new session and use the plugin's setup step or `$stripo:connect`. When sign-in is needed,
-run `codex mcp login stripo-mcp --scopes mcp:tools,offline_access` in a terminal, then start a new
-session. Installing the plugin and authenticating the MCP connection are separate steps.
+Start a new session to load the installed skills.
 
-For a new connection, an Owner or Admin enables **Connect AI tools** in **Workspace Settings →
-MCP integration** and copies the organization's **Client ID**. The connect skill first reuses a
-saved ID. Stripo uses `https://mcp.stripo.email/mcp` with scopes `mcp:tools` and `offline_access`.
+The skills require an authenticated `stripo-mcp` connection configured separately in your agent.
+Stripo uses `https://mcp.stripo.email/mcp` with scopes `mcp:tools` and `offline_access`.
 The plugin contains no tokens, client secrets or fixed MCP server entry. Browser sign-in belongs
 to you and your agent's OAuth flow; never paste tokens into chat or plugin files.
 
-Other clients can load `skills/` from this repository and use
-[connect](skills/connect/SKILL.md) for their settings. Keep the complete plugin together, including
+Other clients with an authenticated Stripo MCP connection can load `skills/` from this repository.
+Keep the complete plugin together, including
 `packages/`: the local commands resolve the SDK relative to the skills.
 
 Run `node scripts/doctor.mjs` from the plugin directory to check local prerequisites. In a new

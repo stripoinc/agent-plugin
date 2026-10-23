@@ -1,8 +1,9 @@
 # Running the Stripo skills
 
-Use the host's authenticated `stripo-mcp` connection and local shell/file/image tools. When the
-connection is missing or unauthenticated, use [connect](../connect/SKILL.md). If several Stripo
-environments are connected, resolve the intended one before reading or writing.
+Use the host's authenticated `stripo-mcp` connection and local shell/file/image tools. If the
+connection is missing or unauthenticated, explain that it must be configured or authorized in
+the agent before calling Stripo tools. If several Stripo environments are connected, resolve
+the intended one before reading or writing.
 
 `<skill-dir>` is the directory containing the loaded `SKILL.md`; `<bundle-root>` is two levels
 above it. In Claude Code these correspond to `${CLAUDE_SKILL_DIR}` and `${CLAUDE_PLUGIN_ROOT}`.
