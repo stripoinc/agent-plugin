@@ -55,7 +55,7 @@ Use [image upload](reference/image-upload.md) for supplied bytes and
 [image jobs](reference/stripo-images.md) for `generate_image`, `edit_image` and `get_image_job`.
 Use the host's image viewer to inspect completed images and saved desktop/mobile screenshots.
 
-The SDK includes the pinned editor validator; its provenance is in `release.json.upstream` and
+The SDK includes the pinned editor validator; its provenance is in
 `packages/convo-email-agent/editor-validator/manifest.json`. No schema download is required.
 The live server validates writes independently. Report its diagnostics and follow the documented
 recovery path; local validation alone does not establish persistence or visual correctness.

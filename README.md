@@ -92,8 +92,9 @@ cannot create templates, change external name/project/folder metadata, or rank e
 performance. Missing capabilities and incomplete visual checks are reported explicitly; local
 validation alone is not a successful save.
 
-The repository root is the installable plugin. `skills/` contains Stripo-owned instructions,
-`packages/` the imported SDK, and `release.json` the upstream provenance and file hashes.
+The repository root is the installable plugin. `skills/` contains Stripo-owned instructions and
+`packages/` the imported SDK; `packages/convo-email-agent/editor-validator/manifest.json` records
+the validator's editor revision and file hashes.
 The development-only `evals/` suite checks routing and scope. See
 [maintenance and eval instructions](https://github.com/stripoinc/agent-plugin/blob/main/docs/maintaining.md)
 for SDK synchronization, validation and packaging. A curated release package excludes development

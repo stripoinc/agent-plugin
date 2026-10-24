@@ -1,7 +1,8 @@
 # Mutate and validate the model
 
 Validation runs the editor's own Document State rules bundled into the SDK. No schema download
-or initialization is required. `release.json.upstream.editorValidator` records the editor revision.
+or initialization is required. `packages/convo-email-agent/editor-validator/manifest.json` records
+the editor revision.
 `finish()` validates edits against the acquired input; create mode validates a new document.
 The service also validates its deployed revision and applies the write to its live state;
 local success does not establish persistence.
