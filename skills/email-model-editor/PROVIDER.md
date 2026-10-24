@@ -1,29 +1,24 @@
-# Stripo MCP guide
+# Stripo provider contract
 
-Shared MCP context for both email skills. Read this once, then open only the topic needed for
-the next operation. The connected server supplies tool schemas; this bundle supplies the
-workflow and the operation-specific tool names and capability boundaries.
+Provider contract for both email skills; each `SKILL.md` and its references define the shared
+creation/editing workflow and SDK usage. This file ships with the bundle: a consuming host adds
+its runtime binding in its own `HOST.md` and must not replace or edit this file. Use the
+connected Stripo MCP. Call `whoami` once to resolve access and projects, only if it has not
+been called yet and the project to work with is not already clear.
 
-- Call `whoami` once to resolve identity and access; never supply your own user ID.
-- Read the connected Stripo server's `stripo://guide/start-here` once when available. Read a
-  relevant recipe from `stripo://guide/recipes` only when the selected workflow needs it.
-- Discover tools by exact name or the Stripo server namespace. Do not search every description
-  for a tool name: a shared server introduction can mention that name in every result.
-- For resource discovery, limit the request to the Stripo server when the host supports it.
-  Inspect names/URIs first and read the selected resource, not every resource body.
-- Keep full tool results and models in variables or local files. Return only the needed fields
-  or bounded excerpts to the conversation; retain the original for later inspection.
-- Keep `(id, type)` together. A reference is not a write target without an explicit edit/rebuild
-  request. Model JSON travels through files and temporary URLs, never inline in MCP arguments.
-- Use the host's configured endpoint, credentials and transfer mechanism. Successful MCP access
-  does not establish shell network access; check the download topic before the first transfer.
+Bundle metadata is at `<bundle-root>/{bundle.json,mcp-tools.json}` unless `HOST.md` relocates
+it; `mcp-tools.json` lists tool names and unsupported capabilities, not callable logical keys.
 
-| Operation | Read before the operation |
+Keep `(id, type)` together on every call: `type` is `EMAIL` or `TEMPLATE` for document, preview
+and image tools and lowercase for `get_content`. A reference identifies source material; only an
+explicit edit/rebuild request makes it the write target. Never write the Business Profile from
+these skills.
+
+Read the topic for the current step:
+
+| Step | Topic |
 | --- | --- |
-| Resolve a reference/target; download model, preview, or image | [Acquisition and network access](reference/stripo-acquisition.md) |
-| Create an email, including an empty one; set native title/preheader | [Creation and native metadata](reference/stripo-creation.md) |
-| Upload a supplied image, generate a visual, or edit an image | [Images and job recovery](reference/stripo-images.md) |
-| Upload a model, handle a write failure, or verify persistence | [Persistence and verification](reference/stripo-persistence.md) |
-
-Follow the selected skill's SDK workflow and these provider topics together. Read the write
-contract before preparing upload tickets; an uncertain outcome must be checked before retrying.
+| Read a reference or target, download artifacts, network access | [Acquisition and transfers](reference/stripo-acquisition.md) |
+| Create an email; document title, preheader and external metadata; renderer constraints for layout | [Creation and metadata](reference/stripo-creation.md) |
+| Image jobs; attached, pasted or local images | [Images](reference/stripo-images.md) |
+| Any document write, its recovery and saved-state verification | [Persistence and verification](reference/stripo-persistence.md) |

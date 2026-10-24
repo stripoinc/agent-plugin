@@ -1,16 +1,12 @@
-# Mutate and validate the model
+# Mutate and validate
 
 Validation runs the editor's own Document State rules bundled into the SDK. No schema download
-or initialization is required. `packages/convo-email-agent/editor-validator/manifest.json` records
-the editor revision.
+or initialization is required. `bundle.json.editorValidator` records the editor revision.
 `finish()` validates edits against the acquired input; create mode validates a new document.
 The service also validates its deployed revision and applies the write to its live state;
 local success does not establish persistence.
 
-For metadata, social collections, insertion, global block settings or theme resets, read
-[Mutation options](mutation-options.md) for that operation before preparing the change.
-
-## 2. Write the change module
+## Write the change module
 
 Create one task-local file such as `<workspace>/email-<id>.changes.mjs`. Export a function and
 mutate only the supplied `email` handle:
@@ -70,27 +66,23 @@ Rules for the module:
 - For a text block, responsive `textAlign` accepts `left`, `center`, `right`, or `justify`.
   Use supported `node.style` or `email.theme.style` methods for native styles; intentional inline
   font-size changes use the complete block HTML passed to `node.setHtml()`, not `setContent()`.
-- Image sources must be email-safe hosted URLs already supplied or authorized by the user or
-  reused from the reference, or a completed hosted Stripo image-job result. For a requested
-  AI change, follow [Stripo images](stripo-images.md) before writing the mutation module: `edit_image` changes the
-  current asset, while `generate_image` creates a new composition. Use the current target's
-  `(id, type)`; do not create another email. Inspect the completed image, then reacquire the
-  target model before constructing the SDK mutation. For a replacement, verify that the intended
-  image still exists with the expected source. Report a concurrent deletion or source change
-  instead of overwriting it. Use `setSrc()` and `setAlt()` as needed against that fresh model.
+- Use authorized, email-safe hosted image URLs. Prepare requested visuals through the
+  image topic in `PROVIDER.md` before writing the mutation module. Preserve text, composition,
+  dimensions, and transparency unless the user requests changes. Inspect the completed hosted
+  result, then reacquire the target model and check that the selected image still has its expected
+  source. Report a concurrent deletion or source change instead of retargeting the edit.
   For an insertion, verify the intended container/anchor still exists and insert a native image
-  block with the completed URL through [the component workflow](mutation-options.md#insertion-and-block-settings). Retain the fresh model
-  unmodified as the persistence base. Preserve unrelated links, layout, and settings.
-  A pending or failed image job is not a replacement; keep the original asset until ready.
-  Use the returned URL directly without reuploading or recompressing it, including during
-  document-write recovery. Image tool calls happen outside the SDK module.
-  Local attachments and crops use [Upload supplied images](image-upload.md).
-  WebP inputs are supported by its image tools,
-  whose completed output is PNG; WebP, AVIF, and extensionless or otherwise unknown URLs are
-  not confirmed email-safe for direct insertion. Obtain a hosted PNG/JPG/JPEG/GIF before
-  applying an image change with an unsupported source; generation is not a lossless conversion.
+  through [the component workflow](mutation-options.md#insertion-and-block-settings).
+  Use `setSrc()` and `setAlt()` against that fresh model and retain it unmodified as the persistence base. Keep the original
+  asset until ready. Use the returned URL directly without another upload or compression pass,
+  including during document-write recovery. Image tool calls happen outside the SDK module.
+  Local attachments and crops for direct insertion use [Upload supplied images](image-upload.md).
+  Inputs to an image job follow `PROVIDER.md`; a staged input ticket is not an email image URL.
+  WebP, AVIF, SVG, and unknown formats are not confirmed email-safe for direct insertion;
+  obtain a hosted PNG/JPG/JPEG/GIF through an authorized conversion and the provider's upload route.
+  Generation is not a lossless conversion. Inspection-only requests must not start image jobs.
 
-## 3. Run the edit
+## Run the edit
 
 ```bash
 node <skill-dir>/scripts/run-sdk.mjs \
@@ -114,7 +106,9 @@ script is unnecessary when that report fully describes the edit. Require exit co
   This report is diagnostic only; it does not establish persistence or replace saved-state checks.
 
 If the requested result already exists, call the supplied `skip(reason)` and return. The runner
-reports `skipped` and produces no uploadable output. A setter that silently changes nothing is an
+reports `skipped` and produces no uploadable output. A skipped request is complete only after
+the fresh saved-value read in [Verify durable state](persist-and-verify.md#verify-durable-state)
+confirms the already-correct value. A setter that silently changes nothing is an
 error. Keep the acquired model, inspection, module, candidate and diagnostics as task artifacts.
 On any preparation failure, the runner removes stale output. Diagnostics distinguish JSON,
 schema, capability, loss and optional runtime stages; inspect `diagnostics.error.issues`.
@@ -122,7 +116,7 @@ Local contract validation is against the pinned revision. `--runtime-snapshot <f
 `STRIPO_RUNTIME_PATH` explicitly requests model preflight and fails if context is missing.
 Only a successful server set followed by get confirms persistence.
 
-### Inline-style candidate checks
+## Inline-style candidate checks
 
 Before uploading requested inline styling, inspect the actual generated candidate for the
 exact requested CSS properties, values or removals on the intended elements and the expected
@@ -141,17 +135,20 @@ intended block just to obtain a valid model; report an unresolved defect if repa
 
 ## Model completeness
 
-`set_document_state` takes the whole document; with the acquired model uploaded as the base
-the editor applies the difference between it and the candidate to the live state.
+Persist complete base and candidate documents using the concurrency contract in `PROVIDER.md`.
+An optional key present in the base but absent from the candidate requests deletion.
+
 The editor diffs the uploaded JSON against the full acquired state. Settings are canonical and complete:
 every key of `general`, `stripes`, `headings`, and `buttons`, including their `lightTheme` and
-`darkTheme` branches, is required, so a missing settings key fails validation before upload. A
+`darkTheme` branches, is required, so a missing settings key fails validation before upload. The
+one optional key is `settings.general.darkTheme.backgroundImage`, the dark-mode background image
+URL or `null`. Never add it to a model acquired without it: that editor does not accept it yet. A
 stripe's `messageArea`, `includeInOutput`, `padding`, `stripeBackgroundColor`, and
 `contentBackgroundColor`, and a column's `settings.width`, must also stay present.
 
 An omitted `stripes`, `structures`, `columns`, or `blocks` array deletes every element it held.
-Timer blocks from the acquired model cannot be deleted, including through a parent
-`remove()` or `repeat()`. Social deletion is supported in the pinned merge-service profile.
+The runner rejects deleting a block type the write does not support, including through a parent
+`remove()` or `repeat()`.
 Therefore persist the complete candidate produced from the freshly acquired model. Clear ordinary
 values by setting their cleared value. The SDK can remove an image or social link with
 `setLink({url: ""})`, or discard `link.salesforce` when `setLink` changes a button's link from
@@ -159,3 +156,5 @@ values by setting their cleared value. The SDK can remove an image or social lin
 Social `networks` is replaced as a complete list: replacing or reordering networks is supported,
 including multiple custom networks. Every resulting network still has to pass schema validation
 and the editor's icon, alt, and link rules.
+
+For native font changes, read [Font persistence](mutation-options.md#native-font-persistence).

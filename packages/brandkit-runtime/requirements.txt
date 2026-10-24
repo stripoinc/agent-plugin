@@ -1,0 +1,5 @@
+# Python >=3.11. Keep the PSL snapshot identical to the frozen source.
+jsonschema>=4,<5
+idna>=3.10,<4.0.0
+publicsuffixlist==1.0.2.20260726
+Pillow>=11.2.0,<12.0.0

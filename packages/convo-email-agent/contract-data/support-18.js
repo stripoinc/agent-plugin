@@ -108,6 +108,18 @@ export default {
   "hash": "516446874afaf323294fafdfb130c5f8278f6a60f923a03852a630b4fcb826fd",
   "group": "apiMutation"
 },
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createPlanningProjection"]: {
+  "hash": "0e8fd9c927f123e33c284157eaf61d5ba2c37e456d71770b372df921c19491f6",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createPlanningProjection#0(nodeIds)"]: {
+  "hash": "6a558a3c34e4d2198f02e08d1d1ad6e2a57e3ff1601ce1e09316eca97aed4016",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createPlanningProjection#0(nodeIds)[]"]: {
+  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
+  "group": "apiMutation"
+},
 ["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.dispose"]: {
   "hash": "db6e05f1ceba9928c3a1c896a2f9409e87ce497adbe4a0d0ec5574dfdc888b03",
   "group": "apiMutation"
@@ -726,14 +738,6 @@ export default {
 },
 ["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|1.createHtmlTreeAction.props|1.node|1.node|1.config|1.smartBlock|1.variables[].externalMapping|1.modifier|1.regexs[]"]: {
   "hash": "d181335a28dd495742df853fbe711e66379e18e8d7f7356d51c08262bf3e70bf",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|1.createHtmlTreeAction.props|1.node|1.node|1.config|1.smartBlock|1.variables[].externalMapping|1.modifier|1.regexs[].$type"]: {
-  "hash": "3308626eeb86af38f95c36d5d0fb5b5dd4a6a22d7424f7b157b1cd85e3f7f5ba",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|1.createHtmlTreeAction.props|1.node|1.node|1.config|1.smartBlock|1.variables[].externalMapping|1.modifier|1.regexs[].regex"]: {
-  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
   "group": "apiMutation"
 }
 };

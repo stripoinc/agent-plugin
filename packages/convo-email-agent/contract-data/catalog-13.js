@@ -1,5 +1,62 @@
 
 export default {
+["column.containers[].blocks[]|0.settings.hideElement"]: {
+  "required": true,
+  "type": "string",
+  "enum": [
+    "no",
+    "desktop",
+    "mobile"
+  ],
+  "schemaHash": "b7571603839ed66295f268b8b98c6caeef06907f950caf17ef53fb63d5bf7abc"
+},
+["column.containers[].blocks[]|0.settings.rightToLeftTextDirection"]: {
+  "required": true,
+  "type": "boolean",
+  "schemaHash": "7cb541e84f226754a46c21c79f131fa2898354e1242456e6fd1c162bce319553"
+},
+["column.containers[].blocks[]|0.settings.alignment"]: {
+  "required": false,
+  "type": "object",
+  "schemaHash": "f44ee0eea8f96a3910ddcf1f98e33c768949b1394854b751235d760c2243b4e9"
+},
+["column.containers[].blocks[]|0.settings.alignment.desktop"]: {
+  "required": true,
+  "type": "string",
+  "enum": [
+    "left",
+    "center",
+    "right",
+    "justify"
+  ],
+  "schemaHash": "8ae8bf286545f6c3b1f6f73573264a9f61fa09fb6bfa2447aa5ce9bb8617ab6f"
+},
+["column.containers[].blocks[]|0.settings.alignment.mobile"]: {
+  "required": true,
+  "type": "string",
+  "enum": [
+    "left",
+    "center",
+    "right",
+    "justify"
+  ],
+  "schemaHash": "8ae8bf286545f6c3b1f6f73573264a9f61fa09fb6bfa2447aa5ce9bb8617ab6f"
+},
+["column.containers[].blocks[]|0.settings.fixedHeight"]: {
+  "required": false,
+  "type": "object",
+  "schemaHash": "045c777f3c60182f86e794440bf6cb2a0ea8dd4a90ae7c19ff0ee9bbcc1b1803"
+},
+["column.containers[].blocks[]|0.settings.fixedHeight.desktop"]: {
+  "required": false,
+  "type": "object",
+  "schemaHash": "56d55f6fcdb01c0c00118da460ddac6a6ae331e81fa89660e48ae90eeceb01bd"
+},
+["column.containers[].blocks[]|0.settings.fixedHeight.desktop.height"]: {
+  "required": true,
+  "type": "integer",
+  "schemaHash": "b4b3a153ebf7f9907edcb00945ab363971246387c038cfb94b5a08fffd84a3e8"
+},
 ["column.containers[].blocks[]|0.settings.fixedHeight.desktop.verticalAlignment"]: {
   "required": false,
   "type": "string",
@@ -8,17 +65,17 @@ export default {
     "middle",
     "bottom"
   ],
-  "schemaHash": "b4b3a153ebf7f9907edcb00945ab363971246387c038cfb94b5a08fffd84a3e8"
+  "schemaHash": "e930d6bfd7e624cc404d6ac9111b7f5169a3f9e6ccda3f7a9c208027be48f312"
 },
 ["column.containers[].blocks[]|0.settings.fixedHeight.mobile"]: {
   "required": false,
   "type": "object",
-  "schemaHash": "e930d6bfd7e624cc404d6ac9111b7f5169a3f9e6ccda3f7a9c208027be48f312"
+  "schemaHash": "37536e5cdca2c6a99d26bcca81988a492aa2df1ee3034744cc62643936f6c8ab"
 },
 ["column.containers[].blocks[]|0.settings.fixedHeight.mobile.height"]: {
   "required": true,
   "type": "integer",
-  "schemaHash": "a4475867ad83c5cd99c199dfddf0b8e799ebe5f636bf765a2f4ec2d69e7ead09"
+  "schemaHash": "b4b3a153ebf7f9907edcb00945ab363971246387c038cfb94b5a08fffd84a3e8"
 },
 ["column.containers[].blocks[]|0.settings.fixedHeight.mobile.verticalAlignment"]: {
   "required": false,
@@ -28,62 +85,62 @@ export default {
     "middle",
     "bottom"
   ],
-  "schemaHash": "b4b3a153ebf7f9907edcb00945ab363971246387c038cfb94b5a08fffd84a3e8"
+  "schemaHash": "e930d6bfd7e624cc404d6ac9111b7f5169a3f9e6ccda3f7a9c208027be48f312"
 },
 ["column.containers[].blocks[]|0.settings.padding"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "2fb4ba346d619aa1f724ab26d5dd469a53ac8b687e36c5231e523f34f496aafc"
+  "schemaHash": "a2fa074d35be69d77eb6f966d8425ea17a639c614d5183ae67a983c0182d7617"
 },
 ["column.containers[].blocks[]|0.settings.padding.desktop"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "37536e5cdca2c6a99d26bcca81988a492aa2df1ee3034744cc62643936f6c8ab"
+  "schemaHash": "98609b7a886726a632398fee0e273681e74eb2efb659858513cca301786b629f"
 },
 ["column.containers[].blocks[]|0.settings.padding.desktop.top"]: {
   "required": true,
   "type": "number",
-  "schemaHash": "98609b7a886726a632398fee0e273681e74eb2efb659858513cca301786b629f"
+  "schemaHash": "ccabffbf0f31f4f4f23d00588199cf15516a64811ff178802912c942e7de8ec3"
 },
 ["column.containers[].blocks[]|0.settings.padding.desktop.right"]: {
   "required": true,
   "type": "number",
-  "schemaHash": "98609b7a886726a632398fee0e273681e74eb2efb659858513cca301786b629f"
+  "schemaHash": "ccabffbf0f31f4f4f23d00588199cf15516a64811ff178802912c942e7de8ec3"
 },
 ["column.containers[].blocks[]|0.settings.padding.desktop.bottom"]: {
   "required": true,
   "type": "number",
-  "schemaHash": "98609b7a886726a632398fee0e273681e74eb2efb659858513cca301786b629f"
+  "schemaHash": "ccabffbf0f31f4f4f23d00588199cf15516a64811ff178802912c942e7de8ec3"
 },
 ["column.containers[].blocks[]|0.settings.padding.desktop.left"]: {
   "required": true,
   "type": "number",
-  "schemaHash": "98609b7a886726a632398fee0e273681e74eb2efb659858513cca301786b629f"
+  "schemaHash": "ccabffbf0f31f4f4f23d00588199cf15516a64811ff178802912c942e7de8ec3"
 },
 ["column.containers[].blocks[]|0.settings.padding.mobile"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "37536e5cdca2c6a99d26bcca81988a492aa2df1ee3034744cc62643936f6c8ab"
+  "schemaHash": "98609b7a886726a632398fee0e273681e74eb2efb659858513cca301786b629f"
 },
 ["column.containers[].blocks[]|0.settings.padding.mobile.top"]: {
   "required": true,
   "type": "number",
-  "schemaHash": "98609b7a886726a632398fee0e273681e74eb2efb659858513cca301786b629f"
+  "schemaHash": "ccabffbf0f31f4f4f23d00588199cf15516a64811ff178802912c942e7de8ec3"
 },
 ["column.containers[].blocks[]|0.settings.padding.mobile.right"]: {
   "required": true,
   "type": "number",
-  "schemaHash": "98609b7a886726a632398fee0e273681e74eb2efb659858513cca301786b629f"
+  "schemaHash": "ccabffbf0f31f4f4f23d00588199cf15516a64811ff178802912c942e7de8ec3"
 },
 ["column.containers[].blocks[]|0.settings.padding.mobile.bottom"]: {
   "required": true,
   "type": "number",
-  "schemaHash": "98609b7a886726a632398fee0e273681e74eb2efb659858513cca301786b629f"
+  "schemaHash": "ccabffbf0f31f4f4f23d00588199cf15516a64811ff178802912c942e7de8ec3"
 },
 ["column.containers[].blocks[]|0.settings.padding.mobile.left"]: {
   "required": true,
   "type": "number",
-  "schemaHash": "98609b7a886726a632398fee0e273681e74eb2efb659858513cca301786b629f"
+  "schemaHash": "ccabffbf0f31f4f4f23d00588199cf15516a64811ff178802912c942e7de8ec3"
 },
 ["column.containers[].blocks[]|0.settings.includeInOutput"]: {
   "required": true,
@@ -103,12 +160,12 @@ export default {
 ["column.containers[].blocks[]|0.settings.letterSpacing"]: {
   "required": false,
   "type": "object",
-  "schemaHash": "7b91cafbb4bd70c075dabec2ee8400c032157eb69f2f1c14d94225aed001db05"
+  "schemaHash": "39e2660bcc56796fdf438ae13c8aec96e13c6720ae1f6491c1f49c51502b9854"
 },
 ["column.containers[].blocks[]|0.settings.letterSpacing.value"]: {
   "required": true,
   "type": "number",
-  "schemaHash": "ccabffbf0f31f4f4f23d00588199cf15516a64811ff178802912c942e7de8ec3"
+  "schemaHash": "35dd650fb6a5f62fe7fc20739ab6b54f5f4aea29f3f5841fc40e61b1e3b89a95"
 },
 ["column.containers[].blocks[]|0.settings.letterSpacing.unit"]: {
   "required": true,
@@ -117,12 +174,12 @@ export default {
     "px",
     "em"
   ],
-  "schemaHash": "35dd650fb6a5f62fe7fc20739ab6b54f5f4aea29f3f5841fc40e61b1e3b89a95"
+  "schemaHash": "5a6d40dd19c05ee913025262e4a5001671aac6913feb634ce0e68f5f65bf6790"
 },
 ["column.containers[].blocks[]|0.content"]: {
   "required": false,
   "type": "string",
-  "schemaHash": "5a6d40dd19c05ee913025262e4a5001671aac6913feb634ce0e68f5f65bf6790"
+  "schemaHash": "cea782e61d1a555b5c4bebddf5e1bf422ddcc83a0eb361b406b8d09d70ed7f88"
 },
 ["column.containers[].blocks[]|1"]: {
   "required": true,
@@ -138,28 +195,28 @@ export default {
 ["column.containers[].blocks[]|1.id"]: {
   "required": true,
   "type": "string",
-  "schemaHash": "987f44fff38a9fcd62e353101b3823e640287645499d853d1e4a670f7d80776d"
+  "schemaHash": "cc22f8ec14817471274ae0fddcdc70ee916ee0e4e058c2adf4ccefed5b83163f"
 },
 ["column.containers[].blocks[]|1.type"]: {
   "required": true,
   "type": "string",
   "const": "image",
-  "schemaHash": "cea782e61d1a555b5c4bebddf5e1bf422ddcc83a0eb361b406b8d09d70ed7f88"
+  "schemaHash": "77491c918f72594148ebce95e4c92d11695538b6f547a6767d2fff890ae7a68a"
 },
 ["column.containers[].blocks[]|1.settings"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "77491c918f72594148ebce95e4c92d11695538b6f547a6767d2fff890ae7a68a"
+  "schemaHash": "efb2498bfd7c3a684731d96285b8c29553f2e46b13fac6d897a5f507ebc3c9ae"
 },
 ["column.containers[].blocks[]|1.settings.src"]: {
   "required": true,
   "type": "string",
-  "schemaHash": "efb2498bfd7c3a684731d96285b8c29553f2e46b13fac6d897a5f507ebc3c9ae"
+  "schemaHash": "f0974842225d8b0fbd8ba7aab50640a6355e945036a7294dc4fdbf021b88812d"
 },
 ["column.containers[].blocks[]|1.settings.link"]: {
   "required": false,
   "type": "object",
-  "schemaHash": "f0974842225d8b0fbd8ba7aab50640a6355e945036a7294dc4fdbf021b88812d"
+  "schemaHash": "b67221dc100f049ba504d1a2dff45ed221a9781a040e75344bd0a22af55234f4"
 },
 ["column.containers[].blocks[]|1.settings.link.type"]: {
   "required": true,
@@ -175,37 +232,37 @@ export default {
     "viber",
     "other"
   ],
-  "schemaHash": "802befecff7fb4e19d2d319ec6f9b19df56b12ccc44284523ea564f3cfbc63a7"
+  "schemaHash": "7c1162100ac24e267b04a084f30aa335e5ad5dfe2712e7130507ddb00588d0ea"
 },
 ["column.containers[].blocks[]|1.settings.link.href"]: {
   "required": true,
   "type": "string",
-  "schemaHash": "7c1162100ac24e267b04a084f30aa335e5ad5dfe2712e7130507ddb00588d0ea"
+  "schemaHash": "24cbcf3cacdd3be29730331e06c047439882c9a9efad7a5ce3d7a75a1eeb32ca"
 },
 ["column.containers[].blocks[]|1.settings.altText"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "24cbcf3cacdd3be29730331e06c047439882c9a9efad7a5ce3d7a75a1eeb32ca"
+  "schemaHash": "b85d15de86db3d5b4310adcf51daf7f021273f8024b917f8cd74e8cda32fe834"
 },
 ["column.containers[].blocks[]|1.settings.altText.text"]: {
   "required": true,
   "type": "string",
-  "schemaHash": "b85d15de86db3d5b4310adcf51daf7f021273f8024b917f8cd74e8cda32fe834"
+  "schemaHash": "5488d5a30aa799c16d2a2e70182680c408d6b79973e0120c2259b2a142a87363"
 },
 ["column.containers[].blocks[]|1.settings.altText.addToTitle"]: {
   "required": true,
   "type": "boolean",
-  "schemaHash": "5488d5a30aa799c16d2a2e70182680c408d6b79973e0120c2259b2a142a87363"
+  "schemaHash": "fc90ddf303f474b1fad5c7baadbf1773f3bb6c2dacaf669c10b0fc256521730f"
 },
 ["column.containers[].blocks[]|1.settings.size"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "fc90ddf303f474b1fad5c7baadbf1773f3bb6c2dacaf669c10b0fc256521730f"
+  "schemaHash": "9ecfde2c177d1d8e70740eaf7ff476cb44b3c6c7506108b1f594dbd0e7386ec0"
 },
 ["column.containers[].blocks[]|1.settings.size.desktop"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "9ecfde2c177d1d8e70740eaf7ff476cb44b3c6c7506108b1f594dbd0e7386ec0"
+  "schemaHash": "c03f794cbcb25b907b25bf853ae71341379a35ddfcfc001f28e718613fb241eb"
 },
 ["column.containers[].blocks[]|1.settings.size.desktop.mode"]: {
   "required": true,
@@ -214,17 +271,17 @@ export default {
     "width",
     "height"
   ],
-  "schemaHash": "c03f794cbcb25b907b25bf853ae71341379a35ddfcfc001f28e718613fb241eb"
+  "schemaHash": "e27ccbc8542e7d9efb79ddbf88f2e7938ec2b252a620ca5541f867926cb70f10"
 },
 ["column.containers[].blocks[]|1.settings.size.desktop.px"]: {
   "required": true,
   "type": "integer",
-  "schemaHash": "e27ccbc8542e7d9efb79ddbf88f2e7938ec2b252a620ca5541f867926cb70f10"
+  "schemaHash": "ffeb13b7004005b19938145b546d5ceb08d7dcade8822f2213892c866f7cb1fa"
 },
 ["column.containers[].blocks[]|1.settings.size.mobile"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "9ecfde2c177d1d8e70740eaf7ff476cb44b3c6c7506108b1f594dbd0e7386ec0"
+  "schemaHash": "c03f794cbcb25b907b25bf853ae71341379a35ddfcfc001f28e718613fb241eb"
 },
 ["column.containers[].blocks[]|1.settings.size.mobile.mode"]: {
   "required": true,
@@ -233,17 +290,17 @@ export default {
     "width",
     "height"
   ],
-  "schemaHash": "c03f794cbcb25b907b25bf853ae71341379a35ddfcfc001f28e718613fb241eb"
+  "schemaHash": "e27ccbc8542e7d9efb79ddbf88f2e7938ec2b252a620ca5541f867926cb70f10"
 },
 ["column.containers[].blocks[]|1.settings.size.mobile.px"]: {
   "required": true,
   "type": "integer",
-  "schemaHash": "e27ccbc8542e7d9efb79ddbf88f2e7938ec2b252a620ca5541f867926cb70f10"
+  "schemaHash": "ffeb13b7004005b19938145b546d5ceb08d7dcade8822f2213892c866f7cb1fa"
 },
 ["column.containers[].blocks[]|1.settings.alignment"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "ffeb13b7004005b19938145b546d5ceb08d7dcade8822f2213892c866f7cb1fa"
+  "schemaHash": "df231449337f06d6d6b616cb574c508c77812efbbd2a02829ccdb35926d62c3e"
 },
 ["column.containers[].blocks[]|1.settings.alignment.desktop"]: {
   "required": true,
@@ -253,7 +310,7 @@ export default {
     "center",
     "right"
   ],
-  "schemaHash": "df231449337f06d6d6b616cb574c508c77812efbbd2a02829ccdb35926d62c3e"
+  "schemaHash": "341814eb6aff7d91bd84e9006aba1a60303f85af77dc4b114c35299d29ccec79"
 },
 ["column.containers[].blocks[]|1.settings.alignment.mobile"]: {
   "required": true,
@@ -263,12 +320,12 @@ export default {
     "center",
     "right"
   ],
-  "schemaHash": "df231449337f06d6d6b616cb574c508c77812efbbd2a02829ccdb35926d62c3e"
+  "schemaHash": "341814eb6aff7d91bd84e9006aba1a60303f85af77dc4b114c35299d29ccec79"
 },
 ["column.containers[].blocks[]|1.settings.radius"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "341814eb6aff7d91bd84e9006aba1a60303f85af77dc4b114c35299d29ccec79"
+  "schemaHash": "82cdc2e20bff7e777b2055cc1783d43dc19e28df76b38edeb403fbcd81b24d9d"
 },
 ["column.containers[].blocks[]|1.settings.radius.desktop"]: {
   "required": true,
@@ -278,22 +335,22 @@ export default {
 ["column.containers[].blocks[]|1.settings.radius.desktop.topLeft"]: {
   "required": true,
   "type": "number",
-  "schemaHash": "d4ea49530b875e80d3ed20028edc09f574018c4371f79e53656eaeeeadc83699"
+  "schemaHash": "dd31199631720a98a43b2f0d848983a49cf1c662a61d0aae5eeca7716eb2eeb7"
 },
 ["column.containers[].blocks[]|1.settings.radius.desktop.topRight"]: {
   "required": true,
   "type": "number",
-  "schemaHash": "dd31199631720a98a43b2f0d848983a49cf1c662a61d0aae5eeca7716eb2eeb7"
+  "schemaHash": "1e4a3971a198b7cbe0dbc8b55521142df63a6f4714a4688bb033dec1d61665d7"
 },
 ["column.containers[].blocks[]|1.settings.radius.desktop.bottomRight"]: {
   "required": true,
   "type": "number",
-  "schemaHash": "1e4a3971a198b7cbe0dbc8b55521142df63a6f4714a4688bb033dec1d61665d7"
+  "schemaHash": "380155b942a4d8b8cd37f1baf475c42f30bf72f300cb6191489845e054b57df4"
 },
 ["column.containers[].blocks[]|1.settings.radius.desktop.bottomLeft"]: {
   "required": true,
   "type": "number",
-  "schemaHash": "380155b942a4d8b8cd37f1baf475c42f30bf72f300cb6191489845e054b57df4"
+  "schemaHash": "22c9c58113a9510e9ac16edc66a390310a7353f25ed2920baa8d0284ee6e60bd"
 },
 ["column.containers[].blocks[]|1.settings.radius.mobile"]: {
   "required": true,
@@ -303,22 +360,22 @@ export default {
 ["column.containers[].blocks[]|1.settings.radius.mobile.topLeft"]: {
   "required": true,
   "type": "number",
-  "schemaHash": "d4ea49530b875e80d3ed20028edc09f574018c4371f79e53656eaeeeadc83699"
+  "schemaHash": "dd31199631720a98a43b2f0d848983a49cf1c662a61d0aae5eeca7716eb2eeb7"
 },
 ["column.containers[].blocks[]|1.settings.radius.mobile.topRight"]: {
   "required": true,
   "type": "number",
-  "schemaHash": "dd31199631720a98a43b2f0d848983a49cf1c662a61d0aae5eeca7716eb2eeb7"
+  "schemaHash": "1e4a3971a198b7cbe0dbc8b55521142df63a6f4714a4688bb033dec1d61665d7"
 },
 ["column.containers[].blocks[]|1.settings.radius.mobile.bottomRight"]: {
   "required": true,
   "type": "number",
-  "schemaHash": "1e4a3971a198b7cbe0dbc8b55521142df63a6f4714a4688bb033dec1d61665d7"
+  "schemaHash": "380155b942a4d8b8cd37f1baf475c42f30bf72f300cb6191489845e054b57df4"
 },
 ["column.containers[].blocks[]|1.settings.radius.mobile.bottomLeft"]: {
   "required": true,
   "type": "number",
-  "schemaHash": "380155b942a4d8b8cd37f1baf475c42f30bf72f300cb6191489845e054b57df4"
+  "schemaHash": "22c9c58113a9510e9ac16edc66a390310a7353f25ed2920baa8d0284ee6e60bd"
 },
 ["column.containers[].blocks[]|1.settings.hideElement"]: {
   "required": true,
@@ -333,57 +390,57 @@ export default {
 ["column.containers[].blocks[]|1.settings.margins"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "82cdc2e20bff7e777b2055cc1783d43dc19e28df76b38edeb403fbcd81b24d9d"
+  "schemaHash": "a7e49c9de944eb59b182b4170e11f27246a9a6b97991efb30eb44167d8e6e96a"
 },
 ["column.containers[].blocks[]|1.settings.margins.desktop"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "a7e49c9de944eb59b182b4170e11f27246a9a6b97991efb30eb44167d8e6e96a"
+  "schemaHash": "512befe9ea2fc6099da95661f8b6f26434831be23e431b5670423c8f8cbc163d"
 },
 ["column.containers[].blocks[]|1.settings.margins.desktop.top"]: {
   "required": true,
   "type": "number",
-  "schemaHash": "512befe9ea2fc6099da95661f8b6f26434831be23e431b5670423c8f8cbc163d"
+  "schemaHash": "a60791c7bd997624175e5ce942b961e03be8caff0688d64714c220d3e3069018"
 },
 ["column.containers[].blocks[]|1.settings.margins.desktop.right"]: {
   "required": true,
   "type": "number",
-  "schemaHash": "a60791c7bd997624175e5ce942b961e03be8caff0688d64714c220d3e3069018"
+  "schemaHash": "f16d2a1c75e4e368c52096f5f392478b7362f12092f61565b2505fc4904bfda5"
 },
 ["column.containers[].blocks[]|1.settings.margins.desktop.bottom"]: {
   "required": true,
   "type": "number",
-  "schemaHash": "f16d2a1c75e4e368c52096f5f392478b7362f12092f61565b2505fc4904bfda5"
+  "schemaHash": "b462dde7c9edde64ea0ef3b7baa66de119ee6b45e1275970be7d07062ca8e996"
 },
 ["column.containers[].blocks[]|1.settings.margins.desktop.left"]: {
   "required": true,
   "type": "number",
-  "schemaHash": "b462dde7c9edde64ea0ef3b7baa66de119ee6b45e1275970be7d07062ca8e996"
+  "schemaHash": "c59c64cc82659b3f4d98141fc48d64d75303e9682323d902d0767caca9a19c31"
 },
 ["column.containers[].blocks[]|1.settings.margins.mobile"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "a7e49c9de944eb59b182b4170e11f27246a9a6b97991efb30eb44167d8e6e96a"
+  "schemaHash": "512befe9ea2fc6099da95661f8b6f26434831be23e431b5670423c8f8cbc163d"
 },
 ["column.containers[].blocks[]|1.settings.margins.mobile.top"]: {
   "required": true,
   "type": "number",
-  "schemaHash": "512befe9ea2fc6099da95661f8b6f26434831be23e431b5670423c8f8cbc163d"
+  "schemaHash": "a60791c7bd997624175e5ce942b961e03be8caff0688d64714c220d3e3069018"
 },
 ["column.containers[].blocks[]|1.settings.margins.mobile.right"]: {
   "required": true,
   "type": "number",
-  "schemaHash": "a60791c7bd997624175e5ce942b961e03be8caff0688d64714c220d3e3069018"
+  "schemaHash": "f16d2a1c75e4e368c52096f5f392478b7362f12092f61565b2505fc4904bfda5"
 },
 ["column.containers[].blocks[]|1.settings.margins.mobile.bottom"]: {
   "required": true,
   "type": "number",
-  "schemaHash": "f16d2a1c75e4e368c52096f5f392478b7362f12092f61565b2505fc4904bfda5"
+  "schemaHash": "b462dde7c9edde64ea0ef3b7baa66de119ee6b45e1275970be7d07062ca8e996"
 },
 ["column.containers[].blocks[]|1.settings.margins.mobile.left"]: {
   "required": true,
   "type": "number",
-  "schemaHash": "b462dde7c9edde64ea0ef3b7baa66de119ee6b45e1275970be7d07062ca8e996"
+  "schemaHash": "c59c64cc82659b3f4d98141fc48d64d75303e9682323d902d0767caca9a19c31"
 },
 ["column.containers[].blocks[]|1.settings.includeInOutput"]: {
   "required": true,
@@ -398,12 +455,12 @@ export default {
 ["column.containers[].blocks[]|1.settings.anchorLinkName"]: {
   "required": true,
   "type": "string",
-  "schemaHash": "c59c64cc82659b3f4d98141fc48d64d75303e9682323d902d0767caca9a19c31"
+  "schemaHash": "3954de1555ee8336646468d5dad24e0136cabe4665ebb85a3b60f14913067a69"
 },
 ["column.containers[].blocks[]|1.settings.responsiveMobile"]: {
   "required": true,
   "type": "boolean",
-  "schemaHash": "3954de1555ee8336646468d5dad24e0136cabe4665ebb85a3b60f14913067a69"
+  "schemaHash": "0a4857291fe8770b399d2f933a25d2c3f94ec8ec39e68be73d3918997d7f3d7b"
 },
 ["column.containers[].blocks[]|2"]: {
   "required": true,
@@ -419,13 +476,13 @@ export default {
 ["column.containers[].blocks[]|2.id"]: {
   "required": true,
   "type": "string",
-  "schemaHash": "987f44fff38a9fcd62e353101b3823e640287645499d853d1e4a670f7d80776d"
+  "schemaHash": "cc22f8ec14817471274ae0fddcdc70ee916ee0e4e058c2adf4ccefed5b83163f"
 },
 ["column.containers[].blocks[]|2.type"]: {
   "required": true,
   "type": "string",
   "const": "video",
-  "schemaHash": "0a4857291fe8770b399d2f933a25d2c3f94ec8ec39e68be73d3918997d7f3d7b"
+  "schemaHash": "5c951508c542a492ea27007225a1c8d93656bc868ca3dd23369d2586fcad9b55"
 },
 ["column.containers[].blocks[]|2.settings"]: {
   "required": true,
@@ -435,32 +492,32 @@ export default {
 ["column.containers[].blocks[]|2.settings.videoLink"]: {
   "required": true,
   "type": "string",
-  "schemaHash": "5c951508c542a492ea27007225a1c8d93656bc868ca3dd23369d2586fcad9b55"
+  "schemaHash": "efd732b80d28c0122ee3a66deffd934c4ce1b8e509136a46f1965cd3af5f03a5"
 },
 ["column.containers[].blocks[]|2.settings.altText"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "24cbcf3cacdd3be29730331e06c047439882c9a9efad7a5ce3d7a75a1eeb32ca"
+  "schemaHash": "b85d15de86db3d5b4310adcf51daf7f021273f8024b917f8cd74e8cda32fe834"
 },
 ["column.containers[].blocks[]|2.settings.altText.text"]: {
   "required": true,
   "type": "string",
-  "schemaHash": "b85d15de86db3d5b4310adcf51daf7f021273f8024b917f8cd74e8cda32fe834"
+  "schemaHash": "5488d5a30aa799c16d2a2e70182680c408d6b79973e0120c2259b2a142a87363"
 },
 ["column.containers[].blocks[]|2.settings.altText.addToTitle"]: {
   "required": true,
   "type": "boolean",
-  "schemaHash": "5488d5a30aa799c16d2a2e70182680c408d6b79973e0120c2259b2a142a87363"
+  "schemaHash": "fc90ddf303f474b1fad5c7baadbf1773f3bb6c2dacaf669c10b0fc256521730f"
 },
 ["column.containers[].blocks[]|2.settings.customThumbnail"]: {
   "required": false,
   "type": "object",
-  "schemaHash": "efd732b80d28c0122ee3a66deffd934c4ce1b8e509136a46f1965cd3af5f03a5"
+  "schemaHash": "8252330452d3e452f1f9e987f5f9fcc0c1563a90eb85bcf1b9a45c227808d935"
 },
 ["column.containers[].blocks[]|2.settings.customThumbnail.src"]: {
   "required": true,
   "type": "string",
-  "schemaHash": "8252330452d3e452f1f9e987f5f9fcc0c1563a90eb85bcf1b9a45c227808d935"
+  "schemaHash": "a349091f76fcc6df5d76f39577c2d279d637698d36ed086028c7f8ea197c7493"
 },
 ["column.containers[].blocks[]|2.settings.playButtonStyle"]: {
   "required": true,
@@ -476,17 +533,17 @@ export default {
     "greyCircle",
     "blackCircleInverse"
   ],
-  "schemaHash": "a349091f76fcc6df5d76f39577c2d279d637698d36ed086028c7f8ea197c7493"
+  "schemaHash": "9997efdcca77945c766ad1cbab2d82d5ea2f1aed6bbd59e8c6299bc16c7d33eb"
 },
 ["column.containers[].blocks[]|2.settings.size"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "fc90ddf303f474b1fad5c7baadbf1773f3bb6c2dacaf669c10b0fc256521730f"
+  "schemaHash": "9ecfde2c177d1d8e70740eaf7ff476cb44b3c6c7506108b1f594dbd0e7386ec0"
 },
 ["column.containers[].blocks[]|2.settings.size.desktop"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "9ecfde2c177d1d8e70740eaf7ff476cb44b3c6c7506108b1f594dbd0e7386ec0"
+  "schemaHash": "c03f794cbcb25b907b25bf853ae71341379a35ddfcfc001f28e718613fb241eb"
 },
 ["column.containers[].blocks[]|2.settings.size.desktop.mode"]: {
   "required": true,
@@ -495,17 +552,17 @@ export default {
     "width",
     "height"
   ],
-  "schemaHash": "c03f794cbcb25b907b25bf853ae71341379a35ddfcfc001f28e718613fb241eb"
+  "schemaHash": "e27ccbc8542e7d9efb79ddbf88f2e7938ec2b252a620ca5541f867926cb70f10"
 },
 ["column.containers[].blocks[]|2.settings.size.desktop.px"]: {
   "required": true,
   "type": "integer",
-  "schemaHash": "e27ccbc8542e7d9efb79ddbf88f2e7938ec2b252a620ca5541f867926cb70f10"
+  "schemaHash": "ffeb13b7004005b19938145b546d5ceb08d7dcade8822f2213892c866f7cb1fa"
 },
 ["column.containers[].blocks[]|2.settings.size.mobile"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "9ecfde2c177d1d8e70740eaf7ff476cb44b3c6c7506108b1f594dbd0e7386ec0"
+  "schemaHash": "c03f794cbcb25b907b25bf853ae71341379a35ddfcfc001f28e718613fb241eb"
 },
 ["column.containers[].blocks[]|2.settings.size.mobile.mode"]: {
   "required": true,
@@ -514,17 +571,17 @@ export default {
     "width",
     "height"
   ],
-  "schemaHash": "c03f794cbcb25b907b25bf853ae71341379a35ddfcfc001f28e718613fb241eb"
+  "schemaHash": "e27ccbc8542e7d9efb79ddbf88f2e7938ec2b252a620ca5541f867926cb70f10"
 },
 ["column.containers[].blocks[]|2.settings.size.mobile.px"]: {
   "required": true,
   "type": "integer",
-  "schemaHash": "e27ccbc8542e7d9efb79ddbf88f2e7938ec2b252a620ca5541f867926cb70f10"
+  "schemaHash": "ffeb13b7004005b19938145b546d5ceb08d7dcade8822f2213892c866f7cb1fa"
 },
 ["column.containers[].blocks[]|2.settings.alignment"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "ffeb13b7004005b19938145b546d5ceb08d7dcade8822f2213892c866f7cb1fa"
+  "schemaHash": "df231449337f06d6d6b616cb574c508c77812efbbd2a02829ccdb35926d62c3e"
 },
 ["column.containers[].blocks[]|2.settings.alignment.desktop"]: {
   "required": true,
@@ -534,7 +591,7 @@ export default {
     "center",
     "right"
   ],
-  "schemaHash": "df231449337f06d6d6b616cb574c508c77812efbbd2a02829ccdb35926d62c3e"
+  "schemaHash": "341814eb6aff7d91bd84e9006aba1a60303f85af77dc4b114c35299d29ccec79"
 },
 ["column.containers[].blocks[]|2.settings.alignment.mobile"]: {
   "required": true,
@@ -544,12 +601,12 @@ export default {
     "center",
     "right"
   ],
-  "schemaHash": "df231449337f06d6d6b616cb574c508c77812efbbd2a02829ccdb35926d62c3e"
+  "schemaHash": "341814eb6aff7d91bd84e9006aba1a60303f85af77dc4b114c35299d29ccec79"
 },
 ["column.containers[].blocks[]|2.settings.radius"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "341814eb6aff7d91bd84e9006aba1a60303f85af77dc4b114c35299d29ccec79"
+  "schemaHash": "82cdc2e20bff7e777b2055cc1783d43dc19e28df76b38edeb403fbcd81b24d9d"
 },
 ["column.containers[].blocks[]|2.settings.radius.desktop"]: {
   "required": true,
@@ -559,22 +616,22 @@ export default {
 ["column.containers[].blocks[]|2.settings.radius.desktop.topLeft"]: {
   "required": true,
   "type": "number",
-  "schemaHash": "d4ea49530b875e80d3ed20028edc09f574018c4371f79e53656eaeeeadc83699"
+  "schemaHash": "dd31199631720a98a43b2f0d848983a49cf1c662a61d0aae5eeca7716eb2eeb7"
 },
 ["column.containers[].blocks[]|2.settings.radius.desktop.topRight"]: {
   "required": true,
   "type": "number",
-  "schemaHash": "dd31199631720a98a43b2f0d848983a49cf1c662a61d0aae5eeca7716eb2eeb7"
+  "schemaHash": "1e4a3971a198b7cbe0dbc8b55521142df63a6f4714a4688bb033dec1d61665d7"
 },
 ["column.containers[].blocks[]|2.settings.radius.desktop.bottomRight"]: {
   "required": true,
   "type": "number",
-  "schemaHash": "1e4a3971a198b7cbe0dbc8b55521142df63a6f4714a4688bb033dec1d61665d7"
+  "schemaHash": "380155b942a4d8b8cd37f1baf475c42f30bf72f300cb6191489845e054b57df4"
 },
 ["column.containers[].blocks[]|2.settings.radius.desktop.bottomLeft"]: {
   "required": true,
   "type": "number",
-  "schemaHash": "380155b942a4d8b8cd37f1baf475c42f30bf72f300cb6191489845e054b57df4"
+  "schemaHash": "22c9c58113a9510e9ac16edc66a390310a7353f25ed2920baa8d0284ee6e60bd"
 },
 ["column.containers[].blocks[]|2.settings.radius.mobile"]: {
   "required": true,
@@ -584,22 +641,22 @@ export default {
 ["column.containers[].blocks[]|2.settings.radius.mobile.topLeft"]: {
   "required": true,
   "type": "number",
-  "schemaHash": "d4ea49530b875e80d3ed20028edc09f574018c4371f79e53656eaeeeadc83699"
+  "schemaHash": "dd31199631720a98a43b2f0d848983a49cf1c662a61d0aae5eeca7716eb2eeb7"
 },
 ["column.containers[].blocks[]|2.settings.radius.mobile.topRight"]: {
   "required": true,
   "type": "number",
-  "schemaHash": "dd31199631720a98a43b2f0d848983a49cf1c662a61d0aae5eeca7716eb2eeb7"
+  "schemaHash": "1e4a3971a198b7cbe0dbc8b55521142df63a6f4714a4688bb033dec1d61665d7"
 },
 ["column.containers[].blocks[]|2.settings.radius.mobile.bottomRight"]: {
   "required": true,
   "type": "number",
-  "schemaHash": "1e4a3971a198b7cbe0dbc8b55521142df63a6f4714a4688bb033dec1d61665d7"
+  "schemaHash": "380155b942a4d8b8cd37f1baf475c42f30bf72f300cb6191489845e054b57df4"
 },
 ["column.containers[].blocks[]|2.settings.radius.mobile.bottomLeft"]: {
   "required": true,
   "type": "number",
-  "schemaHash": "380155b942a4d8b8cd37f1baf475c42f30bf72f300cb6191489845e054b57df4"
+  "schemaHash": "22c9c58113a9510e9ac16edc66a390310a7353f25ed2920baa8d0284ee6e60bd"
 },
 ["column.containers[].blocks[]|2.settings.hideElement"]: {
   "required": true,
@@ -614,57 +671,57 @@ export default {
 ["column.containers[].blocks[]|2.settings.paddings"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "9997efdcca77945c766ad1cbab2d82d5ea2f1aed6bbd59e8c6299bc16c7d33eb"
+  "schemaHash": "70025b1e6ecca2a5db83b40897d93e15e79a2c51694481f46e5521d01ea7be36"
 },
 ["column.containers[].blocks[]|2.settings.paddings.desktop"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "a7e49c9de944eb59b182b4170e11f27246a9a6b97991efb30eb44167d8e6e96a"
+  "schemaHash": "512befe9ea2fc6099da95661f8b6f26434831be23e431b5670423c8f8cbc163d"
 },
 ["column.containers[].blocks[]|2.settings.paddings.desktop.top"]: {
   "required": true,
   "type": "number",
-  "schemaHash": "512befe9ea2fc6099da95661f8b6f26434831be23e431b5670423c8f8cbc163d"
+  "schemaHash": "a60791c7bd997624175e5ce942b961e03be8caff0688d64714c220d3e3069018"
 },
 ["column.containers[].blocks[]|2.settings.paddings.desktop.right"]: {
   "required": true,
   "type": "number",
-  "schemaHash": "a60791c7bd997624175e5ce942b961e03be8caff0688d64714c220d3e3069018"
+  "schemaHash": "f16d2a1c75e4e368c52096f5f392478b7362f12092f61565b2505fc4904bfda5"
 },
 ["column.containers[].blocks[]|2.settings.paddings.desktop.bottom"]: {
   "required": true,
   "type": "number",
-  "schemaHash": "f16d2a1c75e4e368c52096f5f392478b7362f12092f61565b2505fc4904bfda5"
+  "schemaHash": "b462dde7c9edde64ea0ef3b7baa66de119ee6b45e1275970be7d07062ca8e996"
 },
 ["column.containers[].blocks[]|2.settings.paddings.desktop.left"]: {
   "required": true,
   "type": "number",
-  "schemaHash": "b462dde7c9edde64ea0ef3b7baa66de119ee6b45e1275970be7d07062ca8e996"
+  "schemaHash": "c59c64cc82659b3f4d98141fc48d64d75303e9682323d902d0767caca9a19c31"
 },
 ["column.containers[].blocks[]|2.settings.paddings.mobile"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "a7e49c9de944eb59b182b4170e11f27246a9a6b97991efb30eb44167d8e6e96a"
+  "schemaHash": "512befe9ea2fc6099da95661f8b6f26434831be23e431b5670423c8f8cbc163d"
 },
 ["column.containers[].blocks[]|2.settings.paddings.mobile.top"]: {
   "required": true,
   "type": "number",
-  "schemaHash": "512befe9ea2fc6099da95661f8b6f26434831be23e431b5670423c8f8cbc163d"
+  "schemaHash": "a60791c7bd997624175e5ce942b961e03be8caff0688d64714c220d3e3069018"
 },
 ["column.containers[].blocks[]|2.settings.paddings.mobile.right"]: {
   "required": true,
   "type": "number",
-  "schemaHash": "a60791c7bd997624175e5ce942b961e03be8caff0688d64714c220d3e3069018"
+  "schemaHash": "f16d2a1c75e4e368c52096f5f392478b7362f12092f61565b2505fc4904bfda5"
 },
 ["column.containers[].blocks[]|2.settings.paddings.mobile.bottom"]: {
   "required": true,
   "type": "number",
-  "schemaHash": "f16d2a1c75e4e368c52096f5f392478b7362f12092f61565b2505fc4904bfda5"
+  "schemaHash": "b462dde7c9edde64ea0ef3b7baa66de119ee6b45e1275970be7d07062ca8e996"
 },
 ["column.containers[].blocks[]|2.settings.paddings.mobile.left"]: {
   "required": true,
   "type": "number",
-  "schemaHash": "b462dde7c9edde64ea0ef3b7baa66de119ee6b45e1275970be7d07062ca8e996"
+  "schemaHash": "c59c64cc82659b3f4d98141fc48d64d75303e9682323d902d0767caca9a19c31"
 },
 ["column.containers[].blocks[]|2.settings.includeInOutput"]: {
   "required": true,
@@ -679,12 +736,12 @@ export default {
 ["column.containers[].blocks[]|2.settings.anchorLinkName"]: {
   "required": true,
   "type": "string",
-  "schemaHash": "c59c64cc82659b3f4d98141fc48d64d75303e9682323d902d0767caca9a19c31"
+  "schemaHash": "3954de1555ee8336646468d5dad24e0136cabe4665ebb85a3b60f14913067a69"
 },
 ["column.containers[].blocks[]|2.settings.responsiveMobile"]: {
   "required": true,
   "type": "boolean",
-  "schemaHash": "70025b1e6ecca2a5db83b40897d93e15e79a2c51694481f46e5521d01ea7be36"
+  "schemaHash": "479e5a71f296ad92630207e93e6dde8b2f86a8493380ac828d40047b8debb0af"
 },
 ["column.containers[].blocks[]|3"]: {
   "required": true,
@@ -700,13 +757,13 @@ export default {
 ["column.containers[].blocks[]|3.id"]: {
   "required": true,
   "type": "string",
-  "schemaHash": "987f44fff38a9fcd62e353101b3823e640287645499d853d1e4a670f7d80776d"
+  "schemaHash": "cc22f8ec14817471274ae0fddcdc70ee916ee0e4e058c2adf4ccefed5b83163f"
 },
 ["column.containers[].blocks[]|3.type"]: {
   "required": true,
   "type": "string",
   "const": "timer",
-  "schemaHash": "479e5a71f296ad92630207e93e6dde8b2f86a8493380ac828d40047b8debb0af"
+  "schemaHash": "b04708d549cbaaaa4c51ae8d00b79ec10afa37b5ab5aa0a95d636f8def292db6"
 },
 ["column.containers[].blocks[]|3.settings"]: {
   "required": true,
@@ -716,32 +773,32 @@ export default {
 ["column.containers[].blocks[]|3.settings.altText"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "24cbcf3cacdd3be29730331e06c047439882c9a9efad7a5ce3d7a75a1eeb32ca"
+  "schemaHash": "b85d15de86db3d5b4310adcf51daf7f021273f8024b917f8cd74e8cda32fe834"
 },
 ["column.containers[].blocks[]|3.settings.altText.text"]: {
   "required": true,
   "type": "string",
-  "schemaHash": "b85d15de86db3d5b4310adcf51daf7f021273f8024b917f8cd74e8cda32fe834"
+  "schemaHash": "5488d5a30aa799c16d2a2e70182680c408d6b79973e0120c2259b2a142a87363"
 },
 ["column.containers[].blocks[]|3.settings.altText.addToTitle"]: {
   "required": true,
   "type": "boolean",
-  "schemaHash": "5488d5a30aa799c16d2a2e70182680c408d6b79973e0120c2259b2a142a87363"
+  "schemaHash": "fc90ddf303f474b1fad5c7baadbf1773f3bb6c2dacaf669c10b0fc256521730f"
 },
 ["column.containers[].blocks[]|3.settings.responsiveMobile"]: {
   "required": true,
   "type": "boolean",
-  "schemaHash": "b04708d549cbaaaa4c51ae8d00b79ec10afa37b5ab5aa0a95d636f8def292db6"
+  "schemaHash": "f7ed56572064408d6cdf46176b0f5fb1caed0be67697b71d632ef36c28bb2b6a"
 },
 ["column.containers[].blocks[]|3.settings.size"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "fc90ddf303f474b1fad5c7baadbf1773f3bb6c2dacaf669c10b0fc256521730f"
+  "schemaHash": "9ecfde2c177d1d8e70740eaf7ff476cb44b3c6c7506108b1f594dbd0e7386ec0"
 },
 ["column.containers[].blocks[]|3.settings.size.desktop"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "9ecfde2c177d1d8e70740eaf7ff476cb44b3c6c7506108b1f594dbd0e7386ec0"
+  "schemaHash": "c03f794cbcb25b907b25bf853ae71341379a35ddfcfc001f28e718613fb241eb"
 },
 ["column.containers[].blocks[]|3.settings.size.desktop.mode"]: {
   "required": true,
@@ -750,17 +807,17 @@ export default {
     "width",
     "height"
   ],
-  "schemaHash": "c03f794cbcb25b907b25bf853ae71341379a35ddfcfc001f28e718613fb241eb"
+  "schemaHash": "e27ccbc8542e7d9efb79ddbf88f2e7938ec2b252a620ca5541f867926cb70f10"
 },
 ["column.containers[].blocks[]|3.settings.size.desktop.px"]: {
   "required": true,
   "type": "integer",
-  "schemaHash": "e27ccbc8542e7d9efb79ddbf88f2e7938ec2b252a620ca5541f867926cb70f10"
+  "schemaHash": "ffeb13b7004005b19938145b546d5ceb08d7dcade8822f2213892c866f7cb1fa"
 },
 ["column.containers[].blocks[]|3.settings.size.mobile"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "9ecfde2c177d1d8e70740eaf7ff476cb44b3c6c7506108b1f594dbd0e7386ec0"
+  "schemaHash": "c03f794cbcb25b907b25bf853ae71341379a35ddfcfc001f28e718613fb241eb"
 },
 ["column.containers[].blocks[]|3.settings.size.mobile.mode"]: {
   "required": true,
@@ -769,17 +826,17 @@ export default {
     "width",
     "height"
   ],
-  "schemaHash": "c03f794cbcb25b907b25bf853ae71341379a35ddfcfc001f28e718613fb241eb"
+  "schemaHash": "e27ccbc8542e7d9efb79ddbf88f2e7938ec2b252a620ca5541f867926cb70f10"
 },
 ["column.containers[].blocks[]|3.settings.size.mobile.px"]: {
   "required": true,
   "type": "integer",
-  "schemaHash": "e27ccbc8542e7d9efb79ddbf88f2e7938ec2b252a620ca5541f867926cb70f10"
+  "schemaHash": "ffeb13b7004005b19938145b546d5ceb08d7dcade8822f2213892c866f7cb1fa"
 },
 ["column.containers[].blocks[]|3.settings.alignment"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "ffeb13b7004005b19938145b546d5ceb08d7dcade8822f2213892c866f7cb1fa"
+  "schemaHash": "df231449337f06d6d6b616cb574c508c77812efbbd2a02829ccdb35926d62c3e"
 },
 ["column.containers[].blocks[]|3.settings.alignment.desktop"]: {
   "required": true,
@@ -789,7 +846,7 @@ export default {
     "center",
     "right"
   ],
-  "schemaHash": "df231449337f06d6d6b616cb574c508c77812efbbd2a02829ccdb35926d62c3e"
+  "schemaHash": "341814eb6aff7d91bd84e9006aba1a60303f85af77dc4b114c35299d29ccec79"
 },
 ["column.containers[].blocks[]|3.settings.alignment.mobile"]: {
   "required": true,
@@ -799,67 +856,67 @@ export default {
     "center",
     "right"
   ],
-  "schemaHash": "df231449337f06d6d6b616cb574c508c77812efbbd2a02829ccdb35926d62c3e"
+  "schemaHash": "341814eb6aff7d91bd84e9006aba1a60303f85af77dc4b114c35299d29ccec79"
 },
 ["column.containers[].blocks[]|3.settings.margins"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "82cdc2e20bff7e777b2055cc1783d43dc19e28df76b38edeb403fbcd81b24d9d"
+  "schemaHash": "a7e49c9de944eb59b182b4170e11f27246a9a6b97991efb30eb44167d8e6e96a"
 },
 ["column.containers[].blocks[]|3.settings.margins.desktop"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "a7e49c9de944eb59b182b4170e11f27246a9a6b97991efb30eb44167d8e6e96a"
+  "schemaHash": "512befe9ea2fc6099da95661f8b6f26434831be23e431b5670423c8f8cbc163d"
 },
 ["column.containers[].blocks[]|3.settings.margins.desktop.top"]: {
   "required": true,
   "type": "number",
-  "schemaHash": "512befe9ea2fc6099da95661f8b6f26434831be23e431b5670423c8f8cbc163d"
+  "schemaHash": "a60791c7bd997624175e5ce942b961e03be8caff0688d64714c220d3e3069018"
 },
 ["column.containers[].blocks[]|3.settings.margins.desktop.right"]: {
   "required": true,
   "type": "number",
-  "schemaHash": "a60791c7bd997624175e5ce942b961e03be8caff0688d64714c220d3e3069018"
+  "schemaHash": "f16d2a1c75e4e368c52096f5f392478b7362f12092f61565b2505fc4904bfda5"
 },
 ["column.containers[].blocks[]|3.settings.margins.desktop.bottom"]: {
   "required": true,
   "type": "number",
-  "schemaHash": "f16d2a1c75e4e368c52096f5f392478b7362f12092f61565b2505fc4904bfda5"
+  "schemaHash": "b462dde7c9edde64ea0ef3b7baa66de119ee6b45e1275970be7d07062ca8e996"
 },
 ["column.containers[].blocks[]|3.settings.margins.desktop.left"]: {
   "required": true,
   "type": "number",
-  "schemaHash": "b462dde7c9edde64ea0ef3b7baa66de119ee6b45e1275970be7d07062ca8e996"
+  "schemaHash": "c59c64cc82659b3f4d98141fc48d64d75303e9682323d902d0767caca9a19c31"
 },
 ["column.containers[].blocks[]|3.settings.margins.mobile"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "a7e49c9de944eb59b182b4170e11f27246a9a6b97991efb30eb44167d8e6e96a"
+  "schemaHash": "512befe9ea2fc6099da95661f8b6f26434831be23e431b5670423c8f8cbc163d"
 },
 ["column.containers[].blocks[]|3.settings.margins.mobile.top"]: {
   "required": true,
   "type": "number",
-  "schemaHash": "512befe9ea2fc6099da95661f8b6f26434831be23e431b5670423c8f8cbc163d"
+  "schemaHash": "a60791c7bd997624175e5ce942b961e03be8caff0688d64714c220d3e3069018"
 },
 ["column.containers[].blocks[]|3.settings.margins.mobile.right"]: {
   "required": true,
   "type": "number",
-  "schemaHash": "a60791c7bd997624175e5ce942b961e03be8caff0688d64714c220d3e3069018"
+  "schemaHash": "f16d2a1c75e4e368c52096f5f392478b7362f12092f61565b2505fc4904bfda5"
 },
 ["column.containers[].blocks[]|3.settings.margins.mobile.bottom"]: {
   "required": true,
   "type": "number",
-  "schemaHash": "f16d2a1c75e4e368c52096f5f392478b7362f12092f61565b2505fc4904bfda5"
+  "schemaHash": "b462dde7c9edde64ea0ef3b7baa66de119ee6b45e1275970be7d07062ca8e996"
 },
 ["column.containers[].blocks[]|3.settings.margins.mobile.left"]: {
   "required": true,
   "type": "number",
-  "schemaHash": "b462dde7c9edde64ea0ef3b7baa66de119ee6b45e1275970be7d07062ca8e996"
+  "schemaHash": "c59c64cc82659b3f4d98141fc48d64d75303e9682323d902d0767caca9a19c31"
 },
 ["column.containers[].blocks[]|3.settings.endDate"]: {
   "required": true,
   "type": "string",
-  "schemaHash": "f7ed56572064408d6cdf46176b0f5fb1caed0be67697b71d632ef36c28bb2b6a"
+  "schemaHash": "acb2dc5fb6371efe566c75343d2ac338c779db34b4e3d891aba927c8e24def6a"
 },
 ["column.containers[].blocks[]|3.settings.timeZone"]: {
   "required": true,
@@ -1307,16 +1364,16 @@ export default {
     "US/Pacific",
     "UTC"
   ],
-  "schemaHash": "acb2dc5fb6371efe566c75343d2ac338c779db34b4e3d891aba927c8e24def6a"
+  "schemaHash": "09f0d6050dec887da138d7564376bfbc58a2272df7edd7062bebe9d0f623f5ec"
 },
 ["column.containers[].blocks[]|3.settings.link"]: {
   "required": true,
-  "schemaHash": "09f0d6050dec887da138d7564376bfbc58a2272df7edd7062bebe9d0f623f5ec"
+  "schemaHash": "a120dae208683cac8eb71bba21d28099808c2a5a18c66b7b73b7522733845f2d"
 },
 ["column.containers[].blocks[]|3.settings.link|0"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "b67221dc100f049ba504d1a2dff45ed221a9781a040e75344bd0a22af55234f4"
+  "schemaHash": "802befecff7fb4e19d2d319ec6f9b19df56b12ccc44284523ea564f3cfbc63a7"
 },
 ["column.containers[].blocks[]|3.settings.link|0.type"]: {
   "required": true,
@@ -1332,12 +1389,12 @@ export default {
     "viber",
     "other"
   ],
-  "schemaHash": "802befecff7fb4e19d2d319ec6f9b19df56b12ccc44284523ea564f3cfbc63a7"
+  "schemaHash": "7c1162100ac24e267b04a084f30aa335e5ad5dfe2712e7130507ddb00588d0ea"
 },
 ["column.containers[].blocks[]|3.settings.link|0.href"]: {
   "required": true,
   "type": "string",
-  "schemaHash": "7c1162100ac24e267b04a084f30aa335e5ad5dfe2712e7130507ddb00588d0ea"
+  "schemaHash": "24cbcf3cacdd3be29730331e06c047439882c9a9efad7a5ce3d7a75a1eeb32ca"
 },
 ["column.containers[].blocks[]|3.settings.link|1"]: {
   "required": true,
@@ -1347,7 +1404,7 @@ export default {
 ["column.containers[].blocks[]|3.settings.displayDays"]: {
   "required": true,
   "type": "boolean",
-  "schemaHash": "a120dae208683cac8eb71bba21d28099808c2a5a18c66b7b73b7522733845f2d"
+  "schemaHash": "bad59b05d8a47dd8584bb58885892234e746b7288ed2ddc374e4f765fc9de520"
 },
 ["column.containers[].blocks[]|3.settings.labelsLetterCase"]: {
   "required": false,
@@ -1357,12 +1414,12 @@ export default {
     "UPPER",
     "LOWER"
   ],
-  "schemaHash": "bad59b05d8a47dd8584bb58885892234e746b7288ed2ddc374e4f765fc9de520"
+  "schemaHash": "e78aa562ff5c55cf163bec2ce650f69c930529b63b49bd38f471f7e5b49914dd"
 },
 ["column.containers[].blocks[]|3.settings.separator"]: {
   "required": true,
   "type": "string",
-  "schemaHash": "e78aa562ff5c55cf163bec2ce650f69c930529b63b49bd38f471f7e5b49914dd"
+  "schemaHash": "a72cc3300cbe156ababc83a49b26bf1d8e0c434e06e779d884223db2c025b3d5"
 },
 ["column.containers[].blocks[]|3.settings.labelsLanguage"]: {
   "required": true,
@@ -1406,17 +1463,17 @@ export default {
     "ja",
     "ko"
   ],
-  "schemaHash": "a72cc3300cbe156ababc83a49b26bf1d8e0c434e06e779d884223db2c025b3d5"
+  "schemaHash": "2be3ee80dd1e194de193b4844ca8dbd4e9e1866dbaa8128afe1f061cf309bb99"
 },
 ["column.containers[].blocks[]|3.settings.retinaDisplaySupport"]: {
   "required": true,
   "type": "boolean",
-  "schemaHash": "2be3ee80dd1e194de193b4844ca8dbd4e9e1866dbaa8128afe1f061cf309bb99"
+  "schemaHash": "53fd593d288acf21b522225268e83354d990b8d9a52f4eaf601f8e2d6600bbac"
 },
 ["column.containers[].blocks[]|3.settings.expirationImageSrc"]: {
   "required": true,
   "type": "string",
-  "schemaHash": "efb2498bfd7c3a684731d96285b8c29553f2e46b13fac6d897a5f507ebc3c9ae"
+  "schemaHash": "f0974842225d8b0fbd8ba7aab50640a6355e945036a7294dc4fdbf021b88812d"
 },
 ["column.containers[].blocks[]|3.settings.hideElement"]: {
   "required": true,
@@ -1441,7 +1498,7 @@ export default {
 ["column.containers[].blocks[]|3.settings.anchorLinkName"]: {
   "required": true,
   "type": "string",
-  "schemaHash": "c59c64cc82659b3f4d98141fc48d64d75303e9682323d902d0767caca9a19c31"
+  "schemaHash": "3954de1555ee8336646468d5dad24e0136cabe4665ebb85a3b60f14913067a69"
 },
 ["column.containers[].blocks[]|3.settings.digitsFontFamily"]: {
   "required": true,
@@ -1468,12 +1525,12 @@ export default {
     "roboto,'helvetica neue',helvetica,arial,sans-serif",
     "'source sans pro','helvetica neue',helvetica,arial,sans-serif"
   ],
-  "schemaHash": "53fd593d288acf21b522225268e83354d990b8d9a52f4eaf601f8e2d6600bbac"
+  "schemaHash": "943f96b10e4a120f3b97f8a2823867f37d210fc0affad81efe7d534f40c3bc14"
 },
 ["column.containers[].blocks[]|3.settings.digitsFontSize"]: {
   "required": true,
   "type": "integer",
-  "schemaHash": "943f96b10e4a120f3b97f8a2823867f37d210fc0affad81efe7d534f40c3bc14"
+  "schemaHash": "2af4ba420a23a7134874c1b643e7e0d977f1dd386d181e771417ef2a3d1c51d6"
 },
 ["column.containers[].blocks[]|3.settings.digitsFontColor"]: {
   "required": true,
@@ -1483,7 +1540,7 @@ export default {
 ["column.containers[].blocks[]|3.settings.digitsAdvancedColorSettings"]: {
   "required": false,
   "type": "object",
-  "schemaHash": "2af4ba420a23a7134874c1b643e7e0d977f1dd386d181e771417ef2a3d1c51d6"
+  "schemaHash": "2605c621f4a8babb5d5245952d46d9d0378cbf2fb56c439e73e40f103939843e"
 },
 ["column.containers[].blocks[]|3.settings.digitsAdvancedColorSettings.days"]: {
   "required": true,
@@ -1530,12 +1587,12 @@ export default {
     "roboto,'helvetica neue',helvetica,arial,sans-serif",
     "'source sans pro','helvetica neue',helvetica,arial,sans-serif"
   ],
-  "schemaHash": "53fd593d288acf21b522225268e83354d990b8d9a52f4eaf601f8e2d6600bbac"
+  "schemaHash": "943f96b10e4a120f3b97f8a2823867f37d210fc0affad81efe7d534f40c3bc14"
 },
 ["column.containers[].blocks[]|3.settings.labelsFontSize"]: {
   "required": true,
   "type": "integer",
-  "schemaHash": "943f96b10e4a120f3b97f8a2823867f37d210fc0affad81efe7d534f40c3bc14"
+  "schemaHash": "2af4ba420a23a7134874c1b643e7e0d977f1dd386d181e771417ef2a3d1c51d6"
 },
 ["column.containers[].blocks[]|3.settings.labelsFontColor"]: {
   "required": true,
@@ -1545,24 +1602,9 @@ export default {
 ["column.containers[].blocks[]|3.settings.labelsAdvancedColorSettings"]: {
   "required": false,
   "type": "object",
-  "schemaHash": "7995e7231586d8a9c6e90199d7d8f3a56b2dbce178575493f776f6ab7813175f"
+  "schemaHash": "990186c9920bd3d20427cd16114dbe0b632d6f002d164662d0963ce5834c9f76"
 },
 ["column.containers[].blocks[]|3.settings.labelsAdvancedColorSettings.days"]: {
-  "required": true,
-  "type": "string",
-  "schemaHash": "e2a279620bb75ecf86b55101a4bf235bb9fcf27bec60bd4cd1c411436fb57e38"
-},
-["column.containers[].blocks[]|3.settings.labelsAdvancedColorSettings.hours"]: {
-  "required": true,
-  "type": "string",
-  "schemaHash": "e2a279620bb75ecf86b55101a4bf235bb9fcf27bec60bd4cd1c411436fb57e38"
-},
-["column.containers[].blocks[]|3.settings.labelsAdvancedColorSettings.minutes"]: {
-  "required": true,
-  "type": "string",
-  "schemaHash": "e2a279620bb75ecf86b55101a4bf235bb9fcf27bec60bd4cd1c411436fb57e38"
-},
-["column.containers[].blocks[]|3.settings.labelsAdvancedColorSettings.seconds"]: {
   "required": true,
   "type": "string",
   "schemaHash": "e2a279620bb75ecf86b55101a4bf235bb9fcf27bec60bd4cd1c411436fb57e38"

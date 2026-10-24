@@ -23,7 +23,8 @@ import {
 import {
   EmailSdkError,
   assertMetadataTextLimits,
-  deepFreeze
+  deepFreeze,
+  resolveJsonPointer
 } from "./errors-3ee69a7e1eb0.js";
 
 // convo-email-agent/src/sdk/create.ts
@@ -464,6 +465,12 @@ function createEmailFromDraft(options) {
   const draft = { ...baseline, ...cloneJson(options.emailJson) };
   draft.settings = mergeJson(baseSettings(void 0), options.emailJson.settings);
   const globalSettings = draft.settings;
+  const darkTheme = objectValue(objectValue(globalSettings.general, "settings.general").darkTheme, "settings.general.darkTheme");
+  const backgroundImagePointer = "/settings/general/darkTheme/backgroundImage";
+  const acquiredBackgroundImage = resolveJsonPointer(baseline, backgroundImagePointer);
+  if (acquiredBackgroundImage !== void 0 && !Object.hasOwn(darkTheme, "backgroundImage") && !options.intent?.resetFields?.includes(backgroundImagePointer)) {
+    darkTheme.backgroundImage = acquiredBackgroundImage;
+  }
   const lightTheme = (section) => objectValue(objectValue(globalSettings[section], `settings.${section}`).lightTheme, `settings.${section}.lightTheme`);
   const general = lightTheme("general");
   const areas = lightTheme("stripes");

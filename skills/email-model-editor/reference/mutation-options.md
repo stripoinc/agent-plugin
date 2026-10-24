@@ -17,8 +17,14 @@ export default ({ email }) => {
 
 Read current values from the inspection's `summary.metadata`. Include only the requested fields.
 When changing only the preheader text, carry over its current `fillSpace`; use `false` if no
-preheader exists. Both preheader fields must be supplied. [Native metadata](stripo-creation.md) defines the limits and
-clearing semantics. This method also works when the native model has no blocks. Return nothing
+preheader exists. Both preheader fields must be supplied. Clear the title with `title: ""` or
+the preheader with `{text: "", fillSpace: false}`; keep those keys in the complete candidate.
+Omitted patch fields preserve their acquired values. New or changed title/preheader text is
+limited to 500 UTF-16 code units; unchanged imported longer text needs the acquired model as
+the validation baseline. The document title is separate from external sending metadata.
+Follow [PROVIDER.md](../PROVIDER.md) for external metadata routing and saved-value checks.
+This method also works when an initialized native model has no blocks. Missing or unhydrated
+state is a read failure: never initialize a replacement model to bypass it. Return nothing
 from the module, including after a chained SDK call.
 
 ## Social blocks
@@ -100,6 +106,7 @@ and `email.resetSettings(["general.customListStyles"])` disables custom list for
 | `settings.stripes.<area>` (`header`, `footer`) | `backgroundImage` |
 | `settings.headings.h1` through `settings.headings.h6` | `fontWeight`, `paragraphBottomSpace`, `fontSize.desktop`, `fontSize.mobile`, `lineHeight.desktop`, `lineHeight.mobile`, `textAlign.mobile` |
 | `settings.<section>.darkTheme` | every color |
+| `settings.general.darkTheme` | `backgroundImage` |
 
 A nested patch works the same way: `email.setTheme("settings.general", {backgroundImage: undefined})`.
 Every other setting, including light-theme colors, global `fontFamily`, `general.hideImageDownloadIcons`, and
@@ -107,3 +114,17 @@ whole groups such as `settings.stripes.content`, has no reset; set a new value i
 fields from JSON manually. The runner still reports unintended loss for accidentally absent fields,
 unknown settings, and unsupported resets.
 
+## Native font persistence
+
+Custom fonts use `resources.fonts` in the native document. Use `email.setFonts([...])` to
+replace the font-resource collection; include every existing resource still used by the email.
+Each entry has `fontFamily` and `importMethod`: `link` or `import` requires a stylesheet `url`;
+`fontFace` requires ready-to-inline `css` and accepts an optional source `url`.
+
+Use the complete assigned stack as the resource key: `Inter, Arial, sans-serif` in settings
+matches `fontFamily: "inter,arial,sans-serif"` in the resource. The editor canonicalizes case,
+quotes, and spacing when matching. The family inside `@font-face` CSS stays the primary name.
+
+Update native `fontFamily` settings through the SDK. Preserve requested fallback stacks and
+unrelated inline typography. The validated output from `run-sdk.mjs` is the upload candidate;
+its native schema and change checks apply to fonts just as they do to other fields.

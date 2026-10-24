@@ -10,17 +10,29 @@ editor validator. It does not send emails or schedule campaigns.
 | --- | --- |
 | `email-from-reference` | Create an email from a brief, website, template, HTML, screenshot or supplied images; rebuild an explicitly selected email or template; verify saved desktop/mobile previews. |
 | `email-model-editor` | Edit native copy, links, images, layout, styles, document title and preheader in existing emails and templates. |
-| `business-profile` | Read, audit, fill or update a project's Business Profile from supplied information or selected Stripo emails, preserving unrelated fields. |
+| `business-profile` | Build a project's Business Profile from a website (visual identity, brand voice, business context), or read, audit, fill or update it from supplied information or selected Stripo emails. A full website save replaces the stored profile; email updates preserve unrelated fields. |
 
 Image generation and editing use Stripo MCP. Supplied images are hosted as original assets;
-requests to inspect content do not start image jobs. Business Profile website extraction is
-not supported. The email creation skill can still use an authorized website as a reference.
+requests to inspect content do not start image jobs. Business Profile website extraction uses the
+agent's browser session and a local finalizer; it can host the selected logo in the gallery of an
+authorized email or template, and a full save can clear fields the extraction did not measure.
 
 ## Install
 
 Requirements: Node.js 20.18.1+ and an agent with shell, file, image inspection and MCP tools.
 The supplied shell examples use POSIX syntax; on Windows use WSL or an equivalent shell.
-No npm install, curl, Python runtime or private source checkout is needed to use the plugin.
+The email skills need no npm install, curl, Python runtime or private source checkout.
+
+Business Profile finalization (`skills/business-profile/scripts/finalize.py`) additionally needs
+Python 3.11+ with the packaged runtime requirements and the locked Node dependencies of its
+scripts. Install them from the plugin directory into the Python environment your agent uses:
+
+```sh
+python3 -m pip install -r packages/brandkit-runtime/requirements-stripo.txt
+npm ci --omit=dev --ignore-scripts --prefix skills/business-profile/scripts
+```
+
+`node scripts/doctor.mjs` checks the Python requirements and names the interpreter it found.
 
 Claude Code:
 
@@ -78,9 +90,12 @@ requested prompts and authorized reference assets. Uploading or generating an im
 hosted URL; inserting it into an email requires a separate model write. A supplied image is not
 permission to generate a substitute. The plugin carries no separate image-provider credentials.
 
-Website references use the agent's authorized browser tools. The destination receives normal
-browser requests. This plugin has no browser service, publisher proxy, hidden extraction runtime
-or background hook. Host and external-provider data handling follows their own terms and settings.
+Website references and Business Profile extraction use the agent's authorized browser session.
+The destination receives normal browser requests. Extraction runs locally: the bundled
+`chrome-devtools-mcp` bridge attaches to the host's browser, and the Python finalizer reads the
+profile and hosts the logo only through the agent's Stripo MCP connection and the signed upload
+URLs it returns. This plugin has no hosted browser service, publisher proxy or background hook.
+Host and external-provider data handling follows their own terms and settings.
 
 See [Stripo privacy](https://stripo.email/privacy-policy/),
 [terms of use](https://stripo.email/terms-of-use/) and [support](https://support.stripo.email).

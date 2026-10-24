@@ -44,6 +44,8 @@ var error = () => {
     json_string: "cadena JSON",
     e164: "n\xFAmero E.164",
     credit_card: "n\xFAmero de tarjeta de cr\xE9dito",
+    currency_code: "c\xF3digo de moneda",
+    iban: "IBAN",
     jwt: "JWT",
     template_literal: "entrada"
   };

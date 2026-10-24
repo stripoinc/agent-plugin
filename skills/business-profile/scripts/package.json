@@ -1,0 +1,21 @@
+{
+  "name": "@ardas/business-profile-scripts",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "1.30.0",
+    "chrome-devtools-mcp": "1.9.0",
+    "saxes": "6.0.0"
+  },
+  "devDependencies": {
+    "ajv": "8.20.0",
+    "playwright": "1.60.0"
+  },
+  "scripts": {
+    "test": "node --test"
+  },
+  "engines": {
+    "node": "^20.19.0 || ^22.12.0 || >=23"
+  }
+}

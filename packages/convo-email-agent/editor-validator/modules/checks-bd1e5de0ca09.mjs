@@ -1,51 +1,6 @@
 import {
   en_default
-} from "./index-18e3dd656b20.mjs";
-import {
-  anyProcessor,
-  arrayProcessor,
-  bigintProcessor,
-  booleanProcessor,
-  catchProcessor,
-  customProcessor,
-  dateProcessor,
-  defaultProcessor,
-  enumProcessor,
-  fileProcessor,
-  functionProcessor,
-  intersectionProcessor,
-  lazyProcessor,
-  literalProcessor,
-  mapProcessor,
-  nanProcessor,
-  neverProcessor,
-  nonoptionalProcessor,
-  nullProcessor,
-  nullableProcessor,
-  numberProcessor,
-  objectProcessor,
-  optionalProcessor,
-  pipeProcessor,
-  prefaultProcessor,
-  promiseProcessor,
-  readonlyProcessor,
-  recordProcessor,
-  setProcessor,
-  stringProcessor,
-  successProcessor,
-  symbolProcessor,
-  templateLiteralProcessor,
-  transformProcessor,
-  tupleProcessor,
-  undefinedProcessor,
-  unionProcessor,
-  unknownProcessor,
-  voidProcessor
-} from "./json-schema-processors-0c244c7c3151.mjs";
-import {
-  createStandardJSONSchemaMethod,
-  createToJSONSchemaMethod
-} from "./to-json-schema-b5fe38b46dc6.mjs";
+} from "./index-abd71ade49d1.mjs";
 import {
   _any,
   _array,
@@ -70,6 +25,7 @@ import {
   _gt,
   _gte,
   _guid,
+  _iban,
   _includes,
   _int,
   _int32,
@@ -136,11 +92,57 @@ import {
   meta
 } from "./api-7ec6d993fe84.mjs";
 import {
-  globalRegistry
-} from "./registries-3ceb92ae3dab.mjs";
-import {
   memoizer
 } from "./memoizer-c00f0bc54290.mjs";
+import {
+  aggregateChecks,
+  anyProcessor,
+  arrayProcessor,
+  bigintProcessor,
+  booleanProcessor,
+  catchProcessor,
+  customProcessor,
+  dateProcessor,
+  defaultProcessor,
+  enumProcessor,
+  fileProcessor,
+  functionProcessor,
+  intersectionProcessor,
+  lazyProcessor,
+  literalProcessor,
+  mapProcessor,
+  nanProcessor,
+  neverProcessor,
+  nonoptionalProcessor,
+  nullProcessor,
+  nullableProcessor,
+  numberProcessor,
+  objectProcessor,
+  optionalProcessor,
+  pipeProcessor,
+  prefaultProcessor,
+  promiseProcessor,
+  readonlyProcessor,
+  recordProcessor,
+  setProcessor,
+  stringProcessor,
+  successProcessor,
+  symbolProcessor,
+  templateLiteralProcessor,
+  transformProcessor,
+  tupleProcessor,
+  undefinedProcessor,
+  unionProcessor,
+  unknownProcessor,
+  voidProcessor
+} from "./json-schema-processors-0c244c7c3151.mjs";
+import {
+  createStandardJSONSchemaMethod,
+  createToJSONSchemaMethod
+} from "./to-json-schema-b5fe38b46dc6.mjs";
+import {
+  globalRegistry
+} from "./registries-3ceb92ae3dab.mjs";
 import {
   $ZodAny,
   $ZodArray,
@@ -169,6 +171,7 @@ import {
   $ZodFile,
   $ZodFunction,
   $ZodGUID,
+  $ZodIBAN,
   $ZodIPv4,
   $ZodIPv6,
   $ZodISODate,
@@ -230,12 +233,19 @@ import {
   _safeEncode,
   _safeEncodeAsync,
   _safeParse,
-  _safeParseAsync
+  _safeParseAsync,
+  validate,
+  validateAsync
 } from "./parse-545b503fc4ed.mjs";
 import {
   $ZodCheck
 } from "./checks-f4a190521e0d.mjs";
 import {
+  currencyCode,
+  domain,
+  hex,
+  hostname,
+  httpProtocol,
   regexes_exports
 } from "./regexes-d1711c96e64b.mjs";
 import {
@@ -286,12 +296,14 @@ __export(schemas_exports, {
   ZodFile: () => ZodFile,
   ZodFunction: () => ZodFunction,
   ZodGUID: () => ZodGUID,
+  ZodIBAN: () => ZodIBAN,
   ZodIPv4: () => ZodIPv4,
   ZodIPv6: () => ZodIPv6,
   ZodISODate: () => ZodISODate,
   ZodISODateTime: () => ZodISODateTime,
   ZodISODuration: () => ZodISODuration,
   ZodISOTime: () => ZodISOTime,
+  ZodInstanceOf: () => ZodInstanceOf,
   ZodIntersection: () => ZodIntersection,
   ZodJWT: () => ZodJWT,
   ZodKSUID: () => ZodKSUID,
@@ -350,6 +362,7 @@ __export(schemas_exports, {
   creditCard: () => creditCard,
   cuid: () => cuid,
   cuid2: () => cuid2,
+  currencyCode: () => currencyCode2,
   custom: () => custom,
   date: () => date,
   describe: () => describe2,
@@ -365,9 +378,10 @@ __export(schemas_exports, {
   function: () => _function,
   guid: () => guid,
   hash: () => hash,
-  hex: () => hex,
-  hostname: () => hostname,
+  hex: () => hex2,
+  hostname: () => hostname2,
   httpUrl: () => httpUrl,
+  iban: () => iban,
   instanceof: () => _instanceof,
   int: () => int,
   int32: () => int32,
@@ -670,6 +684,12 @@ var ZodType = /* @__PURE__ */ $constructor("ZodType", (inst, def) => {
   set spa(value) {
     util_exports.own(this, "spa", value);
   },
+  validate(data, params) {
+    return validate(this, data, params);
+  },
+  validateAsync(data, params) {
+    return validateAsync(this, data, params);
+  },
   encode: function _encode2(data, params) {
     return encode(this, data, params, { callee: _encode2 });
   },
@@ -706,61 +726,65 @@ var ZodType = /* @__PURE__ */ $constructor("ZodType", (inst, def) => {
     return this._zod.def;
   }
 });
-var _ZodString = /* @__PURE__ */ $constructor("_ZodString", (inst, def) => {
-  $ZodString.init(inst, def);
-  ZodType.init(inst, def);
-  inst._zod.processJSONSchema = (ctx, json2, params) => stringProcessor(inst, ctx, json2, params);
-  const bag = inst._zod.bag;
-  inst.format = bag.format ?? null;
-  inst.minLength = bag.minimum ?? null;
-  inst.maxLength = bag.maximum ?? null;
-}, {
-  regex(...args) {
-    return this.check(_regex(...args));
+var _ZodString = /* @__PURE__ */ $constructor(
+  "_ZodString",
+  (inst, def) => {
+    $ZodString.init(inst, def);
+    ZodType.init(inst, def);
+    inst._zod.processJSONSchema = (ctx, json2, params) => stringProcessor(inst, ctx, json2, params);
   },
-  includes(...args) {
-    return this.check(_includes(...args));
-  },
-  startsWith(...args) {
-    return this.check(_startsWith(...args));
-  },
-  endsWith(...args) {
-    return this.check(_endsWith(...args));
-  },
-  min(...args) {
-    return this.check(_minLength(...args));
-  },
-  max(...args) {
-    return this.check(_maxLength(...args));
-  },
-  length(...args) {
-    return this.check(_length(...args));
-  },
-  nonempty(...args) {
-    return this.check(_minLength(1, ...args));
-  },
-  lowercase(params) {
-    return this.check(_lowercase(params));
-  },
-  uppercase(params) {
-    return this.check(_uppercase(params));
-  },
-  trim() {
-    return this.check(_trim());
-  },
-  normalize(...args) {
-    return this.check(_normalize(...args));
-  },
-  toLowerCase() {
-    return this.check(_toLowerCase());
-  },
-  toUpperCase() {
-    return this.check(_toUpperCase());
-  },
-  slugify() {
-    return this.check(_slugify());
-  }
-});
+  /* @__PURE__ */ util_exports.derived({
+    format: (inst) => aggregateChecks(inst).format ?? null,
+    minLength: (inst) => aggregateChecks(inst).minimum ?? null,
+    maxLength: (inst) => aggregateChecks(inst).maximum ?? null
+  }, {
+    regex(...args) {
+      return this.check(_regex(...args));
+    },
+    includes(...args) {
+      return this.check(_includes(...args));
+    },
+    startsWith(...args) {
+      return this.check(_startsWith(...args));
+    },
+    endsWith(...args) {
+      return this.check(_endsWith(...args));
+    },
+    min(...args) {
+      return this.check(_minLength(...args));
+    },
+    max(...args) {
+      return this.check(_maxLength(...args));
+    },
+    length(...args) {
+      return this.check(_length(...args));
+    },
+    nonempty(...args) {
+      return this.check(_minLength(1, ...args));
+    },
+    lowercase(params) {
+      return this.check(_lowercase(params));
+    },
+    uppercase(params) {
+      return this.check(_uppercase(params));
+    },
+    trim() {
+      return this.check(_trim());
+    },
+    normalize(...args) {
+      return this.check(_normalize(...args));
+    },
+    toLowerCase() {
+      return this.check(_toLowerCase());
+    },
+    toUpperCase() {
+      return this.check(_toUpperCase());
+    },
+    slugify() {
+      return this.check(_slugify());
+    }
+  })
+);
 var ZodString = /* @__PURE__ */ $constructor("ZodString", (inst, def) => {
   $ZodString.init(inst, def);
   _ZodString.init(inst, def);
@@ -906,8 +930,8 @@ function url(params) {
 }
 function httpUrl(params) {
   return _url(ZodURL, {
-    protocol: regexes_exports.httpProtocol,
-    hostname: regexes_exports.domain,
+    protocol: httpProtocol,
+    hostname: domain,
     ...util_exports.normalizeParams(params)
   });
 }
@@ -1023,6 +1047,13 @@ var ZodCreditCard = /* @__PURE__ */ $constructor("ZodCreditCard", (inst, def) =>
 function creditCard(params) {
   return _creditCard(ZodCreditCard, params);
 }
+var ZodIBAN = /* @__PURE__ */ $constructor("ZodIBAN", (inst, def) => {
+  $ZodIBAN.init(inst, def);
+  ZodStringFormat.init(inst, def);
+});
+function iban(params) {
+  return _iban(ZodIBAN, params);
+}
 var ZodJWT = /* @__PURE__ */ $constructor("ZodJWT", (inst, def) => {
   $ZodJWT.init(inst, def);
   ZodStringFormat.init(inst, def);
@@ -1037,11 +1068,14 @@ var ZodCustomStringFormat = /* @__PURE__ */ $constructor("ZodCustomStringFormat"
 function stringFormat(format, fnOrRegex, _params = {}) {
   return _stringFormat(ZodCustomStringFormat, format, fnOrRegex, _params);
 }
-function hostname(_params) {
-  return _stringFormat(ZodCustomStringFormat, "hostname", regexes_exports.hostname, _params);
+function hostname2(_params) {
+  return _stringFormat(ZodCustomStringFormat, "hostname", hostname, _params);
 }
-function hex(_params) {
-  return _stringFormat(ZodCustomStringFormat, "hex", regexes_exports.hex, _params);
+function hex2(_params) {
+  return _stringFormat(ZodCustomStringFormat, "hex", hex, _params);
+}
+function currencyCode2(_params) {
+  return _stringFormat(ZodCustomStringFormat, "currency_code", currencyCode, _params);
 }
 function hash(alg, params) {
   const enc = params?.enc ?? "hex";
@@ -1051,63 +1085,76 @@ function hash(alg, params) {
     throw new Error("Unrecognized hash format: ".concat(format));
   return _stringFormat(ZodCustomStringFormat, format, regex, params);
 }
-var ZodNumber = /* @__PURE__ */ $constructor("ZodNumber", (inst, def) => {
-  $ZodNumber.init(inst, def);
-  ZodType.init(inst, def);
-  inst._zod.processJSONSchema = (ctx, json2, params) => numberProcessor(inst, ctx, json2, params);
-  const bag = inst._zod.bag;
-  inst.minValue = Math.max(bag.minimum ?? Number.NEGATIVE_INFINITY, bag.exclusiveMinimum ?? Number.NEGATIVE_INFINITY) ?? null;
-  inst.maxValue = Math.min(bag.maximum ?? Number.POSITIVE_INFINITY, bag.exclusiveMaximum ?? Number.POSITIVE_INFINITY) ?? null;
-  inst.isInt = (bag.format ?? "").includes("int") || Number.isSafeInteger(bag.multipleOf ?? 0.5);
-  inst.isFinite = true;
-  inst.format = bag.format ?? null;
-}, {
-  gt(value, params) {
-    return this.check(_gt(value, params));
+var ZodNumber = /* @__PURE__ */ $constructor(
+  "ZodNumber",
+  (inst, def) => {
+    $ZodNumber.init(inst, def);
+    ZodType.init(inst, def);
+    inst._zod.processJSONSchema = (ctx, json2, params) => numberProcessor(inst, ctx, json2, params);
+    inst.isFinite = true;
   },
-  gte(value, params) {
-    return this.check(_gte(value, params));
-  },
-  min(value, params) {
-    return this.check(_gte(value, params));
-  },
-  lt(value, params) {
-    return this.check(_lt(value, params));
-  },
-  lte(value, params) {
-    return this.check(_lte(value, params));
-  },
-  max(value, params) {
-    return this.check(_lte(value, params));
-  },
-  int(params) {
-    return this.check(int(params));
-  },
-  safe(params) {
-    return this.check(int(params));
-  },
-  positive(params) {
-    return this.check(_gt(0, params));
-  },
-  nonnegative(params) {
-    return this.check(_gte(0, params));
-  },
-  negative(params) {
-    return this.check(_lt(0, params));
-  },
-  nonpositive(params) {
-    return this.check(_lte(0, params));
-  },
-  multipleOf(value, params) {
-    return this.check(_multipleOf(value, params));
-  },
-  step(value, params) {
-    return this.check(_multipleOf(value, params));
-  },
-  finite() {
-    return this;
-  }
-});
+  /* @__PURE__ */ util_exports.derived({
+    minValue: (inst) => {
+      const { minimum, exclusiveMinimum } = aggregateChecks(inst);
+      return Math.max(minimum ?? Number.NEGATIVE_INFINITY, exclusiveMinimum ?? Number.NEGATIVE_INFINITY);
+    },
+    maxValue: (inst) => {
+      const { maximum, exclusiveMaximum } = aggregateChecks(inst);
+      return Math.min(maximum ?? Number.POSITIVE_INFINITY, exclusiveMaximum ?? Number.POSITIVE_INFINITY);
+    },
+    isInt: (inst) => {
+      const { isInt, multipleOf } = aggregateChecks(inst);
+      return !!isInt || !!multipleOf?.some(Number.isSafeInteger);
+    },
+    format: (inst) => aggregateChecks(inst).format ?? null
+  }, {
+    gt(value, params) {
+      return this.check(_gt(value, params));
+    },
+    gte(value, params) {
+      return this.check(_gte(value, params));
+    },
+    min(value, params) {
+      return this.check(_gte(value, params));
+    },
+    lt(value, params) {
+      return this.check(_lt(value, params));
+    },
+    lte(value, params) {
+      return this.check(_lte(value, params));
+    },
+    max(value, params) {
+      return this.check(_lte(value, params));
+    },
+    int(params) {
+      return this.check(int(params));
+    },
+    safe(params) {
+      return this.check(int(params));
+    },
+    positive(params) {
+      return this.check(_gt(0, params));
+    },
+    nonnegative(params) {
+      return this.check(_gte(0, params));
+    },
+    negative(params) {
+      return this.check(_lt(0, params));
+    },
+    nonpositive(params) {
+      return this.check(_lte(0, params));
+    },
+    multipleOf(value, params) {
+      return this.check(_multipleOf(value, params));
+    },
+    step(value, params) {
+      return this.check(_multipleOf(value, params));
+    },
+    finite() {
+      return this;
+    }
+  })
+);
 function number(params) {
   return _number(ZodNumber, params);
 }
@@ -1138,49 +1185,53 @@ var ZodBoolean = /* @__PURE__ */ $constructor("ZodBoolean", (inst, def) => {
 function boolean(params) {
   return _boolean(ZodBoolean, params);
 }
-var ZodBigInt = /* @__PURE__ */ $constructor("ZodBigInt", (inst, def) => {
-  $ZodBigInt.init(inst, def);
-  ZodType.init(inst, def);
-  inst._zod.processJSONSchema = (ctx, json2, params) => bigintProcessor(inst, ctx, json2, params);
-  const bag = inst._zod.bag;
-  inst.minValue = bag.minimum ?? null;
-  inst.maxValue = bag.maximum ?? null;
-  inst.format = bag.format ?? null;
-}, {
-  gte(value, params) {
-    return this.check(_gte(value, params));
+var ZodBigInt = /* @__PURE__ */ $constructor(
+  "ZodBigInt",
+  (inst, def) => {
+    $ZodBigInt.init(inst, def);
+    ZodType.init(inst, def);
+    inst._zod.processJSONSchema = (ctx, json2, params) => bigintProcessor(inst, ctx, json2, params);
   },
-  min(value, params) {
-    return this.check(_gte(value, params));
-  },
-  gt(value, params) {
-    return this.check(_gt(value, params));
-  },
-  lt(value, params) {
-    return this.check(_lt(value, params));
-  },
-  lte(value, params) {
-    return this.check(_lte(value, params));
-  },
-  max(value, params) {
-    return this.check(_lte(value, params));
-  },
-  positive(params) {
-    return this.check(_gt(BigInt(0), params));
-  },
-  negative(params) {
-    return this.check(_lt(BigInt(0), params));
-  },
-  nonpositive(params) {
-    return this.check(_lte(BigInt(0), params));
-  },
-  nonnegative(params) {
-    return this.check(_gte(BigInt(0), params));
-  },
-  multipleOf(value, params) {
-    return this.check(_multipleOf(value, params));
-  }
-});
+  /* @__PURE__ */ util_exports.derived({
+    minValue: (inst) => aggregateChecks(inst).minimum ?? null,
+    maxValue: (inst) => aggregateChecks(inst).maximum ?? null,
+    format: (inst) => aggregateChecks(inst).format ?? null
+  }, {
+    gte(value, params) {
+      return this.check(_gte(value, params));
+    },
+    min(value, params) {
+      return this.check(_gte(value, params));
+    },
+    gt(value, params) {
+      return this.check(_gt(value, params));
+    },
+    lt(value, params) {
+      return this.check(_lt(value, params));
+    },
+    lte(value, params) {
+      return this.check(_lte(value, params));
+    },
+    max(value, params) {
+      return this.check(_lte(value, params));
+    },
+    positive(params) {
+      return this.check(_gt(BigInt(0), params));
+    },
+    negative(params) {
+      return this.check(_lt(BigInt(0), params));
+    },
+    nonpositive(params) {
+      return this.check(_lte(BigInt(0), params));
+    },
+    nonnegative(params) {
+      return this.check(_gte(BigInt(0), params));
+    },
+    multipleOf(value, params) {
+      return this.check(_multipleOf(value, params));
+    }
+  })
+);
 function bigint(params) {
   return _bigint(ZodBigInt, params);
 }
@@ -1250,16 +1301,26 @@ var ZodVoid = /* @__PURE__ */ $constructor("ZodVoid", (inst, def) => {
 function _void2(params) {
   return _void(ZodVoid, params);
 }
-var ZodDate = /* @__PURE__ */ $constructor("ZodDate", (inst, def) => {
-  $ZodDate.init(inst, def);
-  ZodType.init(inst, def);
-  inst._zod.processJSONSchema = (ctx, json2, params) => dateProcessor(inst, ctx, json2, params);
-  inst.min = (value, params) => inst.check(_gte(value, params));
-  inst.max = (value, params) => inst.check(_lte(value, params));
-  const c = inst._zod.bag;
-  inst.minDate = c.minimum ? new Date(c.minimum) : null;
-  inst.maxDate = c.maximum ? new Date(c.maximum) : null;
-});
+var ZodDate = /* @__PURE__ */ $constructor(
+  "ZodDate",
+  (inst, def) => {
+    $ZodDate.init(inst, def);
+    ZodType.init(inst, def);
+    inst._zod.processJSONSchema = (ctx, json2, params) => dateProcessor(inst, ctx, json2, params);
+    inst.min = (value, params) => inst.check(_gte(value, params));
+    inst.max = (value, params) => inst.check(_lte(value, params));
+  },
+  /* @__PURE__ */ util_exports.derived({
+    minDate: (inst) => {
+      const { minimum } = aggregateChecks(inst);
+      return minimum ? new Date(minimum) : null;
+    },
+    maxDate: (inst) => {
+      const { maximum } = aggregateChecks(inst);
+      return maximum ? new Date(maximum) : null;
+    }
+  }, {})
+);
 function date(params) {
   return _date(ZodDate, params);
 }
@@ -1304,19 +1365,19 @@ var ZodObject = /* @__PURE__ */ $constructor("ZodObject", (inst, def) => {
     return _enum(Object.keys(this._zod.def.shape));
   },
   catchall(catchall) {
-    return this.clone({ ...this._zod.def, catchall });
+    return this.clone(util_exports.mergeDefs(this._zod.def, { catchall }));
   },
   passthrough() {
-    return this.clone({ ...this._zod.def, catchall: unknown() });
+    return this.clone(util_exports.mergeDefs(this._zod.def, { catchall: unknown() }));
   },
   loose() {
-    return this.clone({ ...this._zod.def, catchall: unknown() });
+    return this.clone(util_exports.mergeDefs(this._zod.def, { catchall: unknown() }));
   },
   strict() {
-    return this.clone({ ...this._zod.def, catchall: never() });
+    return this.clone(util_exports.mergeDefs(this._zod.def, { catchall: never() }));
   },
   strip() {
-    return this.clone({ ...this._zod.def, catchall: void 0 });
+    return this.clone(util_exports.mergeDefs(this._zod.def, { catchall: void 0 }));
   },
   extend(incoming) {
     return util_exports.extend(this, incoming);
@@ -1535,7 +1596,7 @@ var ZodEnum = /* @__PURE__ */ $constructor("ZodEnum", (inst, def) => {
   ZodType.init(inst, def);
   inst._zod.processJSONSchema = (ctx, json2, params) => enumProcessor(inst, ctx, json2, params);
   inst.enum = def.entries;
-  inst.options = Object.values(def.entries);
+  inst.options = [...inst._zod.values];
   const keys = new Set(Object.keys(def.entries));
   inst.extract = (values, params) => {
     const newEntries = {};
@@ -1898,8 +1959,15 @@ function superRefine(fn, params) {
 }
 var describe2 = describe;
 var meta2 = meta;
+var ZodInstanceOf = /* @__PURE__ */ $constructor("ZodInstanceOf", (inst, def) => {
+  ZodCustom.init(inst, def);
+}, {
+  properties(shape, params) {
+    return this.check(_properties(shape, params));
+  }
+});
 function _instanceof(cls, params = {}) {
-  const inst = new ZodCustom({
+  const inst = new ZodInstanceOf({
     type: "custom",
     check: "custom",
     fn: (data) => data instanceof cls,
@@ -2008,12 +2076,15 @@ export {
   e164,
   ZodCreditCard,
   creditCard,
+  ZodIBAN,
+  iban,
   ZodJWT,
   jwt,
   ZodCustomStringFormat,
   stringFormat,
-  hostname,
-  hex,
+  hostname2 as hostname,
+  hex2 as hex,
+  currencyCode2 as currencyCode,
   hash,
   ZodNumber,
   number,
@@ -2122,6 +2193,7 @@ export {
   superRefine,
   describe2 as describe,
   meta2 as meta,
+  ZodInstanceOf,
   _instanceof,
   stringbool,
   json,

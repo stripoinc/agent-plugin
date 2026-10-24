@@ -1,4 +1,4 @@
-/*! Stripo editor validator 9fe0771bd1219868d7053ef7e323dc3406329de3. Editor code is proprietary. See NOTICE.txt. */
+/*! Stripo editor validator 2a78eba954846a7d42c2f544142d08e22cbb571b. Editor code is proprietary. See NOTICE.txt. */
 import {
   DEFAULT_TEXT_BLOCK_SETTINGS,
   DEFAULT_VIDEO_BLOCK_SETTINGS,
@@ -16,27 +16,28 @@ import {
   EMPTY_BORDER_RADIUS,
   clearFontValue,
   parse
-} from "./modules/ArrayUtils-759cc5f22881.mjs";
+} from "./modules/ArrayUtils-8063398e6404.mjs";
 import "./modules/ColorUtils-a33f32974f73.mjs";
 import "./modules/master-css-variables-defaults-fd88a551a3d8.mjs";
+import "./modules/master-80783f73f1e0.mjs";
 import "./modules/CSSConverter-608b83714731.mjs";
 import "./modules/biesbjerg-ngx-translate-extract-marker-6a26f5bc5c0e.mjs";
 import "./modules/master-css-variables-a84902889746.mjs";
 import "./modules/ue-proto-87c1854705b4.mjs";
 import "./modules/history-keys-1e69b42223b4.mjs";
-import "./modules/master-80783f73f1e0.mjs";
+import "./modules/tinycolor-2bf5fc1acbb7.mjs";
 import "./modules/coerce-d38c736de753.mjs";
 import "./modules/from-json-schema-1979beab5102.mjs";
 import "./modules/checks-bd1e5de0ca09.mjs";
-import "./modules/index-18e3dd656b20.mjs";
-import "./modules/ru-bc4e3a9b0c5d.mjs";
+import "./modules/index-abd71ade49d1.mjs";
 import "./modules/ta-db52cb61dd13.mjs";
+import "./modules/tg-a3abd3dcaab9.mjs";
 import "./modules/th-0b76e62dab96.mjs";
 import "./modules/uk-e0f612ccc576.mjs";
 import "./modules/ur-d062d4183cb7.mjs";
 import "./modules/vi-b05b5337c3b0.mjs";
 import "./modules/yo-9342d8b90769.mjs";
-import "./modules/ko-27b7a94f5634.mjs";
+import "./modules/zh-TW-74f07ebb2b3a.mjs";
 import "./modules/lt-52aa05368ec0.mjs";
 import "./modules/mk-67b5345704f5.mjs";
 import "./modules/ne-f804b66c7871.mjs";
@@ -44,7 +45,7 @@ import "./modules/pl-0edcc52c11a6.mjs";
 import "./modules/ps-57feece82f75.mjs";
 import "./modules/pt-BR-4ca29f9ccdf1.mjs";
 import "./modules/pt-2b6363a9f827.mjs";
-import "./modules/gu-0e230c44f6bd.mjs";
+import "./modules/ru-bc4e3a9b0c5d.mjs";
 import "./modules/he-3eb1c1845d9e.mjs";
 import "./modules/hi-bdb199026ff7.mjs";
 import "./modules/hy-a38fb7e4f9ec.mjs";
@@ -52,7 +53,7 @@ import "./modules/ja-6478150f8d7a.mjs";
 import "./modules/ka-337898cedd2a.mjs";
 import "./modules/km-d158ab990ee9.mjs";
 import "./modules/kn-ccd0d66753b1.mjs";
-import "./modules/be-72979be88390.mjs";
+import "./modules/ko-27b7a94f5634.mjs";
 import "./modules/bg-542c84614fee.mjs";
 import "./modules/bn-60307a2c0766.mjs";
 import "./modules/ckb-ddc82ea9c77a.mjs";
@@ -60,30 +61,30 @@ import "./modules/el-d2b74d96868d.mjs";
 import "./modules/es-fc2f1ee63cca.mjs";
 import "./modules/fa-b54c803455c1.mjs";
 import "./modules/fr-4b4663c3d230.mjs";
-import "./modules/json-schema-processors-0c244c7c3151.mjs";
-import "./modules/to-json-schema-b5fe38b46dc6.mjs";
+import "./modules/gu-0e230c44f6bd.mjs";
 import "./modules/ar-e1d58fdd0495.mjs";
+import "./modules/be-72979be88390.mjs";
 import "./modules/api-7ec6d993fe84.mjs";
-import "./modules/registries-3ceb92ae3dab.mjs";
 import "./modules/compile-fe1f1936d44e.mjs";
 import "./modules/memoizer-c00f0bc54290.mjs";
+import "./modules/json-schema-processors-0c244c7c3151.mjs";
+import "./modules/to-json-schema-b5fe38b46dc6.mjs";
+import "./modules/registries-3ceb92ae3dab.mjs";
 import "./modules/doc-85ae2b2bbd32.mjs";
 import "./modules/parse-545b503fc4ed.mjs";
 import "./modules/checks-f4a190521e0d.mjs";
 import "./modules/regexes-d1711c96e64b.mjs";
 import "./modules/errors-095a9cd7e5fd.mjs";
 import "./modules/core-d6ef11a90708.mjs";
-import "./modules/document-13235feeff49.mjs";
-import "./modules/map-generator-a34cf548f9d1.mjs";
-import "./modules/at-rule-2b1e381bfcd5.mjs";
-import "./modules/tokenize-acf2d687b44d.mjs";
-import "./modules/tinycolor-2bf5fc1acbb7.mjs";
-import "./modules/index-604a083968ff.mjs";
 import "./modules/decode-codepoint-de4ce2c8771f.mjs";
 import "./modules/decode-data-html-482e5b7a6675.mjs";
 import "./modules/index-83a196bff650.mjs";
 import "./modules/index-829c7f2491ea.mjs";
 import "./modules/parse-8126121d6d62.mjs";
+import "./modules/document-13235feeff49.mjs";
+import "./modules/map-generator-a34cf548f9d1.mjs";
+import "./modules/at-rule-2b1e381bfcd5.mjs";
+import "./modules/tokenize-acf2d687b44d.mjs";
 import "./modules/comment-c2c2abaee17f.mjs";
 import "./modules/node-909c4f08098c.mjs";
 import "./modules/stringifier-5d6259805667.mjs";
@@ -98,8 +99,8 @@ import "./modules/_Hash-6a5a8be86833.mjs";
 import "./modules/serviceSelectorPrefix-db24995a76b3.mjs";
 import "./modules/builders-6d4dedaf957f.mjs";
 import "./modules/index-95be4dc08d9c.mjs";
-import "./modules/index-8c9fdc3b457a.mjs";
 import "./modules/proto-int64-27d7cd28885a.mjs";
+import "./modules/index-604a083968ff.mjs";
 import "./modules/shared-4f53cda18c2b.mjs";
 
 // editor/ui-editor-ui/src/app/core/block-operations-api/text-block/settings/defaults.ts
@@ -235,6 +236,7 @@ function getUnavailableMergeServiceSideEffects(currentSchema, targetSchema) {
 // convo-email-agent/vendor/editor-validator/font-usage.generated.ts
 var FONT_FAMILY_DECLARATION_REGEXP = /font-family\s*:\s*([^;{}<"]+)/gi;
 var FONT_FACE_ATTR_REGEXP = /<font[^>]*\sface\s*=\s*["']([^"']+)["']/gi;
+var FONT_FAMILY_ATTR_REGEXP = /\sfont-family\s*=\s*"([^"]+)"/gi;
 var QUOTE_ENTITY_REGEXP = /&(?:quot|apos|#0*34|#0*39);/gi;
 var FontUtils = class _FontUtils {
   static toUsedFontValues(bodyString, declaredValues = []) {
@@ -258,7 +260,8 @@ var FontUtils = class _FontUtils {
     const html = bodyString.replace(QUOTE_ENTITY_REGEXP, "");
     return [
       ...Array.from(html.matchAll(FONT_FAMILY_DECLARATION_REGEXP)),
-      ...Array.from(html.matchAll(FONT_FACE_ATTR_REGEXP))
+      ...Array.from(html.matchAll(FONT_FACE_ATTR_REGEXP)),
+      ...Array.from(html.matchAll(FONT_FAMILY_ATTR_REGEXP))
     ].map((match) => (match[1] || "").trim());
   }
   static clearFontValue(fontValue) {

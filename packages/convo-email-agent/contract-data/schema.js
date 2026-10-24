@@ -13,7 +13,7 @@ export default {
     "$ref": "#/definitions/__schema11"
   },
   "stripes": {
-    "$ref": "#/definitions/__schema35"
+    "$ref": "#/definitions/__schema36"
   }
 },
 ["required"]: [

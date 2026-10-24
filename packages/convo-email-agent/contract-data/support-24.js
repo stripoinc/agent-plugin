@@ -1,5 +1,37 @@
 
 export default {
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.getDirtyHtmlCss#0(html)|1.getConfig#0(key):constraint|30"]: {
+  "hash": "3b089650961ad6bef9451a42e5de174f17f566d3c05fdac86d78fb617a40fbc1",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.getDirtyHtmlCss#0(html)|1.getConfig#0(key):constraint|31"]: {
+  "hash": "1cb2a71245bf769a4df4501701ea85fb036debd29fe858c158ac888c2d01cc0f",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.getDirtyHtmlCss#0(html)|1.getConfig#0(key):constraint|32"]: {
+  "hash": "e8174147a564882d79aeab2d639fa125dae9151528aadf374c8d588b36e78fdd",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.getDirtyHtmlCss#0(html)|1.getConfig#0(key):constraint|33"]: {
+  "hash": "2753d28071b01b2378da52bb20529a87e55817e1030ab217548a5af0210f6746",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.getDirtyHtmlCss#0(html)|1.getConfig#0(key):constraint|34"]: {
+  "hash": "e66ed79ca20ec0024603e7537eca2fd3c702af02d35b0e3a0cc0c27bab3d6c34",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.getDirtyHtmlCss#0(html)|1.getConfig#0(key):constraint|35"]: {
+  "hash": "8ddf4f91b789098f9e38390972cab567c02af80f46a4d94f4f501153689e10e6",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.getDirtyHtmlCss#0(html)|1.getConfig#0(key):constraint|36"]: {
+  "hash": "71aa025a623dd70353bded2c39c9b6b75f4ff5547cc06e62e1be0d2eb1d803cf",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.getDirtyHtmlCss#0(html)|1.getConfig#0(key):constraint|37"]: {
+  "hash": "9cf209dc6e802a9b89079c2463dd1cb930daa316c349bd319ed5d61a5db4e822",
+  "group": "apiRead"
+},
 ["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.getDirtyHtmlCss#0(html)|1.getConfig#0(key):constraint|38"]: {
   "hash": "ca41046f45f622da7ba51a71a45e0ea7ccd2ed882a9f1a7a349389c8d4fed5b9",
   "group": "apiRead"
@@ -146,6 +178,22 @@ export default {
 },
 ["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.getDirtyHtmlCss#0(html)|1.getConfig#0(key):constraint|74"]: {
   "hash": "6e302d653ede1eceee6a2b0f26defc1b80f6256dc15526f99ca4c268d1732e62",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.getDirtyHtmlCss#0(html)|1.getConfig#0(key):constraint|75"]: {
+  "hash": "d305ad7d6e5982b35166abc860ea91b53a082a4027efbf951bff9bee8df188f8",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.getDirtyHtmlCss#0(html)|1.getConfig#0(key):constraint|76"]: {
+  "hash": "6d0c384c4c6207836ce43976ecb8ce7cbd182df1e79adcd24b9b55e42192546c",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.getDirtyHtmlCss#0(html)|1.getConfig#0(key):constraint|77"]: {
+  "hash": "34e2c3c929a3a7ad2ee02a67f5ff59dec0c7ff725ce92106a6ae702d86550a2b",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.getDirtyHtmlCss#0(html)|1.getConfig#0(key):constraint|78"]: {
+  "hash": "bd24076b1a1e5dffb815c0eb771aa9b4d6123b8d129b37d9dccabbc64b3647e9",
   "group": "apiRead"
 },
 ["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.getDirtyHtmlCss#0(html)|1.getConfigs"]: {
@@ -762,50 +810,6 @@ export default {
 },
 ["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.getDirtyHtmlCss#0(html)|1.setConfig#0(value)|1:object.structureCustomDesktopBottomIndent?"]: {
   "hash": "3b5e8f4439e0cfc6fb875f2bb57f220fe176c5b6735a5abfb204411d411e0d3f",
-  "group": "apiRead"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.getDirtyHtmlCss#0(html)|1.setConfig#0(value)|1:object.structureCustomDesktopLeftIndent?"]: {
-  "hash": "3b5e8f4439e0cfc6fb875f2bb57f220fe176c5b6735a5abfb204411d411e0d3f",
-  "group": "apiRead"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.getDirtyHtmlCss#0(html)|1.setConfig#0(value)|1:object.structureCustomMobileTopIndent?"]: {
-  "hash": "3b5e8f4439e0cfc6fb875f2bb57f220fe176c5b6735a5abfb204411d411e0d3f",
-  "group": "apiRead"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.getDirtyHtmlCss#0(html)|1.setConfig#0(value)|1:object.structureCustomMobileRightIndent?"]: {
-  "hash": "3b5e8f4439e0cfc6fb875f2bb57f220fe176c5b6735a5abfb204411d411e0d3f",
-  "group": "apiRead"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.getDirtyHtmlCss#0(html)|1.setConfig#0(value)|1:object.structureCustomMobileBottomIndent?"]: {
-  "hash": "3b5e8f4439e0cfc6fb875f2bb57f220fe176c5b6735a5abfb204411d411e0d3f",
-  "group": "apiRead"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.getDirtyHtmlCss#0(html)|1.setConfig#0(value)|1:object.structureCustomMobileLeftIndent?"]: {
-  "hash": "3b5e8f4439e0cfc6fb875f2bb57f220fe176c5b6735a5abfb204411d411e0d3f",
-  "group": "apiRead"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.getDirtyHtmlCss#0(html)|1.setConfig#0(value)|1:object.extensionConfig?"]: {
-  "hash": "8124a6a9299893c6ba797f4ac4736cdb99360f87e39b61754778f547f108ee65",
-  "group": "apiRead"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.getDirtyHtmlCss#0(html)|1.setConfig#0(value)|1:object.imgAdaptOffManually?"]: {
-  "hash": "3b5e8f4439e0cfc6fb875f2bb57f220fe176c5b6735a5abfb204411d411e0d3f",
-  "group": "apiRead"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.getDirtyHtmlCss#0(html)|1.setConfig#0(value)|1:object.imageLabels?"]: {
-  "hash": "8124a6a9299893c6ba797f4ac4736cdb99360f87e39b61754778f547f108ee65",
-  "group": "apiRead"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.getDirtyHtmlCss#0(html)|1.setConfig#0(value)|1:object.ignoredAxeIssueID?"]: {
-  "hash": "8124a6a9299893c6ba797f4ac4736cdb99360f87e39b61754778f547f108ee65",
-  "group": "apiRead"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.getDirtyHtmlCss#0(html)|1.setConfig#0(value)|1:object.accessibility?"]: {
-  "hash": "ec739ef5807612aa06c7adde97aa9788ce76e1623661fb7f2076404397401ea5",
-  "group": "apiRead"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.getDirtyHtmlCss#0(html)|1.setConfig#0(value)|1:object.timeZoneId?"]: {
-  "hash": "8124a6a9299893c6ba797f4ac4736cdb99360f87e39b61754778f547f108ee65",
   "group": "apiRead"
 }
 };

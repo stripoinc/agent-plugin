@@ -3,18 +3,114 @@ import {
   finalize,
   handleUnrepresentable,
   initializeContext,
-  process
+  processSchema
 } from "./to-json-schema-b5fe38b46dc6.mjs";
 import {
+  base64Charset,
+  base64urlCharset
+} from "./doc-85ae2b2bbd32.mjs";
+import {
+  base64,
+  base64url,
   integer,
   number
 } from "./regexes-d1711c96e64b.mjs";
 import {
+  BIGINT_FORMAT_RANGES,
+  NUMBER_FORMAT_RANGES,
   assignProp,
   getEnumValues
 } from "./core-d6ef11a90708.mjs";
 
 // editor/ui-editor-ui/node_modules/zod/v4/core/json-schema-processors.js
+var narrowMin = (agg, key, value) => {
+  if (agg[key] === void 0 || value > agg[key])
+    agg[key] = value;
+};
+var narrowMax = (agg, key, value) => {
+  if (agg[key] === void 0 || value < agg[key])
+    agg[key] = value;
+};
+var narrowBoth = (agg, value) => {
+  narrowMin(agg, "minimum", value);
+  narrowMax(agg, "maximum", value);
+};
+var addDivisor = (agg, value) => {
+  agg.multipleOf ?? (agg.multipleOf = []);
+  if (!agg.multipleOf.includes(value))
+    agg.multipleOf.push(value);
+};
+var addPattern = (agg, pattern) => {
+  agg.patterns ?? (agg.patterns = /* @__PURE__ */ new Set());
+  agg.patterns.add(pattern);
+};
+var intersectMime = (agg, mime) => {
+  agg.mime = agg.mime ? agg.mime.filter((m) => mime.includes(m)) : [...mime];
+};
+var setFormat = (agg, format) => {
+  agg.format = format;
+  if (format.includes("int"))
+    agg.isInt = true;
+};
+var minContributor = (agg, def) => narrowMin(agg, "minimum", def.minimum);
+var maxContributor = (agg, def) => narrowMax(agg, "maximum", def.maximum);
+var formatContributor = (ranges) => (agg, def) => {
+  setFormat(agg, def.format);
+  const [minimum, maximum] = ranges[def.format];
+  narrowMin(agg, "minimum", minimum);
+  narrowMax(agg, "maximum", maximum);
+};
+var contributors = {
+  greater_than: (agg, def) => narrowMin(agg, def.inclusive ? "minimum" : "exclusiveMinimum", def.value),
+  less_than: (agg, def) => narrowMax(agg, def.inclusive ? "maximum" : "exclusiveMaximum", def.value),
+  multiple_of: (agg, def) => addDivisor(agg, def.value),
+  number_format: formatContributor(NUMBER_FORMAT_RANGES),
+  bigint_format: formatContributor(BIGINT_FORMAT_RANGES),
+  min_length: minContributor,
+  max_length: maxContributor,
+  length_equals: (agg, def) => narrowBoth(agg, def.length),
+  min_size: minContributor,
+  max_size: maxContributor,
+  size_equals: (agg, def) => narrowBoth(agg, def.size),
+  string_format: (agg, def) => {
+    setFormat(agg, def.format);
+    if (def.pattern)
+      addPattern(agg, def.pattern);
+    if (def.format === "base64" || def.format === "base64url")
+      agg.contentEncoding = def.format;
+    if (def.local || def.precision === -1)
+      agg.laxFormat = true;
+  },
+  mime_type: (agg, def) => intersectMime(agg, def.mime)
+};
+function aggregateChecks(schema) {
+  const agg = {};
+  const def = schema._zod.def;
+  const list = schema._zod.traits.has("$ZodCheck") ? [schema, ...def.checks ?? []] : def.checks ?? [];
+  for (const ch of list)
+    contributors[ch._zod.def.check]?.(agg, ch._zod.def);
+  const bag = schema._zod.bag;
+  if (bag.minimum !== void 0)
+    narrowMin(agg, "minimum", bag.minimum);
+  if (bag.exclusiveMinimum !== void 0)
+    narrowMin(agg, "exclusiveMinimum", bag.exclusiveMinimum);
+  if (bag.maximum !== void 0)
+    narrowMax(agg, "maximum", bag.maximum);
+  if (bag.exclusiveMaximum !== void 0)
+    narrowMax(agg, "exclusiveMaximum", bag.exclusiveMaximum);
+  if (bag.multipleOf !== void 0)
+    addDivisor(agg, bag.multipleOf);
+  if (bag.format !== void 0) {
+    agg.format ?? (agg.format = bag.format);
+    if (bag.format.includes("int"))
+      agg.isInt = true;
+  }
+  if (bag.mime)
+    intersectMime(agg, bag.mime);
+  for (const pattern of bag.patterns ?? [])
+    addPattern(agg, pattern);
+  return agg;
+}
 var formatMap = {
   guid: "uuid",
   url: "uri",
@@ -23,10 +119,15 @@ var formatMap = {
   regex: ""
   // do not set
 };
+var exactPatterns = /* @__PURE__ */ new Map([
+  [base64Charset, base64],
+  [base64urlCharset, base64url]
+]);
+var exactPattern = (p) => exactPatterns.get(p) ?? p;
 var stringProcessor = (schema, ctx, _json, _params) => {
   const json = _json;
   json.type = "string";
-  const { minimum, maximum, format, patterns, contentEncoding, laxFormat } = schema._zod.bag;
+  const { minimum, maximum, format, patterns, contentEncoding, laxFormat } = aggregateChecks(schema);
   if (typeof minimum === "number")
     json.minLength = minimum;
   if (typeof maximum === "number")
@@ -42,7 +143,7 @@ var stringProcessor = (schema, ctx, _json, _params) => {
   if (contentEncoding)
     json.contentEncoding = contentEncoding;
   if (patterns && patterns.size > 0) {
-    const patternList = [...patterns];
+    const patternList = [...patterns].map(exactPattern);
     if (patternList.length === 1)
       json.pattern = patternList[0].source;
     else if (patternList.length > 1) {
@@ -57,11 +158,8 @@ var stringProcessor = (schema, ctx, _json, _params) => {
 };
 var numberProcessor = (schema, ctx, _json, params) => {
   const json = _json;
-  const { minimum, maximum, format, multipleOf, exclusiveMaximum, exclusiveMinimum } = schema._zod.bag;
-  if (typeof format === "string" && format.includes("int"))
-    json.type = "integer";
-  else
-    json.type = "number";
+  const { minimum, maximum, multipleOf, exclusiveMaximum, exclusiveMinimum, isInt } = aggregateChecks(schema);
+  json.type = isInt ? "integer" : "number";
   const exMin = typeof exclusiveMinimum === "number" && exclusiveMinimum >= (minimum ?? Number.NEGATIVE_INFINITY);
   const exMax = typeof exclusiveMaximum === "number" && exclusiveMaximum <= (maximum ?? Number.POSITIVE_INFINITY);
   const legacy = ctx.target === "draft-04" || ctx.target === "openapi-3.0";
@@ -85,11 +183,19 @@ var numberProcessor = (schema, ctx, _json, params) => {
   } else if (typeof maximum === "number") {
     json.maximum = maximum;
   }
-  if (typeof multipleOf === "number") {
-    if (Number.isFinite(multipleOf) && multipleOf !== 0)
-      json.multipleOf = Math.abs(multipleOf);
-    else
-      handleUnrepresentable(schema, ctx, json, params, "A multipleOf divisor of ".concat(multipleOf, " cannot be represented in JSON Schema"));
+  if (multipleOf) {
+    const divisors = /* @__PURE__ */ new Set();
+    for (const divisor of multipleOf) {
+      if (Number.isFinite(divisor) && divisor !== 0)
+        divisors.add(Math.abs(divisor));
+      else
+        handleUnrepresentable(schema, ctx, json, params, "A multipleOf divisor of ".concat(divisor, " cannot be represented in JSON Schema"));
+    }
+    const [first, ...rest] = divisors;
+    if (first !== void 0)
+      json.multipleOf = first;
+    if (rest.length)
+      json.allOf = [...json.allOf ?? [], ...rest.map((m) => ({ multipleOf: m }))];
   }
 };
 var booleanProcessor = (_schema, _ctx, json, _params) => {
@@ -192,27 +298,22 @@ var templateLiteralProcessor = (schema, _ctx, json, _params) => {
 };
 var fileProcessor = (schema, _ctx, json, _params) => {
   const _json = json;
-  const file = {
-    type: "string",
-    format: "binary",
-    contentEncoding: "binary"
-  };
-  const { minimum, maximum, mime } = schema._zod.bag;
+  _json.type = "string";
+  _json.format = "binary";
+  _json.contentEncoding = "binary";
+  const { minimum, maximum, mime } = aggregateChecks(schema);
   if (minimum !== void 0)
-    file.minLength = minimum;
+    _json.minLength = minimum;
   if (maximum !== void 0)
-    file.maxLength = maximum;
-  if (mime) {
-    if (mime.length === 1) {
-      file.contentMediaType = mime[0];
-      Object.assign(_json, file);
-    } else {
-      Object.assign(_json, file);
-      _json.anyOf = mime.map((m) => ({ contentMediaType: m }));
-    }
-  } else {
-    Object.assign(_json, file);
-  }
+    _json.maxLength = maximum;
+  if (!mime)
+    return;
+  if (mime.length === 0)
+    _json.not = {};
+  else if (mime.length === 1)
+    _json.contentMediaType = mime[0];
+  else
+    _json.anyOf = mime.map((m) => ({ contentMediaType: m }));
 };
 var successProcessor = (_schema, _ctx, json, _params) => {
   json.type = "boolean";
@@ -235,13 +336,13 @@ var setProcessor = (schema, ctx, json, params) => {
 var arrayProcessor = (schema, ctx, _json, params) => {
   const json = _json;
   const def = schema._zod.def;
-  const { minimum, maximum } = schema._zod.bag;
+  const { minimum, maximum } = aggregateChecks(schema);
   if (typeof minimum === "number")
     json.minItems = minimum;
   if (typeof maximum === "number")
     json.maxItems = maximum;
   json.type = "array";
-  json.items = process(def.element, ctx, {
+  json.items = processSchema(def.element, ctx, {
     ...params,
     path: [...params.path, "items"]
   });
@@ -267,22 +368,20 @@ var objectProcessor = (schema, ctx, _json, params) => {
   json.type = "object";
   json.properties = {};
   for (const key in shape) {
-    assignProp(json.properties, key, process(shape[key], ctx, {
+    assignProp(json.properties, key, processSchema(shape[key], ctx, {
       ...params,
       path: [...params.path, "properties", key]
     }));
   }
-  const allKeys = new Set(Object.keys(shape));
-  const requiredKeys = new Set([...allKeys].filter((key) => {
+  const requiredKeys = [];
+  for (const key of Object.keys(shape)) {
     const field = def.shape[key];
-    if (ctx.io === "input") {
-      return inputOptin(field) === void 0;
-    } else {
-      return field._zod.optout === void 0;
+    if (ctx.io === "input" ? inputOptin(field) === void 0 : field._zod.optout === void 0) {
+      requiredKeys.push(key);
     }
-  }));
-  if (requiredKeys.size > 0) {
-    json.required = Array.from(requiredKeys);
+  }
+  if (requiredKeys.length > 0) {
+    json.required = requiredKeys;
   }
   if (def.catchall?._zod.def.type === "never") {
     json.additionalProperties = false;
@@ -290,7 +389,7 @@ var objectProcessor = (schema, ctx, _json, params) => {
     if (ctx.io === "output")
       json.additionalProperties = false;
   } else if (def.catchall) {
-    json.additionalProperties = process(def.catchall, ctx, {
+    json.additionalProperties = processSchema(def.catchall, ctx, {
       ...params,
       path: [...params.path, "additionalProperties"]
     });
@@ -299,7 +398,7 @@ var objectProcessor = (schema, ctx, _json, params) => {
 var unionProcessor = (schema, ctx, json, params) => {
   const def = schema._zod.def;
   const isExclusive = def.inclusive === false;
-  const options = def.options.map((x, i) => process(x, ctx, {
+  const options = def.options.map((x, i) => processSchema(x, ctx, {
     ...params,
     path: [...params.path, isExclusive ? "oneOf" : "anyOf", i]
   }));
@@ -311,11 +410,11 @@ var unionProcessor = (schema, ctx, json, params) => {
 };
 var intersectionProcessor = (schema, ctx, json, params) => {
   const def = schema._zod.def;
-  const a = process(def.left, ctx, {
+  const a = processSchema(def.left, ctx, {
     ...params,
     path: [...params.path, "allOf", 0]
   });
-  const b = process(def.right, ctx, {
+  const b = processSchema(def.right, ctx, {
     ...params,
     path: [...params.path, "allOf", 1]
   });
@@ -333,11 +432,11 @@ var tupleProcessor = (schema, ctx, _json, params) => {
   json.type = "array";
   const prefixPath = ctx.target === "draft-2020-12" ? "prefixItems" : "items";
   const restPath = ctx.target === "draft-2020-12" ? "items" : ctx.target === "openapi-3.0" ? "items" : "additionalItems";
-  const prefixItems = def.items.map((x, i) => process(x, ctx, {
+  const prefixItems = def.items.map((x, i) => processSchema(x, ctx, {
     ...params,
     path: [...params.path, prefixPath, i]
   }));
-  const rest = def.rest ? process(def.rest, ctx, {
+  const rest = def.rest ? processSchema(def.rest, ctx, {
     ...params,
     path: [...params.path, restPath, ...ctx.target === "openapi-3.0" ? [def.items.length] : []]
   }) : null;
@@ -385,7 +484,7 @@ var tupleProcessor = (schema, ctx, _json, params) => {
     if (isClosed)
       json.maxItems = maxItems;
   }
-  const { minimum, maximum } = schema._zod.bag;
+  const { minimum, maximum } = aggregateChecks(schema);
   if (typeof minimum === "number")
     json.minItems = minimum;
   if (typeof maximum === "number")
@@ -459,20 +558,19 @@ var recordProcessor = (schema, ctx, _json, params) => {
   const def = schema._zod.def;
   json.type = "object";
   const keyType = def.keyType;
-  const keyBag = keyType._zod.bag;
-  const patterns = keyBag?.patterns;
+  const patterns = aggregateChecks(keyType).patterns;
   if (def.mode === "loose" && patterns && patterns.size > 0) {
-    const valueSchema = process(def.valueType, ctx, {
+    const valueSchema = processSchema(def.valueType, ctx, {
       ...params,
       path: [...params.path, "patternProperties", "*"]
     });
     json.patternProperties = {};
     for (const pattern of patterns) {
-      assignProp(json.patternProperties, pattern.source, valueSchema);
+      assignProp(json.patternProperties, exactPattern(pattern).source, valueSchema);
     }
   } else {
     if (ctx.target === "draft-07" || ctx.target === "draft-2020-12") {
-      json.propertyNames = process(def.keyType, ctx, {
+      json.propertyNames = processSchema(def.keyType, ctx, {
         ...params,
         path: [...params.path, "propertyNames"]
       });
@@ -484,7 +582,7 @@ var recordProcessor = (schema, ctx, _json, params) => {
       }
       pending.push(schema);
     }
-    json.additionalProperties = process(def.valueType, ctx, {
+    json.additionalProperties = processSchema(def.valueType, ctx, {
       ...params,
       path: [...params.path, "additionalProperties"]
     });
@@ -500,7 +598,7 @@ var recordProcessor = (schema, ctx, _json, params) => {
 };
 var nullableProcessor = (schema, ctx, json, params) => {
   const def = schema._zod.def;
-  const inner = process(def.innerType, ctx, params);
+  const inner = processSchema(def.innerType, ctx, params);
   const seen = ctx.seen.get(schema);
   if (ctx.target === "openapi-3.0") {
     seen.ref = def.innerType;
@@ -511,7 +609,7 @@ var nullableProcessor = (schema, ctx, json, params) => {
 };
 var nonoptionalProcessor = (schema, ctx, _json, params) => {
   const def = schema._zod.def;
-  process(def.innerType, ctx, params);
+  processSchema(def.innerType, ctx, params);
   const seen = ctx.seen.get(schema);
   seen.ref = def.innerType;
 };
@@ -531,7 +629,7 @@ function serializeDefaultValue(value, schema, ctx, json, params) {
 }
 var defaultProcessor = (schema, ctx, json, params) => {
   const def = schema._zod.def;
-  process(def.innerType, ctx, params);
+  processSchema(def.innerType, ctx, params);
   const seen = ctx.seen.get(schema);
   seen.ref = def.innerType;
   const value = serializeDefaultValue(def.defaultValue, schema, ctx, json, params);
@@ -540,7 +638,7 @@ var defaultProcessor = (schema, ctx, json, params) => {
 };
 var prefaultProcessor = (schema, ctx, json, params) => {
   const def = schema._zod.def;
-  process(def.innerType, ctx, params);
+  processSchema(def.innerType, ctx, params);
   const seen = ctx.seen.get(schema);
   seen.ref = def.innerType;
   if (ctx.io !== "input")
@@ -551,7 +649,7 @@ var prefaultProcessor = (schema, ctx, json, params) => {
 };
 var catchProcessor = (schema, ctx, json, params) => {
   const def = schema._zod.def;
-  process(def.innerType, ctx, params);
+  processSchema(def.innerType, ctx, params);
   const seen = ctx.seen.get(schema);
   seen.ref = def.innerType;
   let catchValue;
@@ -567,32 +665,32 @@ var pipeProcessor = (schema, ctx, _json, params) => {
   const def = schema._zod.def;
   const inIsTransform = def.in._zod.traits.has("$ZodTransform");
   const innerType = ctx.io === "input" ? inIsTransform ? def.out : def.in : def.out;
-  process(innerType, ctx, params);
+  processSchema(innerType, ctx, params);
   const seen = ctx.seen.get(schema);
   seen.ref = innerType;
 };
 var readonlyProcessor = (schema, ctx, json, params) => {
   const def = schema._zod.def;
-  process(def.innerType, ctx, params);
+  processSchema(def.innerType, ctx, params);
   const seen = ctx.seen.get(schema);
   seen.ref = def.innerType;
   json.readOnly = true;
 };
 var promiseProcessor = (schema, ctx, _json, params) => {
   const def = schema._zod.def;
-  process(def.innerType, ctx, params);
+  processSchema(def.innerType, ctx, params);
   const seen = ctx.seen.get(schema);
   seen.ref = def.innerType;
 };
 var optionalProcessor = (schema, ctx, _json, params) => {
   const def = schema._zod.def;
-  process(def.innerType, ctx, params);
+  processSchema(def.innerType, ctx, params);
   const seen = ctx.seen.get(schema);
   seen.ref = def.innerType;
 };
 var lazyProcessor = (schema, ctx, _json, params) => {
   const innerType = schema._zod.innerType;
-  process(innerType, ctx, params);
+  processSchema(innerType, ctx, params);
   const seen = ctx.seen.get(schema);
   seen.ref = innerType;
 };
@@ -644,7 +742,7 @@ function toJSONSchema(input, params) {
     const defs = {};
     for (const entry of registry._idmap.entries()) {
       const [_, schema] = entry;
-      process(schema, ctx2);
+      processSchema(schema, ctx2);
     }
     const schemas = {};
     const external = {
@@ -667,12 +765,13 @@ function toJSONSchema(input, params) {
     return { schemas };
   }
   const ctx = initializeContext({ ...params, processors: allProcessors });
-  process(input, ctx);
+  processSchema(input, ctx);
   extractDefs(ctx, input);
   return finalize(ctx, input);
 }
 
 export {
+  aggregateChecks,
   stringProcessor,
   numberProcessor,
   booleanProcessor,

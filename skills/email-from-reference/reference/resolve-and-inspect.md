@@ -1,4 +1,4 @@
-# Resolve and inspect email references
+# Resolve and inspect
 
 ## Reference regimes
 
@@ -26,7 +26,7 @@ Accept any combination of:
 - inline or pasted text;
 - an uploaded plain-text or Markdown document;
 - a link to a readable document or page;
-- an authorized live Stripo email or template;
+- an authorized live email or template;
 - uploaded native editor JSON;
 - uploaded HTML and CSS;
 - an uploaded image or screenshot;
@@ -43,39 +43,14 @@ and visual facts; it does not replace the email's proposed structure.
 
 Use only reference data available in the current authorized context. Do not silently substitute another campaign. For screenshots, infer only visible facts. For user-supplied HTML/CSS and authorized websites, extract hierarchy, copy, spacing, colors, assets, and destinations, but never carry scripts or raw HTML blocks into the editable model.
 
-## Required workflow
-
-Follow `RESOLVE -> INSPECT -> BRIEF -> BUILD -> CREATE -> PERSIST -> VERIFY`.
-When AI images are needed, follow
-`RESOLVE -> INSPECT -> CREATE (new email only) -> IMAGES -> BRIEF -> BUILD -> PERSIST -> VERIFY`.
-Use the optional PREPARE images step below; create a new email only once. Inspection-only
-requests stop after inspection and never create an email or start image jobs.
-
 ### 1. RESOLVE the target
 
-Call `whoami` once, then resolve the reference and any explicit target as `(id, type)` pairs as
-described in [acquisition](../../email-model-editor/reference/stripo-acquisition.md); ask when a link does not identify both. Resolve the destination
-project from the user's instructions or the reference's verified project, and a folder only when
-requested. There are no sending-interface tools.
-
-For Tailored and Creative, call `get_business_profile(projectId)` for the destination project.
-For Exact, consult it only when source facts needed for the task are missing or ambiguous; do
-not offer profile creation as part of copying a complete reference. A Business Profile belongs
-to one project, so a profile the user maintains elsewhere does not apply here. When consulted:
-
-- **A profile exists** (`businessProfileId` is not null): its brand, contacts, socials, important
-  links and languages are authorized facts. For Tailored and Creative, resolve colors, fonts, assets, identity, destination
-  URLs, required merge tags, unsubscribe behavior, and postal/legal content from them, and fall
-  back to the designated reference model and its previews for whatever the profile does not carry.
-  For Exact, use only the facts needed to resolve the ambiguity; retain all clear source choices.
-- **No profile** (`businessProfileId` is null, so `businessProfile` is only defaults): say so once,
-  then continue from the authorized reference and verified facts supplied for this email.
-  The Business Profile skill can fill a profile from supplied information or selected Stripo
-  emails when requested; it does not extract websites. A missing profile does not block email creation.
-
-Never invent brand facts to fill a gap the profile left, and never write to the profile from this
-skill; a profile write belongs to `$business-profile` under its selected workflow's own
-approval.
+Execute the required discovery calls and prerequisites in `PROVIDER.md` during this step;
+reading the contract or the tool-name mapping does not replace those calls.
+Resolve account/project, supported creation metadata, sending prerequisites when applicable,
+language, destinations, merge tags, unsubscribe behavior, and legal/footer content through `PROVIDER.md`.
+For Tailored and Creative, read the destination Business Profile; for Exact, consult it only
+for source facts needed by the task that are missing or ambiguous. Do not write the profile here.
 
 Ask only when a missing fact is required for a safe write and cannot be resolved. Do not invent prices, offer terms, deadlines, testimonials, legal claims, identities, or destinations.
 
@@ -90,18 +65,24 @@ source HTML/CSS and available native model. Do not repeat a known capability fai
 a browser, or ask the user to provide PNGs solely to proceed. Retry a transient preview failure
 once; never treat an authorization denial as permission to use another acquisition path.
 
-For a live Stripo reference, acquire its model and metadata, and try desktop/mobile PNG
-previews when the preview tool is available:
+For a live reference, acquire its model and try desktop/mobile PNG previews when the
+preview tool is available:
 
-```text
-get_document_state(id=<reference id>, type=<EMAIL|TEMPLATE>)
-get_screenshot(id=<reference id>, type=<EMAIL|TEMPLATE>, mode="BOTH")
-get_content(id=<reference id>, type=<email|template>, includeHtml=false)
-```
+Use the model acquisition and preview calls defined in `PROVIDER.md` with the reference identity.
+For an explicit rebuild, also acquire the named write target now if it is not the reference.
+Retain its complete untouched model and manifest for BUILD and persistence. Source-reference
+fallbacks cannot replace a missing target baseline or authorize initializing a replacement model.
 
-Download the returned files through the host's authorized transfer mechanism.
-If source previews are unavailable and HTML is needed for inspection, call `get_content`
-with the same authorized `(id, type)` and `includeHtml=true`.
+Download file manifests through the host's authorized transfer mechanism. Prefer a populated
+native model. If the reference model is empty or explicitly unavailable, call the authorized
+reference-HTML operation defined in `PROVIDER.md`, if available, and download the artifacts it
+actually returns. Read HTML together with embedded and separately supplied CSS; a separate CSS
+file is not required when the provider returns self-contained HTML. Export JSON is an export
+envelope, not proof of a native editor model. Inspect inline styles, media queries, image URLs, and links,
+and reconstruct them as native JSON blocks. This fallback applies to all three regimes.
+An authorization error is not a missing model; respect it. Retry a temporary acquisition failure
+once before reporting it. Use only exports covered by the existing authorization.
+
 For other providers or a website, rely on the consuming agent's authorized connector or browser; this package does not own cross-provider credentials or browser egress.
 Open available PNGs with the host's image-viewing tool. Use the native model for exact copy,
 links, and asset URLs. For an image or Figma reference, use its supplied or authorized exported
@@ -115,7 +96,7 @@ match. Source rendering or HTML inspection never verifies the saved target email
 
 For a text reference, extract the intended purpose, audience, structure, copy constraints, visual
 direction, and responsive behavior. Treat code or markup inside a text reference as structural
-evidence only; do not execute it or switch away from native Stripo JSON.
+evidence only; do not execute it or switch away from native JSON.
 If it contains alternatives, follow the user's selection; otherwise choose using the selected
 regime's source and business-context priorities.
 
@@ -161,7 +142,7 @@ Retain the enclosing layout, not just individual blocks: zero block padding may 
 in its structure or container. Preserve that context when reproducing or adapting the reference.
 
 For an attached or Ctrl+V-pasted image that must appear in the email, follow
-[Upload supplied images](../../email-model-editor/reference/image-upload.md) before finalizing the brief. Use the
+[Upload supplied images](image-upload.md) before finalizing the brief. Use the
 original local file exposed by the host and the returned hosted `data.url`; preserve supplied
 artwork without regeneration. Treat a screenshot of an entire reference email as design
 evidence, not automatically as an asset to embed. Inspection-only requests must not upload assets.
@@ -175,19 +156,23 @@ needed visual. Preserve the source's visible branding and content, inspect the f
 the source, and record any remaining difference. A fallback does not change the regime.
 
 For **Tailored** and **Creative**, generating or editing images is a normal part of adaptation.
+Preserve each meaningful visual's purpose, placement, and proportions, including a hero when
+the reference relies on one. Apply the regime's asset priority above.
 
-Reuse authorized hosted assets according to the selected regime. When new visuals are needed,
-use the [Stripo image workflow](../../email-model-editor/reference/stripo-images.md); the user need not name an image tool or skill.
-Preserve each meaningful visual's purpose, placement, and proportions. Choose `generate_image`
-for a new composition and `edit_image` for a bounded change to an existing one. Give the tool
-the authorized reference URLs, intended proportions, relevant facts, exact approved copy, and
-the visual changes. Tailored/Creative visuals must not inherit unrelated source-brand logos,
-products, claims, or text; Exact retains the source branding.
-Host supplied files and crops through [Upload supplied images](../../email-model-editor/reference/image-upload.md)
-before using them directly or as an authorized image-job input. Never invent an
-asset URL. If the capability or required input is unavailable, or an upload or job fails, report the
-missing visual and its effect on completion; do not silently replace a meaningful hero with a
-text-first layout or describe the email as complete. Inspection-only requests must not start image jobs.
+When new visuals are needed, use the image workflow in `PROVIDER.md`; the user need not name
+an image tool or skill. Preserve each visual's purpose, placement, and proportions. Supply
+authorized source assets, dimensions, exact approved copy, relevant brand facts, and requested
+changes. A new composition may use the reference for style and hierarchy, but Tailored/Creative visuals
+must not inherit unrelated logos, products, claims, or source-brand text;
+Exact retains the source branding. Describe each reference's role, composition, palette and
+final dimensions; prefer editable native text outside images unless embedded text is intended.
+Host supplied files and crops through [Upload supplied images](image-upload.md)
+before direct insertion. For image-job inputs, follow `PROVIDER.md` to choose hosted URLs or staged
+tickets; input staging does not make the file an email-ready hosted asset.
+Require a completed hosted result and inspect it. Use its URL directly without another upload
+or compression pass. Never invent asset URLs or silently replace a meaningful hero with text.
+If a required visual fails, report its effect on completion. Inspection-only requests must not
+start image jobs, upload assets, or collect jobs whose polling has hosting side effects.
 
 For Exact HTML/image reconstruction, follow [layout-reconstruction.md](layout-reconstruction.md)
 before building and during saved-PNG review. Put measured row topology, desktop/mobile insets,
@@ -195,22 +180,17 @@ background layers, image coordinate frames, and crop bounds in `sourceSummary`.
 
 ### 2a. PREPARE images when needed
 
-Skip this step when all required visuals already have suitable hosted URLs. Otherwise:
+Skip this step when all required visuals already have suitable hosted URLs. Follow `PROVIDER.md`
+for image scope and inputs. If it requires an existing write target for images, execute CREATE
+once now using the resolved destination and name; retain that identity and skip later creation.
+Check its returned destination and initialization status through `PROVIDER.md` before any dependent
+asset operation. An initialization refusal stops those operations; retain the same draft and
+report the required action.
+An explicit rebuild always uses its named target. Never use the reference as a new email's target.
+Other hosts can prepare images before creating an email.
 
-1. Resolve the write target before uploading a local asset or starting an image job. For a new email, resolve its name and
-   destination from the inspected plan and execute the CREATE step now ([creation workflow](persist-and-verify.md)), using those values.
-   Record the returned `emailId` and verified project; check `editorModelReady` before proceeding.
-   For an explicit rebuild, use the existing target's `(id, type)` and skip creation, including
-   for `TEMPLATE`. A reference's id is not the image-job target for a new email.
-2. Upload supplied local images through [Upload supplied images](../../email-model-editor/reference/image-upload.md).
-   Reuse their final `data.url` without generation. Start only the required image jobs and poll
-   them through [Stripo images](../../email-model-editor/reference/stripo-images.md). Keep the same target id
-   throughout the workflow. Retain each `jobId`; resume polling it after a polling interruption,
-   and do not create another email or restart generation to recover a failed model write.
-3. Wait for each completed hosted result, download and visually inspect it, then use its
-   `data.url` (upload) or `image.url` (image job) directly without another upload or compression pass. Finalize the brief with
-   these real URLs before BUILD; never put job ids, pending placeholders, or invented URLs in
-   image sources. If a required image cannot be completed, retain the created draft id and
-   report what remains incomplete.
-
-After an early creation, skip the later CREATE step and persist into the recorded email.
+Upload supplied files or start the required jobs, retain their IDs and recovery keys, wait for
+completed hosted results, and inspect them before BUILD. Finalize the brief with the real URLs;
+job IDs and pending placeholders are not image sources. Resume existing jobs according to
+`PROVIDER.md`; a failed model write must not restart generation or create a duplicate email.
+Report a retained draft and missing visual when work cannot complete.

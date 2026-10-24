@@ -1,18 +1,127 @@
 {
   "v": 2,
-  "note": "Minimal prompt-only example; replace every placeholder with verified campaign facts.",
+  "note": "Illustrative model only. The message holds the installed provider's example metadata from reference/creation-policy.json; resolve each field from verified facts and replace every placeholder before building or persisting.",
   "sourceSummary": [
-    "Replace this example's content and include settings/resources from the designated reference."
+    "Agent-authored text reference; Creative mode. No external reference or source PNG was supplied. Goal: help a new subscriber confirm their email address with one clear action.",
+    "Proposed structure: concise confirmation heading and explanation, one prominent Confirm email button, then an ignore-if-not-requested note and the required footer. No promotional sections or decorative hero are needed for this goal.",
+    "Draft headline: Confirm your email. Preheader: One quick step to confirm your email address. Body: Please confirm your email address by selecting the button below. CTA: Confirm email. Supporting note: If you did not request this email, you can ignore it.",
+    "Visual direction: a readable single-column layout, 600px on desktop and fitting the mobile viewport, with a clear heading and contrasting CTA. Replace the illustrative colors and Arial with verified brand styling; add an authorized logo if available.",
+    "Essential facts to resolve before saving: the authorized confirmation destination or merge tag, the provider metadata named in PROVIDER.md, the unsubscribe link or merge tag, and applicable legal/footer requirements. The example.com URL, company address, and unsubscribe token below are placeholders, not verified facts."
   ],
-  "message": {"name": "Email from reference"},
+  "message": {
+    "name": "Confirm your email",
+    "referenceMode": "creative"
+  },
   "model": {
-    "stripes": [{
-      "structures": [{
-        "columns": [{
-          "settings": {"width": 600},
-          "containers": [{"blocks": [{"type": "text", "content": "<p>Reference-based email content.</p>"}]}]
-        }]
-      }]
-    }]
+    "settings": {
+      "general": {
+        "messageContentWidth": 600,
+        "lightTheme": {
+          "backgroundColor": "#F4F4F4"
+        }
+      },
+      "stripes": {
+        "fontFamily": "Arial, sans-serif",
+        "lightTheme": {
+          "content": {
+            "contentBackgroundColor": "#FFFFFF",
+            "fontColor": "#222222",
+            "linkColor": "#2457D6",
+            "linkColorHover": "#2457D6"
+          },
+          "footer": {
+            "contentBackgroundColor": "#FFFFFF",
+            "fontColor": "#222222",
+            "linkColor": "#2457D6",
+            "linkColorHover": "#2457D6"
+          }
+        }
+      },
+      "headings": {
+        "fontFamily": "Arial, sans-serif",
+        "lightTheme": {
+          "h1": {
+            "fontColor": "#222222"
+          }
+        }
+      },
+      "buttons": {
+        "fontFamily": "Arial, sans-serif",
+        "lightTheme": {
+          "buttonColor": "#2457D6",
+          "fontColor": "#FFFFFF"
+        }
+      }
+    },
+    "stripes": [
+      {
+        "structures": [
+          {
+            "columns": [
+              {
+                "containers": [
+                  {
+                    "blocks": [
+                      {
+                        "type": "text",
+                        "content": "<h1>Confirm your email</h1><p>Please confirm your email address by selecting the button below.</p>"
+                      },
+                      {
+                        "type": "button",
+                        "settings": {
+                          "text": "Confirm email",
+                          "link": {
+                            "type": "site",
+                            "value": "https://example.com/verified-destination"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                ],
+                "settings": {
+                  "width": 600
+                }
+              }
+            ]
+          }
+        ],
+        "settings": {
+          "messageArea": "content"
+        }
+      },
+      {
+        "structures": [
+          {
+            "columns": [
+              {
+                "containers": [
+                  {
+                    "blocks": [
+                      {
+                        "type": "text",
+                        "content": "<p>If you did not request this email, you can ignore it.</p><p>Verified company address</p><p><a id=\"unsubscribe\" href=\"{{unsubscribe_url}}\">Unsubscribe</a></p>"
+                      }
+                    ]
+                  }
+                ],
+                "settings": {
+                  "width": 600
+                }
+              }
+            ]
+          }
+        ],
+        "settings": {
+          "messageArea": "footer"
+        }
+      }
+    ],
+    "metadata": {
+      "preheader": {
+        "text": "One quick step to confirm your email address",
+        "fillSpace": false
+      }
+    }
   }
 }

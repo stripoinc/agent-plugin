@@ -22,6 +22,7 @@ import {
   $ZodCheckMinSize,
   $ZodCheckMultipleOf,
   $ZodCheckOverwrite,
+  $ZodCheckProperties,
   $ZodCheckProperty,
   $ZodCheckRegex,
   $ZodCheckSizeEquals,
@@ -37,20 +38,18 @@ import {
 } from "./core-d6ef11a90708.mjs";
 
 // editor/ui-editor-ui/node_modules/zod/v4/core/api.js
+function snapshotChecks(def) {
+  if (def.checks)
+    def.checks = [...def.checks];
+  return def;
+}
 // @__NO_SIDE_EFFECTS__
 function _string(Class, params) {
-  return new Class({
-    type: "string",
-    ...normalizeParams(params)
-  });
+  return new Class(snapshotChecks({ type: "string", ...normalizeParams(params) }));
 }
 // @__NO_SIDE_EFFECTS__
 function _coercedString(Class, params) {
-  return new Class({
-    type: "string",
-    coerce: true,
-    ...normalizeParams(params)
-  });
+  return new Class(snapshotChecks({ type: "string", coerce: true, ...normalizeParams(params) }));
 }
 // @__NO_SIDE_EFFECTS__
 function _email(Class, params) {
@@ -286,6 +285,16 @@ function _creditCard(Class, params) {
   });
 }
 // @__NO_SIDE_EFFECTS__
+function _iban(Class, params) {
+  return new Class({
+    type: "string",
+    format: "iban",
+    check: "string_format",
+    abort: false,
+    ...normalizeParams(params)
+  });
+}
+// @__NO_SIDE_EFFECTS__
 function _jwt(Class, params) {
   return new Class({
     type: "string",
@@ -344,20 +353,11 @@ function _isoDuration(Class, params) {
 }
 // @__NO_SIDE_EFFECTS__
 function _number(Class, params) {
-  return new Class({
-    type: "number",
-    checks: [],
-    ...normalizeParams(params)
-  });
+  return new Class(snapshotChecks({ type: "number", checks: [], ...normalizeParams(params) }));
 }
 // @__NO_SIDE_EFFECTS__
 function _coercedNumber(Class, params) {
-  return new Class({
-    type: "number",
-    coerce: true,
-    checks: [],
-    ...normalizeParams(params)
-  });
+  return new Class(snapshotChecks({ type: "number", coerce: true, checks: [], ...normalizeParams(params) }));
 }
 // @__NO_SIDE_EFFECTS__
 function _int(Class, params) {
@@ -699,8 +699,12 @@ function _property(property, schema, params) {
   });
 }
 // @__NO_SIDE_EFFECTS__
-function _properties(shape) {
-  return Object.entries(shape).map(([property, schema]) => new $ZodCheckProperty({ check: "property", property, schema }));
+function _properties(shape, params) {
+  return new $ZodCheckProperties({
+    check: "properties",
+    shape,
+    ...normalizeParams(params)
+  });
 }
 // @__NO_SIDE_EFFECTS__
 function _mime(types, params) {
@@ -1118,6 +1122,7 @@ export {
   _base64url,
   _e164,
   _creditCard,
+  _iban,
   _jwt,
   TimePrecision,
   _isoDateTime,

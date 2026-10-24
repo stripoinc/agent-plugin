@@ -5,9 +5,6 @@ import {
   normalizeModelTag
 } from "./ue-proto-87c1854705b4.mjs";
 import {
-  BlockType
-} from "./index-604a083968ff.mjs";
-import {
   ComplexBlock,
   DefaultBlock,
   defaultBlocksMarkers,
@@ -25,6 +22,9 @@ import {
   q,
   queryParseError
 } from "./builders-6d4dedaf957f.mjs";
+import {
+  BlockType
+} from "./index-604a083968ff.mjs";
 
 // editor/ui-editor-ui/src/app/core/block-operations-api/common/node-selectors.ts
 var STRIPE_CSS_CLASS = "esd-stripe";
@@ -405,7 +405,7 @@ function executeQuery(options) {
       return { ids: executeChildren(options.reader, rootId, options.plan.groups, true) };
     case "all":
       return { ids: executeChildren(options.reader, rootId, options.plan.groups, false) };
-    /* istanbul ignore next: exhaustive QueryMode guard */
+    /* istanbul ignore next: exhaustive QueryMode guard -- @preserve */
     default:
       return assertNever(options.mode);
   }
@@ -486,7 +486,7 @@ function enqueueNextStep(reader, queue, task) {
         queue.push({ id: ancestor, chain: task.chain, stepIndex: nextStepIndex, scopeId: task.id });
       }
       break;
-    /* istanbul ignore next: exhaustive QueryAxis guard */
+    /* istanbul ignore next: exhaustive QueryAxis guard -- @preserve */
     default:
       assertNever(nextStep.axis);
   }
@@ -563,7 +563,7 @@ function matchesParentChainAt(reader, id, chain, stepIndex) {
     case "ancestor":
     case "closest-ancestor":
       return false;
-    /* istanbul ignore next: exhaustive QueryAxis guard */
+    /* istanbul ignore next: exhaustive QueryAxis guard -- @preserve */
     default:
       return assertNever(step.axis);
   }
@@ -629,7 +629,7 @@ function candidatesForStep(reader, rootId, step) {
     case "ancestor":
     case "closest-ancestor":
       return ancestors(reader, rootId, step.axis === "closest-ancestor");
-    /* istanbul ignore next: exhaustive QueryAxis guard */
+    /* istanbul ignore next: exhaustive QueryAxis guard -- @preserve */
     default:
       return assertNever(step.axis);
   }
@@ -734,7 +734,7 @@ function matchesPredicate(reader, id, predicate, context) {
     }
     case "css-selector-regex":
       return predicate.patterns.some((pattern) => new RegExp(pattern.source, pattern.flags).test(reader.getCssSelector(id) ?? ""));
-    /* istanbul ignore next: exhaustive Predicate guard */
+    /* istanbul ignore next: exhaustive Predicate guard -- @preserve */
     default:
       return assertNever(predicate);
   }
@@ -1101,7 +1101,7 @@ function formatPredicate(predicate) {
       return formatPattern(predicate.pattern);
     case "css-selector-regex":
       return ":selector-regex(".concat(predicate.patterns.map((pattern) => formatString(pattern.source)).join(","), ")");
-    /* istanbul ignore next: exhaustive Predicate guard */
+    /* istanbul ignore next: exhaustive Predicate guard -- @preserve */
     default:
       return assertNever2(predicate);
   }
@@ -1226,10 +1226,7 @@ var HtmlLegacyParser = class {
       }
       predicates.push(predicate);
     }
-    if (predicates.length > 0) {
-      return predicates;
-    }
-    return void 0;
+    return predicates;
   }
   parseSimpleSelector() {
     const current = this.peek();
@@ -2101,3 +2098,14 @@ export {
   AXE_ISSUE_IGNORED_SELECTOR,
   ELEMENT_NODE_SELECTOR
 };
+/* istanbul ignore next: exhaustive switch guard -- @preserve */
+/* istanbul ignore if: parseCompound stops only on HTML combinators. -- @preserve */
+/* istanbul ignore next: group splitting rejects unterminated quoted selectors before value parsing. -- @preserve */
+/* istanbul ignore next: group splitting rejects unterminated parenthesized selectors before pseudo parsing. -- @preserve */
+/* istanbul ignore next: source pre-validation rejects empty CSS groups and leading child combinators. -- @preserve */
+/* istanbul ignore next: group splitting rejects unclosed CSS braced tokens before token parsing. -- @preserve */
+/* istanbul ignore next: module legacy pre-validation rejects sibling combinators and group splitting handles commas. -- @preserve */
+/* istanbul ignore next: source pre-validation rejects trailing child combinators. -- @preserve */
+/* istanbul ignore next: callers only ask for a next non-whitespace character inside validated non-empty CSS input. -- @preserve */
+/* istanbul ignore next: CSS parser checks isEnd before peeking in public parse paths. -- @preserve */
+/* istanbul ignore next: exhaustive LegacyTokenKind guard. -- @preserve */

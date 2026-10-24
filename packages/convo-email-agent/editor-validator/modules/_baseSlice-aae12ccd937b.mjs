@@ -13,9 +13,6 @@ import {
   q
 } from "./builders-6d4dedaf957f.mjs";
 import {
-  copy
-} from "./index-8c9fdc3b457a.mjs";
-import {
   __commonJS,
   __toESM
 } from "./shared-4f53cda18c2b.mjs";
@@ -220,7 +217,7 @@ var NodeUtils = class _NodeUtils {
     if (!node) {
       return null;
     }
-    const replaceNodeOnUpdate = node["tag"] !== "IMG" /* IMG */;
+    const replaceNodeOnUpdate = !("tag" in node) || node.tag !== "IMG" /* IMG */;
     return replaceNodeOnUpdate ? { ...node } : node;
   }
   static setProperty(node, property, value) {
@@ -319,7 +316,9 @@ var NodeUtils = class _NodeUtils {
       console.error("Cannot find children of the node to update!");
       return null;
     }
-    property && this.setProperty(updatedNode, property, value);
+    if (property) {
+      this.setProperty(updatedNode, property, value);
+    }
     if (path.length) {
       if (!parentIsComment) {
         const parentChildren = correspondingParent.children;
@@ -330,7 +329,9 @@ var NodeUtils = class _NodeUtils {
     } else {
       Object.assign(correspondingParent, updatedNode);
     }
-    !property && _NodeUtils.reindexNode(correspondingParent, void 0, path);
+    if (!property) {
+      _NodeUtils.reindexNode(correspondingParent, void 0, path);
+    }
     return updatedNode;
   }
   static pureNodeUpdate(root, path, property, value) {
@@ -339,7 +340,9 @@ var NodeUtils = class _NodeUtils {
       console.error("Cannot find node to update!");
       return null;
     }
-    property && this.setProperty(updatedNode, property, value);
+    if (property) {
+      this.setProperty(updatedNode, property, value);
+    }
     return updatedNode;
   }
   static updateNodeModelWithoutReRendering(root, path, property, value) {
@@ -353,7 +356,11 @@ var NodeUtils = class _NodeUtils {
       console.error("Cannot find children of the node to update!");
       return null;
     }
-    property ? this.setProperty(updatedNode, property, value) : Object.assign(updatedNode, value);
+    if (property) {
+      this.setProperty(updatedNode, property, value);
+    } else {
+      Object.assign(updatedNode, value);
+    }
     if (path.length) {
       const parentChildren = correspondingParent.children;
       if (parentChildren) {
@@ -446,17 +453,18 @@ var NodeUtils = class _NodeUtils {
     }
   }
   static getChildByPath(node, path, closest = true) {
+    let currentNode = node;
     for (const i of path) {
-      const child = node.children?.[i];
+      const child = currentNode.children?.[i];
       if (child) {
-        node = child;
+        currentNode = child;
       } else if (closest) {
         break;
       } else {
         return null;
       }
     }
-    return node;
+    return currentNode;
   }
   static getChildByID(node, id) {
     return this.findFirst(node, (n) => n.id === id);
@@ -539,17 +547,17 @@ var NodeUtils = class _NodeUtils {
     if (!root || !path) {
       return null;
     }
-    path = this.getRelativePath(path, root.path);
+    const relativePath = this.getRelativePath(path, root.path);
     if (self) {
-      const node = this.getChildByPath(root, path, false);
+      const node = this.getChildByPath(root, relativePath, false);
       if (node && predicate(node)) {
         return node;
       }
     }
-    if (!path.length) {
+    if (!relativePath.length) {
       return null;
     }
-    return this.getClosest(root, this.getParentPath(path), predicate, true);
+    return this.getClosest(root, this.getParentPath(relativePath), predicate, true);
   }
   static getParents(root, path, predicate) {
     if (!root || !path || !path.length) {
@@ -610,7 +618,8 @@ var NodeUtils = class _NodeUtils {
     return path.slice(relativeTo.length - path.length);
   }
   /**
-   * @description cuts search off early to avoid searching container structures in nested ones
+   * @description cuts search off early to avoid searching container structures in nested ones;
+   * `predicate` is only compared by identity with the known structural predicates and is never called
    */
   static shouldContinueSearchInChildren(node, predicate) {
     const n = node;
@@ -686,7 +695,9 @@ var NodeUtils = class _NodeUtils {
   }
   static foreachNodeCRDT(node, callbackfn) {
     callbackfn(node);
-    node.getChildren() && node.getChildren().forEach((ch) => this.foreachNodeCRDT(ch, callbackfn));
+    if (node.getChildren()) {
+      node.getChildren().forEach((ch) => this.foreachNodeCRDT(ch, callbackfn));
+    }
   }
   /**
    * @description returns first node from node or its children that match predicate
@@ -706,7 +717,7 @@ var NodeUtils = class _NodeUtils {
     return [p1.slice(0, sameLevelPathLen), p2.slice(0, sameLevelPathLen)];
   }
   static getStructuralParentBlock(root, path) {
-    const pathCopy = copy(path);
+    const pathCopy = path.slice();
     const nodeIdentifiers = ["esd-block", "esd-structure", "esd-stripe"];
     for (; pathCopy.length; ) {
       const nodeByPath = _NodeUtils.getChildByPath(root, pathCopy);
@@ -763,7 +774,7 @@ var NodeUtils = class _NodeUtils {
     return !!node?.path?.length;
   }
 };
-globalThis["NodeUtils"] = NodeUtils;
+globalThis.NodeUtils = NodeUtils;
 
 export {
   NodeUtils

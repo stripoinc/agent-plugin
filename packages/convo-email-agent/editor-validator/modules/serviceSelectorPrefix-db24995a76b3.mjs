@@ -20,6 +20,7 @@ var DefaultBlock = ((DefaultBlock2) => {
   DefaultBlock2[DefaultBlock2["BLOCK_AMP_FORM"] = BlockType.BLOCK_AMP_FORM] = "BLOCK_AMP_FORM";
   return DefaultBlock2;
 })(DefaultBlock || {});
+var defaultBlockValues = new Set(Object.values(DefaultBlock));
 var ComplexBlock = ((ComplexBlock2) => {
   ComplexBlock2[ComplexBlock2["CONTAINER"] = BlockType.CONTAINER] = "CONTAINER";
   ComplexBlock2[ComplexBlock2["FORM_CONTAINER"] = BlockType.FORM_CONTAINER] = "FORM_CONTAINER";
@@ -52,10 +53,7 @@ var markers = {
   [ComplexBlock.STRUCTURE]: "".concat(serviceSelectorPrefix, "-structure"),
   [ComplexBlock.STRIPE]: "".concat(serviceSelectorPrefix, "-stripe")
 };
-var defaultBlocksMarkers = Object.keys(markers).reduce((map, key) => ({
-  ...map,
-  [key]: markers[key]
-}), {});
+var defaultBlocksMarkers = { ...markers };
 var pluginBlockMarker = "".concat(serviceSelectorPrefix, "-plugin-block");
 var pluginBlockIDAttr = "".concat(serviceSelectorPrefix, "-plugin-block-id");
 var extensionBlockMarker = "".concat(serviceSelectorPrefix, "-extension-block");

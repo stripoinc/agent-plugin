@@ -1,0 +1,60 @@
+{
+  "provider": "stripo",
+  "requiredMessageStrings": [
+    "name"
+  ],
+  "allowedMessageFields": [
+    "name",
+    "projectId",
+    "folderId",
+    "referenceMode"
+  ],
+  "maxMessageLengths": {
+    "name": 200
+  },
+  "positiveIntegerMessageFields": [
+    "projectId",
+    "folderId"
+  ],
+  "checkBackgroundImages": false,
+  "checkUnbreakableRules": false,
+  "requireContent": true,
+  "exampleMessage": {
+    "name": "Confirm your email"
+  },
+  "messageSchema": {
+    "type": "object",
+    "required": [
+      "name"
+    ],
+    "additionalProperties": false,
+    "description": "Stripo create_email metadata. Title/preheader belong in model.metadata.",
+    "properties": {
+      "referenceMode": {
+        "type": "string",
+        "enum": [
+          "exact",
+          "tailored",
+          "creative",
+          "copy-action"
+        ],
+        "default": "creative",
+        "description": "Local generation policy; do not send to MCP. copy-action is a legacy alias for tailored."
+      },
+      "name": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 200,
+        "pattern": "\\S"
+      },
+      "projectId": {
+        "type": "integer",
+        "minimum": 1
+      },
+      "folderId": {
+        "type": "integer",
+        "minimum": 1
+      }
+    }
+  }
+}

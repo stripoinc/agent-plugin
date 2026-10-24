@@ -3,6 +3,136 @@ export default {
 ["__schema33"]: {
   "type": "object",
   "properties": {
+    "textAlign": {
+      "type": "object",
+      "properties": {
+        "mobile": {
+          "anyOf": [
+            {
+              "type": "string",
+              "enum": [
+                "left",
+                "center",
+                "right"
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "mobile"
+      ],
+      "additionalProperties": false
+    },
+    "textStyle": {
+      "type": "object",
+      "properties": {
+        "italic": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "italic"
+      ],
+      "additionalProperties": false
+    },
+    "fontWeight": {
+      "anyOf": [
+        {
+          "$ref": "#/definitions/__schema25"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "fontSize": {
+      "type": "object",
+      "properties": {
+        "desktop": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/__schema27"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "mobile": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/__schema28"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "desktop",
+        "mobile"
+      ],
+      "additionalProperties": false
+    },
+    "lineHeight": {
+      "type": "object",
+      "properties": {
+        "desktop": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/__schema22"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "mobile": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/__schema23"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "desktop",
+        "mobile"
+      ],
+      "additionalProperties": false
+    },
+    "paragraphBottomSpace": {
+      "anyOf": [
+        {
+          "$ref": "#/definitions/__schema30"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  },
+  "required": [
+    "textAlign",
+    "textStyle",
+    "fontWeight",
+    "fontSize",
+    "lineHeight",
+    "paragraphBottomSpace"
+  ],
+  "additionalProperties": false
+},
+["__schema34"]: {
+  "type": "object",
+  "properties": {
     "outlookSupport": {
       "type": "boolean"
     },
@@ -32,7 +162,7 @@ export default {
       ]
     },
     "fontFamily": {
-      "$ref": "#/definitions/__schema23",
+      "$ref": "#/definitions/__schema24",
       "x-stripo-setDocumentState": {
         "insert": "supported",
         "delete": "unsupported",
@@ -77,10 +207,10 @@ export default {
       }
     },
     "letterSpacing": {
-      "$ref": "#/definitions/__schema20"
+      "$ref": "#/definitions/__schema21"
     },
     "fontSize": {
-      "$ref": "#/definitions/__schema25"
+      "$ref": "#/definitions/__schema26"
     },
     "borderRadius": {
       "type": "object",
@@ -134,16 +264,16 @@ export default {
       "type": "object",
       "properties": {
         "top": {
-          "$ref": "#/definitions/__schema34"
+          "$ref": "#/definitions/__schema35"
         },
         "right": {
-          "$ref": "#/definitions/__schema34"
+          "$ref": "#/definitions/__schema35"
         },
         "bottom": {
-          "$ref": "#/definitions/__schema34"
+          "$ref": "#/definitions/__schema35"
         },
         "left": {
-          "$ref": "#/definitions/__schema34"
+          "$ref": "#/definitions/__schema35"
         },
         "style": {
           "type": "string",
@@ -167,13 +297,13 @@ export default {
       "type": "boolean"
     },
     "padding": {
-      "$ref": "#/definitions/__schema15"
+      "$ref": "#/definitions/__schema16"
     },
     "lightTheme": {
       "type": "object",
       "properties": {
         "buttonColor": {
-          "$ref": "#/definitions/__schema17",
+          "$ref": "#/definitions/__schema18",
           "x-stripo-setDocumentState": {
             "insert": "unsupported",
             "delete": "unsupported",
@@ -218,7 +348,7 @@ export default {
           }
         },
         "fontColor": {
-          "$ref": "#/definitions/__schema30",
+          "$ref": "#/definitions/__schema31",
           "x-stripo-setDocumentState": {
             "insert": "unsupported",
             "delete": "unsupported",
@@ -266,7 +396,7 @@ export default {
           "type": "object",
           "properties": {
             "backgroundColor": {
-              "$ref": "#/definitions/__schema17",
+              "$ref": "#/definitions/__schema18",
               "x-stripo-setDocumentState": {
                 "insert": "unsupported",
                 "delete": "unsupported",
@@ -311,7 +441,7 @@ export default {
               }
             },
             "fontColor": {
-              "$ref": "#/definitions/__schema30",
+              "$ref": "#/definitions/__schema31",
               "x-stripo-setDocumentState": {
                 "insert": "unsupported",
                 "delete": "unsupported",
@@ -359,7 +489,7 @@ export default {
               "type": "object",
               "properties": {
                 "top": {
-                  "$ref": "#/definitions/__schema18",
+                  "$ref": "#/definitions/__schema19",
                   "x-stripo-setDocumentState": {
                     "insert": "unsupported",
                     "delete": "unsupported",
@@ -404,7 +534,7 @@ export default {
                   }
                 },
                 "right": {
-                  "$ref": "#/definitions/__schema18",
+                  "$ref": "#/definitions/__schema19",
                   "x-stripo-setDocumentState": {
                     "insert": "unsupported",
                     "delete": "unsupported",
@@ -449,7 +579,7 @@ export default {
                   }
                 },
                 "bottom": {
-                  "$ref": "#/definitions/__schema18",
+                  "$ref": "#/definitions/__schema19",
                   "x-stripo-setDocumentState": {
                     "insert": "unsupported",
                     "delete": "unsupported",
@@ -494,7 +624,7 @@ export default {
                   }
                 },
                 "left": {
-                  "$ref": "#/definitions/__schema18",
+                  "$ref": "#/definitions/__schema19",
                   "x-stripo-setDocumentState": {
                     "insert": "unsupported",
                     "delete": "unsupported",
@@ -559,7 +689,7 @@ export default {
           "type": "object",
           "properties": {
             "top": {
-              "$ref": "#/definitions/__schema18",
+              "$ref": "#/definitions/__schema19",
               "x-stripo-setDocumentState": {
                 "insert": "unsupported",
                 "delete": "unsupported",
@@ -604,7 +734,7 @@ export default {
               }
             },
             "right": {
-              "$ref": "#/definitions/__schema18",
+              "$ref": "#/definitions/__schema19",
               "x-stripo-setDocumentState": {
                 "insert": "unsupported",
                 "delete": "unsupported",
@@ -649,7 +779,7 @@ export default {
               }
             },
             "bottom": {
-              "$ref": "#/definitions/__schema18",
+              "$ref": "#/definitions/__schema19",
               "x-stripo-setDocumentState": {
                 "insert": "unsupported",
                 "delete": "unsupported",
@@ -694,7 +824,7 @@ export default {
               }
             },
             "left": {
-              "$ref": "#/definitions/__schema18",
+              "$ref": "#/definitions/__schema19",
               "x-stripo-setDocumentState": {
                 "insert": "unsupported",
                 "delete": "unsupported",
@@ -762,7 +892,7 @@ export default {
         "buttonColor": {
           "anyOf": [
             {
-              "$ref": "#/definitions/__schema17"
+              "$ref": "#/definitions/__schema18"
             },
             {
               "type": "null"
@@ -814,7 +944,7 @@ export default {
         "fontColor": {
           "anyOf": [
             {
-              "$ref": "#/definitions/__schema30"
+              "$ref": "#/definitions/__schema31"
             },
             {
               "type": "null"
@@ -869,7 +999,7 @@ export default {
             "backgroundColor": {
               "anyOf": [
                 {
-                  "$ref": "#/definitions/__schema17"
+                  "$ref": "#/definitions/__schema18"
                 },
                 {
                   "type": "null"
@@ -921,7 +1051,7 @@ export default {
             "fontColor": {
               "anyOf": [
                 {
-                  "$ref": "#/definitions/__schema30"
+                  "$ref": "#/definitions/__schema31"
                 },
                 {
                   "type": "null"
@@ -976,7 +1106,7 @@ export default {
                 "top": {
                   "anyOf": [
                     {
-                      "$ref": "#/definitions/__schema18"
+                      "$ref": "#/definitions/__schema19"
                     },
                     {
                       "type": "null"
@@ -1028,7 +1158,7 @@ export default {
                 "right": {
                   "anyOf": [
                     {
-                      "$ref": "#/definitions/__schema18"
+                      "$ref": "#/definitions/__schema19"
                     },
                     {
                       "type": "null"
@@ -1080,7 +1210,7 @@ export default {
                 "bottom": {
                   "anyOf": [
                     {
-                      "$ref": "#/definitions/__schema18"
+                      "$ref": "#/definitions/__schema19"
                     },
                     {
                       "type": "null"
@@ -1132,7 +1262,7 @@ export default {
                 "left": {
                   "anyOf": [
                     {
-                      "$ref": "#/definitions/__schema18"
+                      "$ref": "#/definitions/__schema19"
                     },
                     {
                       "type": "null"
@@ -1204,7 +1334,7 @@ export default {
             "top": {
               "anyOf": [
                 {
-                  "$ref": "#/definitions/__schema18"
+                  "$ref": "#/definitions/__schema19"
                 },
                 {
                   "type": "null"
@@ -1256,7 +1386,7 @@ export default {
             "right": {
               "anyOf": [
                 {
-                  "$ref": "#/definitions/__schema18"
+                  "$ref": "#/definitions/__schema19"
                 },
                 {
                   "type": "null"
@@ -1308,7 +1438,7 @@ export default {
             "bottom": {
               "anyOf": [
                 {
-                  "$ref": "#/definitions/__schema18"
+                  "$ref": "#/definitions/__schema19"
                 },
                 {
                   "type": "null"
@@ -1360,7 +1490,7 @@ export default {
             "left": {
               "anyOf": [
                 {
-                  "$ref": "#/definitions/__schema18"
+                  "$ref": "#/definitions/__schema19"
                 },
                 {
                   "type": "null"
@@ -1445,7 +1575,7 @@ export default {
   ],
   "additionalProperties": false
 },
-["__schema34"]: {
+["__schema35"]: {
   "type": "object",
   "properties": {
     "width": {
@@ -1459,13 +1589,13 @@ export default {
   ],
   "additionalProperties": false
 },
-["__schema35"]: {
+["__schema36"]: {
   "type": "array",
   "items": {
     "$ref": "#/definitions/stripe"
   }
 },
-["__schema36"]: {
+["__schema37"]: {
   "type": "array",
   "items": {
     "$ref": "#/definitions/stripe"
@@ -1475,17 +1605,17 @@ export default {
   "type": "object",
   "properties": {
     "id": {
-      "$ref": "#/definitions/__schema37"
-    },
-    "settings": {
       "$ref": "#/definitions/__schema38"
     },
+    "settings": {
+      "$ref": "#/definitions/__schema39"
+    },
     "moduleId": {
-      "$ref": "#/definitions/__schema61",
+      "$ref": "#/definitions/__schema62",
       "readOnly": true
     },
     "structures": {
-      "$ref": "#/definitions/__schema62"
+      "$ref": "#/definitions/__schema63"
     }
   },
   "required": [
@@ -1536,36 +1666,36 @@ export default {
   },
   "additionalProperties": false
 },
-["__schema37"]: {
+["__schema38"]: {
   "type": "string",
   "minLength": 1
 },
-["__schema38"]: {
+["__schema39"]: {
   "type": "object",
   "properties": {
     "messageArea": {
-      "$ref": "#/definitions/__schema39"
+      "$ref": "#/definitions/__schema40"
     },
     "includeInOutput": {
-      "$ref": "#/definitions/__schema40"
+      "$ref": "#/definitions/__schema41"
     },
     "hideElement": {
       "$ref": "#/definitions/hideElement"
     },
     "padding": {
-      "$ref": "#/definitions/__schema41"
+      "$ref": "#/definitions/__schema42"
     },
     "stripeBackgroundColor": {
-      "$ref": "#/definitions/__schema46"
-    },
-    "contentBackgroundColor": {
       "$ref": "#/definitions/__schema47"
     },
-    "backgroundImage": {
+    "contentBackgroundColor": {
       "$ref": "#/definitions/__schema48"
     },
+    "backgroundImage": {
+      "$ref": "#/definitions/__schema49"
+    },
     "contentBorder": {
-      "$ref": "#/definitions/__schema58"
+      "$ref": "#/definitions/__schema59"
     }
   },
   "required": [
@@ -1578,28 +1708,28 @@ export default {
   "type": "object",
   "properties": {
     "messageArea": {
-      "$ref": "#/definitions/__schema39"
+      "$ref": "#/definitions/__schema40"
     },
     "includeInOutput": {
-      "$ref": "#/definitions/__schema40"
+      "$ref": "#/definitions/__schema41"
     },
     "hideElement": {
       "$ref": "#/definitions/hideElement"
     },
     "padding": {
-      "$ref": "#/definitions/__schema41"
+      "$ref": "#/definitions/__schema42"
     },
     "stripeBackgroundColor": {
-      "$ref": "#/definitions/__schema46"
-    },
-    "contentBackgroundColor": {
       "$ref": "#/definitions/__schema47"
     },
-    "backgroundImage": {
+    "contentBackgroundColor": {
       "$ref": "#/definitions/__schema48"
     },
+    "backgroundImage": {
+      "$ref": "#/definitions/__schema49"
+    },
     "contentBorder": {
-      "$ref": "#/definitions/__schema58"
+      "$ref": "#/definitions/__schema59"
     }
   },
   "required": [
@@ -1608,7 +1738,7 @@ export default {
   "description": "Stripe-level settings.",
   "additionalProperties": false
 },
-["__schema39"]: {
+["__schema40"]: {
   "type": "string",
   "enum": [
     "header",
@@ -1617,7 +1747,7 @@ export default {
     "infoArea"
   ]
 },
-["__schema40"]: {
+["__schema41"]: {
   "type": "string",
   "enum": [
     "both",
@@ -1644,154 +1774,17 @@ export default {
   ],
   "description": "Hide element mode: no, desktop, or mobile."
 },
-["__schema41"]: {
-  "type": "object",
-  "properties": {
-    "mobile": {
-      "$ref": "#/definitions/fullSideValues"
-    }
-  },
-  "required": [
-    "mobile"
-  ],
-  "additionalProperties": false,
-  "description": "Mobile-only top, right, bottom, and left side values."
-},
-["mobilePadding"]: {
-  "type": "object",
-  "properties": {
-    "mobile": {
-      "$ref": "#/definitions/fullSideValues"
-    }
-  },
-  "required": [
-    "mobile"
-  ],
-  "additionalProperties": false,
-  "description": "Mobile-only top, right, bottom, and left side values."
-},
-["fullSideValues"]: {
-  "type": "object",
-  "properties": {
-    "top": {
-      "$ref": "#/definitions/__schema42"
-    },
-    "right": {
-      "$ref": "#/definitions/__schema43"
-    },
-    "bottom": {
-      "$ref": "#/definitions/__schema44"
-    },
-    "left": {
-      "$ref": "#/definitions/__schema45"
-    }
-  },
-  "required": [
-    "top",
-    "right",
-    "bottom",
-    "left"
-  ],
-  "additionalProperties": false,
-  "description": "Numeric values for top, right, bottom, and left sides."
-},
 ["__schema42"]: {
-  "type": "number"
-},
-["__schema43"]: {
-  "type": "number"
-},
-["__schema44"]: {
-  "type": "number"
-},
-["__schema45"]: {
-  "type": "number"
-},
-["__schema46"]: {
-  "type": "string",
-  "description": "Valid CSS color value that allows transparent values."
-},
-["colorValueAllowTransparent"]: {
-  "type": "string",
-  "description": "Valid CSS color value that allows transparent values."
-},
-["__schema47"]: {
-  "type": "string",
-  "description": "Valid CSS color value that allows transparent values."
-},
-["__schema48"]: {
   "type": "object",
   "properties": {
-    "path": {
-      "$ref": "#/definitions/__schema49"
-    },
-    "repeat": {
-      "type": "boolean"
-    },
-    "x": {
-      "$ref": "#/definitions/__schema52"
-    },
-    "y": {
-      "$ref": "#/definitions/__schema53"
-    },
-    "sizeX": {
-      "type": "string"
-    },
-    "sizeY": {
-      "type": "string"
+    "mobile": {
+      "$ref": "#/definitions/fullSideValues"
     }
   },
   "required": [
-    "path",
-    "repeat",
-    "x",
-    "y",
-    "sizeX",
-    "sizeY"
+    "mobile"
   ],
   "additionalProperties": false,
-  "description": "Background image settings."
-},
-["backgroundImage"]: {
-  "type": "object",
-  "properties": {
-    "path": {
-      "$ref": "#/definitions/__schema49"
-    },
-    "repeat": {
-      "type": "boolean"
-    },
-    "x": {
-      "$ref": "#/definitions/__schema52"
-    },
-    "y": {
-      "$ref": "#/definitions/__schema53"
-    },
-    "sizeX": {
-      "type": "string"
-    },
-    "sizeY": {
-      "type": "string"
-    }
-  },
-  "required": [
-    "path",
-    "repeat",
-    "x",
-    "y",
-    "sizeX",
-    "sizeY"
-  ],
-  "additionalProperties": false,
-  "description": "Background image settings."
-},
-["__schema49"]: {
-  "type": "string"
-},
-["__schema50"]: {
-  "type": [
-    "boolean",
-    "string"
-  ]
+  "description": "Mobile-only top, right, bottom, and left side values."
 }
 };

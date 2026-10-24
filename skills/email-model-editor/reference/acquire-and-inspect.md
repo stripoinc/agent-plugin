@@ -1,20 +1,10 @@
-# Acquire and inspect the model
+# Acquire and inspect
 
-When repairing a draft created from a reference, retain its chosen Exact, Tailored, or Creative
-regime and original PNG baseline. For Exact, preserve source choices, reuse existing assets or
-crops before considering AI generation, and compare the repaired PNGs with the original source.
-Do not reset the regime or adapt the branding during the repair.
-
-## 1. Acquire and inspect
-
-Resolve the target `(id, type)` as described in [acquisition contract](stripo-acquisition.md) and call:
-
-```text
-get_document_state(id=<id>, type=<EMAIL|TEMPLATE>)
-```
-
-Require `status=OK` and download its temporary `downloadUrl` to a local JSON file through the
-host's authorized transfer path; that file, unmodified, is the base of the write.
+Resolve the explicit write target and acquire its native model using the acquisition topic in
+[PROVIDER.md](../PROVIDER.md).
+Check the provider's success envelope, retain its manifest and any concurrency token, then
+download the temporary artifact through the configured transfer helper. Confirm its byte count
+and checksum when supplied. An access refusal is not an empty model.
 
 Inspect the model:
 
@@ -25,8 +15,9 @@ node <skill-dir>/scripts/inspect-editor-json.mjs \
 ```
 
 If inspection reports no stripes or zero blocks, acquire and download again a bounded handful of
-times. Never upload a blockless model or fall back to editing compiled HTML. If no populated model
-becomes available, report a read failure and write nothing.
+times, unless this is a metadata-only edit against a successfully acquired, initialized native
+model. Missing or unhydrated state is never that exception. For other edits, if no populated model
+becomes available, report a read failure and write nothing; do not fall back to compiled HTML.
 
 The command prints bounded content inventories (including node IDs, text, links and visibility)
 and saves the complete inspection report when `--output` is supplied. Its `sdkMethods` field
@@ -46,3 +37,11 @@ The pinned editor contract makes `moduleId` read-only. Preserve it during ordina
 edits. Prefer a unique node id to address an edit; a `moduleId` selector also matches descendants,
 so constrain its node kind and check cardinality before changing content.
 
+## Requests to reuse a saved module
+
+Use the saved-module lookup documented by `PROVIDER.md`; when it documents none and
+`mcp-tools.json` marks the library operation unsupported, report library reuse as unavailable. Match the requested name, ID, language,
+and purpose to an actual result. Verify the target node's own read-only `moduleId` and content.
+A library synchronization flag does not prove that this instance is linked or current.
+The current SDK cannot replace a binding by changing `moduleId`; report an unsupported replacement
+without relabeling, detaching, or rebuilding content to manufacture the requested identity.

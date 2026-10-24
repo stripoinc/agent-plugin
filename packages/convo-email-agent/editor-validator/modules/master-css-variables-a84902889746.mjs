@@ -20,7 +20,8 @@ var background = (semanticOwner, selector, settingsPath, semanticBinding, light,
   cssTarget: { selector, additionalSelectors: options?.additionalSelectors },
   displayPolicy: options?.displayPolicy,
   backgroundPolicy: "replace-light-gradient-preserve-image",
-  effectiveInlineImage: options?.effectiveInlineImage
+  effectiveInlineImage: options?.effectiveInlineImage,
+  imageSelector: options?.imageSelector
 });
 var color = (semanticOwner, selector, settingsPath, semanticBinding, light, dark, property = "color", displayPolicy, options) => ({
   semanticOwner,
@@ -40,11 +41,7 @@ var color = (semanticOwner, selector, settingsPath, semanticBinding, light, dark
   displayPolicy
 });
 var BUTTON_SELECTORS = "a.es-button, button.es-button, label.es-button, .es-button-border";
-var BUTTON_HOVER_INNER_SELECTORS = [
-  ".es-button-border:hover a.es-button",
-  ".es-button-border:hover button.es-button",
-  ".es-button-border:hover label.es-button"
-].join(",");
+var BUTTON_HOVER_INNER_SELECTORS = ".es-button-border:hover a.es-button,.es-button-border:hover button.es-button,.es-button-border:hover label.es-button";
 var BUTTON_HOVER_DISPLAY_POLICY = {
   variable: MasterCssVar.BUTTON_HAS_HOVER,
   settingsActivation: "button-hover-styles"
@@ -60,10 +57,10 @@ var THEME_VARIABLE_DESCRIPTORS = [
   }, {
     solid: MasterCssVar.DARK_WRAPPER_BACKGROUND_COLOR,
     gradient: MasterCssVar.DARK_WRAPPER_BACKGROUND_GRADIENT
-  }),
+  }, { imageSelector: ".es-wrapper" }),
   color(
     "general.list.marker",
-    "ul li::marker",
+    "ul li",
     ["customListStyles", "listMarkerColor"],
     { kind: "general", setting: "list-marker" },
     MasterCssVar.LIST_MARKER_COLOR,
@@ -78,7 +75,7 @@ var THEME_VARIABLE_DESCRIPTORS = [
   ),
   color(
     "general.list.number-marker",
-    "ol li::marker",
+    "ol li",
     ["customListStyles", "listNumberMarkerColor"],
     { kind: "general", setting: "list-number-marker" },
     MasterCssVar.LIST_NUMBER_MARKER_COLOR,
@@ -93,7 +90,7 @@ var THEME_VARIABLE_DESCRIPTORS = [
   ),
   background(
     "stripes.header.background",
-    ".es-header, .esd-header-popover:not(.es-content)",
+    ".es-header",
     ["header", "stripeBackgroundColor"],
     { kind: "stripe", section: "header", setting: "background" },
     {
@@ -198,7 +195,7 @@ var THEME_VARIABLE_DESCRIPTORS = [
   ),
   background(
     "stripes.footer.background",
-    ".es-footer, .esd-footer-popover:not(.es-content)",
+    ".es-footer",
     ["footer", "stripeBackgroundColor"],
     { kind: "stripe", section: "footer", setting: "background" },
     {
@@ -424,7 +421,8 @@ function getThemeVariableDescriptorByCssTarget(selector) {
   }
   return THEME_VARIABLE_DESCRIPTORS.find((descriptor) => [
     descriptor.cssTarget.selector,
-    ...descriptor.cssTarget.additionalSelectors ?? []
+    ...descriptor.cssTarget.additionalSelectors ?? [],
+    ...descriptor.valueKind === "background" && descriptor.imageSelector ? [descriptor.imageSelector] : []
   ].some((target) => {
     const targetParts = new Set(target.split(",").map((part) => part.trim()).filter(Boolean));
     return selectorParts.every((selectorPart) => targetParts.has(selectorPart));
@@ -487,32 +485,50 @@ function getBackgroundThemeVariableDescriptorByDarkLayerProperty(property) {
   );
 }
 function createDarkThemeMasterCss() {
-  const rules = THEME_VARIABLE_DESCRIPTORS.flatMap((descriptor) => [
-    descriptor.cssTarget.selector,
-    ...descriptor.cssTarget.additionalSelectors ?? []
-  ].map((selector) => {
-    if (descriptor.valueKind === "background") {
-      const imageDeclarations = descriptor.effectiveInlineImage ? "".concat(descriptor.effectiveInlineImage.darkLayerProperty, ": var(").concat(descriptor.variables.dark.gradient, ") !important;\n  ").concat(descriptor.effectiveInlineImage.darkLayerResetProperty, ": var(").concat(descriptor.variables.dark.gradient, ") !important;\n  background-image: var(").concat(descriptor.variables.dark.gradient, ");") : "background-image: var(".concat(descriptor.variables.dark.gradient, ") !important;");
-      return "".concat(selector, " {\n  background-color: var(").concat(descriptor.variables.dark.solid, ") !important;\n  ").concat(imageDeclarations, "\n}");
+  const declarationsBySelector = /* @__PURE__ */ new Map();
+  THEME_VARIABLE_DESCRIPTORS.forEach((descriptor) => {
+    const declarations = descriptor.valueKind === "background" ? [
+      "background-color: var(".concat(descriptor.variables.dark.solid, ") !important;"),
+      ...descriptor.effectiveInlineImage ? [
+        "".concat(descriptor.effectiveInlineImage.darkLayerProperty, ": var(").concat(descriptor.variables.dark.gradient, ") !important;"),
+        "".concat(descriptor.effectiveInlineImage.darkLayerResetProperty, ": var(").concat(descriptor.variables.dark.gradient, ") !important;"),
+        "background-image: var(".concat(descriptor.variables.dark.gradient, ");")
+      ] : ["background-image: var(".concat(descriptor.variables.dark.gradient, ") !important;")]
+    ] : ["".concat(descriptor.cssTarget.property, ": var(").concat(descriptor.variables.dark, ") !important;")];
+    [descriptor.cssTarget.selector, ...descriptor.cssTarget.additionalSelectors ?? []].forEach(
+      (selector) => declarationsBySelector.set(selector, [...declarationsBySelector.get(selector) ?? [], ...declarations])
+    );
+    if (descriptor.valueKind === "background" && descriptor.imageSelector) {
+      declarationsBySelector.set(descriptor.imageSelector, [
+        ...declarationsBySelector.get(descriptor.imageSelector) ?? [],
+        "background-image: var(".concat(descriptor.variables.dark.gradient, ") !important;")
+      ]);
     }
-    return "".concat(selector, " {\n  ").concat(descriptor.cssTarget.property, ": var(").concat(descriptor.variables.dark, ") !important;\n}");
-  })).join("\n\n");
+  });
+  const rules = [...declarationsBySelector].map(([selector, declarations]) => "".concat(selector, " {\n  ").concat(declarations.join("\n  "), "\n}")).join("\n\n");
   return "@media (prefers-color-scheme: dark) {\n".concat(rules, "\n}");
 }
 function getDarkThemeRuleDisplay(selector, variables) {
   const descriptors = THEME_VARIABLE_DESCRIPTORS.filter((descriptor) => [
     descriptor.cssTarget.selector,
-    ...descriptor.cssTarget.additionalSelectors ?? []
+    ...descriptor.cssTarget.additionalSelectors ?? [],
+    ...descriptor.valueKind === "background" && descriptor.imageSelector ? [descriptor.imageSelector] : []
   ].includes(selector));
   if (!descriptors.length) {
     return void 0;
   }
-  const hasAuthoredValue = (value) => value !== void 0 && value !== null && value !== "";
-  const isAuthored = descriptors.some(
-    (descriptor) => descriptor.valueKind === "background" ? [descriptor.variables.dark.solid, descriptor.variables.dark.gradient].some((variable) => hasAuthoredValue(variables[variable])) : hasAuthoredValue(variables[descriptor.variables.dark])
-  );
+  const isAuthored = descriptors.some((descriptor) => hasAuthoredDarkThemeValue(descriptor, variables));
   const isEnabled = descriptors.every((descriptor) => !descriptor.displayPolicy || Boolean(variables[descriptor.displayPolicy.variable]));
   return isAuthored && isEnabled;
+}
+function hasAnyAuthoredDarkThemeValue(variables) {
+  return THEME_VARIABLE_DESCRIPTORS.some((descriptor) => hasAuthoredDarkThemeValue(descriptor, variables));
+}
+function hasAuthoredDarkThemeValue(descriptor, variables) {
+  return descriptor.valueKind === "background" ? [descriptor.variables.dark.solid, descriptor.variables.dark.gradient].some((variable) => isAuthoredThemeValue(variables[variable])) : isAuthoredThemeValue(variables[descriptor.variables.dark]);
+}
+function isAuthoredThemeValue(value) {
+  return value !== void 0 && value !== null && value !== "";
 }
 
 export {
@@ -528,5 +544,6 @@ export {
   getBackgroundThemeVariableDescriptorByInlineImageClass,
   getBackgroundThemeVariableDescriptorByDarkLayerProperty,
   createDarkThemeMasterCss,
-  getDarkThemeRuleDisplay
+  getDarkThemeRuleDisplay,
+  hasAnyAuthoredDarkThemeValue
 };

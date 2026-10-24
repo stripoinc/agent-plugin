@@ -1,5 +1,29 @@
 
 export default {
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|26.createCommentAction.props|1.createdAt|1.seconds.not"]: {
+  "hash": "ec0c3ea476453d54b0d796524f92bad0292a1981a712665cf5386564c8d8f849",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|26.createCommentAction.props|1.createdAt|1.seconds.countLeadingZeros"]: {
+  "hash": "db2ba91749ad75575c5239d792934964c38806458d88f584d8005944cd2cb07e",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|26.createCommentAction.props|1.createdAt|1.seconds.clz"]: {
+  "hash": "db2ba91749ad75575c5239d792934964c38806458d88f584d8005944cd2cb07e",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|26.createCommentAction.props|1.createdAt|1.seconds.countTrailingZeros"]: {
+  "hash": "db2ba91749ad75575c5239d792934964c38806458d88f584d8005944cd2cb07e",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|26.createCommentAction.props|1.createdAt|1.seconds.ctz"]: {
+  "hash": "db2ba91749ad75575c5239d792934964c38806458d88f584d8005944cd2cb07e",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|26.createCommentAction.props|1.createdAt|1.seconds.notEquals"]: {
+  "hash": "e571fcfa8855ccbe7cc5b6451abcdc7d31cc892669494d6ddc9318a002f70b20",
+  "group": "apiMutation"
+},
 ["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|26.createCommentAction.props|1.createdAt|1.seconds.notEquals#0(other)"]: {
   "hash": "d91a894c4a6cbc2246c2aa91bf6d983984a4f92fff0680c5c05d16ece14ceddc",
   "group": "apiMutation"
@@ -738,30 +762,6 @@ export default {
 },
 ["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(patchMetadata).notificationEventsRelatedMetadata|1.eventMetadata?|2.commentReply.taggedUserIds"]: {
   "hash": "31f2907b41218f3deeca96fa6d3fa16e7dc2bea64037058fc172d9818efe23d7",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(patchMetadata).notificationEventsRelatedMetadata|1.eventMetadata?|2.commentReply.threadUserIds"]: {
-  "hash": "31f2907b41218f3deeca96fa6d3fa16e7dc2bea64037058fc172d9818efe23d7",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(patchMetadata).notificationEventsRelatedMetadata|1.eventMetadata?|2.commentReply.initialCommentAuthorId"]: {
-  "hash": "27705690421c3f5f0b07e61ae86428378b1bbe473efd88ed21af1300e5fbed4c",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(patchMetadata).notificationEventsRelatedMetadata|1.eventMetadata?|2.commentReply.initialCommentCreationDate"]: {
-  "hash": "27705690421c3f5f0b07e61ae86428378b1bbe473efd88ed21af1300e5fbed4c",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(patchMetadata).notificationEventsRelatedMetadata|1.eventMetadata?|2.commentReply.anonymousUserList"]: {
-  "hash": "9c3d077617b13ddef0e32dfb2790e7dce357959fd35743bcab2e384c878ae0f5",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(patchMetadata).notificationEventsRelatedMetadata|1.eventMetadata?|2.commentReply.replyAuthorIdStr"]: {
-  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(patchMetadata).notificationEventsRelatedMetadata|1.eventMetadata?|2.commentReply.taggedUserIdsStr"]: {
-  "hash": "2f66b41966a90abaa8087407bd4236ee55d4992f5dc7acd9e4126413e1f61a85",
   "group": "apiMutation"
 }
 };

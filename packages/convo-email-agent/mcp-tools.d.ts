@@ -16,7 +16,7 @@ export type McpBrand = "reteno" | "yespo" | "stripo";
 export declare const EMAIL_INTERFACE_MCP_BRANDS: readonly ["reteno", "yespo"];
 export type EmailInterfaceMcpBrand = (typeof EMAIL_INTERFACE_MCP_BRANDS)[number];
 export type McpOperationForBrand<TBrand extends McpBrand> = TBrand extends "stripo" ? keyof typeof STRIPO_MCP_TOOL_MAPPING.tools : keyof typeof RETENO_MCP_TOOL_MAPPING.tools;
-/** Tool names and unsupported capabilities; provider instructions define MCP arguments. */
+/** Tool names and unsupported capabilities; each skill's PROVIDER.md defines MCP arguments. */
 export interface McpToolMapping<TBrand extends McpBrand = "reteno"> {
     readonly brand: TBrand;
     readonly canonicalBrand: "reteno";

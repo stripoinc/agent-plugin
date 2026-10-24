@@ -50,7 +50,7 @@ function handleUnrepresentable(schema, ctx, json, params, message) {
   Object.assign(json, result);
   return true;
 }
-function process(schema, ctx, _params = { path: [], schemaPath: [] }) {
+function processSchema(schema, ctx, _params = { path: [], schemaPath: [] }) {
   var _a;
   const def = schema._zod.def;
   const seen = ctx.seen.get(schema);
@@ -89,7 +89,7 @@ function process(schema, ctx, _params = { path: [], schemaPath: [] }) {
     if (parent) {
       if (!result.ref)
         result.ref = parent;
-      process(parent, ctx, params);
+      processSchema(parent, ctx, params);
       ctx.seen.get(parent).isParent = true;
     }
   }
@@ -194,7 +194,6 @@ function extractDefs(ctx, schema) {
     if (seen.count > 1) {
       if (ctx.reused === "ref") {
         extractToDef(entry);
-        continue;
       }
     }
   }
@@ -522,14 +521,14 @@ function isTransforming(_schema, _ctx) {
 }
 var createToJSONSchemaMethod = (schema, processors = {}) => (params) => {
   const ctx = initializeContext({ ...params, processors });
-  process(schema, ctx);
+  processSchema(schema, ctx);
   extractDefs(ctx, schema);
   return finalize(ctx, schema);
 };
 var createStandardJSONSchemaMethod = (schema, io, processors = {}) => (params) => {
   const { libraryOptions, target } = params ?? {};
   const ctx = initializeContext({ ...libraryOptions ?? {}, target, io, processors });
-  process(schema, ctx);
+  processSchema(schema, ctx);
   extractDefs(ctx, schema);
   return finalize(ctx, schema);
 };
@@ -537,7 +536,7 @@ var createStandardJSONSchemaMethod = (schema, io, processors = {}) => (params) =
 export {
   initializeContext,
   handleUnrepresentable,
-  process,
+  processSchema,
   extractDefs,
   finalize,
   createToJSONSchemaMethod,

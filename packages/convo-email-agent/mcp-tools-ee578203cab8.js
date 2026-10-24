@@ -65,7 +65,7 @@ var STRIPO_MCP_TOOL_MAPPING = Object.freeze({
     getImageJob: "get_image_job"
   }),
   unsupported: Object.freeze({
-    getEmailMessageExport: "No compiled email export tool is available. Read native metadata with getEmailModel.",
+    getEmailMessageExport: "No matching HTML/CSS export-manifest operation. PROVIDER.md defines authorized reference HTML through contentMetadata; routine verification uses native state and previews.",
     getEmailMessageViewLink: "No hosted email-view link operation is available in this adapter.",
     listCustomBlocks: "No saved-module library tool is available in this adapter.",
     listEmailInterfaces: "This editor has no sending interfaces.",

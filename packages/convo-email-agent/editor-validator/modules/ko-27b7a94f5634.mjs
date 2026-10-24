@@ -45,6 +45,8 @@ var error = () => {
     json_string: "JSON \uBB38\uC790\uC5F4",
     e164: "E.164 \uBC88\uD638",
     credit_card: "\uC2E0\uC6A9\uCE74\uB4DC \uBC88\uD638",
+    currency_code: "\uD1B5\uD654 \uCF54\uB4DC",
+    iban: "IBAN",
     jwt: "JWT",
     template_literal: "\uC785\uB825"
   };

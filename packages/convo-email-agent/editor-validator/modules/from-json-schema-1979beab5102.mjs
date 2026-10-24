@@ -162,26 +162,187 @@ function resolveRef(ref, ctx) {
   }
   throw new Error("Reference not found: ".concat(ref));
 }
-function checkPropertyNames(objectSchema, keySchema) {
+function checkObjectGuards(objectSchema, guards) {
   const guard = z.transform((value) => value).check((payload) => {
     const value = payload.value;
     if (typeof value !== "object" || value === null || Array.isArray(value))
       return;
-    for (const key of Object.getOwnPropertyNames(value)) {
-      const result = keySchema.safeParse(key);
-      if (result.success)
-        continue;
+    const keys = Object.getOwnPropertyNames(value);
+    if (guards.minProperties !== void 0 && keys.length < guards.minProperties) {
       payload.issues.push({
-        code: "invalid_key",
-        origin: "record",
-        issues: result.error.issues,
-        input: key,
-        path: [key],
+        origin: "object",
+        code: "too_small",
+        minimum: guards.minProperties,
+        inclusive: true,
+        message: "Too small: expected object to have >=".concat(guards.minProperties, " properties"),
+        input: value,
+        inst: objectSchema,
         continue: true
       });
     }
+    if (guards.maxProperties !== void 0 && keys.length > guards.maxProperties) {
+      payload.issues.push({
+        origin: "object",
+        code: "too_big",
+        maximum: guards.maxProperties,
+        inclusive: true,
+        message: "Too big: expected object to have <=".concat(guards.maxProperties, " properties"),
+        input: value,
+        inst: objectSchema,
+        continue: true
+      });
+    }
+    if (guards.keySchema) {
+      for (const key of keys) {
+        const result = guards.keySchema.safeParse(key);
+        if (result.success)
+          continue;
+        payload.issues.push({
+          code: "invalid_key",
+          origin: "record",
+          issues: result.error.issues,
+          input: key,
+          path: [key],
+          continue: true
+        });
+      }
+    }
   });
   return guard.pipe(objectSchema);
+}
+function canonicalKey(value, seen) {
+  if (value === null)
+    return "z";
+  const type = typeof value;
+  if (type !== "object") {
+    if (type === "number" && Number.isNaN(value))
+      return null;
+    const raw = String(value);
+    return "".concat(type[0]).concat(raw.length, ":").concat(raw);
+  }
+  if (seen.has(value))
+    return null;
+  seen.add(value);
+  try {
+    if (Array.isArray(value)) {
+      const parts2 = [];
+      for (const item of value) {
+        const key = canonicalKey(item, seen);
+        if (key === null)
+          return null;
+        parts2.push(key);
+      }
+      return "a".concat(parts2.length, ":[").concat(parts2.join(","), "]");
+    }
+    const keys = Object.keys(value).sort();
+    const parts = [];
+    for (const k of keys) {
+      const key = canonicalKey(value[k], seen);
+      if (key === null)
+        return null;
+      parts.push("".concat(k.length, ":").concat(k, "=").concat(key));
+    }
+    return "o".concat(parts.length, ":{").concat(parts.join(","), "}");
+  } finally {
+    seen.delete(value);
+  }
+}
+var SCHEMA_KEYWORDS = /* @__PURE__ */ new Set([
+  "items",
+  "prefixItems",
+  "additionalItems",
+  "additionalProperties",
+  "contains",
+  "propertyNames",
+  "not",
+  "if",
+  "then",
+  "else",
+  "allOf",
+  "anyOf",
+  "oneOf",
+  "unevaluatedItems",
+  "unevaluatedProperties",
+  "contentSchema"
+]);
+var SCHEMA_MAP_KEYWORDS = /* @__PURE__ */ new Set([
+  "properties",
+  "patternProperties",
+  "dependentSchemas",
+  "dependencies",
+  "$defs",
+  "definitions"
+]);
+function containsRef(value) {
+  if (typeof value !== "object" || value === null)
+    return false;
+  if (Array.isArray(value))
+    return value.some(containsRef);
+  if (typeof value.$ref === "string")
+    return true;
+  return Object.entries(value).some(([key, sub]) => {
+    if (SCHEMA_KEYWORDS.has(key))
+      return containsRef(sub);
+    if (!SCHEMA_MAP_KEYWORDS.has(key) || typeof sub !== "object" || sub === null)
+      return false;
+    return Object.values(sub).some(containsRef);
+  });
+}
+function plural(n) {
+  return n === 1 ? "element" : "elements";
+}
+function checkArrayGuards(arraySchema, guards) {
+  const guard = z.transform((value) => value).check((payload) => {
+    const items = payload.value;
+    if (!Array.isArray(items))
+      return;
+    if (guards.uniqueItems === true) {
+      const firstSeen = /* @__PURE__ */ new Map();
+      for (let i = 0; i < items.length; i++) {
+        const key = canonicalKey(items[i], /* @__PURE__ */ new Set());
+        if (key === null)
+          continue;
+        const first = firstSeen.get(key);
+        if (first === void 0) {
+          firstSeen.set(key, i);
+          continue;
+        }
+        payload.issues.push({
+          code: "custom",
+          message: "Array items must be unique: element at index ".concat(i, " duplicates the one at index ").concat(first),
+          input: items,
+          path: [i],
+          continue: true
+        });
+      }
+    }
+    if (guards.containsSchema) {
+      const minContains = guards.minContains ?? 1;
+      const ceiling = guards.maxContains !== void 0 ? guards.maxContains + 1 : Number.POSITIVE_INFINITY;
+      let matches = 0;
+      for (const item of items) {
+        if (guards.containsSchema.safeParse(item).success && ++matches >= ceiling)
+          break;
+      }
+      if (matches < minContains) {
+        payload.issues.push({
+          code: "custom",
+          message: "Array must contain at least ".concat(minContains, " matching ").concat(plural(minContains), "; found ").concat(matches),
+          input: items,
+          continue: true
+        });
+      }
+      if (guards.maxContains !== void 0 && matches > guards.maxContains) {
+        payload.issues.push({
+          code: "custom",
+          message: "Array must contain at most ".concat(guards.maxContains, " matching ").concat(plural(guards.maxContains)),
+          input: items,
+          continue: true
+        });
+      }
+    }
+  });
+  return guard.pipe(arraySchema);
 }
 function getTupleRest(restSchema, ctx) {
   if (restSchema === false) {
@@ -312,6 +473,8 @@ function convertBaseSchema(schema, ctx) {
           stringSchema = stringSchema.check(z.e164());
         } else if (format === "credit_card") {
           stringSchema = stringSchema.check(z.creditCard());
+        } else if (format === "iban") {
+          stringSchema = stringSchema.check(z.iban());
         } else if (format === "jwt") {
           stringSchema = stringSchema.check(z.jwt());
         } else if (format === "emoji") {
@@ -444,9 +607,16 @@ function convertBaseSchema(schema, ctx) {
           zodSchema = objectSchema.passthrough();
         }
       }
-      if (schema.propertyNames !== void 0 && schema.propertyNames !== true) {
-        const keyJSONSchema = typeof schema.propertyNames === "object" && schema.propertyNames.type === void 0 ? { type: "string", ...schema.propertyNames } : schema.propertyNames;
-        zodSchema = checkPropertyNames(zodSchema, convertSchema(keyJSONSchema, ctx));
+      const hasKeyGuard = schema.propertyNames !== void 0 && schema.propertyNames !== true;
+      const minProperties = typeof schema.minProperties === "number" ? schema.minProperties : void 0;
+      const maxProperties = typeof schema.maxProperties === "number" ? schema.maxProperties : void 0;
+      if (hasKeyGuard || minProperties !== void 0 || maxProperties !== void 0) {
+        let keySchema;
+        if (hasKeyGuard) {
+          const keyJSONSchema = typeof schema.propertyNames === "object" && schema.propertyNames.type === void 0 ? { type: "string", ...schema.propertyNames } : schema.propertyNames;
+          keySchema = convertSchema(keyJSONSchema, ctx);
+        }
+        zodSchema = checkObjectGuards(zodSchema, { keySchema, minProperties, maxProperties });
       }
       break;
     }
@@ -491,6 +661,14 @@ function convertBaseSchema(schema, ctx) {
         zodSchema = arraySchema;
       } else {
         zodSchema = z.array(z.any());
+      }
+      if (schema.uniqueItems === true || schema.contains !== void 0) {
+        zodSchema = checkArrayGuards(zodSchema, {
+          uniqueItems: schema.uniqueItems === true,
+          containsSchema: schema.contains !== void 0 ? convertSchema(schema.contains, ctx) : void 0,
+          minContains: typeof schema.minContains === "number" ? schema.minContains : void 0,
+          maxContains: typeof schema.maxContains === "number" ? schema.maxContains : void 0
+        });
       }
       break;
     }
@@ -549,8 +727,23 @@ function convertSchema(schema, ctx) {
       extraMeta[key] = schema[key];
     }
   }
-  if (schema.propertyNames !== void 0 && schema.type === "object" && schema.$ref === void 0) {
-    extraMeta.propertyNames = schema.propertyNames;
+  if (schema.type === "object" && schema.$ref === void 0) {
+    if (schema.propertyNames !== void 0 && !containsRef(schema.propertyNames)) {
+      extraMeta.propertyNames = schema.propertyNames;
+    }
+    for (const key of ["minProperties", "maxProperties"]) {
+      if (schema[key] !== void 0)
+        extraMeta[key] = schema[key];
+    }
+  }
+  if (schema.type === "array" && schema.$ref === void 0) {
+    if (schema.contains !== void 0 && !containsRef(schema.contains)) {
+      extraMeta.contains = schema.contains;
+    }
+    for (const key of ["uniqueItems", "minContains", "maxContains"]) {
+      if (schema[key] !== void 0)
+        extraMeta[key] = schema[key];
+    }
   }
   for (const key of Object.keys(schema)) {
     if (!RECOGNIZED_KEYS.has(key)) {

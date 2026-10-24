@@ -1,6 +1,8 @@
 // src/skill-scripts/email-from-reference/create-from-brief.ts
 import { randomUUID } from "node:crypto";
-import { rmSync as rmSync2 } from "node:fs";
+import { readFileSync as readFileSync2, rmSync as rmSync2 } from "node:fs";
+import path2 from "node:path";
+import { fileURLToPath as fileURLToPath2 } from "node:url";
 
 // src/skill-scripts/shared/runtime.ts
 import { existsSync, mkdirSync, readFileSync, realpathSync, rmSync, statSync, writeFileSync } from "node:fs";
@@ -389,21 +391,21 @@ function detachReferenceModules(model) {
   const detached = [];
   const children = ["stripes", "structures", "columns", "containers", "blocks"];
   const hasBlocks = (node) => children.some((key) => Array.isArray(node[key]) && node[key].some((value) => isObject3(value) && (key === "blocks" || hasBlocks(value))));
-  const visit = (node, path2, kind) => {
+  const visit = (node, path3, kind) => {
     if (["stripes", "structures", "containers"].includes(kind) && Object.hasOwn(node, "moduleId")) {
       if (typeof node.moduleId !== "number" || !Number.isFinite(node.moduleId)) {
-        throw new Error(`${path2}.moduleId: expected a finite saved-module ID`);
+        throw new Error(`${path3}.moduleId: expected a finite saved-module ID`);
       }
       if (!hasBlocks(node)) {
-        throw new Error(`${path2}.moduleId: cannot copy an unresolved saved module; acquire its complete editable content first`);
+        throw new Error(`${path3}.moduleId: cannot copy an unresolved saved module; acquire its complete editable content first`);
       }
-      detached.push({ path: `${path2}.moduleId`, sourceNodeId: nonEmptyString(node.id), moduleId: node.moduleId });
+      detached.push({ path: `${path3}.moduleId`, sourceNodeId: nonEmptyString(node.id), moduleId: node.moduleId });
       delete node.moduleId;
     }
     for (const key of children) {
       const rows = node[key];
       if (Array.isArray(rows)) rows.forEach((value, index) => {
-        if (isObject3(value)) visit(value, `${path2}.${key}[${index}]`, key);
+        if (isObject3(value)) visit(value, `${path3}.${key}[${index}]`, key);
       });
     }
   };
@@ -429,14 +431,14 @@ function backgroundImageFindings(model, exact) {
     }
     return Object.values(value).some(hasWhiteText);
   };
-  const inspect = (value, path2) => {
+  const inspect = (value, path3) => {
     if (Array.isArray(value)) {
-      value.forEach((item, index) => inspect(item, `${path2}[${index}]`));
+      value.forEach((item, index) => inspect(item, `${path3}[${index}]`));
     } else if (isObject3(value)) {
       if (isObject3(value.backgroundImage) && value.backgroundImage.sizeX === "cover" && value.backgroundImage.sizeY === "cover") {
-        findings.push(`${path2}.backgroundImage.sizeY: use "auto" when sizeX is "cover"; this native combination fails Reteno document-state SET`);
+        findings.push(`${path3}.backgroundImage.sizeY: use "auto" when sizeX is "cover"; this native combination fails the host document-state SET`);
       }
-      for (const [key, child] of Object.entries(value)) inspect(child, `${path2}.${key}`);
+      for (const [key, child] of Object.entries(value)) inspect(child, `${path3}.${key}`);
     }
   };
   inspect(model.stripes, "brief.model.stripes");
@@ -450,42 +452,58 @@ function backgroundImageFindings(model, exact) {
 }
 function unbreakableRuleFindings(model) {
   const findings = [];
-  const inspect = (value, path2) => {
+  const inspect = (value, path3) => {
     if (Array.isArray(value)) {
-      value.forEach((item, index) => inspect(item, `${path2}[${index}]`));
+      value.forEach((item, index) => inspect(item, `${path3}[${index}]`));
     } else if (isObject3(value)) {
       if (value.type === "text" && typeof value.content === "string" && /[━─═]{24,}/u.test(value.content)) {
-        findings.push(`${path2}.content: repeated rule glyphs force the mobile table wider than the viewport; use a full-width border-top span instead`);
+        findings.push(`${path3}.content: repeated rule glyphs force the mobile table wider than the viewport; use a full-width border-top span instead`);
       }
-      for (const [key, child] of Object.entries(value)) inspect(child, `${path2}.${key}`);
+      for (const [key, child] of Object.entries(value)) inspect(child, `${path3}.${key}`);
     }
   };
   inspect(model.stripes, "brief.model.stripes");
   return findings;
 }
-function validateCreationBrief(brief, brand = "reteno") {
+function readCreationPolicy() {
+  const policyPath = path2.resolve(path2.dirname(fileURLToPath2(import.meta.url)), "../reference/creation-policy.json");
+  let policy;
+  try {
+    policy = JSON.parse(readFileSync2(policyPath, "utf8"));
+  } catch {
+    throw new Error("reference/creation-policy.json must contain the installed provider's creation validation policy.");
+  }
+  const strings = (value) => Array.isArray(value) && value.every((item) => typeof item === "string" && item.length > 0);
+  if (!isObject3(policy) || !nonEmptyString(policy.provider) || !strings(policy.requiredMessageStrings) || !(policy.allowedMessageFields === null || strings(policy.allowedMessageFields)) || !strings(policy.positiveIntegerMessageFields) || !isObject3(policy.maxMessageLengths) || !Object.values(policy.maxMessageLengths).every((n) => Number.isSafeInteger(n) && n > 0) || ![policy.checkBackgroundImages, policy.checkUnbreakableRules, policy.requireContent].every((v) => typeof v === "boolean")) {
+    throw new Error("Invalid creation validation policy in reference/creation-policy.json.");
+  }
+  return policy;
+}
+function validateCreationBrief(brief, policy) {
   if (!isObject3(brief)) return ["brief: the file must contain a JSON object"];
   const findings = [];
   if (brief.v !== 2) findings.push(`brief.v: expected 2 (native model draft), got ${JSON.stringify(brief.v)}`);
   if (!isObject3(brief.message)) {
     findings.push("brief.message: required metadata object");
-  } else if (brand === "stripo") {
-    if (nonEmptyString(brief.message.name) === void 0) findings.push("brief.message.name: required non-empty name");
-    if (typeof brief.message.name === "string" && brief.message.name.length > 200) findings.push("brief.message.name: maximum 200 characters");
-    for (const key of Object.keys(brief.message)) {
-      if (!["name", "projectId", "folderId", "referenceMode"].includes(key)) findings.push(`brief.message.${key}: unsupported Stripo metadata`);
+  } else {
+    for (const key of policy.requiredMessageStrings) {
+      if (nonEmptyString(brief.message[key]) === void 0) findings.push(`brief.message.${key}: required non-empty ${key}`);
     }
-    for (const key of ["projectId", "folderId"]) {
+    if (policy.allowedMessageFields !== null) for (const key of Object.keys(brief.message)) {
+      if (!policy.allowedMessageFields.includes(key)) findings.push(`brief.message.${key}: unsupported ${policy.provider} metadata`);
+    }
+    for (const [key, maximum] of Object.entries(policy.maxMessageLengths)) {
+      const value = brief.message[key];
+      if (value !== void 0 && (typeof value !== "string" || value.length > maximum)) {
+        findings.push(`brief.message.${key}: expected a string of at most ${maximum} characters`);
+      }
+    }
+    for (const key of policy.positiveIntegerMessageFields) {
       const value = brief.message[key];
       if (value !== void 0 && (!Number.isSafeInteger(value) || value < 1)) findings.push(`brief.message.${key}: expected a positive integer`);
     }
-  } else if (nonEmptyString(brief.message.subject) === void 0) {
-    findings.push("brief.message.subject: required non-empty subject");
-  } else {
     if (Object.hasOwn(brief.message, "preheader") || Object.hasOwn(brief.message, "preHeader")) {
-      findings.push(
-        "brief.message.preheader and brief.message.preHeader must be absent; use brief.model.metadata.preheader with text and boolean fillSpace"
-      );
+      findings.push("brief.message.preheader and brief.message.preHeader must be absent; use brief.model.metadata.preheader with text and boolean fillSpace");
     }
   }
   if (isObject3(brief.message) && brief.message.referenceMode !== void 0 && !["exact", "tailored", "creative", "copy-action"].includes(brief.message.referenceMode)) {
@@ -495,9 +513,9 @@ function validateCreationBrief(brief, brand = "reteno") {
     findings.push("brief.model: required native editor model draft");
   } else if (!Array.isArray(brief.model.stripes) || brief.model.stripes.length === 0) {
     findings.push("brief.model.stripes: required non-empty array");
-  } else if (brand === "reteno") {
-    findings.push(...backgroundImageFindings(brief.model, isObject3(brief.message) && brief.message.referenceMode === "exact"));
-    findings.push(...unbreakableRuleFindings(brief.model));
+  } else {
+    if (policy.checkBackgroundImages) findings.push(...backgroundImageFindings(brief.model, isObject3(brief.message) && brief.message.referenceMode === "exact"));
+    if (policy.checkUnbreakableRules) findings.push(...unbreakableRuleFindings(brief.model));
   }
   for (const key of Object.keys(brief)) {
     if (!["v", "note", "sourceSummary", "message", "model"].includes(key)) {
@@ -513,13 +531,16 @@ async function main() {
   const baselinePath = args.baseline === void 0 ? void 0 : requireString(args, "baseline");
   const diagnosticsPath = optionalString(args, "diagnostics") ?? `${outputPath}.diagnostics.json`;
   let sdkPath;
-  const brand = optionalString(args, "brand") ?? "reteno";
   beginOutputs(outputPath, diagnosticsPath, [briefPath, baselinePath, optionalString(args, "runtime-snapshot")]);
   try {
     sdkPath = resolveSdkDist();
-    if (brand !== "reteno" && brand !== "stripo") throw new Error(`Unsupported brand: ${brand}`);
+    const policy = readCreationPolicy();
+    const requestedBrand = optionalString(args, "brand");
+    if (requestedBrand !== void 0 && requestedBrand !== policy.provider) {
+      throw new Error(`Unsupported brand: ${requestedBrand}; the installed creation policy selects ${policy.provider}.`);
+    }
     const brief = readJson(briefPath);
-    const findings = validateCreationBrief(brief, brand);
+    const findings = validateCreationBrief(brief, policy);
     if (findings.length > 0) {
       throw new Error(`Creation brief has ${findings.length} finding(s): ${JSON.stringify(findings)}`);
     }
@@ -548,7 +569,7 @@ async function main() {
       runtimeSnapshotPath: optionalString(args, "runtime-snapshot")
     });
     const summary = summarizeEditorJson(prepared.documentState);
-    if (brand === "stripo" && summary.counts.blocks === 0) throw new Error("A Stripo email must contain at least one block.");
+    if (policy.requireContent && summary.counts.blocks === 0) throw new Error("An email must contain at least one block.");
     writeJson(outputPath, prepared.documentState);
     writeJson(diagnosticsPath, {
       status: "ok",

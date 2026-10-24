@@ -76,15 +76,19 @@ var require_map_generator = __commonJS({
           }
         } else if (this.css) {
           let annotation = "/*# sourceMappingURL=";
+          let css = "";
+          let cursor = 0;
           let startIndex;
-          while ((startIndex = this.css.lastIndexOf(annotation)) !== -1) {
+          while ((startIndex = this.css.indexOf(annotation, cursor)) !== -1) {
             let endIndex = this.css.indexOf("*/", startIndex + annotation.length);
             if (endIndex === -1) break;
-            while (startIndex > 0 && this.css[startIndex - 1] === "\n") {
+            while (startIndex > cursor && this.css[startIndex - 1] === "\n") {
               startIndex--;
             }
-            this.css = this.css.slice(0, startIndex) + this.css.slice(endIndex + 2);
+            css += this.css.slice(cursor, startIndex);
+            cursor = endIndex + 2;
           }
+          if (cursor > 0) this.css = css + this.css.slice(cursor);
         }
       }
       generate() {

@@ -1,5 +1,33 @@
 
 export default {
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|17.$case"]: {
+  "hash": "ea8b4afe858c51f9a56001801a6334018915463d0a0830d4d63aa81ed4a7a99c",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|17.setGlobalCssVariableAction"]: {
+  "hash": "4a65bd04fc8dd1af587caddb4dd0933254d47d9d8ec87f73d55697b87d92455b",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|17.setGlobalCssVariableAction.$type"]: {
+  "hash": "48ade07104d542c4975fe0b0ff2e35cc12e4d3dd2a54bf1ff39b80188337c090",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|17.setGlobalCssVariableAction.propertyName"]: {
+  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|17.setGlobalCssVariableAction.oldValue"]: {
+  "hash": "9c3058fae2daf43d6031052b2e757d6758d8da945575f6a3e3fb0b3e6e51bf39",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|17.setGlobalCssVariableAction.newValue"]: {
+  "hash": "9c3058fae2daf43d6031052b2e757d6758d8da945575f6a3e3fb0b3e6e51bf39",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|18"]: {
+  "hash": "63395a1497409f92707608e77076d48d89b0733620988d472b53369dd8c57da8",
+  "group": "apiMutation"
+},
 ["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|18.$case"]: {
   "hash": "ad8cc22f157239fca7ead3b0179ec623b8a31b8034a140fab73afd1aad5ae80d",
   "group": "apiMutation"
@@ -714,30 +742,6 @@ export default {
 },
 ["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|26.createCommentAction.props|1.createdAt|1.seconds.neg"]: {
   "hash": "ec0c3ea476453d54b0d796524f92bad0292a1981a712665cf5386564c8d8f849",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|26.createCommentAction.props|1.createdAt|1.seconds.not"]: {
-  "hash": "ec0c3ea476453d54b0d796524f92bad0292a1981a712665cf5386564c8d8f849",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|26.createCommentAction.props|1.createdAt|1.seconds.countLeadingZeros"]: {
-  "hash": "db2ba91749ad75575c5239d792934964c38806458d88f584d8005944cd2cb07e",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|26.createCommentAction.props|1.createdAt|1.seconds.clz"]: {
-  "hash": "db2ba91749ad75575c5239d792934964c38806458d88f584d8005944cd2cb07e",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|26.createCommentAction.props|1.createdAt|1.seconds.countTrailingZeros"]: {
-  "hash": "db2ba91749ad75575c5239d792934964c38806458d88f584d8005944cd2cb07e",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|26.createCommentAction.props|1.createdAt|1.seconds.ctz"]: {
-  "hash": "db2ba91749ad75575c5239d792934964c38806458d88f584d8005944cd2cb07e",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|26.createCommentAction.props|1.createdAt|1.seconds.notEquals"]: {
-  "hash": "e571fcfa8855ccbe7cc5b6451abcdc7d31cc892669494d6ddc9318a002f70b20",
   "group": "apiMutation"
 }
 };

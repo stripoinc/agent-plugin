@@ -62,9 +62,8 @@ global settings from the actual source into the brief explicitly.
 
 Sum insets through stripe, structure, container, and block. Adding the same gutter twice is a
 layout error. Never flatten native text/controls to an image just to match a screenshot.
-For a centered photo-backed panel, use the native background field at the layer containing
-its text. Inspect the saved result to confirm crop, placement and text contrast; schema validity
-alone does not establish how a background renders.
+Check the renderer constraints listed in `PROVIDER.md`, if any, for background placement and
+sizing; verify the saved photo crop and text contrast against the source.
 
 For desktop two-column image/quote rows, check `structure.settings.responsiveMobile` in the
 saved mobile preview. If it is false, text can remain in a narrow column and wrap vertically;
@@ -84,11 +83,9 @@ desktop and compare the saved section height with the source mobile image.
 Represent horizontal separators with a native border or a full-width text span with a one-pixel
 top border and a nonbreaking space. Repeated `━`/`─` characters form one unbreakable text run;
 they can expand the entire mobile email table and push other columns off-screen.
-Verify mobile typography and spacing in the saved preview. If generated mobile rules override
-an inline paragraph size, use the supported native settings or intentional inline styles and
-check the resulting model and PNG. For compact label/value rows, preserve reading order and
-alignment with a supported native layout; use a presentation table inside an editable text block
-only when the reference requires it. Do not assume another provider's mobile defaults apply.
+Follow the renderer constraints in `PROVIDER.md`, if any, for compiler overrides of mobile font
+sizes and column widths. Verify compact dividers and label/value rows in the saved mobile PNG,
+not just native JSON.
 
 `responsiveMenu` controls stacking; it does not establish an interactive hamburger menu.
 Check the actual model capability for collapsed navigation. A static hamburger glyph with

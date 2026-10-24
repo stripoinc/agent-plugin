@@ -85,6 +85,8 @@ var error = () => {
     json_string: "JSON \u057F\u0578\u0572",
     e164: "E.164 \u0570\u0561\u0574\u0561\u0580",
     credit_card: "\u056F\u0580\u0565\u0564\u056B\u057F \u0584\u0561\u0580\u057F\u056B \u0570\u0561\u0574\u0561\u0580",
+    currency_code: "\u0561\u0580\u056A\u0578\u0582\u0575\u0569\u056B \u056F\u0578\u0564",
+    iban: "IBAN",
     jwt: "JWT",
     template_literal: "\u0574\u0578\u0582\u057F\u0584"
   };

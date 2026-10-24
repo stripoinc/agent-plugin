@@ -1,67 +1,57 @@
-# Create, persist, and verify
+# Create, persist and verify
 
-### 5. CREATE the email
+### 5. CREATE or acquire the target baseline
 
-If PREPARE images already created the email, reuse its recorded `emailId` and verified project;
-do not call `create_email` again. Continue with PERSIST after building the final brief.
+For an explicit full rebuild, skip creation. Acquire the named target before BUILD and preserve
+its untouched complete model and manifest as the baseline. Set the brief's `model.settings` and
+font resources from the requested source design. The builder fills schema defaults; do not copy
+the target's visual settings merely to make a rebuild complete. The target model supplies the
+persistence baseline, while the reference supplies typography, width, borders and layout.
 
-For an explicit full rebuild, skip creation. Use the named target's existing `(id, type)` and
-preserve its unrelated native settings and resources; templates can be rebuilt but not created.
-Copy the target's complete `settings` from its acquired model into the brief's `model.settings`
-before building; the schema rejects a rebuilt model that omits a settings key.
+For a new email, use `PROVIDER.md` to create once with supported metadata. Reuse any identity already
+created during PREPARE images. Check the returned initialization status; if initialization is
+unavailable, stop dependent writes, retain the draft, and report the required editor action.
+After an ambiguous create, use the recovery lookup in `PROVIDER.md`
+before any retry; never create a duplicate to work around an unknown outcome.
 
-For a new email not yet created, call `create_email` with the brief's `name` (or the resolved
-name from the inspected plan when PREPARE images runs this step early), the resolved `projectId`, and a
-`folderId` only when requested, as described in [creation](../../email-model-editor/reference/stripo-creation.md); pass `sourceEmailId` or
-`sourceTemplateId` only for an explicitly requested copy, never both. Check the returned project
-and `editorModelReady`; if the model is not initialized, keep the same email and report the
-required editor action. Creation is not idempotent: after an uncertain create, find the matching
-name in the intended project with `find_content` before retrying, and repair a known created
-email under the same ID. Do not silently create an email when the user requested a new template.
+When `PROVIDER.md` requires acquisition of the new shell, acquire it and rerun BUILD once with
+`--baseline <shell-model.json>` to validate the initial candidate against the actual shell.
+Keep the extracted brandkit and brief unchanged for that run.
+This validation baseline does not imply that the provider accepts a base upload in create mode.
+Retain the final candidate for persistence retries; do not regenerate IDs after a successful save.
 
-### 6. PERSIST the new Stripo model
+### 6. PERSIST
 
-Preserve native font settings and resources. Requested title and preheader are already in the
-model's `metadata` and are persisted in the same document upload.
-Persist `<new-model.json>` through the prepare-upload/write flow in [Stripo persistence](../../email-model-editor/reference/stripo-persistence.md):
+Use the create contract in `PROVIDER.md` for a newly created draft and its edit/rebuild contract
+for an existing target. Follow its acquisition-history rules too: a new identity alone does not
+authorize dropping an acquired base. Prepare the required tickets, transfer exact file bytes, and finalize
+only after successful uploads. Edits/rebuilds preserve the byte-exact acquired base; creation
+may require a single candidate ticket and forbid a base. Do not send the model inline or
+copy hash, idempotency, or ticket rules from another provider.
 
-1. Call `prepare_document_state_upload(id=<id>, type=<type>)`; require `status=OK`.
-2. Upload `<new-model.json>` to the returned `uploadUrl` through the consuming agent's authorized transfer mechanism.
-3. Call `set_document_state(id=<id>, type=<type>, uploadId=<upload id>, baseUploadId=<base ticket, rebuild only>)`. Never pass the complete model as a tool argument.
-
-For a rebuild, also call `prepare_document_state_upload` a second time, upload the target's
-untouched acquired model to that ticket and pass it as `baseUploadId`, so the rebuild is applied
-as a delta on top of the current state and concurrent edits survive; `UPLOAD_NOT_FOUND` names the
-empty ticket in `missingUploadId`, a `VALIDATION_ERROR` about an incompatible delta means acquire
-the target again, rebuild from the fresh model, and persist with it as the base, and
-`REVISION_CONFLICT` means repeat the same write with fresh tickets. For a freshly created email
-built from a brief there is no acquisition: use one ticket and no `baseUploadId`, and the upload
-replaces the empty document.
-`WRITE_UNCONFIRMED` means the result is unknown, including when a deleted-target rejection was
-returned as an internal error. Read back first: do not repeat a rebuild already applied, and
-report a missing intended target without recreating or retargeting it. Otherwise rebuild from
-the fresh model and upload it unmodified as the base with fresh tickets. If readback fails, stop
-and report the failure. Follow the same read-first procedure after a protocol or transport error.
-An upload ID is single-use and there is no hash or idempotency argument. After an uncertain
-write, read the state before retrying with fresh tickets; allow at most one repair retry under
-the same ID. A `MERGE_BROKEN` answer carries the editor's `code` and `details` as [Stripo persistence](../../email-model-editor/reference/stripo-persistence.md)
-describes: `details.errors[].path` is a dot path into `<new-model.json>`, so correct the brief,
-rebuild, and persist with fresh tickets for both files when rebuilding; do not patch the JSON
-by hand. Report the returned `code`, paths, and messages when the repair retry fails.
-There is no external metadata write tool: preserve existing name, project,
-and folder metadata, report requested metadata changes as unsupported, and reference only hosted
-assets.
+Persist `metadata.preheader` and `resources.fonts` in the same native document as the body.
+Follow `PROVIDER.md` for requested external metadata changes and provider-specific recovery.
+After uncertainty, read first. Verify already-saved changes instead of writing them again.
+Before the first successful save, follow the initial-write recovery and baseline rules in `PROVIDER.md`.
+After a successful save, repair the same draft against its fresh saved state. Never restore a
+stale snapshot, recreate a deleted target, drop concurrency checks, or restart image jobs.
+Changed inputs need the provider's appropriate new tickets/keys. If readback fails, stop and
+report uncertainty.
+Allow at most one repair retry per rejected change unless `PROVIDER.md` documents a bounded
+recovery sequence for that concrete failure. Retain the requested content and report any
+part that cannot be persisted; do not silently simplify the email to pass validation.
 
 ### 7. VERIFY
 
-Re-read the saved model with `get_document_state(id=<id>, type=<type>)` and request
-`get_screenshot(id=<id>, type=<type>, mode="BOTH")`. Download the fresh model and both PNGs
-through the host's authorized transfer mechanism.
+Use `PROVIDER.md` to reacquire the saved native model and both desktop/mobile previews. Download
+through the configured transfer helper. Verify native fonts, requested metadata, and the
+provider's compiled-content checks, including its saved preheader checks when the model sets
+or copies a preheader. A receipt alone does not establish requested-value equality.
 
 Inspect the saved model for every intended block, exact copy, CTA href, asset URL, merge tag,
 unsubscribe link, and postal/legal detail. Compare the per-type block census with the intended
 model.
-Verify the stored name and project with `get_content`; do not infer hidden metadata from an image.
+Verify supported external metadata through the read operation in `PROVIDER.md`; do not infer it from an image.
 
 For intentional inline styling, follow the shared [inline-style verification](../../email-model-editor/reference/persist-and-verify.md#inline-style-verification)
 before judging the saved previews.
@@ -98,13 +88,14 @@ fresh previews of both sizes again. Use the existing model-editor workflow for a
 do not rerun an insertion or duplication module just to verify it. Stop when the intended result
 passes review or a concrete limitation prevents repair. In the latter case, report "saved,
 visual defects unresolved", name the defect, and do not describe the email as ready to launch.
-Screenshots show the current coediting state, including unsaved changes; the fresh model read is
-the durable check.
+Apply the preview freshness and durable-state checks in `PROVIDER.md`; hashes do not replace visual inspection.
 
 Report full success only when the persisted id exists, persistence and model checks pass, required
 metadata reads back correctly, and both visual checks pass. If PNG generation, download, or
 inspection fails after a bounded retry, report "saved, visual verification incomplete" when the
 other checks passed.
-Keep the same id for a later preview retry; do not create another email or repeat a successful
-write. Never use an HTML export as the visual-verification fallback for the saved target. Return the id, entity type,
-project for a new email, and a concise summary of deliberate deviations from the references.
+Keep the same target identity for later preview retries; do not create another email or repeat
+a successful write. Never use an HTML export as the saved target's visual-verification fallback;
+rendering source HTML as reference evidence is allowed.
+Return the saved identity, destination and available presentation link as defined in `PROVIDER.md`,
+plus a concise account of deliberate deviations from the references.

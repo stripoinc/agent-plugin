@@ -1,3 +1,7 @@
+import {
+  rawShape
+} from "./core-d6ef11a90708.mjs";
+
 // editor/ui-editor-ui/node_modules/zod/v4/core/memoizer.js
 var $ZodCyclicError = class extends Error {
   constructor() {
@@ -7,28 +11,53 @@ var $ZodCyclicError = class extends Error {
 };
 var STATE = "~memo";
 var NO_ISSUES = [];
+function isRef(value) {
+  return value !== null && typeof value === "object";
+}
 function cloneIssues(issues) {
   return issues.map((iss) => iss.path ? { ...iss, path: iss.path.slice() } : { ...iss });
 }
 var recursive = /* @__PURE__ */ new WeakMap();
-function isRecursive(inst, stack) {
+var NONE = 0;
+var ASSUMED = 1;
+var PROVEN = 2;
+function isRecursive(inst, stack, resolve) {
   const cached = recursive.get(inst);
   if (cached !== void 0)
-    return cached;
+    return cached ? PROVEN : NONE;
   if (stack.has(inst))
-    return true;
+    return PROVEN;
   stack.add(inst);
-  let result = false;
+  let result = NONE;
   const check = (child) => {
-    if (!result && child?._zod && isRecursive(child, stack))
-      result = true;
+    if (result !== PROVEN && child?._zod) {
+      const answer = isRecursive(child, stack, resolve);
+      if (answer > result)
+        result = answer;
+    }
+  };
+  const shape = (sh, spread) => {
+    let answer = NONE;
+    for (const key of Reflect.ownKeys(sh)) {
+      const desc = Object.getOwnPropertyDescriptor(sh, key);
+      if (spread && !desc.enumerable)
+        continue;
+      const child = desc.get ? ASSUMED : desc.value?._zod ? isRecursive(desc.value, stack, resolve) : NONE;
+      if (child > answer)
+        answer = child;
+    }
+    return answer;
+  };
+  const merge = (answer) => {
+    if (answer > result)
+      result = answer;
   };
   const def = inst._zod.def;
   const kind = def.type;
   switch (kind) {
     case "object": {
-      for (const key of Reflect.ownKeys(def.shape))
-        check(def.shape[key]);
+      const raw = rawShape(def);
+      merge(raw ? shape(raw, true) : ASSUMED);
       check(def.catchall);
       break;
     }
@@ -75,10 +104,12 @@ function isRecursive(inst, stack) {
       check(def.input);
       check(def.output);
       break;
-    // reading `_zod.innerType` resolves the getter once and caches it
-    case "lazy":
-      check(inst._zod.innerType);
+    // `$ZodLazy` caches its inner on the def, so a resolved edge is followed exactly
+    case "lazy": {
+      const inner = def._cachedInner ?? (resolve ? inst._zod.innerType : void 0);
+      merge(inner ? isRecursive(inner, stack, false) : ASSUMED);
       break;
+    }
     // a leaf by choice: `parts` are regex fragments, not data positions
     case "template_literal":
     // leaves
@@ -120,16 +151,20 @@ function isRecursive(inst, stack) {
     }
   }
   stack.delete(inst);
-  recursive.set(inst, result);
-  return result;
+  return settle(inst, result);
+}
+function settle(inst, answer) {
+  if (answer !== ASSUMED)
+    recursive.set(inst, answer === PROVEN);
+  return answer;
 }
 function isRecursiveSchema(inst) {
-  return isRecursive(inst, /* @__PURE__ */ new Set());
+  return isRecursive(inst, /* @__PURE__ */ new Set(), true) !== NONE;
 }
 function bucketFor(state, inst) {
   let bucket = state.buckets.get(inst);
   if (!bucket) {
-    bucket = /* @__PURE__ */ new Map();
+    bucket = /* @__PURE__ */ new WeakMap();
     state.buckets.set(inst, bucket);
   }
   return bucket;
@@ -165,6 +200,7 @@ var memo = {
   attach(inst) {
     var _a;
     let isRecursiveInst;
+    let rechecked = false;
     let lastCtx;
     let lastBucket;
     (_a = inst._zod).deferred ?? (_a.deferred = []);
@@ -172,20 +208,24 @@ var memo = {
       const base = inst._zod.parse;
       const wrapped = (payload, ctx) => {
         if (isRecursiveInst === void 0) {
-          isRecursiveInst = isRecursive(inst, /* @__PURE__ */ new Set());
-          if (!isRecursiveInst) {
+          const walked = isRecursive(inst, /* @__PURE__ */ new Set(), false);
+          if (walked === NONE) {
             inst._zod.parse = base;
             if (inst._zod.run === wrapped)
               inst._zod.run = base;
             return base(payload, ctx);
           }
+          if (walked === PROVEN || rechecked)
+            isRecursiveInst = true;
+          else
+            rechecked = true;
         }
         const input = payload.value;
-        if (input === null || typeof input !== "object")
+        if (!isRef(input))
           return base(payload, ctx);
         let state = ctx[STATE];
         if (!state) {
-          state = { buckets: /* @__PURE__ */ new Map(), backEdges: void 0 };
+          state = { buckets: /* @__PURE__ */ new WeakMap(), backEdges: void 0 };
           ctx[STATE] = state;
         }
         let bucket;
@@ -204,7 +244,7 @@ var memo = {
               payload.issues.push(...cloneIssues(hit.issues));
           } else {
             payload.memo = true;
-            state.backEdges ?? (state.backEdges = /* @__PURE__ */ new Set());
+            state.backEdges ?? (state.backEdges = /* @__PURE__ */ new WeakSet());
             state.backEdges.add(hit.value);
           }
           return payload;
@@ -236,7 +276,7 @@ function memoizer() {
 }
 function isBackEdge(ctx, value) {
   const backEdges = ctx[STATE]?.backEdges;
-  return backEdges !== void 0 && value !== null && typeof value === "object" && backEdges.has(value);
+  return backEdges !== void 0 && isRef(value) && backEdges.has(value);
 }
 
 export {

@@ -1,5 +1,13 @@
 
 export default {
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|1.createHtmlTreeAction.props|1.node|1.node|1.config|1.smartBlock|1.variables[].externalMapping|1.modifier|1.regexs[].$type"]: {
+  "hash": "3308626eeb86af38f95c36d5d0fb5b5dd4a6a22d7424f7b157b1cd85e3f7f5ba",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|1.createHtmlTreeAction.props|1.node|1.node|1.config|1.smartBlock|1.variables[].externalMapping|1.modifier|1.regexs[].regex"]: {
+  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
+  "group": "apiMutation"
+},
 ["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|1.createHtmlTreeAction.props|1.node|1.node|1.config|1.smartBlock|1.variables[].externalMapping|1.modifier|1.regexs[].replacement"]: {
   "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
   "group": "apiMutation"
@@ -662,14 +670,6 @@ export default {
 },
 ["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|1.createHtmlTreeAction.props|1.node|1.node|1.config|1.timer|1.timerRetinaSupport"]: {
   "hash": "a5b031ab62bc416d720c0410d802ea46b910c4fbe85c50a946ccc658b74e677e",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|1.createHtmlTreeAction.props|1.node|1.node|1.config|1.timer|1.timerBackgroundColor"]: {
-  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|1.createHtmlTreeAction.props|1.node|1.node|1.config|1.timer|1.timerExpiresImageSrc"]: {
-  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
   "group": "apiMutation"
 }
 };

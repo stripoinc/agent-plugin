@@ -889,3 +889,9 @@ export {
   CanonicalSelectBuilder,
   q
 };
+/* istanbul ignore if: top-level parse rejects empty sources and nested argument parsing handles empty parens before this -- @preserve */
+/* istanbul ignore next: private parser entrypoints call this only when a selector is present -- @preserve */
+/* istanbul ignore if: parseCompound consumes or rejects non-combinator tokens before this point -- @preserve */
+/* istanbul ignore next: selector arguments are produced only for :not and :has -- @preserve */
+/* istanbul ignore next: literal arguments are not produced by selector parsers -- @preserve */
+/* istanbul ignore if: expect is called only after the caller has already matched the same delimiter -- @preserve */

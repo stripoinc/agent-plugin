@@ -1,5 +1,401 @@
 
 export default {
+["IBlockOperationsApi.videoBlock#1=>.updateGifSettings"]: {
+  "hash": "758bbba041232e5e7ba8cd6622d75490aea739c26c7c9fc024d7f68b01447eee",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.videoBlock#1=>.updateGifSettings#0(gifSettings)"]: {
+  "hash": "32de608cf6fc3700f1dc53e99c329a7661186e699bfdf24c2eb261678ec58e61",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.videoBlock#1=>.updateGifSettings#0(gifSettings).startTimeMs"]: {
+  "hash": "fd1a55ee2217c1ac278ab485236d6c199517334ee91e965cf2f6b8575701cd1c",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.videoBlock#1=>.updateGifSettings#0(gifSettings).durationSec"]: {
+  "hash": "fd1a55ee2217c1ac278ab485236d6c199517334ee91e965cf2f6b8575701cd1c",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.videoBlock#1=>.updateGifSettings#0(gifSettings).framesPerSec"]: {
+  "hash": "fd1a55ee2217c1ac278ab485236d6c199517334ee91e965cf2f6b8575701cd1c",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.videoBlock#1=>.updateGifSettings#0=>"]: {
+  "hash": "751c06d9b115f2b0703d511099c982425cdfae0d79f1e6789582ae2fb8586dd9",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.videoBlock#1=>.getGifSettings"]: {
+  "hash": "8f8d6d529aa05ea17627d989358a9e1cba182bd482a2bced957fdba245d64f57",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.videoBlock#1=>.updateFallbackUrl"]: {
+  "hash": "b36c79add04376a9100f86407adb3f1568a98cee80f56aded823a9bfa522cb23",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.videoBlock#1=>.updateFallbackUrl#0(fallbackUrl)"]: {
+  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.videoBlock#1=>.updateFallbackUrl#0=>"]: {
+  "hash": "751c06d9b115f2b0703d511099c982425cdfae0d79f1e6789582ae2fb8586dd9",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.videoBlock#1=>.getFallbackUrl"]: {
+  "hash": "8d67252c65f2e66032c8f9618c617ba066dc059abb08c968f731c1ce74be0efa",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.videoBlock#1=>.hasFallbackUrl"]: {
+  "hash": "6bd3df6f2216b5a140f7da59ba6cd56dd3537b002128ca108e9e2d71f711a18a",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.timerBlock"]: {
+  "hash": "8c8d6aec6fc8577d72c273e76bee735d9ad46126024e2e6a8b53e0ce346aff78",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.timerBlock#0(id)"]: {
+  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.timerBlock#0=>"]: {
+  "hash": "154596623859477841044a08d6cb4e76d138f86bbe895ff9f7cfdf8521c9535e",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.timerBlock#0=>.getSettings"]: {
+  "hash": "72b214168ee4132ce413ce3c8be0205f341c0e45912967703dfabf69887f523b",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.timerBlock#0=>.getSettings#0=>"]: {
+  "hash": "c89aab87df6e8b487c1776bb5084109bb27e5c0c2cd7535eb23afe4e301c71af",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.timerBlock#0=>.getSettings#0=>.altText"]: {
+  "hash": "a4789f4b114676c6d7737a3869800bdc1530571818b2bf01dd3fd07d518c7755",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.timerBlock#0=>.getSettings#0=>.responsiveMobile"]: {
+  "hash": "a5b031ab62bc416d720c0410d802ea46b910c4fbe85c50a946ccc658b74e677e",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.timerBlock#0=>.getSettings#0=>.size"]: {
+  "hash": "ec40339c618a815d820aa857e43f9da810b582225e75142c9a1a049ce754ca46",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.timerBlock#0=>.getSettings#0=>.alignment"]: {
+  "hash": "c02808b47937e675d1b636933a3997b747229de40138e3cb42453a40a23f0829",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.timerBlock#0=>.getSettings#0=>.margins"]: {
+  "hash": "4fd4e648beea96512f53e25aa549eec24f10baf67f276c8207ce8e866b38d7bc",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.timerBlock#0=>.getSettings#0=>.endDate"]: {
+  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.timerBlock#0=>.getSettings#0=>.timeZone"]: {
+  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.timerBlock#0=>.getSettings#0=>.link"]: {
+  "hash": "96faf982b2da49558f49ba94d19c819446c8a0ea69364bb90091811a39afb7a2",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.timerBlock#0=>.getSettings#0=>.link|0"]: {
+  "hash": "13ce20414eeea59045c2d5a12eeab2d508cf3c44e2bd67810a1180b15706fad4",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.timerBlock#0=>.getSettings#0=>.link|1"]: {
+  "hash": "ab9a8f8de8fc3b3c291ba274d0668efbb3a30e49e04f5d19cdf845e9b9f39199",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.timerBlock#0=>.getSettings#0=>.displayDays"]: {
+  "hash": "a5b031ab62bc416d720c0410d802ea46b910c4fbe85c50a946ccc658b74e677e",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.timerBlock#0=>.getSettings#0=>.labelsLetterCase?"]: {
+  "hash": "1cf9617dc551ca004586af13f09970478170983b16f0602a179c09c822fab88b",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.timerBlock#0=>.getSettings#0=>.labelsLetterCase?|0"]: {
+  "hash": "570326e88d6ea9324c701bdef940750ecb6febdbcf2bae814b6887868f904465",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.timerBlock#0=>.getSettings#0=>.labelsLetterCase?|1"]: {
+  "hash": "72aa5f9e5c35898208cec426859b0e3e3806fed0b2add8194269c1f29248ad45",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.timerBlock#0=>.getSettings#0=>.labelsLetterCase?|2"]: {
+  "hash": "f379f436e7ac7f08e253abec55196937233cc1eeb582be5a7f96e4ed41d62ef0",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.timerBlock#0=>.getSettings#0=>.labelsLetterCase?|3"]: {
+  "hash": "8058c7d14704f435538cb49dd88622789c74e65bbb4b91d99dc2b9a4b708022a",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.timerBlock#0=>.getSettings#0=>.separator"]: {
+  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.timerBlock#0=>.getSettings#0=>.labelsLanguage"]: {
+  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.timerBlock#0=>.getSettings#0=>.retinaDisplaySupport"]: {
+  "hash": "a5b031ab62bc416d720c0410d802ea46b910c4fbe85c50a946ccc658b74e677e",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.timerBlock#0=>.getSettings#0=>.expirationImageSrc"]: {
+  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.timerBlock#0=>.getSettings#0=>.hideElement"]: {
+  "hash": "dcd0a05e489099c667915dad041bf536669e6222ca32b2dc1ab509cb28a4a9df",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.timerBlock#0=>.getSettings#0=>.includeInOutput"]: {
+  "hash": "c287e94be95f327fb483a657cdbc9187eec76b13a5355fe6f4e6ce34c2bc88ae",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.timerBlock#0=>.getSettings#0=>.anchorLinkName"]: {
+  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.timerBlock#0=>.getSettings#0=>.digitsFontFamily"]: {
+  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.timerBlock#0=>.getSettings#0=>.digitsFontSize"]: {
+  "hash": "fd1a55ee2217c1ac278ab485236d6c199517334ee91e965cf2f6b8575701cd1c",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.timerBlock#0=>.getSettings#0=>.digitsFontColor"]: {
+  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.timerBlock#0=>.getSettings#0=>.digitsAdvancedColorSettings?"]: {
+  "hash": "4219c44393f670f9250a4706148062c6e430b5dd6d6746f186353afe6e3ff1cb",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.timerBlock#0=>.getSettings#0=>.digitsAdvancedColorSettings?|0"]: {
+  "hash": "570326e88d6ea9324c701bdef940750ecb6febdbcf2bae814b6887868f904465",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.timerBlock#0=>.getSettings#0=>.digitsAdvancedColorSettings?|1"]: {
+  "hash": "2443ebaa249bdc47c2f40ff37e0c99554fb634bc4c13b1a3d23085b098924d8b",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.timerBlock#0=>.getSettings#0=>.digitsAdvancedColorSettings?|1.days"]: {
+  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.timerBlock#0=>.getSettings#0=>.digitsAdvancedColorSettings?|1.hours"]: {
+  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.timerBlock#0=>.getSettings#0=>.digitsAdvancedColorSettings?|1.minutes"]: {
+  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.timerBlock#0=>.getSettings#0=>.digitsAdvancedColorSettings?|1.seconds"]: {
+  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.timerBlock#0=>.getSettings#0=>.labelsFontFamily"]: {
+  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.timerBlock#0=>.getSettings#0=>.labelsFontSize"]: {
+  "hash": "fd1a55ee2217c1ac278ab485236d6c199517334ee91e965cf2f6b8575701cd1c",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.timerBlock#0=>.getSettings#0=>.labelsFontColor"]: {
+  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.timerBlock#0=>.getSettings#0=>.labelsAdvancedColorSettings?"]: {
+  "hash": "35860f49e6a3f72008bc364f87a446f1b1160b5516f4bda364d5946112d167b4",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.timerBlock#0=>.getSettings#0=>.separatorFontFamily"]: {
+  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.timerBlock#0=>.getSettings#0=>.separatorFontSize"]: {
+  "hash": "fd1a55ee2217c1ac278ab485236d6c199517334ee91e965cf2f6b8575701cd1c",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.timerBlock#0=>.getSettings#0=>.separatorFontColor"]: {
+  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.timerBlock#0=>.getSettings#0=>.backgroundColor"]: {
+  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.timerBlock#0=>.updateAltText"]: {
+  "hash": "cc045a6673b0eb7e9384e8c8a3089baf82f92e1407d33b453599a3d8720a242e",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.timerBlock#0=>.updateAltText#0(text)"]: {
+  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.timerBlock#0=>.updateAltText#0(addToTitle)"]: {
+  "hash": "a5b031ab62bc416d720c0410d802ea46b910c4fbe85c50a946ccc658b74e677e",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.timerBlock#0=>.updateAltText#0=>"]: {
+  "hash": "751c06d9b115f2b0703d511099c982425cdfae0d79f1e6789582ae2fb8586dd9",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.timerBlock#0=>.getAltText"]: {
+  "hash": "43396f59b9574774c5e2e40f61f073ee74709bb9bf3f14fbc03e4f93b1db4585",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.timerBlock#0=>.getAltText#0=>"]: {
+  "hash": "a4789f4b114676c6d7737a3869800bdc1530571818b2bf01dd3fd07d518c7755",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.timerBlock#0=>.updateResponsiveMobile"]: {
+  "hash": "e6c475d00fa7ea983c142af2aff237cb9d9c947ad50f25bc8118152cec72038d",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.timerBlock#0=>.updateResponsiveMobile#0(enabled)"]: {
+  "hash": "a5b031ab62bc416d720c0410d802ea46b910c4fbe85c50a946ccc658b74e677e",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.timerBlock#0=>.updateResponsiveMobile#0=>"]: {
+  "hash": "751c06d9b115f2b0703d511099c982425cdfae0d79f1e6789582ae2fb8586dd9",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.timerBlock#0=>.getResponsiveMobile"]: {
+  "hash": "6bd3df6f2216b5a140f7da59ba6cd56dd3537b002128ca108e9e2d71f711a18a",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.timerBlock#0=>.updateSize"]: {
+  "hash": "adf2d17172b11245d226a1c9495c6f746a62d256d4ab7e1f6ae778fa240ad827",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.timerBlock#0=>.updateSize#0(size)"]: {
+  "hash": "ec40339c618a815d820aa857e43f9da810b582225e75142c9a1a049ce754ca46",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.timerBlock#0=>.updateSize#0=>"]: {
+  "hash": "751c06d9b115f2b0703d511099c982425cdfae0d79f1e6789582ae2fb8586dd9",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.timerBlock#0=>.updateSizeDesktop"]: {
+  "hash": "d05c4ec83854147e26be70d66d05642f296afe01511156711409dee128f714ff",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.timerBlock#0=>.updateSizeDesktop#0(size)"]: {
+  "hash": "df1256f199c81d7a1e2725f2c7a69a522ca341f556aa077efa45e48b56596ae0",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.timerBlock#0=>.updateSizeDesktop#0(options)"]: {
+  "hash": "55fed6ac29ff78aa27736f1105fa587f98421b563a5ad668516f58b6096062ef",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.timerBlock#0=>.updateSizeDesktop#0=>"]: {
+  "hash": "751c06d9b115f2b0703d511099c982425cdfae0d79f1e6789582ae2fb8586dd9",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.timerBlock#0=>.getSizeDesktop"]: {
+  "hash": "b459d7b2761b283c34bfe117b6266187560817620a49caeb85e0fd9b8a6cf8f4",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.timerBlock#0=>.getSizeDesktop#0=>"]: {
+  "hash": "df1256f199c81d7a1e2725f2c7a69a522ca341f556aa077efa45e48b56596ae0",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.timerBlock#0=>.updateSizeMobile"]: {
+  "hash": "e148893a147bdea04de65a0b4c1269a5f14ef058b6388dc829480663bcf9f1ea",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.timerBlock#0=>.updateSizeMobile#0(size)"]: {
+  "hash": "df1256f199c81d7a1e2725f2c7a69a522ca341f556aa077efa45e48b56596ae0",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.timerBlock#0=>.updateSizeMobile#0=>"]: {
+  "hash": "751c06d9b115f2b0703d511099c982425cdfae0d79f1e6789582ae2fb8586dd9",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.timerBlock#0=>.getSizeMobile"]: {
+  "hash": "b459d7b2761b283c34bfe117b6266187560817620a49caeb85e0fd9b8a6cf8f4",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.timerBlock#0=>.getSizeMobile#0=>"]: {
+  "hash": "df1256f199c81d7a1e2725f2c7a69a522ca341f556aa077efa45e48b56596ae0",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.timerBlock#0=>.updateAlignment"]: {
+  "hash": "ffc5e98be2b78e04479e61b7c5962a2170e0b413a3485d27cf7fb129b187a10c",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.timerBlock#0=>.updateAlignment#0(alignment)"]: {
+  "hash": "c02808b47937e675d1b636933a3997b747229de40138e3cb42453a40a23f0829",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.timerBlock#0=>.updateAlignment#0=>"]: {
+  "hash": "751c06d9b115f2b0703d511099c982425cdfae0d79f1e6789582ae2fb8586dd9",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.timerBlock#0=>.updateAlignmentDesktop"]: {
+  "hash": "d6030019e3ab45d218710e81fe3b200440bd0b7142fc4e9fa6dda31fd3f78c0c",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.timerBlock#0=>.updateAlignmentDesktop#0(alignment)"]: {
+  "hash": "9b1f986223908e2280fd734235c3b8e07efd508c5a0f8c7b23dc50451d527b82",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.timerBlock#0=>.updateAlignmentDesktop#0=>"]: {
+  "hash": "751c06d9b115f2b0703d511099c982425cdfae0d79f1e6789582ae2fb8586dd9",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.timerBlock#0=>.getAlignmentDesktop"]: {
+  "hash": "de2259cbe84029a70d97ef26edae4d8fe188ebd0427a334bafa589cf1fa87ffe",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.timerBlock#0=>.updateAlignmentMobile"]: {
+  "hash": "d6030019e3ab45d218710e81fe3b200440bd0b7142fc4e9fa6dda31fd3f78c0c",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.timerBlock#0=>.updateAlignmentMobile#0(alignment)"]: {
+  "hash": "9b1f986223908e2280fd734235c3b8e07efd508c5a0f8c7b23dc50451d527b82",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.timerBlock#0=>.updateAlignmentMobile#0=>"]: {
+  "hash": "751c06d9b115f2b0703d511099c982425cdfae0d79f1e6789582ae2fb8586dd9",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.timerBlock#0=>.getAlignmentMobile"]: {
+  "hash": "de2259cbe84029a70d97ef26edae4d8fe188ebd0427a334bafa589cf1fa87ffe",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.timerBlock#0=>.updateMarginsDesktop"]: {
+  "hash": "ea446283625e191e02948810d5433d4bb64a7907da95553617ce033304ba011f",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.timerBlock#0=>.updateMarginsDesktop#0(margins)"]: {
+  "hash": "2a026e4cd27a7fc95ebc78d73bb4f94744de46df3826f88bd43e3316d57cef7b",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.timerBlock#0=>.updateMarginsDesktop#0=>"]: {
+  "hash": "751c06d9b115f2b0703d511099c982425cdfae0d79f1e6789582ae2fb8586dd9",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.timerBlock#0=>.getMarginsDesktop"]: {
+  "hash": "c2190d4270b697f7cc6b9e47aec1c7c9c24be6d4d7e5671c166e0fb19e1f6745",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.timerBlock#0=>.updateMarginsMobile"]: {
+  "hash": "ea446283625e191e02948810d5433d4bb64a7907da95553617ce033304ba011f",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.timerBlock#0=>.updateMarginsMobile#0(margins)"]: {
+  "hash": "2a026e4cd27a7fc95ebc78d73bb4f94744de46df3826f88bd43e3316d57cef7b",
+  "group": "apiMutation"
+},
 ["IBlockOperationsApi.timerBlock#0=>.updateMarginsMobile#0=>"]: {
   "hash": "751c06d9b115f2b0703d511099c982425cdfae0d79f1e6789582ae2fb8586dd9",
   "group": "apiMutation"
@@ -694,370 +1090,6 @@ export default {
 },
 ["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.networks[].type|65"]: {
   "hash": "8a1621e383b0e30f16df8308a190a66ac3779f5fa394ae2363eaed2f59560faa",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.networks[].type|66"]: {
-  "hash": "547b5f33788b610e172d53b73f18d1881c9b6b4c8c0af5542058bccd46471834",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.networks[].type|67"]: {
-  "hash": "66188d62f06f3f86728894b707c5a0db8f0664a40de16748fe48dcd05b4338a8",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.networks[].type|68"]: {
-  "hash": "f90115729e1e075786c99004de101a6f47ddd5b4f8a22808c21eb57b8842d776",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.networks[].type|69"]: {
-  "hash": "1dbe357a390292ad2b59c810a74e6ffb34192ca2bdb63c6c3a5be900f5e5e28e",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.networks[].type|70"]: {
-  "hash": "e723f51a0a7ea6207ae9b311cae110093f4a36e538971d503e5ae9710586a9a2",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.networks[].type|71"]: {
-  "hash": "7396bdc8ea8e6f4f7dab808c5b6e73bb563dc3a0cf1ca2820f8c05be1c99fc01",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.networks[].type|72"]: {
-  "hash": "efbf39a4c701a1dda4d5ec6a3462486cba1bb217d0a93db454b995619d53d470",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.networks[].type|73"]: {
-  "hash": "57dd99883992810a15a86bbdb384f9b14a4a08f9304b818f9e474d47e4477a3d",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.networks[].type|74"]: {
-  "hash": "b48309efdb390abf57a71e09d89aba9a970dd1a10e77815da187c61fedabe2f4",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.networks[].type|75"]: {
-  "hash": "ecaf7c012188c2a11185407768a02ce8f614dadd0db54040e23ecec768da5f46",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.networks[].type|76"]: {
-  "hash": "bfd15d79433fe5f6a39835f636efca600fc1ff93b42f8a462125073270960ada",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.networks[].type|77"]: {
-  "hash": "fe0a91f981ad9192e5845d981a0347738e1d57177fdb1f0e3b9c19ed3850273b",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.networks[].type|78"]: {
-  "hash": "29a761af5eece1f551b04c9782696ebf6f58f7dba7e9cb49092113302decf25c",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.networks[].type|79"]: {
-  "hash": "7c409c17ed4af2684354b6ef6b8d77ef4e163c0f7cfc9ea78746309c35813397",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.networks[].type|80"]: {
-  "hash": "c8ea6b9a0beef2710136f661d6913024cb7832a49010a07e283e11005f29aa53",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.networks[].type|81"]: {
-  "hash": "0278b3baedde1ee67f71640387d277b6e5858831b690656b9fd0872faaf08ea3",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.networks[].type|82"]: {
-  "hash": "b66ae5daa2a5273a4d62e376f7de1715906d947dd24085337144ad436e6fc5c5",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.networks[].type|83"]: {
-  "hash": "dcc8f4dfc90e6c12c3d64727f1ccf74f4eb9914a21a793c7c5c032b3b8027e8d",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.networks[].type|84"]: {
-  "hash": "7132803e27a3cf178ecf0e6c796d275195292a3a0da07b33c3e5ddcccc130b82",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.networks[].type|85"]: {
-  "hash": "298227b78260964144b1fca657f64039a02bf436bebbbe192a5bbcba4eda844c",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.networks[].type|86"]: {
-  "hash": "f1fe22bf997f0e08ce3269a5fadd0dbb6629564d203954f9fb5501dcabec57b7",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.networks[].type|87"]: {
-  "hash": "270a3071a69002645ab9faeefd347cc10d7a4d5ed8950ea446c92e88b7c26cee",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.networks[].type|88"]: {
-  "hash": "e6a5a7b11a7534bae7ef0103d31be2ba5e54e6d96f34f3bea643a5dd3c3046e0",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.networks[].link?"]: {
-  "hash": "c55b734827a94263bcb30111c60fe1b9b2b73a87d76c8a5ac2ca9a1cb4d6b7b8",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.networks[].icon?"]: {
-  "hash": "8124a6a9299893c6ba797f4ac4736cdb99360f87e39b61754778f547f108ee65",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.networks[].title"]: {
-  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.networks[].alt?"]: {
-  "hash": "8124a6a9299893c6ba797f4ac4736cdb99360f87e39b61754778f547f108ee65",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.style"]: {
-  "hash": "75cd53065dfb1d9b8b5c274220c16c584987baf4c8a8d99665c134f3d8e2ce5c",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.style|0"]: {
-  "hash": "195e2ba4b7709b167226be0f03151ab32b5d1da396f1adb4362d7c3afef291ed",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.style|1"]: {
-  "hash": "e4aa1b1337fc6255fcc70592be023cc08e7f0375f707c968dc1783a4774de620",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.style|2"]: {
-  "hash": "cf3373757cdaf1e120bb79f37d1f9c338418d5f578b3e5c30ddd7deec268b34a",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.style|3"]: {
-  "hash": "0a62175b805f793bdc88256589c9282764d531068d412a1d569630c92385ac49",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.style|4"]: {
-  "hash": "ce816cc498bc42fa71298b0532d337eda23adbab1f8329774cdaad794d245dd0",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.style|5"]: {
-  "hash": "da010252f172df7a777435906c04bc9d170ebc30cffe9aa96cf965a73f8fa017",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.style|6"]: {
-  "hash": "98d5eadfedfdf8f3675fd1ef693edb18992aec74e22855f116b9e8d0bbe03b15",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.style|7"]: {
-  "hash": "a5f02c073142c72f22cc82781b87256b8fc727e33a2a12cc093e13b265084da0",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.style|8"]: {
-  "hash": "c163995fa2d111f1f48ca854dd7584d62d31e4f9e576d783ccb3cc6298109175",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.style|9"]: {
-  "hash": "0e7cd48ea23cfb42fb5753f2c631971c91269dc52246a059b6b178f3a919b43a",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.style|10"]: {
-  "hash": "c0afd6935002419b19a018a2a5b027486c0c401bf3192a7506a4b90bff2e7fd4",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.style|11"]: {
-  "hash": "bd5487b0e9acdd633dfa070b82349c0f2f04b0ea9a0f059e730c849aa1bbd95c",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.style|12"]: {
-  "hash": "c4d212ed67ee05b3be767fb2c01a45010d101b3d9f19a9c882d65421b1090b1e",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.style|13"]: {
-  "hash": "f72a1ea1bf44b24af7b117e00552992cdace684658b43151e7281e8b2b7099e5",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.style|14"]: {
-  "hash": "8366d744138cf4fb8ff63a6ea00e43242c335e81ced88f77b936e621088f6fbb",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.style|15"]: {
-  "hash": "4a12b0c504a87562078be6b16eeda39095a6abd97371037f54b45df8fb3caa97",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.style|16"]: {
-  "hash": "e544e09da6058497ff3872183e8c7e797af0067cb3797db5098cf420ca3fd996",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.style|17"]: {
-  "hash": "c10cc16458b3e807928c9c14e57734ff86a48da9145b98464b88353ccb28f653",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.style|18"]: {
-  "hash": "c64c4ebd3adb4a65facb2b8a7638f798ab16a7aef3315c1d20a1387fdbab48f3",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.style|19"]: {
-  "hash": "4893c2d0348dfc31e5df8c9dd363fbe57a1f1712c84c40fecfcf2196d844b8d9",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.style|20"]: {
-  "hash": "f5cd879580a81bc16772b5e2987a1cabc76b8fe1e99f74241dbe5b2d6d83da1a",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.style|21"]: {
-  "hash": "3326d9abbf686dc070912044925cad84bcc1effffeb70aeacdc20e56f22fa26a",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.style|22"]: {
-  "hash": "04e05070c6a493076da66f891d151703a9ae45d58265c2a4b654019debc484c3",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.style|23"]: {
-  "hash": "ef2fd099ef7a740c7039f00be5fb9278bdeadd9cb9455242eb45620efae40d82",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.style|24"]: {
-  "hash": "fb2aa21a43b25909829a482d77bdcc5ad10b0bd82ceef9b1b8bcda62ccd855d4",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.style|25"]: {
-  "hash": "795301f508d2a932ad63363b985d3216997e415f3bf4125e6e8303afbabea259",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.style|26"]: {
-  "hash": "493de6553ca09e82b434657e992237169895c7afff5fb6e96595c6778cf408ca",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.style|27"]: {
-  "hash": "9fcd74a89b37d0d3004b035506d62b2cfccbf0920711305cbd8507f104cc4f9f",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.style|28"]: {
-  "hash": "d9183f513f15975f6835e7ec66c4d50156f7de09666048293c4b8108960081a0",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.iconSize"]: {
-  "hash": "fd1a55ee2217c1ac278ab485236d6c199517334ee91e965cf2f6b8575701cd1c",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.spaceBetweenIcons"]: {
-  "hash": "fcdf98b4aa619fa596ad2851d67bd4e0aa17d1cbb29f81678a2c8c4aa7ca9bab",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.spaceBetweenIcons.desktop"]: {
-  "hash": "fd1a55ee2217c1ac278ab485236d6c199517334ee91e965cf2f6b8575701cd1c",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.spaceBetweenIcons.mobile"]: {
-  "hash": "fd1a55ee2217c1ac278ab485236d6c199517334ee91e965cf2f6b8575701cd1c",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.textCustomization"]: {
-  "hash": "a5b031ab62bc416d720c0410d802ea46b910c4fbe85c50a946ccc658b74e677e",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|1"]: {
-  "hash": "68ff5b4fd81ae35579dd222078995402abcc881a67c8e7a7de4d92e71cf48064",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|1.source"]: {
-  "hash": "2b7ec8c9045b275a7253bacaecf824a8da26cc27e32aef1cc3f42f1ae4357373",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|1.networks"]: {
-  "hash": "56eb67f4f599b82ac67a19b5a4384e45f90f41e113069793b18c0954b0e82713",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|1.networks[]"]: {
-  "hash": "ef6f15ebe77761aa6eb26a44bfd21302b219b0c82ba1ed21f1e81b28e1729a1d",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|1.networks[].name"]: {
-  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|1.networks[].href?"]: {
-  "hash": "8124a6a9299893c6ba797f4ac4736cdb99360f87e39b61754778f547f108ee65",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|1.networks[].alt?"]: {
-  "hash": "8124a6a9299893c6ba797f4ac4736cdb99360f87e39b61754778f547f108ee65",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|1.networks[].title?"]: {
-  "hash": "8124a6a9299893c6ba797f4ac4736cdb99360f87e39b61754778f547f108ee65",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|1.style?"]: {
-  "hash": "8124a6a9299893c6ba797f4ac4736cdb99360f87e39b61754778f547f108ee65",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|1.iconSize"]: {
-  "hash": "fd1a55ee2217c1ac278ab485236d6c199517334ee91e965cf2f6b8575701cd1c",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|1.spaceBetweenIcons"]: {
-  "hash": "738e690e78501c9b69ba5c6951a682b771a292282b7e53e6d37bdcf602bdf07e",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|1.textCustomization"]: {
-  "hash": "a5b031ab62bc416d720c0410d802ea46b910c4fbe85c50a946ccc658b74e677e",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|1.alignment"]: {
-  "hash": "c02808b47937e675d1b636933a3997b747229de40138e3cb42453a40a23f0829",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).prevComponentId?"]: {
-  "hash": "8124a6a9299893c6ba797f4ac4736cdb99360f87e39b61754778f547f108ee65",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).prevPositionToken?"]: {
-  "hash": "8124a6a9299893c6ba797f4ac4736cdb99360f87e39b61754778f547f108ee65",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).dndPosition?"]: {
-  "hash": "5ccd8514cec7ddcfe810b52341e38c39dd851a3b1378a6fab81813c9017eb5e1",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).emptyContainerPlaceholder?"]: {
-  "hash": "1fd23a9ded7cf95eac0bdb4d6304d23e71aaa712ea1f2b2464c892812dcb55dd",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(patchOptions)"]: {
-  "hash": "cde1c32dc7e44016d04507af8dad77bb92a04da179ad60ffbd540bfa460303da",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0=>"]: {
-  "hash": "751c06d9b115f2b0703d511099c982425cdfae0d79f1e6789582ae2fb8586dd9",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#1(id)"]: {
-  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#1=>"]: {
-  "hash": "b098bc6d6ce1e64e105b4668ef53c59abff4f599e455977ec4b3f49ee2327ecc",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#1=>.repairRelativeIconSources"]: {
-  "hash": "f7997575d6b36288f8665b70d2572761c4e1a15bfc0d56b31b2e297e9da505a6",
-  "group": "host"
-},
-["IBlockOperationsApi.socialBlock#1=>.repairRelativeIconSources#0=>"]: {
-  "hash": "751c06d9b115f2b0703d511099c982425cdfae0d79f1e6789582ae2fb8586dd9",
-  "group": "host"
-},
-["IBlockOperationsApi.socialBlock#1=>.updateNetworks"]: {
-  "hash": "97f93da4c992591e09a79a5eeb0c07df4f2df10e5079b2d16e5b19e24d94785b",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#1=>.updateNetworks#0(networks)"]: {
-  "hash": "720ce2a7f6dece87e37fc34ca70487ddb95e5566e05a14d4edb57aa3873166a6",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#1=>.updateNetworks#0(options)"]: {
-  "hash": "636a9226160a7e8eb7e16f36a98887c61130d0cd886a10580d05ad572ba1998f",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#1=>.updateNetworks#0(options)|0"]: {
-  "hash": "570326e88d6ea9324c701bdef940750ecb6febdbcf2bae814b6887868f904465",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#1=>.updateNetworks#0(options)|1"]: {
-  "hash": "90f7bbcc869e5e8c3a75a5d0e2aa6a24a9127ffb11683ec2db21972ab9f3c9f3",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#1=>.updateNetworks#0(options)|1.preserveExplicitEmptyCaptions?"]: {
-  "hash": "3b5e8f4439e0cfc6fb875f2bb57f220fe176c5b6735a5abfb204411d411e0d3f",
   "group": "apiMutation"
 }
 };

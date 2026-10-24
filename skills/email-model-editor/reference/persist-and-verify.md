@@ -1,49 +1,32 @@
-# Persist and verify the edit
+# Persist and verify
 
-## 4. Persist by file reference
+## Persist by file reference
 
-Preserve native font settings and resources; there is no font normalization step. Follow the
-prepare-upload/write flow in [Stripo persistence](stripo-persistence.md):
+Follow the edit/rebuild contract in the provider's persistence topic (`PROVIDER.md`). Prepare distinct candidate and base tickets where
+required, upload the complete candidate and byte-exact acquisition through the configured helper,
+and finalize only after every transfer succeeds. Never swap their ticket IDs, pass JSON inline,
+or discard the concurrency protection to force a write. Use the provider's exact hash,
+idempotency, ticket-consumption, and retry rules; these are not interchangeable.
 
-```text
-prepare_document_state_upload(id=<id>, type=<type>)   # ticket for <updated-model.json>
-prepare_document_state_upload(id=<id>, type=<type>)   # ticket for <downloaded-model.json>
-set_document_state(id=<id>, type=<type>, uploadId=<first ticket>, baseUploadId=<second ticket>)
-```
+After an uncertain write, read current state before considering any retry. If the intended
+changes are already present, verify them without another write. If a target node was deleted
+or changed incompatibly, report the conflict without recreating or retargeting it. Otherwise
+reconcile against a fresh acquisition and rerun the SDK module. Never restore a stale snapshot.
+If readback fails, report the uncertainty and stop. Repair returned field errors in the module,
+not in the generated JSON. Allow at most one repair retry, using the tickets and keys required
+by `PROVIDER.md`. A confirmed pre-write conflict may have its own bounded retry rule there;
+never apply that rule to an unknown outcome. Report unresolved codes, paths, and messages.
 
-Between the calls, upload `<updated-model.json>` to the first `uploadUrl` and the untouched
-`<downloaded-model.json>` to the second, both through the consuming agent's authorized transfer
-mechanism. Never pass a model inline and never swap the two ids. With the base the editor writes
-only this edit on top of the live state and concurrent edits by others survive. Tickets are
-single-use and there is no hash or idempotency argument: keep the read-to-write gap short, and
-after an uncertain write read the state before retrying with fresh tickets. Follow the `status`
-contract in [Stripo persistence](stripo-persistence.md): a `MERGE_BROKEN` answer names the rejected fields in
-`details.errors[].path` (a dot path into `<updated-model.json>`); fix them in the change module,
-rerun the runner, and persist with two fresh tickets. `UPLOAD_NOT_FOUND` names the empty ticket in
-`missingUploadId`: a missing base has spent nothing, finish that upload and call again; a missing
-candidate has spent the base, so upload both files to fresh tickets. `REVISION_CONFLICT` or a
-`VALIDATION_ERROR` whose message says the delta is incompatible with the current document mean
-the letter moved, not that the edit is wrong: for `REVISION_CONFLICT` repeat the same write with
-fresh tickets; otherwise acquire again, rerun the same change module on the fresh model, and
-persist with the fresh model as the base. A deleted target can instead return `WRITE_UNCONFIRMED`:
-the result is unknown, so read back first. If the changes are already present, do not write again;
-if the intended node is missing, report the conflict without recreating it or retargeting the edit.
-Otherwise rerun the change module on the fresh model and use it as the base with fresh tickets.
-If readback fails, stop and report the failure. Use this same read-first procedure after a
-protocol or transport error. Use two fresh tickets for repairs after `INVALID_STATE`, `PARSE_ERROR`
-and `SIDE_EFFECT_UNAVAILABLE` as well. Never drop `baseUploadId` to force a write. Allow at
-most one repair retry before reporting the failure with the returned `code`, paths, and messages.
+## Verify durable state
 
-## 5. Verify durable state
+Acquire a fresh native model and perform the required verification calls through `PROVIDER.md`.
+Request desktop/mobile previews unless the provider defines a preheader-only completion rule;
+then perform its saved native/compiled preheader checks instead of requesting PNGs.
+Independent verification requests may be issued together when the host supports it; inspect
+every response. A merge receipt is not the resulting document. Use the fresh file and manifest
+for any next edit. Verify `resources.fonts` and requested font-family settings in that file.
 
-Read both surfaces after persistence:
-
-```text
-get_document_state(id=<id>, type=<type>)
-get_screenshot(id=<id>, type=<type>, mode="BOTH")
-```
-
-Download the fresh model and both PNG artifacts through the authorized transfer path. Inspect
+Download the fresh model and required PNG artifacts through the authorized transfer path. Inspect
 the model for the exact requested values, link destinations, image URLs, alt text, merge tags, and
 preserved content. Compare its depth-agnostic per-type block census with the acquisition census.
 Structural node IDs may change between reads, so compare counts and types rather than those ids.
@@ -54,23 +37,24 @@ After a structural edit, compare the census with the intended additions, removal
 The merged result may also contain concurrent edits. Whole-target equality or an unchanged
 block count is not required: verify the requested changes and investigate unexplained loss,
 while preserving unrelated live additions and edits.
-After a metadata edit, compare the fresh model's `metadata.title`, `metadata.preheader.text`, and
-`metadata.preheader.fillSpace` with the requested values and the preserved fields. Hidden metadata
-is verified from JSON; an unchanged screenshot is expected for a metadata-only edit.
-Because the write was applied as a delta, the fresh model may also carry edits other people made
-since the acquisition; those are not defects. Report a difference outside the requested change as
-a loss only when the acquisition had it, the current state lacks it, and nothing else explains it.
+After a metadata edit, compare the fresh model's `metadata.title`, `metadata.preheader.text`,
+and `metadata.preheader.fillSpace` with the requested and preserved values. Follow `PROVIDER.md` for
+any compiled-preheader checks and its preheader-only preview rule. Screenshots cannot
+verify hidden metadata; unchanged previews are expected after a metadata-only edit and are not a
+defect to repair. A concurrent change outside the requested delta is not automatically a loss.
 
-### Inline-style verification
+## Inline-style verification
 
 For intentional inline-style changes, verify the requested CSS properties, values or removals
 on the intended elements in fresh native content against the checked candidate, allowing harmless
 serializer changes in quoting, whitespace, and declaration order. A write receipt does not
 prove the styles were saved. An incorrect local candidate is a mutation failure;
 a correct candidate followed by a native styling mismatch is a persistence discrepancy.
-Follow [Stripo persistence](stripo-persistence.md): verify the fresh native model and both
-screenshots without quota-consuming HTML export. Screenshots do not establish independent
-compiled HTML/CSS verification.
+`PROVIDER.md` states whether compiled HTML/CSS verification is available and any export quota limits.
+Where supported, verify requested CSS on the compiled elements before judging the PNGs.
+Correct native CSS followed by different compiled CSS is a compilation or rule discrepancy;
+report unavailable compiled-style verification explicitly. Screenshots alone do not establish it.
+
 If retained styling still renders incorrectly, inspect the affected elements, applicable rules,
 and layout constraints. A preview showing literal merge placeholders does not establish a
 recipient-data rendering defect.
@@ -96,9 +80,9 @@ obtain and inspect fresh previews of both sizes again. Do not replay a successfu
 as a verification step. Stop when the requested result passes review or a concrete limitation
 prevents repair. Report "saved, visual defects unresolved" with the defect if repair cannot
 complete; do not describe that email as ready to launch.
-Screenshots show the current coediting state with export settings, including unsaved changes; the
-fresh model read is the durable check. `PARTIAL` or unavailable previews mean "saved, visual
-verification incomplete" when the model checks pass.
+Follow `PROVIDER.md` for preview freshness semantics and presentation links. A matching manifest
+hash supports verification but does not replace inspecting visible changes. A preview may show
+coediting state; use the fresh model and the provider's durable checks to assess persistence.
 
 Do not rerun the change module for verification. Report full success only when persistence, model
 checks, and the required visual checks pass. If PNG generation, download, or inspection is unavailable or

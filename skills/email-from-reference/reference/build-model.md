@@ -1,21 +1,15 @@
-# Build the native model
-
-Validation runs the editor's own Document State rules bundled into the SDK. No schema download
-or initialization is required. `packages/convo-email-agent/editor-validator/manifest.json` records
-the editor revision.
-New documents validate without a baseline; rebuilding an existing message uses `--baseline`
-to preserve the acquired document's context. The service also validates its deployed revision
-and applies the write to its live state; local success does not establish persistence.
+# Brief and build
 
 ### 3. BRIEF
 
-Write a version 2 creation brief conforming to [reference/creation-brief.schema.json](creation-brief.schema.json). Start from [examples/prompt-only.creation.json](../examples/prompt-only.creation.json) when useful.
+Write a version 2 creation brief conforming to [creation-brief.schema.json](creation-brief.schema.json). Start from [the example brief](../examples/prompt-only.creation.json) when useful.
 Translate the supplied or agent-authored text reference into the complete native model; the
-example's placeholder copy, assets, and destinations are not verified campaign facts.
+example's placeholder copy, assets, and destinations are not verified campaign facts. Its
+`message` is a valid instance of the installed provider's metadata; replace those values too.
 
 The brief contains:
 
-- `message`: `{ "name", "projectId"?, "folderId"?, "referenceMode"? }`; pass only name and destination fields to `create_email`. There is no sending subject, sender, sending interface, or font gate;
+- `message`: provider creation metadata as defined in `PROVIDER.md`, plus local `referenceMode`;
 - `model`: a draft using the native editor schema's field names and nesting.
 
 The brief schema describes the wrapper and message metadata. The bundled editor schema
@@ -76,7 +70,7 @@ and `createStripe` for programmatic creation; layout widths are positive weights
 Menu and social arrays use explicit collection methods. Timer/video changes that require an
 unavailable preview fail rather than fabricate assets. Preserve supplied native values and
 resources. For a rebuild, use the acquired target as `baselineEmailJson`, or use
-`createDocument({current})`; deleting content must still respect nested timer restrictions.
+`createDocument({current})`.
 Creation and editing use the same current/target preparation and loss
 guards. The successful result is the normalized validated JSON; failed preparation removes
 stale output. An optional encoded-model preflight is stronger local evidence, while a server
@@ -84,26 +78,29 @@ set followed by get is required to confirm persistence.
 
 The builder's defaults are fixed values, not the live document's values. The candidate and base
 are complete models; persistence applies their differences to the live state for a rebuild,
-while creation replaces the new shell. Settings are canonical and complete:
-every key of `general`, `stripes`, `headings`, and `buttons`, including both theme branches, is
-required, so a missing settings key such as `general.hideImageDownloadIcons` fails validation
-instead of being reset. Unset optional values are `null`: background images, custom list styles,
+while creation replaces the new shell. Settings are canonical and complete: the built model
+has every key of `general`, `stripes`, `headings`, and `buttons`, including both theme branches.
+The builder fills a key the brief omits, such as `general.hideImageDownloadIcons`, with its
+schema default instead of failing, also with `--baseline`; it never copies the target's value.
+Unset optional values are `null`: background images, custom list styles,
 paragraph bottom space, heading font weight, and every dark-theme color. For an explicit full rebuild,
-use the acquired target as the validation baseline and provide complete intended settings
-following the selected reference and user instructions. Preserve unrequested metadata. Never persist a
-partial document; `email-model-editor` describes resets under Model completeness.
-Put requested document title and preheader values in `model.metadata`, for example:
+use the acquired target as the validation baseline and set the brief's `settings` from the
+requested source design and user instructions; do not copy the target's visual settings merely to
+make a rebuild complete. Preserve unrequested metadata. Never persist a
+partial document; `email-model-editor` describes resets under
+[Model completeness](../../email-model-editor/reference/mutate-and-validate.md#model-completeness).
+Put requested or copied document title and preheader values in `model.metadata`, for example:
 
 ```json
 {"title":"Spring collection","preheader":{"text":"Discover what's new this season","fillSpace":true}}
 ```
 
-The draft builder preserves these native fields. [Native metadata](../../email-model-editor/reference/stripo-creation.md) defines their meaning, limits, and
-clearing semantics. The builder rejects new or changed text above 500 UTF-16 code units before
-producing a candidate. Keep unrequested metadata from the reference or rebuild target. If only the
-preheader text changes, preserve its `fillSpace`, using `false` when no preheader exists. Both
-preheader fields are required. The brief's `message` object contains creation destination
-metadata and local reference policy; do not put title or preheader there. Use `email-model-editor` for a bounded metadata edit.
+Both preheader fields are required. For text-only changes preserve `fillSpace`, using `false`
+when no preheader exists. Clear with `{text: "", fillSpace: false}` instead of deleting keys.
+Preserve unrequested metadata. New or changed text is limited to 500 UTF-16 code units;
+unchanged longer text needs the acquired target as the validation baseline. Document title is
+not the sending subject. Keep `message.preheader` and `message.preHeader` absent. `PROVIDER.md`
+defines external metadata support. Use `email-model-editor` for bounded metadata edits.
 
 Prefer semantic text, image, button, spacer, and social blocks for newly drafted content. Preserve other
 schema-valid native blocks from the reference; do not replace editable content with newly authored
@@ -130,13 +127,30 @@ content edits preserve their acquired bindings. If retaining a saved-library ide
 explicit requirement, this creation path is unsupported; report it instead of using detached
 content to claim library reuse. An unresolved module must be acquired completely before copying.
 
+### Native fonts
+
+Preserve typography from the authorized reference. Put custom-font definitions in
+`model.resources.fonts` and select their font-family stacks in native body, heading, button,
+and block settings. Each definition has `fontFamily` plus one of:
+
+- `importMethod: "link"` or `"import"`, with the hosted stylesheet `url`;
+- `importMethod: "fontFace"`, with ready-to-inline `css` and an optional source `url`.
+
+Set each resource's `fontFamily` to the complete stack assigned in settings, including
+fallbacks: for `Inter, Arial, sans-serif`, use `inter,arial,sans-serif`. The editor matches the
+canonical stack when connecting resources. In `fontFace` CSS, the `@font-face` family remains
+the primary name, such as `Inter`.
+
+Use the native schema to validate the definitions. Keep existing font resources needed by the
+model, including during rebuilds. Fonts and fallback stacks remain as requested. No separate
+shell-font plan is needed: font resources travel in the same document upload as the content.
+
 ### 4. BUILD
 
 Run the fixed TypeScript-generated builder:
 
 ```bash
 node <skill-dir>/scripts/create-from-brief.mjs \
-  --brand stripo \
   --brief <creation-brief.json> \
   --output <new-model.json> \
   --diagnostics <diagnostics.json>

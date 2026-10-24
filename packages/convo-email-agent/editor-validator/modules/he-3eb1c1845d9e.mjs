@@ -81,6 +81,8 @@ var error = () => {
     json_string: { label: "\u05DE\u05D7\u05E8\u05D5\u05D6\u05EA JSON", gender: "f" },
     e164: { label: "\u05DE\u05E1\u05E4\u05E8 E.164", gender: "m" },
     credit_card: { label: "\u05DE\u05E1\u05E4\u05E8 \u05DB\u05E8\u05D8\u05D9\u05E1 \u05D0\u05E9\u05E8\u05D0\u05D9", gender: "m" },
+    currency_code: { label: "\u05E7\u05D5\u05D3 \u05DE\u05D8\u05D1\u05E2", gender: "m" },
+    iban: { label: "IBAN", gender: "m" },
     jwt: { label: "JWT", gender: "m" },
     template_literal: { label: "\u05E7\u05DC\u05D8", gender: "m" },
     ends_with: { label: "\u05E7\u05DC\u05D8", gender: "m" },
