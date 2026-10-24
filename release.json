@@ -215,10 +215,10 @@
     "skills/email-model-editor/scripts/run-sdk.mjs"
   ],
   "files": {
-    ".agents/plugins/marketplace.json": "762cb81784d6bbad3d661811545383f7fccb808cf824bc4472f9b11fec9bc744",
-    ".claude-plugin/marketplace.json": "d292f89956cdf950c31f3b8cee4de682173384c89534abf5f16507000bda29a6",
-    ".claude-plugin/plugin.json": "9995ecb94a0a37bc19a25a2fb1b93e3e6d04ec31077222825fc536b354512a4e",
-    ".codex-plugin/plugin.json": "e57eb36f400616acdf524cc2cfd070f204d02571f199f34eecde22eb9212abdc",
+    ".agents/plugins/marketplace.json": "ded376a3197def5108fd9640acc45f6de037a6db0c38199de7f472336b25fabd",
+    ".claude-plugin/marketplace.json": "84fee66ac412b9741695363a99a5ecd945111c880cdb3dba4e46200075a9240d",
+    ".claude-plugin/plugin.json": "16567c1b91124d5023d6f399f5c24b3173024be5e57e84118d845335859fd054",
+    ".codex-plugin/plugin.json": "72e9d129c76409577417addd9f747d62de7ab136e5135405cdf3ea810e20c688",
     "LICENSE": "81d2760fbd1543712315f5f20edfc5bbf1dadd6b16095fb3f75d095156b88ed8",
     "README.md": "62783527da720ef0540b18ef705e7985f7bc311861daf763dc82bb4bb0a87a45",
     "assets/stripo.svg": "97f696106c8f68734a9b48f5bf5926bb6838a71b31f8c60e2dd85c3fe1b9e757",
@@ -415,7 +415,7 @@
     "packages/convo-email-agent/social-f4a8e0da8c68.js": "789b67f6a7e9400b1332a6816c4e0bf056a7ced3787170f73e09d390519e0595",
     "packages/convo-email-agent/stripo/mcp-tools.d.ts": "59e1ae95909ae4f98e3fcda0dc6446dba6744a439e058953b474908fd939ddb5",
     "packages/convo-email-agent/styles-961c8e1b984f.js": "b6b5264e07b892390cf8f897f18652d6e50b014d36ee37e6fc18f35b34be6472",
-    "plugin.json": "9bc43711ac6a80b6ce739d3c0fbe8c14df250fab686aef32b541bd76ffc7c9ec",
+    "plugin.json": "0e8176f450f5508cc5442155eb0ed31eda168c40401b4a8374f4532e8bfa3d85",
     "scripts/doctor.mjs": "d3331330c1c82a8c6d742443e3dcb4e419f73cfb7c62add044d77a5a8a622986",
     "scripts/transfer.mjs": "675b1e003cb82ad3836d832801b9b35b0a5bec7c8560eec163cc15a727a44408",
     "skills/business-profile/SKILL.md": "1dec90adb6dfecc9bc5f2c68df7f8180d9b63c0542a879e5ba8ad43e8e2949d6",

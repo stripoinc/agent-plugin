@@ -1,7 +1,7 @@
 {
   "name": "stripo",
   "version": "0.12.0",
-  "description": "Stripo email creation, editing, localization, images, Business Profile updates",
+  "description": "Create and edit Stripo emails, generate and edit images, and read or update Business Profiles.",
   "author": {
     "name": "Stripo",
     "email": "support@stripo.email"
@@ -19,16 +19,16 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "Stripo",
-    "shortDescription": "Stripo's AI agent. Create and edit Stripo emails",
-    "longDescription": "Create emails from a brief, template, HTML or screenshot. Generate and edit images, update text, links and styles in existing emails and templates, and review desktop and mobile previews.",
-    "category": "Marketing",
+    "shortDescription": "Create and edit Stripo emails",
+    "longDescription": "Create editable Stripo emails from a brief, website, email, template, HTML, screenshot or supplied images. Edit existing emails and templates, generate and edit images, and verify saved desktop and mobile previews. Read, audit or update Business Profiles from supplied information or selected Stripo emails.",
+    "category": "Business & Operations",
     "capabilities": [
       "Read",
       "Write"
     ],
     "defaultPrompt": [
       "Create a Stripo email from my reference and verify its saved desktop and mobile previews.",
-      "Translate and clone a Stripo email while preserving every language.",
+      "Update the copy, links or images in this Stripo email and verify its saved previews.",
       "Update my Stripo Business Profile from the information I provide."
     ],
     "logo": "./assets/stripo.svg",

@@ -2,7 +2,7 @@
   "name": "stripo",
   "displayName": "Stripo",
   "version": "0.12.0",
-  "description": "Stripo email creation, editing, localization, images, Business Profile updates",
+  "description": "Create and edit Stripo emails, generate and edit images, and read or update Business Profiles.",
   "author": {
     "name": "Stripo",
     "email": "support@stripo.email"

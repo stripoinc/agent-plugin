@@ -2,10 +2,10 @@
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "stripo",
   "version": "0.12.0",
-  "description": "Create and edit emails and templates with Stripo.",
+  "description": "Create and edit Stripo emails, generate and edit images, and read or update Business Profiles.",
   "author": {
     "name": "Stripo",
-    "url": "https://stripo.email"
+    "email": "support@stripo.email"
   },
   "homepage": "https://stripo.email",
   "repository": "https://github.com/stripoinc/agent-plugin",
@@ -14,22 +14,24 @@
     "stripo",
     "email",
     "email-template",
-    "mcp"
+    "mcp",
+    "marketing"
   ],
   "extensions": {
     "com.openai": {
       "interface": {
         "displayName": "Stripo",
         "shortDescription": "Create and edit Stripo emails",
-        "longDescription": "Create emails from a brief, template, HTML or screenshot. Generate and edit images, update text, links and styles in existing emails and templates, and review desktop and mobile previews.",
-        "category": "Productivity",
+        "longDescription": "Create editable Stripo emails from a brief, website, email, template, HTML, screenshot or supplied images. Edit existing emails and templates, generate and edit images, and verify saved desktop and mobile previews. Read, audit or update Business Profiles from supplied information or selected Stripo emails.",
+        "category": "Business & Operations",
         "capabilities": [
           "Read",
           "Write"
         ],
         "defaultPrompt": [
-          "Create a new Stripo email from this description",
-          "Change the copy, links or images in an existing Stripo email"
+          "Create a Stripo email from my reference and verify its saved desktop and mobile previews.",
+          "Update the copy, links or images in this Stripo email and verify its saved previews.",
+          "Update my Stripo Business Profile from the information I provide."
         ],
         "logo": "./assets/stripo.svg",
         "composerIcon": "./assets/stripo.svg",
