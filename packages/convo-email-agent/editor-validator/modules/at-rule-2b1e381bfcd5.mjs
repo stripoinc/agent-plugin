@@ -12,7 +12,7 @@ import {
 
 // editor/ui-editor-ui/node_modules/postcss/lib/at-rule.js
 var require_at_rule = __commonJS({
-  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-ui/node_modules/postcss/lib/at-rule.js"(exports, module) {
+  "editor/ui-editor-ui/node_modules/postcss/lib/at-rule.js"(exports, module) {
     "use strict";
     var Container = require_container();
     var AtRule = class extends Container {
@@ -37,7 +37,7 @@ var require_at_rule = __commonJS({
 
 // editor/ui-editor-ui/node_modules/postcss/lib/root.js
 var require_root = __commonJS({
-  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-ui/node_modules/postcss/lib/root.js"(exports, module) {
+  "editor/ui-editor-ui/node_modules/postcss/lib/root.js"(exports, module) {
     "use strict";
     var Container = require_container();
     var LazyResult;
@@ -99,7 +99,7 @@ var require_root = __commonJS({
 
 // editor/ui-editor-ui/node_modules/postcss/lib/list.js
 var require_list = __commonJS({
-  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-ui/node_modules/postcss/lib/list.js"(exports, module) {
+  "editor/ui-editor-ui/node_modules/postcss/lib/list.js"(exports, module) {
     "use strict";
     var list = {
       comma(string) {
@@ -174,7 +174,7 @@ var require_list = __commonJS({
 
 // editor/ui-editor-ui/node_modules/postcss/lib/rule.js
 var require_rule = __commonJS({
-  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-ui/node_modules/postcss/lib/rule.js"(exports, module) {
+  "editor/ui-editor-ui/node_modules/postcss/lib/rule.js"(exports, module) {
     "use strict";
     var Container = require_container();
     var list = require_list();
@@ -201,7 +201,7 @@ var require_rule = __commonJS({
 
 // editor/ui-editor-ui/node_modules/postcss/lib/parser.js
 var require_parser = __commonJS({
-  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-ui/node_modules/postcss/lib/parser.js"(exports, module) {
+  "editor/ui-editor-ui/node_modules/postcss/lib/parser.js"(exports, module) {
     var AtRule = require_at_rule();
     var Comment = require_comment();
     var Declaration = require_declaration();

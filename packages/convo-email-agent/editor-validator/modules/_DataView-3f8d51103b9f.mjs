@@ -32,7 +32,7 @@ import {
 
 // editor/ui-editor-common/node_modules/lodash/_stackClear.js
 var require_stackClear = __commonJS({
-  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-common/node_modules/lodash/_stackClear.js"(exports, module) {
+  "editor/ui-editor-common/node_modules/lodash/_stackClear.js"(exports, module) {
     "use strict";
     var ListCache = require_ListCache();
     function stackClear() {
@@ -45,7 +45,7 @@ var require_stackClear = __commonJS({
 
 // editor/ui-editor-common/node_modules/lodash/_stackDelete.js
 var require_stackDelete = __commonJS({
-  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-common/node_modules/lodash/_stackDelete.js"(exports, module) {
+  "editor/ui-editor-common/node_modules/lodash/_stackDelete.js"(exports, module) {
     "use strict";
     function stackDelete(key) {
       var data = this.__data__, result = data["delete"](key);
@@ -58,7 +58,7 @@ var require_stackDelete = __commonJS({
 
 // editor/ui-editor-common/node_modules/lodash/_stackGet.js
 var require_stackGet = __commonJS({
-  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-common/node_modules/lodash/_stackGet.js"(exports, module) {
+  "editor/ui-editor-common/node_modules/lodash/_stackGet.js"(exports, module) {
     "use strict";
     function stackGet(key) {
       return this.__data__.get(key);
@@ -69,7 +69,7 @@ var require_stackGet = __commonJS({
 
 // editor/ui-editor-common/node_modules/lodash/_stackHas.js
 var require_stackHas = __commonJS({
-  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-common/node_modules/lodash/_stackHas.js"(exports, module) {
+  "editor/ui-editor-common/node_modules/lodash/_stackHas.js"(exports, module) {
     "use strict";
     function stackHas(key) {
       return this.__data__.has(key);
@@ -80,7 +80,7 @@ var require_stackHas = __commonJS({
 
 // editor/ui-editor-common/node_modules/lodash/_stackSet.js
 var require_stackSet = __commonJS({
-  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-common/node_modules/lodash/_stackSet.js"(exports, module) {
+  "editor/ui-editor-common/node_modules/lodash/_stackSet.js"(exports, module) {
     "use strict";
     var ListCache = require_ListCache();
     var Map = require_Map();
@@ -107,7 +107,7 @@ var require_stackSet = __commonJS({
 
 // editor/ui-editor-common/node_modules/lodash/_Stack.js
 var require_Stack = __commonJS({
-  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-common/node_modules/lodash/_Stack.js"(exports, module) {
+  "editor/ui-editor-common/node_modules/lodash/_Stack.js"(exports, module) {
     "use strict";
     var ListCache = require_ListCache();
     var stackClear = require_stackClear();
@@ -130,7 +130,7 @@ var require_Stack = __commonJS({
 
 // editor/ui-editor-common/node_modules/lodash/_setCacheAdd.js
 var require_setCacheAdd = __commonJS({
-  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-common/node_modules/lodash/_setCacheAdd.js"(exports, module) {
+  "editor/ui-editor-common/node_modules/lodash/_setCacheAdd.js"(exports, module) {
     "use strict";
     var HASH_UNDEFINED = "__lodash_hash_undefined__";
     function setCacheAdd(value) {
@@ -143,7 +143,7 @@ var require_setCacheAdd = __commonJS({
 
 // editor/ui-editor-common/node_modules/lodash/_setCacheHas.js
 var require_setCacheHas = __commonJS({
-  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-common/node_modules/lodash/_setCacheHas.js"(exports, module) {
+  "editor/ui-editor-common/node_modules/lodash/_setCacheHas.js"(exports, module) {
     "use strict";
     function setCacheHas(value) {
       return this.__data__.has(value);
@@ -154,7 +154,7 @@ var require_setCacheHas = __commonJS({
 
 // editor/ui-editor-common/node_modules/lodash/_SetCache.js
 var require_SetCache = __commonJS({
-  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-common/node_modules/lodash/_SetCache.js"(exports, module) {
+  "editor/ui-editor-common/node_modules/lodash/_SetCache.js"(exports, module) {
     "use strict";
     var MapCache = require_MapCache();
     var setCacheAdd = require_setCacheAdd();
@@ -174,7 +174,7 @@ var require_SetCache = __commonJS({
 
 // editor/ui-editor-common/node_modules/lodash/_arraySome.js
 var require_arraySome = __commonJS({
-  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-common/node_modules/lodash/_arraySome.js"(exports, module) {
+  "editor/ui-editor-common/node_modules/lodash/_arraySome.js"(exports, module) {
     "use strict";
     function arraySome(array, predicate) {
       var index = -1, length = array == null ? 0 : array.length;
@@ -191,7 +191,7 @@ var require_arraySome = __commonJS({
 
 // editor/ui-editor-common/node_modules/lodash/_cacheHas.js
 var require_cacheHas = __commonJS({
-  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-common/node_modules/lodash/_cacheHas.js"(exports, module) {
+  "editor/ui-editor-common/node_modules/lodash/_cacheHas.js"(exports, module) {
     "use strict";
     function cacheHas(cache, key) {
       return cache.has(key);
@@ -202,7 +202,7 @@ var require_cacheHas = __commonJS({
 
 // editor/ui-editor-common/node_modules/lodash/_equalArrays.js
 var require_equalArrays = __commonJS({
-  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-common/node_modules/lodash/_equalArrays.js"(exports, module) {
+  "editor/ui-editor-common/node_modules/lodash/_equalArrays.js"(exports, module) {
     "use strict";
     var SetCache = require_SetCache();
     var arraySome = require_arraySome();
@@ -258,7 +258,7 @@ var require_equalArrays = __commonJS({
 
 // editor/ui-editor-common/node_modules/lodash/_Uint8Array.js
 var require_Uint8Array = __commonJS({
-  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-common/node_modules/lodash/_Uint8Array.js"(exports, module) {
+  "editor/ui-editor-common/node_modules/lodash/_Uint8Array.js"(exports, module) {
     "use strict";
     var root = require_root();
     var Uint8Array = root.Uint8Array;
@@ -268,7 +268,7 @@ var require_Uint8Array = __commonJS({
 
 // editor/ui-editor-common/node_modules/lodash/_mapToArray.js
 var require_mapToArray = __commonJS({
-  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-common/node_modules/lodash/_mapToArray.js"(exports, module) {
+  "editor/ui-editor-common/node_modules/lodash/_mapToArray.js"(exports, module) {
     "use strict";
     function mapToArray(map) {
       var index = -1, result = Array(map.size);
@@ -283,7 +283,7 @@ var require_mapToArray = __commonJS({
 
 // editor/ui-editor-common/node_modules/lodash/_setToArray.js
 var require_setToArray = __commonJS({
-  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-common/node_modules/lodash/_setToArray.js"(exports, module) {
+  "editor/ui-editor-common/node_modules/lodash/_setToArray.js"(exports, module) {
     "use strict";
     function setToArray(set) {
       var index = -1, result = Array(set.size);
@@ -298,7 +298,7 @@ var require_setToArray = __commonJS({
 
 // editor/ui-editor-common/node_modules/lodash/_equalByTag.js
 var require_equalByTag = __commonJS({
-  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-common/node_modules/lodash/_equalByTag.js"(exports, module) {
+  "editor/ui-editor-common/node_modules/lodash/_equalByTag.js"(exports, module) {
     "use strict";
     var Symbol = require_Symbol();
     var Uint8Array = require_Uint8Array();
@@ -373,7 +373,7 @@ var require_equalByTag = __commonJS({
 
 // editor/ui-editor-common/node_modules/lodash/_arrayPush.js
 var require_arrayPush = __commonJS({
-  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-common/node_modules/lodash/_arrayPush.js"(exports, module) {
+  "editor/ui-editor-common/node_modules/lodash/_arrayPush.js"(exports, module) {
     "use strict";
     function arrayPush(array, values) {
       var index = -1, length = values.length, offset = array.length;
@@ -388,7 +388,7 @@ var require_arrayPush = __commonJS({
 
 // editor/ui-editor-common/node_modules/lodash/_baseGetAllKeys.js
 var require_baseGetAllKeys = __commonJS({
-  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-common/node_modules/lodash/_baseGetAllKeys.js"(exports, module) {
+  "editor/ui-editor-common/node_modules/lodash/_baseGetAllKeys.js"(exports, module) {
     "use strict";
     var arrayPush = require_arrayPush();
     var isArray = require_isArray();
@@ -402,7 +402,7 @@ var require_baseGetAllKeys = __commonJS({
 
 // editor/ui-editor-common/node_modules/lodash/_arrayFilter.js
 var require_arrayFilter = __commonJS({
-  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-common/node_modules/lodash/_arrayFilter.js"(exports, module) {
+  "editor/ui-editor-common/node_modules/lodash/_arrayFilter.js"(exports, module) {
     "use strict";
     function arrayFilter(array, predicate) {
       var index = -1, length = array == null ? 0 : array.length, resIndex = 0, result = [];
@@ -420,7 +420,7 @@ var require_arrayFilter = __commonJS({
 
 // editor/ui-editor-common/node_modules/lodash/stubArray.js
 var require_stubArray = __commonJS({
-  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-common/node_modules/lodash/stubArray.js"(exports, module) {
+  "editor/ui-editor-common/node_modules/lodash/stubArray.js"(exports, module) {
     "use strict";
     function stubArray() {
       return [];
@@ -431,7 +431,7 @@ var require_stubArray = __commonJS({
 
 // editor/ui-editor-common/node_modules/lodash/_getSymbols.js
 var require_getSymbols = __commonJS({
-  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-common/node_modules/lodash/_getSymbols.js"(exports, module) {
+  "editor/ui-editor-common/node_modules/lodash/_getSymbols.js"(exports, module) {
     "use strict";
     var arrayFilter = require_arrayFilter();
     var stubArray = require_stubArray();
@@ -453,7 +453,7 @@ var require_getSymbols = __commonJS({
 
 // editor/ui-editor-common/node_modules/lodash/_baseTimes.js
 var require_baseTimes = __commonJS({
-  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-common/node_modules/lodash/_baseTimes.js"(exports, module) {
+  "editor/ui-editor-common/node_modules/lodash/_baseTimes.js"(exports, module) {
     "use strict";
     function baseTimes(n, iteratee) {
       var index = -1, result = Array(n);
@@ -468,7 +468,7 @@ var require_baseTimes = __commonJS({
 
 // editor/ui-editor-common/node_modules/lodash/_baseIsArguments.js
 var require_baseIsArguments = __commonJS({
-  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-common/node_modules/lodash/_baseIsArguments.js"(exports, module) {
+  "editor/ui-editor-common/node_modules/lodash/_baseIsArguments.js"(exports, module) {
     "use strict";
     var baseGetTag = require_baseGetTag();
     var isObjectLike = require_isObjectLike();
@@ -482,7 +482,7 @@ var require_baseIsArguments = __commonJS({
 
 // editor/ui-editor-common/node_modules/lodash/isArguments.js
 var require_isArguments = __commonJS({
-  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-common/node_modules/lodash/isArguments.js"(exports, module) {
+  "editor/ui-editor-common/node_modules/lodash/isArguments.js"(exports, module) {
     "use strict";
     var baseIsArguments = require_baseIsArguments();
     var isObjectLike = require_isObjectLike();
@@ -500,7 +500,7 @@ var require_isArguments = __commonJS({
 
 // editor/ui-editor-common/node_modules/lodash/stubFalse.js
 var require_stubFalse = __commonJS({
-  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-common/node_modules/lodash/stubFalse.js"(exports, module) {
+  "editor/ui-editor-common/node_modules/lodash/stubFalse.js"(exports, module) {
     "use strict";
     function stubFalse() {
       return false;
@@ -511,7 +511,7 @@ var require_stubFalse = __commonJS({
 
 // editor/ui-editor-common/node_modules/lodash/isBuffer.js
 var require_isBuffer = __commonJS({
-  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-common/node_modules/lodash/isBuffer.js"(exports, module) {
+  "editor/ui-editor-common/node_modules/lodash/isBuffer.js"(exports, module) {
     "use strict";
     var root = require_root();
     var stubFalse = require_stubFalse();
@@ -527,7 +527,7 @@ var require_isBuffer = __commonJS({
 
 // editor/ui-editor-common/node_modules/lodash/isLength.js
 var require_isLength = __commonJS({
-  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-common/node_modules/lodash/isLength.js"(exports, module) {
+  "editor/ui-editor-common/node_modules/lodash/isLength.js"(exports, module) {
     "use strict";
     var MAX_SAFE_INTEGER = 9007199254740991;
     function isLength(value) {
@@ -539,7 +539,7 @@ var require_isLength = __commonJS({
 
 // editor/ui-editor-common/node_modules/lodash/_baseIsTypedArray.js
 var require_baseIsTypedArray = __commonJS({
-  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-common/node_modules/lodash/_baseIsTypedArray.js"(exports, module) {
+  "editor/ui-editor-common/node_modules/lodash/_baseIsTypedArray.js"(exports, module) {
     "use strict";
     var baseGetTag = require_baseGetTag();
     var isLength = require_isLength();
@@ -580,7 +580,7 @@ var require_baseIsTypedArray = __commonJS({
 
 // editor/ui-editor-common/node_modules/lodash/_baseUnary.js
 var require_baseUnary = __commonJS({
-  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-common/node_modules/lodash/_baseUnary.js"(exports, module) {
+  "editor/ui-editor-common/node_modules/lodash/_baseUnary.js"(exports, module) {
     "use strict";
     function baseUnary(func) {
       return function(value) {
@@ -593,7 +593,7 @@ var require_baseUnary = __commonJS({
 
 // editor/ui-editor-common/node_modules/lodash/_nodeUtil.js
 var require_nodeUtil = __commonJS({
-  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-common/node_modules/lodash/_nodeUtil.js"(exports, module) {
+  "editor/ui-editor-common/node_modules/lodash/_nodeUtil.js"(exports, module) {
     "use strict";
     var freeGlobal = require_freeGlobal();
     var freeExports = typeof exports == "object" && exports && !exports.nodeType && exports;
@@ -616,7 +616,7 @@ var require_nodeUtil = __commonJS({
 
 // editor/ui-editor-common/node_modules/lodash/isTypedArray.js
 var require_isTypedArray = __commonJS({
-  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-common/node_modules/lodash/isTypedArray.js"(exports, module) {
+  "editor/ui-editor-common/node_modules/lodash/isTypedArray.js"(exports, module) {
     "use strict";
     var baseIsTypedArray = require_baseIsTypedArray();
     var baseUnary = require_baseUnary();
@@ -629,7 +629,7 @@ var require_isTypedArray = __commonJS({
 
 // editor/ui-editor-common/node_modules/lodash/_arrayLikeKeys.js
 var require_arrayLikeKeys = __commonJS({
-  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-common/node_modules/lodash/_arrayLikeKeys.js"(exports, module) {
+  "editor/ui-editor-common/node_modules/lodash/_arrayLikeKeys.js"(exports, module) {
     "use strict";
     var baseTimes = require_baseTimes();
     var isArguments = require_isArguments();
@@ -658,7 +658,7 @@ var require_arrayLikeKeys = __commonJS({
 
 // editor/ui-editor-common/node_modules/lodash/_isPrototype.js
 var require_isPrototype = __commonJS({
-  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-common/node_modules/lodash/_isPrototype.js"(exports, module) {
+  "editor/ui-editor-common/node_modules/lodash/_isPrototype.js"(exports, module) {
     "use strict";
     var objectProto = Object.prototype;
     function isPrototype(value) {
@@ -671,7 +671,7 @@ var require_isPrototype = __commonJS({
 
 // editor/ui-editor-common/node_modules/lodash/_overArg.js
 var require_overArg = __commonJS({
-  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-common/node_modules/lodash/_overArg.js"(exports, module) {
+  "editor/ui-editor-common/node_modules/lodash/_overArg.js"(exports, module) {
     "use strict";
     function overArg(func, transform) {
       return function(arg) {
@@ -684,7 +684,7 @@ var require_overArg = __commonJS({
 
 // editor/ui-editor-common/node_modules/lodash/_nativeKeys.js
 var require_nativeKeys = __commonJS({
-  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-common/node_modules/lodash/_nativeKeys.js"(exports, module) {
+  "editor/ui-editor-common/node_modules/lodash/_nativeKeys.js"(exports, module) {
     "use strict";
     var overArg = require_overArg();
     var nativeKeys = overArg(Object.keys, Object);
@@ -694,7 +694,7 @@ var require_nativeKeys = __commonJS({
 
 // editor/ui-editor-common/node_modules/lodash/_baseKeys.js
 var require_baseKeys = __commonJS({
-  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-common/node_modules/lodash/_baseKeys.js"(exports, module) {
+  "editor/ui-editor-common/node_modules/lodash/_baseKeys.js"(exports, module) {
     "use strict";
     var isPrototype = require_isPrototype();
     var nativeKeys = require_nativeKeys();
@@ -718,7 +718,7 @@ var require_baseKeys = __commonJS({
 
 // editor/ui-editor-common/node_modules/lodash/isArrayLike.js
 var require_isArrayLike = __commonJS({
-  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-common/node_modules/lodash/isArrayLike.js"(exports, module) {
+  "editor/ui-editor-common/node_modules/lodash/isArrayLike.js"(exports, module) {
     "use strict";
     var isFunction = require_isFunction();
     var isLength = require_isLength();
@@ -731,7 +731,7 @@ var require_isArrayLike = __commonJS({
 
 // editor/ui-editor-common/node_modules/lodash/keys.js
 var require_keys = __commonJS({
-  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-common/node_modules/lodash/keys.js"(exports, module) {
+  "editor/ui-editor-common/node_modules/lodash/keys.js"(exports, module) {
     "use strict";
     var arrayLikeKeys = require_arrayLikeKeys();
     var baseKeys = require_baseKeys();
@@ -745,7 +745,7 @@ var require_keys = __commonJS({
 
 // editor/ui-editor-common/node_modules/lodash/_getAllKeys.js
 var require_getAllKeys = __commonJS({
-  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-common/node_modules/lodash/_getAllKeys.js"(exports, module) {
+  "editor/ui-editor-common/node_modules/lodash/_getAllKeys.js"(exports, module) {
     "use strict";
     var baseGetAllKeys = require_baseGetAllKeys();
     var getSymbols = require_getSymbols();
@@ -759,7 +759,7 @@ var require_getAllKeys = __commonJS({
 
 // editor/ui-editor-common/node_modules/lodash/_equalObjects.js
 var require_equalObjects = __commonJS({
-  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-common/node_modules/lodash/_equalObjects.js"(exports, module) {
+  "editor/ui-editor-common/node_modules/lodash/_equalObjects.js"(exports, module) {
     "use strict";
     var getAllKeys = require_getAllKeys();
     var COMPARE_PARTIAL_FLAG = 1;
@@ -814,7 +814,7 @@ var require_equalObjects = __commonJS({
 
 // editor/ui-editor-common/node_modules/lodash/_DataView.js
 var require_DataView = __commonJS({
-  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-common/node_modules/lodash/_DataView.js"(exports, module) {
+  "editor/ui-editor-common/node_modules/lodash/_DataView.js"(exports, module) {
     "use strict";
     var getNative = require_getNative();
     var root = require_root();
@@ -825,7 +825,7 @@ var require_DataView = __commonJS({
 
 // editor/ui-editor-common/node_modules/lodash/_Promise.js
 var require_Promise = __commonJS({
-  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-common/node_modules/lodash/_Promise.js"(exports, module) {
+  "editor/ui-editor-common/node_modules/lodash/_Promise.js"(exports, module) {
     "use strict";
     var getNative = require_getNative();
     var root = require_root();
@@ -836,7 +836,7 @@ var require_Promise = __commonJS({
 
 // editor/ui-editor-common/node_modules/lodash/_Set.js
 var require_Set = __commonJS({
-  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-common/node_modules/lodash/_Set.js"(exports, module) {
+  "editor/ui-editor-common/node_modules/lodash/_Set.js"(exports, module) {
     "use strict";
     var getNative = require_getNative();
     var root = require_root();
@@ -847,7 +847,7 @@ var require_Set = __commonJS({
 
 // editor/ui-editor-common/node_modules/lodash/_WeakMap.js
 var require_WeakMap = __commonJS({
-  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-common/node_modules/lodash/_WeakMap.js"(exports, module) {
+  "editor/ui-editor-common/node_modules/lodash/_WeakMap.js"(exports, module) {
     "use strict";
     var getNative = require_getNative();
     var root = require_root();
@@ -858,7 +858,7 @@ var require_WeakMap = __commonJS({
 
 // editor/ui-editor-common/node_modules/lodash/_getTag.js
 var require_getTag = __commonJS({
-  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-common/node_modules/lodash/_getTag.js"(exports, module) {
+  "editor/ui-editor-common/node_modules/lodash/_getTag.js"(exports, module) {
     "use strict";
     var DataView = require_DataView();
     var Map = require_Map();
@@ -905,7 +905,7 @@ var require_getTag = __commonJS({
 
 // editor/ui-editor-common/node_modules/lodash/_baseIsEqualDeep.js
 var require_baseIsEqualDeep = __commonJS({
-  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-common/node_modules/lodash/_baseIsEqualDeep.js"(exports, module) {
+  "editor/ui-editor-common/node_modules/lodash/_baseIsEqualDeep.js"(exports, module) {
     "use strict";
     var Stack = require_Stack();
     var equalArrays = require_equalArrays();
@@ -957,7 +957,7 @@ var require_baseIsEqualDeep = __commonJS({
 
 // editor/ui-editor-common/node_modules/lodash/_baseIsEqual.js
 var require_baseIsEqual = __commonJS({
-  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-common/node_modules/lodash/_baseIsEqual.js"(exports, module) {
+  "editor/ui-editor-common/node_modules/lodash/_baseIsEqual.js"(exports, module) {
     "use strict";
     var baseIsEqualDeep = require_baseIsEqualDeep();
     var isObjectLike = require_isObjectLike();
@@ -976,7 +976,7 @@ var require_baseIsEqual = __commonJS({
 
 // editor/ui-editor-common/node_modules/lodash/_baseIsMatch.js
 var require_baseIsMatch = __commonJS({
-  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-common/node_modules/lodash/_baseIsMatch.js"(exports, module) {
+  "editor/ui-editor-common/node_modules/lodash/_baseIsMatch.js"(exports, module) {
     "use strict";
     var Stack = require_Stack();
     var baseIsEqual = require_baseIsEqual();
@@ -1019,7 +1019,7 @@ var require_baseIsMatch = __commonJS({
 
 // editor/ui-editor-common/node_modules/lodash/_isStrictComparable.js
 var require_isStrictComparable = __commonJS({
-  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-common/node_modules/lodash/_isStrictComparable.js"(exports, module) {
+  "editor/ui-editor-common/node_modules/lodash/_isStrictComparable.js"(exports, module) {
     "use strict";
     var isObject = require_isObject();
     function isStrictComparable(value) {
@@ -1031,7 +1031,7 @@ var require_isStrictComparable = __commonJS({
 
 // editor/ui-editor-common/node_modules/lodash/_getMatchData.js
 var require_getMatchData = __commonJS({
-  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-common/node_modules/lodash/_getMatchData.js"(exports, module) {
+  "editor/ui-editor-common/node_modules/lodash/_getMatchData.js"(exports, module) {
     "use strict";
     var isStrictComparable = require_isStrictComparable();
     var keys = require_keys();
@@ -1049,7 +1049,7 @@ var require_getMatchData = __commonJS({
 
 // editor/ui-editor-common/node_modules/lodash/_matchesStrictComparable.js
 var require_matchesStrictComparable = __commonJS({
-  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-common/node_modules/lodash/_matchesStrictComparable.js"(exports, module) {
+  "editor/ui-editor-common/node_modules/lodash/_matchesStrictComparable.js"(exports, module) {
     "use strict";
     function matchesStrictComparable(key, srcValue) {
       return function(object) {
@@ -1065,7 +1065,7 @@ var require_matchesStrictComparable = __commonJS({
 
 // editor/ui-editor-common/node_modules/lodash/_baseMatches.js
 var require_baseMatches = __commonJS({
-  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-common/node_modules/lodash/_baseMatches.js"(exports, module) {
+  "editor/ui-editor-common/node_modules/lodash/_baseMatches.js"(exports, module) {
     "use strict";
     var baseIsMatch = require_baseIsMatch();
     var getMatchData = require_getMatchData();
@@ -1085,7 +1085,7 @@ var require_baseMatches = __commonJS({
 
 // editor/ui-editor-common/node_modules/lodash/get.js
 var require_get = __commonJS({
-  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-common/node_modules/lodash/get.js"(exports, module) {
+  "editor/ui-editor-common/node_modules/lodash/get.js"(exports, module) {
     "use strict";
     var baseGet = require_baseGet();
     function get(object, path, defaultValue) {
@@ -1098,7 +1098,7 @@ var require_get = __commonJS({
 
 // editor/ui-editor-common/node_modules/lodash/_baseHasIn.js
 var require_baseHasIn = __commonJS({
-  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-common/node_modules/lodash/_baseHasIn.js"(exports, module) {
+  "editor/ui-editor-common/node_modules/lodash/_baseHasIn.js"(exports, module) {
     "use strict";
     function baseHasIn(object, key) {
       return object != null && key in Object(object);
@@ -1109,7 +1109,7 @@ var require_baseHasIn = __commonJS({
 
 // editor/ui-editor-common/node_modules/lodash/_hasPath.js
 var require_hasPath = __commonJS({
-  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-common/node_modules/lodash/_hasPath.js"(exports, module) {
+  "editor/ui-editor-common/node_modules/lodash/_hasPath.js"(exports, module) {
     "use strict";
     var castPath = require_castPath();
     var isArguments = require_isArguments();
@@ -1139,7 +1139,7 @@ var require_hasPath = __commonJS({
 
 // editor/ui-editor-common/node_modules/lodash/hasIn.js
 var require_hasIn = __commonJS({
-  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-common/node_modules/lodash/hasIn.js"(exports, module) {
+  "editor/ui-editor-common/node_modules/lodash/hasIn.js"(exports, module) {
     "use strict";
     var baseHasIn = require_baseHasIn();
     var hasPath = require_hasPath();
@@ -1152,7 +1152,7 @@ var require_hasIn = __commonJS({
 
 // editor/ui-editor-common/node_modules/lodash/_baseMatchesProperty.js
 var require_baseMatchesProperty = __commonJS({
-  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-common/node_modules/lodash/_baseMatchesProperty.js"(exports, module) {
+  "editor/ui-editor-common/node_modules/lodash/_baseMatchesProperty.js"(exports, module) {
     "use strict";
     var baseIsEqual = require_baseIsEqual();
     var get = require_get();
@@ -1178,7 +1178,7 @@ var require_baseMatchesProperty = __commonJS({
 
 // editor/ui-editor-common/node_modules/lodash/identity.js
 var require_identity = __commonJS({
-  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-common/node_modules/lodash/identity.js"(exports, module) {
+  "editor/ui-editor-common/node_modules/lodash/identity.js"(exports, module) {
     "use strict";
     function identity(value) {
       return value;
@@ -1189,7 +1189,7 @@ var require_identity = __commonJS({
 
 // editor/ui-editor-common/node_modules/lodash/_baseProperty.js
 var require_baseProperty = __commonJS({
-  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-common/node_modules/lodash/_baseProperty.js"(exports, module) {
+  "editor/ui-editor-common/node_modules/lodash/_baseProperty.js"(exports, module) {
     "use strict";
     function baseProperty(key) {
       return function(object) {
@@ -1202,7 +1202,7 @@ var require_baseProperty = __commonJS({
 
 // editor/ui-editor-common/node_modules/lodash/_basePropertyDeep.js
 var require_basePropertyDeep = __commonJS({
-  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-common/node_modules/lodash/_basePropertyDeep.js"(exports, module) {
+  "editor/ui-editor-common/node_modules/lodash/_basePropertyDeep.js"(exports, module) {
     "use strict";
     var baseGet = require_baseGet();
     function basePropertyDeep(path) {
@@ -1216,7 +1216,7 @@ var require_basePropertyDeep = __commonJS({
 
 // editor/ui-editor-common/node_modules/lodash/property.js
 var require_property = __commonJS({
-  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-common/node_modules/lodash/property.js"(exports, module) {
+  "editor/ui-editor-common/node_modules/lodash/property.js"(exports, module) {
     "use strict";
     var baseProperty = require_baseProperty();
     var basePropertyDeep = require_basePropertyDeep();
@@ -1231,7 +1231,7 @@ var require_property = __commonJS({
 
 // editor/ui-editor-common/node_modules/lodash/_baseIteratee.js
 var require_baseIteratee = __commonJS({
-  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-common/node_modules/lodash/_baseIteratee.js"(exports, module) {
+  "editor/ui-editor-common/node_modules/lodash/_baseIteratee.js"(exports, module) {
     "use strict";
     var baseMatches = require_baseMatches();
     var baseMatchesProperty = require_baseMatchesProperty();
@@ -1256,7 +1256,7 @@ var require_baseIteratee = __commonJS({
 
 // editor/ui-editor-common/node_modules/lodash/_basePickBy.js
 var require_basePickBy = __commonJS({
-  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-common/node_modules/lodash/_basePickBy.js"(exports, module) {
+  "editor/ui-editor-common/node_modules/lodash/_basePickBy.js"(exports, module) {
     "use strict";
     var baseGet = require_baseGet();
     var baseSet = require_baseSet();
@@ -1277,7 +1277,7 @@ var require_basePickBy = __commonJS({
 
 // editor/ui-editor-common/node_modules/lodash/_getPrototype.js
 var require_getPrototype = __commonJS({
-  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-common/node_modules/lodash/_getPrototype.js"(exports, module) {
+  "editor/ui-editor-common/node_modules/lodash/_getPrototype.js"(exports, module) {
     "use strict";
     var overArg = require_overArg();
     var getPrototype = overArg(Object.getPrototypeOf, Object);
@@ -1287,7 +1287,7 @@ var require_getPrototype = __commonJS({
 
 // editor/ui-editor-common/node_modules/lodash/_getSymbolsIn.js
 var require_getSymbolsIn = __commonJS({
-  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-common/node_modules/lodash/_getSymbolsIn.js"(exports, module) {
+  "editor/ui-editor-common/node_modules/lodash/_getSymbolsIn.js"(exports, module) {
     "use strict";
     var arrayPush = require_arrayPush();
     var getPrototype = require_getPrototype();
@@ -1308,7 +1308,7 @@ var require_getSymbolsIn = __commonJS({
 
 // editor/ui-editor-common/node_modules/lodash/_nativeKeysIn.js
 var require_nativeKeysIn = __commonJS({
-  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-common/node_modules/lodash/_nativeKeysIn.js"(exports, module) {
+  "editor/ui-editor-common/node_modules/lodash/_nativeKeysIn.js"(exports, module) {
     "use strict";
     function nativeKeysIn(object) {
       var result = [];
@@ -1325,7 +1325,7 @@ var require_nativeKeysIn = __commonJS({
 
 // editor/ui-editor-common/node_modules/lodash/_baseKeysIn.js
 var require_baseKeysIn = __commonJS({
-  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-common/node_modules/lodash/_baseKeysIn.js"(exports, module) {
+  "editor/ui-editor-common/node_modules/lodash/_baseKeysIn.js"(exports, module) {
     "use strict";
     var isObject = require_isObject();
     var isPrototype = require_isPrototype();
@@ -1350,7 +1350,7 @@ var require_baseKeysIn = __commonJS({
 
 // editor/ui-editor-common/node_modules/lodash/keysIn.js
 var require_keysIn = __commonJS({
-  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-common/node_modules/lodash/keysIn.js"(exports, module) {
+  "editor/ui-editor-common/node_modules/lodash/keysIn.js"(exports, module) {
     "use strict";
     var arrayLikeKeys = require_arrayLikeKeys();
     var baseKeysIn = require_baseKeysIn();
@@ -1364,7 +1364,7 @@ var require_keysIn = __commonJS({
 
 // editor/ui-editor-common/node_modules/lodash/_getAllKeysIn.js
 var require_getAllKeysIn = __commonJS({
-  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-common/node_modules/lodash/_getAllKeysIn.js"(exports, module) {
+  "editor/ui-editor-common/node_modules/lodash/_getAllKeysIn.js"(exports, module) {
     "use strict";
     var baseGetAllKeys = require_baseGetAllKeys();
     var getSymbolsIn = require_getSymbolsIn();
@@ -1378,7 +1378,7 @@ var require_getAllKeysIn = __commonJS({
 
 // editor/ui-editor-common/node_modules/lodash/pickBy.js
 var require_pickBy = __commonJS({
-  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-common/node_modules/lodash/pickBy.js"(exports, module) {
+  "editor/ui-editor-common/node_modules/lodash/pickBy.js"(exports, module) {
     "use strict";
     var arrayMap = require_arrayMap();
     var baseIteratee = require_baseIteratee();

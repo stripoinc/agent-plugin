@@ -4,7 +4,7 @@ import {
 
 // editor/ui-editor-ui/node_modules/postcss/lib/tokenize.js
 var require_tokenize = __commonJS({
-  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-ui/node_modules/postcss/lib/tokenize.js"(exports, module) {
+  "editor/ui-editor-ui/node_modules/postcss/lib/tokenize.js"(exports, module) {
     var SINGLE_QUOTE = "'".charCodeAt(0);
     var DOUBLE_QUOTE = '"'.charCodeAt(0);
     var BACKSLASH = "\\".charCodeAt(0);

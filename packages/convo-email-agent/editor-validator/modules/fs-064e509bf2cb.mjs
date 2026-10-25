@@ -4,28 +4,28 @@ import {
 
 // (disabled):convo-email-agent/fs
 var require_fs = __commonJS({
-  "(disabled):fs"() {
+  "(disabled):convo-email-agent/fs"() {
     "use strict";
   }
 });
 
 // (disabled):convo-email-agent/path
 var require_path = __commonJS({
-  "(disabled):path"() {
+  "(disabled):convo-email-agent/path"() {
     "use strict";
   }
 });
 
 // (disabled):editor/ui-editor-ui/node_modules/source-map-js/source-map.js
 var require_source_map = __commonJS({
-  "(disabled):../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-ui/node_modules/source-map-js/source-map.js"() {
+  "(disabled):editor/ui-editor-ui/node_modules/source-map-js/source-map.js"() {
     "use strict";
   }
 });
 
 // editor/ui-editor-ui/node_modules/postcss/lib/previous-map.js
 var require_previous_map = __commonJS({
-  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-ui/node_modules/postcss/lib/previous-map.js"(exports, module) {
+  "editor/ui-editor-ui/node_modules/postcss/lib/previous-map.js"(exports, module) {
     var { existsSync, readFileSync, realpathSync } = require_fs();
     var { dirname, isAbsolute, join, relative, sep } = require_path();
     var { SourceMapConsumer, SourceMapGenerator } = require_source_map();

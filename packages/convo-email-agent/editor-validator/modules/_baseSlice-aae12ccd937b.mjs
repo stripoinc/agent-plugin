@@ -18,7 +18,7 @@ import {
 
 // editor/ui-editor-common/node_modules/lodash/set.js
 var require_set = __commonJS({
-  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-common/node_modules/lodash/set.js"(exports, module) {
+  "editor/ui-editor-common/node_modules/lodash/set.js"(exports, module) {
     "use strict";
     var baseSet = require_baseSet();
     function set2(object, path, value) {
@@ -30,7 +30,7 @@ var require_set = __commonJS({
 
 // editor/ui-editor-common/node_modules/lodash/last.js
 var require_last = __commonJS({
-  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-common/node_modules/lodash/last.js"(exports, module) {
+  "editor/ui-editor-common/node_modules/lodash/last.js"(exports, module) {
     "use strict";
     function last(array) {
       var length = array == null ? 0 : array.length;
@@ -42,7 +42,7 @@ var require_last = __commonJS({
 
 // editor/ui-editor-common/node_modules/lodash/_baseSlice.js
 var require_baseSlice = __commonJS({
-  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-common/node_modules/lodash/_baseSlice.js"(exports, module) {
+  "editor/ui-editor-common/node_modules/lodash/_baseSlice.js"(exports, module) {
     "use strict";
     function baseSlice(array, start, end) {
       var index = -1, length = array.length;
@@ -67,7 +67,7 @@ var require_baseSlice = __commonJS({
 
 // editor/ui-editor-common/node_modules/lodash/_parent.js
 var require_parent = __commonJS({
-  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-common/node_modules/lodash/_parent.js"(exports, module) {
+  "editor/ui-editor-common/node_modules/lodash/_parent.js"(exports, module) {
     "use strict";
     var baseGet = require_baseGet();
     var baseSlice = require_baseSlice();
@@ -80,7 +80,7 @@ var require_parent = __commonJS({
 
 // editor/ui-editor-common/node_modules/lodash/_baseUnset.js
 var require_baseUnset = __commonJS({
-  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-common/node_modules/lodash/_baseUnset.js"(exports, module) {
+  "editor/ui-editor-common/node_modules/lodash/_baseUnset.js"(exports, module) {
     "use strict";
     var castPath = require_castPath();
     var last = require_last();
@@ -112,7 +112,7 @@ var require_baseUnset = __commonJS({
 
 // editor/ui-editor-common/node_modules/lodash/unset.js
 var require_unset = __commonJS({
-  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-common/node_modules/lodash/unset.js"(exports, module) {
+  "editor/ui-editor-common/node_modules/lodash/unset.js"(exports, module) {
     "use strict";
     var baseUnset = require_baseUnset();
     function unset2(object, path) {

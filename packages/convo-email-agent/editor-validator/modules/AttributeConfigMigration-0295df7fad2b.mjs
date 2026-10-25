@@ -60,7 +60,7 @@ import {
 
 // editor/ui-editor-ui/node_modules/fast-deep-equal/index.js
 var require_fast_deep_equal = __commonJS({
-  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-ui/node_modules/fast-deep-equal/index.js"(exports, module) {
+  "editor/ui-editor-ui/node_modules/fast-deep-equal/index.js"(exports, module) {
     "use strict";
     module.exports = function equal(a, b) {
       if (a === b) return true;
@@ -95,7 +95,7 @@ var require_fast_deep_equal = __commonJS({
 
 // editor/ui-editor-ui/node_modules/lodash/_escapeHtmlChar.js
 var require_escapeHtmlChar = __commonJS({
-  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-ui/node_modules/lodash/_escapeHtmlChar.js"(exports, module) {
+  "editor/ui-editor-ui/node_modules/lodash/_escapeHtmlChar.js"(exports, module) {
     "use strict";
     var basePropertyOf = require_basePropertyOf();
     var htmlEscapes = {
@@ -112,7 +112,7 @@ var require_escapeHtmlChar = __commonJS({
 
 // editor/ui-editor-ui/node_modules/lodash/escape.js
 var require_escape = __commonJS({
-  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-ui/node_modules/lodash/escape.js"(exports, module) {
+  "editor/ui-editor-ui/node_modules/lodash/escape.js"(exports, module) {
     "use strict";
     var escapeHtmlChar = require_escapeHtmlChar();
     var toString = require_toString();
@@ -128,7 +128,7 @@ var require_escape = __commonJS({
 
 // editor/ui-editor-ui/node_modules/lodash/escapeRegExp.js
 var require_escapeRegExp = __commonJS({
-  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-ui/node_modules/lodash/escapeRegExp.js"(exports, module) {
+  "editor/ui-editor-ui/node_modules/lodash/escapeRegExp.js"(exports, module) {
     "use strict";
     var toString = require_toString();
     var reRegExpChar = /[\\^$.*+?()[\]{}|]/g;
@@ -143,7 +143,7 @@ var require_escapeRegExp = __commonJS({
 
 // editor/ui-editor-ui/node_modules/lodash/isObject.js
 var require_isObject = __commonJS({
-  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-ui/node_modules/lodash/isObject.js"(exports, module) {
+  "editor/ui-editor-ui/node_modules/lodash/isObject.js"(exports, module) {
     "use strict";
     function isObject2(value) {
       var type = typeof value;
@@ -155,7 +155,7 @@ var require_isObject = __commonJS({
 
 // editor/ui-editor-ui/node_modules/postcss-safe-parser/lib/safe-parser.js
 var require_safe_parser = __commonJS({
-  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-ui/node_modules/postcss-safe-parser/lib/safe-parser.js"(exports, module) {
+  "editor/ui-editor-ui/node_modules/postcss-safe-parser/lib/safe-parser.js"(exports, module) {
     "use strict";
     var Comment = require_comment();
     var Parser = require_parser();
@@ -244,7 +244,7 @@ var require_safe_parser = __commonJS({
 
 // editor/ui-editor-ui/node_modules/postcss-safe-parser/lib/safe-parse.js
 var require_safe_parse = __commonJS({
-  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-ui/node_modules/postcss-safe-parser/lib/safe-parse.js"(exports, module) {
+  "editor/ui-editor-ui/node_modules/postcss-safe-parser/lib/safe-parse.js"(exports, module) {
     "use strict";
     var { Input } = require_postcss();
     var SafeParser = require_safe_parser();

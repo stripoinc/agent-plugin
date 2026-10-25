@@ -21,7 +21,7 @@ import {
 
 // editor/ui-editor-ui/node_modules/postcss/lib/document.js
 var require_document = __commonJS({
-  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-ui/node_modules/postcss/lib/document.js"(exports, module) {
+  "editor/ui-editor-ui/node_modules/postcss/lib/document.js"(exports, module) {
     "use strict";
     var Container = require_container();
     var LazyResult;
@@ -51,7 +51,7 @@ var require_document = __commonJS({
 
 // editor/ui-editor-ui/node_modules/postcss/lib/parse.js
 var require_parse = __commonJS({
-  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-ui/node_modules/postcss/lib/parse.js"(exports, module) {
+  "editor/ui-editor-ui/node_modules/postcss/lib/parse.js"(exports, module) {
     "use strict";
     var Container = require_container();
     var Input = require_input();
@@ -85,7 +85,7 @@ var require_parse = __commonJS({
 
 // editor/ui-editor-ui/node_modules/postcss/lib/warning.js
 var require_warning = __commonJS({
-  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-ui/node_modules/postcss/lib/warning.js"(exports, module) {
+  "editor/ui-editor-ui/node_modules/postcss/lib/warning.js"(exports, module) {
     "use strict";
     var Container = require_container();
     var { my } = require_symbols();
@@ -126,7 +126,7 @@ var require_warning = __commonJS({
 
 // editor/ui-editor-ui/node_modules/postcss/lib/result.js
 var require_result = __commonJS({
-  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-ui/node_modules/postcss/lib/result.js"(exports, module) {
+  "editor/ui-editor-ui/node_modules/postcss/lib/result.js"(exports, module) {
     "use strict";
     var Warning = require_warning();
     var Result = class {
@@ -165,7 +165,7 @@ var require_result = __commonJS({
 
 // editor/ui-editor-ui/node_modules/postcss/lib/warn-once.js
 var require_warn_once = __commonJS({
-  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-ui/node_modules/postcss/lib/warn-once.js"(exports, module) {
+  "editor/ui-editor-ui/node_modules/postcss/lib/warn-once.js"(exports, module) {
     "use strict";
     var printed = {};
     module.exports = function warnOnce(message) {
@@ -180,7 +180,7 @@ var require_warn_once = __commonJS({
 
 // editor/ui-editor-ui/node_modules/postcss/lib/lazy-result.js
 var require_lazy_result = __commonJS({
-  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-ui/node_modules/postcss/lib/lazy-result.js"(exports, module) {
+  "editor/ui-editor-ui/node_modules/postcss/lib/lazy-result.js"(exports, module) {
     var Container = require_container();
     var Document = require_document();
     var MapGenerator = require_map_generator();
