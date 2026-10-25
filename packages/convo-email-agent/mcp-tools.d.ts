@@ -23,6 +23,8 @@ export interface McpToolMapping<TBrand extends McpBrand = "reteno"> {
     readonly fieldMapping: TBrand extends "reteno" ? "identity" : "adapter";
     readonly tools: Readonly<Partial<Record<CanonicalMcpOperation, string>>>;
     readonly auxiliaryTools?: Readonly<Record<string, string>>;
+    /** Presentation helpers may be absent on older servers without blocking mutation workflows. */
+    readonly optionalAuxiliaryTools?: Readonly<Record<string, string>>;
     readonly unsupported?: Readonly<Record<string, string>>;
 }
 export declare function supportsEmailInterfaces(brand: McpBrand): brand is EmailInterfaceMcpBrand;

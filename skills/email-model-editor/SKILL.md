@@ -26,7 +26,7 @@ on demand and do not load the full tool/resource catalog.
 | Acquire | [Download and inspect the target](reference/acquire-and-inspect.md) before editing. |
 | Mutate | [SDK module, run, validation, completeness](reference/mutate-and-validate.md) before constructing the change. |
 | Conditional mutation | [Metadata, social, insertion, global block settings, theme resets and fonts](reference/mutation-options.md) when the request includes these operations. |
-| Persist | [File upload, recovery, durable and visual checks](reference/persist-and-verify.md) before writing. |
+| Persist | [File upload, recovery, durable and visual checks, final presentation](reference/persist-and-verify.md) before writing. |
 | Attached or Ctrl+V image | [Upload supplied images](reference/image-upload.md) before hosting original bytes. |
 
 For an attached or Ctrl+V-pasted replacement image, the host must supply the original bytes as
@@ -62,6 +62,7 @@ installed `skills/` and `packages/` directories.
   concurrency token when supplied.
 - A successful local mutation is not completion. Verify the saved model and inspect fresh
   desktop and mobile PNG previews, except when `PROVIDER.md` defines preheader-only checks.
+  Then run the provider's final presentation step, when `PROVIDER.md` defines one.
 
 ## Boundaries
 

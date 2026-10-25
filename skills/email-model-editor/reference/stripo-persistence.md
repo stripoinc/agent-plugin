@@ -127,4 +127,29 @@ still inspect both previews.
 For creation/rebuilds, call `get_content(id, type=<lowercase>, includeHtml=false)` after persistence
 to verify the stored name and project; the initial read or create receipt does not replace this
 saved-metadata check. Return the saved `id` and entity `type`, plus the verified project for a new
-email. There is no hosted-view-link operation in this adapter; do not invent a link.
+email. There is no hosted-view-link operation in this adapter; the only link is the `editorLink`
+returned by the [final presentation](#final-presentation). Do not invent a link.
+
+## Final presentation
+
+After the last confirmed `set_document_state` and the checks and repairs the selected workflow
+requires, call the optional `show_content_preview(id, type)` once for the saved target through the
+host-visible MCP tool path so a supporting host can display its App. Pass `id` and `type` as its
+advertised schema defines them. Creation and rebuilds call it after the last write, model and
+desktop/mobile checks and any repairs, never immediately after creating the initial email or
+before its first content write. An edit calls it after the edit skill's durable and visual checks.
+A confirmed save with incomplete verification or unresolved visual defects still calls it.
+Inspection-only work, or a write that was never confirmed, does not call it.
+
+This is a presentation step, separate from persistence and visual verification. `OK` means the
+snapshot was prepared; it does not prove that the host rendered it or that an uncertain write
+succeeded. Resolve `WRITE_UNCONFIRMED` through normal recovery first. The preview reflects the
+current coediting state at call time, including concurrent changes, without an exact saved
+revision guarantee.
+
+The model receives status, metadata and `editorLink`; the compiled HTML URL and its expiry stay in
+UI-only `_meta`. Do not download that HTML or print the signed URL. Include the returned
+`editorLink` in the final response as the text fallback. If the server lacks this optional tool
+or the preview fails, report the saved result and the presentation limitation honestly. Never
+repeat `create_email` or `set_document_state` for a preview, and never claim the App was shown
+merely because a snapshot was prepared. Do not hide this call in file-transfer helpers.

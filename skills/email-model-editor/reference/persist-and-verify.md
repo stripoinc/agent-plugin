@@ -89,3 +89,10 @@ checks, and the required visual checks pass. If PNG generation, download, or ins
 fails after a bounded retry, report "saved, visual verification incomplete" when persistence and
 model checks passed. Keep the same id for a later preview retry. Do not substitute an HTML
 export, inspect HTML as the visual check, or repeat a successful write to obtain a preview.
+
+## Final presentation
+
+After the last confirmed save and the checks above, run the provider's final presentation step
+once when `PROVIDER.md` defines one. It is not verification, needs no further write, and its
+absence or failure does not change the saved result. Report the saved change with any
+presentation link `PROVIDER.md` defines.

@@ -28,6 +28,9 @@ export declare const STRIPO_MCP_TOOL_MAPPING: Readonly<{
         editImage: "edit_image";
         getImageJob: "get_image_job";
     }>;
+    optionalAuxiliaryTools: Readonly<{
+        showContentPreview: "show_content_preview";
+    }>;
     unsupported: Readonly<{
         getEmailMessageExport: "No matching HTML/CSS export-manifest operation. PROVIDER.md defines authorized reference HTML through contentMetadata; routine verification uses native state and previews.";
         getEmailMessageViewLink: "No hosted email-view link operation is available in this adapter.";

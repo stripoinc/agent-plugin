@@ -97,5 +97,11 @@ other checks passed.
 Keep the same target identity for later preview retries; do not create another email or repeat
 a successful write. Never use an HTML export as the saved target's visual-verification fallback;
 rendering source HTML as reference evidence is allowed.
+
+### 8. PRESENT
+
+After the last confirmed save and the checks above, run the provider's final presentation step
+once when `PROVIDER.md` defines one. It is not verification, needs no further write, and its
+absence or failure does not change the saved result.
 Return the saved identity, destination and available presentation link as defined in `PROVIDER.md`,
 plus a concise account of deliberate deviations from the references.

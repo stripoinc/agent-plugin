@@ -22,3 +22,4 @@ Read the topic for the current step:
 | Create an email; document title, preheader and external metadata; renderer constraints for layout | [Creation and metadata](reference/stripo-creation.md) |
 | Image jobs; attached, pasted or local images | [Images](reference/stripo-images.md) |
 | Any document write, its recovery and saved-state verification | [Persistence and verification](reference/stripo-persistence.md) |
+| Final step after the last confirmed save and required checks | [Final presentation](reference/stripo-persistence.md#final-presentation) |

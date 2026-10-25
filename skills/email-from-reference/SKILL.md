@@ -26,11 +26,12 @@ all references or the full tool/resource catalog at startup.
 | --- | --- |
 | Resolve and inspect | [Reference regimes, inputs, target, assets](reference/resolve-and-inspect.md) before using a reference or drafting content. |
 | Brief and build | [Native model, fonts and local validation](reference/build-model.md) before constructing the brief. |
-| Create and save | [Creation, persistence, recovery, verification](reference/persist-and-verify.md) before creating or changing remote content. |
+| Create and save | [Creation, persistence, recovery, verification, final presentation](reference/persist-and-verify.md) before creating or changing remote content. |
 | Attached or Ctrl+V image | [Upload supplied images](reference/image-upload.md) before hosting original bytes or local crops. |
 | Exact HTML/image reconstruction | [Layout reconstruction](reference/layout-reconstruction.md) before building and during saved-PNG review. |
 
-Follow `RESOLVE -> INSPECT -> PREPARE ASSETS -> BRIEF -> BUILD -> CREATE/BASELINE -> PERSIST -> VERIFY`.
+Follow `RESOLVE -> INSPECT -> PREPARE ASSETS -> BRIEF -> BUILD -> CREATE/BASELINE -> PERSIST -> VERIFY -> PRESENT`.
+PRESENT is the provider's final presentation step, when `PROVIDER.md` defines one.
 For a rebuild, acquire the target baseline during INSPECT, before BRIEF and BUILD. For a new
 email, the provider's images topic says whether assets need an existing write target, in which
 case CREATE runs once during PREPARE ASSETS; otherwise CREATE follows BUILD.
