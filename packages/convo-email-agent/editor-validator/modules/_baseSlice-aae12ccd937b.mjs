@@ -5,10 +5,9 @@ import {
   require_toKey
 } from "./_Hash-6a5a8be86833.mjs";
 import {
-  ComplexBlock,
   DefaultBlock,
   defaultBlocksMarkers
-} from "./serviceSelectorPrefix-db24995a76b3.mjs";
+} from "./serviceSelectorPrefix-a2f28f143508.mjs";
 import {
   q
 } from "./builders-6d4dedaf957f.mjs";
@@ -19,7 +18,7 @@ import {
 
 // editor/ui-editor-common/node_modules/lodash/set.js
 var require_set = __commonJS({
-  "../editor/ui-editor-common/node_modules/lodash/set.js"(exports, module) {
+  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-common/node_modules/lodash/set.js"(exports, module) {
     "use strict";
     var baseSet = require_baseSet();
     function set2(object, path, value) {
@@ -31,7 +30,7 @@ var require_set = __commonJS({
 
 // editor/ui-editor-common/node_modules/lodash/last.js
 var require_last = __commonJS({
-  "../editor/ui-editor-common/node_modules/lodash/last.js"(exports, module) {
+  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-common/node_modules/lodash/last.js"(exports, module) {
     "use strict";
     function last(array) {
       var length = array == null ? 0 : array.length;
@@ -43,7 +42,7 @@ var require_last = __commonJS({
 
 // editor/ui-editor-common/node_modules/lodash/_baseSlice.js
 var require_baseSlice = __commonJS({
-  "../editor/ui-editor-common/node_modules/lodash/_baseSlice.js"(exports, module) {
+  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-common/node_modules/lodash/_baseSlice.js"(exports, module) {
     "use strict";
     function baseSlice(array, start, end) {
       var index = -1, length = array.length;
@@ -68,7 +67,7 @@ var require_baseSlice = __commonJS({
 
 // editor/ui-editor-common/node_modules/lodash/_parent.js
 var require_parent = __commonJS({
-  "../editor/ui-editor-common/node_modules/lodash/_parent.js"(exports, module) {
+  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-common/node_modules/lodash/_parent.js"(exports, module) {
     "use strict";
     var baseGet = require_baseGet();
     var baseSlice = require_baseSlice();
@@ -81,7 +80,7 @@ var require_parent = __commonJS({
 
 // editor/ui-editor-common/node_modules/lodash/_baseUnset.js
 var require_baseUnset = __commonJS({
-  "../editor/ui-editor-common/node_modules/lodash/_baseUnset.js"(exports, module) {
+  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-common/node_modules/lodash/_baseUnset.js"(exports, module) {
     "use strict";
     var castPath = require_castPath();
     var last = require_last();
@@ -113,7 +112,7 @@ var require_baseUnset = __commonJS({
 
 // editor/ui-editor-common/node_modules/lodash/unset.js
 var require_unset = __commonJS({
-  "../editor/ui-editor-common/node_modules/lodash/unset.js"(exports, module) {
+  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-common/node_modules/lodash/unset.js"(exports, module) {
     "use strict";
     var baseUnset = require_baseUnset();
     function unset2(object, path) {
@@ -235,34 +234,34 @@ var NodeUtils = class _NodeUtils {
     return node?.type === 3 /* TEXT_NODE */;
   }
   static getIsStructureSelector() {
-    const orSelector = q.select.descendants().hasClass(defaultBlocksMarkers[ComplexBlock.STRUCTURE]);
-    return q.select.descendants().tag(ComplexBlock.STRUCTURE).or(orSelector).end();
+    const orSelector = q.select.descendants().hasClass(defaultBlocksMarkers["STRUCTURE" /* STRUCTURE */]);
+    return q.select.descendants().tag("STRUCTURE" /* STRUCTURE */).or(orSelector).end();
   }
   static isStructure(node) {
-    return node?.tag === ComplexBlock.STRUCTURE || !!node?.attributes?.class?.includes(defaultBlocksMarkers[ComplexBlock.STRUCTURE]);
+    return node?.tag === "STRUCTURE" /* STRUCTURE */ || !!node?.attributes?.class?.includes(defaultBlocksMarkers["STRUCTURE" /* STRUCTURE */]);
   }
   static isStructureCRDT(node) {
-    return node?.getTag() === ComplexBlock.STRUCTURE || !!node?.getClasses().has(defaultBlocksMarkers[ComplexBlock.STRUCTURE]);
+    return node?.getTag() === "STRUCTURE" /* STRUCTURE */ || !!node?.getClasses().has(defaultBlocksMarkers["STRUCTURE" /* STRUCTURE */]);
   }
   static isStripe(node) {
-    return node?.tag === ComplexBlock.STRIPE || !!node?.attributes?.class?.includes(defaultBlocksMarkers[ComplexBlock.STRIPE]);
+    return node?.tag === "STRIPE" /* STRIPE */ || !!node?.attributes?.class?.includes(defaultBlocksMarkers["STRIPE" /* STRIPE */]);
   }
   static isStripeCRDT(node) {
-    return node?.getTag() === ComplexBlock.STRIPE || !!node?.getClasses().has(defaultBlocksMarkers[ComplexBlock.STRIPE]);
+    return node?.getTag() === "STRIPE" /* STRIPE */ || !!node?.getClasses().has(defaultBlocksMarkers["STRIPE" /* STRIPE */]);
   }
   static getIsStripeSelector() {
-    const orSelector = q.select.descendants().hasClass(defaultBlocksMarkers[ComplexBlock.STRIPE]);
-    return q.select.descendants().tag(ComplexBlock.STRIPE).or(orSelector).end();
+    const orSelector = q.select.descendants().hasClass(defaultBlocksMarkers["STRIPE" /* STRIPE */]);
+    return q.select.descendants().tag("STRIPE" /* STRIPE */).or(orSelector).end();
   }
   static getContainerSelector() {
-    const orSelector = q.select.descendants().hasClass(defaultBlocksMarkers[ComplexBlock.CONTAINER]);
-    return q.select.descendants().tag(ComplexBlock.CONTAINER).or(orSelector).end();
+    const orSelector = q.select.descendants().hasClass(defaultBlocksMarkers["CONTAINER" /* CONTAINER */]);
+    return q.select.descendants().tag("CONTAINER" /* CONTAINER */).or(orSelector).end();
   }
   static isContainer(node) {
-    return node?.tag === ComplexBlock.CONTAINER || !!node?.attributes?.class?.includes(defaultBlocksMarkers[ComplexBlock.CONTAINER]);
+    return node?.tag === "CONTAINER" /* CONTAINER */ || !!node?.attributes?.class?.includes(defaultBlocksMarkers["CONTAINER" /* CONTAINER */]);
   }
   static isContainerCRDT(node) {
-    return node?.getTag() === ComplexBlock.CONTAINER || !!node?.getClasses().has(defaultBlocksMarkers[ComplexBlock.CONTAINER]);
+    return node?.getTag() === "CONTAINER" /* CONTAINER */ || !!node?.getClasses().has(defaultBlocksMarkers["CONTAINER" /* CONTAINER */]);
   }
   static isDefaultBlock(node) {
     return Object.values(DefaultBlock).includes(node.tag);
@@ -271,19 +270,19 @@ var NodeUtils = class _NodeUtils {
     return Object.values(DefaultBlock).includes(node?.getTag());
   }
   static isMenuItem(node) {
-    return node?.tag === DefaultBlock.BLOCK_MENU_ITEM || !!node?.attributes?.class?.includes("esd-block-menu-item");
+    return node?.tag === "BLOCK_MENU_ITEM" /* BLOCK_MENU_ITEM */ || !!node?.attributes?.class?.includes("esd-block-menu-item");
   }
   static isImageBlock(node) {
-    return node?.tag === DefaultBlock.BLOCK_IMAGE || !!node?.attributes?.class?.includes(defaultBlocksMarkers[DefaultBlock.BLOCK_IMAGE]);
+    return node?.tag === "BLOCK_IMAGE" /* BLOCK_IMAGE */ || !!node?.attributes?.class?.includes(defaultBlocksMarkers["BLOCK_IMAGE" /* BLOCK_IMAGE */]);
   }
   static isVideoBlock(node) {
-    return node?.tag === DefaultBlock.BLOCK_VIDEO || !!node?.attributes?.class?.includes(defaultBlocksMarkers[DefaultBlock.BLOCK_VIDEO]);
+    return node?.tag === "BLOCK_VIDEO" /* BLOCK_VIDEO */ || !!node?.attributes?.class?.includes(defaultBlocksMarkers["BLOCK_VIDEO" /* BLOCK_VIDEO */]);
   }
   static isBannerBlock(node) {
-    return node?.tag === DefaultBlock.BLOCK_BANNER || !!node?.attributes?.class?.includes(defaultBlocksMarkers[DefaultBlock.BLOCK_BANNER]);
+    return node?.tag === "BLOCK_BANNER" /* BLOCK_BANNER */ || !!node?.attributes?.class?.includes(defaultBlocksMarkers["BLOCK_BANNER" /* BLOCK_BANNER */]);
   }
   static isAmpBlock(node) {
-    return node?.tag === DefaultBlock.BLOCK_AMP_ACCORDION || node?.tag === DefaultBlock.BLOCK_AMP_CAROUSEL || node?.tag === DefaultBlock.BLOCK_AMP_FORM;
+    return node?.tag === "BLOCK_AMP_ACCORDION" /* BLOCK_AMP_ACCORDION */ || node?.tag === "BLOCK_AMP_CAROUSEL" /* BLOCK_AMP_CAROUSEL */ || node?.tag === "BLOCK_AMP_FORM" /* BLOCK_AMP_FORM */;
   }
   static isAmpCarousel(node) {
     return node?.tag === "AMP-CAROUSEL" /* AMP_CAROUSEL */;
@@ -292,10 +291,10 @@ var NodeUtils = class _NodeUtils {
     return node?.tag === "AMP-IMG" /* AMP_IMG */;
   }
   static isAccordionBlock(node) {
-    return node?.tag === DefaultBlock.BLOCK_AMP_ACCORDION;
+    return node?.tag === "BLOCK_AMP_ACCORDION" /* BLOCK_AMP_ACCORDION */;
   }
   static isAmpFormBlock(node) {
-    return node?.tag === DefaultBlock.BLOCK_AMP_FORM;
+    return node?.tag === "BLOCK_AMP_FORM" /* BLOCK_AMP_FORM */;
   }
   /**
    * @description updates node by path.

@@ -1,13 +1,13 @@
 import {
-  parse,
-  parseAsync
-} from "./parse-545b503fc4ed.mjs";
-import {
   $ZodCheck,
   $ZodCheckBigIntFormat,
   $ZodCheckNumberFormat,
   $ZodCheckStringFormat
 } from "./checks-f4a190521e0d.mjs";
+import {
+  parse,
+  parseAsync
+} from "./parse-545b503fc4ed.mjs";
 import {
   _null,
   _undefined,
@@ -70,7 +70,8 @@ import {
   prefixIssues,
   primitiveTypes,
   propertyKeyTypes,
-  rawShape
+  rawShape,
+  sizeCaps
 } from "./core-d6ef11a90708.mjs";
 
 // editor/ui-editor-ui/node_modules/zod/v4/core/doc.js
@@ -116,7 +117,7 @@ var Doc = class {
 var version = {
   major: 4,
   minor: 6,
-  patch: 5
+  patch: 6
 };
 
 // editor/ui-editor-ui/node_modules/zod/v4/core/schemas.js
@@ -872,6 +873,31 @@ var $ZodDate = /* @__PURE__ */ $constructor("$ZodDate", (inst, def) => {
     return payload;
   };
 });
+function capSize(inst, size) {
+  const caps = sizeCaps(inst._zod.def.checks);
+  if (!caps.length)
+    return;
+  const cap = Math.min(...caps.map((c) => c[0]));
+  const parse2 = inst._zod.parse;
+  inst._zod.parse = (payload, ctx) => {
+    const n = size(payload.value);
+    if (n > cap && !ctx?.skipChecks && ctx?.direction !== "backward") {
+      for (const [max, ch] of sizeCaps(inst._zod.def.checks)) {
+        if (n > max && ch._zod.def.when(payload)) {
+          const start = payload.issues.length;
+          ch._zod.check(payload);
+          payload.issues[start].continue = false;
+          attachSchema(payload.issues, start, inst);
+          return payload;
+        }
+      }
+    }
+    return parse2(payload, ctx);
+  };
+}
+var arraySize = (input) => Array.isArray(input) ? input.length : -1;
+var mapSize = (input) => input instanceof Map ? input.size : -1;
+var setSize = (input) => input instanceof Set ? input.size : -1;
 function handleArrayResult(result, final, index) {
   if (result.issues.length) {
     final.issues.push(...prefixIssues(index, result.issues));
@@ -915,6 +941,7 @@ var $ZodArray = /* @__PURE__ */ $constructor("$ZodArray", (inst, def) => {
     }
     return payload;
   };
+  capSize(inst, arraySize);
 });
 function handlePropertyResult(result, final, key, input, optin, optout) {
   const isPresent = key in input;
@@ -1821,6 +1848,7 @@ var $ZodMap = /* @__PURE__ */ $constructor("$ZodMap", (inst, def) => {
       return Promise.all(proms).then(() => payload);
     return payload;
   };
+  capSize(inst, mapSize);
 });
 function handleMapResult(keyResult, valueResult, final, key, input, inst, ctx) {
   if (keyResult.issues.length) {
@@ -1887,6 +1915,7 @@ var $ZodSet = /* @__PURE__ */ $constructor("$ZodSet", (inst, def) => {
       return Promise.all(proms).then(() => payload);
     return payload;
   };
+  capSize(inst, setSize);
 });
 function handleSetResult(result, final) {
   if (result.issues.length) {

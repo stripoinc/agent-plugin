@@ -28,7 +28,8 @@ import {
   esc,
   floatSafeRemainder,
   isPlainObject,
-  shallowClone
+  shallowClone,
+  sizeCaps
 } from "./core-d6ef11a90708.mjs";
 
 // editor/ui-editor-ui/node_modules/zod/v4/core/compile.js
@@ -1068,9 +1069,15 @@ function generateNullableCheck(doc, ctx, schema, accessor, buildsValue = true) {
   doc.write("}");
   return outputVar;
 }
+function generateSizeGate(doc, schema, size) {
+  for (const [max, check] of sizeCaps(schema._zod.def.checks)) {
+    doc.write("if (".concat(size, " > ").concat(numericOperand(max, check._zod.def.check), ") return INVALID;"));
+  }
+}
 function generateArrayCheck(doc, ctx, schema, accessor, buildsValue = true) {
   const def = schema._zod.def;
   doc.write("if (!Array.isArray(".concat(accessor, ")) return INVALID;"));
+  generateSizeGate(doc, schema, "".concat(accessor, ".length"));
   const outputVar = buildsValue ? newVar(ctx) : null;
   const iVar = newVar(ctx);
   const elemVar = newVar(ctx);
@@ -1470,6 +1477,7 @@ function literalPropertyKey(ctx, key) {
 function generateMapCheck(doc, ctx, schema, accessor) {
   const def = schema._zod.def;
   doc.write("if (!(".concat(accessor, " instanceof Map)) return INVALID;"));
+  generateSizeGate(doc, schema, "".concat(accessor, ".size"));
   const outputVar = newVar(ctx);
   const kVar = newVar(ctx);
   const valVar = newVar(ctx);
@@ -1486,6 +1494,7 @@ function generateMapCheck(doc, ctx, schema, accessor) {
 function generateSetCheck(doc, ctx, schema, accessor) {
   const def = schema._zod.def;
   doc.write("if (!(".concat(accessor, " instanceof Set)) return INVALID;"));
+  generateSizeGate(doc, schema, "".concat(accessor, ".size"));
   const outputVar = newVar(ctx);
   const valVar = newVar(ctx);
   doc.write("const ".concat(outputVar, " = new Set();"));

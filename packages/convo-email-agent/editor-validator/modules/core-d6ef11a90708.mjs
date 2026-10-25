@@ -73,6 +73,7 @@ __export(util_exports, {
   required: () => required,
   safeExtend: () => safeExtend,
   shallowClone: () => shallowClone,
+  sizeCaps: () => sizeCaps,
   slugify: () => slugify,
   stringifyPrimitive: () => stringifyPrimitive,
   toZod: () => toZod,
@@ -716,6 +717,18 @@ function prefixIssues(path, issues) {
 function unwrapMessage(message) {
   return typeof message === "string" ? message : message?.message;
 }
+function sizeCaps(defChecks) {
+  const caps = [];
+  for (const ch of defChecks ?? []) {
+    const d = ch._zod.def;
+    if (!/_(length|size)$|_equals$/.test(d.check))
+      break;
+    const max = d.maximum ?? d.length ?? d.size;
+    if (max >= 0)
+      caps.push([max, ch]);
+  }
+  return caps;
+}
 function attachSchema(issues, start, inst) {
   var _a2;
   for (let i = start; i < issues.length; i++) {
@@ -1022,6 +1035,7 @@ export {
   explicitlyAborted,
   prefixIssues,
   unwrapMessage,
+  sizeCaps,
   attachSchema,
   finalizeIssue,
   getSizableOrigin,

@@ -8,7 +8,7 @@ import {
 
 // editor/ui-editor-ui/node_modules/postcss/lib/comment.js
 var require_comment = __commonJS({
-  "../editor/ui-editor-ui/node_modules/postcss/lib/comment.js"(exports, module) {
+  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-ui/node_modules/postcss/lib/comment.js"(exports, module) {
     "use strict";
     var Node = require_node();
     var Comment = class extends Node {
@@ -24,7 +24,7 @@ var require_comment = __commonJS({
 
 // editor/ui-editor-ui/node_modules/postcss/lib/declaration.js
 var require_declaration = __commonJS({
-  "../editor/ui-editor-ui/node_modules/postcss/lib/declaration.js"(exports, module) {
+  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-ui/node_modules/postcss/lib/declaration.js"(exports, module) {
     "use strict";
     var Node = require_node();
     var Declaration = class extends Node {
@@ -46,7 +46,7 @@ var require_declaration = __commonJS({
 
 // editor/ui-editor-ui/node_modules/postcss/lib/container.js
 var require_container = __commonJS({
-  "../editor/ui-editor-ui/node_modules/postcss/lib/container.js"(exports, module) {
+  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-ui/node_modules/postcss/lib/container.js"(exports, module) {
     var Comment = require_comment();
     var Declaration = require_declaration();
     var Node = require_node();

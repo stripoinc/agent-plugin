@@ -10,6 +10,7 @@ var BrowserReadErrorCode;
   BrowserReadErrorCode2[BrowserReadErrorCode2["BROWSER_READ_ERROR_CODE_STALE_SNAPSHOT"] = 6] = "BROWSER_READ_ERROR_CODE_STALE_SNAPSHOT";
   BrowserReadErrorCode2[BrowserReadErrorCode2["BROWSER_READ_ERROR_CODE_RENDER_ERROR"] = 7] = "BROWSER_READ_ERROR_CODE_RENDER_ERROR";
   BrowserReadErrorCode2[BrowserReadErrorCode2["BROWSER_READ_ERROR_CODE_NO_RESPONDER"] = 8] = "BROWSER_READ_ERROR_CODE_NO_RESPONDER";
+  BrowserReadErrorCode2[BrowserReadErrorCode2["BROWSER_READ_ERROR_CODE_IMAGE_LOAD_ERROR"] = 9] = "BROWSER_READ_ERROR_CODE_IMAGE_LOAD_ERROR";
 })(BrowserReadErrorCode || (BrowserReadErrorCode = {}));
 var BrowserLayoutMetric;
 (function(BrowserLayoutMetric2) {
@@ -21,6 +22,8 @@ var BrowserLayoutMetric;
   BrowserLayoutMetric2[BrowserLayoutMetric2["BROWSER_LAYOUT_METRIC_OFFSET_HEIGHT"] = 5] = "BROWSER_LAYOUT_METRIC_OFFSET_HEIGHT";
   BrowserLayoutMetric2[BrowserLayoutMetric2["BROWSER_LAYOUT_METRIC_SCROLL_WIDTH"] = 6] = "BROWSER_LAYOUT_METRIC_SCROLL_WIDTH";
   BrowserLayoutMetric2[BrowserLayoutMetric2["BROWSER_LAYOUT_METRIC_SCROLL_HEIGHT"] = 7] = "BROWSER_LAYOUT_METRIC_SCROLL_HEIGHT";
+  BrowserLayoutMetric2[BrowserLayoutMetric2["BROWSER_LAYOUT_METRIC_NATURAL_WIDTH"] = 8] = "BROWSER_LAYOUT_METRIC_NATURAL_WIDTH";
+  BrowserLayoutMetric2[BrowserLayoutMetric2["BROWSER_LAYOUT_METRIC_NATURAL_HEIGHT"] = 9] = "BROWSER_LAYOUT_METRIC_NATURAL_HEIGHT";
 })(BrowserLayoutMetric || (BrowserLayoutMetric = {}));
 var PatchMetadataActionClass;
 (function(PatchMetadataActionClass2) {
@@ -385,6 +388,7 @@ var MasterCssVar;
   MasterCssVar2["BUTTON_FONT"] = "--button__font";
   MasterCssVar2["BUTTON_FONT_SIZE"] = "--button__fontSize";
   MasterCssVar2["ADAPT_BUTTON_FONT_SIZE"] = "--adapt__buttonFontSize";
+  MasterCssVar2["ADAPT_BUTTON_LINE_HEIGHT"] = "--adapt__buttonLineHeight";
   MasterCssVar2["BUTTON_LETTER_SPACING"] = "--button__letterSpacing";
   MasterCssVar2["BUTTON_COLOR"] = "--button__color";
   MasterCssVar2["BUTTON_COLOR_GRADIENT_SOLID"] = "--button__color_gradientSolid";

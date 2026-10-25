@@ -13,7 +13,7 @@ import {
 
 // editor/ui-editor-ui/node_modules/nanoid/non-secure/index.cjs
 var require_non_secure = __commonJS({
-  "../editor/ui-editor-ui/node_modules/nanoid/non-secure/index.cjs"(exports, module) {
+  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-ui/node_modules/nanoid/non-secure/index.cjs"(exports, module) {
     "use strict";
     var urlAlphabet = "useandom-26T198340PX75pxJACKVERYMINDBUSHWOLF_GQZbfghjklqvwyzrict";
     var customAlphabet = (alphabet, defaultSize = 21) => {
@@ -47,7 +47,7 @@ var require_url = __commonJS({
 
 // editor/ui-editor-ui/node_modules/postcss/lib/input.js
 var require_input = __commonJS({
-  "../editor/ui-editor-ui/node_modules/postcss/lib/input.js"(exports, module) {
+  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-ui/node_modules/postcss/lib/input.js"(exports, module) {
     var { nanoid } = require_non_secure();
     var { isAbsolute, resolve } = require_path();
     var { SourceMapConsumer, SourceMapGenerator } = require_source_map();

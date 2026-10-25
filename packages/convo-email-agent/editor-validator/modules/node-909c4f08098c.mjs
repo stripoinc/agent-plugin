@@ -10,7 +10,7 @@ import {
 
 // editor/ui-editor-ui/node_modules/postcss/lib/stringify.js
 var require_stringify = __commonJS({
-  "../editor/ui-editor-ui/node_modules/postcss/lib/stringify.js"(exports, module) {
+  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-ui/node_modules/postcss/lib/stringify.js"(exports, module) {
     "use strict";
     var Stringifier = require_stringifier();
     var STYLE_TAG = /(<)(\/?style\b)/gi;
@@ -70,7 +70,7 @@ var require_stringify = __commonJS({
 
 // editor/ui-editor-ui/node_modules/postcss/lib/symbols.js
 var require_symbols = __commonJS({
-  "../editor/ui-editor-ui/node_modules/postcss/lib/symbols.js"(exports, module) {
+  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-ui/node_modules/postcss/lib/symbols.js"(exports, module) {
     "use strict";
     module.exports.isClean = /* @__PURE__ */ Symbol("isClean");
     module.exports.my = /* @__PURE__ */ Symbol("my");
@@ -79,7 +79,7 @@ var require_symbols = __commonJS({
 
 // editor/ui-editor-ui/node_modules/postcss/lib/node.js
 var require_node = __commonJS({
-  "../editor/ui-editor-ui/node_modules/postcss/lib/node.js"(exports, module) {
+  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-ui/node_modules/postcss/lib/node.js"(exports, module) {
     var CssSyntaxError = require_css_syntax_error();
     var Stringifier = require_stringifier();
     var stringify = require_stringify();

@@ -1,7 +1,4 @@
 import {
-  timeZones
-} from "./time-zones-data-498efe19d3a8.mjs";
-import {
   BUTTONS_TEXT_TRANSFORM_VALUES,
   EMPTY_BORDER_RADIUS,
   IMAGE_MAX_ALT_TEXT_LENGTH,
@@ -17,11 +14,14 @@ import {
   require_basePropertyOf,
   require_postcss,
   require_toString
-} from "./ArrayUtils-8063398e6404.mjs";
+} from "./ArrayUtils-fbf37596896f.mjs";
+import {
+  timeZones
+} from "./time-zones-data-498efe19d3a8.mjs";
 import {
   IMG_SELECTOR,
   QUERY_HTML_NODE_TEXT_NODE_SELECTOR
-} from "./CSSConverter-608b83714731.mjs";
+} from "./CSSConverter-eecb098b236c.mjs";
 import {
   SmartBlockSourceType,
   SocialNetworkType as SocialNetworkType2
@@ -29,9 +29,6 @@ import {
 import {
   external_exports
 } from "./coerce-d38c736de753.mjs";
-import {
-  copy
-} from "./index-83a196bff650.mjs";
 import {
   require_parser
 } from "./at-rule-2b1e381bfcd5.mjs";
@@ -54,14 +51,8 @@ import {
   NodeUtils
 } from "./_baseSlice-aae12ccd937b.mjs";
 import {
-  DefaultBlock
-} from "./serviceSelectorPrefix-db24995a76b3.mjs";
-import {
   q
 } from "./builders-6d4dedaf957f.mjs";
-import {
-  UIElementType
-} from "./index-604a083968ff.mjs";
 import {
   __commonJS,
   __toESM
@@ -69,7 +60,7 @@ import {
 
 // editor/ui-editor-ui/node_modules/fast-deep-equal/index.js
 var require_fast_deep_equal = __commonJS({
-  "../editor/ui-editor-ui/node_modules/fast-deep-equal/index.js"(exports, module) {
+  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-ui/node_modules/fast-deep-equal/index.js"(exports, module) {
     "use strict";
     module.exports = function equal(a, b) {
       if (a === b) return true;
@@ -104,7 +95,7 @@ var require_fast_deep_equal = __commonJS({
 
 // editor/ui-editor-ui/node_modules/lodash/_escapeHtmlChar.js
 var require_escapeHtmlChar = __commonJS({
-  "../editor/ui-editor-ui/node_modules/lodash/_escapeHtmlChar.js"(exports, module) {
+  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-ui/node_modules/lodash/_escapeHtmlChar.js"(exports, module) {
     "use strict";
     var basePropertyOf = require_basePropertyOf();
     var htmlEscapes = {
@@ -121,7 +112,7 @@ var require_escapeHtmlChar = __commonJS({
 
 // editor/ui-editor-ui/node_modules/lodash/escape.js
 var require_escape = __commonJS({
-  "../editor/ui-editor-ui/node_modules/lodash/escape.js"(exports, module) {
+  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-ui/node_modules/lodash/escape.js"(exports, module) {
     "use strict";
     var escapeHtmlChar = require_escapeHtmlChar();
     var toString = require_toString();
@@ -137,7 +128,7 @@ var require_escape = __commonJS({
 
 // editor/ui-editor-ui/node_modules/lodash/escapeRegExp.js
 var require_escapeRegExp = __commonJS({
-  "../editor/ui-editor-ui/node_modules/lodash/escapeRegExp.js"(exports, module) {
+  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-ui/node_modules/lodash/escapeRegExp.js"(exports, module) {
     "use strict";
     var toString = require_toString();
     var reRegExpChar = /[\\^$.*+?()[\]{}|]/g;
@@ -152,7 +143,7 @@ var require_escapeRegExp = __commonJS({
 
 // editor/ui-editor-ui/node_modules/lodash/isObject.js
 var require_isObject = __commonJS({
-  "../editor/ui-editor-ui/node_modules/lodash/isObject.js"(exports, module) {
+  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-ui/node_modules/lodash/isObject.js"(exports, module) {
     "use strict";
     function isObject2(value) {
       var type = typeof value;
@@ -164,7 +155,7 @@ var require_isObject = __commonJS({
 
 // editor/ui-editor-ui/node_modules/postcss-safe-parser/lib/safe-parser.js
 var require_safe_parser = __commonJS({
-  "../editor/ui-editor-ui/node_modules/postcss-safe-parser/lib/safe-parser.js"(exports, module) {
+  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-ui/node_modules/postcss-safe-parser/lib/safe-parser.js"(exports, module) {
     "use strict";
     var Comment = require_comment();
     var Parser = require_parser();
@@ -253,7 +244,7 @@ var require_safe_parser = __commonJS({
 
 // editor/ui-editor-ui/node_modules/postcss-safe-parser/lib/safe-parse.js
 var require_safe_parse = __commonJS({
-  "../editor/ui-editor-ui/node_modules/postcss-safe-parser/lib/safe-parse.js"(exports, module) {
+  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-ui/node_modules/postcss-safe-parser/lib/safe-parse.js"(exports, module) {
     "use strict";
     var { Input } = require_postcss();
     var SafeParser = require_safe_parser();
@@ -548,6 +539,12 @@ var DEFAULT_FONTS = [
   }
 ];
 
+// editor/ui-editor-ui/src/app/entities/SmartBlock.ts
+var SMART_BLOCK_SOURCE_TYPES = [
+  SmartBlockSourceType.SMART_BLOCK_SOURCE_TYPE_WEBSITE_PAGE,
+  SmartBlockSourceType.SMART_BLOCK_SOURCE_TYPE_DATA_FEED
+];
+
 // editor/ui-editor-ui/src/app/core/models-api/CRDT/register/register.ts
 var import_fast_deep_equal = __toESM(require_fast_deep_equal());
 
@@ -556,157 +553,6 @@ var byteToHex = [];
 for (let i = 0; i < 256; ++i) {
   byteToHex[i] = (i + 256).toString(16).substring(1);
 }
-
-// editor/ui-editor-ui/src/app/entities/SmartBlock.ts
-var SMART_BLOCK_SOURCE_TYPES = [
-  SmartBlockSourceType.SMART_BLOCK_SOURCE_TYPE_WEBSITE_PAGE,
-  SmartBlockSourceType.SMART_BLOCK_SOURCE_TYPE_DATA_FEED
-];
-
-// editor/ui-editor-ui/src/app/entities/InputType.ts
-var InputType = ((InputType2) => {
-  InputType2[InputType2["BUTTON"] = UIElementType.BUTTON] = "BUTTON";
-  InputType2[InputType2["CHECKBOX"] = UIElementType.CHECKBOX] = "CHECKBOX";
-  InputType2[InputType2["CHECK_BUTTONS"] = UIElementType.CHECK_BUTTONS] = "CHECK_BUTTONS";
-  InputType2[InputType2["COLOR"] = UIElementType.COLOR] = "COLOR";
-  InputType2[InputType2["COUNTER"] = UIElementType.COUNTER] = "COUNTER";
-  InputType2[InputType2["DATEPICKER"] = UIElementType.DATEPICKER] = "DATEPICKER";
-  InputType2[InputType2["LABEL"] = UIElementType.LABEL] = "LABEL";
-  InputType2[InputType2["MESSAGE"] = UIElementType.MESSAGE] = "MESSAGE";
-  InputType2[InputType2["RADIO_BUTTONS"] = UIElementType.RADIO_BUTTONS] = "RADIO_BUTTONS";
-  InputType2[InputType2["SELECTPICKER"] = UIElementType.SELECTPICKER] = "SELECTPICKER";
-  InputType2[InputType2["SWITCHER"] = UIElementType.SWITCHER] = "SWITCHER";
-  InputType2[InputType2["TEXT"] = UIElementType.TEXT] = "TEXT";
-  InputType2[InputType2["TEXTAREA"] = UIElementType.TEXTAREA] = "TEXTAREA";
-  InputType2[InputType2["MERGETAGS"] = UIElementType.MERGETAGS] = "MERGETAGS";
-  InputType2[InputType2["FONT_FAMILY_SELECT"] = UIElementType.FONT_FAMILY_SELECT] = "FONT_FAMILY_SELECT";
-  InputType2[InputType2["NESTED_CONTROL"] = UIElementType.NESTED_CONTROL] = "NESTED_CONTROL";
-  InputType2[InputType2["ICON"] = UIElementType.ICON] = "ICON";
-  InputType2[InputType2["EXPANDABLE"] = UIElementType.EXPANDABLE] = "EXPANDABLE";
-  InputType2[InputType2["ORDERABLE"] = UIElementType.ORDERABLE] = "ORDERABLE";
-  InputType2[InputType2["ORDERABLE_ITEM"] = UIElementType.ORDERABLE_ITEM] = "ORDERABLE_ITEM";
-  InputType2[InputType2["ORDERABLE_ICON"] = UIElementType.ORDERABLE_ICON] = "ORDERABLE_ICON";
-  InputType2[InputType2["AMP_FORM_SERVICE_PICKER"] = UIElementType.AMP_FORM_SERVICE_PICKER] = "AMP_FORM_SERVICE_PICKER";
-  InputType2[InputType2["MULTIPLE_SELECT"] = UIElementType.MULTIPLE_SELECT] = "MULTIPLE_SELECT";
-  InputType2[InputType2["POPUP_PANEL"] = UIElementType.POPUP_PANEL] = "POPUP_PANEL";
-  InputType2["BANNER_CROPPER"] = "UE-BANNER-CROPPER";
-  InputType2["CAPTION"] = "UE-CAPTION";
-  InputType2["CAROUSEL"] = "UE-CAROUSEL";
-  InputType2["CHECK_BUTTON"] = "UE-CHECK-BUTTON";
-  InputType2["DROPZONE"] = "UE-DROPZONE";
-  InputType2["ADD_CONTENT_TOGGLE"] = "UE-ADD-CONTENT-TOGGLE";
-  InputType2["OPEN_EMOJI"] = "UE-EMOJI-TOGGLE";
-  InputType2["EXTENSION"] = "UE-EXTENSION-INPUT";
-  InputType2["GRADIENT_SLIDER"] = "UE-GRADIENT-SLIDER";
-  InputType2["HIDDEN_PRE_HEADER"] = "UE-HIDDEN-PRE-HEADER";
-  InputType2["MERGE_TAG_TOGGLE"] = "UE-MERGE-TAG-TOGGLE";
-  InputType2["MESSAGE_SUBJECT_TITLE"] = "UE-MESSAGE-SUBJECT-TITLE";
-  InputType2["RICH_TEXT"] = "UE-RICH-TEXT";
-  InputType2["IMAGE"] = "UE-IMAGE";
-  InputType2["IMAGE_GALLERY"] = "UE-IMAGE-GALLERY";
-  InputType2["IMAGE_GALLERY_AI"] = "UE-IMAGE-GALLERY-AI";
-  InputType2["LINK"] = "UE-LINK";
-  InputType2["LISTBOX"] = "UE-LISTBOX";
-  InputType2["NUMBER"] = "UE-NUMBER";
-  InputType2["PANEL_NAVIGATION"] = "UE-PANEL-NAVIGATION";
-  InputType2["PIXIE"] = "UE-PIXIE";
-  InputType2["POPOVER_TOGGLER"] = "UE-POPOVER-TOGGLER";
-  InputType2["QUOTAS_BADGE"] = "UE-QUOTAS-BADGE";
-  InputType2["SMART_BLOCK_CONFIG"] = "UE-SMART-CONFIG";
-  InputType2["SMART_BLOCK_MAPPING"] = "UE-SMART-MAPPING";
-  InputType2["SMART_BLOCK_DATA_PREVIEW"] = "UE-SMART-DATA-PREVIEW";
-  InputType2["SMART_BLOCK_IMAGE"] = "UE-SMART-IMAGE";
-  InputType2["SMART_BLOCK_TEXT"] = "UE-SMART-TEXT";
-  InputType2["SMART_BLOCK_VALUES"] = "UE-SMART-BLOCK-VALUES";
-  InputType2["SOCIAL_ICONS_TOGGLE"] = "UE-TOGGLE-ICON-PICKER";
-  InputType2["TABS_HEADER"] = "UE-TABS-HEADER";
-  InputType2["TEMPLATE_THEME_SELECTOR"] = "UE-TEMPLATE-THEME-SELECTOR";
-  InputType2["TOGGLE"] = "UE-TOGGLE";
-  InputType2["GIF_PREVIEW"] = "UE-GIF-PREVIEW";
-  InputType2["VIDEO_DROPZONE"] = "UE-VIDEO-DROPZONE";
-  InputType2["AMP_FORM_PANEL_SETTINGS"] = "UE-AMP-FORM-PANEL-SETTINGS";
-  return InputType2;
-})(InputType || {});
-
-// editor/ui-editor-ui/src/app/entities/UIObjectTypes.ts
-var UIObjectType = ((UIObjectType2) => {
-  UIObjectType2["CONTAINER"] = "UE-CONTAINER";
-  UIObjectType2["RESPONSIVE_CONTAINER"] = "UE-RESPONSIVE-CONTAINER";
-  UIObjectType2["FORM"] = "UE-FORM";
-  UIObjectType2["GENERIC"] = "GENERIC";
-  UIObjectType2["PREVIEW"] = "UE-PREVIEW";
-  UIObjectType2["SIMPLE_PANEL"] = "UE-SIMPLE-PANEL";
-  UIObjectType2["CODE_EDITOR"] = "UE-CODE-EDITOR";
-  UIObjectType2["CONTROLS_PANEL"] = "UE-CONTROLS-PANEL";
-  UIObjectType2["STYLES_PANEL"] = "UE-STYLES-PANEL";
-  UIObjectType2["MAIN_TABS_PANEL"] = "UE-MAIN-TABS-PANEL";
-  UIObjectType2["HEADER"] = "UE-HEADER";
-  UIObjectType2["ACCORDION"] = "UE-ACCORDION";
-  UIObjectType2["BLOCKS_PANEL"] = "UE-BLOCKS-PANEL";
-  UIObjectType2["BLOCKS_PANEL_HEADER"] = "UE-BLOCKS-PANEL-HEADER";
-  UIObjectType2["MODULES_PANEL"] = "UE-MODULES-PANEL";
-  UIObjectType2["MODULES_PANEL_CONTENT"] = "UE-MODULES-PANEL-CONTENT";
-  UIObjectType2["MODULES_CATEGORY"] = "UE-MODULES-CATEGORY";
-  UIObjectType2["COMMENTS_PANEL"] = "UE-COMMENTS-PANEL";
-  UIObjectType2["MOBILE_COMMENTS_PANEL"] = "UE-MOBILE-COMMENTS-PANEL";
-  UIObjectType2["COMMENTS_TREAD"] = "UE-COMMENTS-TREAD";
-  UIObjectType2["USER_TAG_LIST"] = "UE-USER-TAG-LIST";
-  UIObjectType2["BLOCK_THUMB"] = "UE-BLOCK-THUMB";
-  UIObjectType2["STRIPE_THUMB"] = "UE-STRIPE-THUMB";
-  UIObjectType2["ELEMENT_HIGHLIGHT"] = "UE-ELEMENT-HIGHLIGHT";
-  UIObjectType2["DOCUMENT_PREVIEW_CONTAINER"] = "UE-DOCUMENT-PREVIEW-CONTAINER";
-  UIObjectType2["MAIN_EDITOR_CONTAINER"] = "UE-MAIN-EDITOR-CONTAINER";
-  UIObjectType2["HISTORY"] = "UE-HISTORY";
-  UIObjectType2["DESCRIPTION"] = "UE-DESCRIPTION";
-  UIObjectType2["MENU"] = "UE-MENU";
-  UIObjectType2["BLOCK_THUMB_HINT"] = "UE-BLOCK-THUMB-HINT";
-  UIObjectType2["CONTEXT_MENU"] = "UE-CONTEXT-MENU";
-  UIObjectType2["SOCIAL_ICONS_PICKER"] = "UE-SOCIAL-ICONS-PICKER";
-  UIObjectType2["INSERT_NEW_ELEMENT"] = "UE-INSERT-NEW-ELEMENT";
-  UIObjectType2["TEXT_AI_TOGGLE"] = "TEXT-AI-TOGGLE";
-  UIObjectType2["TEXT_AI_LIST"] = "TEXT-AI-LIST";
-  UIObjectType2["TEXT_AI_IMPROVE"] = "TEXT-AI-IMPROVE";
-  UIObjectType2["TEMPLATE_THEME_HISTORY_RECOVERY"] = "UE-TEMPLATE-THEME-HISTORY-RECOVERY";
-  UIObjectType2["COLOR_PICKER"] = "UE-COLOR-PICKER";
-  UIObjectType2["COLOR_PICKER_WRAPPER"] = "UE-COLOR-PICKER-WRAPPER";
-  UIObjectType2["COLOR_MERGE_TAGS"] = "UE-COLOR-MERGE-TAGS";
-  UIObjectType2["MESSAGE"] = "UE-MESSAGE";
-  UIObjectType2["CLICKABLE_ITEM"] = "UE-CLICKABLE-ITEM";
-  UIObjectType2["NARROW_PANEL_AREA"] = "UE-NARROW-PANEL-AREA";
-  UIObjectType2["WIDE_PANEL_AREA"] = "UE-WIDE-PANEL-AREA";
-  UIObjectType2["FIXED_PANEL_AREA"] = "UE-FIXED-PANEL-AREA";
-  UIObjectType2["IMG_MENU"] = "UE-IMG-MENU";
-  UIObjectType2["SOON"] = "UE-SOON";
-  UIObjectType2["LOCK"] = "UE-LOCK";
-  UIObjectType2["LOCK_CONTAINER"] = "UE-LOCK-CONTAINER";
-  UIObjectType2["VISUAL_MODE"] = "UE-VISUAL-MODE";
-  UIObjectType2["DYNAMIC_CONTAINERS"] = "UE-DYNAMIC-CONTAINERS";
-  UIObjectType2["EQUALIZATION_MODE"] = "UE-EQUALIZATION_MODE";
-  UIObjectType2["GMAIL_PROMO_PREVIEW"] = "UE-GMAIL-PROMO_PREVIEW";
-  UIObjectType2["DEAL_CARD_PREVIEW"] = "UE-DEAL-CARD-PREVIEW";
-  UIObjectType2["TEXT_PANEL"] = "UE-TEXT-PANEL";
-  UIObjectType2["TABLE_PANEL"] = "UE-TABLE-PANEL";
-  UIObjectType2["BANNER_PANEL"] = "UE-BANNER-PANEL";
-  UIObjectType2["MODULE_FORM"] = "UE-MODULE-FORM";
-  UIObjectType2["ACCESSIBILITY_PANEL"] = "UE-ACCESSIBILITY-PANEL";
-  UIObjectType2["URL_LINK_VALIDATION_PANEL"] = "UE-URL-LINK-VALIDATION-PANEL";
-  UIObjectType2["DOTTED_NAV"] = "UE-DOTTED-NAV";
-  UIObjectType2["EMOJI_COMPONENT"] = "UE-EMOJI-COMPONENT";
-  UIObjectType2["MERGE_TAGS_COMPONENT"] = "UE-MERGE-TAGS-COMPONENT";
-  UIObjectType2["LINK_MERGE_TAG_PICKER"] = "UE_LINK_MERGE_TAG_PICKER";
-  UIObjectType2["USER_CURSOR"] = "UE-USER-CURSOR";
-  UIObjectType2["ACTIVE_USERS"] = "UE-ACTIVE-USERS";
-  UIObjectType2["AMP_VALIDATION_VIEW"] = "UE-AMP-VALIDATION-VIEW";
-  UIObjectType2["COMMENTS_PIN"] = "UE-COMMENTS-PIN";
-  UIObjectType2[UIObjectType2["ICON"] = UIElementType.ICON] = "ICON";
-  UIObjectType2[UIObjectType2["ORDERABLE_ITEM"] = UIElementType.ORDERABLE_ITEM] = "ORDERABLE_ITEM";
-  UIObjectType2[UIObjectType2["SCROLLABLE_CONTAINER"] = UIElementType.SCROLLABLE] = "SCROLLABLE_CONTAINER";
-  UIObjectType2[UIObjectType2["REPEATABLE"] = UIElementType.REPEATABLE] = "REPEATABLE";
-  UIObjectType2[UIObjectType2["DRAGGABLE_BLOCK"] = UIElementType.DRAGGABLE_BLOCK] = "DRAGGABLE_BLOCK";
-  return UIObjectType2;
-})(UIObjectType || {});
-var inputTagOverrideMap = Object.values(InputType).reduce((all, tag) => ({ ...all, [tag]: tag }), {});
-var originalInputTagOverrideMap = copy(inputTagOverrideMap);
 
 // editor/ui-editor-ui/src/app/core/nodes-api/history/actions/GUID.ts
 var byteToHex2 = [];
@@ -984,7 +830,7 @@ var EmptyImageConfigMigration = class extends ClassConfigMigration {
   }
 };
 
-// editor/ui-editor-ui/src/app/core-model-adapter/action-transformers/helpers/html-node-interop.ts
+// editor/ui-editor-ui/src/app/core/block-operations-api/common/layout/helpers/html-node-interop.ts
 function isRecord(value) {
   return value !== null && typeof value === "object";
 }
@@ -1059,7 +905,7 @@ var MenuTypeConfigMigration = class _MenuTypeConfigMigration {
       }
       Object.keys(_MenuTypeConfigMigration.menuClassTypeMap).forEach((className) => {
         if (classes.indexOf(className) !== -1) {
-          const menuItems = NodeUtils.find(htmlObject, (n) => n.tag === DefaultBlock.BLOCK_MENU_ITEM);
+          const menuItems = NodeUtils.find(htmlObject, (n) => n.tag === "BLOCK_MENU_ITEM" /* BLOCK_MENU_ITEM */);
           const isLinks = menuItems.every((v) => v.children.every((m) => m.children.every((e) => e.tag !== "IMG" /* IMG */)));
           const isIcons = menuItems.every((v) => v.children.every((m) => m.children.every((e) => e.tag === "IMG" /* IMG */)));
           const isLinksAndIcons = menuItems.every((v) => {

@@ -1,1095 +1,1099 @@
 
 export default {
-["IBlockOperationsApi.videoBlock#1=>.updateGifSettings"]: {
-  "hash": "758bbba041232e5e7ba8cd6622d75490aea739c26c7c9fc024d7f68b01447eee",
+["IBlockOperationsApi.structure#0=>.delete#0(options).fontsCategories?|1[].entries[].importMethod?|0"]: {
+  "hash": "570326e88d6ea9324c701bdef940750ecb6febdbcf2bae814b6887868f904465",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.videoBlock#1=>.updateGifSettings#0(gifSettings)"]: {
-  "hash": "32de608cf6fc3700f1dc53e99c329a7661186e699bfdf24c2eb261678ec58e61",
+["IBlockOperationsApi.structure#0=>.delete#0(options).fontsCategories?|1[].entries[].importMethod?|1"]: {
+  "hash": "7ff9cb19dc739d71d82c227abccf474abd2c93fcc751b5f374789c0c21572cbd",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.videoBlock#1=>.updateGifSettings#0(gifSettings).startTimeMs"]: {
-  "hash": "fd1a55ee2217c1ac278ab485236d6c199517334ee91e965cf2f6b8575701cd1c",
+["IBlockOperationsApi.structure#0=>.delete#0(options).fontsCategories?|1[].entries[].importMethod?|2"]: {
+  "hash": "c15c65984ad2ca5d360b789e214cbe004bd1cb022ba7a08b6fc27cf43236e3d6",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.videoBlock#1=>.updateGifSettings#0(gifSettings).durationSec"]: {
-  "hash": "fd1a55ee2217c1ac278ab485236d6c199517334ee91e965cf2f6b8575701cd1c",
+["IBlockOperationsApi.structure#0=>.delete#0(options).fontsCategories?|1[].entries[].importMethod?|3"]: {
+  "hash": "9afe7ceec913be65122f0f6df1ce0e6c96e19a25e0920d92dbd1c8ac92281044",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.videoBlock#1=>.updateGifSettings#0(gifSettings).framesPerSec"]: {
-  "hash": "fd1a55ee2217c1ac278ab485236d6c199517334ee91e965cf2f6b8575701cd1c",
+["IBlockOperationsApi.structure#0=>.delete#0(options).fontsCategories?|1[].entries[].importMethod?|4"]: {
+  "hash": "43eee21512c366abba9069e54dd70754f24b459c725f488501dbc5043a0333be",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.videoBlock#1=>.updateGifSettings#0=>"]: {
-  "hash": "751c06d9b115f2b0703d511099c982425cdfae0d79f1e6789582ae2fb8586dd9",
+["IBlockOperationsApi.structure#0=>.delete#0(options).skipUniqueClassCleanup?"]: {
+  "hash": "3b5e8f4439e0cfc6fb875f2bb57f220fe176c5b6735a5abfb204411d411e0d3f",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.videoBlock#1=>.getGifSettings"]: {
-  "hash": "8f8d6d529aa05ea17627d989358a9e1cba182bd482a2bced957fdba245d64f57",
-  "group": "apiRead"
-},
-["IBlockOperationsApi.videoBlock#1=>.updateFallbackUrl"]: {
-  "hash": "b36c79add04376a9100f86407adb3f1568a98cee80f56aded823a9bfa522cb23",
+["IBlockOperationsApi.structure#0=>.delete#0(options).skipFontCleanup?"]: {
+  "hash": "3b5e8f4439e0cfc6fb875f2bb57f220fe176c5b6735a5abfb204411d411e0d3f",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.videoBlock#1=>.updateFallbackUrl#0(fallbackUrl)"]: {
-  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
+["IBlockOperationsApi.structure#0=>.delete#0(options).uniqueClassCleanup?"]: {
+  "hash": "e40d4551c7c033ef7a1381ba79d5fd012e8463edd7e4ff488697dfb187b2be5c",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.videoBlock#1=>.updateFallbackUrl#0=>"]: {
-  "hash": "751c06d9b115f2b0703d511099c982425cdfae0d79f1e6789582ae2fb8586dd9",
+["IBlockOperationsApi.structure#0=>.delete#0(options).uniqueClassCleanup?|0"]: {
+  "hash": "570326e88d6ea9324c701bdef940750ecb6febdbcf2bae814b6887868f904465",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.videoBlock#1=>.getFallbackUrl"]: {
+["IBlockOperationsApi.structure#0=>.delete#0(options).uniqueClassCleanup?|1"]: {
+  "hash": "2ac4efb3dca694a3d97171c2641ed9cf79ee74f9ab6727c3a8a918f4db38d5af",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).uniqueClassCleanup?|1#0(node)"]: {
+  "hash": "228f325e56d2d895dc628a0739e5ec1ef185058e319965150edeee8c51cd9850",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).uniqueClassCleanup?|1#0(node).getId"]: {
   "hash": "8d67252c65f2e66032c8f9618c617ba066dc059abb08c968f731c1ce74be0efa",
-  "group": "apiRead"
-},
-["IBlockOperationsApi.videoBlock#1=>.hasFallbackUrl"]: {
-  "hash": "6bd3df6f2216b5a140f7da59ba6cd56dd3537b002128ca108e9e2d71f711a18a",
-  "group": "apiRead"
-},
-["IBlockOperationsApi.timerBlock"]: {
-  "hash": "8c8d6aec6fc8577d72c273e76bee735d9ad46126024e2e6a8b53e0ce346aff78",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.timerBlock#0(id)"]: {
+["IBlockOperationsApi.structure#0=>.delete#0(options).uniqueClassCleanup?|1#0(node).getType"]: {
+  "hash": "bcd84c134110e046d8406024eb45b886633e7a6f7e35fb569c6dbd251831aebd",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).uniqueClassCleanup?|1#0(node).getContent"]: {
+  "hash": "8a8155ba7d8204fb263b4bfd55b00578640df85660862042ea5940e7c32710ad",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).uniqueClassCleanup?|1#0(node).getTag"]: {
+  "hash": "8a8155ba7d8204fb263b4bfd55b00578640df85660862042ea5940e7c32710ad",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).uniqueClassCleanup?|1#0(node).getAttributes"]: {
+  "hash": "0ea9644885545a7cd09c1933cd809d5f650337ea821207a347e6ed8ab19830fa",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).uniqueClassCleanup?|1#0(node).getAttribute"]: {
+  "hash": "474b2cd78991c2e3079d92d15a789057da7ad7b70270915075dc11f3f0913c41",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).uniqueClassCleanup?|1#0(node).getAttribute#0(name)"]: {
   "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.timerBlock#0=>"]: {
-  "hash": "154596623859477841044a08d6cb4e76d138f86bbe895ff9f7cfdf8521c9535e",
+["IBlockOperationsApi.structure#0=>.delete#0(options).uniqueClassCleanup?|1#0(node).getStringAttribute"]: {
+  "hash": "84c79f46ad2da53ce0847495451e53843bce2870bd51faf83a04ca83fa0e1910",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.timerBlock#0=>.getSettings"]: {
-  "hash": "72b214168ee4132ce413ce3c8be0205f341c0e45912967703dfabf69887f523b",
-  "group": "apiRead"
-},
-["IBlockOperationsApi.timerBlock#0=>.getSettings#0=>"]: {
-  "hash": "c89aab87df6e8b487c1776bb5084109bb27e5c0c2cd7535eb23afe4e301c71af",
-  "group": "apiRead"
-},
-["IBlockOperationsApi.timerBlock#0=>.getSettings#0=>.altText"]: {
-  "hash": "a4789f4b114676c6d7737a3869800bdc1530571818b2bf01dd3fd07d518c7755",
-  "group": "apiRead"
-},
-["IBlockOperationsApi.timerBlock#0=>.getSettings#0=>.responsiveMobile"]: {
-  "hash": "a5b031ab62bc416d720c0410d802ea46b910c4fbe85c50a946ccc658b74e677e",
-  "group": "apiRead"
-},
-["IBlockOperationsApi.timerBlock#0=>.getSettings#0=>.size"]: {
-  "hash": "ec40339c618a815d820aa857e43f9da810b582225e75142c9a1a049ce754ca46",
-  "group": "apiRead"
-},
-["IBlockOperationsApi.timerBlock#0=>.getSettings#0=>.alignment"]: {
-  "hash": "c02808b47937e675d1b636933a3997b747229de40138e3cb42453a40a23f0829",
-  "group": "apiRead"
-},
-["IBlockOperationsApi.timerBlock#0=>.getSettings#0=>.margins"]: {
-  "hash": "4fd4e648beea96512f53e25aa549eec24f10baf67f276c8207ce8e866b38d7bc",
-  "group": "apiRead"
-},
-["IBlockOperationsApi.timerBlock#0=>.getSettings#0=>.endDate"]: {
+["IBlockOperationsApi.structure#0=>.delete#0(options).uniqueClassCleanup?|1#0(node).getStringAttribute#0(name)"]: {
   "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
-  "group": "apiRead"
+  "group": "apiMutation"
 },
-["IBlockOperationsApi.timerBlock#0=>.getSettings#0=>.timeZone"]: {
+["IBlockOperationsApi.structure#0=>.delete#0(options).uniqueClassCleanup?|1#0(node).getNumberAttribute"]: {
+  "hash": "9dcc425e6b9c56d68b9fd429ce8253d5dbf4805dce9778195a65a25d162a76c7",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).uniqueClassCleanup?|1#0(node).getNumberAttribute#0(name)"]: {
   "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
-  "group": "apiRead"
+  "group": "apiMutation"
 },
-["IBlockOperationsApi.timerBlock#0=>.getSettings#0=>.link"]: {
-  "hash": "96faf982b2da49558f49ba94d19c819446c8a0ea69364bb90091811a39afb7a2",
-  "group": "apiRead"
+["IBlockOperationsApi.structure#0=>.delete#0(options).uniqueClassCleanup?|1#0(node).getBooleanAttribute"]: {
+  "hash": "c95e461d513d3ad1aa82de8f5f64487ad00e10ebfae521f0a78012885d6b7f8e",
+  "group": "apiMutation"
 },
-["IBlockOperationsApi.timerBlock#0=>.getSettings#0=>.link|0"]: {
-  "hash": "13ce20414eeea59045c2d5a12eeab2d508cf3c44e2bd67810a1180b15706fad4",
-  "group": "apiRead"
+["IBlockOperationsApi.structure#0=>.delete#0(options).uniqueClassCleanup?|1#0(node).getBooleanAttribute#0(name)"]: {
+  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
+  "group": "apiMutation"
 },
-["IBlockOperationsApi.timerBlock#0=>.getSettings#0=>.link|1"]: {
-  "hash": "ab9a8f8de8fc3b3c291ba274d0668efbb3a30e49e04f5d19cdf845e9b9f39199",
-  "group": "apiRead"
+["IBlockOperationsApi.structure#0=>.delete#0(options).uniqueClassCleanup?|1#0(node).getClasses"]: {
+  "hash": "8d85cdbd93afb1289f2b28f424ca23345a70bc8db8933ed7bb88b7a3232976c0",
+  "group": "apiMutation"
 },
-["IBlockOperationsApi.timerBlock#0=>.getSettings#0=>.displayDays"]: {
-  "hash": "a5b031ab62bc416d720c0410d802ea46b910c4fbe85c50a946ccc658b74e677e",
-  "group": "apiRead"
+["IBlockOperationsApi.structure#0=>.delete#0(options).uniqueClassCleanup?|1#0(node).hasClass"]: {
+  "hash": "548194b95f3aec5a044c07ad8e110e927692d424f8b4bb13b9214a0bdfc1b9d6",
+  "group": "apiMutation"
 },
-["IBlockOperationsApi.timerBlock#0=>.getSettings#0=>.labelsLetterCase?"]: {
-  "hash": "1cf9617dc551ca004586af13f09970478170983b16f0602a179c09c822fab88b",
-  "group": "apiRead"
+["IBlockOperationsApi.structure#0=>.delete#0(options).uniqueClassCleanup?|1#0(node).hasClass#0(className)"]: {
+  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
+  "group": "apiMutation"
 },
-["IBlockOperationsApi.timerBlock#0=>.getSettings#0=>.labelsLetterCase?|0"]: {
+["IBlockOperationsApi.structure#0=>.delete#0(options).uniqueClassCleanup?|1#0(node).getClassList"]: {
+  "hash": "8d67252c65f2e66032c8f9618c617ba066dc059abb08c968f731c1ce74be0efa",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).uniqueClassCleanup?|1#0(node).getStyles"]: {
+  "hash": "3284ffcae1bda57c7930e48f7de71a8a9d961e84e89a058d96dd81993893bf9b",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).uniqueClassCleanup?|1#0(node).getStyle"]: {
+  "hash": "84c79f46ad2da53ce0847495451e53843bce2870bd51faf83a04ca83fa0e1910",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).uniqueClassCleanup?|1#0(node).getStyle#0(name)"]: {
+  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).uniqueClassCleanup?|1#0(node).getStyleList"]: {
+  "hash": "8d67252c65f2e66032c8f9618c617ba066dc059abb08c968f731c1ce74be0efa",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).uniqueClassCleanup?|1#0(node).getNodeConfigProp"]: {
+  "hash": "5325ae0f6bd7b5622be669e120c5535ab0d7842317232588f4d65e1a8f78d926",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).uniqueClassCleanup?|1#0(node).getNodeConfigProp#0(prop)"]: {
+  "hash": "65aef5e867d44f116ccec3af3261363bd462c25c66cd08023dc69747efc213f4",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).uniqueClassCleanup?|1#0(node).getNodeConfigProp#0(prop):constraint"]: {
+  "hash": "da149cf3599d3ca9ed91cbdf6ee3882ae1da6e934ff599415a76940422683c02",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).uniqueClassCleanup?|1#0(node).getNodeConfig"]: {
+  "hash": "338b0e5caa8d24f4a670de0aea47202f264d0e7758f290a83df71b34767d9f05",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).uniqueClassCleanup?|1#0(node).getChildren"]: {
+  "hash": "4f6dca6d2b94ebff210c8aba6c2661191632e9d34d28394473b387d42527ae73",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).uniqueClassCleanup?|1#0(node).getParent"]: {
+  "hash": "04052e2cfaa481d943a105da11b731211522133e0262dceb937aed221abca250",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).uniqueClassCleanup?|1#0(node).getAllChildrenIds"]: {
+  "hash": "7470769ec190c88fe4f6fdaf25d26319da681456dd838d0da3fff0fb9bd59bc9",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).uniqueClassCleanup?|1#0(node).find"]: {
+  "hash": "8b1798f8b836c9d8a31283e16e408358a4854af807ad8065e192a5a0d89c31f4",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).uniqueClassCleanup?|1#0(node).find#0(selectors)"]: {
+  "hash": "cfe3200f357781e00e7c47ffe83d96d6679d29832c135e3e146fc41fc31149b9",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).uniqueClassCleanup?|1#0(node).findOne"]: {
+  "hash": "8b1798f8b836c9d8a31283e16e408358a4854af807ad8065e192a5a0d89c31f4",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).uniqueClassCleanup?|1#0(node).findOne#0(selectors)"]: {
+  "hash": "cfe3200f357781e00e7c47ffe83d96d6679d29832c135e3e146fc41fc31149b9",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).uniqueClassCleanup?|1#0(node).findAll"]: {
+  "hash": "3939d9519d21f68fe489b74394d2b7f93288c10653998a8ac4a793fb8bed5f0c",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).uniqueClassCleanup?|1#0(node).findAll#0(selectors)"]: {
+  "hash": "cfe3200f357781e00e7c47ffe83d96d6679d29832c135e3e146fc41fc31149b9",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).uniqueClassCleanup?|1#0(node).getClosestParent"]: {
+  "hash": "8b1798f8b836c9d8a31283e16e408358a4854af807ad8065e192a5a0d89c31f4",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).uniqueClassCleanup?|1#0(node).getClosestParent#0(selectors)"]: {
+  "hash": "cfe3200f357781e00e7c47ffe83d96d6679d29832c135e3e146fc41fc31149b9",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).uniqueClassCleanup?|1#0(node).findParent"]: {
+  "hash": "8b1798f8b836c9d8a31283e16e408358a4854af807ad8065e192a5a0d89c31f4",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).uniqueClassCleanup?|1#0(node).findParent#0(selectors)"]: {
+  "hash": "cfe3200f357781e00e7c47ffe83d96d6679d29832c135e3e146fc41fc31149b9",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).uniqueClassCleanup?|1#0(node).getParents"]: {
+  "hash": "3cbc48febc797bf5d57b1ce7eebd6d8f55cad63626d3a13674e75ee2065088d8",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).uniqueClassCleanup?|1#0(node).getParents#0(selectors)"]: {
+  "hash": "cfe3200f357781e00e7c47ffe83d96d6679d29832c135e3e146fc41fc31149b9",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).uniqueClassCleanup?|1#0(crdtApi)"]: {
+  "hash": "c28084b11384e511aabbbda13c9358b9b24b8cea67d27d802f930954dd421f6c",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).fontRemoval?"]: {
+  "hash": "b3f6d754c03d2ecf430126a651a4e4439b690474a2da3a995a297dc1ba19df37",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).fontRemoval?|0"]: {
   "hash": "570326e88d6ea9324c701bdef940750ecb6febdbcf2bae814b6887868f904465",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).fontRemoval?|1"]: {
+  "hash": "828fb7f8e391e7da7484351b0321551011560984751f1d34759af2bd6d011c20",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).fontRemoval?|1#0(node)"]: {
+  "hash": "5ba9c7bb79c30f819a8f374c9590623b75aaffd26a5faeedb276c182f6bc2704",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).fontRemoval?|1#0(crdtApi)"]: {
+  "hash": "c28084b11384e511aabbbda13c9358b9b24b8cea67d27d802f930954dd421f6c",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).fontRemoval?|1#0(fontsCategories)"]: {
+  "hash": "808bc11780c319b9a002d7a87680b8e476a7ffc23688426bac666f63d9bd2336",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(patchOptions)"]: {
+  "hash": "cde1c32dc7e44016d04507af8dad77bb92a04da179ad60ffbd540bfa460303da",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0=>"]: {
+  "hash": "751c06d9b115f2b0703d511099c982425cdfae0d79f1e6789582ae2fb8586dd9",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.resolve"]: {
+  "hash": "d3da2d8daafa13d9b9e22a1909935bb61ed06312e9e6eba99cb163c23967f43a",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.resolve#0(htmlApi)"]: {
+  "hash": "cf8fcd3dda55c3f9dbaef45b1834c4460a515ed73f752ded9acb742148d4e935",
   "group": "apiRead"
 },
-["IBlockOperationsApi.timerBlock#0=>.getSettings#0=>.labelsLetterCase?|1"]: {
-  "hash": "72aa5f9e5c35898208cec426859b0e3e3806fed0b2add8194269c1f29248ad45",
-  "group": "apiRead"
-},
-["IBlockOperationsApi.timerBlock#0=>.getSettings#0=>.labelsLetterCase?|2"]: {
-  "hash": "f379f436e7ac7f08e253abec55196937233cc1eeb582be5a7f96e4ed41d62ef0",
-  "group": "apiRead"
-},
-["IBlockOperationsApi.timerBlock#0=>.getSettings#0=>.labelsLetterCase?|3"]: {
-  "hash": "8058c7d14704f435538cb49dd88622789c74e65bbb4b91d99dc2b9a4b708022a",
-  "group": "apiRead"
-},
-["IBlockOperationsApi.timerBlock#0=>.getSettings#0=>.separator"]: {
+["IBlockOperationsApi.structure#0=>.resolve#0(baseNodeId)"]: {
   "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
   "group": "apiRead"
 },
-["IBlockOperationsApi.timerBlock#0=>.getSettings#0=>.labelsLanguage"]: {
+["IBlockOperationsApi.structure#1(id)"]: {
   "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>"]: {
+  "hash": "e0442eb2e002f599f4f70132895ebff8d532fb47db8ae156c9240bd2e241fb94",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateBackgroundColor"]: {
+  "hash": "b645395e0413ff8a2d0d0d493e7b47d5660587fd087ad4212589559f2e64af0a",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateBackgroundColor#0(backgroundColor)"]: {
+  "hash": "225012718a0bde3a521c91ce0c3bf1579b27bf9974e29152edc101189d45c443",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateBackgroundColor#0=>"]: {
+  "hash": "751c06d9b115f2b0703d511099c982425cdfae0d79f1e6789582ae2fb8586dd9",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.getBackgroundColor"]: {
+  "hash": "8a8155ba7d8204fb263b4bfd55b00578640df85660862042ea5940e7c32710ad",
   "group": "apiRead"
 },
-["IBlockOperationsApi.timerBlock#0=>.getSettings#0=>.retinaDisplaySupport"]: {
-  "hash": "a5b031ab62bc416d720c0410d802ea46b910c4fbe85c50a946ccc658b74e677e",
+["IBlockOperationsApi.structure#1=>.getBackgroundColorWithGradient"]: {
+  "hash": "8a8155ba7d8204fb263b4bfd55b00578640df85660862042ea5940e7c32710ad",
   "group": "apiRead"
 },
-["IBlockOperationsApi.timerBlock#0=>.getSettings#0=>.expirationImageSrc"]: {
-  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
+["IBlockOperationsApi.structure#1=>.getBackgroundColorAsync"]: {
+  "hash": "cc33b8e5cdae12c6662a7b53eee511d62f13dc98f279d65f3de4cfccade51a63",
   "group": "apiRead"
 },
-["IBlockOperationsApi.timerBlock#0=>.getSettings#0=>.hideElement"]: {
-  "hash": "dcd0a05e489099c667915dad041bf536669e6222ca32b2dc1ab509cb28a4a9df",
+["IBlockOperationsApi.structure#1=>.updateBackgroundSettings"]: {
+  "hash": "6464496b222c6af27041bf1c46cb494a37e58e1c741f0a1d484700e4b3a60049",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateBackgroundSettings#0(settings)"]: {
+  "hash": "8a10ca961925cd68ccf21bee5029607ada0228f6cf7a12904ee1cea893587098",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateBackgroundSettings#0=>"]: {
+  "hash": "751c06d9b115f2b0703d511099c982425cdfae0d79f1e6789582ae2fb8586dd9",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.getBackgroundSettings"]: {
+  "hash": "28d8b99de4bbaef4c6e4ab5412a029fee2e93a7026e9c27007622680ad5f3ac4",
   "group": "apiRead"
 },
-["IBlockOperationsApi.timerBlock#0=>.getSettings#0=>.includeInOutput"]: {
-  "hash": "c287e94be95f327fb483a657cdbc9187eec76b13a5355fe6f4e6ce34c2bc88ae",
+["IBlockOperationsApi.structure#1=>.getBackgroundSettings#0=>"]: {
+  "hash": "8a10ca961925cd68ccf21bee5029607ada0228f6cf7a12904ee1cea893587098",
   "group": "apiRead"
 },
-["IBlockOperationsApi.timerBlock#0=>.getSettings#0=>.anchorLinkName"]: {
-  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
-  "group": "apiRead"
+["IBlockOperationsApi.structure#1=>.updateBorder"]: {
+  "hash": "52bb7bee764ac61e75890432b564e8bcf05a1457553b5fbae6fbd8114f895458",
+  "group": "apiMutation"
 },
-["IBlockOperationsApi.timerBlock#0=>.getSettings#0=>.digitsFontFamily"]: {
-  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
-  "group": "apiRead"
+["IBlockOperationsApi.structure#1=>.updateBorder#0(border)"]: {
+  "hash": "5802af4b5a84623ccab482b5d1021b72f7b9b58423e958e635e78137cb0274d8",
+  "group": "apiMutation"
 },
-["IBlockOperationsApi.timerBlock#0=>.getSettings#0=>.digitsFontSize"]: {
+["IBlockOperationsApi.structure#1=>.updateBorder#0(isMobile)"]: {
+  "hash": "3b5e8f4439e0cfc6fb875f2bb57f220fe176c5b6735a5abfb204411d411e0d3f",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateBorder#0=>"]: {
+  "hash": "751c06d9b115f2b0703d511099c982425cdfae0d79f1e6789582ae2fb8586dd9",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateBorderWidthShort"]: {
+  "hash": "b0183ee903f3bcdae082a689063fb39ab34c802999f5f8ef5f941b0bc507809f",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateBorderWidthShort#0(width)"]: {
   "hash": "fd1a55ee2217c1ac278ab485236d6c199517334ee91e965cf2f6b8575701cd1c",
-  "group": "apiRead"
+  "group": "apiMutation"
 },
-["IBlockOperationsApi.timerBlock#0=>.getSettings#0=>.digitsFontColor"]: {
+["IBlockOperationsApi.structure#1=>.updateBorderWidthShort#0(isMobile)"]: {
+  "hash": "3b5e8f4439e0cfc6fb875f2bb57f220fe176c5b6735a5abfb204411d411e0d3f",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateBorderWidthShort#0=>"]: {
+  "hash": "751c06d9b115f2b0703d511099c982425cdfae0d79f1e6789582ae2fb8586dd9",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateBorderWidthDetailed"]: {
+  "hash": "b0c7c67ae09dba6bd04b000db224f77c65bd868db66c7c3dacb6e5ad18d0da67",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateBorderWidthDetailed#0(width)"]: {
+  "hash": "d9ed44092f9448c773b645eabcc24c61313d8464b1ceb8df3f8abff145a4146e",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateBorderWidthDetailed#0(isMobile)"]: {
+  "hash": "3b5e8f4439e0cfc6fb875f2bb57f220fe176c5b6735a5abfb204411d411e0d3f",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateBorderWidthDetailed#0=>"]: {
+  "hash": "751c06d9b115f2b0703d511099c982425cdfae0d79f1e6789582ae2fb8586dd9",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateBorderColorShort"]: {
+  "hash": "52be1eb6da93c4f4e869e62b80416f1ff38b3b5b8f4803551ab55328260dc71b",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateBorderColorShort#0(color)"]: {
   "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateBorderColorShort#0(isMobile)"]: {
+  "hash": "3b5e8f4439e0cfc6fb875f2bb57f220fe176c5b6735a5abfb204411d411e0d3f",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateBorderColorShort#0=>"]: {
+  "hash": "751c06d9b115f2b0703d511099c982425cdfae0d79f1e6789582ae2fb8586dd9",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateBorderColorDetailed"]: {
+  "hash": "f01461915cb55cc37243973d84feb7a6847673aeeca0fcde7090bcd13026180f",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateBorderColorDetailed#0(color)"]: {
+  "hash": "20560090ba8a34a00e2c80ad2f82195f661064b5cd736db1b6948fb757bdc0c3",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateBorderColorDetailed#0(isMobile)"]: {
+  "hash": "3b5e8f4439e0cfc6fb875f2bb57f220fe176c5b6735a5abfb204411d411e0d3f",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateBorderColorDetailed#0=>"]: {
+  "hash": "751c06d9b115f2b0703d511099c982425cdfae0d79f1e6789582ae2fb8586dd9",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateBorderStyle"]: {
+  "hash": "3551a4ff17f273d1c7e32d268cb7495236f0780587daece25f206bd9a9929bf1",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateBorderStyle#0(style)"]: {
+  "hash": "09f36ed8ec66d9c424008b32b4d6c1c6ac8ed7034b11abd363aa0a1ee60afd30",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateBorderStyle#0(isMobile)"]: {
+  "hash": "3b5e8f4439e0cfc6fb875f2bb57f220fe176c5b6735a5abfb204411d411e0d3f",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateBorderStyle#0=>"]: {
+  "hash": "751c06d9b115f2b0703d511099c982425cdfae0d79f1e6789582ae2fb8586dd9",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateBorderModeShort"]: {
+  "hash": "7783a650cedf6c16045e1766e98b6d566d9100698e0e6616947371d47e588b11",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateBorderModeShort#0(isMobile)"]: {
+  "hash": "3b5e8f4439e0cfc6fb875f2bb57f220fe176c5b6735a5abfb204411d411e0d3f",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateBorderModeShort#0=>"]: {
+  "hash": "751c06d9b115f2b0703d511099c982425cdfae0d79f1e6789582ae2fb8586dd9",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.getBorder"]: {
+  "hash": "c417d616bf008166765aff247818a5c93f349d172c04facb63dc985fe4a03181",
   "group": "apiRead"
 },
-["IBlockOperationsApi.timerBlock#0=>.getSettings#0=>.digitsAdvancedColorSettings?"]: {
-  "hash": "4219c44393f670f9250a4706148062c6e430b5dd6d6746f186353afe6e3ff1cb",
+["IBlockOperationsApi.structure#1=>.getBorder#0(isMobile)"]: {
+  "hash": "3b5e8f4439e0cfc6fb875f2bb57f220fe176c5b6735a5abfb204411d411e0d3f",
   "group": "apiRead"
 },
-["IBlockOperationsApi.timerBlock#0=>.getSettings#0=>.digitsAdvancedColorSettings?|0"]: {
-  "hash": "570326e88d6ea9324c701bdef940750ecb6febdbcf2bae814b6887868f904465",
+["IBlockOperationsApi.structure#1=>.updateBorderRadius"]: {
+  "hash": "d082fe0d08288d470d6ccb932d569841b82c50734868392c1ef815254da5fb8c",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateBorderRadius#0(value)"]: {
+  "hash": "09413bbda1f29d06f53f7506408cd7388a354e5b46a97e4fc1aade421b702699",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateBorderRadius#0=>"]: {
+  "hash": "751c06d9b115f2b0703d511099c982425cdfae0d79f1e6789582ae2fb8586dd9",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.getBorderRadius"]: {
+  "hash": "e0651f0456e25a00288f420cf8bb317a2a05e55df6d4f3a2d4b2106c7a37bd58",
   "group": "apiRead"
 },
-["IBlockOperationsApi.timerBlock#0=>.getSettings#0=>.digitsAdvancedColorSettings?|1"]: {
-  "hash": "2443ebaa249bdc47c2f40ff37e0c99554fb634bc4c13b1a3d23085b098924d8b",
+["IBlockOperationsApi.structure#1=>.getBorderRadiusAsync"]: {
+  "hash": "26d362fc202671f08d7b9ac17827660f7bfc444a3157b5029a6ee4e3535aa296",
   "group": "apiRead"
 },
-["IBlockOperationsApi.timerBlock#0=>.getSettings#0=>.digitsAdvancedColorSettings?|1.days"]: {
-  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
-  "group": "apiRead"
+["IBlockOperationsApi.structure#1=>.updateWidthColumn"]: {
+  "hash": "941161a720986498a1447fd64f3295e1c36b6791a3ca303fc5756cc333d709f1",
+  "group": "apiMutation"
 },
-["IBlockOperationsApi.timerBlock#0=>.getSettings#0=>.digitsAdvancedColorSettings?|1.hours"]: {
-  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
-  "group": "apiRead"
-},
-["IBlockOperationsApi.timerBlock#0=>.getSettings#0=>.digitsAdvancedColorSettings?|1.minutes"]: {
-  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
-  "group": "apiRead"
-},
-["IBlockOperationsApi.timerBlock#0=>.getSettings#0=>.digitsAdvancedColorSettings?|1.seconds"]: {
-  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
-  "group": "apiRead"
-},
-["IBlockOperationsApi.timerBlock#0=>.getSettings#0=>.labelsFontFamily"]: {
-  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
-  "group": "apiRead"
-},
-["IBlockOperationsApi.timerBlock#0=>.getSettings#0=>.labelsFontSize"]: {
+["IBlockOperationsApi.structure#1=>.updateWidthColumn#0(index)"]: {
   "hash": "fd1a55ee2217c1ac278ab485236d6c199517334ee91e965cf2f6b8575701cd1c",
-  "group": "apiRead"
+  "group": "apiMutation"
 },
-["IBlockOperationsApi.timerBlock#0=>.getSettings#0=>.labelsFontColor"]: {
-  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
-  "group": "apiRead"
-},
-["IBlockOperationsApi.timerBlock#0=>.getSettings#0=>.labelsAdvancedColorSettings?"]: {
-  "hash": "35860f49e6a3f72008bc364f87a446f1b1160b5516f4bda364d5946112d167b4",
-  "group": "apiRead"
-},
-["IBlockOperationsApi.timerBlock#0=>.getSettings#0=>.separatorFontFamily"]: {
-  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
-  "group": "apiRead"
-},
-["IBlockOperationsApi.timerBlock#0=>.getSettings#0=>.separatorFontSize"]: {
+["IBlockOperationsApi.structure#1=>.updateWidthColumn#0(widthColumn)"]: {
   "hash": "fd1a55ee2217c1ac278ab485236d6c199517334ee91e965cf2f6b8575701cd1c",
-  "group": "apiRead"
-},
-["IBlockOperationsApi.timerBlock#0=>.getSettings#0=>.separatorFontColor"]: {
-  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
-  "group": "apiRead"
-},
-["IBlockOperationsApi.timerBlock#0=>.getSettings#0=>.backgroundColor"]: {
-  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
-  "group": "apiRead"
-},
-["IBlockOperationsApi.timerBlock#0=>.updateAltText"]: {
-  "hash": "cc045a6673b0eb7e9384e8c8a3089baf82f92e1407d33b453599a3d8720a242e",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.timerBlock#0=>.updateAltText#0(text)"]: {
-  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.timerBlock#0=>.updateAltText#0(addToTitle)"]: {
-  "hash": "a5b031ab62bc416d720c0410d802ea46b910c4fbe85c50a946ccc658b74e677e",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.timerBlock#0=>.updateAltText#0=>"]: {
+["IBlockOperationsApi.structure#1=>.updateWidthColumn#0=>"]: {
   "hash": "751c06d9b115f2b0703d511099c982425cdfae0d79f1e6789582ae2fb8586dd9",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.timerBlock#0=>.getAltText"]: {
-  "hash": "43396f59b9574774c5e2e40f61f073ee74709bb9bf3f14fbc03e4f93b1db4585",
-  "group": "apiRead"
-},
-["IBlockOperationsApi.timerBlock#0=>.getAltText#0=>"]: {
-  "hash": "a4789f4b114676c6d7737a3869800bdc1530571818b2bf01dd3fd07d518c7755",
-  "group": "apiRead"
-},
-["IBlockOperationsApi.timerBlock#0=>.updateResponsiveMobile"]: {
-  "hash": "e6c475d00fa7ea983c142af2aff237cb9d9c947ad50f25bc8118152cec72038d",
+["IBlockOperationsApi.structure#1=>.updateWidthColumns"]: {
+  "hash": "faa64ecd0a94ef338c5d60b78716b68bd00c92896c78ae90ae4a33ef754f5e85",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.timerBlock#0=>.updateResponsiveMobile#0(enabled)"]: {
-  "hash": "a5b031ab62bc416d720c0410d802ea46b910c4fbe85c50a946ccc658b74e677e",
+["IBlockOperationsApi.structure#1=>.updateWidthColumns#0(widthColumns)"]: {
+  "hash": "32b4b67186cc2fe69fc2bf85533bec9a9f6efba7c7fc7621e76d21bcdcefaad0",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.timerBlock#0=>.updateResponsiveMobile#0=>"]: {
+["IBlockOperationsApi.structure#1=>.updateWidthColumns#0(normalizeConstraints)"]: {
+  "hash": "3b5e8f4439e0cfc6fb875f2bb57f220fe176c5b6735a5abfb204411d411e0d3f",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateWidthColumns#0=>"]: {
   "hash": "751c06d9b115f2b0703d511099c982425cdfae0d79f1e6789582ae2fb8586dd9",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.timerBlock#0=>.getResponsiveMobile"]: {
-  "hash": "6bd3df6f2216b5a140f7da59ba6cd56dd3537b002128ca108e9e2d71f711a18a",
+["IBlockOperationsApi.structure#1=>.getWidthColumns"]: {
+  "hash": "2810aea4238e445f084222845acd22b89581e2a4e151b0fc479fec2d593a03cc",
   "group": "apiRead"
 },
-["IBlockOperationsApi.timerBlock#0=>.updateSize"]: {
-  "hash": "adf2d17172b11245d226a1c9495c6f746a62d256d4ab7e1f6ae778fa240ad827",
+["IBlockOperationsApi.structure#1=>.updateColumnsGapDesktop"]: {
+  "hash": "cb644bf22b1b80e97103ae42df38007d23a04a9c754d8b5ba2f6b85cde840831",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.timerBlock#0=>.updateSize#0(size)"]: {
-  "hash": "ec40339c618a815d820aa857e43f9da810b582225e75142c9a1a049ce754ca46",
+["IBlockOperationsApi.structure#1=>.updateColumnsGapDesktop#0(columnsGap)"]: {
+  "hash": "fd1a55ee2217c1ac278ab485236d6c199517334ee91e965cf2f6b8575701cd1c",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.timerBlock#0=>.updateSize#0=>"]: {
+["IBlockOperationsApi.structure#1=>.updateColumnsGapDesktop#0=>"]: {
   "hash": "751c06d9b115f2b0703d511099c982425cdfae0d79f1e6789582ae2fb8586dd9",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.timerBlock#0=>.updateSizeDesktop"]: {
-  "hash": "d05c4ec83854147e26be70d66d05642f296afe01511156711409dee128f714ff",
+["IBlockOperationsApi.structure#1=>.getColumnsGapDesktop"]: {
+  "hash": "db2ba91749ad75575c5239d792934964c38806458d88f584d8005944cd2cb07e",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.structure#1=>.updateColumnsGapMobile"]: {
+  "hash": "cb644bf22b1b80e97103ae42df38007d23a04a9c754d8b5ba2f6b85cde840831",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.timerBlock#0=>.updateSizeDesktop#0(size)"]: {
-  "hash": "df1256f199c81d7a1e2725f2c7a69a522ca341f556aa077efa45e48b56596ae0",
+["IBlockOperationsApi.structure#1=>.updateColumnsGapMobile#0(columnsGap)"]: {
+  "hash": "fd1a55ee2217c1ac278ab485236d6c199517334ee91e965cf2f6b8575701cd1c",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.timerBlock#0=>.updateSizeDesktop#0(options)"]: {
-  "hash": "55fed6ac29ff78aa27736f1105fa587f98421b563a5ad668516f58b6096062ef",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.timerBlock#0=>.updateSizeDesktop#0=>"]: {
+["IBlockOperationsApi.structure#1=>.updateColumnsGapMobile#0=>"]: {
   "hash": "751c06d9b115f2b0703d511099c982425cdfae0d79f1e6789582ae2fb8586dd9",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.timerBlock#0=>.getSizeDesktop"]: {
-  "hash": "b459d7b2761b283c34bfe117b6266187560817620a49caeb85e0fd9b8a6cf8f4",
+["IBlockOperationsApi.structure#1=>.getColumnsGapMobile"]: {
+  "hash": "aba6f26e3a3c6da73537c38a482c2b813985145abdf9e44778a35ab1b8c3481b",
   "group": "apiRead"
 },
-["IBlockOperationsApi.timerBlock#0=>.getSizeDesktop#0=>"]: {
-  "hash": "df1256f199c81d7a1e2725f2c7a69a522ca341f556aa077efa45e48b56596ae0",
+["IBlockOperationsApi.structure#1=>.getColumnsGapMobile#0(responsiveEnabled)"]: {
+  "hash": "3b5e8f4439e0cfc6fb875f2bb57f220fe176c5b6735a5abfb204411d411e0d3f",
   "group": "apiRead"
 },
-["IBlockOperationsApi.timerBlock#0=>.updateSizeMobile"]: {
-  "hash": "e148893a147bdea04de65a0b4c1269a5f14ef058b6388dc829480663bcf9f1ea",
+["IBlockOperationsApi.structure#1=>.updatePaddingDesktop"]: {
+  "hash": "ce22cae6d07b4101f13a96784b2ee0ed72b0433e8962af74eda716cc4ace176a",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.timerBlock#0=>.updateSizeMobile#0(size)"]: {
-  "hash": "df1256f199c81d7a1e2725f2c7a69a522ca341f556aa077efa45e48b56596ae0",
+["IBlockOperationsApi.structure#1=>.updatePaddingDesktop#0(padding)"]: {
+  "hash": "46ea3c3df7b49e832a49ea3dd5d5fe8c039a53909f3ce56b68c0a9e4b9d5e9a2",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.timerBlock#0=>.updateSizeMobile#0=>"]: {
+["IBlockOperationsApi.structure#1=>.updatePaddingDesktop#0=>"]: {
   "hash": "751c06d9b115f2b0703d511099c982425cdfae0d79f1e6789582ae2fb8586dd9",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.timerBlock#0=>.getSizeMobile"]: {
-  "hash": "b459d7b2761b283c34bfe117b6266187560817620a49caeb85e0fd9b8a6cf8f4",
-  "group": "apiRead"
-},
-["IBlockOperationsApi.timerBlock#0=>.getSizeMobile#0=>"]: {
-  "hash": "df1256f199c81d7a1e2725f2c7a69a522ca341f556aa077efa45e48b56596ae0",
-  "group": "apiRead"
-},
-["IBlockOperationsApi.timerBlock#0=>.updateAlignment"]: {
-  "hash": "ffc5e98be2b78e04479e61b7c5962a2170e0b413a3485d27cf7fb129b187a10c",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.timerBlock#0=>.updateAlignment#0(alignment)"]: {
-  "hash": "c02808b47937e675d1b636933a3997b747229de40138e3cb42453a40a23f0829",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.timerBlock#0=>.updateAlignment#0=>"]: {
-  "hash": "751c06d9b115f2b0703d511099c982425cdfae0d79f1e6789582ae2fb8586dd9",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.timerBlock#0=>.updateAlignmentDesktop"]: {
-  "hash": "d6030019e3ab45d218710e81fe3b200440bd0b7142fc4e9fa6dda31fd3f78c0c",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.timerBlock#0=>.updateAlignmentDesktop#0(alignment)"]: {
-  "hash": "9b1f986223908e2280fd734235c3b8e07efd508c5a0f8c7b23dc50451d527b82",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.timerBlock#0=>.updateAlignmentDesktop#0=>"]: {
-  "hash": "751c06d9b115f2b0703d511099c982425cdfae0d79f1e6789582ae2fb8586dd9",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.timerBlock#0=>.getAlignmentDesktop"]: {
-  "hash": "de2259cbe84029a70d97ef26edae4d8fe188ebd0427a334bafa589cf1fa87ffe",
-  "group": "apiRead"
-},
-["IBlockOperationsApi.timerBlock#0=>.updateAlignmentMobile"]: {
-  "hash": "d6030019e3ab45d218710e81fe3b200440bd0b7142fc4e9fa6dda31fd3f78c0c",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.timerBlock#0=>.updateAlignmentMobile#0(alignment)"]: {
-  "hash": "9b1f986223908e2280fd734235c3b8e07efd508c5a0f8c7b23dc50451d527b82",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.timerBlock#0=>.updateAlignmentMobile#0=>"]: {
-  "hash": "751c06d9b115f2b0703d511099c982425cdfae0d79f1e6789582ae2fb8586dd9",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.timerBlock#0=>.getAlignmentMobile"]: {
-  "hash": "de2259cbe84029a70d97ef26edae4d8fe188ebd0427a334bafa589cf1fa87ffe",
-  "group": "apiRead"
-},
-["IBlockOperationsApi.timerBlock#0=>.updateMarginsDesktop"]: {
-  "hash": "ea446283625e191e02948810d5433d4bb64a7907da95553617ce033304ba011f",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.timerBlock#0=>.updateMarginsDesktop#0(margins)"]: {
-  "hash": "2a026e4cd27a7fc95ebc78d73bb4f94744de46df3826f88bd43e3316d57cef7b",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.timerBlock#0=>.updateMarginsDesktop#0=>"]: {
-  "hash": "751c06d9b115f2b0703d511099c982425cdfae0d79f1e6789582ae2fb8586dd9",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.timerBlock#0=>.getMarginsDesktop"]: {
+["IBlockOperationsApi.structure#1=>.getPaddingDesktop"]: {
   "hash": "c2190d4270b697f7cc6b9e47aec1c7c9c24be6d4d7e5671c166e0fb19e1f6745",
   "group": "apiRead"
 },
-["IBlockOperationsApi.timerBlock#0=>.updateMarginsMobile"]: {
-  "hash": "ea446283625e191e02948810d5433d4bb64a7907da95553617ce033304ba011f",
+["IBlockOperationsApi.structure#1=>.updatePaddingMobile"]: {
+  "hash": "ce22cae6d07b4101f13a96784b2ee0ed72b0433e8962af74eda716cc4ace176a",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.timerBlock#0=>.updateMarginsMobile#0(margins)"]: {
-  "hash": "2a026e4cd27a7fc95ebc78d73bb4f94744de46df3826f88bd43e3316d57cef7b",
+["IBlockOperationsApi.structure#1=>.updatePaddingMobile#0(padding)"]: {
+  "hash": "46ea3c3df7b49e832a49ea3dd5d5fe8c039a53909f3ce56b68c0a9e4b9d5e9a2",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.timerBlock#0=>.updateMarginsMobile#0=>"]: {
+["IBlockOperationsApi.structure#1=>.updatePaddingMobile#0=>"]: {
   "hash": "751c06d9b115f2b0703d511099c982425cdfae0d79f1e6789582ae2fb8586dd9",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.timerBlock#0=>.getMarginsMobile"]: {
+["IBlockOperationsApi.structure#1=>.getPaddingMobile"]: {
   "hash": "c2190d4270b697f7cc6b9e47aec1c7c9c24be6d4d7e5671c166e0fb19e1f6745",
   "group": "apiRead"
 },
-["IBlockOperationsApi.timerBlock#0=>.updateMargins"]: {
-  "hash": "babebb0e449044ec162c80b6370d0c2ffce2aa498a2f98da152aad92a0b6c207",
+["IBlockOperationsApi.structure#1=>.updateMarginsDesktop"]: {
+  "hash": "ceed4b0ea159d502988e3780b6d771c50840a0b7658311718becbd64b0dd2fd9",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.timerBlock#0=>.updateMargins#0(margins)"]: {
-  "hash": "4fd4e648beea96512f53e25aa549eec24f10baf67f276c8207ce8e866b38d7bc",
+["IBlockOperationsApi.structure#1=>.updateMarginsDesktop#0(margins)"]: {
+  "hash": "6ad1acd548f1b0b3fb6a303c149063fe68cb15adca099f4aecfe31f48e753039",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.timerBlock#0=>.updateMargins#0=>"]: {
+["IBlockOperationsApi.structure#1=>.updateMarginsDesktop#0(margins).top?"]: {
+  "hash": "ac15a940ef7fc0e26a183ae678a8df16ca9fb0aa01de170f6fd2f5cd8eea2ca1",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateMarginsDesktop#0(margins).right?"]: {
+  "hash": "ac15a940ef7fc0e26a183ae678a8df16ca9fb0aa01de170f6fd2f5cd8eea2ca1",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateMarginsDesktop#0(margins).bottom?"]: {
+  "hash": "ac15a940ef7fc0e26a183ae678a8df16ca9fb0aa01de170f6fd2f5cd8eea2ca1",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateMarginsDesktop#0(margins).left?"]: {
+  "hash": "ac15a940ef7fc0e26a183ae678a8df16ca9fb0aa01de170f6fd2f5cd8eea2ca1",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateMarginsDesktop#0=>"]: {
   "hash": "751c06d9b115f2b0703d511099c982425cdfae0d79f1e6789582ae2fb8586dd9",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.timerBlock#0=>.updateLink"]: {
-  "hash": "6140698fd14fa005c7723de0252fcd276e5e842071b65f9a525b6f966e255159",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.timerBlock#0=>.updateLink#0(link)"]: {
-  "hash": "c55b734827a94263bcb30111c60fe1b9b2b73a87d76c8a5ac2ca9a1cb4d6b7b8",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.timerBlock#0=>.updateLink#0=>"]: {
-  "hash": "751c06d9b115f2b0703d511099c982425cdfae0d79f1e6789582ae2fb8586dd9",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.timerBlock#0=>.getLink"]: {
-  "hash": "6a288bcd699c4933571d99e8ab60821534d3d0cbcf2294cd91c764c79f9c2efe",
+["IBlockOperationsApi.structure#1=>.getMarginsDesktop"]: {
+  "hash": "b0cee7692fea8f87f69f1446f527b046498d751e4be3a69bb8fa8ab613ecd8ac",
   "group": "apiRead"
 },
-["IBlockOperationsApi.timerBlock#0=>.updateHideElement"]: {
+["IBlockOperationsApi.structure#1=>.updateMarginsMobile"]: {
+  "hash": "ceed4b0ea159d502988e3780b6d771c50840a0b7658311718becbd64b0dd2fd9",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateMarginsMobile#0(margins)"]: {
+  "hash": "8add65648fd84452826ed242000cc1c168f5473e9e8c894daacbf7a0afb8817d",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateMarginsMobile#0=>"]: {
+  "hash": "751c06d9b115f2b0703d511099c982425cdfae0d79f1e6789582ae2fb8586dd9",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.getMarginsMobile"]: {
+  "hash": "b0cee7692fea8f87f69f1446f527b046498d751e4be3a69bb8fa8ab613ecd8ac",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.structure#1=>.updateIncludeInOutput"]: {
+  "hash": "3bd8fa4477d938e290b0cfec017d1b0503cbaef601f2c53561ccdd7d37d91227",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateIncludeInOutput#0(includeInOutput)"]: {
+  "hash": "0f92fe20c1a42189048896c446839c7de3ffaa47ba6e157c2a77967347f7fddd",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateIncludeInOutput#0=>"]: {
+  "hash": "751c06d9b115f2b0703d511099c982425cdfae0d79f1e6789582ae2fb8586dd9",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.getIncludeInOutput"]: {
+  "hash": "dfee3c9bfaebe57ba51e3690320df8350283b06d3e72d63ecc505f8699c99dbe",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.structure#1=>.updateHideElement"]: {
   "hash": "004b9e10f93fc9af94599ae0d0a24787bc287342457ed0c2f448712cf7f7ac9a",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.timerBlock#0=>.updateHideElement#0(hiddenValue)"]: {
+["IBlockOperationsApi.structure#1=>.updateHideElement#0(hiddenValue)"]: {
   "hash": "0a7352f8825f3557d45c5e5bb18d30b91da686213f4106f10fe00dd2d937c71e",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.timerBlock#0=>.updateHideElement#0=>"]: {
+["IBlockOperationsApi.structure#1=>.updateHideElement#0=>"]: {
   "hash": "751c06d9b115f2b0703d511099c982425cdfae0d79f1e6789582ae2fb8586dd9",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.timerBlock#0=>.getHideElement"]: {
+["IBlockOperationsApi.structure#1=>.getHideElement"]: {
   "hash": "404ca1cc2265dd418e52f2a14aee92cde2d8550e51088141bdff4a1bb529f72b",
   "group": "apiRead"
 },
-["IBlockOperationsApi.timerBlock#0=>.updateIncludeInOutput"]: {
-  "hash": "f8db3cf0efe0d41af5df5ed91c2f9d13436aa07786b1f61e87b78ade07dfad37",
+["IBlockOperationsApi.structure#1=>.updateResponsiveMobile"]: {
+  "hash": "e81fad923be0e301c16531344ba85ab82a79ef6dfc4076b5e8cdce4bb68cbcc6",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.timerBlock#0=>.updateIncludeInOutput#0(includeInOutput)"]: {
-  "hash": "c287e94be95f327fb483a657cdbc9187eec76b13a5355fe6f4e6ce34c2bc88ae",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.timerBlock#0=>.updateIncludeInOutput#0=>"]: {
-  "hash": "751c06d9b115f2b0703d511099c982425cdfae0d79f1e6789582ae2fb8586dd9",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.timerBlock#0=>.getIncludeInOutput"]: {
-  "hash": "65af5f3f497e558ac8c044e8a0d43923fa5bf66dcfbaaa86fd89ace92dbb6283",
-  "group": "apiRead"
-},
-["IBlockOperationsApi.timerBlock#0=>.updateAnchorLinkName"]: {
-  "hash": "bbd5f44e1071a4574239c16ce7235885ca332d09c2a8331b727e0a42eac99334",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.timerBlock#0=>.updateAnchorLinkName#0(anchorLinkName)"]: {
-  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.timerBlock#0=>.updateAnchorLinkName#0=>"]: {
-  "hash": "751c06d9b115f2b0703d511099c982425cdfae0d79f1e6789582ae2fb8586dd9",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.timerBlock#0=>.getAnchorLinkName"]: {
-  "hash": "8d67252c65f2e66032c8f9618c617ba066dc059abb08c968f731c1ce74be0efa",
-  "group": "apiRead"
-},
-["IBlockOperationsApi.timerBlock#0=>.updateConfig"]: {
-  "hash": "cc263b1215c24fb359d055620547e8bb2b5987dd5c444a5b5003443b04bae77d",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.timerBlock#0=>.updateConfig#0(key)"]: {
-  "hash": "65aef5e867d44f116ccec3af3261363bd462c25c66cd08023dc69747efc213f4",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.timerBlock#0=>.updateConfig#0(key):constraint"]: {
-  "hash": "adccea83a5d0a317d99e2e360862ce13b74664fd358680b46bff81ac494e016c",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.timerBlock#0=>.updateConfig#0(key):constraint|0"]: {
-  "hash": "0c2852c1bfbcec838740e99ce365ee6c6f6543d497366c3089619f1ccccf279b",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.timerBlock#0=>.updateConfig#0(key):constraint|1"]: {
-  "hash": "0a3d037081ebd1ef35def9feec7107118c3c4d3c2b6c1c8ed98bed26294c6558",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.timerBlock#0=>.updateConfig#0(key):constraint|2"]: {
-  "hash": "56fb8409f3faeec140e1de5f78e4736900cee1d672234648a1075034a682f2a1",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.timerBlock#0=>.updateConfig#0(key):constraint|3"]: {
-  "hash": "802a27717d2c9ceea9b6f798609b0b01f4060f43eedc14cb813a29478d925609",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.timerBlock#0=>.updateConfig#0(key):constraint|4"]: {
-  "hash": "844fad653888b0b92b9d889b5e55d78968b9be6e5780e8c06a451096fda295e9",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.timerBlock#0=>.updateConfig#0(key):constraint|5"]: {
-  "hash": "b39e188574c8473ddfcbd8d62d8433827e608581d1795b11b1ab80b5f0a938c3",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.timerBlock#0=>.updateConfig#0(key):constraint|6"]: {
-  "hash": "13f7003181b1380317d6f49a57ac6a522d9ef7b2f419b4e55288749dab78e196",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.timerBlock#0=>.updateConfig#0(key):constraint|7"]: {
-  "hash": "51d8e6a3d6adfc328e81b8787dbab132754b46c7c25568a7a95ab282ad22ae89",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.timerBlock#0=>.updateConfig#0(key):constraint|8"]: {
-  "hash": "6d0e4103d99d8f131910285de01d118913d4cca5937fe408f574055fb9d6ef5f",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.timerBlock#0=>.updateConfig#0(key):constraint|9"]: {
-  "hash": "281cbffe76bfeeb7ef5a2e7a6f0b70143c4ded0a6b191c7b81a74248ee2a2c75",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.timerBlock#0=>.updateConfig#0(key):constraint|10"]: {
-  "hash": "dff877438288c398ff6bf38220bbd5ec14b0090bb7f6f044365500dc0213ee0a",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.timerBlock#0=>.updateConfig#0(key):constraint|11"]: {
-  "hash": "a4ad3878aed1652a5a3493896b82f0542a68c2a760165b0b8d39193bb0789fff",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.timerBlock#0=>.updateConfig#0(key):constraint|12"]: {
-  "hash": "a7e4f4dc6aa37cef0d79a6ead94a75b7f64c8951b4e6bc4db210b5c7b68712aa",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.timerBlock#0=>.updateConfig#0(key):constraint|13"]: {
-  "hash": "a58a648e00ca265f41522d8328713bafca92a2d08d3b341e3868425b5f0609c3",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.timerBlock#0=>.updateConfig#0(key):constraint|14"]: {
-  "hash": "dbd8e091653955a4821c2c12a39dad6bd4a8ec72af5855a7022c0ab22605c72a",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.timerBlock#0=>.updateConfig#0(key):constraint|15"]: {
-  "hash": "5db322379670cbc2f2f0b31013625b7693b294d30179446f73ff6e91851ca07c",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.timerBlock#0=>.updateConfig#0(key):constraint|16"]: {
-  "hash": "4d5f2d0befacd10eb2698fe42f59c254bdf0cefcdbba9869ece2ff5e4f225c29",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.timerBlock#0=>.updateConfig#0(key):constraint|17"]: {
-  "hash": "470d4c522220475208847f4bb9f458d52ff954d2f6d08c0e31ac77cfcda50d84",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.timerBlock#0=>.updateConfig#0(key):constraint|18"]: {
-  "hash": "8dd8c303dc2a39b25c6ccf4ed82d5793288e6dcab09920597cd1eb6a7cd4287d",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.timerBlock#0=>.updateConfig#0(key):constraint|19"]: {
-  "hash": "3e259b7001720851b8d9abac2245d8863c1ffe815c0b04e3e500655ef200a5a8",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.timerBlock#0=>.updateConfig#0(key):constraint|20"]: {
-  "hash": "fd4edc8e33df8efefa636572bf0000c9afe6dad89a6240854d15ca411f049c1f",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.timerBlock#0=>.updateConfig#0(key):constraint|21"]: {
-  "hash": "a11273045f13108eeb029187fea97a83f8a08a9c0658695c92c9b7778679341d",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.timerBlock#0=>.updateConfig#0(key):constraint|22"]: {
-  "hash": "c4b8d36b2c6116128b4403dcec7f39716a398aca126c17e67e13185860051e50",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.timerBlock#0=>.updateConfig#0(key):constraint|23"]: {
-  "hash": "3199d32f73ebdd15c0f955214d1f00287b9c9104f3c846c619bef9d8c533a919",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.timerBlock#0=>.updateConfig#0(key):constraint|24"]: {
-  "hash": "13d30dbec5e55c57a5fbddedfdb9f84aa51387cd862d51251bd11b908ee7ecec",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.timerBlock#0=>.updateConfig#0(key):constraint|25"]: {
-  "hash": "caf39eb172df8046fcc84b267f93048e281b5c9c2fa2158f07889e9e5e8f0fd3",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.timerBlock#0=>.updateConfig#0(key):constraint|26"]: {
-  "hash": "dac95adb0da4e3f39a93275014240b3901db38169af38e142f33ecc6db7386ff",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.timerBlock#0=>.updateConfig#0(value)"]: {
-  "hash": "d1f7d00901885e7802466bcc10d6aad303b2e8321d7235c235faed013f8ecdf3",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.timerBlock#0=>.updateConfig#0(value):object"]: {
-  "hash": "87eb14ee777b8b7a7b0ad9a9e2552fa042b41571e26716f74d536d9543fa1df1",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.timerBlock#0=>.updateConfig#0(value):object.timerDeadline"]: {
-  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.timerBlock#0=>.updateConfig#0(value):object.timerTimeZoneId"]: {
-  "hash": "fd1a55ee2217c1ac278ab485236d6c199517334ee91e965cf2f6b8575701cd1c",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.timerBlock#0=>.updateConfig#0(value):object.timerShowDays"]: {
+["IBlockOperationsApi.structure#1=>.updateResponsiveMobile#0(enabled)"]: {
   "hash": "a5b031ab62bc416d720c0410d802ea46b910c4fbe85c50a946ccc658b74e677e",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.timerBlock#0=>.updateConfig#0(value):object.timerLabelShowLabel"]: {
-  "hash": "a5b031ab62bc416d720c0410d802ea46b910c4fbe85c50a946ccc658b74e677e",
+["IBlockOperationsApi.structure#1=>.updateResponsiveMobile#0(preserveInversion)"]: {
+  "hash": "3b5e8f4439e0cfc6fb875f2bb57f220fe176c5b6735a5abfb204411d411e0d3f",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.timerBlock#0=>.updateConfig#0(value):object.timerLabelCase"]: {
-  "hash": "2771053eea7d656a04134593cf5bf094de419c9da0e05ffbbad7cffe1f2ceaa5",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.timerBlock#0=>.updateConfig#0(value):object.timerLabelCase|0"]: {
-  "hash": "72aa5f9e5c35898208cec426859b0e3e3806fed0b2add8194269c1f29248ad45",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.timerBlock#0=>.updateConfig#0(value):object.timerLabelCase|1"]: {
-  "hash": "f379f436e7ac7f08e253abec55196937233cc1eeb582be5a7f96e4ed41d62ef0",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.timerBlock#0=>.updateConfig#0(value):object.timerLabelCase|2"]: {
-  "hash": "8058c7d14704f435538cb49dd88622789c74e65bbb4b91d99dc2b9a4b708022a",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.timerBlock#0=>.updateConfig#0(value):object.timerSeparatorSymbol"]: {
-  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.timerBlock#0=>.updateConfig#0(value):object.timerLabelLanguageId"]: {
-  "hash": "fd1a55ee2217c1ac278ab485236d6c199517334ee91e965cf2f6b8575701cd1c",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.timerBlock#0=>.updateConfig#0(value):object.timerRetinaSupport"]: {
-  "hash": "a5b031ab62bc416d720c0410d802ea46b910c4fbe85c50a946ccc658b74e677e",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.timerBlock#0=>.updateConfig#0(value):object.timerExpiresImageSrc"]: {
-  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.timerBlock#0=>.updateConfig#0(value):object.timerFontId"]: {
-  "hash": "fd1a55ee2217c1ac278ab485236d6c199517334ee91e965cf2f6b8575701cd1c",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.timerBlock#0=>.updateConfig#0(value):object.timerFontSize"]: {
-  "hash": "fd1a55ee2217c1ac278ab485236d6c199517334ee91e965cf2f6b8575701cd1c",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.timerBlock#0=>.updateConfig#0(value):object.timerFontColor"]: {
-  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.timerBlock#0=>.updateConfig#0(value):object.timerDaysFontColor"]: {
-  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.timerBlock#0=>.updateConfig#0(value):object.timerHoursFontColor"]: {
-  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.timerBlock#0=>.updateConfig#0(value):object.timerMinutesFontColor"]: {
-  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.timerBlock#0=>.updateConfig#0(value):object.timerSecondsFontColor"]: {
-  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.timerBlock#0=>.updateConfig#0(value):object.timerLabelFontId"]: {
-  "hash": "fd1a55ee2217c1ac278ab485236d6c199517334ee91e965cf2f6b8575701cd1c",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.timerBlock#0=>.updateConfig#0(value):object.timerLabelFontSize"]: {
-  "hash": "fd1a55ee2217c1ac278ab485236d6c199517334ee91e965cf2f6b8575701cd1c",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.timerBlock#0=>.updateConfig#0(value):object.timerLabelFontColor"]: {
-  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.timerBlock#0=>.updateConfig#0(value):object.timerLabelDaysFontColor"]: {
-  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.timerBlock#0=>.updateConfig#0(value):object.timerLabelHoursFontColor"]: {
-  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.timerBlock#0=>.updateConfig#0(value):object.timerLabelMinutesFontColor"]: {
-  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.timerBlock#0=>.updateConfig#0(value):object.timerLabelSecondsFontColor"]: {
-  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.timerBlock#0=>.updateConfig#0(value):object.timerSeparatorFontId"]: {
-  "hash": "fd1a55ee2217c1ac278ab485236d6c199517334ee91e965cf2f6b8575701cd1c",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.timerBlock#0=>.updateConfig#0(value):object.timerSeparatorFontSize"]: {
-  "hash": "fd1a55ee2217c1ac278ab485236d6c199517334ee91e965cf2f6b8575701cd1c",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.timerBlock#0=>.updateConfig#0(value):object.timerSeparatorFontColor"]: {
-  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.timerBlock#0=>.updateConfig#0(value):object.timerBackgroundColor"]: {
-  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.timerBlock#0=>.updateConfig#0(value):key"]: {
-  "hash": "ffb52c04ef3b203deb4dfa9f793f558cef26004417692d82b8c189858f0578a8",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.timerBlock#0=>.updateConfig#0=>"]: {
+["IBlockOperationsApi.structure#1=>.updateResponsiveMobile#0=>"]: {
   "hash": "751c06d9b115f2b0703d511099c982425cdfae0d79f1e6789582ae2fb8586dd9",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.timerBlock#0=>.updateConfigValues"]: {
-  "hash": "031061593fdc4b66c1ba59ec37645fbffae3edc0572d011ff80b40180c0f62a4",
+["IBlockOperationsApi.structure#1=>.getResponsiveMobile"]: {
+  "hash": "6bd3df6f2216b5a140f7da59ba6cd56dd3537b002128ca108e9e2d71f711a18a",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.structure#1=>.getContainersPerRow"]: {
+  "hash": "070ad661387220667f7d0438e772c8000264042d2a2da739702607df3ac59b77",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.structure#1=>.updateContainersPerRow"]: {
+  "hash": "7f5dc0c9dea5466469f0dc2ede390540f647e044fc2b2dc2a3df8d31580c34d8",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.timerBlock#0=>.updateConfigValues#0(values)"]: {
-  "hash": "5354c54e69360fe1c461b1fa79cf29d052d476fc232ff073b8bae4b127e9b55f",
+["IBlockOperationsApi.structure#1=>.updateContainersPerRow#0(perRow)"]: {
+  "hash": "854ea1507ca8933661e2a6dea151f851d9619575462a27ec3c6acbada697e50c",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.timerBlock#0=>.updateConfigValues#0=>"]: {
+["IBlockOperationsApi.structure#1=>.updateContainersPerRow#0(perRow)|0"]: {
+  "hash": "cc11310c456c3690d5a74c23aa31cc25b4e74cdae146c71e54ad9dbc1d109fde",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateContainersPerRow#0(perRow)|1"]: {
+  "hash": "a4aab3f1f08004e907d2357fafe74cab56359bcb32e23f52e7eb1d3a9c0a2ad3",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateContainersPerRow#0(perRow)|2"]: {
+  "hash": "2bf175f9655e7bb7357b9f0a7c6051465a5ae701104ffe741b98e852c0e4d460",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateContainersPerRow#0(perRow)|3"]: {
+  "hash": "391552c099c101b131feaf24c5795a6a15bc8ec82015424e0d2b4274a369a0bf",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateContainersPerRow#0=>"]: {
   "hash": "751c06d9b115f2b0703d511099c982425cdfae0d79f1e6789582ae2fb8586dd9",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.timerBlock#0=>.getCurrentConfigValue"]: {
-  "hash": "a026f0334b22e7939e6811555117553a827a11603ea39783ae34ef4d8f0b07a7",
-  "group": "apiRead"
-},
-["IBlockOperationsApi.timerBlock#0=>.getCurrentConfigValue#0(key)"]: {
-  "hash": "65aef5e867d44f116ccec3af3261363bd462c25c66cd08023dc69747efc213f4",
-  "group": "apiRead"
-},
-["IBlockOperationsApi.timerBlock#0=>.getCurrentConfigValue#0(key):constraint"]: {
-  "hash": "59682f98aa5583fa9b9a57d3e9570a7e151ebb70c20a5ecc356304148d03d13e",
-  "group": "apiRead"
-},
-["IBlockOperationsApi.timerBlock#0=>.getCurrentConfigValue#0(fallback)"]: {
-  "hash": "d1f7d00901885e7802466bcc10d6aad303b2e8321d7235c235faed013f8ecdf3",
-  "group": "apiRead"
-},
-["IBlockOperationsApi.timerBlock#0=>.getCurrentConfigValue#0(fallback):object"]: {
-  "hash": "58f77b7f8b18ddb75f4afc8a867624d5111c3d939bb642c7fd3eb121a89f8483",
-  "group": "apiRead"
-},
-["IBlockOperationsApi.timerBlock#0=>.getCurrentConfigValue#0(fallback):key"]: {
-  "hash": "d6dedf5df2b6ffdc4b4d1df24fb358af437e0fd95ac8fb7ca5df95e6965bd48c",
-  "group": "apiRead"
-},
-["IBlockOperationsApi.socialBlock"]: {
-  "hash": "bdc0658588e0101bb6fc7ba5b05d42fcad1b322633f42d6bef46ce62c52cb098",
+["IBlockOperationsApi.structure#1=>.updateResponsiveMobileContainersInversion"]: {
+  "hash": "e6c475d00fa7ea983c142af2aff237cb9d9c947ad50f25bc8118152cec72038d",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.socialBlock#0=>"]: {
-  "hash": "7149d6cbca58ff2006afbfb4b54f571a22263dbec3a2eda01f1be1c00cfe5c01",
+["IBlockOperationsApi.structure#1=>.updateResponsiveMobileContainersInversion#0(enabled)"]: {
+  "hash": "a5b031ab62bc416d720c0410d802ea46b910c4fbe85c50a946ccc658b74e677e",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.socialBlock#0=>.insert"]: {
-  "hash": "8db71913eaaf6ef084de8d8107a8ec3bd25220041c3d7638cf7478f676f9255c",
+["IBlockOperationsApi.structure#1=>.updateResponsiveMobileContainersInversion#0=>"]: {
+  "hash": "751c06d9b115f2b0703d511099c982425cdfae0d79f1e6789582ae2fb8586dd9",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options)"]: {
-  "hash": "feedd190496fd3b4a6e2a0735224428eb1b3f08c9160a070a9b0e8cc8f4feeb6",
+["IBlockOperationsApi.structure#1=>.getResponsiveMobileContainersInversion"]: {
+  "hash": "6bd3df6f2216b5a140f7da59ba6cd56dd3537b002128ca108e9e2d71f711a18a",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.container"]: {
+  "hash": "0e3a153cd2e5da1cecefc88cfbbf9f4a852e634997d4cd5521be8367a571b715",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).baseNodeId"]: {
+["IBlockOperationsApi.container#0=>"]: {
+  "hash": "0dfeac421f03633c007d7beac3bf03455f60a46c59c76a82e25491f06dec2feb",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.container#0=>.insert"]: {
+  "hash": "3a1deedd12ca3fa80d8bd1fd0cf0bb6057f128da318345108c17389e937e7467",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.container#0=>.insert#0(options)"]: {
+  "hash": "e42cf50642499791c76ddd9785a35cacf7d8ef5ee7d16407dcfb1973908da60b",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.container#0=>.insert#0(patchOptions)"]: {
+  "hash": "cde1c32dc7e44016d04507af8dad77bb92a04da179ad60ffbd540bfa460303da",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.container#0=>.insert#0=>"]: {
+  "hash": "751c06d9b115f2b0703d511099c982425cdfae0d79f1e6789582ae2fb8586dd9",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.container#0=>.isInsertAllowed"]: {
+  "hash": "20074f7f77f8b4892ffde64326aa9cdcb29908b0bc2f4a21921ab648215c3af2",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.container#0=>.isInsertAllowed#0(options)"]: {
+  "hash": "3df377ce55a6fb364b24e36aca707e5179243ce27f62c578ddf4504faba31c31",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.container#1(id)"]: {
   "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).rootNodeId"]: {
+["IBlockOperationsApi.container#1=>"]: {
+  "hash": "e9d1f05b017bf82e4366ccd0c39cceea7f608ff2b43288c713f43aa73d5bc6db",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.container#1=>.updateBackgroundColor"]: {
+  "hash": "b645395e0413ff8a2d0d0d493e7b47d5660587fd087ad4212589559f2e64af0a",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.container#1=>.updateBackgroundColor#0(backgroundColor)"]: {
+  "hash": "225012718a0bde3a521c91ce0c3bf1579b27bf9974e29152edc101189d45c443",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.container#1=>.updateBackgroundColor#0=>"]: {
+  "hash": "751c06d9b115f2b0703d511099c982425cdfae0d79f1e6789582ae2fb8586dd9",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.container#1=>.getBackgroundColor"]: {
+  "hash": "8a8155ba7d8204fb263b4bfd55b00578640df85660862042ea5940e7c32710ad",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.container#1=>.getBackgroundColorWithGradient"]: {
+  "hash": "8a8155ba7d8204fb263b4bfd55b00578640df85660862042ea5940e7c32710ad",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.container#1=>.getBackgroundColorAsync"]: {
+  "hash": "cc33b8e5cdae12c6662a7b53eee511d62f13dc98f279d65f3de4cfccade51a63",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.container#1=>.updateBackgroundSettings"]: {
+  "hash": "6464496b222c6af27041bf1c46cb494a37e58e1c741f0a1d484700e4b3a60049",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.container#1=>.updateBackgroundSettings#0(settings)"]: {
+  "hash": "8a10ca961925cd68ccf21bee5029607ada0228f6cf7a12904ee1cea893587098",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.container#1=>.updateBackgroundSettings#0=>"]: {
+  "hash": "751c06d9b115f2b0703d511099c982425cdfae0d79f1e6789582ae2fb8586dd9",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.container#1=>.getBackgroundSettings"]: {
+  "hash": "28d8b99de4bbaef4c6e4ab5412a029fee2e93a7026e9c27007622680ad5f3ac4",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.container#1=>.getBackgroundSettings#0=>"]: {
+  "hash": "8a10ca961925cd68ccf21bee5029607ada0228f6cf7a12904ee1cea893587098",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.container#1=>.getPadding"]: {
+  "hash": "fa8e8ae96c3febc3186890690bb31e61151508fc27faddf9f1b398d25864386c",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.container#1=>.updatePadding"]: {
+  "hash": "fc0686d77fd3b2a7c11f462dfda6132943ba7ebd06fbe3822f5daa9e02421073",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.container#1=>.updatePadding#0(padding)"]: {
+  "hash": "d7411990f33111675ca73a4c19e7346c10c800cd0f16e4d4cb602a40d1a157ea",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.container#1=>.updatePadding#0(padding).desktop"]: {
+  "hash": "46ea3c3df7b49e832a49ea3dd5d5fe8c039a53909f3ce56b68c0a9e4b9d5e9a2",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.container#1=>.updatePadding#0(padding).mobile"]: {
+  "hash": "46ea3c3df7b49e832a49ea3dd5d5fe8c039a53909f3ce56b68c0a9e4b9d5e9a2",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.container#1=>.updatePadding#0=>"]: {
+  "hash": "751c06d9b115f2b0703d511099c982425cdfae0d79f1e6789582ae2fb8586dd9",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.container#1=>.updatePaddingDesktop"]: {
+  "hash": "ce22cae6d07b4101f13a96784b2ee0ed72b0433e8962af74eda716cc4ace176a",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.container#1=>.updatePaddingDesktop#0(padding)"]: {
+  "hash": "46ea3c3df7b49e832a49ea3dd5d5fe8c039a53909f3ce56b68c0a9e4b9d5e9a2",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.container#1=>.updatePaddingDesktop#0=>"]: {
+  "hash": "751c06d9b115f2b0703d511099c982425cdfae0d79f1e6789582ae2fb8586dd9",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.container#1=>.getPaddingDesktop"]: {
+  "hash": "c2190d4270b697f7cc6b9e47aec1c7c9c24be6d4d7e5671c166e0fb19e1f6745",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.container#1=>.updatePaddingMobile"]: {
+  "hash": "ce22cae6d07b4101f13a96784b2ee0ed72b0433e8962af74eda716cc4ace176a",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.container#1=>.updatePaddingMobile#0(padding)"]: {
+  "hash": "46ea3c3df7b49e832a49ea3dd5d5fe8c039a53909f3ce56b68c0a9e4b9d5e9a2",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.container#1=>.updatePaddingMobile#0=>"]: {
+  "hash": "751c06d9b115f2b0703d511099c982425cdfae0d79f1e6789582ae2fb8586dd9",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.container#1=>.getPaddingMobile"]: {
+  "hash": "c2190d4270b697f7cc6b9e47aec1c7c9c24be6d4d7e5671c166e0fb19e1f6745",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.container#1=>.updateIncludeInOutput"]: {
+  "hash": "3bd8fa4477d938e290b0cfec017d1b0503cbaef601f2c53561ccdd7d37d91227",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.container#1=>.updateIncludeInOutput#0(includeInOutput)"]: {
+  "hash": "0f92fe20c1a42189048896c446839c7de3ffaa47ba6e157c2a77967347f7fddd",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.container#1=>.updateIncludeInOutput#0=>"]: {
+  "hash": "751c06d9b115f2b0703d511099c982425cdfae0d79f1e6789582ae2fb8586dd9",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.container#1=>.getIncludeInOutput"]: {
+  "hash": "dfee3c9bfaebe57ba51e3690320df8350283b06d3e72d63ecc505f8699c99dbe",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.container#1=>.updateHideElement"]: {
+  "hash": "159f9e79fec13d998351802ecee8417cc366177035fc1a3012660de0794f7e71",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.container#1=>.updateHideElement#0(hiddenValue)"]: {
+  "hash": "0a7352f8825f3557d45c5e5bb18d30b91da686213f4106f10fe00dd2d937c71e",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.container#1=>.updateHideElement#0(includeMsoActions)"]: {
+  "hash": "3b5e8f4439e0cfc6fb875f2bb57f220fe176c5b6735a5abfb204411d411e0d3f",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.container#1=>.updateHideElement#0=>"]: {
+  "hash": "751c06d9b115f2b0703d511099c982425cdfae0d79f1e6789582ae2fb8586dd9",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.container#1=>.getHideElement"]: {
+  "hash": "404ca1cc2265dd418e52f2a14aee92cde2d8550e51088141bdff4a1bb529f72b",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.container#1=>.updateBorder"]: {
+  "hash": "4f1cee044e1c7d1a8ea66ca33fae359df4583a16b70e84a8612cfe7388451ab4",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.container#1=>.updateBorder#0(border)"]: {
+  "hash": "5802af4b5a84623ccab482b5d1021b72f7b9b58423e958e635e78137cb0274d8",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.container#1=>.updateBorder#0=>"]: {
+  "hash": "751c06d9b115f2b0703d511099c982425cdfae0d79f1e6789582ae2fb8586dd9",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.container#1=>.getBorder"]: {
+  "hash": "0d387db44771a6382cc305452934cb9788c03e4acea5b60cc3ab400110bd746a",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.container#1=>.updateRadius"]: {
+  "hash": "dd172973b7450ec0a3011266013ac5c07ecec1c93b3442a7bbf1e71a86f483bf",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.container#1=>.updateRadius#0(radius)"]: {
+  "hash": "09413bbda1f29d06f53f7506408cd7388a354e5b46a97e4fc1aade421b702699",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.container#1=>.updateRadius#0=>"]: {
+  "hash": "751c06d9b115f2b0703d511099c982425cdfae0d79f1e6789582ae2fb8586dd9",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.container#1=>.getRadius"]: {
+  "hash": "e0651f0456e25a00288f420cf8bb317a2a05e55df6d4f3a2d4b2106c7a37bd58",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.textBlock"]: {
+  "hash": "bf4315c5eaaa6252b17722050875eaafbcfd647aafa899467af6f9fd467f56ba",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.textBlock#0=>"]: {
+  "hash": "021744182a59cc107c90b964144b16273da8fcc44d8e508f4ca70b237b8210a6",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.textBlock#0=>.insert"]: {
+  "hash": "36c0547984ab7a56d896714ac95cf4d3485aabf29e28faff47dc5b6906c651e4",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.textBlock#0=>.insert#0(options)"]: {
+  "hash": "dada55d2239dc14439473374392f022bc7145d9c2a2b6942b49945bd45f61dd9",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.textBlock#0=>.insert#0(options).baseNodeId"]: {
   "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).contentParentNodeId"]: {
+["IBlockOperationsApi.textBlock#0=>.insert#0(options).rootNodeId"]: {
   "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial"]: {
-  "hash": "1469d1b4b9c663f4091c55b50db59db900b6a3f501118e36a2a97f8569002a54",
+["IBlockOperationsApi.textBlock#0=>.insert#0(options).contentParentNodeId"]: {
+  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0"]: {
-  "hash": "8120987f5b0d7b7707e384d6de817351069d3f6b032a95871bab6043d17dde0e",
+["IBlockOperationsApi.textBlock#0=>.insert#0(options).initialContent"]: {
+  "hash": "f591d4ae7104058a73b2111c635e5e7a2ceaea097a40a96cb993875fbd62dbfb",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.source"]: {
-  "hash": "83cf0a33ee7140ae9ae9f9813d0f9588abd99996fa39045ff3a8676a1608cd7f",
+["IBlockOperationsApi.textBlock#0=>.insert#0(options).initialContent|0"]: {
+  "hash": "62ad979dc41f44c165e3b51c4bf1c780d750d911090d3f0fc72adf303ac0f95b",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.alignment"]: {
-  "hash": "c02808b47937e675d1b636933a3997b747229de40138e3cb42453a40a23f0829",
+["IBlockOperationsApi.textBlock#0=>.insert#0(options).initialContent|0.kind"]: {
+  "hash": "8acccd23ba9cd72760c9a4aa7e7e3a5d196f11f4c935fbb785c3d472c11d0322",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.networks"]: {
-  "hash": "cbaa36a13781815b6e5bf1154dd63d8d5a6378248e849ffa02c00aab2672149b",
+["IBlockOperationsApi.textBlock#0=>.insert#0(options).initialContent|0.value"]: {
+  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.networks[]"]: {
-  "hash": "0597fdc78fd76852379970f7777bb381a273a1c5ffcd6b3dfdde0f9ec71381a2",
+["IBlockOperationsApi.textBlock#0=>.insert#0(options).initialContent|1"]: {
+  "hash": "135c9aeb7327486be4421539ef3b248044505394819cb02fcf48d590e576607c",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.networks[].type"]: {
-  "hash": "1a74498d15a1b1f088c499ef3a51370fc3631a9bf21cd73a47ae67d5108f9363",
+["IBlockOperationsApi.textBlock#0=>.insert#0(options).initialContent|1.kind"]: {
+  "hash": "f3cb1fc4d5a8dc90537f1de861d39f50d9beb59ae9f611698890f9190ea414dd",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.networks[].type|0"]: {
-  "hash": "f64740a846947915bb63e71047e8d28d855ded54a7f2ee0ca73b6a068dfb8e0f",
+["IBlockOperationsApi.textBlock#0=>.insert#0(options).initialContent|1.value"]: {
+  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.networks[].type|1"]: {
-  "hash": "a33222c8501b64a3f68ec570d2b279c0b6b6bcda943d47232247debaac1afbd1",
+["IBlockOperationsApi.textBlock#0=>.insert#0(options).prevComponentId?"]: {
+  "hash": "8124a6a9299893c6ba797f4ac4736cdb99360f87e39b61754778f547f108ee65",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.networks[].type|2"]: {
-  "hash": "e8ca55b322adc770250f7c53ca3bc7507d1ebc7790c41a76ded236a438e98087",
+["IBlockOperationsApi.textBlock#0=>.insert#0(options).prevPositionToken?"]: {
+  "hash": "8124a6a9299893c6ba797f4ac4736cdb99360f87e39b61754778f547f108ee65",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.networks[].type|3"]: {
-  "hash": "f5490d1c08bc7515edc2a822976474cc2da995faddbabb5d33d24d7fff985589",
+["IBlockOperationsApi.textBlock#0=>.insert#0(options).dndPosition?"]: {
+  "hash": "c2c80cf56214c1fb283e4336ef31f8b3e99c5233ee1c75e31c7bf393c498111e",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.networks[].type|4"]: {
-  "hash": "3210376ac751972f67f5c98ed288e3c36cb837d2f8abab06ff489a6c4bb944f7",
+["IBlockOperationsApi.textBlock#0=>.insert#0(options).dndPosition?|0"]: {
+  "hash": "570326e88d6ea9324c701bdef940750ecb6febdbcf2bae814b6887868f904465",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.networks[].type|5"]: {
-  "hash": "e9d95cb52d7d11c91063bb662a9c3f7167b272b6fabc6b6b90330adfd3da56bc",
+["IBlockOperationsApi.textBlock#0=>.insert#0(options).dndPosition?|1"]: {
+  "hash": "1bfff7eefadf6c3d1b492d067d49cc8a6fd442d598ccacf7a95e5490d7815155",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.networks[].type|6"]: {
-  "hash": "4ab0ed5100c432c6e9d01a6450fea382fdc5acdf9fcbd4e8cefc0815d9c3a768",
+["IBlockOperationsApi.textBlock#0=>.insert#0(options).dndPosition?|1.kind"]: {
+  "hash": "99b3198af523f2723b6132f813efc01b9f6780e751acccc77dce0218c6ba00f9",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.networks[].type|7"]: {
-  "hash": "3c771bf58d88b5141744c65e9e733d8d9765b241e3f0a62a1760e892b13093fe",
+["IBlockOperationsApi.textBlock#0=>.insert#0(options).dndPosition?|1.kind|0"]: {
+  "hash": "e202a27bcd2c018b4702e2571abf26ec30d6c787437f4b91e9a909977bd82c85",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.networks[].type|8"]: {
-  "hash": "809eb4d9164fcd18f489aebfd8e9e6a348139274b0269fdf80145b8a70b7e5f0",
+["IBlockOperationsApi.textBlock#0=>.insert#0(options).dndPosition?|1.kind|1"]: {
+  "hash": "87ea77691f5c06e4135aa01848f305ca92f989fe57d510aa1317b4bb12c1a1f1",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.networks[].type|9"]: {
-  "hash": "4ee7332a0a2989c0b44a2484ce477f7335f1e75ec8e4c29d4555d76874a7bb71",
+["IBlockOperationsApi.textBlock#0=>.insert#0(options).dndPosition?|1.target"]: {
+  "hash": "56f8e22dfb49c712a906337be2d2bfb7255c8662a101a00ca5e200e9af4a374c",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.networks[].type|10"]: {
-  "hash": "ebcc39fcae472557019047eeebb24d976663eae3b64829d846752310a65a8490",
+["IBlockOperationsApi.textBlock#0=>.insert#0(options).dndPosition?|1.target.nodeId"]: {
+  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.networks[].type|11"]: {
-  "hash": "8688a40464fd2a9701d0b421c766be22562e53f551c9466d3a6e751d2815be92",
+["IBlockOperationsApi.textBlock#0=>.insert#0(options).dndPosition?|1.target.positionToken"]: {
+  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.networks[].type|12"]: {
-  "hash": "769774ea43d136c1126b7c2c8573aaac06faf4e2ad0537ba3350e6c83a0d4e95",
+["IBlockOperationsApi.textBlock#0=>.insert#0(options).emptyContainerPlaceholder?"]: {
+  "hash": "e7299d74d23735e55254907eb91f562215001e11279faa4488167bbfbf8d0f32",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.networks[].type|13"]: {
-  "hash": "fc07bba5f772d73e7abaaaef30492d9ce797be714a2433d3de4f085f92f7fba6",
+["IBlockOperationsApi.textBlock#0=>.insert#0(options).emptyContainerPlaceholder?|0"]: {
+  "hash": "570326e88d6ea9324c701bdef940750ecb6febdbcf2bae814b6887868f904465",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.networks[].type|14"]: {
-  "hash": "e1f24a640edca20b97416048e8ee80cdea1d08564dfceef0e1618bc7152718cc",
+["IBlockOperationsApi.textBlock#0=>.insert#0(options).emptyContainerPlaceholder?|1"]: {
+  "hash": "03bb6aa954bf4069b1a588ed2e633a78166a970bd62655e94d66993f6960f943",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.networks[].type|15"]: {
-  "hash": "c9a398a76d4421f671f9b23a2fa0b2a7f02f9856b96205a455506940e582ab91",
+["IBlockOperationsApi.textBlock#0=>.insert#0(options).emptyContainerPlaceholder?|1.contentParentNodeId"]: {
+  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.networks[].type|16"]: {
-  "hash": "5218f47eed5961375595dab6685a53dfc8ab045789538888c90e486b0935808a",
+["IBlockOperationsApi.textBlock#0=>.insert#0(options).emptyContainerPlaceholder?|1.placeholderNodeId"]: {
+  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.networks[].type|17"]: {
-  "hash": "9055edaf885f15306a07349f10b10333774efd6a01d0e870e556f33bcd2576c7",
+["IBlockOperationsApi.textBlock#0=>.insert#0(options).emptyContainerPlaceholder?|1.placeholderRowNodeId"]: {
+  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.networks[].type|18"]: {
-  "hash": "21d3d0632c94d73f4b2fe00174a800103fed4ef8f38c0f6b0bfa7609f6575eeb",
+["IBlockOperationsApi.textBlock#0=>.insert#0(options).emptyContainerPlaceholder?|1.predecessor"]: {
+  "hash": "97d3947dd92c2b4d941ccc7a1e5edfd80be45801c96485a39e5d827da0845ad9",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.networks[].type|19"]: {
-  "hash": "83d2728c4939ca920151f82c995f17f8135895c11ed477ebbbd3004fa0ad3fab",
+["IBlockOperationsApi.textBlock#0=>.insert#0(options).emptyContainerPlaceholder?|1.predecessor|0"]: {
+  "hash": "0e737486372bb636d7dcb1ae0ca7dcbc54efdd396e303a53caf9275382bbe508",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.networks[].type|20"]: {
-  "hash": "1f271153173e47b9079c1f4163bd7ff68b3dddf36a1034cd9b5eafa9229c217b",
+["IBlockOperationsApi.textBlock#0=>.insert#0(options).emptyContainerPlaceholder?|1.predecessor|0.kind"]: {
+  "hash": "193d06b871399cf87faca0ea733570fbb09a3cfc8b8e94bbf21afbc48c2a4dea",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.networks[].type|21"]: {
-  "hash": "c54d7998b50a657416382bde0f4d24e8a2676f0a36c0c8d3e0d539989a46b901",
+["IBlockOperationsApi.textBlock#0=>.insert#0(options).emptyContainerPlaceholder?|1.predecessor|1"]: {
+  "hash": "dbf26940763143286ed72f78670a1f357e28c4ae85d584a4fca0a267cd3b2b69",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.networks[].type|22"]: {
-  "hash": "9b41be6a7db8cc33c4784f2bd1e253fe5e82329bee2bea4a2cd5b2ab68067830",
+["IBlockOperationsApi.textBlock#0=>.insert#0(options).emptyContainerPlaceholder?|1.predecessor|1.kind"]: {
+  "hash": "02f506936701762079b9e8f2d9f7ae3d37ba5ab977b0d1fa8528e9707b1c3ed1",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.networks[].type|23"]: {
-  "hash": "a4fc4d971dee289eeba03de537b485a800dcdcd7fbef9262b56b4707cb5718bd",
+["IBlockOperationsApi.textBlock#0=>.insert#0(options).emptyContainerPlaceholder?|1.predecessor|1.nodeId"]: {
+  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.networks[].type|24"]: {
-  "hash": "c79e234e7dc407f5b935762128567f3595d8e99925ff2e8c7208da2aaf1be814",
+["IBlockOperationsApi.textBlock#0=>.insert#0(options).emptyContainerPlaceholder?|1.predecessor|1.positionToken"]: {
+  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.networks[].type|25"]: {
-  "hash": "6a84b78139c28ab6257addf1212fcfffe86e04f7157143ab6b0aa439d85b1ff0",
+["IBlockOperationsApi.textBlock#0=>.insert#0(patchOptions)"]: {
+  "hash": "cde1c32dc7e44016d04507af8dad77bb92a04da179ad60ffbd540bfa460303da",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.networks[].type|26"]: {
-  "hash": "48b4d3f1193437e088c5ac03c57f2fdd903002143cd792123cac393e8a092a25",
+["IBlockOperationsApi.textBlock#0=>.insert#0=>"]: {
+  "hash": "751c06d9b115f2b0703d511099c982425cdfae0d79f1e6789582ae2fb8586dd9",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.networks[].type|27"]: {
-  "hash": "5a11958f23181353a7c093ee5d4f76128e96d52f49190db37e983f7096e22f8d",
+["IBlockOperationsApi.textBlock#0=>.delete"]: {
+  "hash": "052de144ae8f402be64c3162ffcbdf909f6db60258f414c05bad3a1fe6b6ad16",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.networks[].type|28"]: {
-  "hash": "68c7621e187932856b4d89358ba6e9da1f81ebe1476df0ee2389045803c9ef31",
+["IBlockOperationsApi.textBlock#0=>.delete#0(options)"]: {
+  "hash": "b07d286906f2a0b461b3fd9eae1174e8507c2bf25e16ea9317245b800a4195d5",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.networks[].type|29"]: {
-  "hash": "656d487cb901f23feb0b285aee8afe4ee2eb9f18ae33dbf2116af0ed03a0b02c",
+["IBlockOperationsApi.textBlock#0=>.delete#0(options).nodeId"]: {
+  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.networks[].type|30"]: {
-  "hash": "0fd420c7794fd4c7b810a5ced54297cea7f52eee207c1c1737f7dd929e21c837",
+["IBlockOperationsApi.textBlock#0=>.delete#0(options).crdtApi"]: {
+  "hash": "c28084b11384e511aabbbda13c9358b9b24b8cea67d27d802f930954dd421f6c",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.networks[].type|31"]: {
-  "hash": "cc9bb7392276866b4980c30d383f62a85be5a0fa0616437dec4d048c5a35fb52",
+["IBlockOperationsApi.textBlock#0=>.delete#0(options).fontsCategories?"]: {
+  "hash": "808bc11780c319b9a002d7a87680b8e476a7ffc23688426bac666f63d9bd2336",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.networks[].type|32"]: {
-  "hash": "fc5a4492ea5dfdf67f9a8c07d4db0103d3fbedd31acbea213c2ef4c23b42948f",
+["IBlockOperationsApi.textBlock#0=>.delete#0(options).skipFontCleanup?"]: {
+  "hash": "3b5e8f4439e0cfc6fb875f2bb57f220fe176c5b6735a5abfb204411d411e0d3f",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.networks[].type|33"]: {
-  "hash": "ea571c44f13e3143667732d8161c35557ae9bfe31c80ca37853d1ed9b0c0f4a0",
+["IBlockOperationsApi.textBlock#0=>.delete#0(options).preserveEmpty?"]: {
+  "hash": "3b5e8f4439e0cfc6fb875f2bb57f220fe176c5b6735a5abfb204411d411e0d3f",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.networks[].type|34"]: {
-  "hash": "120e3652cdc49d78ddcd1058116ada736c9c0a18cb8798f08d85a975b4f89707",
+["IBlockOperationsApi.textBlock#0=>.delete#0(patchOptions)"]: {
+  "hash": "cde1c32dc7e44016d04507af8dad77bb92a04da179ad60ffbd540bfa460303da",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.networks[].type|35"]: {
-  "hash": "09629fe6e77fc8676a56c0d9b75ec8d42a08eae854e712b9ff698adf5b732910",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.networks[].type|36"]: {
-  "hash": "c28a9ca81e2867461fe028b44e3f553cfa9106db51c06db367cfe807ccc99f1c",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.networks[].type|37"]: {
-  "hash": "c2d201fceb501cb6b325b90abf8cee9fcdbe12aa27fd22530d7142eb5040967f",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.networks[].type|38"]: {
-  "hash": "8cec3fe97c1cb79839684cc3d8f024069d53825dff01cf3b4aa6723b3cca593f",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.networks[].type|39"]: {
-  "hash": "cba49bc9633ed24ef1e95db2778373b32b76a19d59fcbec64da970fdf6233753",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.networks[].type|40"]: {
-  "hash": "b24d6bc94fb08742010615e4c8bc0e99b3037775c600b8896dd566c7b6bf6835",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.networks[].type|41"]: {
-  "hash": "a0237838d69a11bf15a8139294d1a471572294dee8d35d31a62d4c763c4dfd21",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.networks[].type|42"]: {
-  "hash": "e903ac482b4e5bfdc390c61718e14a589764e87aa08869065c1c1e48156ee49f",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.networks[].type|43"]: {
-  "hash": "4cbd12e64f58873ca8c422617e23a5a8096d2bce843b3e19f72fa998cdf1a5b7",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.networks[].type|44"]: {
-  "hash": "7530ea4d468ee1e74d0493a056ffdf508699120937800cfbbe64595029245b27",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.networks[].type|45"]: {
-  "hash": "fe8a9c3b0005866bb9a03778b9fbd120f1cd3577bd86d2f84db8572405b9b9e7",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.networks[].type|46"]: {
-  "hash": "1a6cd56360baa727548bb37dd223eb06008d13c92c8ced11aa2151a0b4c4a0cd",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.networks[].type|47"]: {
-  "hash": "46713ba24142e3d44dbacea9636ad24ef5f713a1e0f33e66208fb03fceabc1ec",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.networks[].type|48"]: {
-  "hash": "175c8e211cb57756902135e677f33961e0b5f215fd591512fe325b554dda00bc",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.networks[].type|49"]: {
-  "hash": "3f8746ddced69f9fc1efd4c7e53983948d31f92670b7b8e5194f5631dab922da",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.networks[].type|50"]: {
-  "hash": "3f52b18f21dfa96234c24f0b50b5ed581dd71f31f1ab29a1a329597a0d0f3822",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.networks[].type|51"]: {
-  "hash": "71b32185160df3835a37b8b21205be8e29e564412b0f99881582b457d54c6374",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.networks[].type|52"]: {
-  "hash": "7cc922739a68bdafb0fff368d86a35713b23e212fb3d1b420233ab210df6cf60",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.networks[].type|53"]: {
-  "hash": "c99b47392d38766f9c77073f4f8abf29fc7d59269442b3859dd4dbd85cfdea9c",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.networks[].type|54"]: {
-  "hash": "1d9f4ff9a11f9459d6545b9d7bc9e625655d2646620a02e4bbe4ce9a3defbaa5",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.networks[].type|55"]: {
-  "hash": "d27dceb124b10fa0e5aa1026500b4d8eaff33644aec981e8aa49c90267e1cbea",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.networks[].type|56"]: {
-  "hash": "8c03cbc803eefdb84972c6d91fcacb5605ef5c86dd54d03036fcba59b9aa100a",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.networks[].type|57"]: {
-  "hash": "3e9bd517f616edd99cf3ca7afbbc36de039845787f254c78c2c7aff6477976b1",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.networks[].type|58"]: {
-  "hash": "380b85518ed5467b641bd71cd3747aa2db2d3fdef68d0afbd687346f6ba8393f",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.networks[].type|59"]: {
-  "hash": "27a6a08be63a83ce25454eb4a5763061eb1869db5043426775e0e63c4f9c5e9e",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.networks[].type|60"]: {
-  "hash": "7520387221e9acdc05db8860ce7e02c7817a3b0d5d41ff41eb0bb2f5a4aec1b8",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.networks[].type|61"]: {
-  "hash": "3ca5bb5f015828401365f301274904f92e2dddd9250525525215af71f604ea6c",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.networks[].type|62"]: {
-  "hash": "860e39db660984687bae57546d3e63bed31e77320a9ce5406d3cc0a0f87356c4",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.networks[].type|63"]: {
-  "hash": "8ba2ec0c9cbcdd22985cb23210175034f2595eb92124f1c9c8456bd44ac43eab",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.networks[].type|64"]: {
-  "hash": "f8b07ccb7ae25e87424eb040239003123c13a5d39a71b46e7bdb723c3a18ff49",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.socialBlock#0=>.insert#0(options).initial|0.networks[].type|65"]: {
-  "hash": "8a1621e383b0e30f16df8308a190a66ac3779f5fa394ae2363eaed2f59560faa",
+["IBlockOperationsApi.textBlock#0=>.delete#0=>"]: {
+  "hash": "751c06d9b115f2b0703d511099c982425cdfae0d79f1e6789582ae2fb8586dd9",
   "group": "apiMutation"
 }
 };

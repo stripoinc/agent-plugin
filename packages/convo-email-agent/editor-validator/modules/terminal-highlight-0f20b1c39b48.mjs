@@ -4,14 +4,14 @@ import {
 
 // (disabled):editor/ui-editor-ui/node_modules/postcss/lib/terminal-highlight
 var require_terminal_highlight = __commonJS({
-  "(disabled):../editor/ui-editor-ui/node_modules/postcss/lib/terminal-highlight"() {
+  "(disabled):../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-ui/node_modules/postcss/lib/terminal-highlight"() {
     "use strict";
   }
 });
 
 // editor/ui-editor-ui/node_modules/picocolors/picocolors.browser.js
 var require_picocolors_browser = __commonJS({
-  "../editor/ui-editor-ui/node_modules/picocolors/picocolors.browser.js"(exports, module) {
+  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-ui/node_modules/picocolors/picocolors.browser.js"(exports, module) {
     "use strict";
     var x = String;
     var create = function() {
@@ -24,7 +24,7 @@ var require_picocolors_browser = __commonJS({
 
 // editor/ui-editor-ui/node_modules/postcss/lib/css-syntax-error.js
 var require_css_syntax_error = __commonJS({
-  "../editor/ui-editor-ui/node_modules/postcss/lib/css-syntax-error.js"(exports, module) {
+  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-ui/node_modules/postcss/lib/css-syntax-error.js"(exports, module) {
     "use strict";
     var pico = require_picocolors_browser();
     var terminalHighlight = require_terminal_highlight();

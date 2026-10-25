@@ -1,7 +1,7 @@
 import value0 from './catalog-1.js';
 import value1 from './catalog-20.js';
 export default {
-["editorRevision"]: "2a78eba954846a7d42c2f544142d08e22cbb571b",
+["editorRevision"]: "1e786dd4e00a6614b2ace4d88a1df5c68a682d9e",
 ["roots"]: [
   "metadata",
   "resources",

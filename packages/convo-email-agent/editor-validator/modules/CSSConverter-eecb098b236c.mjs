@@ -1,16 +1,11 @@
 import {
-  localizedMessage
-} from "./biesbjerg-ngx-translate-extract-marker-6a26f5bc5c0e.mjs";
-import {
   normalizeModelTag
 } from "./ue-proto-87c1854705b4.mjs";
 import {
-  ComplexBlock,
-  DefaultBlock,
   defaultBlocksMarkers,
   extensionBlockIDAttr,
   serviceSelectorPrefix
-} from "./serviceSelectorPrefix-db24995a76b3.mjs";
+} from "./serviceSelectorPrefix-a2f28f143508.mjs";
 import {
   formatClassSelector,
   formatLiteral,
@@ -22,9 +17,6 @@ import {
   q,
   queryParseError
 } from "./builders-6d4dedaf957f.mjs";
-import {
-  BlockType
-} from "./index-604a083968ff.mjs";
 
 // editor/ui-editor-ui/src/app/core/block-operations-api/common/node-selectors.ts
 var STRIPE_CSS_CLASS = "esd-stripe";
@@ -58,48 +50,17 @@ var CSS_CLASS_TO_STRUCTURE_TYPE = {
   [CONTAINER_CSS_CLASS]: "container"
 };
 
-// editor/ui-editor-ui/src/app/components/document/default-blocks/custom-block.ts
-var CustomBlocks = ((CustomBlocks2) => {
-  CustomBlocks2[CustomBlocks2["CUSTOM_BLOCK_LINK"] = BlockType.CUSTOM_BLOCK_LINK] = "CUSTOM_BLOCK_LINK";
-  CustomBlocks2[CustomBlocks2["CUSTOM_BLOCK_IMAGE"] = BlockType.CUSTOM_BLOCK_IMAGE] = "CUSTOM_BLOCK_IMAGE";
-  CustomBlocks2[CustomBlocks2["CUSTOM_BLOCK_TEXT"] = BlockType.CUSTOM_BLOCK_TEXT] = "CUSTOM_BLOCK_TEXT";
-  CustomBlocks2["TEXT_IMAGE"] = "TEXT_IMAGE";
-  return CustomBlocks2;
-})(CustomBlocks || {});
-var CustomBlockNames = {
-  CUSTOM_BLOCK_LINK: localizedMessage.BLOCK_LINK_HINT_HEADER,
-  CUSTOM_BLOCK_IMAGE: localizedMessage.BLOCK_IMAGE_HINT_HEADER,
-  CUSTOM_BLOCK_TEXT: localizedMessage.BLOCK_TEXT_HINT_HEADER,
-  TEXT_IMAGE: localizedMessage.TEXT_IMAGE
-};
+// editor/ui-editor-ui/src/app/core/block-operations-api/common/custom-block.ts
 var customBlockMarkers = {
-  [CustomBlocks.CUSTOM_BLOCK_LINK]: "esd-container-frame",
-  [CustomBlocks.CUSTOM_BLOCK_IMAGE]: "esd-container-frame",
-  [CustomBlocks.CUSTOM_BLOCK_TEXT]: CUSTOM_TEXT_BLOCK_CSS_CLASS,
+  ["CUSTOM_BLOCK_LINK" /* CUSTOM_BLOCK_LINK */]: "esd-container-frame",
+  ["CUSTOM_BLOCK_IMAGE" /* CUSTOM_BLOCK_IMAGE */]: "esd-container-frame",
+  ["CUSTOM_BLOCK_TEXT" /* CUSTOM_BLOCK_TEXT */]: CUSTOM_TEXT_BLOCK_CSS_CLASS,
   ["TEXT_IMAGE" /* TEXT_IMAGE */]: "esd-text-image"
 };
 
-// editor/ui-editor-ui/src/app/components/document/document-node-component/structural/structural-node.ts
-var StructuralNode = ((StructuralNode2) => {
-  StructuralNode2["BLOCK_AMP_ACCORDION"] = "BLOCK_AMP_ACCORDION";
-  StructuralNode2["BLOCK_AMP_FORM"] = "BLOCK_AMP_FORM";
-  StructuralNode2["AMP_ACCORDION_CONTAINER"] = "AMP-ACCORDION-CONTAINER";
-  StructuralNode2[StructuralNode2["EMPTY_CONTAINER"] = BlockType.EMPTY_CONTAINER] = "EMPTY_CONTAINER";
-  StructuralNode2["BANNER"] = "BANNER";
-  StructuralNode2["MERGE_TAG_SELECTOR"] = "MERGE-TAG-SELECTOR";
-  StructuralNode2["UI_MERGE_TAG_SELECTOR"] = "UI-MERGE-TAG-SELECTOR";
-  StructuralNode2["AMP_FORM_NOTIFICATION"] = "AMP_FORM_NOTIFICATION";
-  StructuralNode2["AMP_FORM_TEMPLATE"] = "TEMPLATE";
-  StructuralNode2["AMP_FORM_SUBMIT"] = "AMP_FORM_SUBMIT";
-  StructuralNode2["AMP_FORM_START_AGAIN"] = "AMP_FORM_START_AGAIN";
-  StructuralNode2["AMP_FORM_INPUT"] = "AMP_FORM_INPUT";
-  StructuralNode2["AMP_FORM_INPUT_HIDDEN"] = "AMP_FORM_INPUT_HIDDEN";
-  StructuralNode2["MERGE_TAG_PREVIEW"] = "MERGE_TAG_PREVIEW";
-  StructuralNode2["MERGE_TAG_PREVIEW_RAW"] = "MERGE_TAG_PREVIEW_RAW";
-  return StructuralNode2;
-})(StructuralNode || {});
+// editor/ui-editor-ui/src/app/core/block-operations-api/common/markup/structural-node.ts
 var markers = {
-  [StructuralNode.EMPTY_CONTAINER]: {
+  ["EMPTY_CONTAINER" /* EMPTY_CONTAINER */]: {
     tag: "TD" /* TD */,
     clss: "".concat(serviceSelectorPrefix, "-empty-container")
   },
@@ -1731,34 +1692,34 @@ var BANNER_NODE = [q.select.descendants().tag("banner").end()];
 var HTML_SELECTOR = [q.select.descendants().tag("HTML" /* HTML */).end()];
 var BODY_SELECTOR = [q.select.descendants().tag("BODY" /* BODY */).end()];
 var EMPTY_CONTAINER_SELECTOR = [q.select.descendants().hasClass(ESD_EMPTY_CONTAINER_CLASS).end()];
-var SPACER_BLOCK = [q.select.descendants().tag("TD" /* TD */).hasClass(defaultBlocksMarkers[DefaultBlock.BLOCK_SPACER]).end()];
-var VIDEO_BLOCK = [q.select.descendants().tag("TD" /* TD */).hasClass(defaultBlocksMarkers[DefaultBlock.BLOCK_VIDEO]).end()];
+var SPACER_BLOCK = [q.select.descendants().tag("TD" /* TD */).hasClass(defaultBlocksMarkers["BLOCK_SPACER" /* BLOCK_SPACER */]).end()];
+var VIDEO_BLOCK = [q.select.descendants().tag("TD" /* TD */).hasClass(defaultBlocksMarkers["BLOCK_VIDEO" /* BLOCK_VIDEO */]).end()];
 var VIDEO_BLOCK_IMAGE = [q.select.descendants().tag("TD" /* TD */).hasClass("esd-block-video").next(q.select.children().tag("A" /* A */).next(q.select.children().tag("IMG" /* IMG */))).end()];
-var IMAGE_BLOCK_SELECTOR = [q.select.descendants().tag("TD" /* TD */).hasClass(defaultBlocksMarkers[DefaultBlock.BLOCK_IMAGE]).end()];
-var BANNER_BLOCK = [q.select.descendants().tag("TD" /* TD */).hasClass(defaultBlocksMarkers[DefaultBlock.BLOCK_BANNER]).end()];
-var BUTTON_BLOCK_SELECTOR = [q.select.descendants().tag("TD" /* TD */).hasClass(defaultBlocksMarkers[DefaultBlock.BLOCK_BUTTON]).end()];
-var HTML_BLOCK_SELECTOR = [q.select.descendants().tag("TD" /* TD */).hasClass(defaultBlocksMarkers[DefaultBlock.BLOCK_HTML]).end()];
-var TEXT_BLOCK = [q.select.descendants().tag("TD" /* TD */).hasClass(defaultBlocksMarkers[DefaultBlock.BLOCK_TEXT]).end()];
-var CUSTOM_TEXT_BLOCK = [q.select.descendants().hasClass(customBlockMarkers[CustomBlocks.CUSTOM_BLOCK_TEXT]).end()];
+var IMAGE_BLOCK_SELECTOR = [q.select.descendants().tag("TD" /* TD */).hasClass(defaultBlocksMarkers["BLOCK_IMAGE" /* BLOCK_IMAGE */]).end()];
+var BANNER_BLOCK = [q.select.descendants().tag("TD" /* TD */).hasClass(defaultBlocksMarkers["BLOCK_BANNER" /* BLOCK_BANNER */]).end()];
+var BUTTON_BLOCK_SELECTOR = [q.select.descendants().tag("TD" /* TD */).hasClass(defaultBlocksMarkers["BLOCK_BUTTON" /* BLOCK_BUTTON */]).end()];
+var HTML_BLOCK_SELECTOR = [q.select.descendants().tag("TD" /* TD */).hasClass(defaultBlocksMarkers["BLOCK_HTML" /* BLOCK_HTML */]).end()];
+var TEXT_BLOCK = [q.select.descendants().tag("TD" /* TD */).hasClass(defaultBlocksMarkers["BLOCK_TEXT" /* BLOCK_TEXT */]).end()];
+var CUSTOM_TEXT_BLOCK = [q.select.descendants().hasClass(customBlockMarkers["CUSTOM_BLOCK_TEXT" /* CUSTOM_BLOCK_TEXT */]).end()];
 var SOCIAL_BLOCK_ICONS_SELECTOR = [
-  q.select.descendants().tag("TD" /* TD */).hasClass(defaultBlocksMarkers[DefaultBlock.BLOCK_SOCIAL]).next(
+  q.select.descendants().tag("TD" /* TD */).hasClass(defaultBlocksMarkers["BLOCK_SOCIAL" /* BLOCK_SOCIAL */]).next(
     q.select.descendants().tag("TD" /* TD */)
   ).end()
 ];
 var CONTAINER_BLOCK_SELECTOR_TABLE = [
-  q.select.descendants().hasClass(defaultBlocksMarkers[ComplexBlock.CONTAINER]).next(q.select.children().tag("TABLE" /* TABLE */)).end(),
-  q.select.descendants().hasClass(defaultBlocksMarkers[ComplexBlock.CONTAINER]).next(q.select.children().tag("A" /* A */).hasClass("es-module-link").next(q.select.children().tag("TABLE" /* TABLE */))).end()
+  q.select.descendants().hasClass(defaultBlocksMarkers["CONTAINER" /* CONTAINER */]).next(q.select.children().tag("TABLE" /* TABLE */)).end(),
+  q.select.descendants().hasClass(defaultBlocksMarkers["CONTAINER" /* CONTAINER */]).next(q.select.children().tag("A" /* A */).hasClass("es-module-link").next(q.select.children().tag("TABLE" /* TABLE */))).end()
 ];
 var SOCIAL_BLOCK = [
-  q.select.descendants().tag("TD" /* TD */).hasClass(defaultBlocksMarkers[DefaultBlock.BLOCK_SOCIAL]).end()
+  q.select.descendants().tag("TD" /* TD */).hasClass(defaultBlocksMarkers["BLOCK_SOCIAL" /* BLOCK_SOCIAL */]).end()
 ];
 var PARENT_TABLE_CONTAINER_SELECTOR = [
   q.select.children().root().next(q.select.children().tag("TABLE" /* TABLE */)).end(),
   q.select.children().root().next(q.select.children().tag("A" /* A */).hasClass("es-module-link").next(q.select.children().tag("TABLE" /* TABLE */))).end()
 ];
-var CONTAINER_BLOCK_SELECTOR = [q.select.descendants().hasClass(defaultBlocksMarkers[ComplexBlock.CONTAINER]).end()];
-var STRUCTURE_BLOCK_SELECTOR = [q.select.descendants().hasClass(defaultBlocksMarkers[ComplexBlock.STRUCTURE]).end()];
-var STRIPE_BLOCK_SELECTOR = [q.select.descendants().hasClass(defaultBlocksMarkers[ComplexBlock.STRIPE]).end()];
+var CONTAINER_BLOCK_SELECTOR = [q.select.descendants().hasClass(defaultBlocksMarkers["CONTAINER" /* CONTAINER */]).end()];
+var STRUCTURE_BLOCK_SELECTOR = [q.select.descendants().hasClass(defaultBlocksMarkers["STRUCTURE" /* STRUCTURE */]).end()];
+var STRIPE_BLOCK_SELECTOR = [q.select.descendants().hasClass(defaultBlocksMarkers["STRIPE" /* STRIPE */]).end()];
 var MOBILE_GAP_NOT_RESPONSIVE = [q.select.descendants().hasClass(ES_M_WIDTH_0_CLASS).end()];
 var ES_INFOBLOCK_SELECTOR = [q.select.descendants().hasClass("es-infoblock").end()];
 var TEXT_IMAGE = [q.select.descendants().tag("TEXT_IMAGE" /* TEXT_IMAGE */).end()];
@@ -1822,28 +1783,28 @@ var MENU_ITEM_TEXT_SELECTOR = [q.select.descendants().nodeType("text").end()];
 var MENU_ITEM_BR_SELECTOR = [q.select.descendants().tag("BR" /* BR */).end()];
 var MENU_ITEMS_SELECTOR = [q.select.descendants().tag("TABLE" /* TABLE */).next(q.select.descendants().tag("TR" /* TR */).next(q.select.children().tag("TD" /* TD */))).end()];
 var MENU_TABLE_SELECTOR = [q.select.descendants().tag("TABLE" /* TABLE */).hasClass("es-menu").end()];
-var MENU_BLOCK_SELECTOR = [q.select.descendants().tag("TD" /* TD */).hasClass(defaultBlocksMarkers[DefaultBlock.BLOCK_MENU]).end()];
-var MENU_ITEM_SELECTOR = [q.select.descendants().tag("TD" /* TD */).hasClass(defaultBlocksMarkers[DefaultBlock.BLOCK_MENU_ITEM]).end()];
+var MENU_BLOCK_SELECTOR = [q.select.descendants().tag("TD" /* TD */).hasClass(defaultBlocksMarkers["BLOCK_MENU" /* BLOCK_MENU */]).end()];
+var MENU_ITEM_SELECTOR = [q.select.descendants().tag("TD" /* TD */).hasClass(defaultBlocksMarkers["BLOCK_MENU_ITEM" /* BLOCK_MENU_ITEM */]).end()];
 var BLOCKS_SELECTOR = [
   q.select.descendants().classStartsWith("esd-block-").notHasClass("esd-block-menu-item").notHasClass(AMP_FORM_SUBMIT_CLASS).end()
 ];
 var NON_ANCHOR_LINK_SELECTOR = [q.select.descendants().hasClass("esd-block-image").next(q.select.children().tag("a").notHasClass("esd-anchor")).end()];
 var ROLLOVER_IMAGE_SELECTOR = [q.select.descendants().tag("img").hasClass("rollover-second").end()];
 var AMP_ROLLOVER_SELECTOR = [q.select.descendants().hasClass("rollover-amp").end()];
-var STRIPE_SELECTOR = [q.select.descendants().hasClass(defaultBlocksMarkers[ComplexBlock.STRIPE]).end()];
+var STRIPE_SELECTOR = [q.select.descendants().hasClass(defaultBlocksMarkers["STRIPE" /* STRIPE */]).end()];
 var STRIPE_SELECTOR_WITH_HIDDEN_CONFIG = [
-  q.select.descendants().hasClass(defaultBlocksMarkers[ComplexBlock.STRIPE]).configExists("deskHidden").end(),
-  q.select.descendants().hasClass(defaultBlocksMarkers[ComplexBlock.STRIPE]).configExists("mobileHidden").end()
+  q.select.descendants().hasClass(defaultBlocksMarkers["STRIPE" /* STRIPE */]).configExists("deskHidden").end(),
+  q.select.descendants().hasClass(defaultBlocksMarkers["STRIPE" /* STRIPE */]).configExists("mobileHidden").end()
 ];
-var STRUCTURE_SELECTOR = [q.select.descendants().hasClass(defaultBlocksMarkers[ComplexBlock.STRUCTURE]).end()];
+var STRUCTURE_SELECTOR = [q.select.descendants().hasClass(defaultBlocksMarkers["STRUCTURE" /* STRUCTURE */]).end()];
 var DIV_SELECTOR = [q.select.descendants().tag("DIV" /* DIV */).end()];
-var AMP_FORM_SELECTOR = [q.select.descendants().hasClass(defaultBlocksMarkers[DefaultBlock.BLOCK_AMP_FORM]).end()];
-var AMP_FORM_INNER_FORM_SELECTOR = [q.select.descendants().hasClass(defaultBlocksMarkers[DefaultBlock.BLOCK_AMP_FORM]).next(q.select.children().tag("FORM" /* FORM */)).end()];
+var AMP_FORM_SELECTOR = [q.select.descendants().hasClass(defaultBlocksMarkers["BLOCK_AMP_FORM" /* BLOCK_AMP_FORM */]).end()];
+var AMP_FORM_INNER_FORM_SELECTOR = [q.select.descendants().hasClass(defaultBlocksMarkers["BLOCK_AMP_FORM" /* BLOCK_AMP_FORM */]).next(q.select.children().tag("FORM" /* FORM */)).end()];
 var FORM_CHILD_TR_WITH_ID = [q.select.descendants().tag("FORM" /* FORM */).next(q.select.descendants().hasAttr("id").tag("TR" /* TR */)).end()];
-var AMP_ACCORDION_SELECTOR = [q.select.descendants().hasClass(defaultBlocksMarkers[DefaultBlock.BLOCK_AMP_ACCORDION]).end()];
+var AMP_ACCORDION_SELECTOR = [q.select.descendants().hasClass(defaultBlocksMarkers["BLOCK_AMP_ACCORDION" /* BLOCK_AMP_ACCORDION */]).end()];
 var AMP_ACCORDION_BODY_SELECTOR = [q.select.descendants().hasClass("accordion").end()];
 var AMP_ACCORDION_TITLE_SELECTOR = [q.select.descendants().hasClass("section-title").end()];
-var AMP_CAROUSEL_SELECTOR = [q.select.descendants().hasClass(defaultBlocksMarkers[DefaultBlock.BLOCK_AMP_CAROUSEL]).end()];
+var AMP_CAROUSEL_SELECTOR = [q.select.descendants().hasClass(defaultBlocksMarkers["BLOCK_AMP_CAROUSEL" /* BLOCK_AMP_CAROUSEL */]).end()];
 var AMP_CAROUSEL_INNER = [q.select.descendants().tag("AMP-CAROUSEL" /* AMP_CAROUSEL */).end()];
 var AMP_CAROUSEL_AMP_IMG = [q.select.descendants().next(q.select.descendants().tag("AMP-CAROUSEL" /* AMP_CAROUSEL */).next(q.select.descendants().tag("AMP-IMG" /* AMP_IMG */))).end()];
 var AMP_CAROUSEL_ELEMENT_SELECTOR = [q.select.descendants().tag("amp-carousel").end()];
@@ -1852,8 +1813,8 @@ var AMP_ACCORDION_EMPTY_CONTAINER_SELECTOR = [q.select.descendants().hasClass(AM
 var ESD_EMAIL_PADDINGS_SELECTOR = [q.select.descendants().hasClass("esd-email-paddings").end()];
 var AMP_BLOCK_SELECTORS = [...AMP_FORM_SELECTOR, ...AMP_ACCORDION_SELECTOR, ...AMP_CAROUSEL_SELECTOR];
 var CONTAINER_TABLE_SELECTOR = [
-  q.select.descendants().hasClass(defaultBlocksMarkers[ComplexBlock.CONTAINER]).next(q.select.children().tag("TABLE" /* TABLE */)).end(),
-  q.select.descendants().hasClass(defaultBlocksMarkers[ComplexBlock.CONTAINER]).next(q.select.children().tag("A" /* A */).hasClass("es-module-link").next(q.select.children().tag("TABLE" /* TABLE */))).end()
+  q.select.descendants().hasClass(defaultBlocksMarkers["CONTAINER" /* CONTAINER */]).next(q.select.children().tag("TABLE" /* TABLE */)).end(),
+  q.select.descendants().hasClass(defaultBlocksMarkers["CONTAINER" /* CONTAINER */]).next(q.select.children().tag("A" /* A */).hasClass("es-module-link").next(q.select.children().tag("TABLE" /* TABLE */))).end()
 ];
 var SECTION_SELECTOR = [q.select.descendants().tag("SECTION" /* SECTION */).end()];
 var CONTENT_BODY_SELECTOR = [q.select.descendants().hasClass("es-content-body").end()];

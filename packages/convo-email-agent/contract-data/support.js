@@ -1,9 +1,9 @@
 import value0 from './support-1.js';
 import value1 from './support-15.js';
 export default {
-["editorRevision"]: "2a78eba954846a7d42c2f544142d08e22cbb571b",
-["sourcesSha256"]: "dfe420ba68c6d70422753676ec570907f0a5768c78f6ab704a3c36e1de30ce2c",
-["review"]: "Editor develop review for 2a78eba9 (ED-9564; the build on dev since 2026-10-13, planned for New Editor 2.113), including releases/2.112 (0506e0bb on production). Semantic changes: settings.general.darkTheme.backgroundImage (a non-empty trimmed image path or null) is an optional patchSettings field and a reviewed nullable reset; get always returns it, null without a dark background image; null clears the image and omission retains it. A text block settings.fontColor now reports only the block's own inline color; an inherited color is omitted (ED-8799). Set keeps explicitly changed Video sizes when the block moves between containers (ED-8803) and moves Unknown blocks between stripes and containers with their ID, content and extension (ED-8526). Blocks API: structure getContainersPerRow/updateContainersPerRow (2.112; no Document State field), an optional theme for general updateBackgroundImage/getBackgroundImagePath, forceExplicitSize for image and video updateSizeMobile, savedSharedDarkColor for menu updateColors, and prepared trees for structure and Unknown insert. The other 2,814 changed field hashes are $ref renumbering after one added shared schema definition (structurally equal once references are expanded); six changed API entries only moved their first-traversal reference. They keep their previous decisions. New API traversal locations inherit the nearest reviewed ancestor; new methods follow the read/mutation naming of the facade.",
+["editorRevision"]: "1e786dd4e00a6614b2ace4d88a1df5c68a682d9e",
+["sourcesSha256"]: "4635c006044f7fa13b43d2d553659b51b4974b0dacb13d7919bc726cc7e99963",
+["review"]: "Editor releases/2.114 review for 1e786dd4 (2026-10-22), on top of the reviewed develop 2a78eba9 and including the 2.112/2.113 release merges. The Document State input schema, generated types, block union, roots, node and field capabilities and native defaults are unchanged byte for byte; every field keeps its previous decision. Validation rules are unchanged: the source changes reachable from the validator only move the font modules into block-operations-api/common/fonts (font-utils, font-value-rules) and move the merge-service schema adapter, with its unavailable side-effect rules intact, to ui-editor-ui/node-utils/copilot-document-state/copilot-schema.ts. Set behavior: video size keeps an explicitly requested non-responsive state when a preceding move enabled responsiveness; preview regeneration keeps the block's existing animated play button (ED-9540; no Document State field). Merge-service now enables the Go NodesAPI by default (NATIVE_CORE_ENABLED=true) and runs Blocks API patch plugins only behind BLOCKS_PATCH_PLUGINS_ENABLED (default false, ED-9668); MergeExportLibrary.create defaults the same flag to false. Blocks API: videoBlock isPlayButtonAnimated (read) and animatePlayButton in the host preview effect config; NodesAPI arguments gained installPatchPlugins, businessOperations, processPatchAndComplete, getCompletedPatch (read) and waitForQueuedCommands, which moved first-traversal references of 116 entries and of the textBlock/structure argument subtrees (1,824 relocated, 2,572 new locations). New API traversal locations inherit the nearest reviewed ancestor; new methods follow the read/mutation naming of the facade; MergeExportLibrary members are host.",
 ["roots"]: [
   "metadata",
   "resources",
@@ -83,7 +83,7 @@ export default {
     "decision": "contextual-patch",
     "method": "patchSettings; validateChange checks the actual preview dependency",
     "omission": "Changing a preview input is refused when its effect is unavailable; unrelated settings remain editable.",
-    "source": "ui-editor-ui/src/app/core/nodes-api/external-merge-service/ipc/operations/copilot-schema.ts",
+    "source": "ui-editor-ui/node-utils/copilot-document-state/copilot-schema.ts",
     "scenario": "test/documentStateContract.test.ts"
   },
   "apiRead": {

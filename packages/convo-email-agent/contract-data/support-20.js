@@ -1,763 +1,691 @@
 
 export default {
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|1.createHtmlTreeAction.props|1.node|1.node|1.config|1.timer|1.timerBackgroundColor"]: {
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).commentsPort.commentsGetSnapshot#0(commentId)"]: {
   "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|1.createHtmlTreeAction.props|1.node|1.node|1.config|1.timer|1.timerExpiresImageSrc"]: {
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).commentsPort.commentsGetAuthorsCache"]: {
+  "hash": "c485803a564b0baaed62be0cb80de1ccb0ec2ce500e11a815952e41c9a729ecb",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).commentsPort.commentsIsAuthorCached"]: {
+  "hash": "7df0b0ed26ab4d6fa262afb0bb4cd1b083478330b4f4e44e1254c3bf1d0a0c27",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).commentsPort.commentsIsAuthorCached#0(userId)"]: {
   "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|1.createHtmlTreeAction.props|1.node|1.node|1.config|1.timer|1.timerShowDays"]: {
-  "hash": "a5b031ab62bc416d720c0410d802ea46b910c4fbe85c50a946ccc658b74e677e",
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).serializer"]: {
+  "hash": "f050394a5784b663a18a67a66cd0c14add6feb0edda0d2198fce797852731185",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|1.createHtmlTreeAction.props|1.node|1.node|1.config|1.timer|1.timerShowAdvancedSettings"]: {
-  "hash": "a5b031ab62bc416d720c0410d802ea46b910c4fbe85c50a946ccc658b74e677e",
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).sourceSerializer"]: {
+  "hash": "f050394a5784b663a18a67a66cd0c14add6feb0edda0d2198fce797852731185",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|1.createHtmlTreeAction.props|1.node|1.node|1.config|1.keys"]: {
-  "hash": "2f66b41966a90abaa8087407bd4236ee55d4992f5dc7acd9e4126413e1f61a85",
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init"]: {
+  "hash": "bd4395e77f0bab54b61e6361133f5e7022262d49a6b731feed93cec31bd60eb1",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|1.createHtmlTreeAction.props|1.node|1.node|1.config|1.structureCustomDesktopTopIndent"]: {
-  "hash": "b582ff87634fcce53076a421bd35051c62e2828fdd41fb680dfda979b05a931a",
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props)"]: {
+  "hash": "83bcd9c406c6d52eac743b00ce1bdb8c559765b8b132b77f974d3b599218c803",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|1.createHtmlTreeAction.props|1.node|1.node|1.config|1.structureCustomDesktopRightIndent"]: {
-  "hash": "b582ff87634fcce53076a421bd35051c62e2828fdd41fb680dfda979b05a931a",
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?"]: {
+  "hash": "31a2949f1cb2bb95937871d4d0a07da014e249d61e5c1e2716cb565cb931f4c6",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|1.createHtmlTreeAction.props|1.node|1.node|1.config|1.structureCustomDesktopBottomIndent"]: {
-  "hash": "b582ff87634fcce53076a421bd35051c62e2828fdd41fb680dfda979b05a931a",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|1.createHtmlTreeAction.props|1.node|1.node|1.config|1.structureCustomDesktopLeftIndent"]: {
-  "hash": "b582ff87634fcce53076a421bd35051c62e2828fdd41fb680dfda979b05a931a",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|1.createHtmlTreeAction.props|1.node|1.node|1.config|1.structureCustomMobileTopIndent"]: {
-  "hash": "b582ff87634fcce53076a421bd35051c62e2828fdd41fb680dfda979b05a931a",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|1.createHtmlTreeAction.props|1.node|1.node|1.config|1.structureCustomMobileRightIndent"]: {
-  "hash": "b582ff87634fcce53076a421bd35051c62e2828fdd41fb680dfda979b05a931a",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|1.createHtmlTreeAction.props|1.node|1.node|1.config|1.structureCustomMobileBottomIndent"]: {
-  "hash": "b582ff87634fcce53076a421bd35051c62e2828fdd41fb680dfda979b05a931a",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|1.createHtmlTreeAction.props|1.node|1.node|1.config|1.structureCustomMobileLeftIndent"]: {
-  "hash": "b582ff87634fcce53076a421bd35051c62e2828fdd41fb680dfda979b05a931a",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|1.createHtmlTreeAction.props|1.node|1.node|1.config|1.extensionConfig"]: {
-  "hash": "9b1238714fbe5d300a74f2966b7521ba123a3f3fa7a9122011244a130f765847",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|1.createHtmlTreeAction.props|1.node|1.node|1.config|1.imgAdaptOffManually"]: {
-  "hash": "b582ff87634fcce53076a421bd35051c62e2828fdd41fb680dfda979b05a931a",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|1.createHtmlTreeAction.props|1.node|1.node|1.config|1.imageLabels"]: {
-  "hash": "9b1238714fbe5d300a74f2966b7521ba123a3f3fa7a9122011244a130f765847",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|1.createHtmlTreeAction.props|1.node|1.node|1.config|1.ignoredAxeIssueID"]: {
-  "hash": "9b1238714fbe5d300a74f2966b7521ba123a3f3fa7a9122011244a130f765847",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|1.createHtmlTreeAction.props|1.node|1.node|1.config|1.accessibility"]: {
-  "hash": "35cb3fb5bc8cb1faaaf17eb4390388e221344f66d53c9cfb0451cb9d908d1193",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|1.createHtmlTreeAction.props|1.node|1.node|1.config|1.accessibility|0"]: {
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|0"]: {
   "hash": "570326e88d6ea9324c701bdef940750ecb6febdbcf2bae814b6887868f904465",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|1.createHtmlTreeAction.props|1.node|1.node|1.config|1.accessibility|1"]: {
-  "hash": "d4df6c8fbbeb5f91b4b79cfa380ee6a9d636dee112b446eeded6a3f7d2d15624",
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1"]: {
+  "hash": "9b6e74190d1aa872f4d2fd8c6df541972574eeaff476e025ed7b724a681e9a3a",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|1.createHtmlTreeAction.props|1.node|1.node|1.config|1.accessibility|1.$type"]: {
-  "hash": "3c4c885c29032321da8fa0fb8ba60b876952e026058d3395302ef747aac14f66",
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.$type"]: {
+  "hash": "e1bfd55e86c133475df6764db95793d20bee85a44dac600017136b20ad854815",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|1.createHtmlTreeAction.props|1.node|1.node|1.config|1.accessibility|1.ignoredAxeIssueIds"]: {
-  "hash": "2f66b41966a90abaa8087407bd4236ee55d4992f5dc7acd9e4126413e1f61a85",
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.position"]: {
+  "hash": "3053f6d64189e150699dd7bc4fb64afb005862351236050e10e71ac6dcb0a2cb",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|1.createHtmlTreeAction.props|1.node|1.node|1.config|1.timeZoneId"]: {
-  "hash": "9b1238714fbe5d300a74f2966b7521ba123a3f3fa7a9122011244a130f765847",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|1.createHtmlTreeAction.props|1.node|1.node|1.config|1.elementLocked"]: {
-  "hash": "381e7c89365ba4f63b2488702205555c9c0a95e95dd836a69e70d9f495508a48",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|1.createHtmlTreeAction.props|1.node|1.node|1.config|1.elementLocked|0"]: {
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.position|0"]: {
   "hash": "570326e88d6ea9324c701bdef940750ecb6febdbcf2bae814b6887868f904465",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|1.createHtmlTreeAction.props|1.node|1.node|1.config|1.elementLocked|1"]: {
-  "hash": "0d92599034a1c6f9282858309a58a3474abf307abc556c07f30105f099f20363",
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.position|1"]: {
+  "hash": "54cd88e65a4056fa1077a5bc8e4eec893712b8dda25ce4d3133c62e6ba0294ec",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|1.createHtmlTreeAction.props|1.node|1.node|1.config|1.elementLocked|1.$type"]: {
-  "hash": "b3eca2ab6da536fb309b09722b98b797b6bc739d93a531ae625753977629d263",
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.position|1.$type"]: {
+  "hash": "f27e0fe40d83b128f9c5b52e410e3db4b3198593a8a0876dc1a0729590fbe81c",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|1.createHtmlTreeAction.props|1.node|1.node|1.config|1.elementLocked|1.enabled"]: {
-  "hash": "a5b031ab62bc416d720c0410d802ea46b910c4fbe85c50a946ccc658b74e677e",
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.position|1.parentNodeId"]: {
+  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|1.createHtmlTreeAction.props|1.node|1.node|1.config|1.elementLocked|1.options"]: {
-  "hash": "e78a508b6d2e4a1ffb55aa3617d4fcdcf359b6ad12ba670afe530c18d1ea389c",
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.position|1.position"]: {
+  "hash": "3a27c6c299aa6c1f363db0de4a2bcc38e99044fc2ffeed5961911d8c7b389248",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|1.createHtmlTreeAction.props|1.node|1.node|1.config|1.elementLocked|1.options|0"]: {
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.position|1.position|0"]: {
   "hash": "570326e88d6ea9324c701bdef940750ecb6febdbcf2bae814b6887868f904465",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|1.createHtmlTreeAction.props|1.node|1.node|1.config|1.elementLocked|1.options|1"]: {
-  "hash": "2caeeb6508a33d469d45662727dede56b72c631a0f8418ed41dd9641f395ed58",
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.position|1.position|1"]: {
+  "hash": "18e4c67148693df708fb6186d3374818bd057de364664d4d8fc76a39f2cd839c",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|1.createHtmlTreeAction.props|1.node|1.node|1.config|1.elementLocked|1.options|1.$type"]: {
-  "hash": "5f1ee2c2d18584506b34e12b24d993243ac078c864b7341723696ca8dc364966",
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.position|1.position|1.$type"]: {
+  "hash": "658eb98235431af77eb1bc304f42d6edb73c5f12c9909ea7c97dfb5b550502eb",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|1.createHtmlTreeAction.props|1.node|1.node|1.config|1.elementLocked|1.options|1.preventContentEdit"]: {
-  "hash": "a5b031ab62bc416d720c0410d802ea46b910c4fbe85c50a946ccc658b74e677e",
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.position|1.position|1.token"]: {
+  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|1.createHtmlTreeAction.props|1.node|1.node|1.config|1.elementLocked|1.options|1.preventStyleEdit"]: {
-  "hash": "a5b031ab62bc416d720c0410d802ea46b910c4fbe85c50a946ccc658b74e677e",
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.position|1.position|1.prevToken"]: {
+  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|1.createHtmlTreeAction.props|1.node|1.node|1.config|1.fontFamily"]: {
-  "hash": "9b1238714fbe5d300a74f2966b7521ba123a3f3fa7a9122011244a130f765847",
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node"]: {
+  "hash": "cb722d50477b29ca249f833d16077617475b488dcc612fcc0763a8a5fba0fa22",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|1.createHtmlTreeAction.props|1.node|1.node|1.config|1.fontFamilies"]: {
-  "hash": "9b1238714fbe5d300a74f2966b7521ba123a3f3fa7a9122011244a130f765847",
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|0"]: {
+  "hash": "570326e88d6ea9324c701bdef940750ecb6febdbcf2bae814b6887868f904465",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|1.createHtmlTreeAction.props|1.node|1.node|1.config|1.videoMode"]: {
-  "hash": "9b1238714fbe5d300a74f2966b7521ba123a3f3fa7a9122011244a130f765847",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|1.createHtmlTreeAction.props|1.node|1.node|1.config|1.videoAssets"]: {
-  "hash": "9b1238714fbe5d300a74f2966b7521ba123a3f3fa7a9122011244a130f765847",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|1.createHtmlTreeAction.props|1.node|1.node|1.config|1.videoAutoplay"]: {
-  "hash": "b582ff87634fcce53076a421bd35051c62e2828fdd41fb680dfda979b05a931a",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|1.createHtmlTreeAction.props|1.node|1.node|1.config|1.videoMuted"]: {
-  "hash": "b582ff87634fcce53076a421bd35051c62e2828fdd41fb680dfda979b05a931a",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|1.createHtmlTreeAction.props|1.node|1.node|1.config|1.videoLoop"]: {
-  "hash": "b582ff87634fcce53076a421bd35051c62e2828fdd41fb680dfda979b05a931a",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|1.createHtmlTreeAction.props|1.node|1.node|1.config|1.videoGifStart"]: {
-  "hash": "384f9c11fab80386916e4bd737d65647996fd846e3a838767567054deb1304ed",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|1.createHtmlTreeAction.props|1.node|1.node|1.config|1.videoGifDuration"]: {
-  "hash": "384f9c11fab80386916e4bd737d65647996fd846e3a838767567054deb1304ed",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|1.createHtmlTreeAction.props|1.node|1.node|1.config|1.videoGifFps"]: {
-  "hash": "384f9c11fab80386916e4bd737d65647996fd846e3a838767567054deb1304ed",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|1.createHtmlTreeAction.props|1.node|1.node|1.config|1.videoFallbackUrl"]: {
-  "hash": "9b1238714fbe5d300a74f2966b7521ba123a3f3fa7a9122011244a130f765847",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|1.createHtmlTreeAction.props|1.node|1.node|1.config|1.textAlignProjection"]: {
-  "hash": "9b1238714fbe5d300a74f2966b7521ba123a3f3fa7a9122011244a130f765847",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|1.createHtmlTreeAction.props|1.node|1.node|1.config|1.mobileTextAlignProjection"]: {
-  "hash": "9b1238714fbe5d300a74f2966b7521ba123a3f3fa7a9122011244a130f765847",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|1.createHtmlTreeAction.props|1.node|1.node|1.config|1.htmlBlockAnchorHrefProvenance"]: {
-  "hash": "9b1238714fbe5d300a74f2966b7521ba123a3f3fa7a9122011244a130f765847",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|1.createHtmlTreeAction.props|1.node|1.node|1.config|1.columnSchemaId"]: {
-  "hash": "9b1238714fbe5d300a74f2966b7521ba123a3f3fa7a9122011244a130f765847",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|1.createHtmlTreeAction.props|1.node|1.node|1.config|1.calendarEvents"]: {
-  "hash": "9b1238714fbe5d300a74f2966b7521ba123a3f3fa7a9122011244a130f765847",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|1.createHtmlTreeAction.props|1.node|1.node|1.config|1.structureContainersPerRow"]: {
-  "hash": "384f9c11fab80386916e4bd737d65647996fd846e3a838767567054deb1304ed",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|1.createHtmlTreeAction.props|1.node|1.node|1.config|1.keepStylesBakedBackground"]: {
-  "hash": "9b1238714fbe5d300a74f2966b7521ba123a3f3fa7a9122011244a130f765847",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|1.createHtmlTreeAction.props|1.node|1.node|1.config|1.bannerLegacyConfig"]: {
-  "hash": "9b1238714fbe5d300a74f2966b7521ba123a3f3fa7a9122011244a130f765847",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|1.createHtmlTreeAction.props|1.node|1.node|1.config|1.bannerLegacyCopyConverted"]: {
-  "hash": "b582ff87634fcce53076a421bd35051c62e2828fdd41fb680dfda979b05a931a",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|1.createHtmlTreeAction.props|1.node|1.children"]: {
-  "hash": "06296ebdae502900721b465162f6fd442bcd07302393db3642dc1be1ed2fdc76",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|1.createHtmlTreeAction.props|1.node|1.children[]"]: {
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1"]: {
   "hash": "a51c5d1f14c1cba6aa9724e8403e37fe44348c103a533b1fa3db93ead3680f4f",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|2"]: {
-  "hash": "bcccacfeeb0b7572e6683fd63ad6f643b7699c692422285b3bd9a927d11b0db7",
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.$type"]: {
+  "hash": "95c43ae243a863057d338b9a73a05439128f6dcc73e088408629652fec181240",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|2.$case"]: {
-  "hash": "1905ed568142fb4524f2ee886a33b637a689a26eab88e46dada5435964723486",
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.positionToken"]: {
+  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|2.createCssTreeAction"]: {
-  "hash": "ffd3248a41a655a7d07e0fde3f1388b1ed985ae88b6550e4383414165f62743e",
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node"]: {
+  "hash": "7c0359d2dcd6763711b53e3a53a9116df7085ebaa431f8f82d10fcb07f40b472",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|2.createCssTreeAction.$type"]: {
-  "hash": "0938dbe325712ece616e9125fd4821a2ba7a89e4e2bb9215a602fc19d1fb76eb",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|2.createCssTreeAction.props"]: {
-  "hash": "fdd6b80396b3b126e332edffa98f16b61ac53cd248f48318b2749dd41545c7fe",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|2.createCssTreeAction.props|0"]: {
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|0"]: {
   "hash": "570326e88d6ea9324c701bdef940750ecb6febdbcf2bae814b6887868f904465",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|2.createCssTreeAction.props|1"]: {
-  "hash": "4d4043f6ebb2c1c317cbd94fe3dfc2ab5ca91b975e1a4cdea813762502fb7125",
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1"]: {
+  "hash": "dbd6b5dbdfe2ed14ee4370141b3a96e9548ddd3eb9e5b7aa96a55fa210869f01",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|2.createCssTreeAction.props|1.$type"]: {
-  "hash": "8e7e67d9d3750e49daa8eedfc844810a692ffa5ac0b4caba82006b67665e1142",
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.$type"]: {
+  "hash": "4cf31b798bf01d8046eda8681a8d323fa4f85fe2f4103baa7a37f32191915ec7",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|2.createCssTreeAction.props|1.position"]: {
-  "hash": "c91ea54634e83ac1e4ed14d7e6a45f4148fd9f27aedf825b12f8722d44c91374",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|2.createCssTreeAction.props|1.node"]: {
-  "hash": "9971b5816a5530587b681bd9a07d92814a8d55a7d3cbf526a55b0816f59b10cc",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|2.createCssTreeAction.props|1.node|0"]: {
-  "hash": "570326e88d6ea9324c701bdef940750ecb6febdbcf2bae814b6887868f904465",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|2.createCssTreeAction.props|1.node|1"]: {
-  "hash": "3b0ae45fd84cf9cbc9cf329f24d279ec9d6844b15f3e786dd51ed52f2975a61f",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|2.createCssTreeAction.props|1.node|1.$type"]: {
-  "hash": "0724e05098668af1cb4c5fa3b30be77bec7224949ca4988f418211d6c59baa10",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|2.createCssTreeAction.props|1.node|1.positionToken"]: {
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.id"]: {
   "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|2.createCssTreeAction.props|1.node|1.node"]: {
-  "hash": "ee0c9816895b72688b6e6dc9e00c7ac00c93167bb8ac6d6bbec61d4a9e6c1310",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|2.createCssTreeAction.props|1.node|1.node|0"]: {
-  "hash": "570326e88d6ea9324c701bdef940750ecb6febdbcf2bae814b6887868f904465",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|2.createCssTreeAction.props|1.node|1.node|1"]: {
-  "hash": "4f502005839236589a4d0ed91d6ca005ad7a9ae829641fc383ac1b63bc00f28c",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|2.createCssTreeAction.props|1.node|1.node|1.$type"]: {
-  "hash": "5c62d2a2e0cdfe7dab92ce2c30eae8c1a0d44e418c3bfbb61c5d08752456f75a",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|2.createCssTreeAction.props|1.node|1.node|1.id"]: {
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.content"]: {
   "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|2.createCssTreeAction.props|1.node|1.node|1.content"]: {
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.type"]: {
   "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|2.createCssTreeAction.props|1.node|1.node|1.type"]: {
-  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|2.createCssTreeAction.props|1.node|1.node|1.exists"]: {
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.exists"]: {
   "hash": "a5b031ab62bc416d720c0410d802ea46b910c4fbe85c50a946ccc658b74e677e",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|2.createCssTreeAction.props|1.node|1.node|1.selector"]: {
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.tag"]: {
   "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|2.createCssTreeAction.props|1.node|1.node|1.commented"]: {
-  "hash": "a5b031ab62bc416d720c0410d802ea46b910c4fbe85c50a946ccc658b74e677e",
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.attributes"]: {
+  "hash": "b3a88cde1e6e00ceb7956d2097b6bcf1cad6c92a96a0ef7b80fcba100d406234",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|2.createCssTreeAction.props|1.node|1.node|1.attributeName"]: {
-  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|2.createCssTreeAction.props|1.node|1.node|1.attributeValue"]: {
-  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|2.createCssTreeAction.props|1.node|1.node|1.notToDisplay"]: {
-  "hash": "a5b031ab62bc416d720c0410d802ea46b910c4fbe85c50a946ccc658b74e677e",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|2.createCssTreeAction.props|1.node|1.children"]: {
-  "hash": "3bd74d10834390051793e348c96f0e6b2fba930edd2f9ffc4c571b020c49af94",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|2.createCssTreeAction.props|1.node|1.children[]"]: {
-  "hash": "3b0ae45fd84cf9cbc9cf329f24d279ec9d6844b15f3e786dd51ed52f2975a61f",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|3"]: {
-  "hash": "4403afc3b7485464415098b7df9fadbbfec70f1afe4c4397bd4ce9358a05fba9",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|3.$case"]: {
-  "hash": "e5be19a9eda81eaa4c30d3024582a28491ee4057a31fe53a249bc922ca4f4672",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|3.removeHtmlNodesAction"]: {
-  "hash": "2246c094b2b9e5c9d9e4740c84f594e9af0ef8a753dcc6833c85f0ebd5b89620",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|3.removeHtmlNodesAction.$type"]: {
-  "hash": "427ab6248648a70918228cef080360e0b4a0417c6622163fe89d8e9220ed1eac",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|3.removeHtmlNodesAction.ids"]: {
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.classes"]: {
   "hash": "2f66b41966a90abaa8087407bd4236ee55d4992f5dc7acd9e4126413e1f61a85",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|4"]: {
-  "hash": "ec751ad6d1baa0d78c972d92317ecb7755f69a8ff1ba122c8b5674562cebc917",
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.styles"]: {
+  "hash": "744982441a666e33eae4055ec09fed3e8d8aadbd115fbfb021e8aa478d97b3ab",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|4.$case"]: {
-  "hash": "66cbd3465ba2c10fbd2338465637b5c6626bb8464d634a17dd568939db747cfc",
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config"]: {
+  "hash": "188a541e5c94b4ce2cd01cfd4f376758e09157828123196c9bc066bee32dfc55",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|4.removeCssNodesAction"]: {
-  "hash": "574eb37c212e7130331ec08eb29c9dc0827f61fde3aae14edf22510103a4c947",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|4.removeCssNodesAction.$type"]: {
-  "hash": "1fc4f229437c956ef3d63bf509dc32af24cd2e680049a2041cf8882add283385",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|4.removeCssNodesAction.ids"]: {
-  "hash": "2f66b41966a90abaa8087407bd4236ee55d4992f5dc7acd9e4126413e1f61a85",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|5"]: {
-  "hash": "4854058fe3c3addb6e56b3b4effd21ffde28ded05ac6240d6415cac508e36a54",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|5.$case"]: {
-  "hash": "9394a043b176d928e320b061908f60876e13f00ccef7db8c3f74a0dcd2a0b968",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|5.restoreHtmlNodesAction"]: {
-  "hash": "2233c7a9021c4a1566d59015f3f06b663fe248be80d96d12684e14fb44a3ed35",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|5.restoreHtmlNodesAction.$type"]: {
-  "hash": "fb25a6b88ec6df39ce00b84622f88824cac2bd082faf4f1cfbdd84461f1439c1",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|5.restoreHtmlNodesAction.ids"]: {
-  "hash": "2f66b41966a90abaa8087407bd4236ee55d4992f5dc7acd9e4126413e1f61a85",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|6"]: {
-  "hash": "201e16f126cb0d7147776f26cc99f410f9bb20d9c9f54df047e4c8b9881d2f62",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|6.$case"]: {
-  "hash": "13bc1113f7f0728d7e4937e7d6ca34a635088757426dc2dfb4ff599ad8c2c5a6",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|6.restoreCssNodesAction"]: {
-  "hash": "ba6f5daaa156b69ad19e742eace427ce3f3ec030abce8fb9525cac6123602a4c",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|6.restoreCssNodesAction.$type"]: {
-  "hash": "eb487bc178a9bd7f6450bf36ac72b8bfbed220554bbfbbc74fa41d4e9e6c8007",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|6.restoreCssNodesAction.ids"]: {
-  "hash": "2f66b41966a90abaa8087407bd4236ee55d4992f5dc7acd9e4126413e1f61a85",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|7"]: {
-  "hash": "c6a386a1b2d8f176b1b63459e9dc37bf19888cf69f02032c6e5c15c8a089038a",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|7.$case"]: {
-  "hash": "a75270c8dd78bffa2ee4da376f5738677c6ccca949e189f599e3fa3774a088b2",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|7.moveHtmlNodeAction"]: {
-  "hash": "c4296ec30115edc193e648bf4795a3044386fb9de59f307926cfa178e742157a",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|7.moveHtmlNodeAction.$type"]: {
-  "hash": "f2152033554011488a7c0107c2a4b950520fb3f99b730847b445bde864a218e6",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|7.moveHtmlNodeAction.id"]: {
-  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|7.moveHtmlNodeAction.oldPosition"]: {
-  "hash": "c91ea54634e83ac1e4ed14d7e6a45f4148fd9f27aedf825b12f8722d44c91374",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|7.moveHtmlNodeAction.newPosition"]: {
-  "hash": "c91ea54634e83ac1e4ed14d7e6a45f4148fd9f27aedf825b12f8722d44c91374",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|8"]: {
-  "hash": "f7c297726fa380049f0651b97d5023da8ab275f6569211434d5b98f82652b578",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|8.$case"]: {
-  "hash": "895657d05d6117a2cf9c41306c360a3cf0e8126048c63dd487896293eba07846",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|8.moveCssNodeAction"]: {
-  "hash": "f2b181a54ad53ea7654866229a3cfe7f43a4a32ca2ff626dab3fca0f6709e619",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|8.moveCssNodeAction.$type"]: {
-  "hash": "5d0cfdf4b21f0cdb4d80b5d1168ed67f909b223a28e825faa278fbfcd06ead0b",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|8.moveCssNodeAction.id"]: {
-  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|8.moveCssNodeAction.oldPosition"]: {
-  "hash": "c91ea54634e83ac1e4ed14d7e6a45f4148fd9f27aedf825b12f8722d44c91374",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|8.moveCssNodeAction.newPosition"]: {
-  "hash": "c91ea54634e83ac1e4ed14d7e6a45f4148fd9f27aedf825b12f8722d44c91374",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|9"]: {
-  "hash": "cb8c8d7a0b77122461f4a0774f6c62e48936c0b214f17972b762cde2e1816dc0",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|9.$case"]: {
-  "hash": "d34cc546d2c9dedec9b4193debebbe6a856f9fb9ab647e71dbe3c65418c87029",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|9.setHtmlNodeContentAction"]: {
-  "hash": "7f9b065df17451c6bf3885a3b1cc52fa82801113e0dc7b3e31a1ceeed4857ad3",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|9.setHtmlNodeContentAction.$type"]: {
-  "hash": "f4675aa6218b8c799b9303d083755ed750e05eb5059b8574ad795630384a55d2",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|9.setHtmlNodeContentAction.id"]: {
-  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|9.setHtmlNodeContentAction.oldValue"]: {
-  "hash": "9b1238714fbe5d300a74f2966b7521ba123a3f3fa7a9122011244a130f765847",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|9.setHtmlNodeContentAction.newValue"]: {
-  "hash": "9b1238714fbe5d300a74f2966b7521ba123a3f3fa7a9122011244a130f765847",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|10"]: {
-  "hash": "b9e8748288341b1444c5bc228b5a866ab74bf34318a55e0d80c182446ce54238",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|10.$case"]: {
-  "hash": "6fe999853077814098989398da67db96b037dd49f2c9c68c8c4128f3dfd79788",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|10.setCssNodeContentAction"]: {
-  "hash": "8941367426f3199c1a9b37af1b07b99a0138a1b35c282cbd229eb8c0218fc645",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|10.setCssNodeContentAction.$type"]: {
-  "hash": "5b7df251f9c69865383e311d309b6aaccc424a899c8942de794a78811287a010",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|10.setCssNodeContentAction.id"]: {
-  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|10.setCssNodeContentAction.oldValue"]: {
-  "hash": "9b1238714fbe5d300a74f2966b7521ba123a3f3fa7a9122011244a130f765847",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|10.setCssNodeContentAction.newValue"]: {
-  "hash": "9b1238714fbe5d300a74f2966b7521ba123a3f3fa7a9122011244a130f765847",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|11"]: {
-  "hash": "d41526d81b914a09a9a5e9b70757d1915efd0438e6eea2f42f5486bad8c64502",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|11.$case"]: {
-  "hash": "43ff553335d33aeef4ba4272136256b998fe4c6b7227ab7a9ba0f3db3a6aa52d",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|11.setHtmlNodeAttributeAction"]: {
-  "hash": "82629300c4d07e006f03abb14a251e3d7de32698ab9c46d7e25f4c516e72046d",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|11.setHtmlNodeAttributeAction.$type"]: {
-  "hash": "25fb2a457b15415ceaba98d21b89ad3539325f131780bc2999cee06ae6ea2d74",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|11.setHtmlNodeAttributeAction.id"]: {
-  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|11.setHtmlNodeAttributeAction.attributeName"]: {
-  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|11.setHtmlNodeAttributeAction.oldValue"]: {
-  "hash": "fec6d8956b4d2d514c616393a1da977b049720bfd5b1c33c35e5af31700b8f0a",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|11.setHtmlNodeAttributeAction.oldValue|0"]: {
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|0"]: {
   "hash": "570326e88d6ea9324c701bdef940750ecb6febdbcf2bae814b6887868f904465",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|11.setHtmlNodeAttributeAction.oldValue|1"]: {
-  "hash": "9b8c865addb08ac967004caa2deae40145df3cfa176fa2b8a7090cd2e875ac0e",
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1"]: {
+  "hash": "84d4494a64b7e4e850f3cf743febceea4b2a6424d567076e273f234e8dc29492",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|11.setHtmlNodeAttributeAction.oldValue|1.$type"]: {
-  "hash": "3f97a29e4bf1673da1efe453695231f4c0945cd15283bcbf9d64645ec3119dff",
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.$type"]: {
+  "hash": "75ab83f87ea3d9f6933d542da1d4c4bc8e75e8354b30003b52f870471ce8c016",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|11.setHtmlNodeAttributeAction.oldValue|1.value?"]: {
-  "hash": "1429ddb36c40f2846f1f3a122b317ea03d00c47d8509665656d14570c539ed11",
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.bannerImg"]: {
+  "hash": "ce0da6fbd16884676e35623d8b8c187b2f8f22219054590962853be79e6e5c90",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|11.setHtmlNodeAttributeAction.oldValue|1.value?|0"]: {
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.bannerImg|0"]: {
   "hash": "570326e88d6ea9324c701bdef940750ecb6febdbcf2bae814b6887868f904465",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|11.setHtmlNodeAttributeAction.oldValue|1.value?|1"]: {
-  "hash": "b2d4e01fa0668b84023e7508838c7d537c60380b95585f643de910518287c767",
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.bannerImg|1"]: {
+  "hash": "f9efd2aaafb67d66951445a2d1ae6d27bb962fff53cde395dd24e658b0cb0bc0",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|11.setHtmlNodeAttributeAction.oldValue|1.value?|1.$case"]: {
-  "hash": "4b441af989c8511d2546124f1d01908479666df93ba164039c0bb1104d753fe2",
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.bannerImg|1.$type"]: {
+  "hash": "69b673ce8ba9429bd47d17b34b51e9d38f979ac46d1641fe2b6d7e5deae35004",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|11.setHtmlNodeAttributeAction.oldValue|1.value?|1.stringValue"]: {
-  "hash": "fd8284b4275cfc787e3b12d61e30a9deccc65f64d747c21ae2b8626a99afc0d8",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|11.setHtmlNodeAttributeAction.oldValue|1.value?|2"]: {
-  "hash": "8828c6f9d4009a13a9db596e874936621f4b82a81ed867fa62b98d2f76aeeb3b",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|11.setHtmlNodeAttributeAction.oldValue|1.value?|2.$case"]: {
-  "hash": "9b978acc70aa10f302f1fad6b7e39cc8bb0222907d6eb5dfd52776c0faa9d4ff",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|11.setHtmlNodeAttributeAction.oldValue|1.value?|2.boolValue"]: {
-  "hash": "57419c2455ab9279cfc991710270e687e16b72d3addffd23f8cc4caa58e111c8",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|11.setHtmlNodeAttributeAction.oldValue|1.value?|3"]: {
-  "hash": "763436ab1f4a0fcca9ae2e47aabfe93adceaaac2cfe63095a5e96f745c9b2705",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|11.setHtmlNodeAttributeAction.oldValue|1.value?|3.$case"]: {
-  "hash": "a476d40aa13b4b88faaf9513811fae6a2078e02d2051c510147eed16aa127525",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|11.setHtmlNodeAttributeAction.oldValue|1.value?|3.intValue"]: {
-  "hash": "769c09f33c6a3494c9b872dda21451d0708a12849c9f8ed6a6e765551a474ce7",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|11.setHtmlNodeAttributeAction.newValue"]: {
-  "hash": "9c3058fae2daf43d6031052b2e757d6758d8da945575f6a3e3fb0b3e6e51bf39",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|12"]: {
-  "hash": "bde8bc1c13a56d8d79f20c562561405f5e2f1e567d44e4b153e0bbfc4b41d8a2",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|12.$case"]: {
-  "hash": "249ce38551a7176006275daf94eaa0072f1562251c3bbc43f9149064574e03e5",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|12.setCssNodeAttributeNameAction"]: {
-  "hash": "30863c4cc04e4e4cdad0c57dd85a31144e829b5aab5c3020f0c39b6bcdafa881",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|12.setCssNodeAttributeNameAction.$type"]: {
-  "hash": "303482119dd043c67b8a96073d71ce342dc855e8a749336cee2278e5e9e13132",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|12.setCssNodeAttributeNameAction.id"]: {
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.bannerImg|1.value"]: {
   "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|12.setCssNodeAttributeNameAction.oldValue"]: {
-  "hash": "9b1238714fbe5d300a74f2966b7521ba123a3f3fa7a9122011244a130f765847",
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.bannerImg|1.binaryValue"]: {
+  "hash": "fdee8c58c293540afdc7ffeea50426af31087f49783a0d7a6927def620414bbb",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|12.setCssNodeAttributeNameAction.newValue"]: {
-  "hash": "9b1238714fbe5d300a74f2966b7521ba123a3f3fa7a9122011244a130f765847",
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.bannerImg|1.isSet"]: {
+  "hash": "a5b031ab62bc416d720c0410d802ea46b910c4fbe85c50a946ccc658b74e677e",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|13"]: {
-  "hash": "56aab9acce18a45a3b4cfc40ce362fb0a657fa165b3aa36cf0696940b49e0ce2",
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.structureCustomDesktopPaddings"]: {
+  "hash": "738d3fd9a32abfc710e7e21e0a2218e4e04a7a5df46661543cb4fa9499ace0d6",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|13.$case"]: {
-  "hash": "14be46f30e038d5cc866f61dc9b58d875ab6044ee9d64930c7870d87f31a9039",
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.structureCustomDesktopPaddings|0"]: {
+  "hash": "570326e88d6ea9324c701bdef940750ecb6febdbcf2bae814b6887868f904465",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|13.setCssNodeAttributeValueAction"]: {
-  "hash": "927c750ea29ae295bf0e18219b3f4af2ff440cccd80648c9688e153ef0b9f7b6",
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.structureCustomDesktopPaddings|1"]: {
+  "hash": "9db127e3300e44fc1c073a641da24140a6f1dfb28e5ecbe197bbfb635a3cfa0d",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|13.setCssNodeAttributeValueAction.$type"]: {
-  "hash": "f4d0d824818da29b80d047823d898c5a1470787ec07aeed021cb6ce7fcdae0b2",
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.structureCustomDesktopPaddings|1.$type"]: {
+  "hash": "f33e01abc4542f07f7a96fb26b7928ff353f8b62de8aa81e5c38120a5b50d9ed",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|13.setCssNodeAttributeValueAction.id"]: {
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.structureCustomDesktopPaddings|1.value"]: {
+  "hash": "a5b031ab62bc416d720c0410d802ea46b910c4fbe85c50a946ccc658b74e677e",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.structureCustomDesktopPaddings|1.isSet"]: {
+  "hash": "a5b031ab62bc416d720c0410d802ea46b910c4fbe85c50a946ccc658b74e677e",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.structureCustomMobilePaddings"]: {
+  "hash": "d13b567e4e2201f820e062a510b44bb9fb89fd6b7c305308a30092e923bcca3d",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.deskHidden"]: {
+  "hash": "d13b567e4e2201f820e062a510b44bb9fb89fd6b7c305308a30092e923bcca3d",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.displayCondition"]: {
+  "hash": "c2a1adde9eb8cc41a7187212a0e644bcc0a4a1d10a63cc0d193fe149e03cee57",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.displayCondition|0"]: {
+  "hash": "570326e88d6ea9324c701bdef940750ecb6febdbcf2bae814b6887868f904465",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.displayCondition|1"]: {
+  "hash": "8edeb0d8fe9e8951940d2f580f824687f60ce126c1c110cd09f39ec80c068de8",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.displayCondition|1.$type"]: {
+  "hash": "e499d7f5db17056460a913b9901961af47a3bf21b3d4e07ca52361842742c09d",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.displayCondition|1.id"]: {
+  "hash": "fd1a55ee2217c1ac278ab485236d6c199517334ee91e965cf2f6b8575701cd1c",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.displayCondition|1.name"]: {
   "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|13.setCssNodeAttributeValueAction.oldValue"]: {
-  "hash": "9b1238714fbe5d300a74f2966b7521ba123a3f3fa7a9122011244a130f765847",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|13.setCssNodeAttributeValueAction.newValue"]: {
-  "hash": "9b1238714fbe5d300a74f2966b7521ba123a3f3fa7a9122011244a130f765847",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|14"]: {
-  "hash": "ec50f7822a3bacf59547bda37ea94e5f2fd465f4b2ee4869a9687d6a5c04340d",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|14.$case"]: {
-  "hash": "fd399a252fe5d80dbf23ffca2bd45dddb8ff34c6ac1fb68488a9f77b9f3408e3",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|14.addHtmlNodeClassAction"]: {
-  "hash": "54c6eae2446f6221443f678e15e74f1b412861f84ae581aead4ef235d1b460e2",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|14.addHtmlNodeClassAction.$type"]: {
-  "hash": "a386dae69ef73eb3255ffdbbeabe81bfd7f2b1581ca6e3c8d2b9d39eb577efa5",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|14.addHtmlNodeClassAction.id"]: {
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.displayCondition|1.description"]: {
   "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|14.addHtmlNodeClassAction.className"]: {
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.displayCondition|1.beforeScript"]: {
   "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|15"]: {
-  "hash": "0489aa7be6ce07a0eb56ffb97992cff5f8c005978a193ca5ccf746eaf4e210a3",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|15.$case"]: {
-  "hash": "0fc0af405f39a5d79d0511add4a18c62a8526eef9a577e3b91ebffae189d46f0",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|15.removeHtmlNodeClassAction"]: {
-  "hash": "9f88aace99200f826448691e2cbe883b43569a04e12f48aa9f554d1f912ff610",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|15.removeHtmlNodeClassAction.$type"]: {
-  "hash": "db6abef58d31c41c9b4bfcf0c128f87666067e624657e231060494746ced4632",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|15.removeHtmlNodeClassAction.id"]: {
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.displayCondition|1.afterScript"]: {
   "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|15.removeHtmlNodeClassAction.className"]: {
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.displayCondition|1.type"]: {
   "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|16"]: {
-  "hash": "b65ac65d5ba338931af7c7335bd9c791e7072c637621c7cb70fcc8d5976c59a6",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|16.$case"]: {
-  "hash": "6bcf433287a5c2fd9b32a71a8dea38fdd51f6839c9407af06ab5b9d98aa09ed6",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|16.setHtmlNodeStyleAction"]: {
-  "hash": "0e6735ff536529eb93fecbedff52f44c0b57f77e06a67c095bfe1b75084478d8",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|16.setHtmlNodeStyleAction.$type"]: {
-  "hash": "82a6054afdb7fcb7555bea528d2649a9cbb6c70427a7019ac0420e8ad99f7a10",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|16.setHtmlNodeStyleAction.id"]: {
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.displayCondition|1.extraData"]: {
   "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|16.setHtmlNodeStyleAction.styleProp"]: {
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.displayCondition|1.conditionsCount"]: {
+  "hash": "fd1a55ee2217c1ac278ab485236d6c199517334ee91e965cf2f6b8575701cd1c",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.fitToContainer"]: {
+  "hash": "d13b567e4e2201f820e062a510b44bb9fb89fd6b7c305308a30092e923bcca3d",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.gap"]: {
+  "hash": "7f48d3f1789658ea05b7eb79c05c210811627ef07adc55047381c162b363a895",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.gap|0"]: {
+  "hash": "570326e88d6ea9324c701bdef940750ecb6febdbcf2bae814b6887868f904465",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.gap|1"]: {
+  "hash": "179e9fd11a5802798234e9a84deee2078523ba33d6327ef94b06402a0022ee9c",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.gap|1.$type"]: {
+  "hash": "1801649250e9e2e474b49856d3b615489a98fbcb45d46da519c536b7494ed21f",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.gap|1.value"]: {
+  "hash": "fd1a55ee2217c1ac278ab485236d6c199517334ee91e965cf2f6b8575701cd1c",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.gap|1.isSet"]: {
+  "hash": "a5b031ab62bc416d720c0410d802ea46b910c4fbe85c50a946ccc658b74e677e",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.imgAspectRatio"]: {
+  "hash": "5fbdafdc18161566d1cf4ec56a71301d64d73a23326cae0345ac9d31afa69e70",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.imgEmpty"]: {
+  "hash": "d13b567e4e2201f820e062a510b44bb9fb89fd6b7c305308a30092e923bcca3d",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.imgOriginalWidth"]: {
+  "hash": "5fbdafdc18161566d1cf4ec56a71301d64d73a23326cae0345ac9d31afa69e70",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.imgPrevHeight"]: {
+  "hash": "5fbdafdc18161566d1cf4ec56a71301d64d73a23326cae0345ac9d31afa69e70",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.imgPrevWidth"]: {
+  "hash": "5fbdafdc18161566d1cf4ec56a71301d64d73a23326cae0345ac9d31afa69e70",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.isLockContainer"]: {
+  "hash": "d13b567e4e2201f820e062a510b44bb9fb89fd6b7c305308a30092e923bcca3d",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.linksColor"]: {
+  "hash": "4f6f2fe18f61304bad11ce91603a6720ee83156423c170682e318581c4962b11",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.menuItemInternalIndentsInline"]: {
+  "hash": "4f6f2fe18f61304bad11ce91603a6720ee83156423c170682e318581c4962b11",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.menuItemSizeAttributes"]: {
+  "hash": "ac936b04d84edf210ef5d4787a16af51deaf310b5de2fbe4de3a388dd2b07976",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.menuItemSizeAttributes|0"]: {
+  "hash": "570326e88d6ea9324c701bdef940750ecb6febdbcf2bae814b6887868f904465",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.menuItemSizeAttributes|1"]: {
+  "hash": "60bb3338e0ad558c986d5dd4e957de1185ad02fdfa4edd6640c5c2bd0b97826e",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.menuItemSizeAttributes|1.$type"]: {
+  "hash": "84ef2c4b66ca63d4bfc5bca31a6172e9f036e55ea255fe1b3b78e2a05b47571a",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.menuItemSizeAttributes|1.width"]: {
+  "hash": "fd1a55ee2217c1ac278ab485236d6c199517334ee91e965cf2f6b8575701cd1c",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.menuItemSizeAttributes|1.height"]: {
+  "hash": "fd1a55ee2217c1ac278ab485236d6c199517334ee91e965cf2f6b8575701cd1c",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.menuItemSrc"]: {
+  "hash": "4f6f2fe18f61304bad11ce91603a6720ee83156423c170682e318581c4962b11",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.menuCommonType"]: {
+  "hash": "d13b567e4e2201f820e062a510b44bb9fb89fd6b7c305308a30092e923bcca3d",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.menuCommonItemsType"]: {
+  "hash": "1054670cf9c55f31db62e879d5d03641f6dd32936a73b907e692d3d62aff989a",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.menuCommonItemsType|0"]: {
+  "hash": "570326e88d6ea9324c701bdef940750ecb6febdbcf2bae814b6887868f904465",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.menuCommonItemsType|1"]: {
+  "hash": "3f797f2d04a25b9a1afbd85af665cb0f559f683b7a5d5e95088a07382a2dfae3",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.menuCommonItemsType|1.$type"]: {
+  "hash": "fe426c06e5121d4ff086a28dff76db7ca254032d15b820ee09432097ef0c9a2f",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.menuCommonItemsType|1.value"]: {
+  "hash": "a3f198ec4214374c07fa651910d8af45158dc01411c6211a06e3510213ab34d4",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.menuCommonItemsType|1.value|0"]: {
+  "hash": "f570d0a3a7780d0dc3f7672a83e75ff5946606df3d9ed1b504a448eda2a792a7",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.menuCommonItemsType|1.value|1"]: {
+  "hash": "724d65af5df98fb643f6d28a97f0d788e40a2158a706b914bab9dba61d0a6485",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.menuCommonItemsType|1.value|2"]: {
+  "hash": "44f58028e8ff9183084281c6349d7977f3cb60dff3d9eb9f36fda3b861234851",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.menuCommonItemsType|1.isSet"]: {
+  "hash": "a5b031ab62bc416d720c0410d802ea46b910c4fbe85c50a946ccc658b74e677e",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.menuDeskHidden"]: {
+  "hash": "d13b567e4e2201f820e062a510b44bb9fb89fd6b7c305308a30092e923bcca3d",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.mimeType"]: {
+  "hash": "4f6f2fe18f61304bad11ce91603a6720ee83156423c170682e318581c4962b11",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.mobileHidden"]: {
+  "hash": "d13b567e4e2201f820e062a510b44bb9fb89fd6b7c305308a30092e923bcca3d",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.moduleId"]: {
+  "hash": "5fbdafdc18161566d1cf4ec56a71301d64d73a23326cae0345ac9d31afa69e70",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.messageInfoArea"]: {
+  "hash": "d13b567e4e2201f820e062a510b44bb9fb89fd6b7c305308a30092e923bcca3d",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.outlookCss"]: {
+  "hash": "4f6f2fe18f61304bad11ce91603a6720ee83156423c170682e318581c4962b11",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.smartBlock"]: {
+  "hash": "2429e92c20f92faf00732ca2ffb7402635ecfe6a0ff8475540c4ea6c4a59c033",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.smartBlock|0"]: {
+  "hash": "570326e88d6ea9324c701bdef940750ecb6febdbcf2bae814b6887868f904465",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.smartBlock|1"]: {
+  "hash": "272518ae50a1fd79a937b82dc1b5a6b558f3af4087f467fad750543e58e8a75b",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.smartBlock|1.$type"]: {
+  "hash": "b9029d4a06d3cd2c76088440b1136e94fe4bba71d63c507024360f9634a9a7b7",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.smartBlock|1.blockMappings"]: {
+  "hash": "c47a5018fadbc3112fc74fc1115e080d5f982b5b961c61c8c531246b87f7f354",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.smartBlock|1.blockMappings[]"]: {
+  "hash": "a2689b65b57f0fc3bf3b67501a4145109e77f57fb63c95a9fae6931a14a714b8",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.smartBlock|1.blockMappings[].$type"]: {
+  "hash": "37a8463d639f5eaa8d5c153571e96e9ee4578f11330f5e3542d925abc171143a",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.smartBlock|1.blockMappings[].selector"]: {
   "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|16.setHtmlNodeStyleAction.oldValue"]: {
-  "hash": "9b1238714fbe5d300a74f2966b7521ba123a3f3fa7a9122011244a130f765847",
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.smartBlock|1.blockMappings[].attribute"]: {
+  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|16.setHtmlNodeStyleAction.newValue"]: {
-  "hash": "9b1238714fbe5d300a74f2966b7521ba123a3f3fa7a9122011244a130f765847",
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.smartBlock|1.blockMappings[].custom"]: {
+  "hash": "a5b031ab62bc416d720c0410d802ea46b910c4fbe85c50a946ccc658b74e677e",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.createOwnPatch#0(actions)[].action?|17"]: {
-  "hash": "cd845b17a6647f74da69b2f495726fb4d51f7c2a38bb9414fb23e91695da92da",
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.smartBlock|1.value"]: {
+  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.smartBlock|1.variables"]: {
+  "hash": "9859d71eaccece139236851df237c1d61f76e1373f3d709e34b14452a56cb481",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.smartBlock|1.variables[]"]: {
+  "hash": "c5744652f2af2af75af9edb493c5a423f888192adaa7cab8f1253555360fc439",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.smartBlock|1.variables[].$type"]: {
+  "hash": "f408c9d1571f64ec5514812bfc51a0a92814c56dc3edc51a38404f34c497b8b4",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.smartBlock|1.variables[].variable"]: {
+  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.smartBlock|1.variables[].name"]: {
+  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.smartBlock|1.variables[].blockMappings"]: {
+  "hash": "4cda58a00ff3ee6054c5f55b62e0d31d24c697c2d5e9ce7c73f6e0d480bf5fee",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.smartBlock|1.variables[].blockMapping"]: {
+  "hash": "4cda58a00ff3ee6054c5f55b62e0d31d24c697c2d5e9ce7c73f6e0d480bf5fee",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.smartBlock|1.variables[].externalMapping"]: {
+  "hash": "2c718c9bac61b883eb19a10c5bb7dd99743d2603cb25a17b8ead08620b18ba70",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.smartBlock|1.variables[].externalMapping|0"]: {
+  "hash": "570326e88d6ea9324c701bdef940750ecb6febdbcf2bae814b6887868f904465",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.smartBlock|1.variables[].externalMapping|1"]: {
+  "hash": "dffe0baa7ca0627b8bc56e1684c50bda1d2cda209c9ac5568a395bf27be18fae",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.smartBlock|1.variables[].externalMapping|1.$type"]: {
+  "hash": "4e7d4a5c31d83aa630e73424d80f3d25808d6319a2b9a4cd65c3233e2494a7b5",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.smartBlock|1.variables[].externalMapping|1.pageSelector"]: {
+  "hash": "61e19e377b4350e9d1f6ffab135c18a6af4ec18c6625e9cc4e606a8cac4dd43c",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.smartBlock|1.variables[].externalMapping|1.pageSelector|0"]: {
+  "hash": "570326e88d6ea9324c701bdef940750ecb6febdbcf2bae814b6887868f904465",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.smartBlock|1.variables[].externalMapping|1.pageSelector|1"]: {
+  "hash": "c542de810cd37268c31367eddb90015a9ed2c3ab5c55bc664e19ac59527ca14d",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.smartBlock|1.variables[].externalMapping|1.pageSelector|1.$type"]: {
+  "hash": "24b72e40e4674c866ee4b6752506e18b9cef1d9f7e616860da4e723f64dac666",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.smartBlock|1.variables[].externalMapping|1.pageSelector|1.selector"]: {
+  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.smartBlock|1.variables[].externalMapping|1.pageSelector|1.attribute"]: {
+  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.smartBlock|1.variables[].externalMapping|1.pageLinkSelector"]: {
+  "hash": "a35d45c69f55fba3b78cdd952a48370b900e5d3a75252ae12c6a19b7a092a713",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.smartBlock|1.variables[].externalMapping|1.modifier"]: {
+  "hash": "c659f2bb715cdcac02432a84dffe72218f0d1c4d67fab0a1c2888545ad663941",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.smartBlock|1.variables[].externalMapping|1.modifier|0"]: {
+  "hash": "570326e88d6ea9324c701bdef940750ecb6febdbcf2bae814b6887868f904465",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.smartBlock|1.variables[].externalMapping|1.modifier|1"]: {
+  "hash": "919b2137ead192c9a8769482056e377a0abba2e11edbe1af05ae51ed08ccca41",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.smartBlock|1.variables[].externalMapping|1.modifier|1.$type"]: {
+  "hash": "9e84b91fc4212d826816d13cd2ac990008a36a5e72f542a09d137d01827d4d1b",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.smartBlock|1.variables[].externalMapping|1.modifier|1.format"]: {
+  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.smartBlock|1.variables[].externalMapping|1.modifier|1.formatSeparator"]: {
+  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.smartBlock|1.variables[].externalMapping|1.modifier|1.regexs"]: {
+  "hash": "a6bf6f13bc41848e1a8ca6c8e251493899b36400be75883aa6c08ce921e76b9a",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.smartBlock|1.variables[].externalMapping|1.modifier|1.regexs[]"]: {
+  "hash": "d181335a28dd495742df853fbe711e66379e18e8d7f7356d51c08262bf3e70bf",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.smartBlock|1.variables[].externalMapping|1.modifier|1.regexs[].$type"]: {
+  "hash": "3308626eeb86af38f95c36d5d0fb5b5dd4a6a22d7424f7b157b1cd85e3f7f5ba",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.smartBlock|1.variables[].externalMapping|1.modifier|1.regexs[].regex"]: {
+  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.smartBlock|1.variables[].externalMapping|1.modifier|1.regexs[].replacement"]: {
+  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.smartBlock|1.variables[].externalMapping|1.modifier|1.regexs[].replaceAll"]: {
+  "hash": "a5b031ab62bc416d720c0410d802ea46b910c4fbe85c50a946ccc658b74e677e",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.smartBlock|1.variables[].htmlSupport"]: {
+  "hash": "a5b031ab62bc416d720c0410d802ea46b910c4fbe85c50a946ccc658b74e677e",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.smartBlock|1.variables[].dataFeedField"]: {
+  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.smartBlock|1.sourceType"]: {
+  "hash": "bf0154e37e90923d860ff1329364b93f5333077269047955af513ec016b4b007",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.smartBlock|1.sourceType|0"]: {
+  "hash": "ed7b085efaaa365b40b46720c381f80c40e00d706cb22f1eacd395e56471011b",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.smartBlock|1.sourceType|1"]: {
+  "hash": "f8ba05b80cbf9b28552c90f822ddbb6e7073403346cc00738f01d8e9801e8936",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.smartBlock|1.sourceType|2"]: {
+  "hash": "b590aebac2e893656733014e803067a0bba2e1ee5675937c64f5afb81dbf5757",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.smartBlock|1.dataSourceName"]: {
+  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.smartBlock|1.dataSourceType"]: {
+  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.socialDIndent"]: {
+  "hash": "5fbdafdc18161566d1cf4ec56a71301d64d73a23326cae0345ac9d31afa69e70",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.socialMIndent"]: {
+  "hash": "5fbdafdc18161566d1cf4ec56a71301d64d73a23326cae0345ac9d31afa69e70",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.socialStyle"]: {
+  "hash": "4f6f2fe18f61304bad11ce91603a6720ee83156423c170682e318581c4962b11",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.socialType"]: {
+  "hash": "3f3859eea23e75162bf50ad8315cd405010001dcc6ce3be1ce07140a04a3dae6",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.socialType|0"]: {
+  "hash": "570326e88d6ea9324c701bdef940750ecb6febdbcf2bae814b6887868f904465",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.socialType|1"]: {
+  "hash": "26a1a0a840431c208ea2c9a0840d3b5af3e5f08b4abcbaa12e2b6669a682940a",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.socialType|1.$type"]: {
+  "hash": "6fdb38cc3d8f75c3781df66c28df01c69b9ac3924009950785b7756325a782cc",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.socialType|1.value"]: {
+  "hash": "1a74498d15a1b1f088c499ef3a51370fc3631a9bf21cd73a47ae67d5108f9363",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.socialType|1.value|0"]: {
+  "hash": "f64740a846947915bb63e71047e8d28d855ded54a7f2ee0ca73b6a068dfb8e0f",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.socialType|1.value|1"]: {
+  "hash": "e8ca55b322adc770250f7c53ca3bc7507d1ebc7790c41a76ded236a438e98087",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.socialType|1.value|2"]: {
+  "hash": "f5490d1c08bc7515edc2a822976474cc2da995faddbabb5d33d24d7fff985589",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.socialType|1.value|3"]: {
+  "hash": "3210376ac751972f67f5c98ed288e3c36cb837d2f8abab06ff489a6c4bb944f7",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.socialType|1.value|4"]: {
+  "hash": "e9d95cb52d7d11c91063bb662a9c3f7167b272b6fabc6b6b90330adfd3da56bc",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.updateColumns#0(options).nodesApi.installPatchPlugins#0(factory)#0(api).init#0(props).htmlTree?|1.node|1.node|1.config|1.socialType|1.value|5"]: {
+  "hash": "4ab0ed5100c432c6e9d01a6450fea382fdc5acdf9fcbd4e8cefc0815d9c3a768",
   "group": "apiMutation"
 }
 };

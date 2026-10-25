@@ -4,7 +4,7 @@ import {
 
 // editor/ui-editor-ui/node_modules/postcss/lib/stringifier.js
 var require_stringifier = __commonJS({
-  "../editor/ui-editor-ui/node_modules/postcss/lib/stringifier.js"(exports, module) {
+  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-ui/node_modules/postcss/lib/stringifier.js"(exports, module) {
     var AT_NAME_END = /[\t\n\f\r "#'()/;[\\\]{}]/;
     var DEFAULT_RAW = {
       after: "\n",

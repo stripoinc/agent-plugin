@@ -1,4 +1,4 @@
-/*! Stripo editor validator 2a78eba954846a7d42c2f544142d08e22cbb571b. Editor code is proprietary. See NOTICE.txt. */
+/*! Stripo editor validator 1e786dd4e00a6614b2ace4d88a1df5c68a682d9e. Editor code is proprietary. See NOTICE.txt. */
 import {
   DEFAULT_TEXT_BLOCK_SETTINGS,
   DEFAULT_VIDEO_BLOCK_SETTINGS,
@@ -6,102 +6,99 @@ import {
   blockSchema,
   createEmailTemplateSetDocumentStateSchema,
   emailTemplateSchema
-} from "./modules/AttributeConfigMigration-32d6d41af503.mjs";
-import "./modules/time-zones-data-498efe19d3a8.mjs";
-import "./modules/_DataView-3f8d51103b9f.mjs";
-import "./modules/master-css-6656cf175550.mjs";
+} from "./modules/AttributeConfigMigration-0295df7fad2b.mjs";
 import "./modules/Parser-f35812371386.mjs";
 import {
   ArrayUtils,
   EMPTY_BORDER_RADIUS,
   clearFontValue,
-  parse
-} from "./modules/ArrayUtils-8063398e6404.mjs";
+  require_postcss
+} from "./modules/ArrayUtils-fbf37596896f.mjs";
 import "./modules/ColorUtils-a33f32974f73.mjs";
+import "./modules/time-zones-data-498efe19d3a8.mjs";
+import "./modules/_DataView-3f8d51103b9f.mjs";
 import "./modules/master-css-variables-defaults-fd88a551a3d8.mjs";
 import "./modules/master-80783f73f1e0.mjs";
-import "./modules/CSSConverter-608b83714731.mjs";
-import "./modules/biesbjerg-ngx-translate-extract-marker-6a26f5bc5c0e.mjs";
+import "./modules/master-css-6656cf175550.mjs";
 import "./modules/master-css-variables-a84902889746.mjs";
+import "./modules/CSSConverter-eecb098b236c.mjs";
 import "./modules/ue-proto-87c1854705b4.mjs";
-import "./modules/history-keys-1e69b42223b4.mjs";
 import "./modules/tinycolor-2bf5fc1acbb7.mjs";
 import "./modules/coerce-d38c736de753.mjs";
 import "./modules/from-json-schema-1979beab5102.mjs";
 import "./modules/checks-bd1e5de0ca09.mjs";
 import "./modules/index-abd71ade49d1.mjs";
-import "./modules/ta-db52cb61dd13.mjs";
-import "./modules/tg-a3abd3dcaab9.mjs";
-import "./modules/th-0b76e62dab96.mjs";
 import "./modules/uk-e0f612ccc576.mjs";
 import "./modules/ur-d062d4183cb7.mjs";
 import "./modules/vi-b05b5337c3b0.mjs";
 import "./modules/yo-9342d8b90769.mjs";
 import "./modules/zh-TW-74f07ebb2b3a.mjs";
-import "./modules/lt-52aa05368ec0.mjs";
-import "./modules/mk-67b5345704f5.mjs";
-import "./modules/ne-f804b66c7871.mjs";
 import "./modules/pl-0edcc52c11a6.mjs";
 import "./modules/ps-57feece82f75.mjs";
 import "./modules/pt-BR-4ca29f9ccdf1.mjs";
 import "./modules/pt-2b6363a9f827.mjs";
 import "./modules/ru-bc4e3a9b0c5d.mjs";
-import "./modules/he-3eb1c1845d9e.mjs";
-import "./modules/hi-bdb199026ff7.mjs";
-import "./modules/hy-a38fb7e4f9ec.mjs";
+import "./modules/ta-db52cb61dd13.mjs";
+import "./modules/tg-a3abd3dcaab9.mjs";
+import "./modules/th-0b76e62dab96.mjs";
 import "./modules/ja-6478150f8d7a.mjs";
 import "./modules/ka-337898cedd2a.mjs";
 import "./modules/km-d158ab990ee9.mjs";
 import "./modules/kn-ccd0d66753b1.mjs";
 import "./modules/ko-27b7a94f5634.mjs";
-import "./modules/bg-542c84614fee.mjs";
-import "./modules/bn-60307a2c0766.mjs";
-import "./modules/ckb-ddc82ea9c77a.mjs";
+import "./modules/lt-52aa05368ec0.mjs";
+import "./modules/mk-67b5345704f5.mjs";
+import "./modules/ne-f804b66c7871.mjs";
 import "./modules/el-d2b74d96868d.mjs";
 import "./modules/es-fc2f1ee63cca.mjs";
 import "./modules/fa-b54c803455c1.mjs";
 import "./modules/fr-4b4663c3d230.mjs";
 import "./modules/gu-0e230c44f6bd.mjs";
+import "./modules/he-3eb1c1845d9e.mjs";
+import "./modules/hi-bdb199026ff7.mjs";
+import "./modules/hy-a38fb7e4f9ec.mjs";
 import "./modules/ar-e1d58fdd0495.mjs";
 import "./modules/be-72979be88390.mjs";
-import "./modules/api-7ec6d993fe84.mjs";
+import "./modules/bg-542c84614fee.mjs";
+import "./modules/bn-60307a2c0766.mjs";
+import "./modules/ckb-ddc82ea9c77a.mjs";
 import "./modules/compile-fe1f1936d44e.mjs";
-import "./modules/memoizer-c00f0bc54290.mjs";
 import "./modules/json-schema-processors-0c244c7c3151.mjs";
 import "./modules/to-json-schema-b5fe38b46dc6.mjs";
+import "./modules/memoizer-c00f0bc54290.mjs";
+import "./modules/api-7ec6d993fe84.mjs";
 import "./modules/registries-3ceb92ae3dab.mjs";
 import "./modules/doc-85ae2b2bbd32.mjs";
-import "./modules/parse-545b503fc4ed.mjs";
 import "./modules/checks-f4a190521e0d.mjs";
-import "./modules/regexes-d1711c96e64b.mjs";
+import "./modules/parse-545b503fc4ed.mjs";
 import "./modules/errors-095a9cd7e5fd.mjs";
+import "./modules/regexes-d1711c96e64b.mjs";
 import "./modules/core-d6ef11a90708.mjs";
-import "./modules/decode-codepoint-de4ce2c8771f.mjs";
-import "./modules/decode-data-html-482e5b7a6675.mjs";
-import "./modules/index-83a196bff650.mjs";
 import "./modules/index-829c7f2491ea.mjs";
 import "./modules/parse-8126121d6d62.mjs";
 import "./modules/document-13235feeff49.mjs";
 import "./modules/map-generator-a34cf548f9d1.mjs";
+import "./modules/url-27db039aa4f6.mjs";
+import "./modules/fs-064e509bf2cb.mjs";
 import "./modules/at-rule-2b1e381bfcd5.mjs";
 import "./modules/tokenize-acf2d687b44d.mjs";
 import "./modules/comment-c2c2abaee17f.mjs";
 import "./modules/node-909c4f08098c.mjs";
 import "./modules/stringifier-5d6259805667.mjs";
-import "./modules/url-27db039aa4f6.mjs";
-import "./modules/fs-064e509bf2cb.mjs";
 import "./modules/terminal-highlight-0f20b1c39b48.mjs";
 import "./modules/social-networks-data-4f7cb53fbb33.mjs";
 import "./modules/SocialNetworkType-57875c573e3d.mjs";
 import "./modules/index-578459128e2e.mjs";
 import "./modules/_baseSlice-aae12ccd937b.mjs";
 import "./modules/_Hash-6a5a8be86833.mjs";
-import "./modules/serviceSelectorPrefix-db24995a76b3.mjs";
+import "./modules/serviceSelectorPrefix-a2f28f143508.mjs";
 import "./modules/builders-6d4dedaf957f.mjs";
-import "./modules/index-95be4dc08d9c.mjs";
 import "./modules/proto-int64-27d7cd28885a.mjs";
-import "./modules/index-604a083968ff.mjs";
-import "./modules/shared-4f53cda18c2b.mjs";
+import "./modules/decode-codepoint-de4ce2c8771f.mjs";
+import "./modules/decode-data-html-482e5b7a6675.mjs";
+import {
+  __toESM
+} from "./modules/shared-4f53cda18c2b.mjs";
 
 // editor/ui-editor-ui/src/app/core/block-operations-api/text-block/settings/defaults.ts
 function materializeIncomingTextBlockSettingsDefaults(block) {
@@ -232,6 +229,33 @@ function getUnavailableMergeServiceSideEffects(currentSchema, targetSchema) {
   }
   return unavailableSideEffects;
 }
+
+// editor/ui-editor-ui/node_modules/postcss/lib/postcss.mjs
+var import_postcss = __toESM(require_postcss(), 1);
+var stringify = import_postcss.default.stringify;
+var fromJSON = import_postcss.default.fromJSON;
+var plugin = import_postcss.default.plugin;
+var parse = import_postcss.default.parse;
+var list = import_postcss.default.list;
+var document = import_postcss.default.document;
+var comment = import_postcss.default.comment;
+var atRule = import_postcss.default.atRule;
+var rule = import_postcss.default.rule;
+var decl = import_postcss.default.decl;
+var root = import_postcss.default.root;
+var CssSyntaxError = import_postcss.default.CssSyntaxError;
+var Declaration = import_postcss.default.Declaration;
+var Container = import_postcss.default.Container;
+var Processor = import_postcss.default.Processor;
+var Document = import_postcss.default.Document;
+var Comment = import_postcss.default.Comment;
+var Warning = import_postcss.default.Warning;
+var AtRule = import_postcss.default.AtRule;
+var Result = import_postcss.default.Result;
+var Input = import_postcss.default.Input;
+var Rule = import_postcss.default.Rule;
+var Root = import_postcss.default.Root;
+var Node = import_postcss.default.Node;
 
 // convo-email-agent/vendor/editor-validator/font-usage.generated.ts
 var FONT_FAMILY_DECLARATION_REGEXP = /font-family\s*:\s*([^;{}<"]+)/gi;
@@ -376,8 +400,8 @@ function validateDocumentState(target, current) {
   }
   return { success: false, input: "target", issues: result.error.issues.map((issue) => toIssue(issue)) };
 }
-function validateDocumentSnapshot(document) {
-  const result = emailTemplateSchema.safeParse(materializeIncomingDocumentState(document));
+function validateDocumentSnapshot(document2) {
+  const result = emailTemplateSchema.safeParse(materializeIncomingDocumentState(document2));
   return result.success ? { success: true, issues: [], documentState: result.data } : { success: false, input: "current", issues: result.error.issues.map((issue) => toIssue(issue)) };
 }
 function validateBlock(block) {

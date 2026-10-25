@@ -11,12 +11,12 @@ import {
   html
 } from "./master-80783f73f1e0.mjs";
 import {
-  HEAD_SELECTOR,
-  LINK_TAG_SELECTOR
-} from "./CSSConverter-608b83714731.mjs";
-import {
   THEME_VARIABLE_DESCRIPTORS
 } from "./master-css-variables-a84902889746.mjs";
+import {
+  HEAD_SELECTOR,
+  LINK_TAG_SELECTOR
+} from "./CSSConverter-eecb098b236c.mjs";
 import {
   MASTER_CSS_VARIABLES_DEFAULTS,
   MasterCssVar,
@@ -41,6 +41,12 @@ import {
   require_map_generator
 } from "./map-generator-a34cf548f9d1.mjs";
 import {
+  require_input
+} from "./url-27db039aa4f6.mjs";
+import {
+  require_previous_map
+} from "./fs-064e509bf2cb.mjs";
+import {
   require_at_rule,
   require_list,
   require_root,
@@ -56,12 +62,6 @@ import {
   require_stringify
 } from "./node-909c4f08098c.mjs";
 import {
-  require_input
-} from "./url-27db039aa4f6.mjs";
-import {
-  require_previous_map
-} from "./fs-064e509bf2cb.mjs";
-import {
   require_css_syntax_error
 } from "./terminal-highlight-0f20b1c39b48.mjs";
 import {
@@ -74,7 +74,7 @@ import {
 
 // editor/ui-editor-ui/node_modules/postcss-value-parser/lib/walk.js
 var require_walk = __commonJS({
-  "../editor/ui-editor-ui/node_modules/postcss-value-parser/lib/walk.js"(exports, module) {
+  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-ui/node_modules/postcss-value-parser/lib/walk.js"(exports, module) {
     "use strict";
     module.exports = function walk(nodes, cb, bubble) {
       var i, max, node, result;
@@ -96,7 +96,7 @@ var require_walk = __commonJS({
 
 // editor/ui-editor-ui/node_modules/postcss-value-parser/lib/stringify.js
 var require_stringify2 = __commonJS({
-  "../editor/ui-editor-ui/node_modules/postcss-value-parser/lib/stringify.js"(exports, module) {
+  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-ui/node_modules/postcss-value-parser/lib/stringify.js"(exports, module) {
     "use strict";
     function stringifyNode(node, custom) {
       var type = node.type;
@@ -140,7 +140,7 @@ var require_stringify2 = __commonJS({
 
 // editor/ui-editor-ui/node_modules/postcss-value-parser/lib/unit.js
 var require_unit = __commonJS({
-  "../editor/ui-editor-ui/node_modules/postcss-value-parser/lib/unit.js"(exports, module) {
+  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-ui/node_modules/postcss-value-parser/lib/unit.js"(exports, module) {
     "use strict";
     var minus = "-".charCodeAt(0);
     var plus = "+".charCodeAt(0);
@@ -228,7 +228,7 @@ var require_unit = __commonJS({
 
 // editor/ui-editor-ui/node_modules/postcss-value-parser/lib/index.js
 var require_lib = __commonJS({
-  "../editor/ui-editor-ui/node_modules/postcss-value-parser/lib/index.js"(exports, module) {
+  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-ui/node_modules/postcss-value-parser/lib/index.js"(exports, module) {
     "use strict";
     var parse2 = require_parse2();
     var walk = require_walk();
@@ -256,7 +256,7 @@ var require_lib = __commonJS({
 
 // editor/ui-editor-ui/node_modules/postcss/lib/fromJSON.js
 var require_fromJSON = __commonJS({
-  "../editor/ui-editor-ui/node_modules/postcss/lib/fromJSON.js"(exports, module) {
+  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-ui/node_modules/postcss/lib/fromJSON.js"(exports, module) {
     "use strict";
     var AtRule3 = require_at_rule();
     var Comment2 = require_comment();
@@ -350,7 +350,7 @@ var require_fromJSON = __commonJS({
 
 // editor/ui-editor-ui/node_modules/postcss/lib/no-work-result.js
 var require_no_work_result = __commonJS({
-  "../editor/ui-editor-ui/node_modules/postcss/lib/no-work-result.js"(exports, module) {
+  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-ui/node_modules/postcss/lib/no-work-result.js"(exports, module) {
     "use strict";
     var MapGenerator = require_map_generator();
     var parse2 = require_parse();
@@ -465,7 +465,7 @@ var require_no_work_result = __commonJS({
 
 // editor/ui-editor-ui/node_modules/postcss/lib/processor.js
 var require_processor = __commonJS({
-  "../editor/ui-editor-ui/node_modules/postcss/lib/processor.js"(exports, module) {
+  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-ui/node_modules/postcss/lib/processor.js"(exports, module) {
     "use strict";
     var Document2 = require_document();
     var LazyResult = require_lazy_result();
@@ -523,7 +523,7 @@ var require_processor = __commonJS({
 
 // editor/ui-editor-ui/node_modules/postcss/lib/postcss.js
 var require_postcss = __commonJS({
-  "../editor/ui-editor-ui/node_modules/postcss/lib/postcss.js"(exports, module) {
+  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-ui/node_modules/postcss/lib/postcss.js"(exports, module) {
     "use strict";
     var AtRule3 = require_at_rule();
     var Comment2 = require_comment();
@@ -611,7 +611,7 @@ var require_postcss = __commonJS({
 
 // editor/ui-editor-ui/node_modules/lodash/_arrayReduce.js
 var require_arrayReduce = __commonJS({
-  "../editor/ui-editor-ui/node_modules/lodash/_arrayReduce.js"(exports, module) {
+  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-ui/node_modules/lodash/_arrayReduce.js"(exports, module) {
     "use strict";
     function arrayReduce(array, iteratee, accumulator, initAccum) {
       var index = -1, length = array == null ? 0 : array.length;
@@ -629,7 +629,7 @@ var require_arrayReduce = __commonJS({
 
 // editor/ui-editor-ui/node_modules/lodash/_basePropertyOf.js
 var require_basePropertyOf = __commonJS({
-  "../editor/ui-editor-ui/node_modules/lodash/_basePropertyOf.js"(exports, module) {
+  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-ui/node_modules/lodash/_basePropertyOf.js"(exports, module) {
     "use strict";
     function basePropertyOf(object) {
       return function(key) {
@@ -642,7 +642,7 @@ var require_basePropertyOf = __commonJS({
 
 // editor/ui-editor-ui/node_modules/lodash/_deburrLetter.js
 var require_deburrLetter = __commonJS({
-  "../editor/ui-editor-ui/node_modules/lodash/_deburrLetter.js"(exports, module) {
+  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-ui/node_modules/lodash/_deburrLetter.js"(exports, module) {
     "use strict";
     var basePropertyOf = require_basePropertyOf();
     var deburredLetters = {
@@ -846,7 +846,7 @@ var require_deburrLetter = __commonJS({
 
 // editor/ui-editor-ui/node_modules/lodash/_freeGlobal.js
 var require_freeGlobal = __commonJS({
-  "../editor/ui-editor-ui/node_modules/lodash/_freeGlobal.js"(exports, module) {
+  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-ui/node_modules/lodash/_freeGlobal.js"(exports, module) {
     "use strict";
     var freeGlobal = typeof global == "object" && global && global.Object === Object && global;
     module.exports = freeGlobal;
@@ -855,7 +855,7 @@ var require_freeGlobal = __commonJS({
 
 // editor/ui-editor-ui/node_modules/lodash/_root.js
 var require_root2 = __commonJS({
-  "../editor/ui-editor-ui/node_modules/lodash/_root.js"(exports, module) {
+  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-ui/node_modules/lodash/_root.js"(exports, module) {
     "use strict";
     var freeGlobal = require_freeGlobal();
     var freeSelf = typeof self == "object" && self && self.Object === Object && self;
@@ -866,7 +866,7 @@ var require_root2 = __commonJS({
 
 // editor/ui-editor-ui/node_modules/lodash/_Symbol.js
 var require_Symbol = __commonJS({
-  "../editor/ui-editor-ui/node_modules/lodash/_Symbol.js"(exports, module) {
+  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-ui/node_modules/lodash/_Symbol.js"(exports, module) {
     "use strict";
     var root2 = require_root2();
     var Symbol2 = root2.Symbol;
@@ -876,7 +876,7 @@ var require_Symbol = __commonJS({
 
 // editor/ui-editor-ui/node_modules/lodash/_arrayMap.js
 var require_arrayMap = __commonJS({
-  "../editor/ui-editor-ui/node_modules/lodash/_arrayMap.js"(exports, module) {
+  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-ui/node_modules/lodash/_arrayMap.js"(exports, module) {
     "use strict";
     function arrayMap(array, iteratee) {
       var index = -1, length = array == null ? 0 : array.length, result = Array(length);
@@ -891,7 +891,7 @@ var require_arrayMap = __commonJS({
 
 // editor/ui-editor-ui/node_modules/lodash/isArray.js
 var require_isArray = __commonJS({
-  "../editor/ui-editor-ui/node_modules/lodash/isArray.js"(exports, module) {
+  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-ui/node_modules/lodash/isArray.js"(exports, module) {
     "use strict";
     var isArray = Array.isArray;
     module.exports = isArray;
@@ -900,7 +900,7 @@ var require_isArray = __commonJS({
 
 // editor/ui-editor-ui/node_modules/lodash/_getRawTag.js
 var require_getRawTag = __commonJS({
-  "../editor/ui-editor-ui/node_modules/lodash/_getRawTag.js"(exports, module) {
+  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-ui/node_modules/lodash/_getRawTag.js"(exports, module) {
     "use strict";
     var Symbol2 = require_Symbol();
     var objectProto = Object.prototype;
@@ -930,7 +930,7 @@ var require_getRawTag = __commonJS({
 
 // editor/ui-editor-ui/node_modules/lodash/_objectToString.js
 var require_objectToString = __commonJS({
-  "../editor/ui-editor-ui/node_modules/lodash/_objectToString.js"(exports, module) {
+  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-ui/node_modules/lodash/_objectToString.js"(exports, module) {
     "use strict";
     var objectProto = Object.prototype;
     var nativeObjectToString = objectProto.toString;
@@ -943,7 +943,7 @@ var require_objectToString = __commonJS({
 
 // editor/ui-editor-ui/node_modules/lodash/_baseGetTag.js
 var require_baseGetTag = __commonJS({
-  "../editor/ui-editor-ui/node_modules/lodash/_baseGetTag.js"(exports, module) {
+  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-ui/node_modules/lodash/_baseGetTag.js"(exports, module) {
     "use strict";
     var Symbol2 = require_Symbol();
     var getRawTag = require_getRawTag();
@@ -963,7 +963,7 @@ var require_baseGetTag = __commonJS({
 
 // editor/ui-editor-ui/node_modules/lodash/isObjectLike.js
 var require_isObjectLike = __commonJS({
-  "../editor/ui-editor-ui/node_modules/lodash/isObjectLike.js"(exports, module) {
+  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-ui/node_modules/lodash/isObjectLike.js"(exports, module) {
     "use strict";
     function isObjectLike(value) {
       return value != null && typeof value == "object";
@@ -974,7 +974,7 @@ var require_isObjectLike = __commonJS({
 
 // editor/ui-editor-ui/node_modules/lodash/isSymbol.js
 var require_isSymbol = __commonJS({
-  "../editor/ui-editor-ui/node_modules/lodash/isSymbol.js"(exports, module) {
+  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-ui/node_modules/lodash/isSymbol.js"(exports, module) {
     "use strict";
     var baseGetTag = require_baseGetTag();
     var isObjectLike = require_isObjectLike();
@@ -988,7 +988,7 @@ var require_isSymbol = __commonJS({
 
 // editor/ui-editor-ui/node_modules/lodash/_baseToString.js
 var require_baseToString = __commonJS({
-  "../editor/ui-editor-ui/node_modules/lodash/_baseToString.js"(exports, module) {
+  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-ui/node_modules/lodash/_baseToString.js"(exports, module) {
     "use strict";
     var Symbol2 = require_Symbol();
     var arrayMap = require_arrayMap();
@@ -1016,7 +1016,7 @@ var require_baseToString = __commonJS({
 
 // editor/ui-editor-ui/node_modules/lodash/toString.js
 var require_toString = __commonJS({
-  "../editor/ui-editor-ui/node_modules/lodash/toString.js"(exports, module) {
+  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-ui/node_modules/lodash/toString.js"(exports, module) {
     "use strict";
     var baseToString = require_baseToString();
     function toString(value) {
@@ -1028,7 +1028,7 @@ var require_toString = __commonJS({
 
 // editor/ui-editor-ui/node_modules/lodash/deburr.js
 var require_deburr = __commonJS({
-  "../editor/ui-editor-ui/node_modules/lodash/deburr.js"(exports, module) {
+  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-ui/node_modules/lodash/deburr.js"(exports, module) {
     "use strict";
     var deburrLetter = require_deburrLetter();
     var toString = require_toString();
@@ -1049,7 +1049,7 @@ var require_deburr = __commonJS({
 
 // editor/ui-editor-ui/node_modules/lodash/_asciiWords.js
 var require_asciiWords = __commonJS({
-  "../editor/ui-editor-ui/node_modules/lodash/_asciiWords.js"(exports, module) {
+  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-ui/node_modules/lodash/_asciiWords.js"(exports, module) {
     "use strict";
     var reAsciiWord = /[^\x00-\x2f\x3a-\x40\x5b-\x60\x7b-\x7f]+/g;
     function asciiWords(string) {
@@ -1061,7 +1061,7 @@ var require_asciiWords = __commonJS({
 
 // editor/ui-editor-ui/node_modules/lodash/_hasUnicodeWord.js
 var require_hasUnicodeWord = __commonJS({
-  "../editor/ui-editor-ui/node_modules/lodash/_hasUnicodeWord.js"(exports, module) {
+  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-ui/node_modules/lodash/_hasUnicodeWord.js"(exports, module) {
     "use strict";
     var reHasUnicodeWord = /[a-z][A-Z]|[A-Z]{2}[a-z]|[0-9][a-zA-Z]|[a-zA-Z][0-9]|[^a-zA-Z0-9 ]/;
     function hasUnicodeWord(string) {
@@ -1073,7 +1073,7 @@ var require_hasUnicodeWord = __commonJS({
 
 // editor/ui-editor-ui/node_modules/lodash/_unicodeWords.js
 var require_unicodeWords = __commonJS({
-  "../editor/ui-editor-ui/node_modules/lodash/_unicodeWords.js"(exports, module) {
+  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-ui/node_modules/lodash/_unicodeWords.js"(exports, module) {
     "use strict";
     var rsAstralRange = "\\ud800-\\udfff";
     var rsComboMarksRange = "\\u0300-\\u036f";
@@ -1133,7 +1133,7 @@ var require_unicodeWords = __commonJS({
 
 // editor/ui-editor-ui/node_modules/lodash/words.js
 var require_words = __commonJS({
-  "../editor/ui-editor-ui/node_modules/lodash/words.js"(exports, module) {
+  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-ui/node_modules/lodash/words.js"(exports, module) {
     "use strict";
     var asciiWords = require_asciiWords();
     var hasUnicodeWord = require_hasUnicodeWord();
@@ -1153,7 +1153,7 @@ var require_words = __commonJS({
 
 // editor/ui-editor-ui/node_modules/lodash/_createCompounder.js
 var require_createCompounder = __commonJS({
-  "../editor/ui-editor-ui/node_modules/lodash/_createCompounder.js"(exports, module) {
+  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-ui/node_modules/lodash/_createCompounder.js"(exports, module) {
     "use strict";
     var arrayReduce = require_arrayReduce();
     var deburr = require_deburr();
@@ -1171,7 +1171,7 @@ var require_createCompounder = __commonJS({
 
 // editor/ui-editor-ui/node_modules/lodash/_baseSlice.js
 var require_baseSlice = __commonJS({
-  "../editor/ui-editor-ui/node_modules/lodash/_baseSlice.js"(exports, module) {
+  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-ui/node_modules/lodash/_baseSlice.js"(exports, module) {
     "use strict";
     function baseSlice(array, start, end) {
       var index = -1, length = array.length;
@@ -1196,7 +1196,7 @@ var require_baseSlice = __commonJS({
 
 // editor/ui-editor-ui/node_modules/lodash/_castSlice.js
 var require_castSlice = __commonJS({
-  "../editor/ui-editor-ui/node_modules/lodash/_castSlice.js"(exports, module) {
+  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-ui/node_modules/lodash/_castSlice.js"(exports, module) {
     "use strict";
     var baseSlice = require_baseSlice();
     function castSlice(array, start, end) {
@@ -1210,7 +1210,7 @@ var require_castSlice = __commonJS({
 
 // editor/ui-editor-ui/node_modules/lodash/_hasUnicode.js
 var require_hasUnicode = __commonJS({
-  "../editor/ui-editor-ui/node_modules/lodash/_hasUnicode.js"(exports, module) {
+  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-ui/node_modules/lodash/_hasUnicode.js"(exports, module) {
     "use strict";
     var rsAstralRange = "\\ud800-\\udfff";
     var rsComboMarksRange = "\\u0300-\\u036f";
@@ -1229,7 +1229,7 @@ var require_hasUnicode = __commonJS({
 
 // editor/ui-editor-ui/node_modules/lodash/_asciiToArray.js
 var require_asciiToArray = __commonJS({
-  "../editor/ui-editor-ui/node_modules/lodash/_asciiToArray.js"(exports, module) {
+  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-ui/node_modules/lodash/_asciiToArray.js"(exports, module) {
     "use strict";
     function asciiToArray(string) {
       return string.split("");
@@ -1240,7 +1240,7 @@ var require_asciiToArray = __commonJS({
 
 // editor/ui-editor-ui/node_modules/lodash/_unicodeToArray.js
 var require_unicodeToArray = __commonJS({
-  "../editor/ui-editor-ui/node_modules/lodash/_unicodeToArray.js"(exports, module) {
+  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-ui/node_modules/lodash/_unicodeToArray.js"(exports, module) {
     "use strict";
     var rsAstralRange = "\\ud800-\\udfff";
     var rsComboMarksRange = "\\u0300-\\u036f";
@@ -1271,7 +1271,7 @@ var require_unicodeToArray = __commonJS({
 
 // editor/ui-editor-ui/node_modules/lodash/_stringToArray.js
 var require_stringToArray = __commonJS({
-  "../editor/ui-editor-ui/node_modules/lodash/_stringToArray.js"(exports, module) {
+  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-ui/node_modules/lodash/_stringToArray.js"(exports, module) {
     "use strict";
     var asciiToArray = require_asciiToArray();
     var hasUnicode = require_hasUnicode();
@@ -1285,7 +1285,7 @@ var require_stringToArray = __commonJS({
 
 // editor/ui-editor-ui/node_modules/lodash/_createCaseFirst.js
 var require_createCaseFirst = __commonJS({
-  "../editor/ui-editor-ui/node_modules/lodash/_createCaseFirst.js"(exports, module) {
+  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-ui/node_modules/lodash/_createCaseFirst.js"(exports, module) {
     "use strict";
     var castSlice = require_castSlice();
     var hasUnicode = require_hasUnicode();
@@ -1306,7 +1306,7 @@ var require_createCaseFirst = __commonJS({
 
 // editor/ui-editor-ui/node_modules/lodash/upperFirst.js
 var require_upperFirst = __commonJS({
-  "../editor/ui-editor-ui/node_modules/lodash/upperFirst.js"(exports, module) {
+  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-ui/node_modules/lodash/upperFirst.js"(exports, module) {
     "use strict";
     var createCaseFirst = require_createCaseFirst();
     var upperFirst = createCaseFirst("toUpperCase");
@@ -1316,7 +1316,7 @@ var require_upperFirst = __commonJS({
 
 // editor/ui-editor-ui/node_modules/lodash/startCase.js
 var require_startCase = __commonJS({
-  "../editor/ui-editor-ui/node_modules/lodash/startCase.js"(exports, module) {
+  "../../../../../../../tmp/claude-501/-Users-anton--claude-spares-spare-q01p5H/3c03ff74-42eb-4bd6-988d-26cc0b7568e8/scratchpad/editor-src/ui-editor-ui/node_modules/lodash/startCase.js"(exports, module) {
     "use strict";
     var createCompounder = require_createCompounder();
     var upperFirst = require_upperFirst();
@@ -1449,6 +1449,65 @@ function resolveButtonsHoverFontColorFallback(baseFontColor, hoverBackgroundColo
 function getDefaultButtonsOutlookSupport() {
   return Boolean(MASTER_CSS_VARIABLES_DEFAULTS[MasterCssVar.BUTTONS_OUTLOOK_SUPPORT]);
 }
+
+// editor/ui-editor-ui/src/app/constants/general.constants.ts
+var SIDES_LIST = ["top" /* TOP */, "right" /* RIGHT */, "bottom" /* BOTTOM */, "left" /* LEFT */];
+var HORIZONTAL_SIDES_LIST = ["right" /* RIGHT */, "left" /* LEFT */];
+
+// editor/ui-editor-ui/src/app/tools/debugger/debugger.ts
+var STRIPO_DEBUG_MODE = "STRIPO_DEBUG_MODE";
+var debug = {};
+for (const prop in console) {
+  if (typeof console[prop] === "function") {
+    debug[prop] = function(...args) {
+      if (isDebugModeEnabled()) {
+        const result = Reflect.apply(console[prop], console, args);
+        if (prop === "error") {
+          console.groupCollapsed("Error trace");
+          console.trace();
+          console.groupEnd();
+        }
+        return result;
+      }
+      return void 0;
+    };
+  }
+}
+globalThis["breakAfter"] = breakAfter;
+globalThis["enableDebugMode"] = function() {
+  globalThis.localStorage?.setItem(STRIPO_DEBUG_MODE, "true");
+};
+globalThis["disableDebugMode"] = function() {
+  globalThis.localStorage?.setItem(STRIPO_DEBUG_MODE, "");
+};
+var defaultLogOptions = {
+  color: "DarkBlue" /* DarkBlue */,
+  bg: "White" /* White */,
+  fontSize: "12px",
+  logTrace: true,
+  logTime: true,
+  collapsed: false,
+  logContext: true,
+  logSetters: true,
+  logMethods: true,
+  rethrowError: true
+};
+var isDebugModeEnabled = () => {
+  return (
+    /*!environment.production ||*/
+    !!globalThis.localStorage?.getItem(STRIPO_DEBUG_MODE)
+  );
+};
+function breakAfter(timeout = 3e3) {
+  setTimeout(() => {
+    debugger;
+  }, timeout);
+}
+
+// editor/ui-editor-ui/src/app/tools/utils/CSSDetailedUtils.ts
+var EXTENDED_STYLE_SIDES = ["right" /* RIGHT */, "bottom" /* BOTTOM */, "left" /* LEFT */];
+var STYLE_SIDES_SHORT_3 = ["top" /* TOP */, "right" /* RIGHT */, "bottom" /* BOTTOM */];
+var STYLE_SIDES_SHORT_2 = ["top" /* TOP */, "right" /* RIGHT */];
 
 // editor/ui-editor-ui/src/app/core/block-operations-api/buttons/settings/padding/get-from-model.ts
 var BUTTONS_PADDING_SIDES = ["top", "right", "bottom", "left"];
@@ -1603,84 +1662,12 @@ function getCommentBlockCRDT(parent) {
   return res;
 }
 
-// editor/ui-editor-ui/src/app/tools/debugger/debugger.ts
-var STRIPO_DEBUG_MODE = "STRIPO_DEBUG_MODE";
-var debug = {};
-for (const prop in console) {
-  if (typeof console[prop] === "function") {
-    debug[prop] = function(...args) {
-      if (isDebugModeEnabled()) {
-        const result = Reflect.apply(console[prop], console, args);
-        if (prop === "error") {
-          console.groupCollapsed("Error trace");
-          console.trace();
-          console.groupEnd();
-        }
-        return result;
-      }
-      return void 0;
-    };
-  }
-}
-globalThis["breakAfter"] = breakAfter;
-globalThis["enableDebugMode"] = function() {
-  globalThis.localStorage?.setItem(STRIPO_DEBUG_MODE, "true");
-};
-globalThis["disableDebugMode"] = function() {
-  globalThis.localStorage?.setItem(STRIPO_DEBUG_MODE, "");
-};
-var defaultLogOptions = {
-  color: "DarkBlue" /* DarkBlue */,
-  bg: "White" /* White */,
-  fontSize: "12px",
-  logTrace: true,
-  logTime: true,
-  collapsed: false,
-  logContext: true,
-  logSetters: true,
-  logMethods: true,
-  rethrowError: true
-};
-var isDebugModeEnabled = () => {
-  return (
-    /*!environment.production ||*/
-    !!globalThis.localStorage?.getItem(STRIPO_DEBUG_MODE)
-  );
-};
-function breakAfter(timeout = 3e3) {
-  setTimeout(() => {
-    debugger;
-  }, timeout);
-}
-
-// editor/ui-editor-ui/src/app/tools/utils/fonts/font-family-name.utils.ts
+// editor/ui-editor-ui/src/app/core/block-operations-api/common/fonts/font-family-name.ts
 function getPrimaryFontFamilyName(fontFamilyValue) {
   return (fontFamilyValue || "").replace(/["'“”]/g, "").split(",")[0].trim().toLowerCase();
 }
 
-// editor/ui-editor-ui/src/app/tools/utils/fonts/font-style.constants.ts
-var FONT_STYLE_ATTR = "esd-font-style";
-var FONT_STYLE_URL_ATTR = "esd-font-url";
-var FONT_STYLE_IMPORT = "import";
-var FONT_STYLE_FONT_FACE = "fontFace";
-var FONT_METHOD_ENTRY_SEPARATOR = "|";
-var FONT_METHOD_KV_SEPARATOR = "::";
-var FONT_FAMILY_ATTR = "esd-font-family";
-var FONT_FAMILIES_ATTR = "esd-font-families";
-function parseFontFamiliesAttr(attr) {
-  if (!attr) {
-    return [];
-  }
-  return attr.split(FONT_METHOD_ENTRY_SEPARATOR).map((entry) => {
-    const [value, url] = entry.split(FONT_METHOD_KV_SEPARATOR);
-    return { value: value?.trim() || "", url: url?.trim() || "" };
-  }).filter((entry) => entry.value && entry.url);
-}
-function serializeFontFamiliesAttr(entries) {
-  return entries.filter((entry) => entry.value && entry.url).map((entry) => "".concat(entry.value).concat(FONT_METHOD_KV_SEPARATOR).concat(entry.url)).join(FONT_METHOD_ENTRY_SEPARATOR);
-}
-
-// editor/ui-editor-ui/src/app/tools/utils/fonts/defaultWebFontUrls.ts
+// editor/ui-editor-ui/src/app/core/block-operations-api/common/fonts/default-web-font-urls.ts
 var defaultWebFontUrls = {
   "Arvo": "https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&display=swap",
   "Lato": "https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap",
@@ -1694,7 +1681,7 @@ var defaultWebFontUrls = {
   "Source Sans Pro": "https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,200i,300,300i,400,400i,600,600i,700,700i,900,900i"
 };
 
-// editor/ui-editor-ui/src/app/tools/utils/fonts/fontFamilyWeights.ts
+// editor/ui-editor-ui/src/app/core/block-operations-api/common/fonts/font-family-weights.ts
 var defaultFontFamilyWeights = {
   "Arial": [400, 700],
   "Comic Sans MS": [400, 700],
@@ -1728,6 +1715,9 @@ var IPV4_HOST = /^(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})$/;
 var IPV4_MAPPED_IPV6 = /^::ffff:([\da-f]{1,4}):([\da-f]{1,4})$/;
 var INTERNAL_HOST_SUFFIXES = [".localhost", ".local"];
 var UrlUtils = class _UrlUtils {
+  static isCopyableLink(link) {
+    return !!link?.trim();
+  }
   static isRelativeUrl(url) {
     const startsWithProtocolRegexp = new RegExp("^(?:[a-z]+:)?//", "i");
     return !startsWithProtocolRegexp.test(url);
@@ -1839,7 +1829,7 @@ var UrlUtils = class _UrlUtils {
   }
 };
 
-// editor/ui-editor-ui/src/app/tools/utils/fonts/FontUtils.pure.ts
+// editor/ui-editor-ui/src/app/core/block-operations-api/common/fonts/font-value-rules.ts
 function isFontConnectionUrl(value) {
   return /^https?:\/\//i.test(value) && !/[\s\\]/.test(value) && UrlUtils.isAbsoluteHttpUrl(value);
 }
@@ -1862,7 +1852,7 @@ function getUniformFontFamilyValue(value = "") {
   return value.replace('"system-ui"', "BlinkMacSystemFont").replace(/"/g, "'").replace(/, /g, ",");
 }
 
-// editor/ui-editor-ui/src/app/tools/utils/fonts/FontFaceUtils.pure.ts
+// editor/ui-editor-ui/src/app/core/block-operations-api/common/fonts/font-face-rules.ts
 function getFontFaceCssDetails(css) {
   try {
     const root2 = parse(css);
@@ -1930,7 +1920,29 @@ var getDeclaredFontFamily = (rule2) => {
   return getPrimaryFontFamilyName(declared);
 };
 
-// editor/ui-editor-ui/src/app/tools/utils/fonts/FontUtils.node-safe.ts
+// editor/ui-editor-ui/src/app/core/block-operations-api/common/fonts/font-style.ts
+var FONT_STYLE_ATTR = "esd-font-style";
+var FONT_STYLE_URL_ATTR = "esd-font-url";
+var FONT_STYLE_IMPORT = "import";
+var FONT_STYLE_FONT_FACE = "fontFace";
+var FONT_METHOD_ENTRY_SEPARATOR = "|";
+var FONT_METHOD_KV_SEPARATOR = "::";
+var FONT_FAMILY_ATTR = "esd-font-family";
+var FONT_FAMILIES_ATTR = "esd-font-families";
+function parseFontFamiliesAttr(attr) {
+  if (!attr) {
+    return [];
+  }
+  return attr.split(FONT_METHOD_ENTRY_SEPARATOR).map((entry) => {
+    const [value, url] = entry.split(FONT_METHOD_KV_SEPARATOR);
+    return { value: value?.trim() || "", url: url?.trim() || "" };
+  }).filter((entry) => entry.value && entry.url);
+}
+function serializeFontFamiliesAttr(entries) {
+  return entries.filter((entry) => entry.value && entry.url).map((entry) => "".concat(entry.value).concat(FONT_METHOD_KV_SEPARATOR).concat(entry.url)).join(FONT_METHOD_ENTRY_SEPARATOR);
+}
+
+// editor/ui-editor-ui/src/app/core/block-operations-api/common/fonts/font-utils.ts
 var ANY_DESCENDANT_SELECTOR = [q.select.descendants().any().end()];
 var BODY_SELECTOR = [q.select.descendants().tag("body").end()];
 var COMMENT_WRAPPER_COUNT = 2;
@@ -3785,14 +3797,9 @@ function resolveThemeDescriptorValues(readDirectValue, schemas) {
   THEME_VARIABLE_DESCRIPTORS.forEach((descriptor) => resolveValue(descriptor.semanticOwner));
   return resolvedValues;
 }
-function createCanonicalThemeBranches(legacy, section, schemas) {
+function createCanonicalThemeBranches(resolvedValues, section) {
   const lightTheme = {};
   const darkTheme = {};
-  const resolvedValues = resolveThemeDescriptorValues((descriptor) => {
-    const legacySection = legacy[getThemeDescriptorSection(descriptor)];
-    const directValue = getDescriptorSettingsPathValue(legacySection, descriptor.settings.legacyPath);
-    return typeof directValue === "string" ? normalizeLegacyThemeValue(directValue, descriptor, schemas.colorMergeTagValues) : void 0;
-  }, schemas);
   THEME_VARIABLE_DESCRIPTORS.filter((descriptor) => getThemeDescriptorSection(descriptor) === section).forEach((descriptor) => {
     const value = resolvedValues.get(descriptor.semanticOwner);
     if (value === void 0) {
@@ -3850,13 +3857,18 @@ function normalizeLegacySettings(legacy, schemas) {
   if (!legacy.stripes || !legacy.headings || !legacy.buttons) {
     throw new Error("Production legacy settings passed validation without their required sections.");
   }
+  const resolvedValues = resolveThemeDescriptorValues((descriptor) => {
+    const legacySection = legacy[getThemeDescriptorSection(descriptor)];
+    const directValue = getDescriptorSettingsPathValue(legacySection, descriptor.settings.legacyPath);
+    return typeof directValue === "string" ? normalizeLegacyThemeValue(directValue, descriptor, schemas.colorMergeTagValues) : void 0;
+  }, schemas);
   const generalCustomListStyles = legacy.general.customListStyles ? omitKeys(legacy.general.customListStyles, ["listMarkerColor", "listNumberMarkerColor"]) : null;
   const general = {
     ...omitKeys(legacy.general, ["backgroundColor", "customListStyles"]),
     hideImageDownloadIcons: legacy.general.hideImageDownloadIcons ?? getDefaultGeneralHideImageDownloadIcons(),
     backgroundImage: normalizeLegacyBackgroundImage(legacy.general.backgroundImage),
     customListStyles: generalCustomListStyles,
-    ...createCanonicalThemeBranches(legacy, "general", schemas)
+    ...createCanonicalThemeBranches(resolvedValues, "general")
   };
   const stripes = {
     letterSpacing: legacy.stripes.letterSpacing ?? getDefaultLetterSpacingValue(),
@@ -3870,7 +3882,7 @@ function normalizeLegacySettings(legacy, schemas) {
     content: createCanonicalStripeNonThemeSection(legacy.stripes.content, "content"),
     footer: createCanonicalStripeNonThemeSection(legacy.stripes.footer, "footer"),
     infoArea: createCanonicalStripeNonThemeSection(legacy.stripes.infoArea, "infoArea"),
-    ...createCanonicalThemeBranches(legacy, "stripes", schemas)
+    ...createCanonicalThemeBranches(resolvedValues, "stripes")
   };
   const headings = {
     letterSpacing: legacy.headings.letterSpacing ?? getDefaultLetterSpacingValue(),
@@ -3881,7 +3893,7 @@ function normalizeLegacySettings(legacy, schemas) {
     h4: createCanonicalHeadingNonThemeSection(legacy.headings.h4, "h4"),
     h5: createCanonicalHeadingNonThemeSection(legacy.headings.h5, "h5"),
     h6: createCanonicalHeadingNonThemeSection(legacy.headings.h6, "h6"),
-    ...createCanonicalThemeBranches(legacy, "headings", schemas)
+    ...createCanonicalThemeBranches(resolvedValues, "headings")
   };
   const border = {
     top: omitKeys(legacy.buttons.border.top, ["color"]),
@@ -3911,7 +3923,7 @@ function normalizeLegacySettings(legacy, schemas) {
       desktop: getDefaultButtonsPadding("desktop"),
       mobile: getDefaultButtonsPadding("mobile")
     },
-    ...createCanonicalThemeBranches(legacy, "buttons", schemas)
+    ...createCanonicalThemeBranches(resolvedValues, "buttons")
   };
   return canonicalEmailTemplateSettingsSchema2.parse({ general, stripes, headings, buttons });
 }
@@ -3999,12 +4011,11 @@ function settingsNormalization(value, colorMergeTagValues = /* @__PURE__ */ new 
 export {
   EMPTY_BORDER_RADIUS,
   normalizeBackgroundImageSizeValue,
-  ArrayUtils,
   require_postcss,
-  parse,
   isFontConnectionUrl,
   clearFontValue,
   getFontFaceCssDetails,
+  ArrayUtils,
   require_basePropertyOf,
   require_toString,
   BUTTONS_TEXT_TRANSFORM_VALUES,
