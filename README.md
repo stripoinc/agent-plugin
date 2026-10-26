@@ -16,6 +16,8 @@ Image generation and editing use Stripo MCP. Supplied images are hosted as origi
 requests to inspect content do not start image jobs. Business Profile website extraction uses the
 agent's browser session and a local finalizer; it can host the selected logo in the gallery of an
 authorized email or template, and a full save can clear fields the extraction did not measure.
+Website extraction requires [host setup](#business-profile-website-setup) that the plugin does not
+configure.
 
 ## Install
 
@@ -25,7 +27,8 @@ The email skills need no npm install, curl, Python runtime or private source che
 
 Business Profile finalization (`skills/business-profile/scripts/finalize.py`) additionally needs
 Python 3.11+ with the packaged runtime requirements and the locked Node dependencies of its
-scripts. Install them from the plugin directory into the Python environment your agent uses:
+scripts, which require Node.js 20.19+, 22.12+ or 23+. Install them from the plugin directory into
+the Python environment your agent uses:
 
 ```sh
 python3 -m pip install -r packages/brandkit-runtime/requirements-stripo.txt
@@ -52,7 +55,8 @@ codex plugin add stripo@stripo
 
 Start a new session to load the installed skills.
 
-The skills require an authenticated `stripo-mcp` connection configured separately in your agent.
+The skills require an authenticated `stripo-mcp` connection configured separately in your agent;
+see [How to connect your AI assistant to Stripo](https://support.stripo.email/en/articles/15921958-how-to-connect-your-ai-assistant-to-stripo).
 Stripo uses `https://mcp.stripo.email/mcp` with scopes `mcp:tools` and `offline_access`.
 The plugin contains no tokens, client secrets or fixed MCP server entry. Browser sign-in belongs
 to you and your agent's OAuth flow; never paste tokens into chat or plugin files.
@@ -61,15 +65,32 @@ Other clients with an authenticated Stripo MCP connection can load `skills/` fro
 Keep the complete plugin together, including
 `packages/`: the local commands resolve the SDK relative to the skills.
 
-Run `node scripts/doctor.mjs` from the plugin directory to check local prerequisites. In a new
+Run `node scripts/doctor.mjs` from the plugin directory to check local prerequisites. Its Python
+checks (`python311`, `brandkitRuntime`, `resvgPy`) apply only to Business Profile finalization:
+without them `ready` is `false`, but the email skills need only `node` and `emailSdk`. In a new
 agent session, ask for a read-only `whoami` check and verify the intended account/project before
 editing. Local prerequisite checks do not prove MCP authentication or write access.
 
 The bundled `scripts/transfer.mjs` downloads models, references and previews and uploads prepared
 files using the exact HTTPS URLs returned by MCP. It supports direct S3 links, keeps file bytes
 unchanged, checks size limits and optional download checksums, and replaces downloads atomically.
-It returns compact JSON without printing signed URLs. See the
-[host instructions](skills/email-model-editor/HOST.md) for commands and upload finalization.
+It returns compact JSON without printing signed URLs. See
+[Transfers](skills/email-model-editor/reference/stripo-acquisition.md#transfers) for commands and
+upload finalization.
+
+### Business Profile website setup
+
+Website extraction needs host setup that this plugin does not ship or configure. Until a host
+provides it, website extraction cannot run:
+
+- a `HOST.md` beside `skills/business-profile/SKILL.md` that names the browser tools, run
+  directory and transfer binding;
+- a stdio MCP server registered in the agent that calls `serveNativeBrowser` from
+  `skills/business-profile/scripts/native-browser-server.mjs`; it drives the host's browser through
+  `chrome-devtools-mcp`, installed by the `npm ci` command above;
+- for logo hosting, `skills/business-profile/scripts/host_adapter.py` or an absolute
+  `BRANDKIT_HOST_ADAPTER` path that binds the agent's Stripo MCP connection, as described in
+  [PROVIDER.md](skills/business-profile/PROVIDER.md#finalizer-adapter-and-logos).
 
 ## Examples
 
@@ -91,7 +112,8 @@ hosted URL; inserting it into an email requires a separate model write. A suppli
 permission to generate a substitute. The plugin carries no separate image-provider credentials.
 
 Website references and Business Profile extraction use the agent's authorized browser session.
-The destination receives normal browser requests. Extraction runs locally: the bundled
+The destination receives normal browser requests. Once the
+[host setup](#business-profile-website-setup) is in place, extraction runs locally: the
 `chrome-devtools-mcp` bridge attaches to the host's browser, and the Python finalizer reads the
 profile and hosts the logo only through the agent's Stripo MCP connection and the signed upload
 URLs it returns. This plugin has no hosted browser service, publisher proxy or background hook.
@@ -108,12 +130,11 @@ performance. Missing capabilities and incomplete visual checks are reported expl
 validation alone is not a successful save.
 
 The repository root is the installable plugin. `skills/` contains Stripo-owned instructions and
-`packages/` the imported SDK; `packages/convo-email-agent/editor-validator/manifest.json` records
-the validator's editor revision and file hashes.
-The development-only `evals/` suite checks routing and scope. See
-[maintenance and eval instructions](https://github.com/stripoinc/agent-plugin/blob/main/docs/maintaining.md)
-for SDK synchronization, validation and packaging. A curated release package excludes development
-scripts, evals, local work files and dependencies.
+`packages/` the imported email SDK (`convo-email-agent`) and the Python Business Profile runtime
+(`brandkit-runtime`); `packages/convo-email-agent/editor-validator/manifest.json` records the
+validator's editor revision and file hashes.
+The development-only `evals/` suite checks routing and scope. Marketplace installs copy the whole
+repository root, including `evals/`.
 
 This package is distributed under the [Stripo Agent Plugin License, Version 1.0](LICENSE).
 The pinned editor validator contains proprietary Stripo code; bundled third-party notices and
