@@ -17,11 +17,9 @@ identity, destinations and footer content — from the designated reference mode
 for an existing target, its own model can serve as the reference. There are no sending-interface
 tools.
 
-Never write the Business Profile from these skills. `patch_business_profile`,
-`replace_business_profile` and `prepare_business_profile_upload` belong to
-`$business-profile`, which carries its own provider-specific write boundaries. When the
-project has no profile, offer `$business-profile` website extraction once and continue from the reference.
-For Exact, do not offer profile creation as part of copying a complete reference.
+Never write the Business Profile from these skills: do not call `patch_business_profile`,
+`replace_business_profile` or `prepare_business_profile_upload`. When the project has no
+profile, continue from the reference.
 
 Acquire the reference/target with `get_document_state(id, type)`; it returns a temporary
 `downloadUrl`, download to a local JSON file and keep that file unmodified: it is the base the

@@ -1,7 +1,7 @@
 {
   "name": "stripo",
-  "version": "0.12.1",
-  "description": "Create and edit Stripo emails, generate and edit images, and read or update Business Profiles.",
+  "version": "0.13.0",
+  "description": "Create and edit Stripo emails, including generating and editing images.",
   "author": {
     "name": "Stripo",
     "email": "support@stripo.email"
@@ -20,7 +20,7 @@
   "interface": {
     "displayName": "Stripo",
     "shortDescription": "Create and edit Stripo emails",
-    "longDescription": "Create editable Stripo emails from a brief, website, email, template, HTML, screenshot or supplied images. Edit existing emails and templates, generate and edit images, and verify saved desktop and mobile previews. Read, audit or update Business Profiles from supplied information or selected Stripo emails.",
+    "longDescription": "Create editable Stripo emails from a brief, website, email, template, HTML, screenshot or supplied images. Edit existing emails and templates, generate and edit images, and verify saved desktop and mobile previews.",
     "category": "Business & Operations",
     "capabilities": [
       "Read",
@@ -28,8 +28,7 @@
     ],
     "defaultPrompt": [
       "Create a Stripo email from my reference and verify its saved desktop and mobile previews.",
-      "Update the copy, links or images in this Stripo email and verify its saved previews.",
-      "Update my Stripo Business Profile from the information I provide."
+      "Update the copy, links or images in this Stripo email and verify its saved previews."
     ],
     "logo": "./assets/stripo.svg",
     "composerIcon": "./assets/stripo.svg",

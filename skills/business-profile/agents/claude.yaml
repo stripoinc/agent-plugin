@@ -1,6 +1,0 @@
-interface:
-  display_name: "Business profile"
-  short_description: "Build and maintain a business profile"
-  default_prompt: >-
-    Use $business-profile to build or update the selected business profile
-    from the evidence I provide.

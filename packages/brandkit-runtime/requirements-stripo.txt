@@ -1,3 +1,0 @@
--r requirements.txt
-# Local SVG conversion belongs to the Stripo adapter; Reteno rasterizes on its server.
-resvg-py==0.3.3

@@ -6,13 +6,13 @@
     "email": "support@stripo.email"
   },
   "metadata": {
-    "description": "Stripo Agent Plugin: create and edit emails, generate and edit images, and read or update Business Profiles."
+    "description": "Stripo Agent Plugin: create and edit emails, including generating and editing images."
   },
   "plugins": [
     {
       "name": "stripo",
       "source": "./",
-      "description": "Create and edit Stripo emails, generate and edit images, and read or update Business Profiles.",
+      "description": "Create and edit Stripo emails, including generating and editing images.",
       "category": "marketing",
       "keywords": [
         "stripo",

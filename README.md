@@ -10,32 +10,15 @@ editor validator. It does not send emails or schedule campaigns.
 | --- | --- |
 | `email-from-reference` | Create an email from a brief, website, template, HTML, screenshot or supplied images; rebuild an explicitly selected email or template; verify saved desktop/mobile previews. |
 | `email-model-editor` | Edit native copy, links, images, layout, styles, document title and preheader in existing emails and templates. |
-| `business-profile` | Build a project's Business Profile from a website (visual identity, brand voice, business context), or read, audit, fill or update it from supplied information or selected Stripo emails. A full website save replaces the stored profile; email updates preserve unrelated fields. |
 
 Image generation and editing use Stripo MCP. Supplied images are hosted as original assets;
-requests to inspect content do not start image jobs. Business Profile website extraction uses the
-agent's browser session and a local finalizer; it can host the selected logo in the gallery of an
-authorized email or template, and a full save can clear fields the extraction did not measure.
-Website extraction requires [host setup](#business-profile-website-setup) that the plugin does not
-configure.
+requests to inspect content do not start image jobs.
 
 ## Install
 
 Requirements: Node.js 20.18.1+ and an agent with shell, file, image inspection and MCP tools.
 The supplied shell examples use POSIX syntax; on Windows use WSL or an equivalent shell.
 The email skills need no npm install, curl, Python runtime or private source checkout.
-
-Business Profile finalization (`skills/business-profile/scripts/finalize.py`) additionally needs
-Python 3.11+ with the packaged runtime requirements and the locked Node dependencies of its
-scripts, which require Node.js 20.19+, 22.12+ or 23+. Install them from the plugin directory into
-the Python environment your agent uses:
-
-```sh
-python3 -m pip install -r packages/brandkit-runtime/requirements-stripo.txt
-npm ci --omit=dev --ignore-scripts --prefix skills/business-profile/scripts
-```
-
-`node scripts/doctor.mjs` checks the Python requirements and names the interpreter it found.
 
 Claude Code:
 
@@ -65,11 +48,10 @@ Other clients with an authenticated Stripo MCP connection can load `skills/` fro
 Keep the complete plugin together, including
 `packages/`: the local commands resolve the SDK relative to the skills.
 
-Run `node scripts/doctor.mjs` from the plugin directory to check local prerequisites. Its Python
-checks (`python311`, `brandkitRuntime`, `resvgPy`) apply only to Business Profile finalization:
-without them `ready` is `false`, but the email skills need only `node` and `emailSdk`. In a new
-agent session, ask for a read-only `whoami` check and verify the intended account/project before
-editing. Local prerequisite checks do not prove MCP authentication or write access.
+Run `node scripts/doctor.mjs` from the plugin directory to check local prerequisites (`node` and
+`emailSdk`). In a new agent session, ask for a read-only `whoami` check and verify the intended
+account/project before editing. Local prerequisite checks do not prove MCP authentication or write
+access.
 
 The bundled `scripts/transfer.mjs` downloads models, references and previews and uploads prepared
 files using the exact HTTPS URLs returned by MCP. It supports direct S3 links, keeps file bytes
@@ -78,25 +60,10 @@ It returns compact JSON without printing signed URLs. See
 [Transfers](skills/email-model-editor/reference/stripo-acquisition.md#transfers) for commands and
 upload finalization.
 
-### Business Profile website setup
-
-Website extraction needs host setup that this plugin does not ship or configure. Until a host
-provides it, website extraction cannot run:
-
-- a `HOST.md` beside `skills/business-profile/SKILL.md` that names the browser tools, run
-  directory and transfer binding;
-- a stdio MCP server registered in the agent that calls `serveNativeBrowser` from
-  `skills/business-profile/scripts/native-browser-server.mjs`; it drives the host's browser through
-  `chrome-devtools-mcp`, installed by the `npm ci` command above;
-- for logo hosting, `skills/business-profile/scripts/host_adapter.py` or an absolute
-  `BRANDKIT_HOST_ADAPTER` path that binds the agent's Stripo MCP connection, as described in
-  [PROVIDER.md](skills/business-profile/PROVIDER.md#finalizer-adapter-and-logos).
-
 ## Examples
 
 - "Create a Stripo email from this brief and check its saved desktop and mobile previews."
 - "Change the CTA and image in this email, keeping the rest of its layout."
-- "Audit this project's Business Profile against these three emails without changing it."
 
 ## Data and external services
 
@@ -111,12 +78,8 @@ requested prompts and authorized reference assets. Uploading or generating an im
 hosted URL; inserting it into an email requires a separate model write. A supplied image is not
 permission to generate a substitute. The plugin carries no separate image-provider credentials.
 
-Website references and Business Profile extraction use the agent's authorized browser session.
-The destination receives normal browser requests. Once the
-[host setup](#business-profile-website-setup) is in place, extraction runs locally: the
-`chrome-devtools-mcp` bridge attaches to the host's browser, and the Python finalizer reads the
-profile and hosts the logo only through the agent's Stripo MCP connection and the signed upload
-URLs it returns. This plugin has no hosted browser service, publisher proxy or background hook.
+Website references use the agent's authorized browser session. The destination receives normal
+browser requests. This plugin has no hosted browser service, publisher proxy or background hook.
 Host and external-provider data handling follows their own terms and settings.
 
 See [Stripo privacy](https://stripo.email/privacy-policy/),
@@ -130,9 +93,9 @@ performance. Missing capabilities and incomplete visual checks are reported expl
 validation alone is not a successful save.
 
 The repository root is the installable plugin. `skills/` contains Stripo-owned instructions and
-`packages/` the imported email SDK (`convo-email-agent`) and the Python Business Profile runtime
-(`brandkit-runtime`); `packages/convo-email-agent/editor-validator/manifest.json` records the
-validator's editor revision and file hashes.
+`packages/` the imported email SDK (`convo-email-agent`);
+`packages/convo-email-agent/editor-validator/manifest.json` records the validator's editor revision
+and file hashes.
 The development-only `evals/` suite checks routing and scope. Marketplace installs copy the whole
 repository root, including `evals/`.
 
