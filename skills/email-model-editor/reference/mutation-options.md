@@ -92,7 +92,8 @@ export default ({email}) => {
 
 Colors live in the theme branches. Change a light color at its `lightTheme` path, for example
 `email.setTheme("settings.stripes.lightTheme.content.linkColor", "#2457d6")`, and set a dark-mode
-override at the matching `darkTheme` path, where `null` means no override. Switch the button hover
+override at the matching `darkTheme` path, where `null` means no override. Use the scope selected
+under [Color consistency](color-consistency.md). Switch the button hover
 effect with the boolean `settings.buttons.hoverButtonStyles`.
 
 For an intentional reset, write `undefined` or `null` to a nullable setting below. For example,

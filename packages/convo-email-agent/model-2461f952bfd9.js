@@ -1,9 +1,10 @@
 import {
   ROOT_PATH,
+  releaseCopiedFontColors,
   requireValid,
   validateChange,
   validateEmailDocument
-} from "./contract-c566956db999.js";
+} from "./contract-a9a0a7497166.js";
 
 // convo-email-agent/src/sdk/model.ts
 var STRUCTURAL_KEYS = /* @__PURE__ */ new Set(["stripes", "structures", "columns", "containers", "blocks"]);
@@ -426,6 +427,7 @@ var EditorJsonMutationCore = class {
     }
     assertUniqueNewIds(this.draft, [newId, ...Object.values(nestedIds)]);
     const clone = deepClone(location.element);
+    releaseCopiedFontColors(clone);
     const nestedIdsMap = new Map(Object.entries(nestedIds));
     const usedNestedIds = /* @__PURE__ */ new Set();
     for (const child of Object.values(clone)) {
@@ -466,6 +468,7 @@ var EditorJsonMutationCore = class {
     }
     assertUniqueNewIds(this.draft, Object.values(nestedIds));
     const clone = deepClone(node);
+    releaseCopiedFontColors(clone);
     const nestedIdsMap = new Map(Object.entries(nestedIds));
     const usedNestedIds = /* @__PURE__ */ new Set();
     regenerateNestedIds(clone, nestedIdsMap, usedNestedIds, this.idFactory);

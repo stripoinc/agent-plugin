@@ -61,13 +61,14 @@ Rules for the module:
   `{ email }`; the module's only job is to call SDK mutation methods.
 - Preserve unrelated content, links, merge tags, visibility, and compliance content unless they
   are explicit targets. Make structural changes as needed to fulfill the user's request.
-- Prefer a theme edit for a broad change and a node edit for an exception. Render precedence is
-  inline HTML, block, container, structure, stripe, area theme, then general theme.
+- Prefer a theme edit for a broad change and a node edit for an exception.
 - For a text block, responsive `textAlign` accepts `left`, `center`, `right`, or `justify`.
   Use supported `node.style` or `email.theme.style` methods for native styles; intentional inline
-  font-size changes use the complete block HTML passed to `node.setHtml()`, not `setContent()`.
+  font-size changes use the complete block HTML passed to `node.setHtml()`, not `setContent()`. Mobile
+  paragraph sizes follow [Mobile font size](editor-limitations.md#mobile-font-size).
 - Use authorized, email-safe hosted image URLs. Prepare requested visuals through the
-  image topic in `PROVIDER.md` before writing the mutation module. Preserve text, composition,
+  image topic in `PROVIDER.md` before writing the mutation module, unless a background worker
+  collects them as [Parallel work](parallel-work.md) describes. Preserve text, composition,
   dimensions, and transparency unless the user requests changes. Inspect the completed hosted
   result, then reacquire the target model and check that the selected image still has its expected
   source. Report a concurrent deletion or source change instead of retargeting the edit.
@@ -81,6 +82,13 @@ Rules for the module:
   WebP, AVIF, SVG, and unknown formats are not confirmed email-safe for direct insertion;
   obtain a hosted PNG/JPG/JPEG/GIF through an authorized conversion and the provider's upload route.
   Generation is not a lossless conversion. Inspection-only requests must not start image jobs.
+
+For affected text, colors, backgrounds, or inserted text, follow
+[Color consistency](color-consistency.md) using the acquired model to scope the change.
+Express supported block-color writes through `node.setStyle("fontColor", color)`. Removing or
+aligning inline `color` declarations needs the complete block HTML passed to `node.setHtml()`;
+`setContent()` drops incoming style attributes. How a `fontColor` change repaints inline colors,
+and when the SDK rejects it, is in [Text color](editor-limitations.md#text-color).
 
 ## Run the edit
 
@@ -104,6 +112,11 @@ script is unnecessary when that report fully describes the edit. Require exit co
   or entries are abbreviated: inspect the relevant complete files before accepting the scope.
   Diagnostics retain `inputSummary` and `outputSummary` for content and census checks.
   This report is diagnostic only; it does not establish persistence or replace saved-state checks.
+
+Before uploading an edit that changes text markup, colors, backgrounds, or inserts text, apply
+the shared [candidate color check](color-consistency.md#check-the-completed-candidate-before-upload)
+only to affected content and its relevant backgrounds. Use the acquired model to identify that
+scope. Correct conflicts in the change module and rerun it before upload.
 
 If the requested result already exists, call the supplied `skip(reason)` and return. The runner
 reports `skipped` and produces no uploadable output. A skipped request is complete only after

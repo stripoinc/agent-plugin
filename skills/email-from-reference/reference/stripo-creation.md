@@ -38,24 +38,3 @@ schema and verify the exact metadata values with `get_document_state` after writ
 The creation runner enforces the same text limit before producing a candidate. For a full rebuild,
 pass `--baseline <target-model.json>` using the acquired state of the document being replaced;
 only unchanged text from that baseline may exceed the limit. Omit `--baseline` for a new email.
-
-## Renderer constraints
-
-For a centered photo-backed panel, do not put the only image on the stripe while leaving the
-body transparent: this renderer paints that image outside the body and the overlay text can disappear.
-When a native background uses `sizeX: "cover"`, set `sizeY: "auto"`; a `cover`/`cover` pair can
-pass local schema validation but fail the server write. Compare the saved
-photo crop after this adjustment.
-
-When a horizontal divider's border sits in a text block, set the wrapper paragraph's `font-size:1px!important`
-and `line-height:1px!important`. The mobile compiler otherwise forces that paragraph to
-16px and inserts a full line of space at every divider.
-The generated mobile stylesheet forces content paragraphs to 16px with `!important`.
-An inline `font-size` on the `<p>` can therefore look correct on desktop yet enlarge small
-mobile copy, wrap compact detail rows, and lengthen the email. For a source mobile design with
-smaller text, put the mobile size on a nested span with `!important`. For aligned label/value
-rows, use a two-cell presentation table with an explicit font size on each cell so wrapped
-values stay in the value column. Verify the saved mobile PNG, not just the JSON or desktop HTML.
-The renderer can also give a two-column native structure equal mobile widths even when its desktop
-column widths differ and `responsiveMobile` is false. For compact receipt rows, keep the label
-and amount together in one presentation table when the source needs unequal mobile columns.

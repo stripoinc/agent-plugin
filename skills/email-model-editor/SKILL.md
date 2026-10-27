@@ -17,15 +17,18 @@ any image workflow `PROVIDER.md` delegates to it.
 tools. Discover the selected server's actual callable schemas before use. The bundle contains
 no endpoint or credentials.
 
-For an existing-model edit, read the acquisition, mutation and persistence guides together in
-one local read, with the provider's acquisition and persistence topics. Keep conditional topics
-on demand and do not load the full tool/resource catalog.
+For an existing-model edit, read the acquisition, mutation, persistence and
+[parallel work](reference/parallel-work.md) guides and the provider's acquisition and
+persistence topics in one local read. Load conditional topics on demand, never the full
+tool/resource catalog.
 
 | Stage | Common guides read together; conditional topics when needed |
 | --- | --- |
 | Acquire | [Download and inspect the target](reference/acquire-and-inspect.md) before editing. |
 | Mutate | [SDK module, run, validation, completeness](reference/mutate-and-validate.md) before constructing the change. |
 | Conditional mutation | [Metadata, social, insertion, global block settings, theme resets and fonts](reference/mutation-options.md) when the request includes these operations. |
+| Text or colors | [Color consistency](reference/color-consistency.md) before changing text markup, colors, backgrounds, or inserting text. |
+| Editor limits | [Editor limitations](reference/editor-limitations.md) before changing text color, line height, or layout. |
 | Persist | [File upload, recovery, durable and visual checks, final presentation](reference/persist-and-verify.md) before writing. |
 | Attached or Ctrl+V image | [Upload supplied images](reference/image-upload.md) before hosting original bytes. |
 

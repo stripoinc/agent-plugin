@@ -62,14 +62,14 @@ global settings from the actual source into the brief explicitly.
 
 Sum insets through stripe, structure, container, and block. Adding the same gutter twice is a
 layout error. Never flatten native text/controls to an image just to match a screenshot.
-Check the renderer constraints listed in `PROVIDER.md`, if any, for background placement and
+Check [Backgrounds](editor-limitations.md#backgrounds) in the editor limitations for background placement and
 sizing; verify the saved photo crop and text contrast against the source.
 
 For desktop two-column image/quote rows, check `structure.settings.responsiveMobile` in the
 saved mobile preview. If it is false, text can remain in a narrow column and wrap vertically;
 enable stacking and set inversion deliberately to keep each image with its own quote. Check
-text contrast against the actual saved panel, including inline colors that override block
-settings. If the source has decorative social icons but supplies no link destinations, an
+text contrast against the actual saved panel; follow [Color consistency](color-consistency.md)
+for its native and inline colors. If the source has decorative social icons but supplies no link destinations, an
 uploaded crop of just that icon row can preserve its visible geometry as an editable image;
 disclose that its individual destinations remain unverified.
 When a desktop row of cards or counters stacks on mobile, set each container's mobile vertical
@@ -83,7 +83,7 @@ desktop and compare the saved section height with the source mobile image.
 Represent horizontal separators with a native border or a full-width text span with a one-pixel
 top border and a nonbreaking space. Repeated `━`/`─` characters form one unbreakable text run;
 they can expand the entire mobile email table and push other columns off-screen.
-Follow the renderer constraints in `PROVIDER.md`, if any, for compiler overrides of mobile font
+Follow the [editor limitations](editor-limitations.md) for compiler overrides of mobile font
 sizes and column widths. Verify compact dividers and label/value rows in the saved mobile PNG,
 not just native JSON.
 

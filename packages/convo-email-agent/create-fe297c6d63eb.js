@@ -4,13 +4,16 @@ import {
 } from "./content-mutations-15913d881744.js";
 import {
   EditorJsonMutationCore,
+  EmailSdkSchemaError,
   assertValidEmailModel
 } from "./model-2461f952bfd9.js";
 import {
   DocumentStateError,
   contractDefaults,
-  jsonIssues
-} from "./contract-c566956db999.js";
+  hasRecoloredInlineColor,
+  jsonIssues,
+  validateEmailDocument
+} from "./contract-a9a0a7497166.js";
 import {
   SOCIAL_BLOCK_DEFAULT_SETTINGS,
   buildSocialNetwork,
@@ -189,7 +192,8 @@ function textBlock(id, html, theme = DEFAULT_THEME) {
     content: html,
     settings: {
       backgroundColor: "transparent",
-      fontColor: theme.fontColor,
+      // The editor paints a block fontColor over every inline color on insert.
+      ...hasRecoloredInlineColor(html) ? {} : { fontColor: theme.fontColor },
       hideElement: "no",
       includeInOutput: "both",
       padding: responsiveSides(0),
@@ -530,7 +534,8 @@ function createEmailFromDraft(options) {
                 assertNonEmptyString(block.content, `${blockPath}.content`);
                 defaults = textBlock("", "").settings;
                 defaults.backgroundColor = "transparent";
-                defaults.fontColor = areaSettings.fontColor ?? DEFAULT_THEME.fontColor;
+                if (hasRecoloredInlineColor(block.content)) delete defaults.fontColor;
+                else defaults.fontColor = areaSettings.fontColor ?? DEFAULT_THEME.fontColor;
                 break;
               case "image": {
                 assertNonEmptyString(supplied.src, `${blockPath}.settings.src`);
@@ -796,7 +801,19 @@ function createEmailBuilder(options = {}) {
     setTheme(path, value) {
       assertNotSealed();
       assertNonEmptyString(path, "Theme path");
-      setPath(draft, path.split("."), value);
+      const issues = jsonIssues(value);
+      if (issues.length) throw new DocumentStateError(issues);
+      const candidate = cloneJson(draft);
+      setPath(candidate, path.split("."), value);
+      const after = validateEmailDocument(candidate);
+      if (after.length) {
+        const existing = new Set(validateEmailDocument(draft).map((issue) => `${issue.path}
+${issue.message}`));
+        const introduced = after.filter((issue) => !existing.has(`${issue.path}
+${issue.message}`));
+        if (introduced.length) throw new EmailSdkSchemaError(`Theme write ${JSON.stringify(path)}`, introduced);
+      }
+      draft = candidate;
       mutationCount += 1;
       return builder;
     },

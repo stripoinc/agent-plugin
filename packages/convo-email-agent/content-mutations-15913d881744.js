@@ -1,12 +1,6 @@
 import {
-  buildStyleValue,
-  nodeStyleSpec,
-  normalizeColor,
-  themeStyleSpec
-} from "./styles-961c8e1b984f.js";
-import {
   transplantContentFormat
-} from "./parse-html-13fe7bf5afc4.js";
+} from "./transplant-format-b3ed852356b0.js";
 import {
   summarizeEditorJson
 } from "./inspection-70055d97b33b.js";
@@ -31,7 +25,13 @@ import {
   schemaForValue,
   validateChange,
   validateSnapshot
-} from "./contract-c566956db999.js";
+} from "./contract-a9a0a7497166.js";
+import {
+  buildStyleValue,
+  nodeStyleSpec,
+  normalizeColor,
+  themeStyleSpec
+} from "./styles-961c8e1b984f.js";
 import {
   SOCIAL_ALT_MAX_LENGTH,
   SOCIAL_CUSTOM_NETWORK_TYPE,

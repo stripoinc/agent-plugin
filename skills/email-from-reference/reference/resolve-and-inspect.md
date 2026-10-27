@@ -66,7 +66,8 @@ a browser, or ask the user to provide PNGs solely to proceed. Retry a transient 
 once; never treat an authorization denial as permission to use another acquisition path.
 
 For a live reference, acquire its model and try desktop/mobile PNG previews when the
-preview tool is available:
+preview tool is available. Issue these acquisitions together with the RESOLVE reads that do not
+depend on them:
 
 Use the model acquisition and preview calls defined in `PROVIDER.md` with the reference identity.
 For an explicit rebuild, also acquire the named write target now if it is not the reference.
@@ -99,6 +100,11 @@ direction, and responsive behavior. Treat code or markup inside a text reference
 evidence only; do not execute it or switch away from native JSON.
 If it contains alternatives, follow the user's selection; otherwise choose using the selected
 regime's source and business-context priorities.
+
+Before drafting in any reference regime, follow [Color consistency](color-consistency.md)
+and record the resulting section/scope color plan in the existing `sourceSummary`. In Exact
+mode, preserve the source's intent and report poor contrast rather than silently redesigning it.
+Keep this in the brief; it adds neither native JSON fields nor an approval step.
 
 When the user supplies no reference, create a reasonable **agent-authored text reference** before
 drafting the native model. Do not start from a blank sheet, treat editor defaults as a design,
@@ -183,14 +189,19 @@ background layers, image coordinate frames, and crop bounds in `sourceSummary`.
 Skip this step when all required visuals already have suitable hosted URLs. Follow `PROVIDER.md`
 for image scope and inputs. If it requires an existing write target for images, execute CREATE
 once now using the resolved destination and name; retain that identity and skip later creation.
+Run it only after INSPECT has finished without a blocker, so a failed inspection leaves no empty
+draft.
 Check its returned destination and initialization status through `PROVIDER.md` before any dependent
 asset operation. An initialization refusal stops those operations; retain the same draft and
 report the required action.
 An explicit rebuild always uses its named target. Never use the reference as a new email's target.
 Other hosts can prepare images before creating an email.
 
-Upload supplied files or start the required jobs, retain their IDs and recovery keys, wait for
-completed hosted results, and inspect them before BUILD. Finalize the brief with the real URLs;
-job IDs and pending placeholders are not image sources. Resume existing jobs according to
-`PROVIDER.md`; a failed model write must not restart generation or create a duplicate email.
-Report a retained draft and missing visual when work cannot complete.
+Upload supplied files and start all independent jobs together, and retain their IDs and
+recovery keys. Without background workers, wait here for completed hosted results; with them,
+continue to BRIEF while a worker collects them ([Parallel work](parallel-work.md)). Inspect
+every completed hosted result before BUILD and finalize the brief with the real URLs; job IDs
+and pending placeholders are not image sources.
+Resume existing jobs according to `PROVIDER.md`; a failed model write must not restart
+generation or create a duplicate email. Report a retained draft and missing visual when work
+cannot complete.

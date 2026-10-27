@@ -19,6 +19,7 @@ export declare const ROOT_PATH = "<root>";
 export declare function pointerToPath(pointer: string): string;
 /**
  * Schema issues for `model`, or an empty list. Runs the bundled editor's
- * zod schema (with the defaults the server fills in first) and the SDK's social-block rules.
+ * zod schema (with the defaults the server fills in first) and the SDK's social-block and
+ * line-height precision rules.
  */
 export declare function validateEmailDocument(model: unknown, options?: EmailValidationOptions): EmailValidationIssue[];

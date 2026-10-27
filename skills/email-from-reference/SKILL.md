@@ -19,13 +19,16 @@ delegates to it. `mcp-tools.json` maps operation roles
 to actual tools, not interchangeable arguments. The builder reads the installed provider policy
 from `reference/creation-policy.json`; use the same command for either provider.
 
-Read only the topic needed for the current stage, then continue to the next stage. Do not load
-all references or the full tool/resource catalog at startup.
+Except for the parallel-work guide below, read only the topic needed for the current stage,
+then continue to the next stage. Do not load all references or the full tool/resource catalog
+at startup.
 
 | Stage | Read when needed |
 | --- | --- |
 | Resolve and inspect | [Reference regimes, inputs, target, assets](reference/resolve-and-inspect.md) before using a reference or drafting content. |
 | Brief and build | [Native model, fonts and local validation](reference/build-model.md) before constructing the brief. |
+| Colors | [Color consistency](reference/color-consistency.md) before planning colors; apply its candidate check before upload. |
+| Editor limits | [Editor limitations](reference/editor-limitations.md) before building; layout, text color, line height. |
 | Create and save | [Creation, persistence, recovery, verification, final presentation](reference/persist-and-verify.md) before creating or changing remote content. |
 | Attached or Ctrl+V image | [Upload supplied images](reference/image-upload.md) before hosting original bytes or local crops. |
 | Exact HTML/image reconstruction | [Layout reconstruction](reference/layout-reconstruction.md) before building and during saved-PNG review. |
@@ -35,6 +38,8 @@ PRESENT is the provider's final presentation step, when `PROVIDER.md` defines on
 For a rebuild, acquire the target baseline during INSPECT, before BRIEF and BUILD. For a new
 email, the provider's images topic says whether assets need an existing write target, in which
 case CREATE runs once during PREPARE ASSETS; otherwise CREATE follows BUILD.
+Read [Parallel work](reference/parallel-work.md) with `PROVIDER.md`, before the first MCP call;
+background subagents may overlap stages, but CREATE and writes keep this order.
 
 Keep these rules throughout:
 

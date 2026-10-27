@@ -22,7 +22,7 @@ never apply that rule to an unknown outcome. Report unresolved codes, paths, and
 Acquire a fresh native model and perform the required verification calls through `PROVIDER.md`.
 Request desktop/mobile previews unless the provider defines a preheader-only completion rule;
 then perform its saved native/compiled preheader checks instead of requesting PNGs.
-Independent verification requests may be issued together when the host supports it; inspect
+Issue independent verification requests together when the host supports it; inspect
 every response. A merge receipt is not the resulting document. Use the fresh file and manifest
 for any next edit. Verify `resources.fonts` and requested font-family settings in that file.
 

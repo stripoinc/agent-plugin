@@ -43,10 +43,11 @@ part that cannot be persisted; do not silently simplify the email to pass valida
 
 ### 7. VERIFY
 
-Use `PROVIDER.md` to reacquire the saved native model and both desktop/mobile previews. Download
-through the configured transfer helper. Verify native fonts, requested metadata, and the
-provider's compiled-content checks, including its saved preheader checks when the model sets
-or copies a preheader. A receipt alone does not establish requested-value equality.
+Use `PROVIDER.md` to reacquire the saved native model and both desktop/mobile previews. Issue
+these independent reads together when the host supports it, keep their results distinct, and
+download every artifact through the configured transfer helper. Verify native fonts, requested
+metadata, and the provider's compiled-content checks, including its saved preheader checks when
+the model sets or copies a preheader. A receipt alone does not establish requested-value equality.
 
 Inspect the saved model for every intended block, exact copy, CTA href, asset URL, merge tag,
 unsubscribe link, and postal/legal detail. Compare the per-type block census with the intended

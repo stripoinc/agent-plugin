@@ -1,5 +1,6 @@
 import {
   EmailSdkError,
+  LINE_HEIGHT_HINT,
   cloneJson,
   isObject
 } from "./errors-3ee69a7e1eb0.js";
@@ -419,7 +420,12 @@ function buildStyleValue(shape, value, options, existing, leaf) {
     case "sizeResponsive":
       return buildResponsiveScalar(value, existing, breakpoint, 8, 72, "fontSize");
     case "lineHeight":
-      return buildResponsiveScalar(value, existing, breakpoint, 0, 5, "lineHeight");
+      try {
+        return buildResponsiveScalar(value, existing, breakpoint, 0, 5, "lineHeight");
+      } catch (error) {
+        if (error instanceof EmailSdkError) throw new EmailSdkError(`${error.message} ${LINE_HEIGHT_HINT}`);
+        throw error;
+      }
     case "alignResponsive":
       return buildAlignment(value, existing, breakpoint);
     case "textAlignResponsive":

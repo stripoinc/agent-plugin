@@ -33,6 +33,7 @@ export interface NodeCapability {
     readOnlyProperties: string[];
     actions: Record<'INSERT' | 'UPDATE' | 'DELETE' | 'MOVE', ActionCapability>;
 }
+/** Provenance of the bundled editor contract and merge-service validator; not a live server version query. */
 export declare function getContract(): Readonly<{
     editorRevision: string;
     editorDirty: boolean;
@@ -40,6 +41,10 @@ export declare function getContract(): Readonly<{
     validation: 'contract';
     validatorSha256: string;
 }>;
+/**
+ * Detached JSON schema for the pinned Document State contract. Resolve local $ref against its definitions.
+ * Some native refinements/side effects are enforced only by the bundled validator; schema inspection is not validation.
+ */
 export declare function getJsonSchema(): JsonSchemaNode;
 export interface FieldSupport {
     decision: string;
@@ -48,6 +53,11 @@ export interface FieldSupport {
     source: string;
     scenario: string;
 }
+/**
+ * Reviewed field support and native operation capabilities for the pinned contract.
+ * Read fields[path] for one field; decision/method/omission explain support, not every accepted value.
+ * Use getJsonSchema or node.describe for value shapes and validate the complete candidate for contextual restrictions.
+ */
 export declare function getCapabilities(): Readonly<{
     blocks: readonly BlockKind[];
     nodes: readonly NodeCapability[];

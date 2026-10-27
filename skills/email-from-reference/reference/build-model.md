@@ -47,9 +47,14 @@ For an authorized logo, native image dimensions use `size`, not `width`, and an 
 ```
 
 Set section areas through stripe `settings.messageArea`. Global settings supply section colors
-and button defaults; explicit node settings take precedence. Global colors live in each section's
+and button defaults; explicit node settings replace those defaults during draft completion. Global colors live in each section's
 `lightTheme` branch, for example `settings.stripes.lightTheme.content.linkColor` or
-`settings.buttons.lightTheme.buttonColor`; `darkTheme` mirrors it, and `null` there means no dark override. Images default to their column's
+`settings.buttons.lightTheme.buttonColor`; `darkTheme` mirrors it, and `null` there means no dark override.
+Supply the color settings selected under [Color consistency](color-consistency.md) explicitly
+in the brief instead of relying on omitted values to reproduce the planned design; for text with
+inline colors, follow [Text color](editor-limitations.md#text-color).
+
+Images default to their column's
 width with matching desktop/mobile sizes. Set both sizes explicitly when different sizes are
 intended. Supplied IDs and fields are preserved except that bare email button targets receive
 the `mailto:` prefix required for persistence. Duplicate IDs fail validation.
@@ -161,7 +166,15 @@ to the command. Pass its untouched, complete native model. This allows unchanged
 title/preheader text above 500 UTF-16 code units while still rejecting changed text above the
 limit. For a new email, omit `--baseline`; do not use a reference as the target baseline.
 
-Require a zero exit code and schema-valid output. Inspect diagnostics for stripe, structure, column, container, and block counts. Re-open the output when needed to verify exact copy, links, asset URLs, merge tags, areas, and visibility. Correct the brief and rebuild; do not patch generated JSON ad hoc.
+BUILD waits for every image result ([Parallel work](parallel-work.md)). A brief drafted while
+images render leaves their `settings.src` empty; the builder rejects an image without `src`, so
+fill in every collected URL before building. Never substitute a placeholder URL.
+
+Require a zero exit code and schema-valid output. Inspect diagnostics for stripe, structure, column, container, and block counts. Re-open the output when needed to verify exact copy, links, asset URLs, merge tags, areas, and visibility.
+
+Before upload, apply the shared [candidate color check](color-consistency.md#check-the-completed-candidate-before-upload)
+to the completed model, including builder-added defaults, and compare it with `sourceSummary`.
+Correct the brief and rebuild before upload; do not patch generated JSON ad hoc.
 
 For requested inline CSS, apply the shared [inline-style candidate checks](../../email-model-editor/reference/mutate-and-validate.md#inline-style-candidate-checks)
 to the builder output before persistence. Check a fresh build against the intended brief and

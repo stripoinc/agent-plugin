@@ -19,7 +19,20 @@ Read the topic for the current step:
 | Step | Topic |
 | --- | --- |
 | Read a reference or target, download artifacts, network access | [Acquisition and transfers](reference/stripo-acquisition.md) |
-| Create an email; document title, preheader and external metadata; renderer constraints for layout | [Creation and metadata](reference/stripo-creation.md) |
+| Create an email; document title, preheader and external metadata | [Creation and metadata](reference/stripo-creation.md) |
 | Image jobs; attached, pasted or local images | [Images](reference/stripo-images.md) |
 | Any document write, its recovery and saved-state verification | [Persistence and verification](reference/stripo-persistence.md) |
 | Final step after the last confirmed save and required checks | [Final presentation](reference/stripo-persistence.md#final-presentation) |
+
+## Progress
+
+Tell the user in words how the work is going, in the language they write in. When the work
+starts, say what you are about to do. Each time a stage finishes, write one or two short
+sentences: what you found or produced, with a concrete detail, and what comes next (for
+example, "The email is downloaded: 8 sections, 31 blocks. Now I am changing the heading." or
+"The reference is studied: a hero image, three product cards, and a dark footer. Now I am
+writing the brief."). When work runs in parallel, say what continues in the background (for
+example, "Two images are generating; meanwhile I am writing the brief."). These updates are
+reply text between tool calls, not reasoning; do not save them for the final answer. Keep model
+JSON, file contents, signed URLs, and ticket ids out of them. Inspection-only requests need no
+updates.

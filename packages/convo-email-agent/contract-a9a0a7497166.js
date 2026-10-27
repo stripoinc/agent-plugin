@@ -1,7 +1,15 @@
 import {
+  normalizeColor
+} from "./styles-961c8e1b984f.js";
+import {
+  isElement,
+  parseHtml
+} from "./parse-html-7b561a99741a.js";
+import {
   collectSocialDocumentIssues
 } from "./social-f4a8e0da8c68.js";
 import {
+  LINE_HEIGHT_HINT,
   cloneJson,
   deepFreeze,
   describeNodeKind,
@@ -315,7 +323,14 @@ function quoteAll(values) {
 }
 var DISCRIMINATOR_MESSAGE = /^Invalid discriminator value\. Expected (.+)$/u;
 var TYPE_MESSAGE = /^Invalid input: expected (.+?), received (.+)$/u;
+var LINE_HEIGHT_PATH = /^settings\.(?:stripes|headings\.h[1-6])\.lineHeight(?:\.(?:desktop|mobile))?$/u;
 function formatIssue(issue) {
+  const formatted = formatNativeIssue(issue);
+  const missing = issue.code === "invalid_type" && TYPE_MESSAGE.exec(issue.message)?.[2] === "undefined";
+  if (missing || issue.code === "unrecognized_keys" || !LINE_HEIGHT_PATH.test(dotPath(issue.path))) return formatted;
+  return formatted.map((entry) => ({ ...entry, message: `${entry.message} ${LINE_HEIGHT_HINT}` }));
+}
+function formatNativeIssue(issue) {
   const path = dotPath(issue.path);
   if (issue.code === "unrecognized_keys" && issue.keys && issue.keys.length > 0) {
     return issue.keys.map((key) => ({ path, code: issue.code, message: `unsupported property ${JSON.stringify(key)}` }));
@@ -361,15 +376,29 @@ function formatIssue(issue) {
   }
   return [{ path, code: issue.code, message: issue.message }];
 }
+var LINE_HEIGHT_GROUPS = ["stripes", ...[1, 2, 3, 4, 5, 6].map((level) => `headings/h${level}`)];
+function lineHeightPrecisionIssues(model, current) {
+  const issues = [];
+  for (const group of LINE_HEIGHT_GROUPS) {
+    for (const platform of ["desktop", "mobile"]) {
+      const instancePath = `/settings/${group}/lineHeight/${platform}`;
+      const value = resolveJsonPointer(model, instancePath);
+      if (typeof value !== "number" || !Number.isFinite(value) || Math.round(value * 100) / 100 === value) continue;
+      if (current !== void 0 && resolveJsonPointer(current, instancePath) === value) continue;
+      issues.push({ instancePath, message: `${value} is stored as a whole percentage and would read back as ${Math.round(value * 100) / 100}. ${LINE_HEIGHT_HINT}` });
+    }
+  }
+  return issues;
+}
 function validateEmailDocument(model, options = {}) {
   const result = validateDocumentState(model, options.current);
   const issues = result.issues.flatMap(formatIssue);
   const reported = new Set(issues.map((issue) => issue.path));
-  for (const social of collectSocialDocumentIssues(model)) {
-    const path = pointerToPath(social.instancePath);
+  for (const rule of [...collectSocialDocumentIssues(model), ...lineHeightPrecisionIssues(model, options.current)]) {
+    const path = pointerToPath(rule.instancePath);
     if (reported.has(path)) continue;
     reported.add(path);
-    issues.push({ path, code: "editor_rule", message: social.message });
+    issues.push({ path, code: "editor_rule", message: rule.message });
   }
   return issues;
 }
@@ -442,6 +471,78 @@ function findUnintendedLosses(input, output, intent = {}) {
     compare(withoutChildren(node.element), withoutChildren(survivor.element), `/${node.id}`);
   }
   return [...new Set(lost)];
+}
+
+// convo-email-agent/src/sdk/text-font-color.ts
+var RECOLORED_TAGS = /* @__PURE__ */ new Set(["p", "h1", "h2", "h3", "h4", "h5", "h6", "li", "span"]);
+var RGB_FUNCTION = /^rgba?\(\s*(\d{1,3})(?:\s*,\s*|\s+)(\d{1,3})(?:\s*,\s*|\s+)(\d{1,3})(?:\s*[,/]\s*(\d*\.?\d+)(%)?)?\s*\)$/u;
+function inlineColor(element) {
+  const style = element.attrs.find((attr) => attr.name === "style")?.value ?? "";
+  return /(?:^|;)\s*color\s*:\s*([^;!]+)/iu.exec(style)?.[1].trim() || void 0;
+}
+function collectColors(nodes2, found) {
+  for (const node of nodes2) {
+    if (!isElement(node)) continue;
+    const color = RECOLORED_TAGS.has(node.tag) ? inlineColor(node) : void 0;
+    if (color) found.push(color);
+    collectColors(node.children, found);
+  }
+  return found;
+}
+function recoloredInlineColors(content) {
+  return typeof content === "string" ? collectColors(parseHtml(content), []) : [];
+}
+function colorKey(color) {
+  if (typeof color !== "string") return void 0;
+  const value = color.trim().toLowerCase();
+  const rgb = RGB_FUNCTION.exec(value);
+  let hex;
+  if (rgb) {
+    const channels = rgb.slice(1, 4).map(Number);
+    if (channels.some((channel) => channel > 255)) return void 0;
+    const alpha = rgb[4] === void 0 ? 1 : Number(rgb[4]) / (rgb[5] ? 100 : 1);
+    hex = `#${channels.map((channel) => channel.toString(16).padStart(2, "0")).join("")}` + (alpha >= 1 ? "" : Math.round(alpha * 255).toString(16).padStart(2, "0"));
+  } else {
+    try {
+      hex = normalizeColor(value, true).toLowerCase();
+    } catch {
+      return void 0;
+    }
+  }
+  const short = /^#([0-9a-f])([0-9a-f])([0-9a-f])$/u.exec(hex);
+  if (short) hex = `#${short[1]}${short[1]}${short[2]}${short[2]}${short[3]}${short[3]}`;
+  return /^#[0-9a-f]{6}ff$/u.test(hex) ? hex.slice(0, 7) : hex;
+}
+var fontColorOf = (block) => isObject(block.settings) ? block.settings.fontColor : void 0;
+function hasRecoloredInlineColor(content) {
+  return recoloredInlineColors(content).length > 0;
+}
+function textBlockColors(block) {
+  return [fontColorOf(block), ...recoloredInlineColors(block.content)];
+}
+function overwrittenInlineColors(before, after, inherited = []) {
+  const requested = colorKey(fontColorOf(after));
+  if (requested === void 0) return [];
+  if (before && (after.content === before.content || colorKey(fontColorOf(before)) === requested)) return [];
+  const known = new Set((before ? textBlockColors(before) : inherited).map(colorKey));
+  const replaced = recoloredInlineColors(after.content).filter((color) => {
+    const key = colorKey(color);
+    return key !== void 0 && key !== requested && !known.has(key);
+  });
+  return [...new Set(replaced)];
+}
+var THEME_COLORED_TAGS = /* @__PURE__ */ new Set(["p", "h1", "h2", "h3", "h4", "h5", "h6", "li", "a"]);
+function hasBlockColoredText(nodes2) {
+  return nodes2.some((node) => !isElement(node) ? node.text.trim() !== "" : !THEME_COLORED_TAGS.has(node.tag) && !inlineColor(node) && hasBlockColoredText(node.children));
+}
+function releaseCopiedFontColors(value) {
+  if (Array.isArray(value)) {
+    for (const child of value) releaseCopiedFontColors(child);
+    return;
+  }
+  if (!isObject(value)) return;
+  if (value.type === "text" && isObject(value.settings) && overwrittenInlineColors(void 0, value).length && typeof value.content === "string" && !hasBlockColoredText(parseHtml(value.content))) delete value.settings.fontColor;
+  for (const child of Object.values(value)) releaseCopiedFontColors(child);
 }
 
 // convo-email-agent/src/sdk/preparation.ts
@@ -628,6 +729,20 @@ function validateChange({ current, target, intent }) {
       });
     }
   }
+  const inherited = before.filter((node) => node.blockType === "text").flatMap((node) => textBlockColors(node.element));
+  for (const entry of after) if (entry.blockType === "text") {
+    const previous = before.find((node) => node.id === entry.id && node.blockType === "text");
+    const replaced = overwrittenInlineColors(previous?.element, entry.element, inherited);
+    if (replaced.length) issues.push({
+      code: "INLINE_COLOR_OVERWRITTEN",
+      stage: "change",
+      input: "target",
+      path: `${entry.id}.content`,
+      nodeId: entry.id,
+      nodeType: "text",
+      message: previous ? `This write changes both content and fontColor; the editor applies fontColor to every p, h1-h6, li and span, replacing the newly supplied inline colors ${replaced.join(", ")}. Align or remove them, or keep the acquired fontColor for intentional multicolor text.` : `The editor applies a new text block's fontColor to every p, h1-h6, li and span, replacing the inline colors ${replaced.join(", ")}. Omit fontColor to keep the content's colors, or align or remove them.`
+    });
+  }
   for (const entry of after) if (!before.some((node) => node.kind === entry.kind && node.id === entry.id)) {
     const capability = nodeCapability(entry.blockType ?? entry.kind);
     if (!capability?.actions.INSERT.runtimes.mergeService) issues.push({
@@ -702,6 +817,8 @@ export {
   hasLink,
   linkHostContains,
   isSupportedThemeReset,
+  hasRecoloredInlineColor,
+  releaseCopiedFontColors,
   DocumentStateError,
   jsonIssues,
   validateSnapshot,

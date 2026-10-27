@@ -7,6 +7,10 @@ Use the advertised schemas; `mcp-tools.json` supplies names, not argument transl
 Call `whoami` once to resolve accessible projects, only if it has not been called yet and the
 project to work with is not already clear. Use the selected `projectId` on every profile call.
 
+## Progress
+
+Tell the user in words how the work is going, in the language they write in. When the work starts, say what you are about to do. Each time a stage finishes (evidence read, sections authored, finalization, save), write one or two short sentences: what you found or produced, with a concrete detail, and what comes next (for example, "I read five recent emails: the tone is friendly and direct. Now I am comparing it with the stored profile."). These updates are reply text between tool calls, not reasoning; do not save them for the final answer. Keep profile JSON, file contents, signed URLs, and ticket ids out of them. Reads and audits need no updates.
+
 ## Full website replacement
 
 1. Call `prepare_business_profile_upload` directly with the selected `projectId`; use its returned `uploadId` and `uploadUrl`. Treat an MCP error or malformed/missing session ID or URL as a failed preparation.

@@ -19,8 +19,7 @@ import {
   uniqueUuidFromSeed,
   uuidFromSeed
 } from "./content-mutations-15913d881744.js";
-import "./styles-961c8e1b984f.js";
-import "./parse-html-13fe7bf5afc4.js";
+import "./transplant-format-b3ed852356b0.js";
 import {
   summarizeEditorJson
 } from "./inspection-70055d97b33b.js";
@@ -41,7 +40,9 @@ import {
   validateChange,
   validateEmailDocument,
   validateSnapshot
-} from "./contract-c566956db999.js";
+} from "./contract-a9a0a7497166.js";
+import "./styles-961c8e1b984f.js";
+import "./parse-html-7b561a99741a.js";
 import "./social-f4a8e0da8c68.js";
 import {
   EmailSdkError,

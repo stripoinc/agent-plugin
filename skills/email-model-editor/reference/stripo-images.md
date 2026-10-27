@@ -67,6 +67,10 @@ Each model has its own project quota; do not switch models automatically to bypa
 Every start call is non-idempotent and consumes project AI quota, even for a discarded result.
 Record `jobId` as soon as it is returned, together with the tool, prompt, references, and target
 `(id, type)`, in the conversation itself: local files alone cannot recover a job after context loss.
+Start independent jobs together from the main conversation so every `jobId` is recorded there.
+A background worker may collect, download, and review recorded jobs; while it holds them, only
+it polls them, until each reaches a terminal status. A worker never starts, restarts, or replaces
+a job. If it returns without a terminal status, poll those jobs from the main conversation at once.
 Only jobs you started are visible, and the server forgets a job one hour after its start.
 While `status=running`, call `get_image_job(jobId)` after `pollAfterSeconds`; generation usually takes 20–90 seconds. Poll promptly: an uncollected
 result expires 5 minutes after completion. After a transient polling failure, retry the same
@@ -93,8 +97,9 @@ in the brief's image `settings.src` with suitable `settings.altText.text`, then 
 For a bounded replacement, keep the original asset until ready. After inspection, reacquire the
 target model and check that the intended image still exists with the expected source. If it was
 deleted or changed while the job ran, report the conflict instead of retargeting or overwriting.
-Otherwise create the SDK mutation against this fresh model using `setSrc()` and `setAlt()` as
-needed; preserve unrelated links, layout, and settings. Upload the untouched fresh model as
+Otherwise run the SDK mutation against this fresh model using `setSrc()` and `setAlt()` as
+needed; [Parallel work](parallel-work.md) says when its other changes may be written earlier.
+Preserve unrelated links, layout, and settings. Upload the untouched fresh model as
 `baseUploadId` alongside the candidate. Reuse a completed image URL during model-write recovery;
 a failed document write must not start another image job. Finish with model read-back and both
 desktop/mobile screenshots through the [verification contract](stripo-persistence.md).
