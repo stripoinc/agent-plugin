@@ -2,15 +2,18 @@
 // Transfer exact file bytes using URLs returned by Stripo MCP. OAuth stays with the host.
 import {createHash} from 'node:crypto';
 import {lookup as resolveHost} from 'node:dns/promises';
-import {mkdir, mkdtemp, open, readFile, rename, rm} from 'node:fs/promises';
+import {mkdir, mkdtemp, open, readFile, realpath, rename, rm} from 'node:fs/promises';
 import {request as httpsRequest} from 'node:https';
 import {BlockList, isIP} from 'node:net';
-import {dirname, join, resolve} from 'node:path';
+import {tmpdir} from 'node:os';
+import {basename, dirname, join, resolve, sep} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {parseArgs} from 'node:util';
 
 const MAX_BYTES = 64 * 1024 * 1024;
 const TIMEOUT_MS = 60_000;
+// Uploads go only to the Stripo MCP storage buckets that issue the signed tickets.
+const STORAGE_HOSTS = new Set(['live', 'stage', 'dev'].map(env => `stripo-mcp-content-${env}.s3.eu-west-1.amazonaws.com`));
 const blocked = new BlockList();
 for (const [address, prefix] of [
   ['0.0.0.0', 8], ['10.0.0.0', 8], ['100.64.0.0', 10], ['127.0.0.0', 8],
@@ -42,6 +45,34 @@ function targetUrl(raw) {
   // Keep the signed path and query byte-for-byte, including escapes and parameter order.
   const path = !parts[2] || parts[2].startsWith('?') ? `/${parts[2]}` : parts[2];
   return {hostname, port: url.port || 443, path};
+}
+
+// Local files stay under the system temp directory, so an approved transfer cannot read or
+// replace files elsewhere.
+async function taskRoots() {
+  const roots = [];
+  for (const directory of new Set([tmpdir(), '/tmp'])) {
+    try { roots.push(await realpath(directory)); } catch { /* absent on this platform */ }
+  }
+  return roots;
+}
+
+async function taskFile(file, roots, option) {
+  requireValue(typeof file === 'string' && file.length > 0, 'INVALID_ARGUMENT', `${option} requires a file path.`);
+  // Resolve the deepest existing ancestor, so symlinks cannot lead outside the temp directory.
+  let existing = resolve(file);
+  const missing = [];
+  for (;;) {
+    try { existing = await realpath(existing); break; } catch (error) { if (error.code !== 'ENOENT') throw error; }
+    const parent = dirname(existing);
+    requireValue(parent !== existing, 'OUTSIDE_TASK_DIR', `${option} must be inside the task directory.`);
+    missing.unshift(basename(existing));
+    existing = parent;
+  }
+  const path = join(existing, ...missing);
+  requireValue(roots.some(root => path.startsWith(root.endsWith(sep) ? root : root + sep)),
+    'OUTSIDE_TASK_DIR', `${option} must be inside the task directory under the system temp directory.`);
+  return path;
 }
 
 function publicAddress(address) {
@@ -129,10 +160,16 @@ async function atomicWrite(destination, bytes) {
   }
 }
 
-export async function transferFile(options, {lookup = resolveHost, request = httpsRequest} = {}) {
-  const {operation, url, input, output, sha256, contentType, headers = {}} = options;
+export async function transferFile(options, {lookup = resolveHost, request = httpsRequest, roots} = {}) {
+  const {operation, url, sha256, contentType, headers = {}} = options;
+  let {input, output} = options;
   requireValue(['download', 'upload'].includes(operation), 'INVALID_ARGUMENT', 'Choose download or upload.');
   const target = targetUrl(url);
+  requireValue(operation === 'download' || STORAGE_HOSTS.has(target.hostname.toLowerCase()),
+    'UNSUPPORTED_HOST', 'Uploads go only to Stripo storage URLs returned by MCP.');
+  roots ??= await taskRoots();
+  if (input !== undefined) input = await taskFile(input, roots, '--input');
+  if (output !== undefined) output = await taskFile(output, roots, '--output');
   const maxBytes = options.maxBytes ?? MAX_BYTES;
   requireValue(Number.isSafeInteger(maxBytes) && maxBytes > 0 && maxBytes <= MAX_BYTES,
     'INVALID_ARGUMENT', `max-bytes must be between 1 and ${MAX_BYTES}.`);
@@ -183,7 +220,8 @@ async function main() {
   requireValue(positionals.length === 1, 'INVALID_ARGUMENT', 'Choose one operation; use --help.');
   let headers = {};
   if (values['headers-file']) {
-    try { headers = JSON.parse(await readFile(values['headers-file'], 'utf8')); }
+    const file = await taskFile(values['headers-file'], await taskRoots(), '--headers-file');
+    try { headers = JSON.parse(await readFile(file, 'utf8')); }
     catch { throw new TransferError('INVALID_HEADERS', 'Cannot read the ticket headers JSON file.'); }
   }
   const result = await transferFile({

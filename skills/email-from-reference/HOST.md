@@ -59,12 +59,18 @@ of recreating the image.
 
 `node <bundle-root>/scripts/transfer.mjs` is this host's transfer binding. Its commands, limits
 and failure codes are in [Acquisition and transfers](reference/stripo-acquisition.md#transfers).
-Signed URLs point to Stripo storage, not to the MCP host. Codex's default sandbox has no
-network: run the first transfer of a task with an escalation request whose justification names
-the URL's host. Claude Code runs it under its Bash permission rules; with sandboxing enabled the
-host must be allowed. A denied approval stops the transfer; report it. For a website reference
-in Codex, fetch its public data with the web tool when available, otherwise with one escalated
-command that fetches every needed feed or page together.
+This plugin's helper also uploads only to Stripo storage (`UNSUPPORTED_HOST` otherwise) and
+reads and writes local files only under the system temp directory (`OUTSIDE_TASK_DIR`): keep
+every `--input`, `--output` and `--headers-file` in the task directory, and copy a supplied file
+there before uploading it. Signed URLs point to Stripo storage, not to the MCP host. Codex's
+default sandbox has no network: run the first transfer of a task with an escalation request
+whose justification names the URL's host and with `prefix_rule` set to `node` and the helper's
+absolute path, so later transfers need no new approval; run each transfer as its own command,
+not in a pipeline or `&&` chain, so the rule matches. Claude Code runs it under its Bash
+permission rules; with sandboxing enabled the host must be allowed. A denied approval stops the
+transfer; report it. For a website reference in Codex, fetch its public data with the web tool
+when available, otherwise with one escalated command that fetches every needed feed or page
+together.
 
 ## Images
 

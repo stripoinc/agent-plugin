@@ -56,6 +56,8 @@ authentication or write access.
 The bundled `scripts/transfer.mjs` downloads models, references and previews and uploads prepared
 files using the exact HTTPS URLs returned by MCP. It supports direct S3 links, keeps file bytes
 unchanged, checks size limits and optional download checksums, and replaces downloads atomically.
+Uploads go only to Stripo storage, and it reads and writes local files only under the system temp
+directory.
 It returns compact JSON without printing signed URLs. See
 [Transfers](skills/email-model-editor/reference/stripo-acquisition.md#transfers) for commands and
 upload finalization.
