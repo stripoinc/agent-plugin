@@ -127,8 +127,8 @@ still inspect both previews.
 For creation/rebuilds, call `get_content(id, type=<lowercase>, includeHtml=false)` after persistence
 to verify the stored name and project; the initial read or create receipt does not replace this
 saved-metadata check. Return the saved `id` and entity `type`, plus the verified project for a new
-email. There is no hosted-view-link operation in this adapter; the only link is the `editorLink`
-returned by the [final presentation](#final-presentation). Do not invent a link.
+email. Links come only from the [final presentation](#final-presentation): always `editorLink`,
+plus a shared `previewLink` when the server returns one. Do not invent a link.
 
 ## Final presentation
 
@@ -147,9 +147,11 @@ succeeded. Resolve `WRITE_UNCONFIRMED` through normal recovery first. The previe
 current coediting state at call time, including concurrent changes, without an exact saved
 revision guarantee.
 
-The model receives status, metadata and `editorLink`; the compiled HTML URL and its expiry stay in
-UI-only `_meta`. Do not download that HTML or print the signed URL. Include the returned
-`editorLink` in the final response as the text fallback. If the server lacks this optional tool
+The model receives status, metadata and `editorLink`. When the workspace plan includes shared
+preview, the result also carries `previewLink`, a hosted preview page; otherwise it may carry
+`screenshotUrl`, a temporary signed PNG for the App. Older servers return neither. Include the
+returned `editorLink` in the final response as the text fallback, add `previewLink` when present,
+and never print or download `screenshotUrl`. If the server lacks this optional tool
 or the preview fails, report the saved result and the presentation limitation honestly. Never
 repeat `create_email` or `set_document_state` for a preview, and never claim the App was shown
 merely because a snapshot was prepared. Do not hide this call in file-transfer helpers.

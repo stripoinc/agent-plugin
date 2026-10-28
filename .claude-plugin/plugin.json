@@ -1,7 +1,7 @@
 {
   "name": "stripo",
   "displayName": "Stripo",
-  "version": "0.13.0",
+  "version": "0.13.1",
   "description": "Create and edit Stripo emails, including generating and editing images.",
   "author": {
     "name": "Stripo",

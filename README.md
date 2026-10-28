@@ -48,10 +48,10 @@ Other clients with an authenticated Stripo MCP connection can load `skills/` fro
 Keep the complete plugin together, including
 `packages/`: the local commands resolve the SDK relative to the skills.
 
-Run `node scripts/doctor.mjs` from the plugin directory to check local prerequisites (`node` and
-`emailSdk`). In a new agent session, ask for a read-only `whoami` check and verify the intended
-account/project before editing. Local prerequisite checks do not prove MCP authentication or write
-access.
+Run `node scripts/doctor.mjs` from the plugin directory to check local prerequisites (`node`,
+`emailSdk` and `hostNotes`). In a new agent session, ask for a read-only `whoami` check and
+verify the intended account/project before editing. Local prerequisite checks do not prove MCP
+authentication or write access.
 
 The bundled `scripts/transfer.mjs` downloads models, references and previews and uploads prepared
 files using the exact HTTPS URLs returned by MCP. It supports direct S3 links, keeps file bytes
@@ -96,6 +96,19 @@ The repository root is the installable plugin. `skills/` contains Stripo-owned i
 `packages/` the imported email SDK (`convo-email-agent`);
 `packages/convo-email-agent/editor-validator/manifest.json` records the validator's editor revision
 and file hashes.
+Each email skill's `HOST.md` is plugin-owned, as is the Business Profile paragraph in
+`reference/stripo-acquisition.md`. Sync the bundle built by `npm run build:stripo` in
+`convo-email-agent` without them:
+
+```bash
+rsync -a --delete --exclude HOST.md --exclude business-profile/ <convo-email-agent>/dist/convo-email-agent/stripo/skills/ skills/
+```
+
+```bash
+rsync -a --delete --exclude brandkit-runtime/ <convo-email-agent>/dist/convo-email-agent/stripo/packages/ packages/
+```
+
+Then restore that paragraph in both email skills and run `node scripts/doctor.mjs`.
 The development-only `evals/` suite checks routing and scope. Marketplace installs copy the whole
 repository root, including `evals/`.
 

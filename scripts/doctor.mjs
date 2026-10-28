@@ -1,7 +1,11 @@
 #!/usr/bin/env node
 // Runtime-only check: no maintenance dependencies, credentials, MCP calls or network requests.
+import {existsSync} from 'node:fs';
+
 const version = process.versions.node.split('.').map(Number);
 const checks = {node: version[0] > 20 || version[0] === 20 && (version[1] > 18 || version[1] === 18 && version[2] >= 1)};
+checks.hostNotes = ['email-from-reference', 'email-model-editor']
+  .every(skill => existsSync(new URL(`../skills/${skill}/HOST.md`, import.meta.url)));
 try {
   const sdk = await import('../packages/convo-email-agent/index.js');
   checks.emailSdk = ['assertValidEmailModel', 'validateEmailDocument', 'createEmailSdk', 'getContract'].every(name => typeof sdk[name] === 'function');
