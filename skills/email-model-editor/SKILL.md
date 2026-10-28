@@ -19,8 +19,8 @@ no endpoint or credentials.
 
 For an existing-model edit, read the acquisition, mutation, persistence and
 [parallel work](reference/parallel-work.md) guides and the provider's acquisition and
-persistence topics in one local read. Load conditional topics on demand, never the full
-tool/resource catalog.
+persistence topics together, each file in its own tool call. Load conditional topics on
+demand, never the full tool/resource catalog.
 
 | Stage | Common guides read together; conditional topics when needed |
 | --- | --- |

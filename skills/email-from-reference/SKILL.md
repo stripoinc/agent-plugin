@@ -21,7 +21,7 @@ from `reference/creation-policy.json`; use the same command for either provider.
 
 Except for the parallel-work guide below, read only the topic needed for the current stage,
 then continue to the next stage. Do not load all references or the full tool/resource catalog
-at startup.
+at startup. Read each file in its own tool call; several calls may share a response.
 
 | Stage | Read when needed |
 | --- | --- |

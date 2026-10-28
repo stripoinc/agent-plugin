@@ -33,7 +33,7 @@ export declare const STRIPO_MCP_TOOL_MAPPING: Readonly<{
     }>;
     unsupported: Readonly<{
         getEmailMessageExport: "No matching HTML/CSS export-manifest operation. PROVIDER.md defines authorized reference HTML through contentMetadata; routine verification uses native state and previews.";
-        getEmailMessageViewLink: "No hosted email-view link operation is available in this adapter.";
+        getEmailMessageViewLink: "No standalone email-view link operation. The optional showContentPreview returns a shared previewLink when the workspace plan includes shared preview.";
         listCustomBlocks: "No saved-module library tool is available in this adapter.";
         listEmailInterfaces: "This editor has no sending interfaces.";
         updateEmailMetadata: "No write tool for name, project, or folder metadata. Native document title/preheader use updateEmailModel.";

@@ -12,8 +12,10 @@ continue with `PROVIDER.md`. Stripo has no saved-module library, sending interfa
 name/project/folder metadata writes, template creation or HTML/CSS export manifest. A shared
 preview link comes only from `show_content_preview`, as described under presentation below.
 
-Read one topic file per command, when its stage starts. Codex cuts the middle out of a tool
-result above its output budget (10,000 tokens by default), so concatenated topics lose rules.
+Read each topic file in its own tool call when its stage starts; several calls may share one
+response. In Codex that means one `exec` call per file, never several reads in one cell: Codex
+cuts the middle out of an `exec` result above its output budget (10,000 tokens by default), so
+batched topics lose rules.
 
 ## Tool declarations
 
@@ -45,6 +47,9 @@ Never read credential files or put tokens into the conversation, commands or fil
 Create a fresh directory per task (`mktemp -d`) for the untouched model, the SDK module or
 brief, the candidate, diagnostics and PNG previews; never write them into the user's project.
 Inspect local PNGs with the agent's image viewer: `Read` in Claude Code, `view_image` in Codex.
+Check candidate assets, such as product photos, logos and images a worker returns, on a copy
+downscaled to at most 768 px on the long side (for example `sips -Z 768 <in> --out <out>` on
+macOS); view only the saved desktop/mobile previews at full size.
 
 An attached or pasted image can be uploaded only from a local file with its original bytes.
 When the conversation shows an image but no path to it, ask the user for the file path instead
@@ -57,7 +62,9 @@ and failure codes are in [Acquisition and transfers](reference/stripo-acquisitio
 Signed URLs point to Stripo storage, not to the MCP host. Codex's default sandbox has no
 network: run the first transfer of a task with an escalation request whose justification names
 the URL's host. Claude Code runs it under its Bash permission rules; with sandboxing enabled the
-host must be allowed. A denied approval stops the transfer; report it.
+host must be allowed. A denied approval stops the transfer; report it. For a website reference
+in Codex, fetch its public data with the web tool when available, otherwise with one escalated
+command that fetches every needed feed or page together.
 
 ## Images
 
@@ -70,7 +77,9 @@ credentials. Jobs consume the project's image quota.
 
 Claude Code and Codex accept several tool calls in one response. Use the background-worker path
 of [Parallel work](reference/parallel-work.md) only when the agent offers background subagents,
-such as Claude Code's; otherwise run the stages in order.
+such as Claude Code's or Codex's; otherwise run the stages in order. In Codex every worker
+request resends tens of thousands of tokens of host instructions: delegate only long waits, such
+as collecting image jobs, and inspect a single reference, such as one website, yourself.
 
 The agent's permission prompt gates `create_email`, `set_document_state`, uploads and image
 jobs. A denial arrives as a tool error: stop that step, do not retry or switch projects, and
