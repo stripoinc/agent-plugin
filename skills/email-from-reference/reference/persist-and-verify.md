@@ -74,11 +74,16 @@ For **Exact**, also compare with the source as
 [Email, HTML and image references](inspect-email-references.md#verify-an-exact-reproduction) describes.
 
 If either preview shows a defect, repair the same draft, persist it, then obtain and inspect
-fresh previews of both sizes again. Use the existing model-editor workflow for a saved draft;
+fresh previews of both sizes again. Use [Continue after creation](../../email-model-editor/SKILL.md#continue-after-creation)
+for a saved draft, carrying forward its fresh readback and already-loaded instructions;
 do not rerun an insertion or duplication module just to verify it. Stop when the intended result
 passes review or a concrete limitation prevents repair. In the latter case, report "saved,
 visual defects unresolved", name the defect, and do not describe the email as ready to launch.
 Apply the preview freshness and durable-state checks in `PROVIDER.md`; hashes do not replace visual inspection.
+
+Keep complete local audit results in task files. Return check outcomes, census, discrepancies
+and the report path to the conversation; inspect exact values from the files without printing
+every block or repeating a full inventory. Compact reporting never reduces the checks above.
 
 Report full success only when the persisted id exists, persistence and model checks pass, required
 metadata reads back correctly, and both visual checks pass. If PNG generation, download, or

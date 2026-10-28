@@ -1,6 +1,6 @@
 ---
 name: email-from-reference
-description: "Create a new Stripo email, fully rebuild an explicitly named email or template, or inspect a proposed email from authorized references as a native editable JSON model. Accepts a text description inline, in a document, or by link; a live email or template by ID or link, which also supplies the brand facts; uploaded editor JSON, HTML/CSS, image, or screenshot; a website; or another provider's authorized email. When no reference is supplied, first draft a text reference with the proposed structure from the user's goal and verified brand context in Creative mode. Reconstruct reference intent rather than importing raw HTML. Generate or edit required visuals through the provider image workflow. Use email-model-editor for bounded edits. Not for translation, sending, or scheduling. Native preheaders are supported through model.metadata.preheader."
+description: "Create a new Stripo email, fully rebuild an explicitly named target, or inspect authorized references as a native editable model. Accepts briefs, documents/links, websites, existing emails/templates, editor JSON, HTML/CSS, images and screenshots. Without a reference, draft one from the goal and verified brand context in Creative mode. Generate or edit required visuals through the provider image workflow. Supports native preheaders. Use email-model-editor for bounded edits. Not for translation, sending or scheduling."
 ---
 
 # Email From Reference
@@ -11,7 +11,11 @@ for inspection only, report findings from the available model, HTML/CSS, and pre
 edits. A reference id alone never authorizes overwriting it. Inspection-only requests must not
 create an email, write a model, upload assets, or start image jobs.
 
-Read [PROVIDER.md](PROVIDER.md) before tool discovery: it is the provider contract and indexes
+Reuse instructions already present, including a complete injected `SKILL.md` and shared topics
+across both email skills in the same provider/bundle. Reread missing, truncated or changed
+documents and reload on provider/version changes. All checks and remote-state freshness apply.
+
+Read [PROVIDER.md](PROVIDER.md) once before tool discovery: it is the provider contract and indexes
 its topics for metadata, creation, transfers, images, persistence and recovery. If the host
 installs `HOST.md` beside this file, read it too for its runtime binding: bundle paths, transfer
 commands, attachment files, image viewer and permissions, plus any image workflow `PROVIDER.md`
@@ -38,7 +42,7 @@ PRESENT is the provider's final presentation step, when `PROVIDER.md` defines on
 For a rebuild, acquire the target baseline during INSPECT, before BRIEF and BUILD. For a new
 email, the provider's images topic says whether assets need an existing write target, in which
 case CREATE runs once during PREPARE ASSETS; otherwise CREATE follows BUILD.
-Read [Parallel work](reference/parallel-work.md) with `PROVIDER.md`, before the first MCP call;
+Read [Parallel work](reference/parallel-work.md) once with `PROVIDER.md`, before the first MCP call;
 background subagents may overlap stages, but CREATE and writes keep this order.
 
 Keep these rules throughout:

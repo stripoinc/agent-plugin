@@ -68,6 +68,10 @@ defaults added during building. Check the affected parent/theme backgrounds as w
   upload. Schema validity and abbreviated inspection snippets do not establish color consistency
   or readability; do not treat them as a color audit.
 
+Evaluate every node in that scope, but save detailed audit rows in a task file. Print the
+checked counts, conflicts, unresolved surfaces and file path instead of every passing row.
+Report unresolved evidence explicitly; a compact result must not hide a failed or skipped check.
+
 Keep this a local check scoped to the planned creation/rebuild or affected edit. It does not add
 remote reads, screenshots, or a full verification cycle to a focused edit. Preserve the
 workflow's existing final visual checks for full builds/rebuilds and requested verification,

@@ -397,6 +397,9 @@ async function main(argv = process.argv.slice(2)) {
   const args = parseArgs(argv);
   const inputPath = requireString(args, "input");
   const outputPath = optionalString(args, "output");
+  const detail = args.detail === void 0 ? outputPath ? "summary" : "full" : requireString(args, "detail");
+  if (detail !== "summary" && detail !== "full") throw new Error("--detail must be summary or full.");
+  if (detail === "summary" && !outputPath) throw new Error("--detail summary requires --output to retain the full inspection report.");
   const sdkPath = resolveSdkDist();
   const emailJson = readJson(inputPath);
   const summary = summarizeEditorJson(emailJson);
@@ -415,9 +418,19 @@ async function main(argv = process.argv.slice(2)) {
     metadata: result.summary.metadata,
     counts: result.summary.counts,
     blockTypes: result.summary.blockTypes,
-    inventories: result.summary.inventories,
-    limitations: result.summary.limitations,
-    sdkMethods: result.sdkMethods
+    schemaError: result.schema.valid ? void 0 : {
+      name: result.schema.error.name,
+      message: result.schema.error.message
+    },
+    ...detail === "full" ? {
+      inventories: result.summary.inventories,
+      limitations: result.summary.limitations,
+      sdkMethods: result.sdkMethods
+    } : {
+      blockVisibility: result.summary.blockVisibility,
+      reportedDuplicateIdCount: result.summary.ids.duplicateIds.length,
+      reportedLockedBlockCount: result.summary.limitations.lockedBlocks.length
+    }
   }));
   if (!result.schema.valid) process.exitCode = 1;
 }

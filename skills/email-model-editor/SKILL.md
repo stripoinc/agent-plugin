@@ -1,6 +1,6 @@
 ---
 name: email-model-editor
-description: "Edit an existing Stripo email or template through its native JSON model. Use for document title and preheader, copy, link, image-source, AI image generation/editing, theme, style, and block additions, removals, or duplication when the email or template has a native editor model. Uses the provider image workflow for requested visuals and a generated SDK mutation module, validated file-based execution, base/target merging and durable read-back. Use email-from-reference for a new email or full rebuild. Do not use for raw-HTML editing, translation, sending, scheduling, external metadata such as subject, sender, name, project or folder, or content without a native model."
+description: "Edit an existing Stripo email/template through its native JSON model: document title and preheader, copy, links, images, AI image generation/editing, theme/style, and block additions, removals, or duplication. Uses validated SDK mutations, base/target merging and durable readback. Use email-from-reference for new emails/full rebuilds. Not for raw HTML, translation, sending/scheduling, external metadata (subject, sender, name, project or folder), or content without a native model."
 ---
 
 # Email Model Editor
@@ -8,19 +8,21 @@ description: "Edit an existing Stripo email or template through its native JSON 
 Edit content, styles, and structure of an existing email without flattening the native model to
 HTML. Use `email-from-reference` for a new email or full rebuild.
 
-Read [PROVIDER.md](PROVIDER.md) before tool discovery: it is the provider contract and indexes
-its topics for target resolution, MCP arguments, transfers, image jobs, persistence and
-verification. If the host installs `HOST.md` beside this file, read it too for its runtime
-binding: bundle paths, transfer commands, attachment files, image viewer and permissions, plus
-any image workflow `PROVIDER.md` delegates to it.
-`mcp-tools.json` maps logical operations to advertised tool names; its keys are not callable
-tools. Discover the selected server's actual callable schemas before use. The bundle contains
-no endpoint or credentials.
+Reuse instructions already present, including a complete injected `SKILL.md` and shared topics
+across both email skills in the same provider/bundle. Reread missing, truncated or changed
+documents and reload on provider/version changes. All checks and remote-state freshness apply.
 
-For an existing-model edit, read the acquisition, mutation, persistence and
+Read [PROVIDER.md](PROVIDER.md) once before tool discovery for target resolution, metadata,
+transfers, images, persistence and verification. If installed, read `HOST.md` for bundle paths,
+transfer/attachment bindings, image viewing, permissions and delegated image operations.
+`mcp-tools.json` maps operation roles to advertised names; discover the selected server's actual
+schemas, not those logical keys. The bundle contains no endpoint or credentials.
+
+For a newly acquired edit task, read the acquisition, mutation, persistence and
 [parallel work](reference/parallel-work.md) guides and the provider's acquisition and
-persistence topics together, each file in its own tool call. Load conditional topics on
-demand, never the full tool/resource catalog.
+persistence topics that are not already loaded, each file in its own tool call. For a repair
+continuing creation, use the continuation below. Load conditional topics on demand, never the
+full tool/resource catalog.
 
 | Stage | Common guides read together; conditional topics when needed |
 | --- | --- |
@@ -37,10 +39,10 @@ a local file. Host it before editing the model and use only the verified final `
 target and check its current image source before replacement. Keep
 the original asset if hosting fails; do not regenerate a supplied image.
 
-When repairing a draft created from a reference, retain its chosen Exact, Tailored, or Creative
-regime and original PNG baseline. For Exact, preserve source choices, reuse existing assets or
-crops before considering AI generation, and compare the repaired PNGs with the original source.
-Do not reset the regime or adapt the branding during the repair.
+## Continue after creation
+
+For a repair of the same saved draft, use [the continuation](reference/mutate-and-validate.md#continue-after-creation).
+Carry forward the latest readback and loaded contracts; keep all edit invariants and verification below.
 
 `<skill-dir>` is this installed skill directory. `<bundle-root>` is the directory containing the
 installed `skills/` and `packages/` directories.

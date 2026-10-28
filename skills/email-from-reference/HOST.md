@@ -12,8 +12,9 @@ continue with `PROVIDER.md`. Stripo has no saved-module library, sending interfa
 name/project/folder metadata writes, template creation or HTML/CSS export manifest. A shared
 preview link comes only from `show_content_preview`, as described under presentation below.
 
-Read each topic file in its own tool call when its stage starts; several calls may share one
-response. In Codex that means one `exec` call per file, never several reads in one cell: Codex
+Read only still-needed topic files under `SKILL.md`'s reuse rules. Keep each file in its own
+tool call; independent reads may share one response instead of sequential model rounds.
+In Codex that means one `exec` call per file, never several reads in one cell: Codex
 cuts the middle out of an `exec` result above its output budget (10,000 tokens by default), so
 batched topics lose rules.
 
@@ -21,12 +22,20 @@ batched topics lose rules.
 
 Call tools by the names `PROVIDER.md` and its topics use. To check callable schemas, as the
 skills require, look only at the selected Stripo server's tools: list their names once, then
-read the full declaration of each tool you are about to call, by its exact name. In Codex code
+read a tool's full declaration by its exact name before its first use, only if it is not already
+available. Reuse loaded declarations across create/edit; load image tools only for an image
+operation. Refresh after a server change or a schema/unknown-tool rejection. In Codex code
 mode use `ALL_TOOLS.filter(t => t.name.startsWith(prefix)).map(t => t.name)` with that server's
 prefix, such as `mcp__stripo_mcp__`, and `ALL_TOOLS.find(t => t.name === name)`. In Claude Code
 the declarations are already loaded or come from a tool search for the exact name. Do not match
 tool names or descriptions with broad patterns, list other servers' tools or MCP resources, or
 read `stripo://guide/*`: these skills replace the server guides.
+
+Keep full audit/inspection results in task files or retained tool state. Return status, required
+IDs/paths, check outcomes and actionable diagnostics; avoid printing the same JSON in both its
+MCP envelope and decoded form. Check every response in a batch, including errors and warnings,
+before projecting fields. Read detailed evidence when needed; compact output never skips a
+validation, saved-value comparison, concurrency check or desktop/mobile review.
 
 When a call is rejected as an unknown tool or parameter, first compare it with that tool's
 current declaration and correct your own arguments. If the declaration requires something these

@@ -19,14 +19,20 @@ times, unless this is a metadata-only edit against a successfully acquired, init
 model. Missing or unhydrated state is never that exception. For other edits, if no populated model
 becomes available, report a read failure and write nothing; do not fall back to compiled HTML.
 
-The command prints bounded content inventories (including node IDs, text, links and visibility)
-and saves the complete inspection report when `--output` is supplied. Its `sdkMethods` field
-includes selector signatures, common node methods and content methods for the observed block
-types, read from the installed SDK declarations. Use those signatures when sufficient; read the
-full declarations for argument types, settings or unlisted operations. The reference does not
-select targets, authorize mutations or override native capability limits. Download and run inspection
-in the same local command when practical. Read the report or source nodes for information missing
-from the bounded output; snippets and inventories are not proof of exact full content.
+With `--output`, the command saves the full inspection report and prints a compact summary:
+validation status/error, metadata, census, block types/visibility and reported duplicate-ID/locked-block
+counts. These last counts describe the bounded report entries, not necessarily every occurrence. Read the report's `summary.inventories` for relevant nodes and `sdkMethods` for the
+needed selector/node signatures, read from the installed SDK declarations. Read their argument
+types, settings or unlisted methods from the full declarations only when needed. Use
+`--detail full` to print the bounded inventories and SDK signatures on demand; without `--output`
+this remains the default so detail is not discarded. `--detail summary` requires `--output`.
+
+Both modes run the same validation and retain the same report and failing exit status.
+Investigate reported duplicate IDs, locked blocks and schema errors before editing; full error
+details remain in `schema.error`. The reference does not select targets, authorize mutations or
+override native capability limits. Download and run inspection in the same local command when
+practical. Snippets and bounded inventories are not proof of exact full content; inspect the
+relevant complete source nodes without dumping the whole report into the conversation.
 
 Use the inspection report to identify node ids, message areas, block types, visible text, links,
 image sources, effective visibility, duplicate ids, and the before-edit census. Inspect relevant

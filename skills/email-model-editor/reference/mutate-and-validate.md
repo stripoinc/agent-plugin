@@ -6,6 +6,26 @@ or initialization is required. `bundle.json.editorValidator` records the editor 
 The service also validates its deployed revision and applies the write to its live state;
 local success does not establish persistence.
 
+## Continue after creation
+
+When repairing the same draft after its saved previews, carry forward the target ID, original
+reference/regime, latest successful readback file and manifest/concurrency token, census, and
+observed defect. That untouched readback is the edit acquisition; do not download it again
+solely because the skill changed. Reacquire if it is missing, stale under the provider's rules,
+or followed by another write, conflict or uncertain outcome. Never use the creation candidate
+as a substitute for saved state.
+
+Read the mutation steps below and [persistence guide](persist-and-verify.md) if not already
+loaded, plus conditional topics needed by the repair. Reuse the loaded provider/host/shared guides and tool declarations;
+do not repeat project discovery, reference acquisition, CREATE or asset jobs. Apply all edit
+invariants, preserve the byte-exact base, and repeat the required saved-state and visual
+checks after the repair. A skill transition never makes a check optional.
+
+When repairing a draft created from a reference, retain its chosen Exact, Tailored, or Creative
+regime and original PNG baseline. For Exact, preserve source choices, reuse existing assets or
+crops before considering AI generation, and compare the repaired PNGs with the original source.
+Do not reset the regime or adapt the branding during the repair.
+
 ## Write the change module
 
 Create one task-local file such as `<workspace>/email-<id>.changes.mjs`. Export a function and

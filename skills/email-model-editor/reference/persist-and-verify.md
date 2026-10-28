@@ -43,6 +43,12 @@ any compiled-preheader checks and its preheader-only preview rule. Screenshots c
 verify hidden metadata; unchanged previews are expected after a metadata-only edit and are not a
 defect to repair. A concurrent change outside the requested delta is not automatically a loss.
 
+Save complete local audit results in task files and print check outcomes, census, discrepancies
+and report paths. `inspect-editor-json.mjs --input <saved-model> --output <report>` keeps its
+inventory and SDK reference in the file; read only the fields needed for the checks above.
+Do not print another full inventory after a successful audit. A compact summary is a reporting
+choice, not evidence that exact values, preserved content or visual checks were verified.
+
 ## Inline-style verification
 
 For intentional inline-style changes, verify the requested CSS properties, values or removals
