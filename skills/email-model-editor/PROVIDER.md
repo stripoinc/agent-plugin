@@ -21,7 +21,8 @@ Read the topic for the current step:
 | Read a reference or target, download artifacts, network access | [Acquisition and transfers](reference/stripo-acquisition.md) |
 | Create an email; document title, preheader and external metadata | [Creation and metadata](reference/stripo-creation.md) |
 | Image jobs; attached, pasted or local images | [Images](reference/stripo-images.md) |
-| Any document write, its recovery and saved-state verification | [Persistence and verification](reference/stripo-persistence.md) |
+| Any document write and saved-state verification | [Persistence and verification](reference/stripo-persistence.md) |
+| A write status other than `OK`, or an image-upload error | [Write and upload errors](reference/stripo-errors.md) |
 | Final step after the last confirmed save and required checks | [Final presentation](reference/stripo-persistence.md#final-presentation) |
 
 ## Progress

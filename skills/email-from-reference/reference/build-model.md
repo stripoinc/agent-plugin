@@ -63,7 +63,11 @@ Global settings and block settings are different schemas. `model.settings` (`gen
 `headings`, `buttons`) holds the defaults for every element of a type, but a block's own
 `settings` accepts only the keys the editor schema lists for that block type, and some global
 keys have no block-level counterpart. Check the block definition before
-adding a key to a block. When the block schema lacks the key, the global setting is the only way
+adding a key to a block: `node <skill-dir>/scripts/describe-settings.mjs --target <name>` lists
+the native settings of a block type (`text`, `image`, `button`, …), a node kind (`stripe`,
+`structure`, `column`, `container`) or a global group (`general`, `stripes`, `headings`,
+`buttons`) compactly. Use it instead of reading the bundled schema files or the provider's
+schema tool. When the block schema lacks the key, the global setting is the only way
 to change it, and it then applies to every element of that type in the email. A key the block
 schema does not list fails validation as `unsupported property`. For example, button
 `letterSpacing` and `textTransform` exist only in `settings.buttons`; the hover effect is the boolean
@@ -122,15 +126,6 @@ In Exact, an authorized reproduction includes the source's visible copy and asse
 user requests changes. In Tailored, preserve the primary CTA's label and presented action but
 use the target's approved destination. Record the chosen regime, source PNGs, intended changes,
 and any unavoidable fidelity limits in `sourceSummary`.
-
-New reference emails copy editable content rather than saved-library bindings. A source
-`moduleId` is read-only and cannot be inserted on the new structural IDs. The builder detaches
-it only when that module's editable blocks are present, preserves those blocks and their
-styling, and lists the removed bindings in diagnostics `detachedModules`. Report the copied
-content as detached; do not claim saved-module identity or synchronization. Existing-email
-content edits preserve their acquired bindings. If retaining a saved-library identity is an
-explicit requirement, this creation path is unsupported; report it instead of using detached
-content to claim library reuse. An unresolved module must be acquired completely before copying.
 
 ### Native fonts
 

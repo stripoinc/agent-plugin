@@ -145,16 +145,5 @@ recipients without chat authentication. Insert that URL, never the staging `uplo
 
 The upload session is single-use. Once `upload_image` has read the transferred file, the session
 is spent, whatever the answer; a call made before the transfer finishes spends nothing. A failure
-is `{error_code, reason, instruction}`:
-
-| `error_code` | Meaning | Action |
-| --- | --- | --- |
-| `upload_session_not_found` | No transferred file for this session: it expired, was already used, or was prepared for another target or user. | If `upload_image` was already sent for this session, treat the outcome as uncertain. Otherwise correct `id`/`type`, or replace an expired session with a fresh prepare/transfer sequence. |
-| `file_too_large` | Byte size or, for PNG/GIF, pixel dimensions exceed the limit; `reason` says which. Nothing was hosted. | Report the limit. Resize or compress only when the request allows changing the image; compression alone does not fix a pixel failure. A changed file needs a fresh prepare/transfer sequence. |
-| `unsupported_format` | The bytes are not PNG, JPEG, or GIF with a valid header. Nothing was hosted. | Convert with an authorized tool and start a fresh prepare/transfer sequence, or report the format. |
-| `hosting_rejected` | The gallery refused the file. Nothing was hosted. | The same file and name will be refused again. Report the refusal; do not repeat the upload unchanged. |
-| `hosting_failed` | The gallery failed or did not answer. The image may or may not be in the gallery. | Uncertain finalization: do not prepare, transfer, or finalize this image again. Report the uncertainty. |
-
-The response's `instruction` can suggest preparing a new upload after `hosting_failed` or an
-uncertain `upload_session_not_found`. Do not follow that suggestion: Stripo has no gallery read
-operation to rule out a duplicate, so report the uncertainty and leave the image unchanged.
+is `{error_code, reason, instruction}`; handle it as
+[Write and upload errors](stripo-errors.md#image-uploads) describes.

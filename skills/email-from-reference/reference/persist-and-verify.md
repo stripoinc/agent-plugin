@@ -70,19 +70,8 @@ For an agent-authored text reference, review both saved previews against its pro
 copy, primary action, and visual direction. No source PNG comparison is required when none
 exists; the saved desktop and mobile visual checks are still required.
 
-For **Exact**, when source PNGs are available, compare PNG to PNG against the original source
-at matching viewport widths.
-Check content order, section dimensions, colors, typography, spacing, image crops, alignment,
-and mobile stacking. Correct visible differences in the same draft and repeat the comparison.
-Use side-by-side views or an overlay; a pixel-diff score alone cannot establish fidelity.
-If only one source viewport is available, compare that viewport and separately inspect the
-other target layout, stating that its source comparison is unavailable. If perfect reproduction
-is impossible, keep the closest editable result and report the specific differences and causes
-(for example an unavailable font, asset, or unsupported layout). Do not claim an exact match
-or silently change to Tailored or Creative.
-When source PNGs are unavailable, compare the saved model and available target previews with
-the inspected source HTML/CSS and report that source visual fidelity is unverified. Continue
-the saved-target checks below; missing source PNGs do not require another user-supplied artifact.
+For **Exact**, also compare with the source as
+[Email, HTML and image references](inspect-email-references.md#verify-an-exact-reproduction) describes.
 
 If either preview shows a defect, repair the same draft, persist it, then obtain and inspect
 fresh previews of both sizes again. Use the existing model-editor workflow for a saved draft;
