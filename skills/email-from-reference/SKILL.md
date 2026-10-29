@@ -42,8 +42,9 @@ PRESENT is the provider's final presentation step, when `PROVIDER.md` defines on
 For a rebuild, acquire the target baseline during INSPECT, before BRIEF and BUILD. For a new
 email, the provider's images topic says whether assets need an existing write target, in which
 case CREATE runs once during PREPARE ASSETS; otherwise CREATE follows BUILD.
-Read [Parallel work](reference/parallel-work.md) once with `PROVIDER.md`, before the first MCP call;
-background subagents may overlap stages, but CREATE and writes keep this order.
+Use one agent by default and batch independent tool calls. Read [Parallel work](reference/parallel-work.md)
+with `PROVIDER.md` before the first MCP call for job overlap and optional delegation; CREATE and
+writes keep workflow order.
 
 Keep these rules throughout:
 

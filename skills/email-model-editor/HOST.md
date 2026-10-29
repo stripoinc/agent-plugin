@@ -90,11 +90,11 @@ credentials. Jobs consume the project's image quota.
 
 ## Parallel work, approvals and presentation
 
-Claude Code and Codex accept several tool calls in one response. Use the background-worker path
-of [Parallel work](reference/parallel-work.md) only when the agent offers background subagents,
-such as Claude Code's or Codex's; otherwise run the stages in order. In Codex every worker
-request resends tens of thousands of tokens of host instructions: delegate only long waits, such
-as collecting image jobs, and inspect a single reference, such as one website, yourself.
+Use one agent by default. Claude Code and Codex accept several tool calls in one response;
+batch independent operations and keep working while asynchronous image jobs run, following
+[Parallel work](reference/parallel-work.md). Subagents are optional only for large independent
+subtasks or separate reviews. Their extra context and coordination must justify delegation;
+routine image polling, downloads and preparation stay with the main agent.
 
 The agent's permission prompt gates `create_email`, `set_document_state`, uploads and image
 jobs. A denial arrives as a tool error: stop that step, do not retry or switch projects, and

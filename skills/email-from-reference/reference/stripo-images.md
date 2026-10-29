@@ -68,9 +68,11 @@ Every start call is non-idempotent and consumes project AI quota, even for a dis
 Record `jobId` as soon as it is returned, together with the tool, prompt, references, and target
 `(id, type)`, in the conversation itself: local files alone cannot recover a job after context loss.
 Start independent jobs together from the main conversation so every `jobId` is recorded there.
-A background worker may collect, download, and review recorded jobs; while it holds them, only
-it polls them, until each reaches a terminal status. A worker never starts, restarts, or replaces
-a job. If it returns without a terminal status, poll those jobs from the main conversation at once.
+Collect and review jobs from the main conversation by default; independent brief or module
+work may continue while they run. Delegation follows [Parallel work](parallel-work.md).
+If collection is part of a delegated subtask, only that worker polls its assigned jobs. A worker
+never starts, restarts, or replaces a job. Take back any job it returns without a terminal status
+and resume polling from the main conversation.
 Only jobs you started are visible, and the server forgets a job one hour after its start.
 While `status=running`, call `get_image_job(jobId)` after `pollAfterSeconds`; generation usually takes 20–90 seconds. Poll promptly: an uncollected
 result expires 5 minutes after completion. After a transient polling failure, retry the same

@@ -18,11 +18,12 @@ transfer/attachment bindings, image viewing, permissions and delegated image ope
 `mcp-tools.json` maps operation roles to advertised names; discover the selected server's actual
 schemas, not those logical keys. The bundle contains no endpoint or credentials.
 
-For a newly acquired edit task, read the acquisition, mutation, persistence and
-[parallel work](reference/parallel-work.md) guides and the provider's acquisition and
-persistence topics that are not already loaded, each file in its own tool call. For a repair
-continuing creation, use the continuation below. Load conditional topics on demand, never the
-full tool/resource catalog.
+Use one agent by default and batch independent tool calls. For a newly acquired edit task, read
+the acquisition, mutation, persistence and [parallel work](reference/parallel-work.md) guides plus
+the provider's acquisition and persistence topics not already loaded, each in its own tool call.
+The parallel guide limits delegation to large independent subtasks or separate reviews. For a
+repair continuing creation, use the continuation below. Load conditional topics on demand,
+never the full tool/resource catalog.
 
 | Stage | Common guides read together; conditional topics when needed |
 | --- | --- |

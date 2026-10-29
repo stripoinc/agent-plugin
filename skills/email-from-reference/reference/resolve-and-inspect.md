@@ -173,10 +173,10 @@ An explicit rebuild always uses its named target. Never use the reference as a n
 Other hosts can prepare images before creating an email.
 
 Upload supplied files and start all independent jobs together, and retain their IDs and
-recovery keys. Without background workers, wait here for completed hosted results; with them,
-continue to BRIEF while a worker collects them ([Parallel work](parallel-work.md)). Inspect
-every completed hosted result before BUILD and finalize the brief with the real URLs; job IDs
-and pending placeholders are not image sources.
+recovery keys. Continue independent BRIEF work in the same agent while jobs run, polling and
+collecting them as [Parallel work](parallel-work.md) describes. Inspect every completed hosted
+result before BUILD and finalize the brief with the real URLs; job IDs and pending placeholders
+are not image sources.
 Resume existing jobs according to `PROVIDER.md`; a failed model write must not restart
 generation or create a duplicate email. Report a retained draft and missing visual when work
 cannot complete.

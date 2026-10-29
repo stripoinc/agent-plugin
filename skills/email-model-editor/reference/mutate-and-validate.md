@@ -87,9 +87,9 @@ Rules for the module:
   font-size changes use the complete block HTML passed to `node.setHtml()`, not `setContent()`. Mobile
   paragraph sizes follow [Mobile font size](editor-limitations.md#mobile-font-size).
 - Use authorized, email-safe hosted image URLs. Prepare requested visuals through the
-  image topic in `PROVIDER.md` before writing the mutation module, unless a background worker
-  collects them as [Parallel work](parallel-work.md) describes. Preserve text, composition,
-  dimensions, and transparency unless the user requests changes. Inspect the completed hosted
+  image topic in `PROVIDER.md`; while jobs run, draft other SDK changes in the same agent as
+  [Parallel work](parallel-work.md) describes. Preserve text, composition, dimensions, and
+  transparency unless the user requests changes. Inspect the completed hosted
   result, then reacquire the target model and check that the selected image still has its expected
   source. Report a concurrent deletion or source change instead of retargeting the edit.
   For an insertion, verify the intended container/anchor still exists and insert a native image

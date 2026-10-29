@@ -1,70 +1,61 @@
 # Parallel work
 
 This is the shared execution contract for native email creation and editing. Read it with
-`PROVIDER.md`, before the first MCP call. How much work overlaps depends on whether the host
-can run subagents (workers) in the background.
+`PROVIDER.md`, before the first MCP call. Use one agent by default, with parallel tool calls
+for independent operations. Subagents are optional, only for large independent subtasks or
+separate reviews; their availability alone is not a reason to delegate.
 
-## Batch in one response
+## Batch tool calls
 
 When the host accepts several tool calls in one response, issue independent calls together and
 keep their results distinct:
 
+- documentation reads needed for the same stage, each in its own tool call;
 - destination, Business Profile and other RESOLVE reads with reference and target acquisition;
 - every artifact download of one step;
 - supplied-image uploads and the start calls of all independent image jobs;
 - the fresh-model and preview reads of verification, plus any saved-metadata read.
 
 A call that needs another call's result waits for it. The host may still run batched calls one
-after another.
+after another. Parallel tool calls do not require a subagent.
 
-## Without background workers
+## Overlap asynchronous jobs
 
-Run the stages one after another in workflow order. Wait until every started image job is
-complete and collected before writing the brief or the SDK module: generation takes about a
-minute, while a result left uncollected during a long step can expire. Subagents that block the
-main conversation may still inspect several references at once; launch them in one response.
+Start image jobs once the write target that `PROVIDER.md` requires exists, and retain their
+identities. While they run, continue independent reference analysis, brief drafting or SDK
+module preparation in the same agent. Poll existing jobs at the provider's intervals and collect
+results before expiry; do not leave jobs unpolled during a long step. If the host blocks until
+a tool returns, resume the workflow when it does; do not spawn a worker just to wait.
 
-## With background workers
-
-When the host can run subagents in the background, overlap the stages and wait only at the
-join points below.
-
-### Roles
-
-- The main conversation owns every call with remote effects: creating an email, finalizing
-  uploads, starting image jobs, document writes and the final presentation. It records their
-  identities, checks every worker result, decides retries and talks to the user.
-- A worker does read-only or local work, plus collecting image jobs when the provider's images
-  topic allows it. It never starts, repeats or replaces a call with remote effects and never
-  asks the user; it returns facts and open questions, not decisions.
-
-Do not delegate a single short call: starting a worker costs more than it saves.
-
-### Delegate
-
-| Work | The worker returns |
-| --- | --- |
-| Inspect one of several references, or measure an Exact layout | Facts for `sourceSummary`, asset URLs, dimensions |
-| Collect, download and review the image jobs started together | Per job: hosted URL, dimensions, local PNG path and review notes, or failure code |
-| Compare saved desktop/mobile previews with the source or request | Differences by section |
-
-Give each worker a self-contained task instead of the whole skill: exact identifiers, local
-file paths, tool names, the topic files it needs and the result shape. A collecting worker
-polls each job until it reaches a terminal status. If it returns without one, or cannot reach
-the required tools, take that work back and poll the remaining jobs at once. Worker reviews
-narrow your checks but do not replace them: open each returned PNG yourself before using an
-image or reporting completion.
-
-### Join points
-
-- Image jobs and uploads start once the write target that `PROVIDER.md` requires exists.
-- Creation: draft the brief while a worker collects the images, leaving their image blocks
-  without `settings.src`. The builder rejects an image without `src`, so BUILD runs only after
-  every URL is filled in.
-- Editing: write the SDK module's other changes while a worker collects the job, and add
-  `setSrc()`/`setAlt()` once the URL is known. Select nodes by selectors rather than IDs from
-  the earlier read, and run the module only against the model `PROVIDER.md` requires you to
-  reacquire after the job.
+- Creation: draft the brief while images render, leaving their image blocks without
+  `settings.src`. BUILD waits until every completed result is inspected and its hosted URL is
+  filled in; the builder rejects an image without `src`.
+- Editing: draft the SDK module's other changes while images render, then add `setSrc()` and
+  `setAlt()` once the URL is known. Select nodes by selectors rather than IDs from the earlier
+  read, and run the module only against the model `PROVIDER.md` requires you to reacquire after
+  the job.
 - CREATE and each document write stay single and in workflow order, never earlier than the
   workflow and `PROVIDER.md` allow; never run two document writes for one target at once.
 - PRESENT waits for VERIFY.
+
+## Optional delegation
+
+Delegate only a large independent subtask or a separate review when the host supports it and
+the expected benefit justifies the extra context and coordination. Examples include inspecting
+a substantial reference set, measuring a complex Exact layout, or independently comparing saved
+desktop/mobile previews with the source or request. Routine image polling, downloading,
+resizing and inspection stay with the main agent; a long wait alone does not justify a worker.
+
+The main conversation owns calls with remote effects: creating an email, finalizing uploads,
+starting image jobs, document writes and final presentation. It records identities, checks
+worker results, decides retries and talks to the user. A worker does read-only or local work;
+it may collect already-started jobs as part of a delegated subtask only when the provider's
+images topic allows it. It never starts, repeats or replaces calls with remote effects or asks
+the user; it returns facts and open questions, not decisions.
+
+Give each worker a compact, self-contained task: exact identifiers, local file paths, tool
+names, only the topic files it needs and the result shape. Assign each image job to one poller.
+If a worker returns without a terminal status or cannot reach the tools, take back its jobs and
+resume polling. Worker reviews narrow your checks but do not replace them: open each returned
+PNG yourself before using an image or reporting completion. Wait for any required worker result
+at the same image, write and verification join points above.
