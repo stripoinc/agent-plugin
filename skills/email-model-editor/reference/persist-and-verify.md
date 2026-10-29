@@ -49,6 +49,16 @@ inventory and SDK reference in the file; read only the fields needed for the che
 Do not print another full inventory after a successful audit. A compact summary is a reporting
 choice, not evidence that exact values, preserved content or visual checks were verified.
 
+## Font-family verification
+
+For requested-versus-saved `fontFamily` values, use `canonicalFontValue` exported by the
+packaged SDK: `canonicalFontValue(requested) === canonicalFontValue(saved)`. It uses the editor's
+font-stack normalization, including harmless quoting, case and whitespace after commas.
+Compare only strings this way; a missing value is still a discrepancy. Family names and fallback
+order must remain equivalent. Keep the original values in the audit and do not rewrite the model
+to normalize them. Verify font-resource URLs, CSS and import methods separately; this comparison
+does not establish that the requested fonts loaded or rendered correctly.
+
 ## Inline-style verification
 
 For intentional inline-style changes, verify the requested CSS properties, values or removals

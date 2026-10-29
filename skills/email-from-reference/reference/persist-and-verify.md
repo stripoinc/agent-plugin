@@ -48,6 +48,8 @@ these independent reads together when the host supports it, keep their results d
 download every artifact through the configured transfer helper. Verify native fonts, requested
 metadata, and the provider's compiled-content checks, including its saved preheader checks when
 the model sets or copies a preheader. A receipt alone does not establish requested-value equality.
+For string `fontFamily` values, compare `canonicalFontValue(requested) === canonicalFontValue(saved)`
+from the packaged SDK. Missing values and changed families/order remain discrepancies; verify font resources separately.
 
 Inspect the saved model for every intended block, exact copy, CTA href, asset URL, merge tag,
 unsubscribe link, and postal/legal detail. Compare the per-type block census with the intended

@@ -51,6 +51,9 @@ import {
   isObject
 } from "./errors-3ee69a7e1eb0.js";
 
+// convo-email-agent/src/index.ts
+import { canonicalFontValue as canonicalEditorFontValue } from "./editor-validator/index.mjs";
+
 // convo-email-agent/src/sdk/value-editor.ts
 function createEmailValueEditor(email) {
   const wrappers = /* @__PURE__ */ new WeakMap();
@@ -135,6 +138,11 @@ function createStructure(input, options = {}) {
   if (!isObject(structure)) throw new Error("Structure factory did not produce a structure.");
   return structure;
 }
+
+// convo-email-agent/src/index.ts
+function canonicalFontValue(value) {
+  return canonicalEditorFontValue(value);
+}
 export {
   CANONICAL_MCP_OPERATIONS,
   DocumentStateError,
@@ -144,6 +152,7 @@ export {
   RETENO_MCP_TOOL_MAPPING,
   STRIPO_MCP_TOOL_MAPPING,
   assertValidEmailModel,
+  canonicalFontValue,
   createBlock,
   createDocument,
   createEmailBuilder,

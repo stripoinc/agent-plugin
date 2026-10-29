@@ -55,6 +55,10 @@ Never read credential files or put tokens into the conversation, commands or fil
 
 Create a fresh directory per task (`mktemp -d`) for the untouched model, the SDK module or
 brief, the candidate, diagnostics and PNG previews; never write them into the user's project.
+In Codex code mode, keep generated builders in task files and keep orchestration calls short.
+Apply a file edit in its own tool call, then run the generator; avoid nesting a long patch,
+shell heredoc and generator execution inside one JavaScript string. Check a new JavaScript
+generator with `node --check <file>` before executing it.
 Inspect local PNGs with the agent's image viewer: `Read` in Claude Code, `view_image` in Codex.
 Check candidate assets, such as product photos, logos and images a worker returns, on a copy
 downscaled to at most 768 px on the long side (for example `sips -Z 768 <in> --out <out>` on

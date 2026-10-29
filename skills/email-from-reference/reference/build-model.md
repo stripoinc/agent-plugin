@@ -43,7 +43,7 @@ For an authorized logo, native image dimensions use `size`, not `width`, and an 
 `href`, not the button's `value`. For example (replace the asset and destination with verified URLs):
 
 ```json
-{"type":"image","settings":{"src":"https://example.com/logo.png","altText":{"text":"Target brand"},"size":{"desktop":{"mode":"width","px":170},"mobile":{"mode":"width","px":170}},"responsiveMobile":false,"link":{"type":"site","href":"https://example.com/"}}}
+{"type":"image","settings":{"src":"https://example.com/logo.png","altText":{"text":"Target brand"},"size":{"desktop":{"mode":"width","px":224},"mobile":{"mode":"width","px":208}},"responsiveMobile":false,"link":{"type":"site","href":"https://example.com/"}}}
 ```
 
 Set section areas through stripe `settings.messageArea`. Global settings supply section colors
@@ -54,28 +54,28 @@ Supply the color settings selected under [Color consistency](color-consistency.m
 in the brief instead of relying on omitted values to reproduce the planned design; for text with
 inline colors, follow [Text color](editor-limitations.md#text-color).
 
-Images default to their column's
-width with matching desktop/mobile sizes. Set both sizes explicitly when different sizes are
-intended. Supplied IDs and fields are preserved except that bare email button targets receive
+For one-column structures, omit `responsiveMobile` or use `false`; enable it only for
+multi-column stacking. `describe-settings --target structure` also lists gap/inversion constraints.
+
+The image builder defaults `responsiveMobile:true` and copies desktop size to omitted mobile size.
+With that flag, desktop/mobile sizes (mode and px) and alignments must match. For different values,
+set `responsiveMobile:false`, as for the logo above. Choose the mode by layout intent, not pixel width.
+Supplied IDs and fields are preserved except that bare email button targets receive
 the `mailto:` prefix required for persistence. Duplicate IDs fail validation.
 
-Global settings and block settings are different schemas. `model.settings` (`general`, `stripes`,
-`headings`, `buttons`) holds the defaults for every element of a type, but a block's own
-`settings` accepts only the keys the editor schema lists for that block type, and some global
-keys have no block-level counterpart. Check the block definition before
-adding a key to a block: `node <skill-dir>/scripts/describe-settings.mjs --target <name>` lists
-the native settings of a block type (`text`, `image`, `button`, …), a node kind (`stripe`,
-`structure`, `column`, `container`) or a global group (`general`, `stripes`, `headings`,
-`buttons`) compactly. Use it instead of reading the bundled schema files or the provider's
-schema tool. When the block schema lacks the key, the global setting is the only way
-to change it, and it then applies to every element of that type in the email. A key the block
-schema does not list fails validation as `unsupported property`. For example, button
-`letterSpacing` and `textTransform` exist only in `settings.buttons`; the hover effect is the boolean
-`settings.buttons.hoverButtonStyles`, with its colors in `settings.buttons.lightTheme.hoverButtonStyles`.
+Global defaults live in `model.settings.{general,stripes,headings,buttons}`; block `settings`
+accepts only that block type's native keys. Before adding a field, run
+`node <skill-dir>/scripts/describe-settings.mjs --target <name>` for the block type, node kind
+or global group. Its normal output includes conditional rules; no full schema read is needed.
+A global-only field affects all elements of that type and fails as `unsupported property` on a
+block. For buttons, `letterSpacing` and `textTransform` exist only in `settings.buttons`;
+`settings.buttons.hoverButtonStyles` enables hover, with colors in `settings.buttons.lightTheme.hoverButtonStyles`.
 
 The unified SDK covers text, image, button, spacer, social, menu, video, timer, HTML and
 unknown blocks with native types and canonical defaults. Use `createBlock`, `createStructure`
 and `createStripe` for programmatic creation; layout widths are positive weights on write.
+`createStructure({id: "product-row", columns})` defaults `mobile` to `columns.length > 1`.
+Raw JSON drafts require explicit stacking. Correct incompatible settings in the brief; do not silently rewrite them.
 Menu and social arrays use explicit collection methods. Timer/video changes that require an
 unavailable preview fail rather than fabricate assets. Preserve supplied native values and
 resources. For a rebuild, use the acquired target as `baselineEmailJson`, or use
@@ -165,7 +165,10 @@ BUILD waits for every image result ([Parallel work](parallel-work.md)). A brief 
 images render leaves their `settings.src` empty; the builder rejects an image without `src`, so
 fill in every collected URL before building. Never substitute a placeholder URL.
 
-Require a zero exit code and schema-valid output. Inspect diagnostics for stripe, structure, column, container, and block counts. Re-open the output when needed to verify exact copy, links, asset URLs, merge tags, areas, and visibility.
+Require a zero exit code and schema-valid output. The runner prints status, artifact paths and
+stripe, structure, column, container and block counts. Keep complete diagnostics in the file;
+read only relevant errors or selected settings instead of printing the whole diagnostics object.
+Re-open the output when needed to verify exact copy, links, asset URLs, merge tags, areas, and visibility.
 
 Before upload, apply the shared [candidate color check](color-consistency.md#check-the-completed-candidate-before-upload)
 to the completed model, including builder-added defaults, and compare it with `sourceSummary`.

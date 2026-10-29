@@ -57,6 +57,27 @@ async function loadSdk(sdkPath) {
 var GLOBAL_GROUPS = ["general", "stripes", "headings", "buttons"];
 var NODE_KINDS = ["stripe", "structure", "column", "container"];
 var ENUM_PREVIEW = 30;
+var TARGET_GUIDANCE = {
+  structure: [
+    "# Constraints (native validator)",
+    "responsiveMobile=true requires columns.length > 1.",
+    "columnsGap.mobile > 0 requires columns.length > 1.",
+    "responsiveMobileContainersInversion=true requires exactly 2 columns.",
+    "# Creation defaults",
+    "Single-column draft: omit responsiveMobile or set false. Set true for multi-column mobile stacking.",
+    "createStructure({id, columns}) defaults mobile to columns.length > 1; a raw draft does not infer stacking."
+  ],
+  image: [
+    "# Constraints (native validator)",
+    "responsiveMobile=true requires size.mobile to equal size.desktop (both mode and px).",
+    "responsiveMobile=true requires alignment.mobile to equal alignment.desktop.",
+    "For different mobile dimensions or alignment, set responsiveMobile=false.",
+    "# Creation defaults",
+    "The image draft builder defaults responsiveMobile to true and omitted mobile size to desktop size.",
+    'Adaptive photo settings: {"size":{"desktop":{"mode":"width","px":284}},"responsiveMobile":true}',
+    'Separate logo sizes: {"size":{"desktop":{"mode":"width","px":224},"mobile":{"mode":"width","px":208}},"responsiveMobile":false}'
+  ]
+};
 async function main() {
   const args = parseArgs(process.argv.slice(2));
   const sdk = await loadSdk(resolveSdkDist(import.meta.url));
@@ -117,6 +138,7 @@ async function main() {
   }
   console.log([
     `# ${heading}; {a,b} lists siblings with the same shape; the builder fills omitted settings`,
+    ...TARGET_GUIDANCE[target] ?? [],
     ...compact(rows).map((row) => `${row.path}: ${row.shape}`)
   ].join("\n"));
 }
