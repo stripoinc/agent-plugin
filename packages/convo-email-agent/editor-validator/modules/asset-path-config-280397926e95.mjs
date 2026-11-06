@@ -8,20 +8,15 @@ import {
   transformColorToHoverColor
 } from "./ColorUtils-a33f32974f73.mjs";
 import {
-  html
-} from "./master-80783f73f1e0.mjs";
-import {
-  THEME_VARIABLE_DESCRIPTORS
-} from "./master-css-variables-a84902889746.mjs";
-import {
   HEAD_SELECTOR,
   LINK_TAG_SELECTOR
 } from "./CSSConverter-eecb098b236c.mjs";
 import {
+  THEME_VARIABLE_DESCRIPTORS
+} from "./master-css-variables-a84902889746.mjs";
+import {
   MASTER_CSS_VARIABLES_DEFAULTS,
-  MasterCssVar,
-  SGConnectToModelInfoPermissions,
-  SGGetConnectToModelInfoPermissions
+  MasterCssVar
 } from "./ue-proto-87c1854705b4.mjs";
 import {
   external_exports
@@ -44,9 +39,6 @@ import {
   require_input
 } from "./url-27db039aa4f6.mjs";
 import {
-  require_previous_map
-} from "./fs-064e509bf2cb.mjs";
-import {
   require_at_rule,
   require_list,
   require_root,
@@ -64,6 +56,9 @@ import {
 import {
   require_css_syntax_error
 } from "./terminal-highlight-0f20b1c39b48.mjs";
+import {
+  require_previous_map
+} from "./fs-064e509bf2cb.mjs";
 import {
   q
 } from "./builders-6d4dedaf957f.mjs";
@@ -2447,11 +2442,11 @@ var FontUtils = class _FontUtils {
     if (!bodyString) {
       return [];
     }
-    const html2 = bodyString.replace(QUOTE_ENTITY_REGEXP, "");
+    const html = bodyString.replace(QUOTE_ENTITY_REGEXP, "");
     return [
-      ...Array.from(html2.matchAll(FONT_FAMILY_DECLARATION_REGEXP)),
-      ...Array.from(html2.matchAll(FONT_FACE_ATTR_REGEXP)),
-      ...Array.from(html2.matchAll(FONT_FAMILY_ATTR_REGEXP))
+      ...Array.from(html.matchAll(FONT_FAMILY_DECLARATION_REGEXP)),
+      ...Array.from(html.matchAll(FONT_FACE_ATTR_REGEXP)),
+      ...Array.from(html.matchAll(FONT_FAMILY_ATTR_REGEXP))
     ].map((match) => (match[1] || "").trim());
   }
   /**
@@ -2659,169 +2654,8 @@ function getDefaultFontFamily(variable) {
 var DEFAULT_IMAGE_PREVIEW_SVG = "assets/icons/preview/image.svg";
 var IMAGE_MAX_ALT_TEXT_LENGTH = 500;
 
-// editor/ui-editor-ui/src/app/configs/predefined-permissions.ts
-function withUrlValidationPermission(permissions, read, write) {
-  return {
-    ...permissions,
-    urlValidation: SGConnectToModelInfoPermissions.create({ read, write })
-  };
-}
-var adminPermissions = withUrlValidationPermission(SGGetConnectToModelInfoPermissions.create({
-  appearance: {
-    read: true,
-    write: true
-  },
-  content: {
-    read: true,
-    write: true,
-    textOnly: false
-  },
-  modules: {
-    read: true,
-    write: true
-  },
-  codeEditor: {
-    read: true,
-    write: true
-  },
-  versionHistory: {
-    read: true,
-    write: true
-  },
-  templateThemes: {
-    read: true,
-    write: true
-  },
-  manageOwnComments: {
-    read: true,
-    write: true
-  },
-  manageAllComments: {
-    read: true,
-    write: true
-  }
-}), true, true);
-var writerPermissions = SGGetConnectToModelInfoPermissions.create({
-  appearance: {
-    read: false,
-    write: false
-  },
-  content: {
-    read: true,
-    write: true
-  },
-  modules: {
-    read: true,
-    write: false
-  },
-  codeEditor: {
-    read: true,
-    write: true
-  },
-  versionHistory: {
-    read: true,
-    write: true
-  }
-});
-var proofreaderPermissions = SGGetConnectToModelInfoPermissions.create({
-  appearance: {
-    read: false,
-    write: false
-  },
-  content: {
-    read: true,
-    write: true,
-    textOnly: true
-  },
-  modules: {
-    read: true,
-    write: false
-  },
-  codeEditor: {
-    read: false,
-    write: false
-  },
-  versionHistory: {
-    read: true,
-    write: true
-  }
-});
-var viewerPermissions = SGGetConnectToModelInfoPermissions.create({
-  appearance: {
-    read: false,
-    write: false
-  },
-  content: {
-    read: true,
-    write: false
-  },
-  modules: {
-    read: false,
-    write: false
-  },
-  codeEditor: {
-    read: false,
-    write: false
-  },
-  versionHistory: {
-    read: true,
-    write: false
-  }
-});
-var disabledPermissions = SGGetConnectToModelInfoPermissions.create({
-  appearance: {
-    read: false,
-    write: false
-  },
-  content: {
-    read: true,
-    write: false
-  },
-  modules: {
-    read: false,
-    write: false
-  },
-  codeEditor: {
-    read: false,
-    write: false
-  },
-  versionHistory: {
-    read: false,
-    write: false
-  },
-  manageOwnComments: {
-    read: true,
-    write: false
-  },
-  manageAllComments: {
-    read: true,
-    write: false
-  }
-});
-
-// editor/ui-editor-ui/src/environments/environment.ts
-var environment = {
-  production: false,
-  elements: false,
-  cdnAssetsPath: "https://odhvxu.stripocdn.email/content/assets/",
-  editorMode: "demo" /* DEMO */,
-  metadata: {
-    // this is default guid for the demo mode
-    // replace it with your own guid if required
-    guid: "63a6c30a-466e-40e0-ae34-1be5deed5071"
-  },
-  html,
-  cooperativeMode: false,
-  // make request relative to the local domain
-  // and in development mode it will be proxied to the dev-account.stripo.email
-  coeditingBasePath: "/bapi/coediting",
-  coeditingWsUrl: "wss://dev-account.stripo.email/bapi/coediting/ws/coediting",
-  probeWsUrl: "wss://dev-account.stripo.email/bapi/coediting/ws/probe",
-  apiBaseUrl: "",
-  permissions: adminPermissions,
-  ownHeader: true,
-  proxyUrl: "https://dev-account.stripo.email/bapi/documents/v1/proxy"
-};
+// convo-email-agent/vendor/editor-validator/asset-path-config.ts
+var environment = {};
 
 // editor/ui-editor-ui/src/app/tools/assets/asset-path.provider.ts
 var DEFAULT_IMAGE_PATH = "assets/previews/default-img.png";

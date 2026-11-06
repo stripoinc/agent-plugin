@@ -222,9 +222,6 @@ import {
   standardProps
 } from "./doc-85ae2b2bbd32.mjs";
 import {
-  $ZodCheck
-} from "./checks-f4a190521e0d.mjs";
-import {
   _decode,
   _decodeAsync,
   _encode,
@@ -245,6 +242,9 @@ import {
   flattenError,
   formatError
 } from "./errors-095a9cd7e5fd.mjs";
+import {
+  $ZodCheck
+} from "./checks-f4a190521e0d.mjs";
 import {
   currencyCode,
   domain,
