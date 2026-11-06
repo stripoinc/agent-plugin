@@ -16,6 +16,11 @@ function parseArgs(argv) {
   }
   return args;
 }
+function requireString(args, key) {
+  const value = optionalString(args, key);
+  if (value === void 0) throw new Error(`Missing required --${key} argument.`);
+  return value;
+}
 function optionalString(args, key) {
   const value = args[key];
   return typeof value === "string" && value.trim() !== "" ? value : void 0;
@@ -30,8 +35,8 @@ function compactError(error) {
     ...Object.fromEntries(["code", "stage", "input", "path", "issues"].flatMap((key) => fields && key in fields ? [[key, fields[key]]] : []))
   };
 }
-function resolveSdkDist(startUrl = import.meta.url) {
-  const override = process.env.CONVO_EMAIL_AGENT_SDK_PATH;
+function resolveSdkDist(args, startUrl = import.meta.url) {
+  const override = args.sdk === void 0 ? void 0 : requireString(args, "sdk");
   let candidate;
   if (override) {
     candidate = path.resolve(override);
@@ -46,7 +51,7 @@ function resolveSdkDist(startUrl = import.meta.url) {
   }
   if (candidate && existsSync(candidate) && statSync(candidate).isFile()) return candidate;
   throw new Error(
-    `Cannot find the packaged convo-email-agent SDK${candidate ? ` at ${candidate}` : ""}. Install skills/ and packages/ together or set CONVO_EMAIL_AGENT_SDK_PATH to an existing index.js.`
+    `Cannot find the packaged convo-email-agent SDK${candidate ? ` at ${candidate}` : ""}. Install skills/ and packages/ together or pass --sdk with an existing index.js.`
   );
 }
 async function loadSdk(sdkPath) {
@@ -80,7 +85,7 @@ var TARGET_GUIDANCE = {
 };
 async function main() {
   const args = parseArgs(process.argv.slice(2));
-  const sdk = await loadSdk(resolveSdkDist(import.meta.url));
+  const sdk = await loadSdk(resolveSdkDist(args, import.meta.url));
   const schema = sdk.getJsonSchema();
   const definitions = schema.definitions;
   const blocks = sdk.getCapabilities().blocks.filter((kind) => kind !== "unknown");

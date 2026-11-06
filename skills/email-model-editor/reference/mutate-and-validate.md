@@ -146,7 +146,7 @@ error. Keep the acquired model, inspection, module, candidate and diagnostics as
 On any preparation failure, the runner removes stale output. Diagnostics distinguish JSON,
 schema, capability, loss and optional runtime stages; inspect `diagnostics.error.issues`.
 Local contract validation is against the pinned revision. `--runtime-snapshot <file>` plus
-`STRIPO_RUNTIME_PATH` explicitly requests model preflight and fails if context is missing.
+`--runtime <file>` explicitly requests model preflight and fails if context is missing.
 Only a successful server set followed by get confirms persistence.
 
 ## Inline-style candidate checks

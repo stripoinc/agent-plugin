@@ -161,7 +161,7 @@ function socialLinkIssue(link) {
   if (!isObject(link)) return "Social network link must be an object with type and href.";
   const { type, href } = link;
   if (typeof type !== "string" || !SOCIAL_LINK_TYPE_SET.has(type)) {
-    return `Social network link type must be one of ${SOCIAL_LINK_TYPES.join(", ")}.`;
+    return "Social network link type must be one of ".concat(SOCIAL_LINK_TYPES.join(", "), ".");
   }
   if (typeof href !== "string" || href === "") return "Social network link href cannot be empty.";
   if (href.trim() !== href) return "Social network link href must not contain leading or trailing spaces.";
@@ -203,37 +203,37 @@ function collectSocialSettingsIssues(settings) {
   const textCustomization = settings.textCustomization === true;
   settings.networks.forEach((network, index) => {
     if (!isObject(network)) return;
-    const base = `/networks/${index}`;
+    const base = "/networks/".concat(index);
     const hasIcon = Object.hasOwn(network, "icon");
     if (network.type === SOCIAL_CUSTOM_NETWORK_TYPE && !hasIcon) {
-      issues.push({ path: `${base}/icon`, message: "Social network icon is required for custom social networks." });
+      issues.push({ path: "".concat(base, "/icon"), message: "Social network icon is required for custom social networks." });
     }
     if (network.type !== SOCIAL_CUSTOM_NETWORK_TYPE && hasIcon) {
       issues.push({
-        path: `${base}/icon`,
+        path: "".concat(base, "/icon"),
         message: "Social network icon can only be provided for custom social networks; known networks take their icon from type and style."
       });
     }
     if (hasIcon && typeof network.icon === "string") {
       if (network.icon.trim() === "") {
-        issues.push({ path: `${base}/icon`, message: "Social network custom icon must contain a non-whitespace value." });
+        issues.push({ path: "".concat(base, "/icon"), message: "Social network custom icon must contain a non-whitespace value." });
       } else if (network.icon.trim() !== network.icon) {
-        issues.push({ path: `${base}/icon`, message: "Social network custom icon must not contain leading or trailing spaces." });
+        issues.push({ path: "".concat(base, "/icon"), message: "Social network custom icon must not contain leading or trailing spaces." });
       }
     }
     const hasAlt = Object.hasOwn(network, "alt");
     if (textCustomization && !hasAlt) {
-      issues.push({ path: `${base}/alt`, message: "Social network alt is required when text customization is enabled." });
+      issues.push({ path: "".concat(base, "/alt"), message: "Social network alt is required when text customization is enabled." });
     }
     if (!textCustomization && hasAlt) {
       issues.push({
-        path: `${base}/alt`,
+        path: "".concat(base, "/alt"),
         message: "Social network alt can only be provided when text customization is enabled (settings.textCustomization)."
       });
     }
     if (network.link !== void 0) {
       const linkIssue = socialLinkIssue(network.link);
-      if (linkIssue !== void 0) issues.push({ path: `${base}/link/href`, message: linkIssue });
+      if (linkIssue !== void 0) issues.push({ path: "".concat(base, "/link/href"), message: linkIssue });
     }
   });
   return issues;
@@ -245,33 +245,33 @@ function collectSocialDocumentIssues(document) {
     if (!isObject(node)) return;
     if (node.type === "social") {
       for (const issue of collectSocialSettingsIssues(node.settings)) {
-        issues.push({ ...issue, instancePath: `${pointer}/settings${issue.path}` });
+        issues.push({ ...issue, instancePath: "".concat(pointer, "/settings").concat(issue.path) });
       }
     }
     for (const key of CHILD_ARRAYS) {
       const children = node[key];
       if (!Array.isArray(children)) continue;
-      children.forEach((child, index) => visit(child, `${pointer}/${key}/${index}`));
+      children.forEach((child, index) => visit(child, "".concat(pointer, "/").concat(key, "/").concat(index)));
     }
   };
   visit(document, "");
   return issues;
 }
 function requireNonEmptyString(value, label) {
-  if (typeof value !== "string" || value.trim() === "") throw new EmailSdkError(`${label} must be a non-empty string.`);
+  if (typeof value !== "string" || value.trim() === "") throw new EmailSdkError("".concat(label, " must be a non-empty string."));
   return value;
 }
 function assertSocialNetworkType(type) {
   if (!SOCIAL_NETWORK_TYPE_SET.has(type)) {
     throw new EmailSdkError(
-      `Social network type "${type}" is not one the editor ships an icon for. Use one of its ${SOCIAL_NETWORK_TYPES.length} native types, or type "custom" with an icon URL.`
+      'Social network type "'.concat(type, '" is not one the editor ships an icon for. ') + "Use one of its ".concat(SOCIAL_NETWORK_TYPES.length, ' native types, or type "custom" with an icon URL.')
     );
   }
   return type;
 }
 function assertSocialTextLimit(value, field, limit) {
   if (value.length > limit) {
-    throw new EmailSdkError(`Social network ${field} must be at most ${limit} characters; got ${value.length}.`);
+    throw new EmailSdkError("Social network ".concat(field, " must be at most ").concat(limit, " characters; got ").concat(value.length, "."));
   }
 }
 function socialLink(url, linkType) {
@@ -288,12 +288,12 @@ function buildSocialNetwork(input, textCustomization) {
     network.link = socialLink(requireNonEmptyString(input.url, "Social network url"), input.linkType);
   }
   if (type === SOCIAL_CUSTOM_NETWORK_TYPE) {
-    const icon = requireNonEmptyString(input.icon, `Social network "${type}" icon`);
+    const icon = requireNonEmptyString(input.icon, 'Social network "'.concat(type, '" icon'));
     if (icon.trim() !== icon) throw new EmailSdkError("Social network custom icon must not contain leading or trailing spaces.");
     network.icon = icon;
   } else if (input.icon !== void 0) {
     throw new EmailSdkError(
-      `Social network "${type}" does not accept icon; known networks take their icon from type and the block style. Use type "custom" for an own icon.`
+      'Social network "'.concat(type, '" does not accept icon; known networks take their icon from type and the block style. ') + 'Use type "custom" for an own icon.'
     );
   }
   const title = input.title ?? defaultSocialTitle(type);

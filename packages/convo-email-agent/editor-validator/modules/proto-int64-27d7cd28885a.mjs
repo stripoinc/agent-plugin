@@ -151,7 +151,7 @@ function varint32read() {
 var protoInt64 = /* @__PURE__ */ makeInt64Support();
 function makeInt64Support() {
   const dv = new DataView(new ArrayBuffer(8));
-  const ok = typeof BigInt === "function" && typeof dv.getBigInt64 === "function" && typeof dv.getBigUint64 === "function" && typeof dv.setBigInt64 === "function" && typeof dv.setBigUint64 === "function" && (!!globalThis.Deno || !!globalThis.Bun || typeof process != "object" || typeof process.env != "object" || process.env.BUF_BIGINT_DISABLE !== "1");
+  const ok = typeof BigInt === "function" && typeof dv.getBigInt64 === "function" && typeof dv.getBigUint64 === "function" && typeof dv.setBigInt64 === "function" && typeof dv.setBigUint64 === "function" && (!!globalThis.Deno || !!globalThis.Bun || typeof process != "object" || true);
   if (ok) {
     const MIN = BigInt("-9223372036854775808");
     const MAX = BigInt("9223372036854775807");

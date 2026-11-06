@@ -38,11 +38,13 @@ import {
   nodeSchema,
   requireValid,
   validateChange,
-  validateEmailDocument,
   validateSnapshot
-} from "./contract-a9a0a7497166.js";
+} from "./contract-22395cb9da24.js";
 import "./styles-961c8e1b984f.js";
 import "./parse-html-7b561a99741a.js";
+import {
+  validateEmailDocument
+} from "./editor-validator-e41a98b04d42.js";
 import "./social-f4a8e0da8c68.js";
 import {
   EmailSdkError,
@@ -111,10 +113,10 @@ function createBlock(type, input) {
     nodeType: type
   })));
   const checkKeys = (value, parsed, path) => {
-    if (Array.isArray(value) && Array.isArray(parsed)) value.forEach((item, index) => checkKeys(item, parsed[index], `${path}.${index}`));
+    if (Array.isArray(value) && Array.isArray(parsed)) value.forEach((item, index) => checkKeys(item, parsed[index], "".concat(path, ".").concat(index)));
     else if (isObject(value) && isObject(parsed)) for (const key of Object.keys(value)) {
-      if (!Object.hasOwn(parsed, key)) throw new DocumentStateError([{ code: "UNKNOWN_FIELD", stage: "json", input: "target", path: `${path}.${key}`, message: "Unknown factory field." }]);
-      checkKeys(value[key], parsed[key], `${path}.${key}`);
+      if (!Object.hasOwn(parsed, key)) throw new DocumentStateError([{ code: "UNKNOWN_FIELD", stage: "json", input: "target", path: "".concat(path, ".").concat(key), message: "Unknown factory field." }]);
+      checkKeys(value[key], parsed[key], "".concat(path, ".").concat(key));
     }
   };
   checkKeys(block, result.documentState, type);

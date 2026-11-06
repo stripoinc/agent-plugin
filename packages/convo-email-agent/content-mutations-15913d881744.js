@@ -25,7 +25,7 @@ import {
   schemaForValue,
   validateChange,
   validateSnapshot
-} from "./contract-a9a0a7497166.js";
+} from "./contract-22395cb9da24.js";
 import {
   buildStyleValue,
   nodeStyleSpec,
@@ -73,19 +73,19 @@ function assertSafeHref(href) {
   const trimmed = href.trim();
   const match = HREF_SCHEME.exec(trimmed);
   if (match !== null && !ALLOWED_HREF_SCHEMES.has(match[1].toLowerCase())) {
-    throw new EmailSdkError(`Unsafe href scheme "${match[1]}". Allowed schemes: http, https, mailto, tel.`);
+    throw new EmailSdkError('Unsafe href scheme "'.concat(match[1], '". Allowed schemes: http, https, mailto, tel.'));
   }
 }
 function attrValue(rawAttrs, name) {
-  const pattern = new RegExp(`${name}\\s*=\\s*(?:"([^"]*)"|'([^']*)'|([^\\s>]+))`, "iu");
+  const pattern = new RegExp("".concat(name, "\\s*=\\s*(?:\"([^\"]*)\"|'([^']*)'|([^\\s>]+))"), "iu");
   const match = pattern.exec(rawAttrs);
   return match === null ? void 0 : match[1] ?? match[2] ?? match[3];
 }
 function setAttr(rawAttrs, name, value) {
   const escaped = value.replaceAll('"', "&quot;");
-  const pattern = new RegExp(`(${name}\\s*=\\s*)(?:"[^"]*"|'[^']*'|[^\\s>]+)`, "iu");
-  if (pattern.test(rawAttrs)) return rawAttrs.replace(pattern, `$1"${escaped}"`);
-  return `${rawAttrs} ${name}="${escaped}"`;
+  const pattern = new RegExp("(".concat(name, "\\s*=\\s*)(?:\"[^\"]*\"|'[^']*'|[^\\s>]+)"), "iu");
+  if (pattern.test(rawAttrs)) return rawAttrs.replace(pattern, '$1"'.concat(escaped, '"'));
+  return "".concat(rawAttrs, " ").concat(name, '="').concat(escaped, '"');
 }
 function replaceVisibleText(content, matchText, replace, occurrence = 0) {
   if (!Number.isInteger(occurrence) || occurrence < 0) {
@@ -109,13 +109,13 @@ function replaceVisibleText(content, matchText, replace, occurrence = 0) {
     }
   }
   if (matches.length === 0) {
-    throw new EmailSdkError(`Text "${matchText}" was not found inside one visible text run.`);
+    throw new EmailSdkError('Text "'.concat(matchText, '" was not found inside one visible text run.'));
   }
   if (occurrence >= matches.length) {
-    throw new EmailSdkError(`Text "${matchText}" occurrence ${occurrence} is out of range; found ${matches.length}.`);
+    throw new EmailSdkError('Text "'.concat(matchText, '" occurrence ').concat(occurrence, " is out of range; found ").concat(matches.length, "."));
   }
   const span = matches[occurrence];
-  return `${content.slice(0, span.start)}${replace}${content.slice(span.end)}`;
+  return "".concat(content.slice(0, span.start)).concat(replace).concat(content.slice(span.end));
 }
 function mutateAnchor(content, mutation) {
   const candidates = [];
@@ -137,7 +137,7 @@ function mutateAnchor(content, mutation) {
     ordinal += 1;
   }
   if (candidates.length === 0) throw new EmailSdkError("No text anchor matched.");
-  if (candidates.length > 1) throw new EmailSdkError(`Text anchor match is ambiguous: ${candidates.length} anchors matched.`);
+  if (candidates.length > 1) throw new EmailSdkError("Text anchor match is ambiguous: ".concat(candidates.length, " anchors matched."));
   const candidate = candidates[0];
   let attrs = candidate.attrs;
   if (mutation.set.href !== void 0) {
@@ -148,8 +148,8 @@ function mutateAnchor(content, mutation) {
     attrs = setAttr(attrs, "target", mutation.set.target);
   }
   const inner = mutation.set.text ?? candidate.inner;
-  const next = `<a${attrs}>${inner}</a>`;
-  return `${content.slice(0, candidate.start)}${next}${content.slice(candidate.end)}`;
+  const next = "<a".concat(attrs, ">").concat(inner, "</a>");
+  return "".concat(content.slice(0, candidate.start)).concat(next).concat(content.slice(candidate.end));
 }
 
 // convo-email-agent/src/sdk/ids.ts
@@ -176,12 +176,12 @@ function uuidFromSeed(seed) {
   const hex = stableHex(SEED_PREFIX + seed);
   const variantNibble = (parseInt(hex[16], 16) & 3 | 8).toString(16);
   const h = hex.slice(0, 12) + "4" + hex.slice(13, 16) + variantNibble + hex.slice(17, 32);
-  return `${h.slice(0, 8)}-${h.slice(8, 12)}-${h.slice(12, 16)}-${h.slice(16, 20)}-${h.slice(20, 32)}`;
+  return "".concat(h.slice(0, 8), "-").concat(h.slice(8, 12), "-").concat(h.slice(12, 16), "-").concat(h.slice(16, 20), "-").concat(h.slice(20, 32));
 }
 function uniqueUuidFromSeed(seed, isTaken) {
   let candidate = uuidFromSeed(seed);
   for (let retry = 1; isTaken(candidate); retry += 1) {
-    candidate = uuidFromSeed(`${seed}#r${retry}`);
+    candidate = uuidFromSeed("".concat(seed, "#r").concat(retry));
   }
   return candidate;
 }
@@ -243,7 +243,7 @@ function createEmailSdk(options) {
   const generateUniqueId = (seed, isTaken) => options.idFactory?.(seed, isTaken) ?? uniqueUuidFromSeed(seed, isTaken);
   const sdk = new EditorJsonMutationCore(
     options.emailJson,
-    () => generateUniqueId(`fallback#${fallbackOrdinal++}`, () => false),
+    () => generateUniqueId("fallback#".concat(fallbackOrdinal++), () => false),
     { current: options.current ?? options.emailJson }
   );
   const initialMetadata = sdk.snapshot().metadata;
@@ -355,11 +355,11 @@ function createEmailSdk(options) {
         const newNodes = collectNodeIndex(after);
         const remainingCounts = /* @__PURE__ */ new Map();
         for (const node of newNodes) {
-          const key = `${node.kind}:${node.id}`;
+          const key = "".concat(node.kind, ":").concat(node.id);
           remainingCounts.set(key, (remainingCounts.get(key) ?? 0) + 1);
         }
         const deleted = oldNodes.filter((node) => {
-          const key = `${node.kind}:${node.id}`;
+          const key = "".concat(node.kind, ":").concat(node.id);
           const count = remainingCounts.get(key) ?? 0;
           if (count === 0) return true;
           remainingCounts.set(key, count - 1);
@@ -406,13 +406,13 @@ function createEmailSdk(options) {
   }
   function compactLabel(realId) {
     const compactId = realToTemp.get(realId);
-    return compactId === void 0 ? `id="${realId}"` : `id=${compactId}`;
+    return compactId === void 0 ? 'id="'.concat(realId, '"') : "id=".concat(compactId);
   }
   function validIdsSummary() {
     const ids = [...tempToReal.keys()].filter((id) => !removedIds.has(tempToReal.get(id) ?? "")).sort((a, b) => Number(a) - Number(b));
     if (ids.length === 0) return "none";
     if (ids.length <= 60) return ids.join(", ");
-    return `${ids[0]}\u2026${ids[ids.length - 1]} (${ids.length} ids)`;
+    return "".concat(ids[0], "\u2026").concat(ids[ids.length - 1], " (").concat(ids.length, " ids)");
   }
   function assertNotSealed() {
     if (sealed) {
@@ -424,12 +424,12 @@ function createEmailSdk(options) {
   function assertNotRemoved(realId) {
     if (replacedByRepeat.has(realId)) {
       throw new EmailSdkError(
-        `Element ${compactLabel(realId)} was replaced by repeat() \u2014 address the new sections through the handles repeat() returned (e.g. rows[i].byId(...)).`
+        "Element ".concat(compactLabel(realId), " was replaced by repeat() \u2014 address the new sections ") + "through the handles repeat() returned (e.g. rows[i].byId(...))."
       );
     }
     if (removedIds.has(realId) || realId.startsWith("\0sdk:") && !sdk.hasElement(realId)) {
       throw new EmailSdkError(
-        `Element ${compactLabel(realId)} was removed earlier in this script.`
+        "Element ".concat(compactLabel(realId), " was removed earlier in this script.")
       );
     }
   }
@@ -444,7 +444,7 @@ function createEmailSdk(options) {
     const totalCopies = (repeatSiblings[root]?.length ?? 0) + 1;
     const rootCompact = realToTemp.get(root) ?? root;
     return new EmailSdkError(
-      `Element ${compactLabel(realId)} is inside collapsed repeated section ${compactLabel(root)} (repeated ${totalCopies} times). Call email.byId("${rootCompact}").repeat(<totalCount>) first, then edit each returned instance.`
+      "Element ".concat(compactLabel(realId), " is inside collapsed repeated section ").concat(compactLabel(root), " ") + "(repeated ".concat(totalCopies, ' times). Call email.byId("').concat(rootCompact, '").repeat(<totalCount>) first, ') + "then edit each returned instance."
     );
   }
   function assertMutable(realId, opts = {}) {
@@ -461,7 +461,7 @@ function createEmailSdk(options) {
     const unsupported = currentIndex().filter((node) => source.path.every((key, index) => node.path[index] === key)).find((node) => !nodeCapability(node.blockType ?? node.kind)?.actions.DELETE.runtimes.mergeService);
     if (unsupported) {
       throw new EmailSdkError(
-        `${method}() cannot delete ${unsupported.blockType ?? unsupported.kind} in ${label}: merge-service does not support its deletion.`
+        "".concat(method, "() cannot delete ").concat(unsupported.blockType ?? unsupported.kind, " in ").concat(label, ": merge-service does not support its deletion.")
       );
     }
   }
@@ -470,7 +470,7 @@ function createEmailSdk(options) {
     const realId = tempToReal.get(compactId);
     if (realId === void 0) {
       throw new EmailSdkError(
-        `No element with id "${compactId}". Valid ids: ${validIdsSummary()} (see brief_input).`
+        'No element with id "'.concat(compactId, '". Valid ids: ').concat(validIdsSummary(), " (see brief_input).")
       );
     }
     return { compactId, realId };
@@ -487,12 +487,12 @@ function createEmailSdk(options) {
   }
   function disambiguateEntries(entries, rawId, disambiguateBy) {
     if (entries.length === 0) {
-      throw new EmailSdkError(`No element with id "${rawId}". Valid ids: ${validIdsSummary()}.`);
+      throw new EmailSdkError('No element with id "'.concat(rawId, '". Valid ids: ').concat(validIdsSummary(), "."));
     }
     if (entries.length === 1 && disambiguateBy === void 0) return entries[0];
     if (disambiguateBy === void 0) {
       throw new EmailSdkError(
-        `id "${rawId}" resolves to ${entries.length} nodes; pass disambiguateBy.occurrence, parentContainerId, or parentStripeId.`
+        'id "'.concat(rawId, '" resolves to ').concat(entries.length, " nodes; pass disambiguateBy.occurrence, ") + "parentContainerId, or parentStripeId."
       );
     }
     const parentContainerId = disambiguateBy.parentContainerId ?? disambiguateBy.parent_container_id;
@@ -512,12 +512,12 @@ function createEmailSdk(options) {
       }
       const entry = filtered[occurrence];
       if (entry === void 0) {
-        throw new EmailSdkError(`id "${rawId}" occurrence ${occurrence} is out of range after disambiguation.`);
+        throw new EmailSdkError('id "'.concat(rawId, '" occurrence ').concat(occurrence, " is out of range after disambiguation."));
       }
       return entry;
     }
     if (filtered.length === 1) return filtered[0];
-    throw new EmailSdkError(`id "${rawId}" still resolves to ${filtered.length} nodes after disambiguation.`);
+    throw new EmailSdkError('id "'.concat(rawId, '" still resolves to ').concat(filtered.length, " nodes after disambiguation."));
   }
   function resolveLookup(rawId, disambiguateBy) {
     const lookupId = String(rawId).trim();
@@ -576,7 +576,7 @@ function createEmailSdk(options) {
   function entryFor(realId) {
     const path = sdk.referencePath(realId);
     const entry = currentIndex().find((candidate) => path ? stableJson(candidate.path) === stableJson(path) : candidate.id === realId);
-    if (entry === void 0) throw new EmailSdkError(`Element ${compactLabel(realId)} was not found.`);
+    if (entry === void 0) throw new EmailSdkError("Element ".concat(compactLabel(realId), " was not found."));
     return entry;
   }
   function writeSettings(realId, update) {
@@ -586,14 +586,14 @@ function createEmailSdk(options) {
     update(settings, entry);
     for (const key of ["networks", "items"]) {
       if (stableJson(settings[key]) !== stableJson(entry.element.settings?.[key])) {
-        addIntent({ replaceCollections: [`/${entry.id}/settings/${key}`] });
+        addIntent({ replaceCollections: ["/".concat(entry.id, "/settings/").concat(key)] });
       }
     }
     for (const key of ["link", "colors"]) {
       const previous = entry.element.settings?.[key];
       const next = settings[key];
       if (isObject(previous) && (!isObject(next) || previous.type !== next.type || previous.mode !== next.mode)) {
-        addIntent({ replaceCollections: [`/${entry.id}/settings/${key}`] });
+        addIntent({ replaceCollections: ["/".concat(entry.id, "/settings/").concat(key)] });
       }
     }
     sdk.setElementProperty(realId, "settings", settings);
@@ -614,7 +614,7 @@ function createEmailSdk(options) {
       throw new EmailSdkError("Metadata patch must contain title or preheader, with no other keys.");
     }
     const validateText = (value, label) => {
-      if (typeof value !== "string") throw new EmailSdkError(`${label} must be a string.`);
+      if (typeof value !== "string") throw new EmailSdkError("".concat(label, " must be a string."));
     };
     if (Object.hasOwn(patch, "title")) validateText(patch.title, "metadata.title");
     if (Object.hasOwn(patch, "preheader")) {
@@ -632,20 +632,20 @@ function createEmailSdk(options) {
     assertNotSealed();
     const pieces = path.split(".");
     if (pieces.length === 0 || pieces.some((piece) => piece === "")) {
-      throw new EmailSdkError(`Invalid theme path "${path}".`);
+      throw new EmailSdkError('Invalid theme path "'.concat(path, '".'));
     }
     if (pieces[0] !== "settings") {
-      throw new EmailSdkError(`Theme path must start with "settings.", got "${path}".`);
+      throw new EmailSdkError('Theme path must start with "settings.", got "'.concat(path, '".'));
     }
     for (const piece of pieces) {
-      if (/^\d+$/u.test(piece)) throw new EmailSdkError(`Theme path rejects array-index segment "${piece}".`);
+      if (/^\d+$/u.test(piece)) throw new EmailSdkError('Theme path rejects array-index segment "'.concat(piece, '".'));
     }
     const resets = [];
     const normalize = (child, keys) => {
       if (child === void 0 || child === null) {
         const pointer = "/" + keys.join("/");
         if (!isSupportedThemeReset(pointer)) {
-          throw new EmailSdkError(child === null ? `Theme value may not be null at ${keys.join(".")}.` : `No canonical reset is supported for ${keys.join(".")}.`);
+          throw new EmailSdkError(child === null ? "Theme value may not be null at ".concat(keys.join("."), ".") : "No canonical reset is supported for ".concat(keys.join("."), "."));
         }
         resets.push(pointer);
         return null;
@@ -666,13 +666,13 @@ function createEmailSdk(options) {
     const description = schemaForValue(schema, { ...current, ...patch });
     for (const [key, value] of Object.entries(patch)) {
       const property = description.properties?.[key];
-      if (!property) throw new EmailSdkError(`Unknown settings key: ${path}.${key}.`);
-      if (resolveSchema(property).readOnly) throw new EmailSdkError(`Read-only settings key: ${path}.${key}.`);
-      if (key === "networks" || key === "items") throw new EmailSdkError(`${path}.${key} must be changed with collection methods.`);
-      if (Array.isArray(value)) throw new EmailSdkError(`${path}.${key} has no declared atomic patch operation.`);
+      if (!property) throw new EmailSdkError("Unknown settings key: ".concat(path, ".").concat(key, "."));
+      if (resolveSchema(property).readOnly) throw new EmailSdkError("Read-only settings key: ".concat(path, ".").concat(key, "."));
+      if (key === "networks" || key === "items") throw new EmailSdkError("".concat(path, ".").concat(key, " must be changed with collection methods."));
+      if (Array.isArray(value)) throw new EmailSdkError("".concat(path, ".").concat(key, " has no declared atomic patch operation."));
       const previous = current[key];
       const switchesVariant = isObject(value) && isObject(previous) && ["type", "mode"].some((discriminator) => Object.hasOwn(value, discriminator) && previous[discriminator] !== value[discriminator]);
-      result[key] = isObject(value) ? patchObject(switchesVariant || !isObject(previous) ? {} : previous, value, property, `${path}.${key}`) : cloneJson(value);
+      result[key] = isObject(value) ? patchObject(switchesVariant || !isObject(previous) ? {} : previous, value, property, "".concat(path, ".").concat(key)) : cloneJson(value);
     }
     return result;
   }
@@ -680,13 +680,13 @@ function createEmailSdk(options) {
     writeSettings(realId, (settings, entry) => {
       const descriptor = nodeSchema(entry.blockType ?? entry.kind).properties?.settings;
       if (!descriptor) throw new EmailSdkError("This node has no editable settings.");
-      const result = patchObject(settings, patch, descriptor, `${entry.blockType ?? entry.kind}.settings`);
+      const result = patchObject(settings, patch, descriptor, "".concat(entry.blockType ?? entry.kind, ".settings"));
       for (const key of Object.keys(settings)) delete settings[key];
       Object.assign(settings, result);
     });
   }
   function resetDocumentSettings(paths) {
-    for (const path of paths) writeTheme(path.startsWith("settings.") ? path : `settings.${path}`, void 0);
+    for (const path of paths) writeTheme(path.startsWith("settings.") ? path : "settings.".concat(path), void 0);
   }
   function writeDocumentStyle(property, value, styleOptions = {}) {
     const spec = themeStyleSpec(property, styleOptions);
@@ -701,7 +701,7 @@ function createEmailSdk(options) {
       const settings = isObject(entry.element.settings) ? cloneJson(entry.element.settings) : {};
       const current = typeof settings.text === "string" ? settings.text : "";
       if (normalizeText(current) !== normalizeText(match)) {
-        throw new EmailSdkError(`Button label is "${current}", not "${match}".`);
+        throw new EmailSdkError('Button label is "'.concat(current, '", not "').concat(match, '".'));
       }
       settings.text = replace;
       sdk.setElementProperty(realId, "settings", settings);
@@ -713,7 +713,7 @@ function createEmailSdk(options) {
         replaceVisibleText(content, match, replace, replacementOptions.occurrence ?? 0)
       );
     } else {
-      throw new EmailSdkError(`replaceText() supports text and button blocks; got ${entry.blockType ?? entry.kind}.`);
+      throw new EmailSdkError("replaceText() supports text and button blocks; got ".concat(entry.blockType ?? entry.kind, "."));
     }
     mutationCount += 1;
   }
@@ -749,7 +749,7 @@ function createEmailSdk(options) {
         const networks = Array.isArray(settings.networks) ? cloneJson(settings.networks) : [];
         const index = networks.findIndex((network) => isObject(network) && network.type === mutation.network);
         if (index === -1 || !isObject(networks[index])) {
-          throw new EmailSdkError(`Social network "${mutation.network}" was not found.`);
+          throw new EmailSdkError('Social network "'.concat(mutation.network, '" was not found.'));
         }
         if (mutation.url === "") {
           delete networks[index].link;
@@ -760,7 +760,7 @@ function createEmailSdk(options) {
         assertNoSocialIssues(settings, "setLink");
         return;
       }
-      throw new EmailSdkError(`setLink() supports button, image, and social blocks; got ${entry.blockType ?? entry.kind}.`);
+      throw new EmailSdkError("setLink() supports button, image, and social blocks; got ".concat(entry.blockType ?? entry.kind, "."));
     });
   }
   function writeMenuItem(realId, itemIndex, set) {
@@ -769,7 +769,7 @@ function createEmailSdk(options) {
       if (entry.blockType !== "menu") throw new EmailSdkError("setMenuItem() supports menu blocks only.");
       const items = Array.isArray(settings.items) ? cloneJson(settings.items) : [];
       const item = items[itemIndex];
-      if (!isObject(item)) throw new EmailSdkError(`Menu item ${itemIndex} was not found.`);
+      if (!isObject(item)) throw new EmailSdkError("Menu item ".concat(itemIndex, " was not found."));
       const itemLinkColor = set.itemLinkColor ?? set.item_link_color;
       const itemBackgroundColor = set.itemBackgroundColor ?? set.item_background_color;
       const itemLinkValue = set.itemLinkValue ?? set.item_link_value;
@@ -808,27 +808,27 @@ function createEmailSdk(options) {
   }
   function assertSocialBlock(entry, method) {
     if (entry.blockType !== "social") {
-      throw new EmailSdkError(`${method}() supports social blocks only; got ${entry.blockType ?? entry.kind}.`);
+      throw new EmailSdkError("".concat(method, "() supports social blocks only; got ").concat(entry.blockType ?? entry.kind, "."));
     }
   }
   function assertNoSocialIssues(settings, method) {
     const [issue] = collectSocialSettingsIssues(settings);
-    if (issue !== void 0) throw new EmailSdkError(`${method}(): ${issue.message} (settings${issue.path})`);
+    if (issue !== void 0) throw new EmailSdkError("".concat(method, "(): ").concat(issue.message, " (settings").concat(issue.path, ")"));
   }
   function socialNetworksOf(settings, method) {
     if (!Array.isArray(settings.networks) || !settings.networks.every(isObject)) {
-      throw new EmailSdkError(`${method}() found no networks array on this social block.`);
+      throw new EmailSdkError("".concat(method, "() found no networks array on this social block."));
     }
     return cloneJson(settings.networks);
   }
   function socialNetworkSummary(networks) {
-    return networks.length === 0 ? "none" : networks.map((network, index) => `${index}:${String(network.type)}`).join(", ");
+    return networks.length === 0 ? "none" : networks.map((network, index) => "".concat(index, ":").concat(String(network.type))).join(", ");
   }
   function resolveSocialNetworkIndex(networks, target, method) {
     if (typeof target === "number") {
       if (!Number.isInteger(target) || target < 0 || target >= networks.length) {
         throw new EmailSdkError(
-          `${method}(): network index ${String(target)} is out of range. Networks: ${socialNetworkSummary(networks)}.`
+          "".concat(method, "(): network index ").concat(String(target), " is out of range. Networks: ").concat(socialNetworkSummary(networks), ".")
         );
       }
       return target;
@@ -838,14 +838,14 @@ function createEmailSdk(options) {
       if (matches.length === 1) return matches[0];
       if (matches.length === 0) {
         throw new EmailSdkError(
-          `${method}(): social network "${target}" was not found. Networks: ${socialNetworkSummary(networks)}.`
+          "".concat(method, '(): social network "').concat(target, '" was not found. Networks: ').concat(socialNetworkSummary(networks), ".")
         );
       }
       throw new EmailSdkError(
-        `${method}(): ${matches.length} networks have type "${target}"; address one by index (${matches.join(", ")}).`
+        "".concat(method, "(): ").concat(matches.length, ' networks have type "').concat(target, '"; address one by index (').concat(matches.join(", "), ").")
       );
     }
-    throw new EmailSdkError(`${method}() expects a network type or a zero-based network index.`);
+    throw new EmailSdkError("".concat(method, "() expects a network type or a zero-based network index."));
   }
   function writeSocialNetwork(realId, target, set) {
     if (!isObject(set)) throw new EmailSdkError("setSocialNetwork() expects a mutation object.");
@@ -880,7 +880,7 @@ function createEmailSdk(options) {
       if (set.icon !== void 0) {
         if (network.type !== SOCIAL_CUSTOM_NETWORK_TYPE) {
           throw new EmailSdkError(
-            `setSocialNetwork(): icon is only accepted for type "custom"; "${String(network.type)}" takes its icon from type and style.`
+            'setSocialNetwork(): icon is only accepted for type "custom"; "'.concat(String(network.type), '" takes its icon from type and style.')
           );
         }
         network.icon = set.icon;
@@ -970,13 +970,13 @@ function createEmailSdk(options) {
       return error instanceof Error ? error : new Error(String(error));
     }
     const description = sdk.describeElement(realId);
-    const kindLabel = description === void 0 ? "element" : description.type === void 0 ? description.kind : `${description.kind} type="${description.type}"`;
+    const kindLabel = description === void 0 ? "element" : description.type === void 0 ? description.kind : "".concat(description.kind, ' type="').concat(description.type, '"');
     return new EmailSdkError(
-      `${method}() failed on ${kindLabel} ${label}: ${error.message} ${SETTER_HINTS}`
+      "".concat(method, "() failed on ").concat(kindLabel, " ").concat(label, ": ").concat(error.message, " ").concat(SETTER_HINTS)
     );
   }
   function slotKeyOf(slot) {
-    return slot.context === void 0 ? slot.role : `${slot.role}.${slot.context}`;
+    return slot.context === void 0 ? slot.role : "".concat(slot.role, ".").concat(slot.context);
   }
   function slotsSummary(inserted) {
     if (inserted.slots.length === 0) return "none";
@@ -1036,12 +1036,12 @@ function createEmailSdk(options) {
   }
   function makeNode(realId, lookupId, nodeOptions = {}) {
     const { mapping, inserted } = nodeOptions;
-    const label = nodeOptions.label ?? `id=${lookupId}`;
+    const label = nodeOptions.label ?? "id=".concat(lookupId);
     const makeSetter = (method, property) => (value) => {
       assertMutable(realId);
       if (method === "setText" && sdk.describeElement(realId)?.type === "image") {
         throw new EmailSdkError(
-          `setText() is not valid on image ${label}: use setAlt() for alt text, setSrc() for the image URL, setHref() for the link. ${SETTER_HINTS}`
+          "setText() is not valid on image ".concat(label, ": use setAlt() for alt text, ") + "setSrc() for the image URL, setHref() for the link. ".concat(SETTER_HINTS)
         );
       }
       let nextValue = value;
@@ -1080,9 +1080,9 @@ function createEmailSdk(options) {
         assertMutable(realId);
         for (const path of paths) {
           const entry = entryFor(realId);
-          if (entry.blockType !== "image" || path !== "link") throw new EmailSdkError(`No confirmed reset for ${entry.blockType ?? entry.kind}.settings.${path}.`);
+          if (entry.blockType !== "image" || path !== "link") throw new EmailSdkError("No confirmed reset for ".concat(entry.blockType ?? entry.kind, ".settings.").concat(path, "."));
           sdk.deleteElementProperty(realId, ["settings", path]);
-          addIntent({ resetFields: [`/${entry.id}/settings/${path}`] });
+          addIntent({ resetFields: ["/".concat(entry.id, "/settings/").concat(path)] });
           mutationCount++;
         }
         return node;
@@ -1109,7 +1109,7 @@ function createEmailSdk(options) {
           const remove = mode === "line" ? ["height"] : ["width", "border", "mobileBorder", "alignment"];
           for (const key of remove) {
             delete settings[key];
-            addIntent({ resetFields: [`/${entry.id}/settings/${key}`] });
+            addIntent({ resetFields: ["/".concat(entry.id, "/settings/").concat(key)] });
           }
           if (mode === "line") for (const key of ["width", "border", "alignment"]) settings[key] ??= defaults[key];
           else settings.height ??= { desktop: 20, mobile: 20 };
@@ -1129,7 +1129,7 @@ function createEmailSdk(options) {
             if (itemType === "links") delete item.image;
           }
           settings.itemType = mode === "perItem" ? { mode } : { mode: "shared", type: mode };
-          addIntent({ replaceCollections: [`/${entry.id}/settings/itemType`] });
+          addIntent({ replaceCollections: ["/".concat(entry.id, "/settings/itemType")] });
         });
         return node;
       },
@@ -1200,7 +1200,7 @@ function createEmailSdk(options) {
       byId(rawId, disambiguateBy) {
         if (inserted !== void 0) {
           throw new EmailSdkError(
-            `${label} has no compact ids inside \u2014 use slot("role") to address its blocks (slots: ${slotsSummary(inserted)}).`
+            "".concat(label, ' has no compact ids inside \u2014 use slot("role") to address its blocks ') + "(slots: ".concat(slotsSummary(inserted), ").")
           );
         }
         assertNotRemoved(realId);
@@ -1210,7 +1210,7 @@ function createEmailSdk(options) {
           const targetInstanceId = mapping.get(targetOriginalId2);
           if (targetInstanceId === void 0) {
             throw new EmailSdkError(
-              `id "${compactId2}" is not inside section ${label}. Ids inside this section: ${scopeIdsSummary(mapping.keys(), lookupId)}.`
+              'id "'.concat(compactId2, '" is not inside section ').concat(label, ". ") + "Ids inside this section: ".concat(scopeIdsSummary(mapping.keys(), lookupId), ".")
             );
           }
           assertNotRemoved(targetInstanceId);
@@ -1224,7 +1224,7 @@ function createEmailSdk(options) {
         const subtreeIds = new Set(sdk.collectSubtreeIds(realId));
         if (!scope.every((key, index) => target[index] === key)) {
           throw new EmailSdkError(
-            `id "${compactId}" is not inside element ${label}. Ids inside this element: ${scopeIdsSummary(subtreeIds.values(), lookupId)}.`
+            'id "'.concat(compactId, '" is not inside element ').concat(label, ". ") + "Ids inside this element: ".concat(scopeIdsSummary(subtreeIds.values(), lookupId), ".")
           );
         }
         assertNotRemoved(targetOriginalId);
@@ -1292,18 +1292,18 @@ function createEmailSdk(options) {
         assertNotSealed();
         if (inserted !== void 0) {
           throw new EmailSdkError(
-            `repeat() is not supported on inserted components \u2014 call email.insert("${inserted.file}", {after: <previous handle>}) once per copy instead.`
+            'repeat() is not supported on inserted components \u2014 call email.insert("'.concat(inserted.file, '", ') + "{after: <previous handle>}) once per copy instead."
           );
         }
         if (repeatedRoots.has(realId)) {
           throw new EmailSdkError(
-            `Section ${compactLabel(realId)} was already repeated \u2014 call repeat() once with the final total count.`
+            "Section ".concat(compactLabel(realId), " was already repeated \u2014 call repeat() once with the final total count.")
           );
         }
         assertNotRemoved(realId);
         if (typeof totalCount !== "number" || !Number.isInteger(totalCount) || totalCount < 1) {
           throw new EmailSdkError(
-            `repeat(${String(totalCount)}) is invalid: totalCount must be an integer >= 1. Use remove() to delete the section instead.`
+            "repeat(".concat(String(totalCount), ") is invalid: totalCount must be an integer >= 1. ") + "Use remove() to delete the section instead."
           );
         }
         const enclosingRoot = findBlockingCollapsedRoot(realId);
@@ -1319,7 +1319,7 @@ function createEmailSdk(options) {
           for (const originalId of subtreeIds) {
             instanceMapping.set(
               originalId,
-              generateUniqueId(`${originalId}#${ordinal}`, (id) => sdk.hasElement(id))
+              generateUniqueId("".concat(originalId, "#").concat(ordinal), (id) => sdk.hasElement(id))
             );
           }
           const rootCloneId = instanceMapping.get(originalRootId);
@@ -1354,36 +1354,36 @@ function createEmailSdk(options) {
         assertNotRemoved(realId);
         if (typeof role !== "string" || role === "") {
           throw new EmailSdkError(
-            `slot() expects a slot role string. Slots of ${label}: ${slotsSummary(inserted)}.`
+            "slot() expects a slot role string. Slots of ".concat(label, ": ").concat(slotsSummary(inserted), ".")
           );
         }
         const roleMatches = inserted.slots.filter((slot) => slot.role === role);
         if (roleMatches.length === 0) {
           throw new EmailSdkError(
-            `Component ${label} has no slot "${role}". Slots: ${slotsSummary(inserted)}.`
+            "Component ".concat(label, ' has no slot "').concat(role, '". Slots: ').concat(slotsSummary(inserted), ".")
           );
         }
         const matches = context === void 0 ? roleMatches : roleMatches.filter((slot) => slot.context === context);
         if (matches.length === 0) {
           throw new EmailSdkError(
-            `Component ${label} has no slot "${role}" with context "${String(context)}". Available: ${roleMatches.map(slotKeyOf).join(", ")}.`
+            "Component ".concat(label, ' has no slot "').concat(role, '" with context "').concat(String(context), '". ') + "Available: ".concat(roleMatches.map(slotKeyOf).join(", "), ".")
           );
         }
         if (matches.length > 1) {
           const contexts = [...new Set(matches.map((slot) => slot.context))].filter((value) => value !== void 0);
           if (context === void 0 && contexts.length > 1) {
             throw new EmailSdkError(
-              `Slot "${role}" is ambiguous in ${label} \u2014 pass a context: ${contexts.map((value) => `slot("${role}", "${value}")`).join(", ")}.`
+              'Slot "'.concat(role, '" is ambiguous in ').concat(label, " \u2014 pass a context: ") + "".concat(contexts.map((value) => 'slot("'.concat(role, '", "').concat(value, '")')).join(", "), ".")
             );
           }
           throw new EmailSdkError(
-            `Slot "${role}" matches ${matches.length} blocks in ${label} and cannot be disambiguated by context.`
+            'Slot "'.concat(role, '" matches ').concat(matches.length, " blocks in ").concat(label, " and cannot be disambiguated by context.")
           );
         }
         const target = matches[0];
         assertNotRemoved(target.realId);
         return makeNode(target.realId, slotKeyOf(target), {
-          label: `slot "${slotKeyOf(target)}" of ${label}`
+          label: 'slot "'.concat(slotKeyOf(target), '" of ').concat(label)
         });
       }
     });
@@ -1406,7 +1406,7 @@ function createEmailSdk(options) {
     if (typeof rawAnchor === "string" || typeof rawAnchor === "number") {
       const { compactId, realId } = resolveCompactId(rawAnchor);
       assertNotRemoved(realId);
-      return { realId, label: `id=${compactId}` };
+      return { realId, label: "id=".concat(compactId) };
     }
     if (rawAnchor !== null && typeof rawAnchor === "object") {
       const realId = handleRealIds.get(rawAnchor);
@@ -1424,7 +1424,7 @@ function createEmailSdk(options) {
     if (isObject(componentFile)) {
       const component2 = componentFile;
       operationOrigin ??= { kind: "native", nodeId: String(component2.node?.id) };
-      const key = `native:${String(component2.node?.id)}`;
+      const key = "native:".concat(String(component2.node?.id));
       const saved = componentLibrary.get(key);
       componentLibrary.set(key, { ...component2, file: key, level: describeNodeKind(component2.node) === "stripe" ? "L1" : "atoms", slots: component2.slots ?? [] });
       try {
@@ -1447,7 +1447,7 @@ function createEmailSdk(options) {
     const component = library.get(componentFile);
     if (component === void 0) {
       throw new EmailSdkError(
-        `Unknown component "${componentFile}". Valid component files: ${[...library.keys()].sort().join(", ")}.`
+        'Unknown component "'.concat(componentFile, '". Valid component files: ').concat([...library.keys()].sort().join(", "), ".")
       );
     }
     if (position === null || typeof position !== "object") {
@@ -1472,22 +1472,22 @@ function createEmailSdk(options) {
     }
     const componentKind = describeNodeKind(component.node);
     if (componentKind === void 0 || !isObject(component.node) || typeof component.node.id !== "string") {
-      throw new EmailSdkError(`Component "${componentFile}" is malformed and cannot be inserted.`);
+      throw new EmailSdkError('Component "'.concat(componentFile, '" is malformed and cannot be inserted.'));
     }
     const anchorKind = sdk.describeElement(anchorRealId)?.kind;
     if (componentKind !== anchorKind) {
       throw new EmailSdkError(
-        `Component "${componentFile}" is a ${componentKind} and must be inserted next to another ${componentKind}, but anchor ${anchorLabel} is a ${anchorKind ?? "missing element"}. Pick a ${componentKind}-level anchor from brief_input.`
+        'Component "'.concat(componentFile, '" is a ').concat(componentKind, " and must be inserted next to another ") + "".concat(componentKind, ", but anchor ").concat(anchorLabel, " is a ").concat(anchorKind ?? "missing element", ". ") + "Pick a ".concat(componentKind, "-level anchor from brief_input.")
       );
     }
-    const occurrenceKey = `${componentFile}@${anchorRealId}`;
+    const occurrenceKey = "".concat(componentFile, "@").concat(anchorRealId);
     const occurrence = insertOccurrence.get(occurrenceKey) ?? 0;
     const mapping = /* @__PURE__ */ new Map();
     const issued = /* @__PURE__ */ new Set();
     for (const originalId of collectNodeIds(component.node)) {
       if (mapping.has(originalId)) continue;
       const newId = generateUniqueId(
-        `insert:${componentFile}@${anchorRealId}#${occurrence}:${originalId}`,
+        "insert:".concat(componentFile, "@").concat(anchorRealId, "#").concat(occurrence, ":").concat(originalId),
         (id) => issued.has(id) || sdk.hasElement(id)
       );
       mapping.set(originalId, newId);
@@ -1496,7 +1496,7 @@ function createEmailSdk(options) {
     const transaction = sdk.beginTransaction();
     try {
       sdk.insertNode(component.node, effectiveAnchorRealId, isBefore, Object.fromEntries(mapping));
-      if (transactionDepth === 0) sdk.validateDraft(`After insert("${componentFile}")`, {
+      if (transactionDepth === 0) sdk.validateDraft('After insert("'.concat(componentFile, '")'), {
         operation: "insert",
         componentFile,
         direction: isBefore ? "before" : "after",
@@ -1528,9 +1528,9 @@ function createEmailSdk(options) {
         slots.push({ role: slot.role, context: slot.context, realId: slotRealId });
       }
     }
-    const handleId = occurrence === 0 ? componentFile : `${componentFile}#${occurrence + 1}`;
+    const handleId = occurrence === 0 ? componentFile : "".concat(componentFile, "#").concat(occurrence + 1);
     return makeNode(rootRealId, handleId, {
-      label: `component "${handleId}"`,
+      label: 'component "'.concat(handleId, '"'),
       inserted: { file: componentFile, slots }
     });
   }
@@ -1587,7 +1587,7 @@ function createEmailSdk(options) {
     },
     block(id, expectedType) {
       const handle = email.byId(id);
-      if (handle.inspect().blockType !== expectedType) throw new EmailSdkError(`Expected ${expectedType} block at ${id}.`);
+      if (handle.inspect().blockType !== expectedType) throw new EmailSdkError("Expected ".concat(expectedType, " block at ").concat(id, "."));
       return handle;
     },
     patchSettings(patch) {
@@ -1632,7 +1632,7 @@ function createEmailSdk(options) {
         throw new EmailSdkError("Selector matched no nodes.");
       }
       if (entries.length > 1 && selector.limit === void 0) {
-        throw new EmailSdkError(`Selector matched ${entries.length} nodes; narrow it or use select().`);
+        throw new EmailSdkError("Selector matched ".concat(entries.length, " nodes; narrow it or use select()."));
       }
       const entry = entries[0];
       return makeNode(referenceFor(entry), realToTemp.get(entry.id) ?? entry.id);
@@ -1681,7 +1681,7 @@ function createEmailSdk(options) {
       const ids = /* @__PURE__ */ new Map();
       const taken = new Set(collectAllIds(sdk.snapshot()));
       for (const id of collectAllIds(copy)) if (!ids.has(id)) {
-        const next = generateUniqueId(`append:${version}:${id}`, (candidate) => taken.has(candidate));
+        const next = generateUniqueId("append:".concat(version, ":").concat(id), (candidate) => taken.has(candidate));
         if (taken.has(next)) throw new EmailSdkError("idFactory returned a duplicate id.");
         ids.set(id, next);
         taken.add(next);
@@ -1727,7 +1727,7 @@ function createEmailSdk(options) {
         for (const font of resources.fonts) {
           if (!isObject(font) || typeof font.fontFamily !== "string" || !used.has(canonicalFontValue(font.fontFamily))) continue;
           const conflict = fonts.find((item) => isObject(item) && typeof item.fontFamily === "string" && canonicalFontValue(item.fontFamily) === canonicalFontValue(font.fontFamily));
-          if (conflict && stableJson(conflict) !== stableJson(font)) throw new EmailSdkError(`Conflicting font resource ${font.fontFamily}.`);
+          if (conflict && stableJson(conflict) !== stableJson(font)) throw new EmailSdkError("Conflicting font resource ".concat(font.fontFamily, "."));
           if (!conflict) fonts.push(cloneJson(font));
         }
         if (fonts.length || isObject(currentResources) && Array.isArray(currentResources.fonts)) {

@@ -71,12 +71,12 @@ function parseHtml(html) {
   return roots;
 }
 function serializeAttrs(attrs) {
-  return attrs.map((attr) => attr.value === null ? ` ${attr.name}` : ` ${attr.name}="${attr.value.replaceAll('"', "&quot;")}"`).join("");
+  return attrs.map((attr) => attr.value === null ? " ".concat(attr.name) : " ".concat(attr.name, '="').concat(attr.value.replaceAll('"', "&quot;"), '"')).join("");
 }
 function serializeNode(node) {
   if (node.kind === "text") return node.text;
-  if (VOID_TAGS.has(node.tag)) return `<${node.tag}${serializeAttrs(node.attrs)}>`;
-  return `<${node.tag}${serializeAttrs(node.attrs)}>${serializeHtml(node.children)}</${node.tag}>`;
+  if (VOID_TAGS.has(node.tag)) return "<".concat(node.tag).concat(serializeAttrs(node.attrs), ">");
+  return "<".concat(node.tag).concat(serializeAttrs(node.attrs), ">").concat(serializeHtml(node.children), "</").concat(node.tag, ">");
 }
 function serializeHtml(nodes) {
   return nodes.map(serializeNode).join("");

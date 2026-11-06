@@ -44,7 +44,7 @@ function normalizeColor(value, allowTransparent) {
   if (HEX_COLOR.test(raw) || RGB_COLOR.test(lower)) return raw;
   const named = NAMED_COLORS[lower];
   if (named !== void 0) return named;
-  throw new EmailSdkError(`Unsupported color "${value}". Use hex, rgb(), rgba(), or a common named color.`);
+  throw new EmailSdkError('Unsupported color "'.concat(value, '". Use hex, rgb(), rgba(), or a common named color.'));
 }
 var SIDES = ["top", "right", "bottom", "left"];
 var CORNERS = ["topLeft", "topRight", "bottomRight", "bottomLeft"];
@@ -137,12 +137,12 @@ function normalizeStyleArea(area) {
 function normalizeBreakpoint(breakpoint) {
   if (breakpoint === void 0) return "both";
   if (breakpoint === "desktop" || breakpoint === "mobile" || breakpoint === "both") return breakpoint;
-  throw new EmailSdkError(`Style breakpoint must be desktop, mobile, or both; got "${String(breakpoint)}".`);
+  throw new EmailSdkError('Style breakpoint must be desktop, mobile, or both; got "'.concat(String(breakpoint), '".'));
 }
 function normalizeBackgroundTarget(target) {
   if (target === void 0) return "content";
   if (target === "content" || target === "stripe") return target;
-  throw new EmailSdkError(`backgroundTarget must be content or stripe; got "${String(target)}".`);
+  throw new EmailSdkError('backgroundTarget must be content or stripe; got "'.concat(String(target), '".'));
 }
 function checkUnusedStyleOptions(property, options) {
   if (options.backgroundTarget !== void 0 && property !== "backgroundColor") {
@@ -177,9 +177,9 @@ function nodeStyleSpec(kind, blockType, property, options) {
   const spec = selectorKey === void 0 ? void 0 : NODE_STYLE_SPECS[selectorKey]?.[property];
   if (spec !== void 0) return spec;
   const valid = addressableStyleProperties(selectorKey);
-  const suffix = valid.length > 0 ? ` Valid properties: ${valid.join(", ")}.` : "";
+  const suffix = valid.length > 0 ? " Valid properties: ".concat(valid.join(", "), ".") : "";
   throw new EmailSdkError(
-    `Style property "${property}" is not supported on ${kind ?? "element"}${blockType ? ` type="${blockType}"` : ""}.${suffix}`
+    'Style property "'.concat(property, '" is not supported on ').concat(kind ?? "element") + "".concat(blockType ? ' type="'.concat(blockType, '"') : "", ".").concat(suffix)
   );
 }
 function themeStyleSpec(property, options) {
@@ -187,17 +187,17 @@ function themeStyleSpec(property, options) {
   const spec = THEME_STYLE_SPECS[property];
   if (spec === void 0) {
     throw new EmailSdkError(
-      `Style property "${property}" has no document-level theme target. Valid theme properties: ${Object.keys(THEME_STYLE_SPECS).sort().join(", ")}.`
+      'Style property "'.concat(property, '" has no document-level theme target. ') + "Valid theme properties: ".concat(Object.keys(THEME_STYLE_SPECS).sort().join(", "), ".")
     );
   }
   return { path: spec.path(options), shape: spec.shape };
 }
 function assertNumber(value, lo, hi, label) {
   if (typeof value !== "number" || Number.isNaN(value) || typeof value === "boolean") {
-    throw new EmailSdkError(`${label} must be a number.`);
+    throw new EmailSdkError("".concat(label, " must be a number."));
   }
   if (value < lo || value > hi) {
-    throw new EmailSdkError(`${label} must be between ${lo} and ${hi}.`);
+    throw new EmailSdkError("".concat(label, " must be between ").concat(lo, " and ").concat(hi, "."));
   }
   return value;
 }
@@ -209,11 +209,11 @@ function buildResponsiveScalar(value, existing, breakpoint, lo, hi, label) {
   const base = isObject(existing) ? cloneJson(existing) : {};
   if (isObject(value)) {
     const extras = Object.keys(value).filter((key) => !BREAKPOINTS.includes(key));
-    if (extras.length > 0) throw new EmailSdkError(`${label} rejects keys: ${extras.join(", ")}.`);
-    if (Object.keys(value).length === 0) throw new EmailSdkError(`${label} object may not be empty.`);
+    if (extras.length > 0) throw new EmailSdkError("".concat(label, " rejects keys: ").concat(extras.join(", "), "."));
+    if (Object.keys(value).length === 0) throw new EmailSdkError("".concat(label, " object may not be empty."));
     for (const breakpointKey of BREAKPOINTS) {
       if (Object.hasOwn(value, breakpointKey)) {
-        base[breakpointKey] = assertNumber(value[breakpointKey], lo, hi, `${label}.${breakpointKey}`);
+        base[breakpointKey] = assertNumber(value[breakpointKey], lo, hi, "".concat(label, ".").concat(breakpointKey));
       }
     }
   } else {
@@ -234,16 +234,16 @@ function buildAlignment(value, existing, breakpoint, allowJustify = false) {
   const base = isObject(existing) ? cloneJson(existing) : {};
   const check = (candidate, label) => {
     if (typeof candidate !== "string" || !valid.has(candidate)) {
-      throw new EmailSdkError(`${label} must be ${allowed.join(", ")}.`);
+      throw new EmailSdkError("".concat(label, " must be ").concat(allowed.join(", "), "."));
     }
     return candidate;
   };
   if (isObject(value)) {
     const extras = Object.keys(value).filter((key) => !BREAKPOINTS.includes(key));
-    if (extras.length > 0) throw new EmailSdkError(`textAlign rejects keys: ${extras.join(", ")}.`);
+    if (extras.length > 0) throw new EmailSdkError("textAlign rejects keys: ".concat(extras.join(", "), "."));
     if (Object.keys(value).length === 0) throw new EmailSdkError("textAlign object may not be empty.");
     for (const breakpointKey of BREAKPOINTS) {
-      if (Object.hasOwn(value, breakpointKey)) base[breakpointKey] = check(value[breakpointKey], `textAlign.${breakpointKey}`);
+      if (Object.hasOwn(value, breakpointKey)) base[breakpointKey] = check(value[breakpointKey], "textAlign.".concat(breakpointKey));
     }
   } else {
     const next = check(value, "textAlign");
@@ -266,10 +266,10 @@ function buildSides(value, existing) {
   }
   if (isObject(value)) {
     const extras = Object.keys(value).filter((key) => !SIDES.includes(key));
-    if (extras.length > 0) throw new EmailSdkError(`Side object rejects keys: ${extras.join(", ")}.`);
+    if (extras.length > 0) throw new EmailSdkError("Side object rejects keys: ".concat(extras.join(", "), "."));
     if (Object.keys(value).length === 0) throw new EmailSdkError("Side object may not be empty.");
     for (const side of SIDES) {
-      if (Object.hasOwn(value, side)) base[side] = assertNumber(value[side], -1e6, 1e6, `side.${side}`);
+      if (Object.hasOwn(value, side)) base[side] = assertNumber(value[side], -1e6, 1e6, "side.".concat(side));
     }
   } else {
     const next = assertNumber(value, -1e6, 1e6, "spacing");
@@ -284,17 +284,17 @@ function buildResponsiveSides(value, existing, breakpoint, allowedBreakpoints, l
   const base = isObject(existing) ? cloneJson(existing) : {};
   if (isObject(value) && BREAKPOINTS.some((key) => Object.hasOwn(value, key))) {
     const extras = Object.keys(value).filter((key) => !BREAKPOINTS.includes(key));
-    if (extras.length > 0) throw new EmailSdkError(`${label} rejects keys: ${extras.join(", ")}.`);
+    if (extras.length > 0) throw new EmailSdkError("".concat(label, " rejects keys: ").concat(extras.join(", "), "."));
     for (const breakpointKey of BREAKPOINTS) {
       if (!Object.hasOwn(value, breakpointKey)) continue;
       if (!allowedBreakpoints.includes(breakpointKey)) {
-        throw new EmailSdkError(`${label} does not support ${breakpointKey} breakpoint.`);
+        throw new EmailSdkError("".concat(label, " does not support ").concat(breakpointKey, " breakpoint."));
       }
       base[breakpointKey] = buildSides(value[breakpointKey], base[breakpointKey]);
     }
   } else {
     const targetBreakpoints = breakpoint === "both" ? allowedBreakpoints : allowedBreakpoints.includes(breakpoint) ? [breakpoint] : [];
-    if (targetBreakpoints.length === 0) throw new EmailSdkError(`${label} does not support ${breakpoint} breakpoint.`);
+    if (targetBreakpoints.length === 0) throw new EmailSdkError("".concat(label, " does not support ").concat(breakpoint, " breakpoint."));
     for (const breakpointKey of targetBreakpoints) base[breakpointKey] = buildSides(value, base[breakpointKey]);
   }
   for (const breakpointKey of allowedBreakpoints) {
@@ -315,14 +315,14 @@ function buildBorder(value, existing) {
   const validStyles = /* @__PURE__ */ new Set(["solid", "dashed", "dotted"]);
   const base = isObject(existing) ? cloneJson(existing) : {};
   const extras = Object.keys(value).filter((key) => !SIDES.includes(key) && !["width", "color", "style"].includes(key));
-  if (extras.length > 0) throw new EmailSdkError(`border rejects keys: ${extras.join(", ")}.`);
+  if (extras.length > 0) throw new EmailSdkError("border rejects keys: ".concat(extras.join(", "), "."));
   const sideDefault = () => ({ width: 0, color: "transparent" });
   const buildSide = (src, current) => {
     if (src !== void 0 && !isObject(src)) throw new EmailSdkError("border side must be an object.");
     const side = isObject(current) ? cloneJson(current) : sideDefault();
     if (isObject(src)) {
       const sideExtras = Object.keys(src).filter((key) => !["width", "color"].includes(key));
-      if (sideExtras.length > 0) throw new EmailSdkError(`border side rejects keys: ${sideExtras.join(", ")}.`);
+      if (sideExtras.length > 0) throw new EmailSdkError("border side rejects keys: ".concat(sideExtras.join(", "), "."));
       if (Object.hasOwn(src, "width")) side.width = assertNumber(src.width, 0, 100, "border.width");
       if (Object.hasOwn(src, "color")) side.color = normalizeColor(src.color, true);
     }
@@ -361,10 +361,10 @@ function buildCorner(value, existing) {
   const base = isObject(existing) ? cloneJson(existing) : {};
   if (isObject(value)) {
     const extras = Object.keys(value).filter((key) => !CORNERS.includes(key));
-    if (extras.length > 0) throw new EmailSdkError(`borderRadius rejects keys: ${extras.join(", ")}.`);
+    if (extras.length > 0) throw new EmailSdkError("borderRadius rejects keys: ".concat(extras.join(", "), "."));
     if (Object.keys(value).length === 0) throw new EmailSdkError("borderRadius object may not be empty.");
     for (const corner of CORNERS) {
-      if (Object.hasOwn(value, corner)) base[corner] = assertNumber(value[corner], 0, 1e3, `borderRadius.${corner}`);
+      if (Object.hasOwn(value, corner)) base[corner] = assertNumber(value[corner], 0, 1e3, "borderRadius.".concat(corner));
     }
   } else {
     const next = assertNumber(value, 0, 1e3, "borderRadius");
@@ -379,7 +379,7 @@ function buildResponsiveCorner(value, existing, breakpoint) {
   const base = isObject(existing) ? cloneJson(existing) : {};
   if (isObject(value) && BREAKPOINTS.some((key) => Object.hasOwn(value, key))) {
     const extras = Object.keys(value).filter((key) => !BREAKPOINTS.includes(key));
-    if (extras.length > 0) throw new EmailSdkError(`borderRadius rejects keys: ${extras.join(", ")}.`);
+    if (extras.length > 0) throw new EmailSdkError("borderRadius rejects keys: ".concat(extras.join(", "), "."));
     for (const breakpointKey of BREAKPOINTS) {
       if (Object.hasOwn(value, breakpointKey)) base[breakpointKey] = buildCorner(value[breakpointKey], base[breakpointKey]);
     }
@@ -397,7 +397,7 @@ function buildResponsiveCorner(value, existing, breakpoint) {
   return base;
 }
 function buildTextStyle(leaf, value, existing) {
-  if (typeof value !== "boolean") throw new EmailSdkError(`${leaf} must be a boolean.`);
+  if (typeof value !== "boolean") throw new EmailSdkError("".concat(leaf, " must be a boolean."));
   const base = isObject(existing) ? cloneJson(existing) : {};
   base.bold ??= false;
   base.italic ??= false;
@@ -423,7 +423,7 @@ function buildStyleValue(shape, value, options, existing, leaf) {
       try {
         return buildResponsiveScalar(value, existing, breakpoint, 0, 5, "lineHeight");
       } catch (error) {
-        if (error instanceof EmailSdkError) throw new EmailSdkError(`${error.message} ${LINE_HEIGHT_HINT}`);
+        if (error instanceof EmailSdkError) throw new EmailSdkError("".concat(error.message, " ").concat(LINE_HEIGHT_HINT));
         throw error;
       }
     case "alignResponsive":

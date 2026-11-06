@@ -11,9 +11,11 @@ import {
   DocumentStateError,
   contractDefaults,
   hasRecoloredInlineColor,
-  jsonIssues,
+  jsonIssues
+} from "./contract-22395cb9da24.js";
+import {
   validateEmailDocument
-} from "./contract-a9a0a7497166.js";
+} from "./editor-validator-e41a98b04d42.js";
 import {
   SOCIAL_BLOCK_DEFAULT_SETTINGS,
   buildSocialNetwork,
@@ -114,9 +116,9 @@ function collectIds(value) {
 function idIssuer(idFactory, initialTaken = []) {
   const issued = new Set(initialTaken);
   return (seed) => {
-    const id = idFactory?.(seed, (candidate) => issued.has(candidate)) ?? uniqueUuidFromSeed(`email-builder:${seed}`, (candidate) => issued.has(candidate));
+    const id = idFactory?.(seed, (candidate) => issued.has(candidate)) ?? uniqueUuidFromSeed("email-builder:".concat(seed), (candidate) => issued.has(candidate));
     if (issued.has(id)) {
-      throw new EmailSdkError(`idFactory returned duplicate id "${id}" for seed "${seed}".`);
+      throw new EmailSdkError('idFactory returned duplicate id "'.concat(id, '" for seed "').concat(seed, '".'));
     }
     issued.add(id);
     return id;
@@ -124,7 +126,7 @@ function idIssuer(idFactory, initialTaken = []) {
 }
 function assertNonEmptyString(value, label) {
   if (typeof value !== "string" || value.trim() === "") {
-    throw new EmailSdkError(`${label} must be a non-empty string.`);
+    throw new EmailSdkError("".concat(label, " must be a non-empty string."));
   }
 }
 function assertEditorSeed(value) {
@@ -145,7 +147,7 @@ function setPath(target, path, value) {
     throw new EmailSdkError("Theme path must not be empty.");
   }
   if (path[0] !== "settings") {
-    throw new EmailSdkError(`Theme path must start with "settings.", got "${path.join(".")}".`);
+    throw new EmailSdkError('Theme path must start with "settings.", got "'.concat(path.join("."), '".'));
   }
   let current = target;
   for (const segment of path.slice(0, -1)) {
@@ -331,10 +333,10 @@ function sectionStripe(ids, area, blocks, theme = DEFAULT_THEME) {
 function componentStripe(idPrefix, area, blocks) {
   return sectionStripe(
     {
-      stripe: `${idPrefix}-stripe`,
-      structure: `${idPrefix}-structure`,
-      column: `${idPrefix}-column`,
-      container: `${idPrefix}-container`
+      stripe: "".concat(idPrefix, "-stripe"),
+      structure: "".concat(idPrefix, "-structure"),
+      column: "".concat(idPrefix, "-column"),
+      container: "".concat(idPrefix, "-container")
     },
     area,
     blocks
@@ -454,7 +456,7 @@ function createMinimalEmailSeed(options = {}) {
 }
 function assertNonEmptyArray(value, label) {
   if (!Array.isArray(value) || value.length === 0) {
-    throw new EmailSdkError(`${label} must be a non-empty array.`);
+    throw new EmailSdkError("".concat(label, " must be a non-empty array."));
   }
 }
 function createEmailFromDraft(options) {
@@ -475,7 +477,7 @@ function createEmailFromDraft(options) {
   if (acquiredBackgroundImage !== void 0 && !Object.hasOwn(darkTheme, "backgroundImage") && !options.intent?.resetFields?.includes(backgroundImagePointer)) {
     darkTheme.backgroundImage = acquiredBackgroundImage;
   }
-  const lightTheme = (section) => objectValue(objectValue(globalSettings[section], `settings.${section}`).lightTheme, `settings.${section}.lightTheme`);
+  const lightTheme = (section) => objectValue(objectValue(globalSettings[section], "settings.".concat(section)).lightTheme, "settings.".concat(section, ".lightTheme"));
   const general = lightTheme("general");
   const areas = lightTheme("stripes");
   const buttons = objectValue(globalSettings.buttons, "settings.buttons");
@@ -483,62 +485,62 @@ function createEmailFromDraft(options) {
   const issueId = idIssuer(options.idFactory, collectIds(draft));
   const seenIds = /* @__PURE__ */ new Set();
   function objectValue(value, label) {
-    if (!isObject(value)) throw new EmailSdkError(`${label} must be an object.`);
+    if (!isObject(value)) throw new EmailSdkError("".concat(label, " must be an object."));
     return value;
   }
   function settingsOf(node, label) {
-    return node.settings === void 0 ? {} : objectValue(node.settings, `${label}.settings`);
+    return node.settings === void 0 ? {} : objectValue(node.settings, "".concat(label, ".settings"));
   }
   function children(node, key, label) {
     const value = node[key];
-    assertNonEmptyArray(value, `${label}.${key}`);
-    return value.map((child, index) => objectValue(child, `${label}.${key}[${index}]`));
+    assertNonEmptyArray(value, "".concat(label, ".").concat(key));
+    return value.map((child, index) => objectValue(child, "".concat(label, ".").concat(key, "[").concat(index, "]")));
   }
   function fillNode(node, defaults, label) {
     const suppliedId = node.id !== void 0;
     if (!suppliedId) node.id = issueId(label);
-    assertNonEmptyString(node.id, `${label}.id`);
-    if (seenIds.has(node.id) && options.baselineEmailJson === void 0) throw new EmailSdkError(`Duplicate editor id "${node.id}" at ${label}.`);
+    assertNonEmptyString(node.id, "".concat(label, ".id"));
+    if (seenIds.has(node.id) && options.baselineEmailJson === void 0) throw new EmailSdkError('Duplicate editor id "'.concat(node.id, '" at ').concat(label, "."));
     seenIds.add(node.id);
     if (suppliedId && options.regenerateIds) node.id = issueId(label);
     node.settings = mergeJson(defaults, settingsOf(node, label));
   }
   children(draft, "stripes", "emailJson").forEach((stripe, stripeIndex) => {
-    const stripePath = `emailJson.stripes[${stripeIndex}]`;
+    const stripePath = "emailJson.stripes[".concat(stripeIndex, "]");
     const area = settingsOf(stripe, stripePath).messageArea ?? "content";
-    assertNonEmptyString(area, `${stripePath}.settings.messageArea`);
-    const areaSettings = areas[area] === void 0 ? {} : objectValue(areas[area], `settings.stripes.lightTheme.${area}`);
+    assertNonEmptyString(area, "".concat(stripePath, ".settings.messageArea"));
+    const areaSettings = areas[area] === void 0 ? {} : objectValue(areas[area], "settings.stripes.lightTheme.".concat(area));
     const stripeDefaults = stripeSettings(area, DEFAULT_THEME);
     stripeDefaults.contentBackgroundColor = areaSettings.contentBackgroundColor ?? DEFAULT_THEME.contentBackgroundColor;
     stripeDefaults.stripeBackgroundColor = areaSettings.stripeBackgroundColor ?? general.backgroundColor;
     fillNode(stripe, stripeDefaults, stripePath);
     children(stripe, "structures", stripePath).forEach((structure, structureIndex) => {
-      const structurePath = `${stripePath}.structures[${structureIndex}]`;
+      const structurePath = "".concat(stripePath, ".structures[").concat(structureIndex, "]");
       fillNode(structure, structureSettings(), structurePath);
       children(structure, "columns", structurePath).forEach((column, columnIndex) => {
-        const columnPath = `${structurePath}.columns[${columnIndex}]`;
+        const columnPath = "".concat(structurePath, ".columns[").concat(columnIndex, "]");
         const width = settingsOf(column, columnPath).width;
         if (typeof width !== "number" || !Number.isFinite(width) || width <= 0) {
-          throw new EmailSdkError(`${columnPath}.settings.width must be a positive finite column weight.`);
+          throw new EmailSdkError("".concat(columnPath, ".settings.width must be a positive finite column weight."));
         }
         fillNode(column, {}, columnPath);
         children(column, "containers", columnPath).forEach((container, containerIndex) => {
-          const containerPath = `${columnPath}.containers[${containerIndex}]`;
+          const containerPath = "".concat(columnPath, ".containers[").concat(containerIndex, "]");
           fillNode(container, containerSettings(DEFAULT_THEME), containerPath);
           children(container, "blocks", containerPath).forEach((block, blockIndex) => {
-            const blockPath = `${containerPath}.blocks[${blockIndex}]`;
+            const blockPath = "".concat(containerPath, ".blocks[").concat(blockIndex, "]");
             const supplied = settingsOf(block, blockPath);
             let defaults;
             switch (block.type) {
               case "text":
-                assertNonEmptyString(block.content, `${blockPath}.content`);
+                assertNonEmptyString(block.content, "".concat(blockPath, ".content"));
                 defaults = textBlock("", "").settings;
                 defaults.backgroundColor = "transparent";
                 if (hasRecoloredInlineColor(block.content)) delete defaults.fontColor;
                 else defaults.fontColor = areaSettings.fontColor ?? DEFAULT_THEME.fontColor;
                 break;
               case "image": {
-                assertNonEmptyString(supplied.src, `${blockPath}.settings.src`);
+                assertNonEmptyString(supplied.src, "".concat(blockPath, ".settings.src"));
                 defaults = imageBlock("", { src: supplied.src, alt: "" }).settings;
                 const size = isObject(supplied.size) ? supplied.size : {};
                 const desktop = mergeJson({ mode: "width", px: width }, size.desktop);
@@ -546,8 +548,8 @@ function createEmailFromDraft(options) {
                 break;
               }
               case "button": {
-                assertNonEmptyString(supplied.text, `${blockPath}.settings.text`);
-                const link = objectValue(supplied.link, `${blockPath}.settings.link`);
+                assertNonEmptyString(supplied.text, "".concat(blockPath, ".settings.text"));
+                const link = objectValue(supplied.link, "".concat(blockPath, ".settings.link"));
                 if (link.type === "email" && typeof link.value === "string" && link.value !== "") {
                   link.value = normalizeMailto(link.value);
                 }
@@ -559,7 +561,7 @@ function createEmailFromDraft(options) {
                 const borderColors = objectValue(buttonColors.borderColor, "settings.buttons.lightTheme.borderColor");
                 defaults.border = {
                   ...Object.fromEntries(["top", "right", "bottom", "left"].map((side) => [side, {
-                    width: objectValue(borderWidths[side], `settings.buttons.border.${side}`).width,
+                    width: objectValue(borderWidths[side], "settings.buttons.border.".concat(side)).width,
                     color: borderColors[side]
                   }])),
                   style: borderWidths.style
@@ -579,16 +581,16 @@ function createEmailFromDraft(options) {
                 break;
               case "social": {
                 const networks = supplied.networks;
-                assertNonEmptyArray(networks, `${blockPath}.settings.networks`);
+                assertNonEmptyArray(networks, "".concat(blockPath, ".settings.networks"));
                 const textCustomization = resolveTextCustomization(supplied, networks);
-                supplied.networks = networks.map((network, index) => completeNativeSocialNetwork(objectValue(network, `${blockPath}.settings.networks[${index}]`), textCustomization));
+                supplied.networks = networks.map((network, index) => completeNativeSocialNetwork(objectValue(network, "".concat(blockPath, ".settings.networks[").concat(index, "]")), textCustomization));
                 supplied.textCustomization = textCustomization;
                 block.settings = supplied;
                 defaults = cloneJson(SOCIAL_BLOCK_DEFAULT_SETTINGS);
                 break;
               }
               default:
-                assertNonEmptyString(block.type, `${blockPath}.type`);
+                assertNonEmptyString(block.type, "".concat(blockPath, ".type"));
                 defaults = contractDefaults(block.type);
             }
             fillNode(block, block.type === "timer" && validateBlock(block).success ? {} : defaults, blockPath);
@@ -663,7 +665,7 @@ var minimalEmailComponents = Object.freeze({
 });
 function normalizeMailto(value) {
   const match = /^mailto:/iu.exec(value);
-  return match ? `mailto:${value.slice(match[0].length)}` : `mailto:${value}`;
+  return match ? "mailto:".concat(value.slice(match[0].length)) : "mailto:".concat(value);
 }
 function assertNoSchemaOption(options) {
   if (Object.hasOwn(options, "schema")) {
@@ -698,11 +700,11 @@ function createEmailBuilder(options = {}) {
   function nextIds(kind) {
     const ordinal = sectionCount + 1;
     return {
-      stripe: issueId(`${kind}:${ordinal}:stripe`),
-      structure: issueId(`${kind}:${ordinal}:structure`),
-      column: issueId(`${kind}:${ordinal}:column`),
-      container: issueId(`${kind}:${ordinal}:container`),
-      block: issueId(`${kind}:${ordinal}:block`)
+      stripe: issueId("".concat(kind, ":").concat(ordinal, ":stripe")),
+      structure: issueId("".concat(kind, ":").concat(ordinal, ":structure")),
+      column: issueId("".concat(kind, ":").concat(ordinal, ":column")),
+      container: issueId("".concat(kind, ":").concat(ordinal, ":container")),
+      block: issueId("".concat(kind, ":").concat(ordinal, ":block"))
     };
   }
   function resolveAfter(after) {
@@ -717,7 +719,7 @@ function createEmailBuilder(options = {}) {
     if (afterId !== void 0) {
       const effectiveAfterId = lastInsertByAnchor.get(afterId) ?? afterId;
       const index = list.findIndex((item) => isObject(item) && item.id === effectiveAfterId);
-      if (index === -1) throw new EmailSdkError(`after section "${afterId}" was not found.`);
+      if (index === -1) throw new EmailSdkError('after section "'.concat(afterId, '" was not found.'));
       list.splice(index + 1, 0, stripe);
       lastInsertByAnchor.set(afterId, String(stripe.id));
     } else {
@@ -782,13 +784,13 @@ function createEmailBuilder(options = {}) {
       }
       if (sectionOptions.addressHtml !== void 0) {
         assertNonEmptyString(sectionOptions.addressHtml, "Footer addressHtml");
-        blocks.push(textBlock(issueId(`footer-section:${sectionCount + 1}:address-block`), sectionOptions.addressHtml, theme));
+        blocks.push(textBlock(issueId("footer-section:".concat(sectionCount + 1, ":address-block")), sectionOptions.addressHtml, theme));
       }
       if (sectionOptions.unsubscribeHref !== void 0) {
         assertNonEmptyString(sectionOptions.unsubscribeHref, "Footer unsubscribeHref");
         blocks.push(textBlock(
-          issueId(`footer-section:${sectionCount + 1}:unsubscribe-block`),
-          `<p><a href="${sectionOptions.unsubscribeHref}">Unsubscribe</a></p>`,
+          issueId("footer-section:".concat(sectionCount + 1, ":unsubscribe-block")),
+          '<p><a href="'.concat(sectionOptions.unsubscribeHref, '">Unsubscribe</a></p>'),
           theme
         ));
       }
@@ -807,11 +809,9 @@ function createEmailBuilder(options = {}) {
       setPath(candidate, path.split("."), value);
       const after = validateEmailDocument(candidate);
       if (after.length) {
-        const existing = new Set(validateEmailDocument(draft).map((issue) => `${issue.path}
-${issue.message}`));
-        const introduced = after.filter((issue) => !existing.has(`${issue.path}
-${issue.message}`));
-        if (introduced.length) throw new EmailSdkSchemaError(`Theme write ${JSON.stringify(path)}`, introduced);
+        const existing = new Set(validateEmailDocument(draft).map((issue) => "".concat(issue.path, "\n").concat(issue.message)));
+        const introduced = after.filter((issue) => !existing.has("".concat(issue.path, "\n").concat(issue.message)));
+        if (introduced.length) throw new EmailSdkSchemaError("Theme write ".concat(JSON.stringify(path)), introduced);
       }
       draft = candidate;
       mutationCount += 1;

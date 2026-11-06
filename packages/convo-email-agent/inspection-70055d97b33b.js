@@ -8,7 +8,7 @@ var MAX_ITEMS = 100;
 var MAX_SNIPPET = 140;
 function truncate(value, limit = MAX_SNIPPET) {
   const text = String(value ?? "").replace(/\s+/g, " ").trim();
-  return text.length > limit ? `${text.slice(0, limit)}...` : text;
+  return text.length > limit ? "".concat(text.slice(0, limit), "...") : text;
 }
 function stripHtml(html) {
   return truncate(String(html ?? "").replace(/<script\b[^>]*>[\s\S]*?<\/script>/giu, " ").replace(/<style\b[^>]*>[\s\S]*?<\/style>/giu, " ").replace(/<[^>]+>/gu, " ").replace(/&nbsp;/giu, " ").replace(/&amp;/giu, "&").replace(/&lt;/giu, "<").replace(/&gt;/giu, ">"));

@@ -6,10 +6,9 @@ import {
   parseHtml
 } from "./parse-html-7b561a99741a.js";
 import {
-  collectSocialDocumentIssues
-} from "./social-f4a8e0da8c68.js";
+  validateEmailDocument
+} from "./editor-validator-e41a98b04d42.js";
 import {
-  LINE_HEIGHT_HINT,
   cloneJson,
   deepFreeze,
   describeNodeKind,
@@ -20,7 +19,7 @@ import {
 } from "./errors-3ee69a7e1eb0.js";
 
 // convo-email-agent/src/sdk/preparation.ts
-import { validateDocumentSnapshot, validateDocumentState as validateDocumentState2, getUnavailableMergeServiceSideEffects } from "./editor-validator/index.mjs";
+import { validateDocumentSnapshot, validateDocumentState, getUnavailableMergeServiceSideEffects } from "./editor-validator/index.mjs";
 
 // convo-email-agent/src/sdk/contract.ts
 import schemaData from "./contract-data/schema.js";
@@ -34,9 +33,9 @@ var manifest_default = {
   zodVersion: "4.6.6",
   format: "esm-modules-v1",
   files: {
-    "NOTICE.txt": "a77d2ffaf4e8d2c81677dc870abf7ab47bbb80c40ec793cb57bbb5ddea1b76ac",
-    "index.mjs": "3fa538d4f9fbc9cf42faa09a807250b663c8aa6c2073fb21ed3be6032b80ae31",
-    "modules/ArrayUtils-fbf37596896f.mjs": "f465f35c4a77674ccaebdb8a415e76e8e4c95039145b24e9415f52d2cad9aaac",
+    "NOTICE.txt": "85fb506853c08b864dc4ea74b2a2ddf050300de9b3187b3d95496060d8588749",
+    "index.mjs": "95e7cd3a952390729074eef197750da7811a6a2148b589f9b43d66c2a4944bbb",
+    "modules/ArrayUtils-fbf37596896f.mjs": "7adf3ac2f9445647cd81aaaac12fd461bb281b315607a6433e53bd07d0ca6642",
     "modules/AttributeConfigMigration-0295df7fad2b.mjs": "e5b9e7145223508e7c8d7a5fadbbf8bc02b30cd8eff8dee255d8654b3780909a",
     "modules/CSSConverter-eecb098b236c.mjs": "7bd5f53e3b200ddb7096baf845e84457131c847c9466cd5978d1fa8e7cffe4a2",
     "modules/ColorUtils-a33f32974f73.mjs": "9b8c4125697dd9811d153216c56fb2fbc9e85cb8e9fffb78e332afc4e21cb874",
@@ -96,7 +95,7 @@ var manifest_default = {
     "modules/parse-545b503fc4ed.mjs": "0d9109245704e662d12a16a49519324075c090bf342e51ef3ac964ccbcbc44a1",
     "modules/parse-8126121d6d62.mjs": "a6985cef26c5dc0a778637319f43ba032f836ddefdcbd17795e57b1e266f1993",
     "modules/pl-0edcc52c11a6.mjs": "9f94902d4e758f25b0d07de7898cd04fb52fdb7a70312b2cc4f73d61e0b8a813",
-    "modules/proto-int64-27d7cd28885a.mjs": "0ecc5f695acda4ca429fb8ccc9a3ce2d7dc0d84af5900b9817fec84ec26307ad",
+    "modules/proto-int64-27d7cd28885a.mjs": "ff2e9d86fd7c07ab8a89b94099b71583113d90afb74c879483ac8124eb053cf3",
     "modules/ps-57feece82f75.mjs": "6d7faad5c74d0916eec08cd7e1400688fbdc84e3d7b752c74541ffeaca7364c5",
     "modules/pt-2b6363a9f827.mjs": "7539f524c2f0bdb22e8b1d4b02faf1aaaa2f3871ab0cfc22c354a7e5a3e43883",
     "modules/pt-BR-4ca29f9ccdf1.mjs": "78b812a60ee722a6d0409681274d6419dd7c53ae3fa2ead67e4135b9f1622cac",
@@ -123,8 +122,8 @@ var manifest_default = {
     "modules/yo-9342d8b90769.mjs": "e3a29e39e085122bab1c4ffe23ab34834c4c6d965ee91fdee971d2ed4b091ab9",
     "modules/zh-TW-74f07ebb2b3a.mjs": "848fe12bc44f694a16e3198d55ad52d31d6441be8b83f41d2b3788dd43c356f7"
   },
-  sizeBytes: 2280431,
-  bundleSha256: "94f15927e7ac5eff5b15fd3cfa8a49f588bd38eb0ec44b2a7e7352d51dd12136"
+  sizeBytes: 2277977,
+  bundleSha256: "820dbed0b6252d8414872fc61219fefcd492f004b59582ec4094b65793b1a90e"
 };
 
 // convo-email-agent/src/sdk/contract.ts
@@ -164,23 +163,23 @@ function getCapabilities() {
   });
 }
 function nodeCapability(kind) {
-  const definition = kind in blockKinds ? `${kind}Block` : kind;
+  const definition = kind in blockKinds ? "".concat(kind, "Block") : kind;
   return nodes.find((node) => node.schemaDefinition === definition);
 }
 function resolveSchema(node) {
   if (!node.$ref) return node;
   const resolved = node.$ref.slice(2).split("/").reduce((value, key) => isObject(value) ? value[key] : void 0, schema);
-  if (!isObject(resolved)) throw new Error(`Unresolved contract reference: ${node.$ref}`);
+  if (!isObject(resolved)) throw new Error("Unresolved contract reference: ".concat(node.$ref));
   return { ...resolveSchema(resolved), ...Object.fromEntries(Object.entries(node).filter(([key]) => key !== "$ref")) };
 }
 function nodeSchema(kind) {
-  const definition = kind in blockKinds ? `${kind}Block` : kind;
+  const definition = kind in blockKinds ? "".concat(kind, "Block") : kind;
   const result = schema.definitions?.[definition];
-  if (!result) throw new Error(`Unsupported SDK node kind: ${kind}`);
+  if (!result) throw new Error("Unsupported SDK node kind: ".concat(kind));
   return resolveSchema(result);
 }
 function contractDefaults(kind) {
-  const name = `DEFAULT_${kind.toUpperCase()}${kind === "container" ? "" : "_BLOCK"}_SETTINGS`;
+  const name = "DEFAULT_".concat(kind.toUpperCase()).concat(kind === "container" ? "" : "_BLOCK", "_SETTINGS");
   const defaults = catalogData.defaults[name];
   return isObject(defaults) ? cloneJson(defaults) : {};
 }
@@ -306,103 +305,6 @@ function linkHostContains(element, blockType, needle) {
   return urls.some((url) => url.toLowerCase().includes(lowerNeedle));
 }
 
-// convo-email-agent/src/sdk/editor-validator.ts
-import {
-  validateDocumentState
-} from "./editor-validator/index.mjs";
-var ROOT_PATH = "<root>";
-function dotPath(segments) {
-  return segments.length === 0 ? ROOT_PATH : segments.map(String).join(".");
-}
-function pointerToPath(pointer) {
-  const segments = pointer.split("/").slice(1).map((segment) => segment.replace(/~1/gu, "/").replace(/~0/gu, "~"));
-  return dotPath(segments);
-}
-function quoteAll(values) {
-  return values.map((value) => JSON.stringify(value)).join(", ");
-}
-var DISCRIMINATOR_MESSAGE = /^Invalid discriminator value\. Expected (.+)$/u;
-var TYPE_MESSAGE = /^Invalid input: expected (.+?), received (.+)$/u;
-var LINE_HEIGHT_PATH = /^settings\.(?:stripes|headings\.h[1-6])\.lineHeight(?:\.(?:desktop|mobile))?$/u;
-function formatIssue(issue) {
-  const formatted = formatNativeIssue(issue);
-  const missing = issue.code === "invalid_type" && TYPE_MESSAGE.exec(issue.message)?.[2] === "undefined";
-  if (missing || issue.code === "unrecognized_keys" || !LINE_HEIGHT_PATH.test(dotPath(issue.path))) return formatted;
-  return formatted.map((entry) => ({ ...entry, message: `${entry.message} ${LINE_HEIGHT_HINT}` }));
-}
-function formatNativeIssue(issue) {
-  const path = dotPath(issue.path);
-  if (issue.code === "unrecognized_keys" && issue.keys && issue.keys.length > 0) {
-    return issue.keys.map((key) => ({ path, code: issue.code, message: `unsupported property ${JSON.stringify(key)}` }));
-  }
-  if (issue.code === "invalid_type") {
-    const match = TYPE_MESSAGE.exec(issue.message);
-    if (match?.[2] === "undefined" && issue.path.length > 0) {
-      const property = String(issue.path[issue.path.length - 1]);
-      return [{
-        path: dotPath(issue.path.slice(0, -1)),
-        code: issue.code,
-        message: `missing required property ${JSON.stringify(property)}`
-      }];
-    }
-    return [{ path, code: issue.code, message: match ? `expected ${match[1]}, received ${match[2]}` : issue.message }];
-  }
-  if (issue.code === "invalid_union") {
-    const discriminator = DISCRIMINATOR_MESSAGE.exec(issue.message);
-    if (discriminator) {
-      const allowed = discriminator[1].split("|").map((value) => value.trim().replace(/^'(.*)'$/u, "$1"));
-      return [{ path, code: issue.code, message: `must be one of ${quoteAll(allowed)}` }];
-    }
-    let candidates = issue.branches ?? [];
-    for (const property of ["type", "mode"]) {
-      const mismatches = candidates.map((branch) => branch.find((nested) => nested.code === "invalid_value" && nested.path.length === 1 && nested.path[0] === property && nested.values && nested.values.length > 0));
-      if (mismatches.length > 0 && mismatches.every(Boolean)) {
-        const allowed = [...new Set(mismatches.flatMap((mismatch) => mismatch?.values ?? []))];
-        return [{
-          path: dotPath([...issue.path, property]),
-          code: "invalid_value",
-          message: `must be one of ${quoteAll(allowed)}`
-        }];
-      }
-      candidates = candidates.filter((_, index) => !mismatches[index]);
-    }
-    const branches = candidates.map((branch) => branch.flatMap((nested) => formatIssue({ ...nested, path: [...issue.path, ...nested.path] })));
-    const closest = branches.filter((branch) => branch.length > 0).sort((left, right) => left.length - right.length)[0];
-    if (closest) return closest;
-    return [{ path, code: issue.code, message: issue.message }];
-  }
-  if (issue.code === "invalid_value" && issue.values && issue.values.length > 0) {
-    return [{ path, code: issue.code, message: `must be one of ${quoteAll(issue.values)}` }];
-  }
-  return [{ path, code: issue.code, message: issue.message }];
-}
-var LINE_HEIGHT_GROUPS = ["stripes", ...[1, 2, 3, 4, 5, 6].map((level) => `headings/h${level}`)];
-function lineHeightPrecisionIssues(model, current) {
-  const issues = [];
-  for (const group of LINE_HEIGHT_GROUPS) {
-    for (const platform of ["desktop", "mobile"]) {
-      const instancePath = `/settings/${group}/lineHeight/${platform}`;
-      const value = resolveJsonPointer(model, instancePath);
-      if (typeof value !== "number" || !Number.isFinite(value) || Math.round(value * 100) / 100 === value) continue;
-      if (current !== void 0 && resolveJsonPointer(current, instancePath) === value) continue;
-      issues.push({ instancePath, message: `${value} is stored as a whole percentage and would read back as ${Math.round(value * 100) / 100}. ${LINE_HEIGHT_HINT}` });
-    }
-  }
-  return issues;
-}
-function validateEmailDocument(model, options = {}) {
-  const result = validateDocumentState(model, options.current);
-  const issues = result.issues.flatMap(formatIssue);
-  const reported = new Set(issues.map((issue) => issue.path));
-  for (const rule of [...collectSocialDocumentIssues(model), ...lineHeightPrecisionIssues(model, options.current)]) {
-    const path = pointerToPath(rule.instancePath);
-    if (reported.has(path)) continue;
-    reported.add(path);
-    issues.push({ path, code: "editor_rule", message: rule.message });
-  }
-  return issues;
-}
-
 // convo-email-agent/src/sdk/lost-keys.ts
 var CHILD_ARRAYS = /* @__PURE__ */ new Set(["stripes", "structures", "columns", "containers", "blocks"]);
 function acceptsNull(node) {
@@ -439,7 +341,7 @@ function findUnintendedLosses(input, output, intent = {}) {
       return;
     }
     for (const [key, value] of Object.entries(before2)) {
-      const address = `${pointer}/${key}`;
+      const address = "".concat(pointer, "/").concat(key);
       if (!Object.hasOwn(after2, key)) {
         if (!permitted(address)) lost.push(address);
       } else compare(value, after2[key], address);
@@ -450,25 +352,25 @@ function findUnintendedLosses(input, output, intent = {}) {
   for (const key of Object.keys(before)) {
     if (CHILD_ARRAYS.has(key)) continue;
     if (!Object.hasOwn(after, key)) {
-      if (!permitted(`/${key}`)) lost.push(`/${key}`);
-    } else compare(before[key], after[key], `/${key}`);
+      if (!permitted("/".concat(key))) lost.push("/".concat(key));
+    } else compare(before[key], after[key], "/".concat(key));
   }
   const remaining = collectNodeIndex(output);
   const occurrences = /* @__PURE__ */ new Map();
   for (const node of collectNodeIndex(input)) {
-    const key = `${node.kind}:${node.id}`;
+    const key = "".concat(node.kind, ":").concat(node.id);
     const index = occurrences.get(key) ?? 0;
     occurrences.set(key, index + 1);
     const candidates = remaining.filter((item) => item.id === node.id && item.kind === node.kind);
     const survivor = candidates[index];
     if (!survivor) {
-      if (!removals.has(node.id) && !node.parentChain.some((id) => removals.has(id))) lost.push(`/${node.id}`);
+      if (!removals.has(node.id) && !node.parentChain.some((id) => removals.has(id))) lost.push("/".concat(node.id));
       continue;
     }
     const withoutChildren = (item) => Object.fromEntries(
       Object.entries(item).filter(([key2]) => !CHILD_ARRAYS.has(key2))
     );
-    compare(withoutChildren(node.element), withoutChildren(survivor.element), `/${node.id}`);
+    compare(withoutChildren(node.element), withoutChildren(survivor.element), "/".concat(node.id));
   }
   return [...new Set(lost)];
 }
@@ -501,7 +403,7 @@ function colorKey(color) {
     const channels = rgb.slice(1, 4).map(Number);
     if (channels.some((channel) => channel > 255)) return void 0;
     const alpha = rgb[4] === void 0 ? 1 : Number(rgb[4]) / (rgb[5] ? 100 : 1);
-    hex = `#${channels.map((channel) => channel.toString(16).padStart(2, "0")).join("")}` + (alpha >= 1 ? "" : Math.round(alpha * 255).toString(16).padStart(2, "0"));
+    hex = "#".concat(channels.map((channel) => channel.toString(16).padStart(2, "0")).join("")) + (alpha >= 1 ? "" : Math.round(alpha * 255).toString(16).padStart(2, "0"));
   } else {
     try {
       hex = normalizeColor(value, true).toLowerCase();
@@ -510,7 +412,7 @@ function colorKey(color) {
     }
   }
   const short = /^#([0-9a-f])([0-9a-f])([0-9a-f])$/u.exec(hex);
-  if (short) hex = `#${short[1]}${short[1]}${short[2]}${short[2]}${short[3]}${short[3]}`;
+  if (short) hex = "#".concat(short[1]).concat(short[1]).concat(short[2]).concat(short[2]).concat(short[3]).concat(short[3]);
   return /^#[0-9a-f]{6}ff$/u.test(hex) ? hex.slice(0, 7) : hex;
 }
 var fontColorOf = (block) => isObject(block.settings) ? block.settings.fontColor : void 0;
@@ -548,7 +450,7 @@ function releaseCopiedFontColors(value) {
 // convo-email-agent/src/sdk/preparation.ts
 var DocumentStateError = class extends Error {
   constructor(issues) {
-    super(issues.map((issue) => `${issue.path}: ${issue.message}`).join("; "));
+    super(issues.map((issue) => "".concat(issue.path, ": ").concat(issue.message)).join("; "));
     this.issues = issues;
     this.name = "DocumentStateError";
     this.code = issues[0]?.code ?? "INVALID_DOCUMENT";
@@ -565,9 +467,9 @@ var DocumentStateError = class extends Error {
 function normalizedPaths(before, after, path = "") {
   if (stableJson(before) === stableJson(after)) return [];
   if (Array.isArray(before) && Array.isArray(after) && before.length === after.length) {
-    return after.flatMap((value, index) => normalizedPaths(before[index], value, path ? `${path}.${index}` : String(index)));
+    return after.flatMap((value, index) => normalizedPaths(before[index], value, path ? "".concat(path, ".").concat(index) : String(index)));
   }
-  if (isObject(before) && isObject(after)) return [.../* @__PURE__ */ new Set([...Object.keys(before), ...Object.keys(after)])].flatMap((key) => normalizedPaths(before[key], after[key], path ? `${path}.${key}` : key));
+  if (isObject(before) && isObject(after)) return [.../* @__PURE__ */ new Set([...Object.keys(before), ...Object.keys(after)])].flatMap((key) => normalizedPaths(before[key], after[key], path ? "".concat(path, ".").concat(key) : key));
   return [path || "<root>"];
 }
 function jsonIssues(value, input = "target") {
@@ -583,7 +485,7 @@ function jsonIssues(value, input = "target") {
       return;
     }
     if (typeof item !== "object") {
-      fail(`Value of type ${typeof item} is not JSON.`);
+      fail("Value of type ".concat(typeof item, " is not JSON."));
       return;
     }
     if (ancestors.has(item)) {
@@ -600,14 +502,14 @@ function jsonIssues(value, input = "target") {
       if (Object.getPrototypeOf(item) !== Array.prototype) fail("Expected a plain JSON array.");
       for (let i = 0; i < item.length; i++) {
         const descriptor = Object.getOwnPropertyDescriptor(item, i);
-        if (!descriptor) fail(`Sparse array entry at ${i}.`);
-        else if (descriptor.get || descriptor.set || !descriptor.enumerable) fail(`Array entry ${i} is not a JSON data property.`);
-        else visit(descriptor.value, `${path}.${i}`);
+        if (!descriptor) fail("Sparse array entry at ".concat(i, "."));
+        else if (descriptor.get || descriptor.set || !descriptor.enumerable) fail("Array entry ".concat(i, " is not a JSON data property."));
+        else visit(descriptor.value, "".concat(path, ".").concat(i));
       }
       if (Object.getOwnPropertyNames(item).some((key) => key !== "length" && (String(Number(key)) !== key || !Number.isInteger(Number(key)) || Number(key) < 0 || Number(key) >= item.length))) fail("Array properties would be discarded.");
     } else for (const [key, descriptor] of Object.entries(Object.getOwnPropertyDescriptors(item))) {
-      if (descriptor.get || descriptor.set || !descriptor.enumerable) fail(`Property ${key} is not a JSON data property.`);
-      else visit(descriptor.value, path === "<root>" ? key : `${path}.${key}`);
+      if (descriptor.get || descriptor.set || !descriptor.enumerable) fail("Property ".concat(key, " is not a JSON data property."));
+      else visit(descriptor.value, path === "<root>" ? key : "".concat(path, ".").concat(key));
     }
     ancestors.delete(item);
   };
@@ -619,12 +521,12 @@ function unknownIssues(value, input) {
   const visit = (value2, rawSchema, path) => {
     const schema2 = schemaForValue(rawSchema, value2);
     if (Array.isArray(value2)) {
-      if (schema2.items) value2.forEach((child, i) => visit(child, schema2.items, `${path}.${i}`));
+      if (schema2.items) value2.forEach((child, i) => visit(child, schema2.items, "".concat(path, ".").concat(i)));
       return;
     }
     if (!isObject(value2) || !schema2.properties) return;
     for (const [key, child] of Object.entries(value2)) {
-      const childPath = path ? `${path}.${key}` : key;
+      const childPath = path ? "".concat(path, ".").concat(key) : key;
       if (Object.hasOwn(schema2.properties, key)) visit(child, schema2.properties[key], childPath);
       else if (isObject(schema2.additionalProperties)) visit(child, schema2.additionalProperties, childPath);
       else issues.push({
@@ -662,7 +564,7 @@ function validateChange({ current, target, intent }) {
   if (json.length) return { success: false, issues: json };
   const unknown = unknownIssues(target, "target");
   if (unknown.length) return { success: false, issues: unknown };
-  const native = validateDocumentState2(target, current);
+  const native = validateDocumentState(target, current);
   const validation = validateEmailDocument(target, { current });
   if (!native.success || validation.length) return { success: false, issues: validation.length ? validation.map((issue) => ({ ...issue, nativeCode: issue.code, code: "INVALID_DOCUMENT", stage: "schema", input: native.input ?? "target" })) : native.issues.map((issue) => ({ code: "INVALID_DOCUMENT", nativeCode: issue.code, stage: "schema", input: native.input ?? "target", path: issue.path.join("."), message: issue.message })) };
   const candidate = native.documentState;
@@ -715,7 +617,7 @@ function validateChange({ current, target, intent }) {
         nodeId: entry.id,
         nodeType: entry.blockType ?? entry.kind,
         reason: survivor ? "MOVE_UNSUPPORTED" : "DELETE_UNSUPPORTED",
-        message: `${survivor ? "Moving" : "Deleting"} this node (including through its parent) is not supported by merge-service.`
+        message: "".concat(survivor ? "Moving" : "Deleting", " this node (including through its parent) is not supported by merge-service.")
       });
     }
     if (survivor) for (const key of capability?.readOnlyProperties ?? []) {
@@ -723,7 +625,7 @@ function validateChange({ current, target, intent }) {
         code: "READ_ONLY_FIELD",
         stage: "change",
         input: "target",
-        path: `${entry.id}.${key}`,
+        path: "".concat(entry.id, ".").concat(key),
         nodeId: entry.id,
         message: "A read-only field changed."
       });
@@ -737,10 +639,10 @@ function validateChange({ current, target, intent }) {
       code: "INLINE_COLOR_OVERWRITTEN",
       stage: "change",
       input: "target",
-      path: `${entry.id}.content`,
+      path: "".concat(entry.id, ".content"),
       nodeId: entry.id,
       nodeType: "text",
-      message: previous ? `This write changes both content and fontColor; the editor applies fontColor to every p, h1-h6, li and span, replacing the newly supplied inline colors ${replaced.join(", ")}. Align or remove them, or keep the acquired fontColor for intentional multicolor text.` : `The editor applies a new text block's fontColor to every p, h1-h6, li and span, replacing the inline colors ${replaced.join(", ")}. Omit fontColor to keep the content's colors, or align or remove them.`
+      message: previous ? "This write changes both content and fontColor; the editor applies fontColor to every p, h1-h6, li and span, replacing the newly supplied inline colors ".concat(replaced.join(", "), ". Align or remove them, or keep the acquired fontColor for intentional multicolor text.") : "The editor applies a new text block's fontColor to every p, h1-h6, li and span, replacing the inline colors ".concat(replaced.join(", "), ". Omit fontColor to keep the content's colors, or align or remove them.")
     });
   }
   for (const entry of after) if (!before.some((node) => node.kind === entry.kind && node.id === entry.id)) {
@@ -760,7 +662,7 @@ function validateChange({ current, target, intent }) {
         code: "READ_ONLY_FIELD",
         stage: "change",
         input: "target",
-        path: `${entry.id}.${key}`,
+        path: "".concat(entry.id, ".").concat(key),
         nodeId: entry.id,
         message: "A read-only field cannot be inserted on a new node. Preserve the existing node or create a detached content copy."
       });
@@ -774,7 +676,7 @@ function validateChange({ current, target, intent }) {
       path: id,
       nodeId: id,
       reason: effect.kind,
-      message: `This change requires ${effect.kind}, unavailable in the mergeService profile.`
+      message: "This change requires ".concat(effect.kind, ", unavailable in the mergeService profile.")
     });
   }
   if (current !== void 0) for (const loss of findUnintendedLosses(currentResult?.success ? currentResult.documentState : current, candidate, intent)) {
@@ -803,8 +705,6 @@ function requireValid(result) {
 }
 
 export {
-  ROOT_PATH,
-  validateEmailDocument,
   getContract,
   getJsonSchema,
   getCapabilities,

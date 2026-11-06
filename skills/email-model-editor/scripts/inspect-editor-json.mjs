@@ -43,8 +43,8 @@ function compactError(error) {
     ...Object.fromEntries(["code", "stage", "input", "path", "issues"].flatMap((key) => fields && key in fields ? [[key, fields[key]]] : []))
   };
 }
-function resolveSdkDist(startUrl = import.meta.url) {
-  const override = process.env.CONVO_EMAIL_AGENT_SDK_PATH;
+function resolveSdkDist(args, startUrl = import.meta.url) {
+  const override = args.sdk === void 0 ? void 0 : requireString(args, "sdk");
   let candidate;
   if (override) {
     candidate = path.resolve(override);
@@ -59,7 +59,7 @@ function resolveSdkDist(startUrl = import.meta.url) {
   }
   if (candidate && existsSync(candidate) && statSync(candidate).isFile()) return candidate;
   throw new Error(
-    `Cannot find the packaged convo-email-agent SDK${candidate ? ` at ${candidate}` : ""}. Install skills/ and packages/ together or set CONVO_EMAIL_AGENT_SDK_PATH to an existing index.js.`
+    `Cannot find the packaged convo-email-agent SDK${candidate ? ` at ${candidate}` : ""}. Install skills/ and packages/ together or pass --sdk with an existing index.js.`
   );
 }
 async function loadSdk(sdkPath) {
@@ -400,7 +400,7 @@ async function main(argv = process.argv.slice(2)) {
   const detail = args.detail === void 0 ? outputPath ? "summary" : "full" : requireString(args, "detail");
   if (detail !== "summary" && detail !== "full") throw new Error("--detail must be summary or full.");
   if (detail === "summary" && !outputPath) throw new Error("--detail summary requires --output to retain the full inspection report.");
-  const sdkPath = resolveSdkDist();
+  const sdkPath = resolveSdkDist(args);
   const emailJson = readJson(inputPath);
   const summary = summarizeEditorJson(emailJson);
   const result = {

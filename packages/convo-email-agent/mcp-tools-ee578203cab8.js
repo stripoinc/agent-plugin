@@ -109,7 +109,7 @@ function getMcpOperationsForBrand(brand) {
 function getMcpToolMapping(brand) {
   if (brand === "reteno") return RETENO_MCP_TOOL_MAPPING;
   if (brand === "stripo") return STRIPO_MCP_TOOL_MAPPING;
-  throw new Error(`Unsupported brand: ${String(brand)}`);
+  throw new Error("Unsupported brand: ".concat(String(brand)));
 }
 
 export {

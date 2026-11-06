@@ -59,10 +59,9 @@ async function prepareOutput(sdk, options) {
     if (!result.success) throw new sdk.DocumentStateError(result.issues);
     return { documentState: options.session ? options.session.finish() : result.documentState, verification: { level: "contract", ...sdk.getContract() } };
   }
-  const runtimePath = process.env.STRIPO_RUNTIME_PATH;
-  if (!runtimePath) throw new Error("STRIPO_RUNTIME_PATH must point to the optional SDK runtime entry.");
+  if (!options.runtimePath) throw new Error("--runtime-snapshot requires --runtime pointing to the optional SDK runtime entry.");
   if (!options.session && options.current === void 0) throw new Error("Runtime verification requires an acquired current baseline.");
-  const runtime = await import(pathToFileURL(path.resolve(runtimePath)).href);
+  const runtime = await import(pathToFileURL(path.resolve(options.runtimePath)).href);
   const raw = readJson(options.runtimeSnapshotPath);
   if (!isObject(raw) || typeof raw.encodedModel !== "string" || !/^[A-Za-z0-9+/]+={0,2}$/.test(raw.encodedModel)) throw new Error("Runtime snapshot must contain a base64 encodedModel.");
   const session = options.session ?? sdk.createEmailSdk({ emailJson: options.target, current: options.current, intent: options.intent });
@@ -81,8 +80,8 @@ function compactError(error) {
     ...Object.fromEntries(["code", "stage", "input", "path", "issues"].flatMap((key) => fields && key in fields ? [[key, fields[key]]] : []))
   };
 }
-function resolveSdkDist(startUrl = import.meta.url) {
-  const override = process.env.CONVO_EMAIL_AGENT_SDK_PATH;
+function resolveSdkDist(args, startUrl = import.meta.url) {
+  const override = args.sdk === void 0 ? void 0 : requireString(args, "sdk");
   let candidate;
   if (override) {
     candidate = path.resolve(override);
@@ -97,7 +96,7 @@ function resolveSdkDist(startUrl = import.meta.url) {
   }
   if (candidate && existsSync(candidate) && statSync(candidate).isFile()) return candidate;
   throw new Error(
-    `Cannot find the packaged convo-email-agent SDK${candidate ? ` at ${candidate}` : ""}. Install skills/ and packages/ together or set CONVO_EMAIL_AGENT_SDK_PATH to an existing index.js.`
+    `Cannot find the packaged convo-email-agent SDK${candidate ? ` at ${candidate}` : ""}. Install skills/ and packages/ together or pass --sdk with an existing index.js.`
   );
 }
 async function loadSdk(sdkPath) {
@@ -479,11 +478,11 @@ async function main() {
   beginOutputs(outputPath, diagnosticsPath, [inputPath, scriptPath, optionalString(args, "runtime-snapshot")]);
   try {
     for (const key of Object.keys(args)) {
-      if (!["input", "script", "output", "diagnostics", "schema", "runtime-snapshot"].includes(key)) {
+      if (!["input", "script", "output", "diagnostics", "schema", "runtime-snapshot", "runtime", "sdk"].includes(key)) {
         throw new Error(`Unknown argument: --${key}`);
       }
     }
-    sdkPath = resolveSdkDist();
+    sdkPath = resolveSdkDist(args);
     const sdk = await loadSdk(sdkPath);
     const inputJson = inputPath ? readJson(inputPath) : void 0;
     const inputSummary = inputJson === void 0 ? void 0 : summarizeEditorJson(inputJson);
@@ -514,7 +513,8 @@ async function main() {
       current: inputJson,
       target: session ? void 0 : resolveResult(returned),
       session,
-      runtimeSnapshotPath: optionalString(args, "runtime-snapshot")
+      runtimeSnapshotPath: optionalString(args, "runtime-snapshot"),
+      runtimePath: optionalString(args, "runtime")
     });
     const resultJson = output.documentState;
     const verification = output.verification;

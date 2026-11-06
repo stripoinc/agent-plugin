@@ -12,7 +12,7 @@ import {
   ArrayUtils,
   EMPTY_BORDER_RADIUS,
   clearFontValue,
-  require_postcss
+  parse
 } from "./modules/ArrayUtils-fbf37596896f.mjs";
 import "./modules/ColorUtils-a33f32974f73.mjs";
 import "./modules/time-zones-data-498efe19d3a8.mjs";
@@ -96,9 +96,7 @@ import "./modules/builders-6d4dedaf957f.mjs";
 import "./modules/proto-int64-27d7cd28885a.mjs";
 import "./modules/decode-codepoint-de4ce2c8771f.mjs";
 import "./modules/decode-data-html-482e5b7a6675.mjs";
-import {
-  __toESM
-} from "./modules/shared-4f53cda18c2b.mjs";
+import "./modules/shared-4f53cda18c2b.mjs";
 
 // editor/ui-editor-ui/src/app/core/block-operations-api/text-block/settings/defaults.ts
 function materializeIncomingTextBlockSettingsDefaults(block) {
@@ -229,33 +227,6 @@ function getUnavailableMergeServiceSideEffects(currentSchema, targetSchema) {
   }
   return unavailableSideEffects;
 }
-
-// editor/ui-editor-ui/node_modules/postcss/lib/postcss.mjs
-var import_postcss = __toESM(require_postcss(), 1);
-var stringify = import_postcss.default.stringify;
-var fromJSON = import_postcss.default.fromJSON;
-var plugin = import_postcss.default.plugin;
-var parse = import_postcss.default.parse;
-var list = import_postcss.default.list;
-var document = import_postcss.default.document;
-var comment = import_postcss.default.comment;
-var atRule = import_postcss.default.atRule;
-var rule = import_postcss.default.rule;
-var decl = import_postcss.default.decl;
-var root = import_postcss.default.root;
-var CssSyntaxError = import_postcss.default.CssSyntaxError;
-var Declaration = import_postcss.default.Declaration;
-var Container = import_postcss.default.Container;
-var Processor = import_postcss.default.Processor;
-var Document = import_postcss.default.Document;
-var Comment = import_postcss.default.Comment;
-var Warning = import_postcss.default.Warning;
-var AtRule = import_postcss.default.AtRule;
-var Result = import_postcss.default.Result;
-var Input = import_postcss.default.Input;
-var Rule = import_postcss.default.Rule;
-var Root = import_postcss.default.Root;
-var Node = import_postcss.default.Node;
 
 // convo-email-agent/vendor/editor-validator/font-usage.generated.ts
 var FONT_FAMILY_DECLARATION_REGEXP = /font-family\s*:\s*([^;{}<"]+)/gi;
@@ -400,8 +371,8 @@ function validateDocumentState(target, current) {
   }
   return { success: false, input: "target", issues: result.error.issues.map((issue) => toIssue(issue)) };
 }
-function validateDocumentSnapshot(document2) {
-  const result = emailTemplateSchema.safeParse(materializeIncomingDocumentState(document2));
+function validateDocumentSnapshot(document) {
+  const result = emailTemplateSchema.safeParse(materializeIncomingDocumentState(document));
   return result.success ? { success: true, issues: [], documentState: result.data } : { success: false, input: "current", issues: result.error.issues.map((issue) => toIssue(issue)) };
 }
 function validateBlock(block) {

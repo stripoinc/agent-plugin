@@ -1,10 +1,12 @@
 import {
-  ROOT_PATH,
   releaseCopiedFontColors,
   requireValid,
-  validateChange,
+  validateChange
+} from "./contract-22395cb9da24.js";
+import {
+  ROOT_PATH,
   validateEmailDocument
-} from "./contract-a9a0a7497166.js";
+} from "./editor-validator-e41a98b04d42.js";
 
 // convo-email-agent/src/sdk/model.ts
 var STRUCTURAL_KEYS = /* @__PURE__ */ new Set(["stripes", "structures", "columns", "containers", "blocks"]);
@@ -49,21 +51,21 @@ function assertUniqueNewIds(draft, newIds) {
   const uniqueIds = /* @__PURE__ */ new Set();
   for (const newId of newIds) {
     if (uniqueIds.has(newId)) {
-      throw new EditorJsonMutationError(`Generated clone id "${newId}" is duplicated.`);
+      throw new EditorJsonMutationError('Generated clone id "'.concat(newId, '" is duplicated.'));
     }
     if (findElementById(draft, newId)) {
-      throw new EditorJsonMutationError(`Element with id "${newId}" already exists.`);
+      throw new EditorJsonMutationError('Element with id "'.concat(newId, '" already exists.'));
     }
     uniqueIds.add(newId);
   }
 }
 function formatError(error) {
-  return `${error.path || ROOT_PATH}: ${error.message}`;
+  return "".concat(error.path || ROOT_PATH, ": ").concat(error.message);
 }
 function formatErrors(errors) {
   if (!errors?.length) return "unknown schema validation error";
   const summary = errors.slice(0, 8).map(formatError).join("; ");
-  return summary + (errors.length > 8 ? `; ${errors.length - 8} more error(s) in diagnostics.error.errors` : "");
+  return summary + (errors.length > 8 ? "; ".concat(errors.length - 8, " more error(s) in diagnostics.error.errors") : "");
 }
 function formatSchemaErrorPrefix(context, details) {
   if (details?.operation === "insert") {
@@ -71,10 +73,10 @@ function formatSchemaErrorPrefix(context, details) {
     const anchor = details.anchorLabel ?? "unknown anchor";
     const file = details.componentFile ?? "unknown component";
     const rollback = details.rolledBack ? " Draft was rolled back." : "";
-    const kindDetails = details.componentKind === void 0 && details.anchorKind === void 0 ? "" : ` Component kind: ${details.componentKind ?? "unknown"}; anchor kind: ${details.anchorKind ?? "unknown"}.`;
-    return `Insert "${file}" ${direction} ${anchor} produced invalid Stripo editor JSON.${rollback}${kindDetails}`;
+    const kindDetails = details.componentKind === void 0 && details.anchorKind === void 0 ? "" : " Component kind: ".concat(details.componentKind ?? "unknown", "; anchor kind: ").concat(details.anchorKind ?? "unknown", ".");
+    return 'Insert "'.concat(file, '" ').concat(direction, " ").concat(anchor, " produced invalid Stripo editor JSON.").concat(rollback).concat(kindDetails);
   }
-  return `${context} does not match the Stripo editor schema.`;
+  return "".concat(context, " does not match the Stripo editor schema.");
 }
 function setEmailSchema(schema) {
   if (!isObject(schema) || Object.keys(schema).length === 0) {
@@ -199,7 +201,7 @@ var EmailSdkSchemaError = class extends Error {
   details;
   constructor(context, errors, details) {
     const stableErrors = errors?.map((error) => ({ ...error }));
-    super(`${formatSchemaErrorPrefix(context, details)} Errors: ${formatErrors(stableErrors)}`);
+    super("".concat(formatSchemaErrorPrefix(context, details), " Errors: ").concat(formatErrors(stableErrors)));
     this.name = "EmailSdkSchemaError";
     this.context = context;
     this.errors = stableErrors;
@@ -235,7 +237,7 @@ var EditorJsonMutationCore = class {
     for (const key of path) value = value[key];
     if (!isObject(value) || typeof value.id !== "string") throw new EditorJsonMutationError("Invalid structural reference.");
     for (const [token2, item] of this.references) if (item === value) return token2;
-    const token = `\0sdk:${this.referenceOrdinal++}`;
+    const token = "\0sdk:".concat(this.referenceOrdinal++);
     this.references.set(token, value);
     return token;
   }
@@ -322,21 +324,21 @@ var EditorJsonMutationCore = class {
   }
   setContent(id, property, value) {
     const location = this.find(id);
-    if (!location) throw new EditorJsonMutationError(`Element with id "${id}" was not found.`);
+    if (!location) throw new EditorJsonMutationError('Element with id "'.concat(id, '" was not found.'));
     if (!setKnownContentProperty(location.element, property, value)) {
-      throw new EditorJsonMutationError(`Property "${property}" was not found on element "${id}".`);
+      throw new EditorJsonMutationError('Property "'.concat(property, '" was not found on element "').concat(id, '".'));
     }
     return this;
   }
   setElementProperty(id, property, value) {
     const location = this.find(id);
-    if (!location) throw new EditorJsonMutationError(`Element with id "${id}" was not found.`);
+    if (!location) throw new EditorJsonMutationError('Element with id "'.concat(id, '" was not found.'));
     location.element[property] = deepClone(value);
     return this;
   }
   deleteElementProperty(id, path) {
     const element = this.find(id)?.element;
-    if (!element) throw new EditorJsonMutationError(`Element "${id}" was not found.`);
+    if (!element) throw new EditorJsonMutationError('Element "'.concat(id, '" was not found.'));
     let parent = element;
     for (const key of path.slice(0, -1)) {
       if (!isObject(parent) || !isObject(parent[key])) return this;
@@ -400,7 +402,7 @@ var EditorJsonMutationCore = class {
     let current = this.draft;
     for (const segment of path.slice(0, -1)) {
       if (!isObject(current)) {
-        throw new EditorJsonMutationError(`Document path "${path.join(".")}" traverses a non-object.`);
+        throw new EditorJsonMutationError('Document path "'.concat(path.join("."), '" traverses a non-object.'));
       }
       const next = current[segment];
       if (!isObject(next)) {
@@ -409,7 +411,7 @@ var EditorJsonMutationCore = class {
       current = current[segment];
     }
     if (!isObject(current)) {
-      throw new EditorJsonMutationError(`Document path "${path.join(".")}" traverses a non-object.`);
+      throw new EditorJsonMutationError('Document path "'.concat(path.join("."), '" traverses a non-object.'));
     }
     const leaf = path[path.length - 1];
     if (merge && isObject(current[leaf]) && isObject(value)) {
@@ -421,9 +423,9 @@ var EditorJsonMutationCore = class {
   }
   cloneElement(id, newId, isBefore = false, nestedIds = {}) {
     const location = this.find(id);
-    if (!location) throw new EditorJsonMutationError(`Element with id "${id}" was not found.`);
+    if (!location) throw new EditorJsonMutationError('Element with id "'.concat(id, '" was not found.'));
     if (!location.parentArray || location.index === void 0) {
-      throw new EditorJsonMutationError(`Element "${id}" cannot be cloned because it is not inside an array.`);
+      throw new EditorJsonMutationError('Element "'.concat(id, '" cannot be cloned because it is not inside an array.'));
     }
     assertUniqueNewIds(this.draft, [newId, ...Object.values(nestedIds)]);
     const clone = deepClone(location.element);
@@ -437,7 +439,7 @@ var EditorJsonMutationCore = class {
     }
     const unusedNestedIds = Object.keys(nestedIds).filter((nestedId) => !usedNestedIds.has(nestedId));
     if (unusedNestedIds.length > 0) {
-      throw new EditorJsonMutationError(`Nested element with id "${unusedNestedIds[0]}" was not found inside "${id}".`);
+      throw new EditorJsonMutationError('Nested element with id "'.concat(unusedNestedIds[0], '" was not found inside "').concat(id, '".'));
     }
     clone.id = newId;
     const previousCloneId = isBefore ? void 0 : this.lastCloneBySource.get(id);
@@ -460,10 +462,10 @@ var EditorJsonMutationCore = class {
       throw new EditorJsonMutationError("Inserted node must be a JSON object.");
     }
     const location = this.find(anchorId);
-    if (!location) throw new EditorJsonMutationError(`Element with id "${anchorId}" was not found.`);
+    if (!location) throw new EditorJsonMutationError('Element with id "'.concat(anchorId, '" was not found.'));
     if (!location.parentArray || location.index === void 0) {
       throw new EditorJsonMutationError(
-        `Element "${anchorId}" cannot anchor an insert because it is not inside an array.`
+        'Element "'.concat(anchorId, '" cannot anchor an insert because it is not inside an array.')
       );
     }
     assertUniqueNewIds(this.draft, Object.values(nestedIds));
@@ -475,7 +477,7 @@ var EditorJsonMutationCore = class {
     const unusedNestedIds = Object.keys(nestedIds).filter((nestedId) => !usedNestedIds.has(nestedId));
     if (unusedNestedIds.length > 0) {
       throw new EditorJsonMutationError(
-        `Nested element with id "${unusedNestedIds[0]}" was not found inside the inserted node.`
+        'Nested element with id "'.concat(unusedNestedIds[0], '" was not found inside the inserted node.')
       );
     }
     const previousInsertId = isBefore ? void 0 : this.lastInsertByAnchor.get(anchorId);
@@ -490,9 +492,9 @@ var EditorJsonMutationCore = class {
   }
   deleteElement(id) {
     const location = this.find(id);
-    if (!location) throw new EditorJsonMutationError(`Element with id "${id}" was not found.`);
+    if (!location) throw new EditorJsonMutationError('Element with id "'.concat(id, '" was not found.'));
     if (!location.parentArray || location.index === void 0) {
-      throw new EditorJsonMutationError(`Element "${id}" cannot be deleted because it is not inside an array.`);
+      throw new EditorJsonMutationError('Element "'.concat(id, '" cannot be deleted because it is not inside an array.'));
     }
     location.parentArray.splice(location.index, 1);
     return this;
@@ -513,7 +515,7 @@ var EditorJsonMutationCore = class {
   // (unlike the stack-based findElementById) because callers rely on the order.
   collectSubtreeIds(id) {
     const location = this.find(id);
-    if (!location) throw new EditorJsonMutationError(`Element with id "${id}" was not found.`);
+    if (!location) throw new EditorJsonMutationError('Element with id "'.concat(id, '" was not found.'));
     const ids = [];
     const visit = (value) => {
       if (Array.isArray(value)) {

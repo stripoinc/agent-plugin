@@ -101,7 +101,7 @@ function assertMetadataTextLimits(metadata, baseline) {
   for (const path of [["title"], ["preheader", "text"]]) {
     const text = readNested(next, path);
     if (typeof text === "string" && text !== readNested(previous, path) && text.length > 500) {
-      throw new EmailSdkError(`metadata.${path.join(".")} cannot exceed 500 UTF-16 code units when changed.`);
+      throw new EmailSdkError("metadata.".concat(path.join("."), " cannot exceed 500 UTF-16 code units when changed."));
     }
   }
 }
