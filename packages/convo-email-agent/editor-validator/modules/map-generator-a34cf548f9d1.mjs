@@ -13,6 +13,7 @@ import {
 // editor/ui-editor-ui/node_modules/postcss/lib/map-generator.js
 var require_map_generator = __commonJS({
   "editor/ui-editor-ui/node_modules/postcss/lib/map-generator.js"(exports, module) {
+    "use strict";
     var { dirname, relative, resolve, sep } = require_path();
     var { SourceMapConsumer, SourceMapGenerator } = require_source_map();
     var { pathToFileURL } = require_url();

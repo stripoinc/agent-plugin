@@ -26,6 +26,7 @@ var require_source_map = __commonJS({
 // editor/ui-editor-ui/node_modules/postcss/lib/previous-map.js
 var require_previous_map = __commonJS({
   "editor/ui-editor-ui/node_modules/postcss/lib/previous-map.js"(exports, module) {
+    "use strict";
     var { existsSync, readFileSync, realpathSync } = require_fs();
     var { dirname, isAbsolute, join, relative, sep } = require_path();
     var { SourceMapConsumer, SourceMapGenerator } = require_source_map();

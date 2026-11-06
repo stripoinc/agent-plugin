@@ -105,6 +105,5 @@ function validateEmailDocument(model, options = {}) {
 
 export {
   ROOT_PATH,
-  pointerToPath,
   validateEmailDocument
 };

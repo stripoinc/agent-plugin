@@ -379,111 +379,6 @@ var THEME_VARIABLE_DESCRIPTORS = [
     }
   ))
 ];
-function getThemeVariableDescriptorsInReplayOrder() {
-  const descriptorsByOwner = new Map(THEME_VARIABLE_DESCRIPTORS.map((descriptor) => [
-    descriptor.semanticOwner,
-    descriptor
-  ]));
-  const visited = /* @__PURE__ */ new Set();
-  const visiting = /* @__PURE__ */ new Set();
-  const result = [];
-  const visit = (descriptor) => {
-    if (visited.has(descriptor.semanticOwner)) {
-      return;
-    }
-    if (visiting.has(descriptor.semanticOwner)) {
-      throw new Error("Cyclic theme replay dependency at ".concat(descriptor.semanticOwner));
-    }
-    visiting.add(descriptor.semanticOwner);
-    if (descriptor.replayAfterOwner) {
-      const dependency = descriptorsByOwner.get(descriptor.replayAfterOwner);
-      if (!dependency) {
-        throw new Error("Missing theme replay dependency ".concat(descriptor.replayAfterOwner));
-      }
-      visit(dependency);
-    }
-    visiting.delete(descriptor.semanticOwner);
-    visited.add(descriptor.semanticOwner);
-    result.push(descriptor);
-  };
-  THEME_VARIABLE_DESCRIPTORS.forEach(visit);
-  return result;
-}
-function getThemeVariableDescriptorByLightVariable(variable) {
-  return THEME_VARIABLE_DESCRIPTORS.find(
-    (descriptor) => descriptor.valueKind === "background" ? descriptor.variables.light.solid === variable || descriptor.variables.light.gradient === variable : descriptor.variables.light === variable
-  );
-}
-function getThemeVariableDescriptorByCssTarget(selector) {
-  const selectorParts = selector.split(",").map((part) => part.trim()).filter(Boolean);
-  if (!selectorParts.length) {
-    return void 0;
-  }
-  return THEME_VARIABLE_DESCRIPTORS.find((descriptor) => [
-    descriptor.cssTarget.selector,
-    ...descriptor.cssTarget.additionalSelectors ?? [],
-    ...descriptor.valueKind === "background" && descriptor.imageSelector ? [descriptor.imageSelector] : []
-  ].some((target) => {
-    const targetParts = new Set(target.split(",").map((part) => part.trim()).filter(Boolean));
-    return selectorParts.every((selectorPart) => targetParts.has(selectorPart));
-  }));
-}
-function getThemeVariableByLightVariable(variable, theme = "light") {
-  if (theme === "light") {
-    return variable;
-  }
-  const descriptor = getThemeVariableDescriptorByLightVariable(variable);
-  if (!descriptor) {
-    return void 0;
-  }
-  if (descriptor.valueKind !== "background") {
-    return descriptor.variables.dark;
-  }
-  if (descriptor.variables.light.solid === variable) {
-    return descriptor.variables.dark.solid;
-  }
-  if (descriptor.variables.light.gradient === variable) {
-    return descriptor.variables.dark.gradient;
-  }
-  return void 0;
-}
-function requireThemeVariableByLightVariable(variable, theme = "light") {
-  const resolvedVariable = getThemeVariableByLightVariable(variable, theme);
-  if (!resolvedVariable) {
-    throw new Error("No ".concat(theme, " theme binding is registered for ").concat(variable));
-  }
-  return resolvedVariable;
-}
-function getBackgroundThemeVariableDescriptorByDarkGradient(variable) {
-  return THEME_VARIABLE_DESCRIPTORS.find(
-    (descriptor) => descriptor.valueKind === "background" && descriptor.variables.dark.gradient === variable
-  );
-}
-function getBackgroundThemeVariableDescriptorByCssTarget(selector) {
-  return THEME_VARIABLE_DESCRIPTORS.find(
-    (descriptor) => descriptor.valueKind === "background" && [
-      descriptor.cssTarget.selector,
-      ...descriptor.cssTarget.additionalSelectors ?? []
-    ].includes(selector.trim())
-  );
-}
-function isRegisteredThemeVariableCssTarget(selector) {
-  return getThemeVariableDescriptorByCssTarget(selector) !== void 0;
-}
-function getBackgroundThemeVariableDescriptorByInlineImageClass(classNames) {
-  const classes = new Set(classNames);
-  return THEME_VARIABLE_DESCRIPTORS.find(
-    (descriptor) => descriptor.valueKind === "background" && descriptor.effectiveInlineImage !== void 0 && classes.has(descriptor.effectiveInlineImage.className)
-  );
-}
-function getBackgroundThemeVariableDescriptorByDarkLayerProperty(property) {
-  return THEME_VARIABLE_DESCRIPTORS.find(
-    (descriptor) => descriptor.valueKind === "background" && descriptor.effectiveInlineImage !== void 0 && [
-      descriptor.effectiveInlineImage.darkLayerProperty,
-      descriptor.effectiveInlineImage.darkLayerResetProperty
-    ].includes(property)
-  );
-}
 function createDarkThemeMasterCss() {
   const declarationsBySelector = /* @__PURE__ */ new Map();
   THEME_VARIABLE_DESCRIPTORS.forEach((descriptor) => {
@@ -508,42 +403,8 @@ function createDarkThemeMasterCss() {
   const rules = [...declarationsBySelector].map(([selector, declarations]) => "".concat(selector, " {\n  ").concat(declarations.join("\n  "), "\n}")).join("\n\n");
   return "@media (prefers-color-scheme: dark) {\n".concat(rules, "\n}");
 }
-function getDarkThemeRuleDisplay(selector, variables) {
-  const descriptors = THEME_VARIABLE_DESCRIPTORS.filter((descriptor) => [
-    descriptor.cssTarget.selector,
-    ...descriptor.cssTarget.additionalSelectors ?? [],
-    ...descriptor.valueKind === "background" && descriptor.imageSelector ? [descriptor.imageSelector] : []
-  ].includes(selector));
-  if (!descriptors.length) {
-    return void 0;
-  }
-  const isAuthored = descriptors.some((descriptor) => hasAuthoredDarkThemeValue(descriptor, variables));
-  const isEnabled = descriptors.every((descriptor) => !descriptor.displayPolicy || Boolean(variables[descriptor.displayPolicy.variable]));
-  return isAuthored && isEnabled;
-}
-function hasAnyAuthoredDarkThemeValue(variables) {
-  return THEME_VARIABLE_DESCRIPTORS.some((descriptor) => hasAuthoredDarkThemeValue(descriptor, variables));
-}
-function hasAuthoredDarkThemeValue(descriptor, variables) {
-  return descriptor.valueKind === "background" ? [descriptor.variables.dark.solid, descriptor.variables.dark.gradient].some((variable) => isAuthoredThemeValue(variables[variable])) : isAuthoredThemeValue(variables[descriptor.variables.dark]);
-}
-function isAuthoredThemeValue(value) {
-  return value !== void 0 && value !== null && value !== "";
-}
 
 export {
   THEME_VARIABLE_DESCRIPTORS,
-  getThemeVariableDescriptorsInReplayOrder,
-  getThemeVariableDescriptorByLightVariable,
-  getThemeVariableDescriptorByCssTarget,
-  getThemeVariableByLightVariable,
-  requireThemeVariableByLightVariable,
-  getBackgroundThemeVariableDescriptorByDarkGradient,
-  getBackgroundThemeVariableDescriptorByCssTarget,
-  isRegisteredThemeVariableCssTarget,
-  getBackgroundThemeVariableDescriptorByInlineImageClass,
-  getBackgroundThemeVariableDescriptorByDarkLayerProperty,
-  createDarkThemeMasterCss,
-  getDarkThemeRuleDisplay,
-  hasAnyAuthoredDarkThemeValue
+  createDarkThemeMasterCss
 };

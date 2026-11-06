@@ -196,7 +196,7 @@ import {
 import {
   core_exports,
   locales_exports
-} from "./index-abd71ade49d1.mjs";
+} from "./index-c0aa2829846f.mjs";
 import {
   INVALID,
   ZodCompileAsyncError,
@@ -796,13 +796,5 @@ function date2(params) {
 }
 
 export {
-  ZodIssueCode,
-  setErrorMap,
-  getErrorMap,
-  ZodFirstPartyTypeKind,
-  deepPartial,
-  input,
-  output,
-  coerce_exports,
   external_exports
 };

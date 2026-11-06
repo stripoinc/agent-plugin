@@ -356,14 +356,10 @@ function normalizeSocialAlignment(value) {
 
 export {
   SOCIAL_CUSTOM_NETWORK_TYPE,
-  SOCIAL_LINK_TYPES,
-  SOCIAL_NETWORK_TYPES,
   SOCIAL_TITLE_MAX_LENGTH,
   SOCIAL_ALT_MAX_LENGTH,
   SOCIAL_BLOCK_DEFAULT_SETTINGS,
-  defaultSocialTitle,
   inferSocialLinkType,
-  socialLinkIssue,
   collectSocialSettingsIssues,
   collectSocialDocumentIssues,
   assertSocialTextLimit,

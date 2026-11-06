@@ -5,6 +5,7 @@ import {
 // editor/ui-editor-ui/node_modules/postcss/lib/tokenize.js
 var require_tokenize = __commonJS({
   "editor/ui-editor-ui/node_modules/postcss/lib/tokenize.js"(exports, module) {
+    "use strict";
     var SINGLE_QUOTE = "'".charCodeAt(0);
     var DOUBLE_QUOTE = '"'.charCodeAt(0);
     var BACKSLASH = "\\".charCodeAt(0);

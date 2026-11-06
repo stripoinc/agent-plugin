@@ -202,6 +202,7 @@ var require_rule = __commonJS({
 // editor/ui-editor-ui/node_modules/postcss/lib/parser.js
 var require_parser = __commonJS({
   "editor/ui-editor-ui/node_modules/postcss/lib/parser.js"(exports, module) {
+    "use strict";
     var AtRule = require_at_rule();
     var Comment = require_comment();
     var Declaration = require_declaration();

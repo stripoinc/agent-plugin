@@ -31,37 +31,6 @@ var SocialNetworkStyle = /* @__PURE__ */ ((SocialNetworkStyle2) => {
   SocialNetworkStyle2["squareWhiteBordered"] = "square-white-bordered";
   return SocialNetworkStyle2;
 })(SocialNetworkStyle || {});
-var socialNetworkStyleTranslations = {
-  ["custom" /* custom */]: "history_val_sn_style_custom",
-  ["logo-colored" /* logoColored */]: "history_val_sn_style_logo_colored",
-  ["logo-black" /* logoBlack */]: "history_val_sn_style_logo_black",
-  ["logo-gray" /* logoGray */]: "history_val_sn_style_logo_gray",
-  ["logo-white" /* logoWhite */]: "history_val_sn_style_logo_white",
-  ["circle-colored" /* circleColored */]: "history_val_sn_style_circle_colored",
-  ["circle-colored-bordered" /* circleColoredBordered */]: "history_val_sn_style_circle_colored_bordered",
-  ["rounded-colored" /* roundedColored */]: "history_val_sn_style_rounded_colored",
-  ["rounded-colored-bordered" /* roundedColoredBordered */]: "history_val_sn_style_rounded_colored_bordered",
-  ["square-colored" /* squareColored */]: "history_val_sn_style_square_colored",
-  ["square-colored-bordered" /* squareColoredBordered */]: "history_val_sn_style_square_colored_bordered",
-  ["circle-black" /* circleBlack */]: "history_val_sn_style_circle_black",
-  ["circle-black-bordered" /* circleBlackBordered */]: "history_val_sn_style_circle_black_bordered",
-  ["rounded-black" /* roundedBlack */]: "history_val_sn_style_rounded_black",
-  ["rounded-black-bordered" /* roundedBlackBordered */]: "history_val_sn_style_rounded_black_bordered",
-  ["square-black" /* squareBlack */]: "history_val_sn_style_square_black",
-  ["square-black-bordered" /* squareBlackBordered */]: "history_val_sn_style_square_black_bordered",
-  ["circle-gray" /* circleGray */]: "history_val_sn_style_circle_gray",
-  ["circle-gray-bordered" /* circleGrayBordered */]: "history_val_sn_style_circle_gray_bordered",
-  ["rounded-gray" /* roundedGray */]: "history_val_sn_style_rounded_gray",
-  ["rounded-gray-bordered" /* roundedGrayBordered */]: "history_val_sn_style_rounded_gray_bordered",
-  ["square-gray" /* squareGray */]: "history_val_sn_style_square_gray",
-  ["square-gray-bordered" /* squareGrayBordered */]: "history_val_sn_style_square_gray_bordered",
-  ["circle-white" /* circleWhite */]: "history_val_sn_style_circle_white",
-  ["circle-white-bordered" /* circleWhiteBordered */]: "history_val_sn_style_circle_white_bordered",
-  ["rounded-white" /* roundedWhite */]: "history_val_sn_style_rounded_white",
-  ["rounded-white-bordered" /* roundedWhiteBordered */]: "history_val_sn_style_rounded_white_bordered",
-  ["square-white" /* squareWhite */]: "history_val_sn_style_square_white",
-  ["square-white-bordered" /* squareWhiteBordered */]: "history_val_sn_style_square_white_bordered"
-};
 var SOCIAL_NETWORK_ALIASES = {
   "logo-colored-bordered": "circle-colored-bordered"
 };
@@ -160,8 +129,6 @@ var SocialNetworkType = /* @__PURE__ */ ((SocialNetworkType2) => {
 })(SocialNetworkType || {});
 
 export {
-  SocialNetworkStyle,
-  socialNetworkStyleTranslations,
   SOCIAL_NETWORK_ALIASES,
   SOCIAL_NETWORK_STYLES,
   SocialNetworkType

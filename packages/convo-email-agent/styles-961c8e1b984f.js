@@ -446,32 +446,8 @@ function buildStyleValue(shape, value, options, existing, leaf) {
 }
 
 export {
-  NAMED_COLORS,
-  HEX_COLOR,
-  RGB_COLOR,
   normalizeColor,
-  SIDES,
-  CORNERS,
-  BREAKPOINTS,
-  NODE_STYLE_SPECS,
-  THEME_STYLE_SPECS,
-  normalizeStyleArea,
-  normalizeBreakpoint,
-  normalizeBackgroundTarget,
-  checkUnusedStyleOptions,
-  selectorKeyForEntry,
-  addressableStyleProperties,
   nodeStyleSpec,
   themeStyleSpec,
-  assertNumber,
-  resolveBreakpoints,
-  buildResponsiveScalar,
-  buildAlignment,
-  buildSides,
-  buildResponsiveSides,
-  buildBorder,
-  buildCorner,
-  buildResponsiveCorner,
-  buildTextStyle,
   buildStyleValue
 };

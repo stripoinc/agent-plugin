@@ -917,11 +917,6 @@ if (typeof BigInt === "function") {
     return highBigInt << BigInt(32) | lowBigInt;
   };
 }
-var long_default = Long;
-
-export {
-  long_default
-};
 /*! Bundled license information:
 
 long/index.js:

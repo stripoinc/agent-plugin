@@ -5,6 +5,7 @@ import {
 // editor/ui-editor-ui/node_modules/postcss-value-parser/lib/parse.js
 var require_parse = __commonJS({
   "editor/ui-editor-ui/node_modules/postcss-value-parser/lib/parse.js"(exports, module) {
+    "use strict";
     var openParentheses = "(".charCodeAt(0);
     var closeParentheses = ")".charCodeAt(0);
     var singleQuote = "'".charCodeAt(0);

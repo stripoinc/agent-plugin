@@ -206,7 +206,5 @@ function transplantContentFormat(originalHtml, newHtml) {
 }
 
 export {
-  extractFormatTemplate,
-  sanitizeSemanticHtml,
   transplantContentFormat
 };

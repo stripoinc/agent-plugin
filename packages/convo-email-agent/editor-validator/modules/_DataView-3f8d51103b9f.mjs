@@ -1607,7 +1607,3 @@ var VariablesUtils = class _VariablesUtils {
     this.selectorsCache = {};
   }
 };
-
-export {
-  VariablesUtils
-};

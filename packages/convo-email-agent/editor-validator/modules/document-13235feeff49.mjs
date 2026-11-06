@@ -181,6 +181,7 @@ var require_warn_once = __commonJS({
 // editor/ui-editor-ui/node_modules/postcss/lib/lazy-result.js
 var require_lazy_result = __commonJS({
   "editor/ui-editor-ui/node_modules/postcss/lib/lazy-result.js"(exports, module) {
+    "use strict";
     var Container = require_container();
     var Document = require_document();
     var MapGenerator = require_map_generator();

@@ -5,6 +5,7 @@ import {
 // editor/ui-editor-ui/node_modules/postcss/lib/stringifier.js
 var require_stringifier = __commonJS({
   "editor/ui-editor-ui/node_modules/postcss/lib/stringifier.js"(exports, module) {
+    "use strict";
     var AT_NAME_END = /[\t\n\f\r "#'()/;[\\\]{}]/;
     var DEFAULT_RAW = {
       after: "\n",

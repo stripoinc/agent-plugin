@@ -48,6 +48,7 @@ var require_url = __commonJS({
 // editor/ui-editor-ui/node_modules/postcss/lib/input.js
 var require_input = __commonJS({
   "editor/ui-editor-ui/node_modules/postcss/lib/input.js"(exports, module) {
+    "use strict";
     var { nanoid } = require_non_secure();
     var { isAbsolute, resolve } = require_path();
     var { SourceMapConsumer, SourceMapGenerator } = require_source_map();

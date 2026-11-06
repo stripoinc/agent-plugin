@@ -47,6 +47,7 @@ var require_declaration = __commonJS({
 // editor/ui-editor-ui/node_modules/postcss/lib/container.js
 var require_container = __commonJS({
   "editor/ui-editor-ui/node_modules/postcss/lib/container.js"(exports, module) {
+    "use strict";
     var Comment = require_comment();
     var Declaration = require_declaration();
     var Node = require_node();

@@ -80,6 +80,7 @@ var require_symbols = __commonJS({
 // editor/ui-editor-ui/node_modules/postcss/lib/node.js
 var require_node = __commonJS({
   "editor/ui-editor-ui/node_modules/postcss/lib/node.js"(exports, module) {
+    "use strict";
     var CssSyntaxError = require_css_syntax_error();
     var Stringifier = require_stringifier();
     var stringify = require_stringify();

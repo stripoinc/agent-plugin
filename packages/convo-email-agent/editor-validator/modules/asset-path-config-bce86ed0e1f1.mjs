@@ -1,21 +1,14 @@
 import {
-  getContrastedHoveredFontColor,
   isEditableCssGradient,
   isMergeTagColorToken,
   normalizeCopilotDocumentStateColorValue,
   normalizeCssColorOrVar,
-  splitTopLevelCsv,
-  transformColorToHoverColor
+  splitTopLevelCsv
 } from "./ColorUtils-a33f32974f73.mjs";
-import {
-  HEAD_SELECTOR,
-  LINK_TAG_SELECTOR
-} from "./CSSConverter-eecb098b236c.mjs";
 import {
   THEME_VARIABLE_DESCRIPTORS
 } from "./master-css-variables-a84902889746.mjs";
 import {
-  MASTER_CSS_VARIABLES_DEFAULTS,
   MasterCssVar
 } from "./ue-proto-87c1854705b4.mjs";
 import {
@@ -61,7 +54,7 @@ import {
 } from "./fs-064e509bf2cb.mjs";
 import {
   q
-} from "./builders-6d4dedaf957f.mjs";
+} from "./builders-7d87c6093906.mjs";
 import {
   __commonJS,
   __toESM
@@ -1322,383 +1315,12 @@ var require_startCase = __commonJS({
   }
 });
 
-// editor/ui-editor-ui/src/app/services/api/editor-copilot-api/schema/zod-jitless-bootstrap.ts
-external_exports.config({ jitless: true });
-
-// editor/ui-editor-ui/src/app/services/api/editor-copilot-api/schema/email-template-settings.schema.ts
-var import_postcss_value_parser2 = __toESM(require_lib());
-
 // editor/ui-editor-ui/src/app/core/block-operations-api/common/border-radius/types.ts
 var EMPTY_BORDER_RADIUS = {
   topLeft: 0,
   topRight: 0,
   bottomRight: 0,
   bottomLeft: 0
-};
-function normalizeBorderRadiusValue(value) {
-  const parsedValue = Number.parseInt(String(value ?? ""), 10);
-  return Number.isFinite(parsedValue) && parsedValue >= 0 ? parsedValue : void 0;
-}
-
-// editor/ui-editor-ui/src/app/core/block-operations-api/buttons/settings/border-radius/get-from-model.ts
-var BUTTONS_BORDER_RADIUS_VARIABLES = {
-  topLeft: MasterCssVar.BUTTON_BORDER_RADIUS_LT,
-  topRight: MasterCssVar.BUTTON_BORDER_RADIUS_RT,
-  bottomRight: MasterCssVar.BUTTON_BORDER_RADIUS_RB,
-  bottomLeft: MasterCssVar.BUTTON_BORDER_RADIUS_LB
-};
-function getButtonsBorderRadiusVariable(corner) {
-  return BUTTONS_BORDER_RADIUS_VARIABLES[corner];
-}
-function getDefaultButtonsBorderRadius() {
-  return {
-    topLeft: normalizeBorderRadiusValue(
-      MASTER_CSS_VARIABLES_DEFAULTS[getButtonsBorderRadiusVariable("topLeft")]
-    ),
-    topRight: normalizeBorderRadiusValue(
-      MASTER_CSS_VARIABLES_DEFAULTS[getButtonsBorderRadiusVariable("topRight")]
-    ),
-    bottomRight: normalizeBorderRadiusValue(
-      MASTER_CSS_VARIABLES_DEFAULTS[getButtonsBorderRadiusVariable("bottomRight")]
-    ),
-    bottomLeft: normalizeBorderRadiusValue(
-      MASTER_CSS_VARIABLES_DEFAULTS[getButtonsBorderRadiusVariable("bottomLeft")]
-    )
-  };
-}
-
-// editor/ui-editor-ui/src/app/core/block-operations-api/buttons/settings/fit-container/get-from-model.ts
-var BUTTONS_FIT_CONTAINER_VARIABLES = {
-  desktop: MasterCssVar.BUTTON_DISPLAY,
-  mobile: MasterCssVar.ADAPT_BUTTON_DISPLAY
-};
-var BUTTON_DISPLAY_DEFAULT = "inline-block";
-var BUTTON_DISPLAY_ADJUST = "block";
-function normalizeButtonsFitContainerValue(value) {
-  if (typeof value === "boolean") {
-    return value;
-  }
-  if (typeof value === "string") {
-    const normalizedValue = value.trim().toLowerCase();
-    if (normalizedValue === BUTTON_DISPLAY_ADJUST) {
-      return true;
-    }
-    if (normalizedValue === BUTTON_DISPLAY_DEFAULT) {
-      return false;
-    }
-  }
-  return void 0;
-}
-function getButtonsFitContainerVariable(platform) {
-  return BUTTONS_FIT_CONTAINER_VARIABLES[platform];
-}
-function getDefaultButtonsFitContainer(platform) {
-  return normalizeButtonsFitContainerValue(
-    MASTER_CSS_VARIABLES_DEFAULTS[getButtonsFitContainerVariable(platform)]
-  ) ?? false;
-}
-
-// editor/ui-editor-ui/src/app/core/block-operations-api/buttons/settings/font-size/get-from-model.ts
-var BUTTONS_FONT_SIZE_VARIABLES = {
-  desktop: MasterCssVar.BUTTON_FONT_SIZE,
-  mobile: MasterCssVar.ADAPT_BUTTON_FONT_SIZE
-};
-function normalizeButtonsFontSizeValue(value) {
-  const parsedValue = Number.parseInt(String(value ?? ""), 10);
-  return Number.isFinite(parsedValue) && parsedValue > 0 ? parsedValue : void 0;
-}
-function getButtonsFontSizeVariable(platform) {
-  return BUTTONS_FONT_SIZE_VARIABLES[platform];
-}
-function getDefaultButtonsFontSize(platform) {
-  return normalizeButtonsFontSizeValue(
-    MASTER_CSS_VARIABLES_DEFAULTS[getButtonsFontSizeVariable(platform)]
-  );
-}
-
-// editor/ui-editor-ui/src/app/core/block-operations-api/common/color/normalizers.ts
-function normalizeTransparentAllowedColor(value, colorMergeTagValues = /* @__PURE__ */ new Set()) {
-  if (value === void 0 || value === null) {
-    return void 0;
-  }
-  const color = String(value);
-  return normalizeCopilotDocumentStateColorValue(color, { allowTransparent: true }, colorMergeTagValues);
-}
-function normalizeOpaqueColor(value, colorMergeTagValues = /* @__PURE__ */ new Set()) {
-  if (value === void 0 || value === null) {
-    return void 0;
-  }
-  const color = String(value);
-  return normalizeCopilotDocumentStateColorValue(color, { allowTransparent: false }, colorMergeTagValues);
-}
-
-// editor/ui-editor-ui/src/app/core/block-operations-api/buttons/settings/hover-button-styles/fallbacks.ts
-function resolveButtonsHoverColorFallback(baseColor, colorMergeTagValues = /* @__PURE__ */ new Set()) {
-  return normalizeTransparentAllowedColor(transformColorToHoverColor(baseColor, colorMergeTagValues), colorMergeTagValues) ?? baseColor;
-}
-function resolveButtonsHoverFontColorFallback(baseFontColor, hoverBackgroundColor, colorMergeTagValues = /* @__PURE__ */ new Set()) {
-  return normalizeOpaqueColor(getContrastedHoveredFontColor(baseFontColor, hoverBackgroundColor, colorMergeTagValues), colorMergeTagValues) ?? baseFontColor;
-}
-
-// editor/ui-editor-ui/src/app/core/block-operations-api/buttons/settings/outlook-support/get-from-model.ts
-function getDefaultButtonsOutlookSupport() {
-  return Boolean(MASTER_CSS_VARIABLES_DEFAULTS[MasterCssVar.BUTTONS_OUTLOOK_SUPPORT]);
-}
-
-// editor/ui-editor-ui/src/app/constants/general.constants.ts
-var SIDES_LIST = ["top" /* TOP */, "right" /* RIGHT */, "bottom" /* BOTTOM */, "left" /* LEFT */];
-var HORIZONTAL_SIDES_LIST = ["right" /* RIGHT */, "left" /* LEFT */];
-
-// editor/ui-editor-ui/src/app/tools/debugger/debugger.ts
-var STRIPO_DEBUG_MODE = "STRIPO_DEBUG_MODE";
-var debug = {};
-for (const prop in console) {
-  if (typeof console[prop] === "function") {
-    debug[prop] = function(...args) {
-      if (isDebugModeEnabled()) {
-        const result = Reflect.apply(console[prop], console, args);
-        if (prop === "error") {
-          console.groupCollapsed("Error trace");
-          console.trace();
-          console.groupEnd();
-        }
-        return result;
-      }
-      return void 0;
-    };
-  }
-}
-globalThis["breakAfter"] = breakAfter;
-globalThis["enableDebugMode"] = function() {
-  globalThis.localStorage?.setItem(STRIPO_DEBUG_MODE, "true");
-};
-globalThis["disableDebugMode"] = function() {
-  globalThis.localStorage?.setItem(STRIPO_DEBUG_MODE, "");
-};
-var defaultLogOptions = {
-  color: "DarkBlue" /* DarkBlue */,
-  bg: "White" /* White */,
-  fontSize: "12px",
-  logTrace: true,
-  logTime: true,
-  collapsed: false,
-  logContext: true,
-  logSetters: true,
-  logMethods: true,
-  rethrowError: true
-};
-var isDebugModeEnabled = () => {
-  return (
-    /*!environment.production ||*/
-    !!globalThis.localStorage?.getItem(STRIPO_DEBUG_MODE)
-  );
-};
-function breakAfter(timeout = 3e3) {
-  setTimeout(() => {
-    debugger;
-  }, timeout);
-}
-
-// editor/ui-editor-ui/src/app/tools/utils/CSSDetailedUtils.ts
-var EXTENDED_STYLE_SIDES = ["right" /* RIGHT */, "bottom" /* BOTTOM */, "left" /* LEFT */];
-var STYLE_SIDES_SHORT_3 = ["top" /* TOP */, "right" /* RIGHT */, "bottom" /* BOTTOM */];
-var STYLE_SIDES_SHORT_2 = ["top" /* TOP */, "right" /* RIGHT */];
-
-// editor/ui-editor-ui/src/app/core/block-operations-api/buttons/settings/padding/get-from-model.ts
-var BUTTONS_PADDING_SIDES = ["top", "right", "bottom", "left"];
-var BUTTONS_PADDING_VARIABLES = {
-  desktop: {
-    top: MasterCssVar.BUTTON_PADDING_TOP,
-    right: MasterCssVar.BUTTON_PADDING_RIGHT,
-    bottom: MasterCssVar.BUTTON_PADDING_BOTTOM,
-    left: MasterCssVar.BUTTON_PADDING_LEFT
-  },
-  mobile: {
-    top: MasterCssVar.ADAPT_BUTTON_PADDING_TOP,
-    right: MasterCssVar.ADAPT_BUTTON_PADDING_RIGHT,
-    bottom: MasterCssVar.ADAPT_BUTTON_PADDING_BOTTOM,
-    left: MasterCssVar.ADAPT_BUTTON_PADDING_LEFT
-  }
-};
-function normalizeButtonsPaddingSideValue(value) {
-  if (typeof value === "number") {
-    return Number.isFinite(value) ? value : void 0;
-  }
-  if (typeof value !== "string") {
-    return void 0;
-  }
-  const normalizedValue = value.trim();
-  if (!normalizedValue) {
-    return void 0;
-  }
-  const parsedValue = Number(normalizedValue);
-  return Number.isFinite(parsedValue) ? parsedValue : void 0;
-}
-function toPaddingValue(values, fallbacks) {
-  const normalized = {};
-  BUTTONS_PADDING_SIDES.forEach((side) => {
-    normalized[side] = normalizeButtonsPaddingSideValue(values[side]) ?? fallbacks[side];
-  });
-  return normalized;
-}
-function getDefaultPaddingValueFromVariables(variables) {
-  return toPaddingValue({
-    top: MASTER_CSS_VARIABLES_DEFAULTS[variables.top],
-    right: MASTER_CSS_VARIABLES_DEFAULTS[variables.right],
-    bottom: MASTER_CSS_VARIABLES_DEFAULTS[variables.bottom],
-    left: MASTER_CSS_VARIABLES_DEFAULTS[variables.left]
-  }, {
-    top: 0,
-    right: 0,
-    bottom: 0,
-    left: 0
-  });
-}
-function getButtonsPaddingVariables(platform) {
-  return BUTTONS_PADDING_VARIABLES[platform];
-}
-function getDefaultButtonsPadding(platform) {
-  return getDefaultPaddingValueFromVariables(getButtonsPaddingVariables(platform));
-}
-
-// editor/ui-editor-ui/src/app/core/block-operations-api/common/background-image/types.ts
-function normalizeBackgroundImageStringValue(value) {
-  return typeof value === "string" ? value.trim() : "";
-}
-function normalizeBackgroundImageRepeatValue(value) {
-  if (typeof value === "boolean") {
-    return value;
-  }
-  if (typeof value !== "string") {
-    return void 0;
-  }
-  const normalizedValue = value.trim().toLowerCase();
-  if (normalizedValue === "repeat" || normalizedValue === "true") {
-    return true;
-  }
-  if (normalizedValue === "no-repeat" || normalizedValue === "false") {
-    return false;
-  }
-  return void 0;
-}
-function normalizeBackgroundImageSizeValue(value) {
-  const normalizedValue = normalizeBackgroundImageStringValue(value);
-  return normalizedValue || "auto";
-}
-
-// editor/ui-editor-common/tools/utils/ArrayUtils.ts
-var ArrayUtils = class {
-  static onlyUnique(value, index, self2) {
-    return self2.indexOf(value) === index;
-  }
-  static fromPairs(arr) {
-    const res = {};
-    arr.forEach(([k, v]) => {
-      res[k] = v;
-    });
-    return res;
-  }
-};
-
-// editor/ui-editor-ui/node_modules/postcss/lib/postcss.mjs
-var import_postcss = __toESM(require_postcss(), 1);
-var stringify = import_postcss.default.stringify;
-var fromJSON = import_postcss.default.fromJSON;
-var plugin = import_postcss.default.plugin;
-var parse = import_postcss.default.parse;
-var list = import_postcss.default.list;
-var document2 = import_postcss.default.document;
-var comment = import_postcss.default.comment;
-var atRule = import_postcss.default.atRule;
-var rule = import_postcss.default.rule;
-var decl = import_postcss.default.decl;
-var root = import_postcss.default.root;
-var CssSyntaxError = import_postcss.default.CssSyntaxError;
-var Declaration = import_postcss.default.Declaration;
-var Container = import_postcss.default.Container;
-var Processor = import_postcss.default.Processor;
-var Document = import_postcss.default.Document;
-var Comment = import_postcss.default.Comment;
-var Warning = import_postcss.default.Warning;
-var AtRule = import_postcss.default.AtRule;
-var Result = import_postcss.default.Result;
-var Input = import_postcss.default.Input;
-var Rule = import_postcss.default.Rule;
-var Root = import_postcss.default.Root;
-var Node = import_postcss.default.Node;
-
-// editor/ui-editor-ui/src/app/core/block-operations-api/common/comment-node.ts
-var TOP_FONT_COMMENT_CONTENT = "[if !mso]><!-- ";
-var BOTTOM_FONT_COMMENT_CONTENT = "<![endif]";
-var commentNode = {
-  tag: "",
-  type: 8 /* COMMENT_NODE */,
-  content: void 0,
-  specificContent: void 0,
-  config: {},
-  children: [],
-  path: [],
-  attributes: {}
-};
-function getCommentBlockCRDT(parent) {
-  let insideComment = false;
-  const res = [];
-  parent.getChildren().forEach((child) => {
-    if (child.getContent() === TOP_FONT_COMMENT_CONTENT) {
-      insideComment = true;
-    }
-    if (insideComment) {
-      res.push(child);
-    }
-    if (child.getContent() === BOTTOM_FONT_COMMENT_CONTENT) {
-      insideComment = false;
-    }
-  });
-  return res;
-}
-
-// editor/ui-editor-ui/src/app/core/block-operations-api/common/fonts/font-family-name.ts
-function getPrimaryFontFamilyName(fontFamilyValue) {
-  return (fontFamilyValue || "").replace(/["'“”]/g, "").split(",")[0].trim().toLowerCase();
-}
-
-// editor/ui-editor-ui/src/app/core/block-operations-api/common/fonts/default-web-font-urls.ts
-var defaultWebFontUrls = {
-  "Arvo": "https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&display=swap",
-  "Lato": "https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap",
-  "Lora": "https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap",
-  "Merriweather": "https://fonts.googleapis.com/css2?family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&display=swap",
-  "Merriweather Sans": "https://fonts.googleapis.com/css2?family=Merriweather+Sans:ital,wght@0,300..800;1,300..800&display=swap",
-  "Noticia Text": "https://fonts.googleapis.com/css2?family=Noticia+Text:ital,wght@0,400;0,700;1,400;1,700&display=swap",
-  "Open Sans": "https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap",
-  "Playfair Display": "https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap",
-  "Roboto": "https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap",
-  "Source Sans Pro": "https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,200i,300,300i,400,400i,600,600i,700,700i,900,900i"
-};
-
-// editor/ui-editor-ui/src/app/core/block-operations-api/common/fonts/font-family-weights.ts
-var defaultFontFamilyWeights = {
-  "Arial": [400, 700],
-  "Comic Sans MS": [400, 700],
-  "Courier New": [400, 700],
-  "Georgia": [400, 700],
-  "Helvetica": [200, 300, 400, 700],
-  "Lucida Sans Unicode": [400, 700],
-  "Tahoma": [400, 700],
-  "Times New Roman": [400, 700],
-  "Trebuchet MS": [400, 700],
-  "Verdana": [400, 700],
-  "Arvo": [400, 700],
-  "Lato": [100, 300, 400, 700, 900],
-  "Lora": [400, 700],
-  "Merriweather": [300, 400, 500, 600, 700, 800, 900],
-  "Merriweather Sans": [300, 400, 500, 600, 700, 800],
-  "Noticia Text": [400, 700],
-  "Open Sans": [300, 400, 500, 600, 700, 800],
-  "Playfair Display": [400, 500, 600, 700, 800, 900],
-  "Roboto": [100, 200, 300, 400, 500, 600, 700, 800, 900],
-  "Source Sans Pro": [200, 300, 400, 600, 700, 900],
-  "-apple-system": [400, 700]
 };
 
 // editor/ui-editor-ui/src/app/tools/utils/UrlUtils.ts
@@ -1828,23 +1450,211 @@ var UrlUtils = class _UrlUtils {
 function isFontConnectionUrl(value) {
   return /^https?:\/\//i.test(value) && !/[\s\\]/.test(value) && UrlUtils.isAbsoluteHttpUrl(value);
 }
-function createWebFontLink(fontName) {
-  const mappedUrl = defaultWebFontUrls[fontName];
-  if (mappedUrl) {
-    return mappedUrl;
-  }
-  const weights = defaultFontFamilyWeights[fontName] || [400, 700];
-  const weightsParams = weights.map((weight) => "".concat(weight, ",").concat(weight, "i")).join(",");
-  return "https://fonts.googleapis.com/css?family=".concat(fontName.split(" ").join("+"), ":").concat(weightsParams);
-}
 function clearFontValue(fontValue) {
   if (!fontValue) {
     return fontValue;
   }
   return fontValue.replace(/,\s*/g, ",").replace(/('|"|;)/g, "").toLowerCase();
 }
-function getUniformFontFamilyValue(value = "") {
-  return value.replace('"system-ui"', "BlinkMacSystemFont").replace(/"/g, "'").replace(/, /g, ",");
+
+// editor/ui-editor-ui/src/app/services/api/editor-copilot-api/schema/zod-jitless-bootstrap.ts
+external_exports.config({ jitless: true });
+
+// editor/ui-editor-ui/src/app/services/api/editor-copilot-api/schema/email-template-settings.schema.ts
+var import_postcss_value_parser2 = __toESM(require_lib());
+
+// editor/ui-editor-ui/src/app/core/block-operations-api/buttons/settings/border-radius/get-from-model.ts
+var BUTTONS_BORDER_RADIUS_VARIABLES = {
+  topLeft: MasterCssVar.BUTTON_BORDER_RADIUS_LT,
+  topRight: MasterCssVar.BUTTON_BORDER_RADIUS_RT,
+  bottomRight: MasterCssVar.BUTTON_BORDER_RADIUS_RB,
+  bottomLeft: MasterCssVar.BUTTON_BORDER_RADIUS_LB
+};
+
+// editor/ui-editor-ui/src/app/core/block-operations-api/buttons/settings/fit-container/get-from-model.ts
+var BUTTONS_FIT_CONTAINER_VARIABLES = {
+  desktop: MasterCssVar.BUTTON_DISPLAY,
+  mobile: MasterCssVar.ADAPT_BUTTON_DISPLAY
+};
+
+// editor/ui-editor-ui/src/app/core/block-operations-api/buttons/settings/font-size/get-from-model.ts
+var BUTTONS_FONT_SIZE_VARIABLES = {
+  desktop: MasterCssVar.BUTTON_FONT_SIZE,
+  mobile: MasterCssVar.ADAPT_BUTTON_FONT_SIZE
+};
+
+// editor/ui-editor-ui/src/app/core/block-operations-api/common/color/normalizers.ts
+function normalizeTransparentAllowedColor(value, colorMergeTagValues = /* @__PURE__ */ new Set()) {
+  if (value === void 0 || value === null) {
+    return void 0;
+  }
+  const color = String(value);
+  return normalizeCopilotDocumentStateColorValue(color, { allowTransparent: true }, colorMergeTagValues);
+}
+function normalizeOpaqueColor(value, colorMergeTagValues = /* @__PURE__ */ new Set()) {
+  if (value === void 0 || value === null) {
+    return void 0;
+  }
+  const color = String(value);
+  return normalizeCopilotDocumentStateColorValue(color, { allowTransparent: false }, colorMergeTagValues);
+}
+
+// editor/ui-editor-ui/src/app/constants/general.constants.ts
+var SIDES_LIST = ["top" /* TOP */, "right" /* RIGHT */, "bottom" /* BOTTOM */, "left" /* LEFT */];
+var HORIZONTAL_SIDES_LIST = ["right" /* RIGHT */, "left" /* LEFT */];
+
+// editor/ui-editor-ui/src/app/tools/debugger/debugger.ts
+var STRIPO_DEBUG_MODE = "STRIPO_DEBUG_MODE";
+var debug = {};
+for (const prop in console) {
+  if (typeof console[prop] === "function") {
+    debug[prop] = function(...args) {
+      if (isDebugModeEnabled()) {
+        const result = Reflect.apply(console[prop], console, args);
+        if (prop === "error") {
+          console.groupCollapsed("Error trace");
+          console.trace();
+          console.groupEnd();
+        }
+        return result;
+      }
+      return void 0;
+    };
+  }
+}
+globalThis["breakAfter"] = breakAfter;
+globalThis["enableDebugMode"] = function() {
+  globalThis.localStorage?.setItem(STRIPO_DEBUG_MODE, "true");
+};
+globalThis["disableDebugMode"] = function() {
+  globalThis.localStorage?.setItem(STRIPO_DEBUG_MODE, "");
+};
+var defaultLogOptions = {
+  color: "DarkBlue" /* DarkBlue */,
+  bg: "White" /* White */,
+  fontSize: "12px",
+  logTrace: true,
+  logTime: true,
+  collapsed: false,
+  logContext: true,
+  logSetters: true,
+  logMethods: true,
+  rethrowError: true
+};
+var isDebugModeEnabled = () => {
+  return (
+    /*!environment.production ||*/
+    !!globalThis.localStorage?.getItem(STRIPO_DEBUG_MODE)
+  );
+};
+function breakAfter(timeout = 3e3) {
+  setTimeout(() => {
+    debugger;
+  }, timeout);
+}
+
+// editor/ui-editor-ui/src/app/tools/utils/CSSDetailedUtils.ts
+var EXTENDED_STYLE_SIDES = ["right" /* RIGHT */, "bottom" /* BOTTOM */, "left" /* LEFT */];
+var STYLE_SIDES_SHORT_3 = ["top" /* TOP */, "right" /* RIGHT */, "bottom" /* BOTTOM */];
+var STYLE_SIDES_SHORT_2 = ["top" /* TOP */, "right" /* RIGHT */];
+
+// editor/ui-editor-ui/src/app/core/block-operations-api/buttons/settings/padding/get-from-model.ts
+var BUTTONS_PADDING_VARIABLES = {
+  desktop: {
+    top: MasterCssVar.BUTTON_PADDING_TOP,
+    right: MasterCssVar.BUTTON_PADDING_RIGHT,
+    bottom: MasterCssVar.BUTTON_PADDING_BOTTOM,
+    left: MasterCssVar.BUTTON_PADDING_LEFT
+  },
+  mobile: {
+    top: MasterCssVar.ADAPT_BUTTON_PADDING_TOP,
+    right: MasterCssVar.ADAPT_BUTTON_PADDING_RIGHT,
+    bottom: MasterCssVar.ADAPT_BUTTON_PADDING_BOTTOM,
+    left: MasterCssVar.ADAPT_BUTTON_PADDING_LEFT
+  }
+};
+
+// editor/ui-editor-ui/src/app/core/block-operations-api/common/background-image/types.ts
+function normalizeBackgroundImageStringValue(value) {
+  return typeof value === "string" ? value.trim() : "";
+}
+function normalizeBackgroundImageRepeatValue(value) {
+  if (typeof value === "boolean") {
+    return value;
+  }
+  if (typeof value !== "string") {
+    return void 0;
+  }
+  const normalizedValue = value.trim().toLowerCase();
+  if (normalizedValue === "repeat" || normalizedValue === "true") {
+    return true;
+  }
+  if (normalizedValue === "no-repeat" || normalizedValue === "false") {
+    return false;
+  }
+  return void 0;
+}
+function normalizeBackgroundImageSizeValue(value) {
+  const normalizedValue = normalizeBackgroundImageStringValue(value);
+  return normalizedValue || "auto";
+}
+
+// editor/ui-editor-common/tools/utils/ArrayUtils.ts
+var ArrayUtils = class {
+  static onlyUnique(value, index, self2) {
+    return self2.indexOf(value) === index;
+  }
+  static fromPairs(arr) {
+    const res = {};
+    arr.forEach(([k, v]) => {
+      res[k] = v;
+    });
+    return res;
+  }
+};
+
+// editor/ui-editor-ui/node_modules/postcss/lib/postcss.mjs
+var import_postcss = __toESM(require_postcss(), 1);
+var stringify = import_postcss.default.stringify;
+var fromJSON = import_postcss.default.fromJSON;
+var plugin = import_postcss.default.plugin;
+var parse = import_postcss.default.parse;
+var list = import_postcss.default.list;
+var document2 = import_postcss.default.document;
+var comment = import_postcss.default.comment;
+var atRule = import_postcss.default.atRule;
+var rule = import_postcss.default.rule;
+var decl = import_postcss.default.decl;
+var root = import_postcss.default.root;
+var CssSyntaxError = import_postcss.default.CssSyntaxError;
+var Declaration = import_postcss.default.Declaration;
+var Container = import_postcss.default.Container;
+var Processor = import_postcss.default.Processor;
+var Document = import_postcss.default.Document;
+var Comment = import_postcss.default.Comment;
+var Warning = import_postcss.default.Warning;
+var AtRule = import_postcss.default.AtRule;
+var Result = import_postcss.default.Result;
+var Input = import_postcss.default.Input;
+var Rule = import_postcss.default.Rule;
+var Root = import_postcss.default.Root;
+var Node = import_postcss.default.Node;
+
+// editor/ui-editor-ui/src/app/core/block-operations-api/common/comment-node.ts
+var commentNode = {
+  tag: "",
+  type: 8 /* COMMENT_NODE */,
+  content: void 0,
+  specificContent: void 0,
+  config: {},
+  children: [],
+  path: [],
+  attributes: {}
+};
+
+// editor/ui-editor-ui/src/app/core/block-operations-api/common/fonts/font-family-name.ts
+function getPrimaryFontFamilyName(fontFamilyValue) {
+  return (fontFamilyValue || "").replace(/["'“”]/g, "").split(",")[0].trim().toLowerCase();
 }
 
 // editor/ui-editor-ui/src/app/core/block-operations-api/common/fonts/font-face-rules.ts
@@ -1883,28 +1693,6 @@ function getFontFaceCssDetails(css) {
     return { families: [], error: "Invalid font-face CSS syntax." };
   }
 }
-function getFontImportUrls(css) {
-  try {
-    const root2 = parse(css);
-    const urls = [];
-    for (const node of root2.nodes) {
-      if (node.type === "comment") {
-        continue;
-      }
-      if (node.type !== "atrule" || node.name.toLowerCase() !== "import" || node.nodes) {
-        return void 0;
-      }
-      const match = node.params.match(/^(?:url\(\s*(?:"([^"]*)"|'([^']*)'|([^)]*?))\s*\)|"([^"]*)"|'([^']*)')$/i);
-      if (!match) {
-        return void 0;
-      }
-      urls.push(match.slice(1).find((value) => value !== void 0) ?? "");
-    }
-    return urls;
-  } catch {
-    return void 0;
-  }
-}
 var getDeclaredFontFamily = (rule2) => {
   let declared = "";
   rule2.walkDecls((declaration) => {
@@ -1915,740 +1703,9 @@ var getDeclaredFontFamily = (rule2) => {
   return getPrimaryFontFamilyName(declared);
 };
 
-// editor/ui-editor-ui/src/app/core/block-operations-api/common/fonts/font-style.ts
-var FONT_STYLE_ATTR = "esd-font-style";
-var FONT_STYLE_URL_ATTR = "esd-font-url";
-var FONT_STYLE_IMPORT = "import";
-var FONT_STYLE_FONT_FACE = "fontFace";
-var FONT_METHOD_ENTRY_SEPARATOR = "|";
-var FONT_METHOD_KV_SEPARATOR = "::";
-var FONT_FAMILY_ATTR = "esd-font-family";
-var FONT_FAMILIES_ATTR = "esd-font-families";
-function parseFontFamiliesAttr(attr) {
-  if (!attr) {
-    return [];
-  }
-  return attr.split(FONT_METHOD_ENTRY_SEPARATOR).map((entry) => {
-    const [value, url] = entry.split(FONT_METHOD_KV_SEPARATOR);
-    return { value: value?.trim() || "", url: url?.trim() || "" };
-  }).filter((entry) => entry.value && entry.url);
-}
-function serializeFontFamiliesAttr(entries) {
-  return entries.filter((entry) => entry.value && entry.url).map((entry) => "".concat(entry.value).concat(FONT_METHOD_KV_SEPARATOR).concat(entry.url)).join(FONT_METHOD_ENTRY_SEPARATOR);
-}
-
 // editor/ui-editor-ui/src/app/core/block-operations-api/common/fonts/font-utils.ts
 var ANY_DESCENDANT_SELECTOR = [q.select.descendants().any().end()];
 var BODY_SELECTOR = [q.select.descendants().tag("body").end()];
-var COMMENT_WRAPPER_COUNT = 2;
-var FONT_FAMILY_DECLARATION_REGEXP = /font-family\s*:\s*([^;{}<"]+)/gi;
-var FONT_FACE_ATTR_REGEXP = /<font[^>]*\sface\s*=\s*["']([^"']+)["']/gi;
-var FONT_FAMILY_ATTR_REGEXP = /\sfont-family\s*=\s*"([^"]+)"/gi;
-var QUOTE_ENTITY_REGEXP = /&(?:quot|apos|#0*34|#0*39);/gi;
-var GENERIC_FONT_FAMILIES = /* @__PURE__ */ new Set([
-  "serif",
-  "sans-serif",
-  "monospace",
-  "cursive",
-  "fantasy",
-  "math",
-  "emoji",
-  "fangsong",
-  "system-ui",
-  "ui-serif",
-  "ui-sans-serif",
-  "ui-monospace",
-  "ui-rounded",
-  "-apple-system",
-  "blinkmacsystemfont",
-  "inherit",
-  "initial",
-  "unset",
-  "revert",
-  "revert-layer"
-]);
-var FontUtils = class _FontUtils {
-  /** Model-only inventory. A damaged node never hides a healthy sibling connection. */
-  static collectHeadFontConnections(api) {
-    const resolvedApi = _FontUtils.resolveApi(api);
-    const head = resolvedApi.htmlApi.find(void 0, HEAD_SELECTOR);
-    if (!head) {
-      return [];
-    }
-    const connections = [];
-    const nodes = resolvedApi.htmlApi.findAll(head.getId(), [q.select.descendants().tag(["link", "style"]).end()]);
-    for (const node of nodes) {
-      try {
-        const nodeId = node.getId();
-        const stamped = _FontUtils.getStampedFontFamily(node);
-        const families = stamped ? [stamped] : [];
-        if (node.getTag()?.toLowerCase() === "link") {
-          const url = String(node.getAttribute("href") ?? "");
-          if (node.getAttribute("rel") === "stylesheet") {
-            connections.push({
-              nodeId,
-              importMethod: "link" /* LINK */,
-              url,
-              families,
-              familyNames: _FontUtils.getKnownFontUrlFamilies(url),
-              supported: isFontConnectionUrl(url)
-            });
-          }
-          continue;
-        }
-        const css = node.getChildren().filter((child) => child.getType() === "text").map((child) => child.getContent() ?? "").join("");
-        const marker = node.getAttribute(FONT_STYLE_ATTR);
-        if (marker === FONT_STYLE_FONT_FACE || !marker && /@font-face\b/i.test(css)) {
-          const url = String(node.getAttribute(FONT_STYLE_URL_ATTR) ?? "") || void 0;
-          const details = getFontFaceCssDetails(css);
-          connections.push({
-            nodeId,
-            importMethod: "fontFace" /* FONT_FACE */,
-            url,
-            css,
-            families,
-            familyNames: details.families,
-            supported: !details.error && (url === void 0 || isFontConnectionUrl(url))
-          });
-        } else if (marker === FONT_STYLE_IMPORT || !marker && /@import\b/i.test(css)) {
-          const urls = getFontImportUrls(css);
-          const mapping = _FontUtils.getFontFamiliesMapping(node);
-          if (!urls) {
-            connections.push({
-              nodeId,
-              importMethod: "import" /* IMPORT */,
-              families: mapping.map((entry) => entry.value),
-              familyNames: [],
-              supported: false
-            });
-            continue;
-          }
-          for (const url of new Set(urls)) {
-            connections.push({
-              nodeId,
-              importMethod: "import" /* IMPORT */,
-              url,
-              families: mapping.filter((entry) => entry.url === url).map((entry) => _FontUtils.clearFontValue(entry.value)),
-              familyNames: _FontUtils.getKnownFontUrlFamilies(url),
-              supported: isFontConnectionUrl(url)
-            });
-          }
-        }
-      } catch {
-      }
-    }
-    return connections;
-  }
-  /** Opaque URLs carry no family evidence, even when an arbitrary query parameter resembles a name. */
-  static getKnownFontUrlFamilies(url) {
-    try {
-      const parsed = new URL(url);
-      if (parsed.hostname !== "fonts.googleapis.com") {
-        return [];
-      }
-      return [...new Set(parsed.searchParams.getAll("family").flatMap((value) => value.split("|")).map((value) => getPrimaryFontFamilyName(value.split(":")[0])).filter((value) => !!value && !value.includes("\uFFFD")))];
-    } catch {
-      return [];
-    }
-  }
-  /** Projection keeps full stamped keys; cleanup may conservatively retain other fallback stacks of that primary family. */
-  static getHeadConnectionUsedValues(connection, usedValues, includeStampedFallbackVariants = false) {
-    return usedValues.filter((value) => connection.families.includes(value) || connection.familyNames.includes(getPrimaryFontFamilyName(value)) || includeStampedFallbackVariants && connection.families.some((family) => getPrimaryFontFamilyName(family) === getPrimaryFontFamilyName(value)));
-  }
-  static resolveApi(api) {
-    if (_FontUtils.isCrdtApi(api)) {
-      return {
-        htmlApi: api.html(),
-        cssApi: api.css(),
-        variablesApi: api.variables(),
-        actionsApi: api.actions(),
-        serializerApi: api.serializer()
-      };
-    }
-    return api;
-  }
-  static isCrdtApi(api) {
-    return typeof api.html === "function";
-  }
-  static createWebFontLink(fontName) {
-    return createWebFontLink(fontName);
-  }
-  static getFontValuesFromNodeCRDT(node, excludedFonts, api) {
-    const { htmlApi } = _FontUtils.resolveApi(api);
-    const fontsFamily = [
-      node.getStyle("font-family"),
-      ...htmlApi.findAll(node.getId(), ANY_DESCENDANT_SELECTOR).map((n) => n.getStyle("font-family"))
-    ];
-    return fontsFamily.filter((f) => Boolean(f)).filter((f) => !excludedFonts.some((font) => _FontUtils.clearFontValue(font.value) === _FontUtils.clearFontValue(f)));
-  }
-  static getFontsUsedOnlyInCurrentNodeCRDT(node, excludedFonts, api) {
-    const resolvedApi = _FontUtils.resolveApi(api);
-    const customFonts = _FontUtils.getFontValuesFromNodeCRDT(node, excludedFonts, resolvedApi).map((font) => font?.trim()).filter(Boolean).filter(ArrayUtils.onlyUnique);
-    if (!customFonts.length) {
-      return [];
-    }
-    const body = resolvedApi.htmlApi.find(void 0, BODY_SELECTOR);
-    const stringBody = body ? resolvedApi.serializerApi.htmlNode(body)?.toString({}).buffer : void 0;
-    const stringNode = resolvedApi.serializerApi.htmlNode(node)?.toString({}).buffer ?? "";
-    return customFonts.filter((font) => {
-      const fontVariants = font.split(",").map((f) => f.trim().replace(/'/g, "&#39;"));
-      return fontVariants.every((variant) => {
-        const searchRegExp = new RegExp(variant, "gi");
-        return (stringBody?.match(searchRegExp) || []).length === (stringNode.match(searchRegExp) || []).length;
-      });
-    });
-  }
-  /**
-   * Removes the head connections (link / @font-face style / @import lines) of the given font urls.
-   *
-   * `fontValues` narrows the removal of @font-face styles to the listed families: since ED-8366
-   * one stylesheet can back several <style> nodes, one per font-family, and dropping one font
-   * must not take its neighbours down. Omit it to remove every @font-face style of the urls.
-   * Styles written before ED-6994 carry no family stamp and are always removed with their url.
-   */
-  static removeFontActionsCRDT(fontsUrls, api, fontValues) {
-    const resolvedApi = _FontUtils.resolveApi(api);
-    const head = resolvedApi.htmlApi.find(void 0, HEAD_SELECTOR);
-    if (!head || !fontsUrls.length) {
-      return [];
-    }
-    const removedNodeIds = [];
-    const contentActions = [];
-    const removedFamilies = fontValues && _FontUtils.getClearedFontValues(fontValues);
-    const fontLinks = _FontUtils.collectFontLinks(head, resolvedApi);
-    fontsUrls.map((url) => fontLinks.find((link) => String(link.getAttribute("href") || "").startsWith(url))).filter((f) => Boolean(f)).forEach((fN) => removedNodeIds.push(fN.getId()));
-    const { importStyle, fontFaceStyles } = _FontUtils.getEditorFontStyleNodes(head, resolvedApi);
-    fontFaceStyles.filter((node) => fontsUrls.includes(String(node.getAttribute(FONT_STYLE_URL_ATTR) || ""))).filter((node) => {
-      const stamped = _FontUtils.getStampedFontFamily(node);
-      return !removedFamilies || !stamped || removedFamilies.includes(stamped);
-    }).forEach((node) => removedNodeIds.push(node.getId()));
-    if (importStyle) {
-      const textChild = importStyle.getChildren().find((c) => c.getType() === "text");
-      const content = textChild?.getContent() || "";
-      const lines = content.split("\n");
-      const remaining = lines.filter((line) => !fontsUrls.some((url) => url && line.includes(url)));
-      if (remaining.length !== lines.length) {
-        if (!remaining.some((line) => line.trim())) {
-          removedNodeIds.push(importStyle.getId());
-        } else if (textChild) {
-          contentActions.push(resolvedApi.actionsApi.createSetHtmlNodeContentAction(textChild.getId(), remaining.join("\n")));
-          const mappingEntries = _FontUtils.getFontFamiliesMapping(importStyle);
-          const remainingEntries = mappingEntries.filter((entry) => !fontsUrls.includes(entry.url));
-          if (remainingEntries.length !== mappingEntries.length) {
-            contentActions.push(resolvedApi.actionsApi.createSetHtmlNodeConfigAction(
-              importStyle.getId(),
-              { fontFamilies: serializeFontFamiliesAttr(remainingEntries) || void 0 }
-            ));
-          }
-        }
-      }
-    }
-    if (!removedNodeIds.length && !contentActions.length) {
-      return [];
-    }
-    const removeFontActions = resolvedApi.actionsApi.createRemoveHtmlNodesAction(removedNodeIds);
-    const fontNodesWithWrapperComments = getCommentBlockCRDT(head);
-    if (removeFontActions.length && removeFontActions.length === fontNodesWithWrapperComments.length - COMMENT_WRAPPER_COUNT) {
-      removeFontActions.push(...resolvedApi.actionsApi.createRemoveHtmlNodesAction([fontNodesWithWrapperComments[0].getId()]));
-    }
-    return [...removeFontActions, ...contentActions];
-  }
-  /**
-   * Removes only the @font-face <style> nodes stamped with one of `fontValues` for the given urls.
-   * Complements {@link removeFontActionsCRDT} for a stylesheet url shared with a still-used sibling
-   * family: the url-wide connections (<link>, @import lines, legacy unstamped styles) must survive,
-   * while the dropped family's own scoped style still has to go (ED-8366).
-   */
-  static removeStampedFontFaceActionsCRDT(fontsUrls, api, fontValues) {
-    const resolvedApi = _FontUtils.resolveApi(api);
-    const head = resolvedApi.htmlApi.find(void 0, HEAD_SELECTOR);
-    if (!head || !fontsUrls.length || !fontValues.length) {
-      return [];
-    }
-    const removedFamilies = _FontUtils.getClearedFontValues(fontValues);
-    const { fontFaceStyles } = _FontUtils.getEditorFontStyleNodes(head, resolvedApi);
-    const removedNodeIds = fontFaceStyles.filter((node) => fontsUrls.includes(String(node.getAttribute(FONT_STYLE_URL_ATTR) || ""))).filter((node) => {
-      const stamped = _FontUtils.getStampedFontFamily(node);
-      return !!stamped && removedFamilies.includes(stamped);
-    }).map((node) => node.getId());
-    return removedNodeIds.length ? resolvedApi.actionsApi.createRemoveHtmlNodesAction(removedNodeIds) : [];
-  }
-  /**
-   * The cleared font-family a head connection node was stamped with at insertion time (ED-6994).
-   * Primary storage is the node config (invisible in the code editor); the esd-font-family
-   * attribute is read as a fallback (e.g. code-editor edits before the config migration ran).
-   */
-  static getStampedFontFamily(node) {
-    if (!node) {
-      return "";
-    }
-    const value = node.getNodeConfigProp("fontFamily") ?? node.getAttribute(FONT_FAMILY_ATTR) ?? "";
-    return _FontUtils.clearFontValue(String(value));
-  }
-  /** The `value::url` mapping of the shared @import style (ED-6994); config first, attribute fallback. */
-  static getFontFamiliesMapping(node) {
-    if (!node) {
-      return [];
-    }
-    const value = node.getNodeConfigProp("fontFamilies") ?? node.getAttribute(FONT_FAMILIES_ATTR) ?? "";
-    return parseFontFamiliesAttr(String(value));
-  }
-  /**
-   * Collects the editor-managed font <style> nodes from the head (ED-8052):
-   * the single shared `@import` style and any per-font `@font-face` styles.
-   */
-  static getEditorFontStyleNodes(head, api) {
-    const styles = api.htmlApi.findAll(head.getId(), [q.select.descendants().tag("style").end()]);
-    let importStyle;
-    const fontFaceStyles = [];
-    styles.forEach((node) => {
-      const marker = node.getAttribute(FONT_STYLE_ATTR);
-      if (marker === FONT_STYLE_IMPORT) {
-        importStyle = node;
-      } else if (marker === FONT_STYLE_FONT_FACE) {
-        fontFaceStyles.push(node);
-      }
-    });
-    return { importStyle, fontFaceStyles };
-  }
-  /**
-   * Identifies and removes editor-managed font <style> connections (@import lines and
-   * @font-face blocks) whose font is no longer used anywhere in the document.
-   * Companion of {@link removeUnusedFontsCRDT} which only handles <link> nodes.
-   */
-  static removeUnusedFontStylesCRDT(api, fontsCategories) {
-    try {
-      const resolvedApi = _FontUtils.resolveApi(api);
-      const documentNodes = _FontUtils.getDocumentNodes(resolvedApi);
-      if (!documentNodes) {
-        return [];
-      }
-      const { head, body } = documentNodes;
-      const { importStyle, fontFaceStyles } = _FontUtils.getEditorFontStyleNodes(head, resolvedApi);
-      if (!importStyle && !fontFaceStyles.length) {
-        return [];
-      }
-      const fonts = _FontUtils.prepareFonts(fontsCategories);
-      const usageContext = _FontUtils.collectFontUsageContext(body, resolvedApi);
-      const unusedUrls = /* @__PURE__ */ new Set();
-      const unusedFontFaceFamilies = /* @__PURE__ */ new Set();
-      const isEveryFamilyUnused = (families) => families.length > 0 && families.every((fontValue) => !_FontUtils.isFontValueUsed(fontValue, usageContext.usedFontValues));
-      const orphansRemovable = _FontUtils.areUsedFontsResolvable(usageContext.usedFontValues, fonts, head, resolvedApi);
-      fontFaceStyles.forEach((node) => {
-        const url = String(node.getAttribute(FONT_STYLE_URL_ATTR) || "");
-        if (!url) {
-          return;
-        }
-        const stamped = _FontUtils.getStampedFontFamily(node);
-        const families = stamped ? [stamped] : _FontUtils.getFontFaceStyleFamilies(node, url, fonts);
-        if (families.length ? isEveryFamilyUnused(families) : orphansRemovable) {
-          unusedUrls.add(url);
-          families.forEach((family) => unusedFontFaceFamilies.add(family));
-        }
-      });
-      if (importStyle) {
-        const importContent = importStyle.getChildren().find((c) => c.getType() === "text")?.getContent() || "";
-        const mappingEntries = _FontUtils.getFontFamiliesMapping(importStyle);
-        const mappingValuesByUrl = (url) => mappingEntries.filter((entry) => entry.url === url).map((entry) => entry.value);
-        const candidateUrls = [
-          ...mappingEntries.map((entry) => entry.url),
-          ...fonts.map((font) => font.link).filter((link) => Boolean(link)),
-          // Lines the mapping and the config say nothing about — orphan candidates (ED-8856).
-          ..._FontUtils.getImportedUrls(importContent)
-        ].filter(ArrayUtils.onlyUnique);
-        candidateUrls.forEach((url) => {
-          if (!importContent.includes(url)) {
-            return;
-          }
-          const families = _FontUtils.getConnectionFontFamilies(mappingValuesByUrl(url), url, fonts);
-          if (families.length ? isEveryFamilyUnused(families) : orphansRemovable) {
-            unusedUrls.add(url);
-          }
-        });
-      }
-      return unusedUrls.size ? _FontUtils.removeFontActionsCRDT(Array.from(unusedUrls), resolvedApi, Array.from(unusedFontFaceFamilies)) : [];
-    } catch (error) {
-      debug.error("FontUtils.removeUnusedFontStylesCRDT: Error removing unused font styles", error);
-      return [];
-    }
-  }
-  static getFontsFrom(fonts, source) {
-    return source.filter((webFont) => fonts.find((f) => _FontUtils.clearFontValue(f) === _FontUtils.clearFontValue(webFont.value)));
-  }
-  static getUsedFont(fontValues, head) {
-    const links = head?.findAll?.(LINK_TAG_SELECTOR) ?? [];
-    const regexList = _FontUtils.getFontFamilyUrlMatchers(fontValues);
-    const targetValues = _FontUtils.getClearedFontValues(fontValues);
-    return links.filter((link) => {
-      const href = String(link.getAttribute("href") || "");
-      return regexList.some((rgx) => rgx.test(href)) || targetValues.includes(_FontUtils.getStampedFontFamily(link));
-    }).map((link) => link.getAttribute("href"));
-  }
-  /**
-   * Method-agnostic counterpart of {@link getUsedFont}: returns the head connection
-   * URLs for the given font values across all import methods (ED-8052) —
-   * `<link>` (matched by `href`), `@import` (shared style lines matched by the
-   * `family=` URL param) and `@font-face` (per-font style matched by the
-   * `font-family` declared inside the @font-face CSS → its `esd-font-url`).
-   *
-   * Used by deletion / font-family-change cleanup so editor-managed
-   * `@import`/`@font-face` connections are removed too, including cross-account
-   * fonts unknown to the destination config.
-   */
-  static getUsedFontUrls(fontValues, head, api) {
-    if (!head) {
-      return [];
-    }
-    const resolvedApi = _FontUtils.resolveApi(api);
-    const urls = new Set(_FontUtils.getUsedFont(fontValues, head));
-    const familyUrlMatchers = _FontUtils.getFontFamilyUrlMatchers(fontValues);
-    const targetNames = _FontUtils.getFontFamilyNames(fontValues);
-    const targetValues = _FontUtils.getClearedFontValues(fontValues);
-    const { importStyle, fontFaceStyles } = _FontUtils.getEditorFontStyleNodes(head, resolvedApi);
-    fontFaceStyles.forEach((node) => {
-      const url = String(node.getAttribute(FONT_STYLE_URL_ATTR) || "");
-      if (!url) {
-        return;
-      }
-      const stampedFamily = _FontUtils.getStampedFontFamily(node);
-      if (stampedFamily && targetValues.includes(stampedFamily)) {
-        urls.add(url);
-        return;
-      }
-      const css = node.getChildren().find((c) => c.getType() === "text")?.getContent() || "";
-      if (_FontUtils.getFontFaceFamilies(css).some((family) => targetNames.includes(family))) {
-        urls.add(url);
-      }
-    });
-    if (importStyle) {
-      _FontUtils.getFontFamiliesMapping(importStyle).filter((entry) => targetValues.includes(_FontUtils.clearFontValue(entry.value))).forEach((entry) => urls.add(entry.url));
-      const content = importStyle.getChildren().find((c) => c.getType() === "text")?.getContent() || "";
-      content.split("\n").forEach((line) => {
-        if (!familyUrlMatchers.some((rgx) => rgx.test(line))) {
-          return;
-        }
-        const url = line.match(/url\(\s*['"]?([^'")]+)['"]?\s*\)/i)?.[1];
-        if (url) {
-          urls.add(url);
-        }
-      });
-    }
-    return Array.from(urls);
-  }
-  /** First (cleared, lowercased) font-family name for each value, e.g. `Arvo, serif` → `arvo`. */
-  static getFontFamilyNames(fontValues) {
-    return fontValues.map(getPrimaryFontFamilyName).filter(Boolean);
-  }
-  /** Full cleared value for each font value, e.g. `'Arvo', serif` → `arvo,serif`. */
-  static getClearedFontValues(fontValues) {
-    return fontValues.map((v) => _FontUtils.clearFontValue(v)).filter(Boolean);
-  }
-  /** Regexes matching the `family=<name>` URL param of a connection link for each font value. */
-  static getFontFamilyUrlMatchers(fontValues) {
-    return fontValues.map((v) => v.replace(/["'“”]/g, "").split(",")[0].trim()).filter(Boolean).map((name) => new RegExp("family=".concat(name.replace(/\s+/g, "\\+?"), "(?:[+:&]|$)"), "i"));
-  }
-  /**
-   * The font-family values an unstamped @font-face <style> serves: the fonts-config entries on its
-   * url, or — failing that — the families its own @font-face CSS declares. The latter resolves
-   * pre-stamp nodes whose url is unknown to the config, so they no longer live forever (ED-8856).
-   */
-  static getFontFaceStyleFamilies(node, url, fonts) {
-    const configFamilies = _FontUtils.getConnectionFontFamilies([], url, fonts);
-    if (configFamilies.length) {
-      return configFamilies;
-    }
-    const css = node.getChildren().find((c) => c.getType() === "text")?.getContent() || "";
-    return _FontUtils.getFontFaceFamilies(css).filter(ArrayUtils.onlyUnique);
-  }
-  /** Every url referenced by the `@import url(...)` lines of the shared import style. */
-  static getImportedUrls(importContent) {
-    return Array.from(importContent.matchAll(/url\(\s*['"]?([^'")]+)['"]?\s*\)/gi)).map((match) => match[1]?.trim()).filter(Boolean);
-  }
-  /** Extracts the (cleared, lowercased) `font-family` names declared inside @font-face CSS. */
-  static getFontFaceFamilies(css) {
-    return (css.match(/font-family\s*:\s*([^;}]+)/gi) || []).map((decl2) => decl2.replace(/font-family\s*:\s*/i, "").replace(/["'“”]/g, "").trim().toLowerCase()).filter(Boolean);
-  }
-  /**
-   * Collects font link nodes from the document header
-   * @param head Header node
-   * @param api Font utils scoped API
-   * @returns Array of font link nodes
-   */
-  static collectFontLinks(head, api) {
-    return api.htmlApi.findAll(head.getId(), [q.select.descendants().tag("link").end()]).filter((link) => {
-      const rel = link.getAttribute("rel");
-      const href = link.getAttribute("href");
-      return rel === "stylesheet" && href;
-    });
-  }
-  /**
-   * Prepares font entries with their links
-   * @param fontsCategories Font categories to process
-   * @returns Array of font entries with links
-   */
-  static prepareFonts(fontsCategories) {
-    return fontsCategories?.flatMap((c) => c.entries)?.map((font) => {
-      if (!font.link) {
-        font.link = _FontUtils.createWebFontLink(font.name);
-      }
-      return font;
-    }) || [];
-  }
-  /**
-   * Checks whether a head connection's font-family is used by any of the document's
-   * font-family declarations.
-   *
-   * @param fontValue Cleared font value carried by the connection
-   * @param usedFontValues Cleared font values declared in the document ({@link collectUsedFontValues})
-   */
-  static isFontValueUsed(fontValue, usedFontValues) {
-    return !!fontValue && usedFontValues.some((declared) => declared.includes(fontValue));
-  }
-  /**
-   * The font-family values a document actually declares: `font-family` declarations of the body
-   * (inline styles and `<style>` blocks), the legacy `<font face>` tag, the custom CSS rules and
-   * the master font variables — all cleared.
-   *
-   * Deliberately narrower than a raw substring scan of the serialized body (ED-8856): the font
-   * name may occur in the letter's text or inside a service `esd-*` attribute without the font
-   * being used, which used to keep its head connection alive forever.
-   */
-  static collectUsedFontValues(api) {
-    const resolvedApi = _FontUtils.resolveApi(api);
-    const body = resolvedApi.htmlApi.find(void 0, BODY_SELECTOR);
-    return body ? _FontUtils.collectFontUsageContext(body, resolvedApi).usedFontValues : [];
-  }
-  /**
-   * Same rule as {@link collectUsedFontValues} for callers that read the document themselves:
-   * the body's `font-family` declarations plus the given raw values (custom CSS rules, master
-   * font variables), all cleared and deduplicated.
-   */
-  static toUsedFontValues(bodyString, declaredValues = []) {
-    return [
-      ..._FontUtils.collectDeclaredFontValues(bodyString),
-      ...declaredValues
-    ].map((value) => {
-      const rawValue = String(value ?? "").trim();
-      try {
-        const declaration = parse("font-family: ".concat(rawValue)).first;
-        return _FontUtils.clearFontValue(declaration?.type === "decl" ? declaration.value : rawValue);
-      } catch {
-        return _FontUtils.clearFontValue(rawValue);
-      }
-    }).filter(Boolean).filter(ArrayUtils.onlyUnique);
-  }
-  /** Extracts the `font-family` declarations (and legacy `<font face>` values) of a serialized body. */
-  static collectDeclaredFontValues(bodyString) {
-    if (!bodyString) {
-      return [];
-    }
-    const html = bodyString.replace(QUOTE_ENTITY_REGEXP, "");
-    return [
-      ...Array.from(html.matchAll(FONT_FAMILY_DECLARATION_REGEXP)),
-      ...Array.from(html.matchAll(FONT_FACE_ATTR_REGEXP)),
-      ...Array.from(html.matchAll(FONT_FAMILY_ATTR_REGEXP))
-    ].map((match) => (match[1] || "").trim());
-  }
-  /**
-   * Creates removal actions for unused font links
-   * @param unusedLinks Array of unused link nodes
-   * @param allLinks Array of all link nodes
-   * @param head Header node
-   * @param api Font utils scoped API
-   * @returns Array of VersionedAction for removal
-   */
-  static createRemovalActions(unusedLinks, allLinks, head, api) {
-    const removeFontActions = [];
-    for (const linkNode of unusedLinks) {
-      removeFontActions.push(...api.actionsApi.createRemoveHtmlNodesAction([linkNode.getId()]));
-    }
-    if (removeFontActions.length && removeFontActions.length === allLinks.length) {
-      const fontNodesWithWrapperComments = getCommentBlockCRDT(head);
-      if (fontNodesWithWrapperComments.length > COMMENT_WRAPPER_COUNT) {
-        const wrapperCommentId = fontNodesWithWrapperComments[0].getId();
-        removeFontActions.push(...api.actionsApi.createRemoveHtmlNodesAction([wrapperCommentId]));
-      }
-    }
-    return removeFontActions;
-  }
-  /**
-   * Gets document content for font usage analysis
-   * @param api Font utils scoped API
-   * @returns Object with head and body nodes, or null if not found
-   */
-  static getDocumentNodes(api) {
-    const head = api.htmlApi.find(void 0, HEAD_SELECTOR);
-    const body = api.htmlApi.find(void 0, BODY_SELECTOR);
-    if (!head || !body) {
-      return null;
-    }
-    return { head, body };
-  }
-  /**
-   * Collects font-related data from the document
-   * @param body Body node
-   * @param api Font utils scoped API
-   * @returns Font usage context data
-   */
-  static collectFontUsageContext(body, api) {
-    const bodyString = api.serializerApi.htmlNode(body)?.toString({}).buffer || "";
-    const fontVariables = [
-      api.variablesApi.getVariable(MasterCssVar.BUTTON_FONT),
-      api.variablesApi.getVariable(MasterCssVar.TITLE_FONT),
-      api.variablesApi.getVariable(MasterCssVar.FONT)
-    ].filter(Boolean).map(String);
-    const customCssNodes = api.cssApi.findAll?.(void 0, [
-      q.select.descendants().hasProperty("font-family").end()
-    ]) || [];
-    return {
-      usedFontValues: _FontUtils.toUsedFontValues(bodyString, [
-        ...fontVariables,
-        ...customCssNodes.map((node) => String(node.getAttributeValue?.() ?? ""))
-      ])
-    };
-  }
-  /**
-   * Identifies unused font links in the document
-   * @param linkNodes Font link nodes to check
-   * @param fonts Available fonts with their metadata
-   * @param usedFontValues Font values declared in the document
-   * @param head Header node
-   * @param api Font utils scoped API
-   * @returns Array of unused link nodes
-   */
-  static identifyUnusedFontLinks(linkNodes, fonts, usedFontValues, head, api) {
-    const unusedLinks = [];
-    const opaqueLinks = [];
-    for (const linkNode of linkNodes) {
-      const linkHref = String(linkNode.getAttribute("href") || "");
-      if (!linkHref) {
-        continue;
-      }
-      const linkFamilies = _FontUtils.getConnectionFontFamilies(_FontUtils.getStampedFontFamily(linkNode), linkHref, fonts);
-      if (!linkFamilies.length) {
-        opaqueLinks.push(linkNode);
-        continue;
-      }
-      if (linkFamilies.every((fontValue) => !_FontUtils.isFontValueUsed(fontValue, usedFontValues))) {
-        unusedLinks.push(linkNode);
-      }
-    }
-    unusedLinks.push(..._FontUtils.identifyOrphanConnections(opaqueLinks, usedFontValues, fonts, head, api));
-    return unusedLinks;
-  }
-  /**
-   * Head connections whose font-family cannot be resolved at all — no stamp, no fonts-config entry
-   * with this url (opaque `use.typekit.net/*.css` kits, direct `.woff` urls, bare domains). Such a
-   * connection used to be immortal, which is how a letter ends up with dozens of dead font links
-   * while a single font is in use (ED-8856).
-   *
-   * Removing them is gated twice, because an unresolvable connection carries no proof of its own:
-   * - {@link areUsedFontsResolvable} — while any used font-family is unaccounted for, the letter may
-   *   well be relying on one of these connections, so none of them is touched;
-   * - the node must sit inside the editor-managed MSO font region, so `<link>`s written by the
-   *   template or by hand in the code editor are left alone.
-   */
-  static identifyOrphanConnections(opaqueLinks, usedFontValues, fonts, head, api) {
-    if (!opaqueLinks.length || !_FontUtils.areUsedFontsResolvable(usedFontValues, fonts, head, api)) {
-      return [];
-    }
-    const editorRegionIds = new Set(getCommentBlockCRDT(head).map((node) => node.getId()));
-    return opaqueLinks.filter((link) => editorRegionIds.has(link.getId()));
-  }
-  /**
-   * True when every font-family the document declares is accounted for: it is a generic/keyword
-   * family, a configured font (standard fonts need no connection at all), or a family some
-   * resolvable head connection is stamped with. Compared by primary family name so a differing
-   * fallback stack does not hide the match.
-   */
-  static areUsedFontsResolvable(usedFontValues, fonts, head, api) {
-    const resolvedApi = _FontUtils.resolveApi(api);
-    const knownNames = new Set([
-      ...fonts.map((font) => font.value),
-      ..._FontUtils.collectHeadConnectionFamilies(head, resolvedApi),
-      ..._FontUtils.collectHeadFontConnections(resolvedApi).flatMap((connection) => connection.familyNames)
-    ].map(getPrimaryFontFamilyName).filter(Boolean));
-    return usedFontValues.map(getPrimaryFontFamilyName).filter(Boolean).every((name) => GENERIC_FONT_FAMILIES.has(name) || knownNames.has(name));
-  }
-  /** Every font-family the head connections are stamped with (link / @font-face stamps, @import mapping). */
-  static collectHeadConnectionFamilies(head, api) {
-    const families = api.htmlApi.findAll(head.getId(), [q.select.descendants().tag("link").end()]).map((node) => _FontUtils.getStampedFontFamily(node));
-    const { importStyle, fontFaceStyles } = _FontUtils.getEditorFontStyleNodes(head, api);
-    fontFaceStyles.forEach((node) => families.push(_FontUtils.getStampedFontFamily(node)));
-    if (importStyle) {
-      _FontUtils.getFontFamiliesMapping(importStyle).forEach((entry) => families.push(_FontUtils.clearFontValue(entry.value)));
-    }
-    return families.filter(Boolean).filter(ArrayUtils.onlyUnique);
-  }
-  /**
-   * All cleared font-family values a head connection url serves, resolved from the head nodes
-   * (link/fontFace stamps, import mapping) and every fonts-config entry with this url (ED-6994).
-   * A single url can carry several families (e.g. one Google Fonts link with two family params).
-   */
-  static getHeadConnectionFamilies(url, head, fonts, api) {
-    if (!head) {
-      return _FontUtils.getConnectionFontFamilies([], url, fonts);
-    }
-    const resolvedApi = _FontUtils.resolveApi(api);
-    const stamps = [];
-    _FontUtils.collectFontLinks(head, resolvedApi).filter((link) => String(link.getAttribute("href") || "").startsWith(url)).forEach((link) => stamps.push(_FontUtils.getStampedFontFamily(link)));
-    const { importStyle, fontFaceStyles } = _FontUtils.getEditorFontStyleNodes(head, resolvedApi);
-    fontFaceStyles.filter((node) => String(node.getAttribute(FONT_STYLE_URL_ATTR) || "") === url).forEach((node) => stamps.push(_FontUtils.getStampedFontFamily(node)));
-    if (importStyle) {
-      _FontUtils.getFontFamiliesMapping(importStyle).filter((entry) => entry.url === url).forEach((entry) => stamps.push(entry.value));
-    }
-    return _FontUtils.getConnectionFontFamilies(stamps, url, fonts);
-  }
-  /** All cleared font-family values a head connection url may serve: the stamped ones + every config entry with this url. */
-  static getConnectionFontFamilies(stampedFamilies, url, fonts) {
-    const stamped = (Array.isArray(stampedFamilies) ? stampedFamilies : [stampedFamilies]).map((v) => _FontUtils.clearFontValue(v));
-    const configFamilies = fonts.filter((f) => f.link === url).map((f) => _FontUtils.clearFontValue(f.value));
-    return [...stamped, ...configFamilies].filter(Boolean).filter(ArrayUtils.onlyUnique);
-  }
-  /**
-   * Removes unused font links from the document header
-   * @param api Font utils scoped API or CRDT API
-   * @param fontsCategories Optional font categories to check against
-   * @returns Array of VersionedAction to remove unused font links
-   */
-  static removeUnusedFontsCRDT(api, fontsCategories) {
-    try {
-      const resolvedApi = _FontUtils.resolveApi(api);
-      const documentNodes = _FontUtils.getDocumentNodes(resolvedApi);
-      if (!documentNodes) {
-        return [];
-      }
-      const { head, body } = documentNodes;
-      const linkNodes = _FontUtils.collectFontLinks(head, resolvedApi);
-      if (!linkNodes.length) {
-        return _FontUtils.removeUnusedFontStylesCRDT(resolvedApi, fontsCategories);
-      }
-      const fonts = _FontUtils.prepareFonts(fontsCategories);
-      const usageContext = _FontUtils.collectFontUsageContext(body, resolvedApi);
-      const unusedLinks = _FontUtils.identifyUnusedFontLinks(linkNodes, fonts, usageContext.usedFontValues, head, resolvedApi);
-      return [
-        ..._FontUtils.createRemovalActions(unusedLinks, linkNodes, head, resolvedApi),
-        ..._FontUtils.removeUnusedFontStylesCRDT(resolvedApi, fontsCategories)
-      ];
-    } catch (error) {
-      debug.error("FontUtils.removeUnusedFontsCRDT: Error removing unused fonts", error);
-      return [];
-    }
-  }
-  static clearFontValue(fontValue) {
-    return clearFontValue(fontValue);
-  }
-  static getUniformFontFamilyValue(value = "") {
-    return getUniformFontFamilyValue(value);
-  }
-};
-
-// editor/ui-editor-ui/src/app/core/block-operations-api/common/font-family.ts
-function getDefaultFontFamily(variable) {
-  return FontUtils.getUniformFontFamilyValue(
-    String(MASTER_CSS_VARIABLES_DEFAULTS[variable] ?? "")
-  ) || "";
-}
 
 // editor/ui-editor-ui/src/app/constants/image-utils.const.ts
 var DEFAULT_IMAGE_PREVIEW_SVG = "assets/icons/preview/image.svg";
@@ -2711,7 +1768,6 @@ var AssetPathProvider = class _AssetPathProvider {
 };
 
 // editor/ui-editor-ui/src/app/constants/form.constants.ts
-var DEFAULT_LETTER_SPACING = 0;
 var MAX_QUANTITY_CONTAINERS = 11;
 var DEFAULT_CAROUSEL_SLIDE_PREVIEW_DIMENSIONS = {
   width: 60,
@@ -2725,26 +1781,6 @@ var DEFAULT_CAROUSEL_SLIDE_OPTIONS = {
   src: AssetPathProvider.createAbsolutePath(DEFAULT_IMAGE_PREVIEW_SVG)
 };
 
-// editor/ui-editor-ui/src/app/core/block-operations-api/common/letter-spacing/types.ts
-var DEFAULT_UNIT = "px";
-function getDefaultLetterSpacingValue() {
-  return {
-    value: DEFAULT_LETTER_SPACING,
-    unit: DEFAULT_UNIT
-  };
-}
-
-// editor/ui-editor-ui/src/app/core/block-operations-api/common/text-style/types.ts
-function normalizeTextStyleValue(value) {
-  return {
-    bold: value?.bold === true,
-    italic: value?.italic === true
-  };
-}
-function getDefaultTextStyleValue() {
-  return normalizeTextStyleValue(void 0);
-}
-
 // editor/ui-editor-ui/src/app/core/block-operations-api/common/text-transform.ts
 var BUTTONS_TEXT_TRANSFORM_VALUES = [
   "none",
@@ -2752,12 +1788,6 @@ var BUTTONS_TEXT_TRANSFORM_VALUES = [
   "capitalize",
   "lowercase"
 ];
-var DEFAULT_BUTTONS_TEXT_TRANSFORM = "none";
-
-// editor/ui-editor-ui/src/app/core/block-operations-api/general/settings/hide-image-download-icons/get-from-model.ts
-function getDefaultGeneralHideImageDownloadIcons() {
-  return true;
-}
 
 // editor/ui-editor-ui/src/app/core/block-operations-api/headings/settings/font-size/get-from-model.ts
 var HEADINGS_FONT_SIZE_VARIABLES = {
@@ -2786,37 +1816,6 @@ var HEADINGS_FONT_SIZE_VARIABLES = {
     mobile: MasterCssVar.ADAPT_H6_FONT_SIZE
   }
 };
-function normalizeHeadingsFontSizeValue(value) {
-  const parsedValue = Number.parseInt(String(value ?? ""), 10);
-  return Number.isFinite(parsedValue) && parsedValue > 0 ? parsedValue : void 0;
-}
-function getHeadingsFontSizeVariable(heading, platform) {
-  return HEADINGS_FONT_SIZE_VARIABLES[heading][platform];
-}
-function getDefaultHeadingsFontSize(heading, platform) {
-  return normalizeHeadingsFontSizeValue(
-    MASTER_CSS_VARIABLES_DEFAULTS[getHeadingsFontSizeVariable(heading, platform)]
-  );
-}
-
-// editor/ui-editor-ui/src/app/core/block-operations-api/common/line-height/types.ts
-function normalizeLineHeightValue(value) {
-  if (typeof value === "number" && Number.isFinite(value)) {
-    return value > 5 ? value / 100 : value;
-  }
-  if (typeof value !== "string") {
-    return void 0;
-  }
-  const trimmed = value.trim();
-  if (!trimmed) {
-    return void 0;
-  }
-  const numericValue = trimmed.endsWith("%") ? Number(trimmed.slice(0, -1)) : Number(trimmed);
-  if (!Number.isFinite(numericValue)) {
-    return void 0;
-  }
-  return numericValue > 5 ? numericValue / 100 : numericValue;
-}
 
 // editor/ui-editor-ui/src/app/core/block-operations-api/headings/settings/line-height/get-from-model.ts
 var HEADINGS_LINE_HEIGHT_VARIABLES = {
@@ -2845,25 +1844,11 @@ var HEADINGS_LINE_HEIGHT_VARIABLES = {
     mobile: MasterCssVar.ADAPT_H6_LINE_HEIGHT
   }
 };
-var normalizeHeadingsLineHeightValue = normalizeLineHeightValue;
-function getHeadingsLineHeightVariable(heading, platform) {
-  return HEADINGS_LINE_HEIGHT_VARIABLES[heading][platform];
-}
-function getDefaultHeadingsLineHeight(heading, platform) {
-  return normalizeHeadingsLineHeightValue(
-    MASTER_CSS_VARIABLES_DEFAULTS[getHeadingsLineHeightVariable(heading, platform)]
-  ) ?? 1.2;
-}
 
 // editor/ui-editor-ui/src/app/core/block-operations-api/headings/settings/text-align/types.ts
 var DEFAULT_HEADINGS_TEXT_ALIGN_VALUE = {
   mobile: "left" /* left */
 };
-function getDefaultHeadingsTextAlignValue() {
-  return {
-    ...DEFAULT_HEADINGS_TEXT_ALIGN_VALUE
-  };
-}
 
 // editor/ui-editor-ui/src/app/core/block-operations-api/headings/settings/text-style/types.ts
 var HEADING_TEXT_STYLE_VARIABLES = {
@@ -2874,9 +1859,6 @@ var HEADING_TEXT_STYLE_VARIABLES = {
   h5: { italic: MasterCssVar.H5_FONT_STYLE },
   h6: { italic: MasterCssVar.H6_FONT_STYLE }
 };
-function getDefaultHeadingsTextStyleValue() {
-  return { italic: false };
-}
 
 // editor/ui-editor-ui/src/app/core/block-operations-api/stripes/settings/font-size/get-from-model.ts
 var STRIPES_SECTION_FONT_SIZE_VARIABLES = {
@@ -2897,22 +1879,9 @@ var STRIPES_SECTION_FONT_SIZE_VARIABLES = {
     mobile: MasterCssVar.ADAPT_INFO_FONT_SIZE
   }
 };
-function normalizeStripesSectionFontSizeValue(value) {
-  const parsedValue = Number.parseInt(String(value ?? ""), 10);
-  return Number.isFinite(parsedValue) && parsedValue > 0 ? parsedValue : void 0;
-}
-function getStripesSectionFontSizeVariable(section, platform) {
-  return STRIPES_SECTION_FONT_SIZE_VARIABLES[section][platform];
-}
-function getDefaultStripesSectionFontSize(section, platform) {
-  return normalizeStripesSectionFontSizeValue(
-    MASTER_CSS_VARIABLES_DEFAULTS[getStripesSectionFontSizeVariable(section, platform)]
-  );
-}
 
 // editor/ui-editor-ui/src/app/tools/utils/fonts/fontWeights.ts
 var import_startCase = __toESM(require_startCase());
-var fallbackWeight = 400;
 var fontWeights = {
   Thin: 100,
   ExtraLight: 200,
@@ -2939,33 +1908,6 @@ var HEADING_FONT_WEIGHT_VARIABLES = {
   h5: MasterCssVar.H5_FONT_WEIGHT,
   h6: MasterCssVar.H6_FONT_WEIGHT
 };
-function getNumWeight(weight) {
-  if (weight === void 0) {
-    return void 0;
-  }
-  switch (weight) {
-    case "normal":
-      return 400;
-    case "bold":
-      return 700;
-    default: {
-      const numberValue = parseInt(weight, 10);
-      return Number.isNaN(numberValue) ? void 0 : numberValue;
-    }
-  }
-}
-
-// editor/ui-editor-ui/src/app/core/block-operations-api/stripes/settings/font-weight/get-from-model.ts
-function getDefaultStripesFontWeight() {
-  return getNumWeight(String(MASTER_CSS_VARIABLES_DEFAULTS[MasterCssVar.STRIPES_FONT_WEIGHT] ?? "")) ?? fallbackWeight;
-}
-
-// editor/ui-editor-ui/src/app/core/block-operations-api/stripes/settings/line-height/get-from-model.ts
-var normalizeStripesLineHeightValue = normalizeLineHeightValue;
-function getDefaultStripesLineHeight(platform) {
-  const variable = platform === "desktop" ? MasterCssVar.LINE_HEIGHT : MasterCssVar.ADAPT_LINE_HEIGHT;
-  return normalizeStripesLineHeightValue(MASTER_CSS_VARIABLES_DEFAULTS[variable]) ?? 1.5;
-}
 
 // editor/ui-editor-ui/src/app/core/background/background-image-layer-composition.ts
 var import_postcss_value_parser = __toESM(require_lib());
@@ -3064,41 +2006,6 @@ function hasUnclosedCssFunction(value) {
     unclosed ||= "unclosed" in node && node.unclosed === true;
   });
   return unclosed;
-}
-
-// editor/ui-editor-ui/src/app/services/api/editor-copilot-api/utils/descriptor-settings-path.ts
-function isPathRecord(value) {
-  return value !== null && typeof value === "object" && !Array.isArray(value);
-}
-function getDescriptorSettingsPathValue(source, path) {
-  let current = source;
-  for (const key of path) {
-    if (!isPathRecord(current)) {
-      return void 0;
-    }
-    current = current[key];
-  }
-  return current;
-}
-function setDescriptorSettingsPathValue(target, path, value) {
-  if (path.length === 0) {
-    throw new Error("Theme settings descriptor paths must not be empty.");
-  }
-  let current = target;
-  path.forEach((key, index) => {
-    if (index === path.length - 1) {
-      current[key] = value;
-      return;
-    }
-    const nested = current[key];
-    if (isPathRecord(nested)) {
-      current = nested;
-      return;
-    }
-    const created = {};
-    current[key] = created;
-    current = created;
-  });
 }
 
 // editor/ui-editor-ui/src/app/services/api/editor-copilot-api/schema/theme-background-image.contract.ts
@@ -3564,283 +2471,6 @@ var {
   canonicalEmailTemplateSettingsSchema,
   productionLegacyEmailTemplateSettingsSchema
 } = createEmailTemplateSettingsSchemas();
-function getDescriptorDefault(descriptor) {
-  const value = descriptor.valueKind === "background" ? MASTER_CSS_VARIABLES_DEFAULTS[descriptor.variables.light.solid] : MASTER_CSS_VARIABLES_DEFAULTS[descriptor.variables.light];
-  if (typeof value !== "string") {
-    throw new Error("Missing theme settings fallback for ".concat(descriptor.semanticOwner));
-  }
-  return value;
-}
-function normalizeLegacyThemeValue(value, descriptor, colorMergeTagValues = /* @__PURE__ */ new Set()) {
-  const normalized = descriptor.settings.allowTransparent ? normalizeTransparentAllowedColor(value, colorMergeTagValues) : normalizeOpaqueColor(value, colorMergeTagValues);
-  if (normalized === void 0) {
-    throw new Error("Invalid production legacy theme value for ".concat(descriptor.semanticOwner));
-  }
-  return normalized;
-}
-function resolveThemeDescriptorValues(readDirectValue, schemas) {
-  const { getDescriptorValueSchema, colorMergeTagValues } = schemas;
-  const descriptorsByOwner = new Map(THEME_VARIABLE_DESCRIPTORS.map((descriptor) => [
-    descriptor.semanticOwner,
-    descriptor
-  ]));
-  const resolvedValues = /* @__PURE__ */ new Map();
-  const resolvingOwners = /* @__PURE__ */ new Set();
-  const resolveValue = (owner) => {
-    const resolvedValue = resolvedValues.get(owner);
-    if (resolvedValue !== void 0) {
-      return resolvedValue;
-    }
-    if (resolvingOwners.has(owner)) {
-      throw new Error("Cyclic theme settings fallback dependency: ".concat(owner));
-    }
-    const descriptor = descriptorsByOwner.get(owner);
-    if (!descriptor) {
-      throw new Error("Unknown theme settings fallback owner: ".concat(owner));
-    }
-    resolvingOwners.add(owner);
-    const directValue = readDirectValue(descriptor);
-    const validDirectValue = directValue !== void 0 && getDescriptorValueSchema(descriptor).safeParse(directValue).success ? directValue : void 0;
-    let value;
-    if (validDirectValue !== void 0) {
-      value = validDirectValue;
-    } else if (descriptor.settings.legacyFallbackOwner) {
-      const fallbackValue = resolveValue(descriptor.settings.legacyFallbackOwner);
-      switch (descriptor.settings.legacyFallbackTransform) {
-        case "button-hover-color":
-          value = resolveButtonsHoverColorFallback(fallbackValue, colorMergeTagValues);
-          break;
-        case "button-hover-font-contrast": {
-          const contextOwner = descriptor.settings.legacyFallbackContextOwner;
-          if (!contextOwner) {
-            throw new Error("Missing context owner for ".concat(descriptor.semanticOwner));
-          }
-          value = resolveButtonsHoverFontColorFallback(fallbackValue, resolveValue(contextOwner), colorMergeTagValues);
-          break;
-        }
-        default:
-          value = fallbackValue;
-      }
-    } else {
-      value = getDescriptorDefault(descriptor);
-    }
-    resolvingOwners.delete(owner);
-    resolvedValues.set(owner, value);
-    return value;
-  };
-  THEME_VARIABLE_DESCRIPTORS.forEach((descriptor) => resolveValue(descriptor.semanticOwner));
-  return resolvedValues;
-}
-function createCanonicalThemeBranches(resolvedValues, section) {
-  const lightTheme = {};
-  const darkTheme = {};
-  THEME_VARIABLE_DESCRIPTORS.filter((descriptor) => getThemeDescriptorSection(descriptor) === section).forEach((descriptor) => {
-    const value = resolvedValues.get(descriptor.semanticOwner);
-    if (value === void 0) {
-      throw new Error("Missing resolved theme settings value for ".concat(descriptor.semanticOwner));
-    }
-    setDescriptorSettingsPathValue(
-      lightTheme,
-      descriptor.settings.path,
-      value
-    );
-    setDescriptorSettingsPathValue(darkTheme, descriptor.settings.path, null);
-  });
-  return { lightTheme, darkTheme };
-}
-function omitKeys(value, keys) {
-  return Object.fromEntries(Object.entries(value).filter(([key]) => !keys.includes(key)));
-}
-function normalizeLegacyBackgroundImage(value) {
-  const path = typeof value?.path === "string" ? value.path.trim() : "";
-  return path ? { ...value, path } : null;
-}
-function createCanonicalStripeNonThemeSection(legacySection, section) {
-  const canonical = {
-    fontSize: legacySection?.fontSize ?? {
-      desktop: getDefaultStripesSectionFontSize(section, "desktop"),
-      mobile: getDefaultStripesSectionFontSize(section, "mobile")
-    },
-    paragraphBottomSpace: legacySection?.paragraphBottomSpace ?? null
-  };
-  if (section === "header" || section === "footer") {
-    canonical.backgroundImage = normalizeLegacyBackgroundImage(
-      legacySection?.backgroundImage
-    );
-  }
-  return canonical;
-}
-function createCanonicalHeadingNonThemeSection(legacySection, heading) {
-  return {
-    textAlign: legacySection?.textAlign ?? getDefaultHeadingsTextAlignValue(),
-    textStyle: legacySection?.textStyle ?? getDefaultHeadingsTextStyleValue(),
-    fontWeight: legacySection?.fontWeight ?? null,
-    fontSize: legacySection?.fontSize ?? {
-      desktop: getDefaultHeadingsFontSize(heading, "desktop"),
-      mobile: getDefaultHeadingsFontSize(heading, "mobile")
-    },
-    lineHeight: legacySection?.lineHeight ?? {
-      desktop: getDefaultHeadingsLineHeight(heading, "desktop"),
-      mobile: getDefaultHeadingsLineHeight(heading, "mobile")
-    },
-    paragraphBottomSpace: legacySection?.paragraphBottomSpace ?? null
-  };
-}
-function normalizeLegacySettings(legacy, schemas) {
-  const { canonicalEmailTemplateSettingsSchema: canonicalEmailTemplateSettingsSchema2 } = schemas;
-  if (!legacy.stripes || !legacy.headings || !legacy.buttons) {
-    throw new Error("Production legacy settings passed validation without their required sections.");
-  }
-  const resolvedValues = resolveThemeDescriptorValues((descriptor) => {
-    const legacySection = legacy[getThemeDescriptorSection(descriptor)];
-    const directValue = getDescriptorSettingsPathValue(legacySection, descriptor.settings.legacyPath);
-    return typeof directValue === "string" ? normalizeLegacyThemeValue(directValue, descriptor, schemas.colorMergeTagValues) : void 0;
-  }, schemas);
-  const generalCustomListStyles = legacy.general.customListStyles ? omitKeys(legacy.general.customListStyles, ["listMarkerColor", "listNumberMarkerColor"]) : null;
-  const general = {
-    ...omitKeys(legacy.general, ["backgroundColor", "customListStyles"]),
-    hideImageDownloadIcons: legacy.general.hideImageDownloadIcons ?? getDefaultGeneralHideImageDownloadIcons(),
-    backgroundImage: normalizeLegacyBackgroundImage(legacy.general.backgroundImage),
-    customListStyles: generalCustomListStyles,
-    ...createCanonicalThemeBranches(resolvedValues, "general")
-  };
-  const stripes = {
-    letterSpacing: legacy.stripes.letterSpacing ?? getDefaultLetterSpacingValue(),
-    lineHeight: legacy.stripes.lineHeight ?? {
-      desktop: getDefaultStripesLineHeight("desktop"),
-      mobile: getDefaultStripesLineHeight("mobile")
-    },
-    fontFamily: legacy.stripes.fontFamily ?? getDefaultFontFamily(MasterCssVar.FONT),
-    fontWeight: legacy.stripes.fontWeight ?? getDefaultStripesFontWeight(),
-    header: createCanonicalStripeNonThemeSection(legacy.stripes.header, "header"),
-    content: createCanonicalStripeNonThemeSection(legacy.stripes.content, "content"),
-    footer: createCanonicalStripeNonThemeSection(legacy.stripes.footer, "footer"),
-    infoArea: createCanonicalStripeNonThemeSection(legacy.stripes.infoArea, "infoArea"),
-    ...createCanonicalThemeBranches(resolvedValues, "stripes")
-  };
-  const headings = {
-    letterSpacing: legacy.headings.letterSpacing ?? getDefaultLetterSpacingValue(),
-    fontFamily: legacy.headings.fontFamily ?? getDefaultFontFamily(MasterCssVar.TITLE_FONT),
-    h1: createCanonicalHeadingNonThemeSection(legacy.headings.h1, "h1"),
-    h2: createCanonicalHeadingNonThemeSection(legacy.headings.h2, "h2"),
-    h3: createCanonicalHeadingNonThemeSection(legacy.headings.h3, "h3"),
-    h4: createCanonicalHeadingNonThemeSection(legacy.headings.h4, "h4"),
-    h5: createCanonicalHeadingNonThemeSection(legacy.headings.h5, "h5"),
-    h6: createCanonicalHeadingNonThemeSection(legacy.headings.h6, "h6"),
-    ...createCanonicalThemeBranches(resolvedValues, "headings")
-  };
-  const border = {
-    top: omitKeys(legacy.buttons.border.top, ["color"]),
-    right: omitKeys(legacy.buttons.border.right, ["color"]),
-    bottom: omitKeys(legacy.buttons.border.bottom, ["color"]),
-    left: omitKeys(legacy.buttons.border.left, ["color"]),
-    style: legacy.buttons.border.style
-  };
-  const buttons = {
-    outlookSupport: legacy.buttons.outlookSupport ?? getDefaultButtonsOutlookSupport(),
-    textStyle: legacy.buttons.textStyle ?? getDefaultTextStyleValue(),
-    textTransform: legacy.buttons.textTransform ?? DEFAULT_BUTTONS_TEXT_TRANSFORM,
-    fontFamily: legacy.buttons.fontFamily ?? getDefaultFontFamily(MasterCssVar.BUTTON_FONT),
-    letterSpacing: legacy.buttons.letterSpacing ?? getDefaultLetterSpacingValue(),
-    fontSize: legacy.buttons.fontSize ?? {
-      desktop: getDefaultButtonsFontSize("desktop"),
-      mobile: getDefaultButtonsFontSize("mobile")
-    },
-    borderRadius: legacy.buttons.borderRadius ?? getDefaultButtonsBorderRadius(),
-    fitContainer: legacy.buttons.fitContainer ?? {
-      desktop: getDefaultButtonsFitContainer("desktop"),
-      mobile: getDefaultButtonsFitContainer("mobile")
-    },
-    border,
-    hoverButtonStyles: legacy.buttons.hoverButtonStyles !== void 0,
-    padding: legacy.buttons.padding ?? {
-      desktop: getDefaultButtonsPadding("desktop"),
-      mobile: getDefaultButtonsPadding("mobile")
-    },
-    ...createCanonicalThemeBranches(resolvedValues, "buttons")
-  };
-  return canonicalEmailTemplateSettingsSchema2.parse({ general, stripes, headings, buttons });
-}
-function normalizeReleasedHeadingTextStyles(value) {
-  if (!value || typeof value !== "object" || Array.isArray(value)) {
-    return value;
-  }
-  const settings = value;
-  const headings = settings.headings;
-  if (!headings || typeof headings !== "object" || Array.isArray(headings)) {
-    return value;
-  }
-  let normalizedHeadings;
-  for (const heading of ["h1", "h2", "h3", "h4", "h5", "h6"]) {
-    const section = headings[heading];
-    if (!section || typeof section !== "object" || Array.isArray(section)) {
-      continue;
-    }
-    const textStyle = section.textStyle;
-    if (!textStyle || typeof textStyle !== "object" || Array.isArray(textStyle)) {
-      continue;
-    }
-    const textStyleRecord = textStyle;
-    const keys = Object.keys(textStyleRecord);
-    if (!keys.includes("bold") || !keys.every((key) => key === "bold" || key === "italic") || typeof textStyleRecord.bold !== "boolean" || typeof textStyleRecord.italic !== "boolean") {
-      continue;
-    }
-    normalizedHeadings ??= { ...headings };
-    normalizedHeadings[heading] = {
-      ...section,
-      textStyle: { italic: textStyleRecord.italic }
-    };
-  }
-  return normalizedHeadings ? { ...settings, headings: normalizedHeadings } : value;
-}
-function materializeCanonicalNonThemeSettings(legacy, colorMergeTagValues = /* @__PURE__ */ new Set()) {
-  const schemas = createEmailTemplateSettingsSchemas(colorMergeTagValues);
-  const { productionLegacyEmailTemplateSettingsSchema: productionLegacyEmailTemplateSettingsSchema2, canonicalEmailTemplateSettingsSchema: canonicalEmailTemplateSettingsSchema2 } = schemas;
-  const hoverStylesEnabled = legacy.buttons?.hoverButtonStyles !== void 0;
-  const customListStylesEnabled = Boolean(legacy.general.customListStyles);
-  const projection = JSON.parse(JSON.stringify(legacy));
-  const defaultThemeValues = resolveThemeDescriptorValues(() => void 0, schemas);
-  THEME_VARIABLE_DESCRIPTORS.forEach((descriptor) => {
-    if (descriptor.displayPolicy?.settingsActivation === "custom-list-styles" && !customListStylesEnabled || descriptor.displayPolicy?.settingsActivation === "button-hover-styles" && !hoverStylesEnabled) {
-      return;
-    }
-    const section = projection[getThemeDescriptorSection(descriptor)];
-    const value = defaultThemeValues.get(descriptor.semanticOwner);
-    if (value === void 0) {
-      throw new Error("Missing default theme settings value for ".concat(descriptor.semanticOwner));
-    }
-    setDescriptorSettingsPathValue(section, descriptor.settings.legacyPath, value);
-  });
-  const parsedProjection = productionLegacyEmailTemplateSettingsSchema2.parse(projection);
-  const canonical = normalizeLegacySettings(parsedProjection, schemas);
-  canonical.buttons.hoverButtonStyles = hoverStylesEnabled;
-  if (!customListStylesEnabled) {
-    canonical.general.customListStyles = null;
-  }
-  return canonicalEmailTemplateSettingsSchema2.parse(canonical);
-}
-var SettingsNormalizationError = class extends Error {
-  constructor(canonicalIssues, legacyIssues) {
-    super("Email template settings match neither canonical nor production legacy schema.");
-    this.canonicalIssues = canonicalIssues;
-    this.legacyIssues = legacyIssues;
-    this.name = "SettingsNormalizationError";
-  }
-};
-function settingsNormalization(value, colorMergeTagValues = /* @__PURE__ */ new Set()) {
-  const schemas = createEmailTemplateSettingsSchemas(colorMergeTagValues);
-  const { canonicalEmailTemplateSettingsSchema: canonicalEmailTemplateSettingsSchema2, productionLegacyEmailTemplateSettingsSchema: productionLegacyEmailTemplateSettingsSchema2 } = schemas;
-  const canonicalResult = canonicalEmailTemplateSettingsSchema2.safeParse(value);
-  if (canonicalResult.success) {
-    return value;
-  }
-  const legacyCompatibleValue = normalizeReleasedHeadingTextStyles(value);
-  const legacyResult = productionLegacyEmailTemplateSettingsSchema2.safeParse(legacyCompatibleValue);
-  if (legacyResult.success) {
-    return normalizeLegacySettings(legacyResult.data, schemas);
-  }
-  throw new SettingsNormalizationError(canonicalResult.error.issues, legacyResult.error.issues);
-}
 
 export {
   EMPTY_BORDER_RADIUS,
@@ -3858,13 +2488,5 @@ export {
   MAX_QUANTITY_CONTAINERS,
   normalizeTransparentAllowedColor,
   normalizeOpaqueColor,
-  getThemeDescriptorSection,
-  createEmailTemplateSettingsSchemas,
-  canonicalThemeBackgroundSchema,
-  canonicalEmailTemplateSettingsSchema,
-  productionLegacyEmailTemplateSettingsSchema,
-  resolveThemeDescriptorValues,
-  materializeCanonicalNonThemeSettings,
-  SettingsNormalizationError,
-  settingsNormalization
+  createEmailTemplateSettingsSchemas
 };

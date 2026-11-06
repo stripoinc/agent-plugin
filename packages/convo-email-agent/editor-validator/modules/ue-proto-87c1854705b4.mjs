@@ -693,41 +693,6 @@ var LINK_COLOR_HOVER_VARS = [
   MasterCssVar.FOOTER_LINK_COLOR_HOVER,
   MasterCssVar.INFO_LINK_COLOR_HOVER
 ];
-var TAG_NORMALIZATION_RULES = {
-  "BLOCK_IMAGE": "td",
-  "BLOCK_TEXT": "td",
-  "BLOCK_BUTTON": "td",
-  "BLOCK_SPACER": "td",
-  "BLOCK_VIDEO": "td",
-  "BLOCK_SOCIAL": "td",
-  "BLOCK_BANNER": "td",
-  "BLOCK_TIMER": "td",
-  "BLOCK_MENU": "td",
-  "BLOCK_MENU_ITEM": "td",
-  "BLOCK_HTML": "td",
-  "BLOCK_AMP_CAROUSEL": "td",
-  "BLOCK_AMP_ACCORDION": "td",
-  "BLOCK_AMP_FORM": "td",
-  "CONTAINER": "td",
-  "FORM_CONTAINER": "td",
-  "STRUCTURE": "td",
-  "STRIPE": "td",
-  "CUSTOM_BLOCK_LINK": "a",
-  "CUSTOM_BLOCK_IMAGE": "img",
-  "CUSTOM_BLOCK_TEXT": "a",
-  "TEXT_IMAGE": "a",
-  "EMPTY_CONTAINER": "td",
-  "AMP-ACCORDION-CONTAINER": "td",
-  "AMP_FORM_NOTIFICATION": "td",
-  "AMP_FORM_SUBMIT": "td",
-  "AMP_FORM_START_AGAIN": "td",
-  "AMP_FORM_INPUT": "td",
-  "AMP_FORM_INPUT_HIDDEN": "td"
-};
-function normalizeModelTag(tag) {
-  const uppercaseTag = tag?.toUpperCase() ?? "";
-  return TAG_NORMALIZATION_RULES[uppercaseTag] ?? uppercaseTag.toLowerCase();
-}
 var SGResponseError_SGErrorCode;
 (function(SGResponseError_SGErrorCode2) {
   SGResponseError_SGErrorCode2[SGResponseError_SGErrorCode2["BAD_REQUEST"] = 0] = "BAD_REQUEST";
@@ -780,7 +745,5 @@ export {
   SocialNetworkType,
   SmartBlockSourceType,
   MasterCssVar,
-  MASTER_CSS_VARIABLES_DEFAULTS,
-  LINK_COLOR_HOVER_VARS,
-  normalizeModelTag
+  LINK_COLOR_HOVER_VARS
 };
