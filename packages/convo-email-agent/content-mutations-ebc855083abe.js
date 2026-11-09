@@ -262,7 +262,7 @@ function createEmailSdk(options) {
     intent: cloneJson(intent),
     journal: [...journal],
     maps: [tempToReal, realToTemp, insertOccurrence, collapsedScopes].map((map) => new Map(map)),
-    sets: [repeatedRoots, removedIds, replacedByRepeat].map((set) => new Set(set)),
+    sets: [repeatedRoots, removedIds, replacedByRepeat].map((changes) => new Set(changes)),
     warnings: [...warnings],
     misses: [...selectorMisses]
   });
@@ -283,9 +283,9 @@ function createEmailSdk(options) {
       map.clear();
       for (const [key, value] of state.maps[index]) map.set(key, value);
     });
-    [repeatedRoots, removedIds, replacedByRepeat].forEach((set, index) => {
-      set.clear();
-      for (const id of state.sets[index]) set.add(id);
+    [repeatedRoots, removedIds, replacedByRepeat].forEach((changes, index) => {
+      changes.clear();
+      for (const id of state.sets[index]) changes.add(id);
     });
     warnings.splice(0, warnings.length, ...state.warnings);
     selectorMisses.splice(0, selectorMisses.length, ...state.misses);
@@ -455,7 +455,7 @@ function createEmailSdk(options) {
     if (entries.length === 1 && disambiguateBy === void 0) return entries[0];
     if (disambiguateBy === void 0) {
       throw new EmailSdkError(
-        'id "'.concat(rawId, '" resolves to ').concat(entries.length, " nodes; pass disambiguateBy.occurrence, ") + "parentContainerId, or parentStripeId."
+        'id "'.concat(rawId, '" resolves to ').concat(entries.length, " nodes; use disambiguateBy.occurrence, ") + "parentContainerId, or parentStripeId."
       );
     }
     const parentContainerId = disambiguateBy.parentContainerId ?? disambiguateBy.parent_container_id;
@@ -726,18 +726,18 @@ function createEmailSdk(options) {
       throw new EmailSdkError("setLink() supports button, image, and social blocks; got ".concat(entry.blockType ?? entry.kind, "."));
     });
   }
-  function writeMenuItem(realId, itemIndex, set) {
+  function writeMenuItem(realId, itemIndex, changes) {
     if (!Number.isInteger(itemIndex) || itemIndex < 0) throw new EmailSdkError("Menu item index must be a non-negative integer.");
     writeSettings(realId, (settings, entry) => {
       if (entry.blockType !== "menu") throw new EmailSdkError("setMenuItem() supports menu blocks only.");
       const items = Array.isArray(settings.items) ? cloneJson(settings.items) : [];
       const item = items[itemIndex];
       if (!isObject(item)) throw new EmailSdkError("Menu item ".concat(itemIndex, " was not found."));
-      const itemLinkColor = set.itemLinkColor ?? set.item_link_color;
-      const itemBackgroundColor = set.itemBackgroundColor ?? set.item_background_color;
-      const itemLinkValue = set.itemLinkValue ?? set.item_link_value;
-      const itemLinkType = set.itemLinkType ?? set.item_link_type;
-      const itemName = set.itemName ?? set.item_name;
+      const itemLinkColor = changes.itemLinkColor ?? changes.item_link_color;
+      const itemBackgroundColor = changes.itemBackgroundColor ?? changes.item_background_color;
+      const itemLinkValue = changes.itemLinkValue ?? changes.item_link_value;
+      const itemLinkType = changes.itemLinkType ?? changes.item_link_type;
+      const itemName = changes.itemName ?? changes.item_name;
       if (itemLinkColor !== void 0 || itemBackgroundColor !== void 0) {
         const colors = isObject(item.colors) ? cloneJson(item.colors) : {};
         if (itemLinkColor !== void 0) colors.link = normalizeColor(itemLinkColor, false);
@@ -761,10 +761,10 @@ function createEmailSdk(options) {
       settings.items = items;
     });
   }
-  function writeMenuShared(realId, set) {
+  function writeMenuShared(realId, changes) {
     writeSettings(realId, (settings, entry) => {
       if (entry.blockType !== "menu") throw new EmailSdkError("setMenuShared() supports menu blocks only.");
-      const sharedLinkColor = set.sharedLinkColor ?? set.shared_link_color;
+      const sharedLinkColor = changes.sharedLinkColor ?? changes.shared_link_color;
       if (sharedLinkColor === void 0) throw new EmailSdkError("setMenuShared() requires sharedLinkColor.");
       settings.colors = { mode: "shared", link: normalizeColor(sharedLinkColor, false) };
     });
@@ -810,43 +810,43 @@ function createEmailSdk(options) {
     }
     throw new EmailSdkError("".concat(method, "() expects a network type or a zero-based network index."));
   }
-  function writeSocialNetwork(realId, target, set) {
-    if (!isObject(set)) throw new EmailSdkError("setSocialNetwork() expects a mutation object.");
+  function writeSocialNetwork(realId, target, changes) {
+    if (!isObject(changes)) throw new EmailSdkError("setSocialNetwork() expects a mutation object.");
     writeSettings(realId, (settings, entry) => {
       assertSocialBlock(entry, "setSocialNetwork");
       const networks = socialNetworksOf(settings, "setSocialNetwork");
       const index = resolveSocialNetworkIndex(networks, target, "setSocialNetwork");
       const network = networks[index];
-      const linkType = set.linkType ?? set.link_type;
-      if (set.url !== void 0) {
-        if (set.url === "") {
+      const linkType = changes.linkType ?? changes.link_type;
+      if (changes.url !== void 0) {
+        if (changes.url === "") {
           delete network.link;
         } else {
-          network.link = { type: linkType ?? inferSocialLinkType(set.url), href: set.url };
+          network.link = { type: linkType ?? inferSocialLinkType(changes.url), href: changes.url };
         }
       } else if (linkType !== void 0 && isObject(network.link)) {
         network.link = { ...network.link, type: linkType };
       }
-      if (set.title !== void 0) {
-        if (typeof set.title === "string") assertSocialTextLimit(set.title, "title", SOCIAL_TITLE_MAX_LENGTH);
-        network.title = set.title;
+      if (changes.title !== void 0) {
+        if (typeof changes.title === "string") assertSocialTextLimit(changes.title, "title", SOCIAL_TITLE_MAX_LENGTH);
+        network.title = changes.title;
       }
-      if (set.alt !== void 0) {
-        if (typeof set.alt === "string") assertSocialTextLimit(set.alt, "alt", SOCIAL_ALT_MAX_LENGTH);
+      if (changes.alt !== void 0) {
+        if (typeof changes.alt === "string") assertSocialTextLimit(changes.alt, "alt", SOCIAL_ALT_MAX_LENGTH);
         if (settings.textCustomization !== true) {
           throw new EmailSdkError(
             "setSocialNetwork(): alt requires text customization on the block \u2014 call setSocialShared({textCustomization: true}) first."
           );
         }
-        network.alt = set.alt;
+        network.alt = changes.alt;
       }
-      if (set.icon !== void 0) {
+      if (changes.icon !== void 0) {
         if (network.type !== SOCIAL_CUSTOM_NETWORK_TYPE) {
           throw new EmailSdkError(
             'setSocialNetwork(): icon is only accepted for type "custom"; "'.concat(String(network.type), '" takes its icon from type and style.')
           );
         }
-        network.icon = set.icon;
+        network.icon = changes.icon;
       }
       settings.networks = networks;
       assertNoSocialIssues(settings, "setSocialNetwork");
@@ -884,19 +884,19 @@ function createEmailSdk(options) {
       settings.networks = networks;
     });
   }
-  function writeSocialShared(realId, set) {
-    if (!isObject(set)) throw new EmailSdkError("setSocialShared() expects a mutation object.");
+  function writeSocialShared(realId, changes) {
+    if (!isObject(changes)) throw new EmailSdkError("setSocialShared() expects a mutation object.");
     writeSettings(realId, (settings, entry) => {
       assertSocialBlock(entry, "setSocialShared");
-      const iconSize = set.iconSize ?? set.icon_size;
-      const spaceBetweenIcons = set.spaceBetweenIcons ?? set.space_between_icons;
-      const textCustomization = set.textCustomization ?? set.text_customization;
-      if (set.style === void 0 && iconSize === void 0 && spaceBetweenIcons === void 0 && textCustomization === void 0) {
+      const iconSize = changes.iconSize ?? changes.icon_size;
+      const spaceBetweenIcons = changes.spaceBetweenIcons ?? changes.space_between_icons;
+      const textCustomization = changes.textCustomization ?? changes.text_customization;
+      if (changes.style === void 0 && iconSize === void 0 && spaceBetweenIcons === void 0 && textCustomization === void 0) {
         throw new EmailSdkError("setSocialShared() requires at least one of style, iconSize, spaceBetweenIcons, textCustomization.");
       }
-      if (set.style !== void 0) {
-        if (typeof set.style !== "string" || set.style === "") throw new EmailSdkError('setSocialShared() style must be an icon style name such as "logoColored".');
-        settings.style = set.style;
+      if (changes.style !== void 0) {
+        if (typeof changes.style !== "string" || changes.style === "") throw new EmailSdkError('setSocialShared() style must be an icon style name such as "logoColored".');
+        settings.style = changes.style;
       }
       if (iconSize !== void 0) settings.iconSize = normalizeIconSize(iconSize);
       if (spaceBetweenIcons !== void 0) settings.spaceBetweenIcons = normalizeSpaceBetweenIcons(spaceBetweenIcons);
@@ -1215,16 +1215,16 @@ function createEmailSdk(options) {
         writeStyle(realId, property, value, options2);
         return node;
       },
-      setMenuItem(itemIndex, set) {
-        writeMenuItem(realId, itemIndex, set);
+      setMenuItem(itemIndex, changes) {
+        writeMenuItem(realId, itemIndex, changes);
         return node;
       },
-      setMenuShared(set) {
-        writeMenuShared(realId, set);
+      setMenuShared(changes) {
+        writeMenuShared(realId, changes);
         return node;
       },
-      setSocialNetwork(target, set) {
-        writeSocialNetwork(realId, target, set);
+      setSocialNetwork(target, changes) {
+        writeSocialNetwork(realId, target, changes);
         return node;
       },
       addSocialNetwork(network, position) {
@@ -1235,8 +1235,8 @@ function createEmailSdk(options) {
         writeSocialNetworkRemove(realId, target);
         return node;
       },
-      setSocialShared(set) {
-        writeSocialShared(realId, set);
+      setSocialShared(changes) {
+        writeSocialShared(realId, changes);
         return node;
       },
       remove() {
@@ -1336,7 +1336,7 @@ function createEmailSdk(options) {
           const contexts = [...new Set(matches.map((slot) => slot.context))].filter((value) => value !== void 0);
           if (context === void 0 && contexts.length > 1) {
             throw new EmailSdkError(
-              'Slot "'.concat(role, '" is ambiguous in ').concat(label, " \u2014 pass a context: ") + "".concat(contexts.map((value) => 'slot("'.concat(role, '", "').concat(value, '")')).join(", "), ".")
+              'Slot "'.concat(role, '" is ambiguous in ').concat(label, " \u2014 add a context: ") + "".concat(contexts.map((value) => 'slot("'.concat(role, '", "').concat(value, '")')).join(", "), ".")
             );
           }
           throw new EmailSdkError(

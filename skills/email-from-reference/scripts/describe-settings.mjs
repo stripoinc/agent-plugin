@@ -51,7 +51,7 @@ function resolveSdkDist(args, startUrl = import.meta.url) {
   }
   if (candidate && existsSync(candidate) && statSync(candidate).isFile()) return candidate;
   throw new Error(
-    `Cannot find the packaged convo-email-agent SDK${candidate ? ` at ${candidate}` : ""}. Install skills/ and packages/ together or pass --sdk with an existing index.js.`
+    `Cannot find the packaged convo-email-agent SDK${candidate ? ` at ${candidate}` : ""}. Install skills/ and packages/ together or use --sdk with an existing index.js.`
   );
 }
 async function loadSdk(sdkPath) {
@@ -69,14 +69,14 @@ var TARGET_GUIDANCE = {
     "columnsGap.mobile > 0 requires columns.length > 1.",
     "responsiveMobileContainersInversion=true requires exactly 2 columns.",
     "# Creation defaults",
-    "Single-column draft: omit responsiveMobile or set false. Set true for multi-column mobile stacking.",
+    "Single-column draft: omit responsiveMobile or make it false. Make it true for multi-column mobile stacking.",
     "createStructure({id, columns}) defaults mobile to columns.length > 1; a raw draft does not infer stacking."
   ],
   image: [
     "# Constraints (native validator)",
     "responsiveMobile=true requires size.mobile to equal size.desktop (both mode and px).",
     "responsiveMobile=true requires alignment.mobile to equal alignment.desktop.",
-    "For different mobile dimensions or alignment, set responsiveMobile=false.",
+    "For different mobile dimensions or alignment, use responsiveMobile=false.",
     "# Creation defaults",
     "The image draft builder defaults responsiveMobile to true and omitted mobile size to desktop size.",
     'Adaptive photo settings: {"size":{"desktop":{"mode":"width","px":284}},"responsiveMobile":true}',
