@@ -36,5 +36,5 @@ may be longer. Empty `title` clears the title; `{text: "", fillSpace: false}` cl
 Keep the metadata keys in the candidate when clearing values. Check support in the downloaded
 schema and verify the exact metadata values with `get_document_state` after writing.
 The creation runner enforces the same text limit before producing a candidate. For a full rebuild,
-pass `--baseline <target-model.json>` using the acquired state of the document being replaced;
+add `--baseline <target-model.json>` with the acquired state of the document being replaced;
 only unchanged text from that baseline may exceed the limit. Omit `--baseline` for a new email.

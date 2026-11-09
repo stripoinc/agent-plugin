@@ -42,7 +42,7 @@ a tool returns, resume the workflow when it does; do not spawn a worker just to 
 
 Delegate only a large independent subtask or a separate review when the host supports it and
 the expected benefit justifies the extra context and coordination. Examples include inspecting
-a substantial reference set, measuring a complex Exact layout, or independently comparing saved
+a substantial set of references, measuring a complex Exact layout, or independently comparing saved
 desktop/mobile previews with the source or request. Routine image polling, downloading,
 resizing and inspection stay with the main agent; a long wait alone does not justify a worker.
 
