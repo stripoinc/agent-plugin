@@ -1,9 +1,694 @@
 
 export default {
+["structure.columns[].containers[].blocks[]|0"]: {
+  "required": true,
+  "type": "object",
+  "actions": {
+    "insert": "supported",
+    "delete": "supported",
+    "update": "supported",
+    "move": "supported"
+  },
+  "schemaHash": "fde0e043848147d151f330a15c4cb37069edbb219885baad902ae71f4fb6b162"
+},
+["structure.columns[].containers[].blocks[]|0.id"]: {
+  "required": true,
+  "type": "string",
+  "schemaHash": "9378496996ae3dece3ebf32dfd38c47a83af7f0406b4e7d7db208f433ffcee42"
+},
+["structure.columns[].containers[].blocks[]|0.type"]: {
+  "required": true,
+  "type": "string",
+  "const": "text",
+  "schemaHash": "e9a1c4855d31ed99336125118d369a2b7e0313cbe83dad4c864eb3c031eb698c"
+},
+["structure.columns[].containers[].blocks[]|0.settings"]: {
+  "required": false,
+  "type": "object",
+  "schemaHash": "9119e37ac31455c3e3b497658119c983af4e84a814b0672d2229b91880f5f37b"
+},
+["structure.columns[].containers[].blocks[]|0.settings.fontColor"]: {
+  "required": false,
+  "type": "string",
+  "schemaHash": "b61b2b9f199526eb3295f9e2ced901958e0497a6c2750820f57bee70b1158827"
+},
+["structure.columns[].containers[].blocks[]|0.settings.hideElement"]: {
+  "required": true,
+  "type": "string",
+  "enum": [
+    "no",
+    "desktop",
+    "mobile"
+  ],
+  "schemaHash": "b7571603839ed66295f268b8b98c6caeef06907f950caf17ef53fb63d5bf7abc"
+},
+["structure.columns[].containers[].blocks[]|0.settings.rightToLeftTextDirection"]: {
+  "required": true,
+  "type": "boolean",
+  "schemaHash": "7cb541e84f226754a46c21c79f131fa2898354e1242456e6fd1c162bce319553"
+},
+["structure.columns[].containers[].blocks[]|0.settings.alignment"]: {
+  "required": false,
+  "type": "object",
+  "schemaHash": "c0cbe70569a2b9985283a85c0412d3816f80ab79f635ce40fbf5887bad3e8f4e"
+},
+["structure.columns[].containers[].blocks[]|0.settings.alignment.desktop"]: {
+  "required": true,
+  "type": "string",
+  "enum": [
+    "left",
+    "center",
+    "right",
+    "justify"
+  ],
+  "schemaHash": "545169c5e967251714bdc95b8e24b2661d0aab9e0c47d252eea521a99ad79df7"
+},
+["structure.columns[].containers[].blocks[]|0.settings.alignment.mobile"]: {
+  "required": true,
+  "type": "string",
+  "enum": [
+    "left",
+    "center",
+    "right",
+    "justify"
+  ],
+  "schemaHash": "545169c5e967251714bdc95b8e24b2661d0aab9e0c47d252eea521a99ad79df7"
+},
+["structure.columns[].containers[].blocks[]|0.settings.fixedHeight"]: {
+  "required": false,
+  "type": "object",
+  "schemaHash": "a39f50192654cd59cc8e85339d6978fa5dee0fb021cb44b41699b414f214ecb5"
+},
+["structure.columns[].containers[].blocks[]|0.settings.fixedHeight.desktop"]: {
+  "required": false,
+  "type": "object",
+  "schemaHash": "db8061168303c6be1f45c9923089167dbd85cbaa25f9f67f2eb3565207a3e327"
+},
+["structure.columns[].containers[].blocks[]|0.settings.fixedHeight.desktop.height"]: {
+  "required": true,
+  "type": "integer",
+  "schemaHash": "474f4d9296fe9ab42673b8752a6fed0e522587f12abaf9751a03797acb4d96b5"
+},
+["structure.columns[].containers[].blocks[]|0.settings.fixedHeight.desktop.verticalAlignment"]: {
+  "required": false,
+  "type": "string",
+  "enum": [
+    "top",
+    "middle",
+    "bottom"
+  ],
+  "schemaHash": "c145b8d0e8d0ecce2a0a2622ad17ecd4c5584fda7205631d1cb263a76928fba8"
+},
+["structure.columns[].containers[].blocks[]|0.settings.fixedHeight.mobile"]: {
+  "required": false,
+  "type": "object",
+  "schemaHash": "b1801ad48db8da15cc2a86a1d31e4251c1eda78abb0a74c1f8be0e8a756a940f"
+},
+["structure.columns[].containers[].blocks[]|0.settings.fixedHeight.mobile.height"]: {
+  "required": true,
+  "type": "integer",
+  "schemaHash": "474f4d9296fe9ab42673b8752a6fed0e522587f12abaf9751a03797acb4d96b5"
+},
+["structure.columns[].containers[].blocks[]|0.settings.fixedHeight.mobile.verticalAlignment"]: {
+  "required": false,
+  "type": "string",
+  "enum": [
+    "top",
+    "middle",
+    "bottom"
+  ],
+  "schemaHash": "c145b8d0e8d0ecce2a0a2622ad17ecd4c5584fda7205631d1cb263a76928fba8"
+},
+["structure.columns[].containers[].blocks[]|0.settings.padding"]: {
+  "required": true,
+  "type": "object",
+  "schemaHash": "42aeaafa11852293724925168414611fb3309ce210ecc601a17568e4c4506fff"
+},
+["structure.columns[].containers[].blocks[]|0.settings.padding.desktop"]: {
+  "required": true,
+  "type": "object",
+  "schemaHash": "923752398804419d65fd5fa6d63fb00fbdfdee1a47e0296f69434adc03e29e78"
+},
+["structure.columns[].containers[].blocks[]|0.settings.padding.desktop.top"]: {
+  "required": true,
+  "type": "number",
+  "schemaHash": "1b26ba4a13d211700ebbd8d2d85a193233d853508272739304475edfdd7d1c6e"
+},
+["structure.columns[].containers[].blocks[]|0.settings.padding.desktop.right"]: {
+  "required": true,
+  "type": "number",
+  "schemaHash": "1b26ba4a13d211700ebbd8d2d85a193233d853508272739304475edfdd7d1c6e"
+},
+["structure.columns[].containers[].blocks[]|0.settings.padding.desktop.bottom"]: {
+  "required": true,
+  "type": "number",
+  "schemaHash": "1b26ba4a13d211700ebbd8d2d85a193233d853508272739304475edfdd7d1c6e"
+},
+["structure.columns[].containers[].blocks[]|0.settings.padding.desktop.left"]: {
+  "required": true,
+  "type": "number",
+  "schemaHash": "1b26ba4a13d211700ebbd8d2d85a193233d853508272739304475edfdd7d1c6e"
+},
+["structure.columns[].containers[].blocks[]|0.settings.padding.mobile"]: {
+  "required": true,
+  "type": "object",
+  "schemaHash": "923752398804419d65fd5fa6d63fb00fbdfdee1a47e0296f69434adc03e29e78"
+},
+["structure.columns[].containers[].blocks[]|0.settings.padding.mobile.top"]: {
+  "required": true,
+  "type": "number",
+  "schemaHash": "1b26ba4a13d211700ebbd8d2d85a193233d853508272739304475edfdd7d1c6e"
+},
+["structure.columns[].containers[].blocks[]|0.settings.padding.mobile.right"]: {
+  "required": true,
+  "type": "number",
+  "schemaHash": "1b26ba4a13d211700ebbd8d2d85a193233d853508272739304475edfdd7d1c6e"
+},
+["structure.columns[].containers[].blocks[]|0.settings.padding.mobile.bottom"]: {
+  "required": true,
+  "type": "number",
+  "schemaHash": "1b26ba4a13d211700ebbd8d2d85a193233d853508272739304475edfdd7d1c6e"
+},
+["structure.columns[].containers[].blocks[]|0.settings.padding.mobile.left"]: {
+  "required": true,
+  "type": "number",
+  "schemaHash": "1b26ba4a13d211700ebbd8d2d85a193233d853508272739304475edfdd7d1c6e"
+},
+["structure.columns[].containers[].blocks[]|0.settings.includeInOutput"]: {
+  "required": true,
+  "type": "string",
+  "enum": [
+    "both",
+    "html",
+    "ampHtml"
+  ],
+  "schemaHash": "52e3402be3437c71fe10c40c6cdb1fd5aa95baa6a99786e8eacbea179002175e"
+},
+["structure.columns[].containers[].blocks[]|0.settings.backgroundColor"]: {
+  "required": true,
+  "type": "string",
+  "schemaHash": "f606b7cec987cb653b92ac0840d09cec1dfe35a1bdf121212817f060bd4ab3e3"
+},
+["structure.columns[].containers[].blocks[]|0.settings.letterSpacing"]: {
+  "required": false,
+  "type": "object",
+  "schemaHash": "6c0a48468186e0c8d560f840814d1fecd1737259415b326aae6ee0c5787405d9"
+},
+["structure.columns[].containers[].blocks[]|0.settings.letterSpacing.value"]: {
+  "required": true,
+  "type": "number",
+  "schemaHash": "92ecef150d33ac7d09603020589d690900d2fd2ae8d10a0a9cfd6936384e8b05"
+},
+["structure.columns[].containers[].blocks[]|0.settings.letterSpacing.unit"]: {
+  "required": true,
+  "type": "string",
+  "enum": [
+    "px",
+    "em"
+  ],
+  "schemaHash": "c679b09b2ab5a8c336c639b8750e66205b88ff18864947604378c69a6944f97e"
+},
+["structure.columns[].containers[].blocks[]|0.content"]: {
+  "required": false,
+  "type": "string",
+  "schemaHash": "60103c69a46aa5e06fb8015ba33f2629730adca94ed2130a7319cc99447e3fa1"
+},
+["structure.columns[].containers[].blocks[]|1"]: {
+  "required": true,
+  "type": "object",
+  "actions": {
+    "insert": "supported",
+    "delete": "supported",
+    "update": "supported",
+    "move": "supported"
+  },
+  "schemaHash": "855c0c82d0cae51f704f7d611bce37e00f9458922ff847dfb93fcd32d511ca59"
+},
+["structure.columns[].containers[].blocks[]|1.id"]: {
+  "required": true,
+  "type": "string",
+  "schemaHash": "9378496996ae3dece3ebf32dfd38c47a83af7f0406b4e7d7db208f433ffcee42"
+},
+["structure.columns[].containers[].blocks[]|1.type"]: {
+  "required": true,
+  "type": "string",
+  "const": "image",
+  "schemaHash": "f91d29b5ca92f549d52a1729a378abdde7d9b342856784a42f81c4e7251303a7"
+},
+["structure.columns[].containers[].blocks[]|1.settings"]: {
+  "required": true,
+  "type": "object",
+  "schemaHash": "987f44fff38a9fcd62e353101b3823e640287645499d853d1e4a670f7d80776d"
+},
+["structure.columns[].containers[].blocks[]|1.settings.src"]: {
+  "required": true,
+  "type": "string",
+  "schemaHash": "cc22f8ec14817471274ae0fddcdc70ee916ee0e4e058c2adf4ccefed5b83163f"
+},
+["structure.columns[].containers[].blocks[]|1.settings.link"]: {
+  "required": false,
+  "type": "object",
+  "schemaHash": "796892a0a67d7975ad6b69e46842aed905ee794b205e0c0f6e0841569314f221"
+},
+["structure.columns[].containers[].blocks[]|1.settings.link.type"]: {
+  "required": true,
+  "type": "string",
+  "enum": [
+    "site",
+    "anchor",
+    "email",
+    "phone",
+    "file",
+    "sms",
+    "telegram",
+    "viber",
+    "other"
+  ],
+  "schemaHash": "8ae8bf286545f6c3b1f6f73573264a9f61fa09fb6bfa2447aa5ce9bb8617ab6f"
+},
+["structure.columns[].containers[].blocks[]|1.settings.link.href"]: {
+  "required": true,
+  "type": "string",
+  "schemaHash": "56d55f6fcdb01c0c00118da460ddac6a6ae331e81fa89660e48ae90eeceb01bd"
+},
+["structure.columns[].containers[].blocks[]|1.settings.altText"]: {
+  "required": true,
+  "type": "object",
+  "schemaHash": "a4475867ad83c5cd99c199dfddf0b8e799ebe5f636bf765a2f4ec2d69e7ead09"
+},
+["structure.columns[].containers[].blocks[]|1.settings.altText.text"]: {
+  "required": true,
+  "type": "string",
+  "schemaHash": "b4b3a153ebf7f9907edcb00945ab363971246387c038cfb94b5a08fffd84a3e8"
+},
+["structure.columns[].containers[].blocks[]|1.settings.altText.addToTitle"]: {
+  "required": true,
+  "type": "boolean",
+  "schemaHash": "e930d6bfd7e624cc404d6ac9111b7f5169a3f9e6ccda3f7a9c208027be48f312"
+},
+["structure.columns[].containers[].blocks[]|1.settings.size"]: {
+  "required": true,
+  "type": "object",
+  "schemaHash": "37536e5cdca2c6a99d26bcca81988a492aa2df1ee3034744cc62643936f6c8ab"
+},
+["structure.columns[].containers[].blocks[]|1.settings.size.desktop"]: {
+  "required": true,
+  "type": "object",
+  "schemaHash": "98609b7a886726a632398fee0e273681e74eb2efb659858513cca301786b629f"
+},
+["structure.columns[].containers[].blocks[]|1.settings.size.desktop.mode"]: {
+  "required": true,
+  "type": "string",
+  "enum": [
+    "width",
+    "height"
+  ],
+  "schemaHash": "ccabffbf0f31f4f4f23d00588199cf15516a64811ff178802912c942e7de8ec3"
+},
+["structure.columns[].containers[].blocks[]|1.settings.size.desktop.px"]: {
+  "required": true,
+  "type": "integer",
+  "schemaHash": "35dd650fb6a5f62fe7fc20739ab6b54f5f4aea29f3f5841fc40e61b1e3b89a95"
+},
+["structure.columns[].containers[].blocks[]|1.settings.size.mobile"]: {
+  "required": true,
+  "type": "object",
+  "schemaHash": "98609b7a886726a632398fee0e273681e74eb2efb659858513cca301786b629f"
+},
+["structure.columns[].containers[].blocks[]|1.settings.size.mobile.mode"]: {
+  "required": true,
+  "type": "string",
+  "enum": [
+    "width",
+    "height"
+  ],
+  "schemaHash": "ccabffbf0f31f4f4f23d00588199cf15516a64811ff178802912c942e7de8ec3"
+},
+["structure.columns[].containers[].blocks[]|1.settings.size.mobile.px"]: {
+  "required": true,
+  "type": "integer",
+  "schemaHash": "35dd650fb6a5f62fe7fc20739ab6b54f5f4aea29f3f5841fc40e61b1e3b89a95"
+},
+["structure.columns[].containers[].blocks[]|1.settings.alignment"]: {
+  "required": true,
+  "type": "object",
+  "schemaHash": "5a6d40dd19c05ee913025262e4a5001671aac6913feb634ce0e68f5f65bf6790"
+},
+["structure.columns[].containers[].blocks[]|1.settings.alignment.desktop"]: {
+  "required": true,
+  "type": "string",
+  "enum": [
+    "left",
+    "center",
+    "right"
+  ],
+  "schemaHash": "cea782e61d1a555b5c4bebddf5e1bf422ddcc83a0eb361b406b8d09d70ed7f88"
+},
+["structure.columns[].containers[].blocks[]|1.settings.alignment.mobile"]: {
+  "required": true,
+  "type": "string",
+  "enum": [
+    "left",
+    "center",
+    "right"
+  ],
+  "schemaHash": "cea782e61d1a555b5c4bebddf5e1bf422ddcc83a0eb361b406b8d09d70ed7f88"
+},
+["structure.columns[].containers[].blocks[]|1.settings.radius"]: {
+  "required": true,
+  "type": "object",
+  "schemaHash": "77491c918f72594148ebce95e4c92d11695538b6f547a6767d2fff890ae7a68a"
+},
+["structure.columns[].containers[].blocks[]|1.settings.radius.desktop"]: {
+  "required": true,
+  "type": "object",
+  "schemaHash": "601d28fffdb4e535fb11ddf53e6ee82d731ef89ba19ba7d6345ed87cf4889381"
+},
+["structure.columns[].containers[].blocks[]|1.settings.radius.desktop.topLeft"]: {
+  "required": true,
+  "type": "number",
+  "schemaHash": "c6a7ff699a4fa712c9fa55a9c2b0d3ad74f2c553003f34c77f684d541148a799"
+},
+["structure.columns[].containers[].blocks[]|1.settings.radius.desktop.topRight"]: {
+  "required": true,
+  "type": "number",
+  "schemaHash": "76aafbb93390c3dff8b2ae02b12097a3d3738647f00ac4e4e7aa4fb38cee5c2b"
+},
+["structure.columns[].containers[].blocks[]|1.settings.radius.desktop.bottomRight"]: {
+  "required": true,
+  "type": "number",
+  "schemaHash": "3bfb5286fc5028d5eabaa11a8db3f7678318acc269d485f50ce2d47c675a58b4"
+},
+["structure.columns[].containers[].blocks[]|1.settings.radius.desktop.bottomLeft"]: {
+  "required": true,
+  "type": "number",
+  "schemaHash": "65b696cd36e9bba1b6772e1f1b30b41c7c1ead9b9bc4011ef1ee8e9098bd84ca"
+},
+["structure.columns[].containers[].blocks[]|1.settings.radius.mobile"]: {
+  "required": true,
+  "type": "object",
+  "schemaHash": "601d28fffdb4e535fb11ddf53e6ee82d731ef89ba19ba7d6345ed87cf4889381"
+},
+["structure.columns[].containers[].blocks[]|1.settings.radius.mobile.topLeft"]: {
+  "required": true,
+  "type": "number",
+  "schemaHash": "c6a7ff699a4fa712c9fa55a9c2b0d3ad74f2c553003f34c77f684d541148a799"
+},
+["structure.columns[].containers[].blocks[]|1.settings.radius.mobile.topRight"]: {
+  "required": true,
+  "type": "number",
+  "schemaHash": "76aafbb93390c3dff8b2ae02b12097a3d3738647f00ac4e4e7aa4fb38cee5c2b"
+},
+["structure.columns[].containers[].blocks[]|1.settings.radius.mobile.bottomRight"]: {
+  "required": true,
+  "type": "number",
+  "schemaHash": "3bfb5286fc5028d5eabaa11a8db3f7678318acc269d485f50ce2d47c675a58b4"
+},
+["structure.columns[].containers[].blocks[]|1.settings.radius.mobile.bottomLeft"]: {
+  "required": true,
+  "type": "number",
+  "schemaHash": "65b696cd36e9bba1b6772e1f1b30b41c7c1ead9b9bc4011ef1ee8e9098bd84ca"
+},
+["structure.columns[].containers[].blocks[]|1.settings.hideElement"]: {
+  "required": true,
+  "type": "string",
+  "enum": [
+    "no",
+    "desktop",
+    "mobile"
+  ],
+  "schemaHash": "b7571603839ed66295f268b8b98c6caeef06907f950caf17ef53fb63d5bf7abc"
+},
+["structure.columns[].containers[].blocks[]|1.settings.margins"]: {
+  "required": true,
+  "type": "object",
+  "schemaHash": "efb2498bfd7c3a684731d96285b8c29553f2e46b13fac6d897a5f507ebc3c9ae"
+},
+["structure.columns[].containers[].blocks[]|1.settings.margins.desktop"]: {
+  "required": true,
+  "type": "object",
+  "schemaHash": "f0974842225d8b0fbd8ba7aab50640a6355e945036a7294dc4fdbf021b88812d"
+},
+["structure.columns[].containers[].blocks[]|1.settings.margins.desktop.top"]: {
+  "required": true,
+  "type": "number",
+  "schemaHash": "b67221dc100f049ba504d1a2dff45ed221a9781a040e75344bd0a22af55234f4"
+},
+["structure.columns[].containers[].blocks[]|1.settings.margins.desktop.right"]: {
+  "required": true,
+  "type": "number",
+  "schemaHash": "802befecff7fb4e19d2d319ec6f9b19df56b12ccc44284523ea564f3cfbc63a7"
+},
+["structure.columns[].containers[].blocks[]|1.settings.margins.desktop.bottom"]: {
+  "required": true,
+  "type": "number",
+  "schemaHash": "7c1162100ac24e267b04a084f30aa335e5ad5dfe2712e7130507ddb00588d0ea"
+},
+["structure.columns[].containers[].blocks[]|1.settings.margins.desktop.left"]: {
+  "required": true,
+  "type": "number",
+  "schemaHash": "24cbcf3cacdd3be29730331e06c047439882c9a9efad7a5ce3d7a75a1eeb32ca"
+},
+["structure.columns[].containers[].blocks[]|1.settings.margins.mobile"]: {
+  "required": true,
+  "type": "object",
+  "schemaHash": "f0974842225d8b0fbd8ba7aab50640a6355e945036a7294dc4fdbf021b88812d"
+},
+["structure.columns[].containers[].blocks[]|1.settings.margins.mobile.top"]: {
+  "required": true,
+  "type": "number",
+  "schemaHash": "b67221dc100f049ba504d1a2dff45ed221a9781a040e75344bd0a22af55234f4"
+},
+["structure.columns[].containers[].blocks[]|1.settings.margins.mobile.right"]: {
+  "required": true,
+  "type": "number",
+  "schemaHash": "802befecff7fb4e19d2d319ec6f9b19df56b12ccc44284523ea564f3cfbc63a7"
+},
+["structure.columns[].containers[].blocks[]|1.settings.margins.mobile.bottom"]: {
+  "required": true,
+  "type": "number",
+  "schemaHash": "7c1162100ac24e267b04a084f30aa335e5ad5dfe2712e7130507ddb00588d0ea"
+},
+["structure.columns[].containers[].blocks[]|1.settings.margins.mobile.left"]: {
+  "required": true,
+  "type": "number",
+  "schemaHash": "24cbcf3cacdd3be29730331e06c047439882c9a9efad7a5ce3d7a75a1eeb32ca"
+},
+["structure.columns[].containers[].blocks[]|1.settings.includeInOutput"]: {
+  "required": true,
+  "type": "string",
+  "enum": [
+    "both",
+    "html",
+    "ampHtml"
+  ],
+  "schemaHash": "52e3402be3437c71fe10c40c6cdb1fd5aa95baa6a99786e8eacbea179002175e"
+},
+["structure.columns[].containers[].blocks[]|1.settings.anchorLinkName"]: {
+  "required": true,
+  "type": "string",
+  "schemaHash": "b85d15de86db3d5b4310adcf51daf7f021273f8024b917f8cd74e8cda32fe834"
+},
+["structure.columns[].containers[].blocks[]|1.settings.responsiveMobile"]: {
+  "required": true,
+  "type": "boolean",
+  "schemaHash": "5488d5a30aa799c16d2a2e70182680c408d6b79973e0120c2259b2a142a87363"
+},
+["structure.columns[].containers[].blocks[]|2"]: {
+  "required": true,
+  "type": "object",
+  "actions": {
+    "insert": "supported",
+    "delete": "supported",
+    "update": "supported",
+    "move": "supported"
+  },
+  "schemaHash": "8441b3e9d7955c4ac8db7f346ca037617bad501bf7a3a9963a23268c83dcbd41"
+},
+["structure.columns[].containers[].blocks[]|2.id"]: {
+  "required": true,
+  "type": "string",
+  "schemaHash": "9378496996ae3dece3ebf32dfd38c47a83af7f0406b4e7d7db208f433ffcee42"
+},
+["structure.columns[].containers[].blocks[]|2.type"]: {
+  "required": true,
+  "type": "string",
+  "const": "video",
+  "schemaHash": "fc90ddf303f474b1fad5c7baadbf1773f3bb6c2dacaf669c10b0fc256521730f"
+},
+["structure.columns[].containers[].blocks[]|2.settings"]: {
+  "required": true,
+  "type": "object",
+  "schemaHash": "3272677b3785aec173d0170f736bbcda85be6fcff62315f9cf5407f812c12a9c"
+},
+["structure.columns[].containers[].blocks[]|2.settings.videoLink"]: {
+  "required": true,
+  "type": "string",
+  "schemaHash": "9ecfde2c177d1d8e70740eaf7ff476cb44b3c6c7506108b1f594dbd0e7386ec0"
+},
+["structure.columns[].containers[].blocks[]|2.settings.altText"]: {
+  "required": true,
+  "type": "object",
+  "schemaHash": "a4475867ad83c5cd99c199dfddf0b8e799ebe5f636bf765a2f4ec2d69e7ead09"
+},
+["structure.columns[].containers[].blocks[]|2.settings.altText.text"]: {
+  "required": true,
+  "type": "string",
+  "schemaHash": "b4b3a153ebf7f9907edcb00945ab363971246387c038cfb94b5a08fffd84a3e8"
+},
+["structure.columns[].containers[].blocks[]|2.settings.altText.addToTitle"]: {
+  "required": true,
+  "type": "boolean",
+  "schemaHash": "e930d6bfd7e624cc404d6ac9111b7f5169a3f9e6ccda3f7a9c208027be48f312"
+},
+["structure.columns[].containers[].blocks[]|2.settings.customThumbnail"]: {
+  "required": false,
+  "type": "object",
+  "schemaHash": "c03f794cbcb25b907b25bf853ae71341379a35ddfcfc001f28e718613fb241eb"
+},
+["structure.columns[].containers[].blocks[]|2.settings.customThumbnail.src"]: {
+  "required": true,
+  "type": "string",
+  "schemaHash": "e27ccbc8542e7d9efb79ddbf88f2e7938ec2b252a620ca5541f867926cb70f10"
+},
+["structure.columns[].containers[].blocks[]|2.settings.playButtonStyle"]: {
+  "required": true,
+  "type": "string",
+  "enum": [
+    "NONE",
+    "red",
+    "white",
+    "black",
+    "blue",
+    "whiteCircle",
+    "blackCircle",
+    "greyCircle",
+    "blackCircleInverse"
+  ],
+  "schemaHash": "ffeb13b7004005b19938145b546d5ceb08d7dcade8822f2213892c866f7cb1fa"
+},
+["structure.columns[].containers[].blocks[]|2.settings.size"]: {
+  "required": true,
+  "type": "object",
+  "schemaHash": "37536e5cdca2c6a99d26bcca81988a492aa2df1ee3034744cc62643936f6c8ab"
+},
+["structure.columns[].containers[].blocks[]|2.settings.size.desktop"]: {
+  "required": true,
+  "type": "object",
+  "schemaHash": "98609b7a886726a632398fee0e273681e74eb2efb659858513cca301786b629f"
+},
+["structure.columns[].containers[].blocks[]|2.settings.size.desktop.mode"]: {
+  "required": true,
+  "type": "string",
+  "enum": [
+    "width",
+    "height"
+  ],
+  "schemaHash": "ccabffbf0f31f4f4f23d00588199cf15516a64811ff178802912c942e7de8ec3"
+},
+["structure.columns[].containers[].blocks[]|2.settings.size.desktop.px"]: {
+  "required": true,
+  "type": "integer",
+  "schemaHash": "35dd650fb6a5f62fe7fc20739ab6b54f5f4aea29f3f5841fc40e61b1e3b89a95"
+},
+["structure.columns[].containers[].blocks[]|2.settings.size.mobile"]: {
+  "required": true,
+  "type": "object",
+  "schemaHash": "98609b7a886726a632398fee0e273681e74eb2efb659858513cca301786b629f"
+},
+["structure.columns[].containers[].blocks[]|2.settings.size.mobile.mode"]: {
+  "required": true,
+  "type": "string",
+  "enum": [
+    "width",
+    "height"
+  ],
+  "schemaHash": "ccabffbf0f31f4f4f23d00588199cf15516a64811ff178802912c942e7de8ec3"
+},
+["structure.columns[].containers[].blocks[]|2.settings.size.mobile.px"]: {
+  "required": true,
+  "type": "integer",
+  "schemaHash": "35dd650fb6a5f62fe7fc20739ab6b54f5f4aea29f3f5841fc40e61b1e3b89a95"
+},
+["structure.columns[].containers[].blocks[]|2.settings.alignment"]: {
+  "required": true,
+  "type": "object",
+  "schemaHash": "5a6d40dd19c05ee913025262e4a5001671aac6913feb634ce0e68f5f65bf6790"
+},
+["structure.columns[].containers[].blocks[]|2.settings.alignment.desktop"]: {
+  "required": true,
+  "type": "string",
+  "enum": [
+    "left",
+    "center",
+    "right"
+  ],
+  "schemaHash": "cea782e61d1a555b5c4bebddf5e1bf422ddcc83a0eb361b406b8d09d70ed7f88"
+},
+["structure.columns[].containers[].blocks[]|2.settings.alignment.mobile"]: {
+  "required": true,
+  "type": "string",
+  "enum": [
+    "left",
+    "center",
+    "right"
+  ],
+  "schemaHash": "cea782e61d1a555b5c4bebddf5e1bf422ddcc83a0eb361b406b8d09d70ed7f88"
+},
+["structure.columns[].containers[].blocks[]|2.settings.radius"]: {
+  "required": true,
+  "type": "object",
+  "schemaHash": "77491c918f72594148ebce95e4c92d11695538b6f547a6767d2fff890ae7a68a"
+},
+["structure.columns[].containers[].blocks[]|2.settings.radius.desktop"]: {
+  "required": true,
+  "type": "object",
+  "schemaHash": "601d28fffdb4e535fb11ddf53e6ee82d731ef89ba19ba7d6345ed87cf4889381"
+},
+["structure.columns[].containers[].blocks[]|2.settings.radius.desktop.topLeft"]: {
+  "required": true,
+  "type": "number",
+  "schemaHash": "c6a7ff699a4fa712c9fa55a9c2b0d3ad74f2c553003f34c77f684d541148a799"
+},
+["structure.columns[].containers[].blocks[]|2.settings.radius.desktop.topRight"]: {
+  "required": true,
+  "type": "number",
+  "schemaHash": "76aafbb93390c3dff8b2ae02b12097a3d3738647f00ac4e4e7aa4fb38cee5c2b"
+},
+["structure.columns[].containers[].blocks[]|2.settings.radius.desktop.bottomRight"]: {
+  "required": true,
+  "type": "number",
+  "schemaHash": "3bfb5286fc5028d5eabaa11a8db3f7678318acc269d485f50ce2d47c675a58b4"
+},
+["structure.columns[].containers[].blocks[]|2.settings.radius.desktop.bottomLeft"]: {
+  "required": true,
+  "type": "number",
+  "schemaHash": "65b696cd36e9bba1b6772e1f1b30b41c7c1ead9b9bc4011ef1ee8e9098bd84ca"
+},
+["structure.columns[].containers[].blocks[]|2.settings.radius.mobile"]: {
+  "required": true,
+  "type": "object",
+  "schemaHash": "601d28fffdb4e535fb11ddf53e6ee82d731ef89ba19ba7d6345ed87cf4889381"
+},
+["structure.columns[].containers[].blocks[]|2.settings.radius.mobile.topLeft"]: {
+  "required": true,
+  "type": "number",
+  "schemaHash": "c6a7ff699a4fa712c9fa55a9c2b0d3ad74f2c553003f34c77f684d541148a799"
+},
+["structure.columns[].containers[].blocks[]|2.settings.radius.mobile.topRight"]: {
+  "required": true,
+  "type": "number",
+  "schemaHash": "76aafbb93390c3dff8b2ae02b12097a3d3738647f00ac4e4e7aa4fb38cee5c2b"
+},
+["structure.columns[].containers[].blocks[]|2.settings.radius.mobile.bottomRight"]: {
+  "required": true,
+  "type": "number",
+  "schemaHash": "3bfb5286fc5028d5eabaa11a8db3f7678318acc269d485f50ce2d47c675a58b4"
+},
 ["structure.columns[].containers[].blocks[]|2.settings.radius.mobile.bottomLeft"]: {
   "required": true,
   "type": "number",
-  "schemaHash": "22c9c58113a9510e9ac16edc66a390310a7353f25ed2920baa8d0284ee6e60bd"
+  "schemaHash": "65b696cd36e9bba1b6772e1f1b30b41c7c1ead9b9bc4011ef1ee8e9098bd84ca"
 },
 ["structure.columns[].containers[].blocks[]|2.settings.hideElement"]: {
   "required": true,
@@ -18,57 +703,57 @@ export default {
 ["structure.columns[].containers[].blocks[]|2.settings.paddings"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "70025b1e6ecca2a5db83b40897d93e15e79a2c51694481f46e5521d01ea7be36"
+  "schemaHash": "df231449337f06d6d6b616cb574c508c77812efbbd2a02829ccdb35926d62c3e"
 },
 ["structure.columns[].containers[].blocks[]|2.settings.paddings.desktop"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "512befe9ea2fc6099da95661f8b6f26434831be23e431b5670423c8f8cbc163d"
+  "schemaHash": "f0974842225d8b0fbd8ba7aab50640a6355e945036a7294dc4fdbf021b88812d"
 },
 ["structure.columns[].containers[].blocks[]|2.settings.paddings.desktop.top"]: {
   "required": true,
   "type": "number",
-  "schemaHash": "a60791c7bd997624175e5ce942b961e03be8caff0688d64714c220d3e3069018"
+  "schemaHash": "b67221dc100f049ba504d1a2dff45ed221a9781a040e75344bd0a22af55234f4"
 },
 ["structure.columns[].containers[].blocks[]|2.settings.paddings.desktop.right"]: {
   "required": true,
   "type": "number",
-  "schemaHash": "f16d2a1c75e4e368c52096f5f392478b7362f12092f61565b2505fc4904bfda5"
+  "schemaHash": "802befecff7fb4e19d2d319ec6f9b19df56b12ccc44284523ea564f3cfbc63a7"
 },
 ["structure.columns[].containers[].blocks[]|2.settings.paddings.desktop.bottom"]: {
   "required": true,
   "type": "number",
-  "schemaHash": "b462dde7c9edde64ea0ef3b7baa66de119ee6b45e1275970be7d07062ca8e996"
+  "schemaHash": "7c1162100ac24e267b04a084f30aa335e5ad5dfe2712e7130507ddb00588d0ea"
 },
 ["structure.columns[].containers[].blocks[]|2.settings.paddings.desktop.left"]: {
   "required": true,
   "type": "number",
-  "schemaHash": "c59c64cc82659b3f4d98141fc48d64d75303e9682323d902d0767caca9a19c31"
+  "schemaHash": "24cbcf3cacdd3be29730331e06c047439882c9a9efad7a5ce3d7a75a1eeb32ca"
 },
 ["structure.columns[].containers[].blocks[]|2.settings.paddings.mobile"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "512befe9ea2fc6099da95661f8b6f26434831be23e431b5670423c8f8cbc163d"
+  "schemaHash": "f0974842225d8b0fbd8ba7aab50640a6355e945036a7294dc4fdbf021b88812d"
 },
 ["structure.columns[].containers[].blocks[]|2.settings.paddings.mobile.top"]: {
   "required": true,
   "type": "number",
-  "schemaHash": "a60791c7bd997624175e5ce942b961e03be8caff0688d64714c220d3e3069018"
+  "schemaHash": "b67221dc100f049ba504d1a2dff45ed221a9781a040e75344bd0a22af55234f4"
 },
 ["structure.columns[].containers[].blocks[]|2.settings.paddings.mobile.right"]: {
   "required": true,
   "type": "number",
-  "schemaHash": "f16d2a1c75e4e368c52096f5f392478b7362f12092f61565b2505fc4904bfda5"
+  "schemaHash": "802befecff7fb4e19d2d319ec6f9b19df56b12ccc44284523ea564f3cfbc63a7"
 },
 ["structure.columns[].containers[].blocks[]|2.settings.paddings.mobile.bottom"]: {
   "required": true,
   "type": "number",
-  "schemaHash": "b462dde7c9edde64ea0ef3b7baa66de119ee6b45e1275970be7d07062ca8e996"
+  "schemaHash": "7c1162100ac24e267b04a084f30aa335e5ad5dfe2712e7130507ddb00588d0ea"
 },
 ["structure.columns[].containers[].blocks[]|2.settings.paddings.mobile.left"]: {
   "required": true,
   "type": "number",
-  "schemaHash": "c59c64cc82659b3f4d98141fc48d64d75303e9682323d902d0767caca9a19c31"
+  "schemaHash": "24cbcf3cacdd3be29730331e06c047439882c9a9efad7a5ce3d7a75a1eeb32ca"
 },
 ["structure.columns[].containers[].blocks[]|2.settings.includeInOutput"]: {
   "required": true,
@@ -83,12 +768,12 @@ export default {
 ["structure.columns[].containers[].blocks[]|2.settings.anchorLinkName"]: {
   "required": true,
   "type": "string",
-  "schemaHash": "3954de1555ee8336646468d5dad24e0136cabe4665ebb85a3b60f14913067a69"
+  "schemaHash": "b85d15de86db3d5b4310adcf51daf7f021273f8024b917f8cd74e8cda32fe834"
 },
 ["structure.columns[].containers[].blocks[]|2.settings.responsiveMobile"]: {
   "required": true,
   "type": "boolean",
-  "schemaHash": "479e5a71f296ad92630207e93e6dde8b2f86a8493380ac828d40047b8debb0af"
+  "schemaHash": "341814eb6aff7d91bd84e9006aba1a60303f85af77dc4b114c35299d29ccec79"
 },
 ["structure.columns[].containers[].blocks[]|3"]: {
   "required": true,
@@ -104,13 +789,13 @@ export default {
 ["structure.columns[].containers[].blocks[]|3.id"]: {
   "required": true,
   "type": "string",
-  "schemaHash": "cc22f8ec14817471274ae0fddcdc70ee916ee0e4e058c2adf4ccefed5b83163f"
+  "schemaHash": "9378496996ae3dece3ebf32dfd38c47a83af7f0406b4e7d7db208f433ffcee42"
 },
 ["structure.columns[].containers[].blocks[]|3.type"]: {
   "required": true,
   "type": "string",
   "const": "timer",
-  "schemaHash": "b04708d549cbaaaa4c51ae8d00b79ec10afa37b5ab5aa0a95d636f8def292db6"
+  "schemaHash": "82cdc2e20bff7e777b2055cc1783d43dc19e28df76b38edeb403fbcd81b24d9d"
 },
 ["structure.columns[].containers[].blocks[]|3.settings"]: {
   "required": true,
@@ -120,32 +805,32 @@ export default {
 ["structure.columns[].containers[].blocks[]|3.settings.altText"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "b85d15de86db3d5b4310adcf51daf7f021273f8024b917f8cd74e8cda32fe834"
+  "schemaHash": "a4475867ad83c5cd99c199dfddf0b8e799ebe5f636bf765a2f4ec2d69e7ead09"
 },
 ["structure.columns[].containers[].blocks[]|3.settings.altText.text"]: {
   "required": true,
   "type": "string",
-  "schemaHash": "5488d5a30aa799c16d2a2e70182680c408d6b79973e0120c2259b2a142a87363"
+  "schemaHash": "b4b3a153ebf7f9907edcb00945ab363971246387c038cfb94b5a08fffd84a3e8"
 },
 ["structure.columns[].containers[].blocks[]|3.settings.altText.addToTitle"]: {
   "required": true,
   "type": "boolean",
-  "schemaHash": "fc90ddf303f474b1fad5c7baadbf1773f3bb6c2dacaf669c10b0fc256521730f"
+  "schemaHash": "e930d6bfd7e624cc404d6ac9111b7f5169a3f9e6ccda3f7a9c208027be48f312"
 },
 ["structure.columns[].containers[].blocks[]|3.settings.responsiveMobile"]: {
   "required": true,
   "type": "boolean",
-  "schemaHash": "f7ed56572064408d6cdf46176b0f5fb1caed0be67697b71d632ef36c28bb2b6a"
+  "schemaHash": "a7e49c9de944eb59b182b4170e11f27246a9a6b97991efb30eb44167d8e6e96a"
 },
 ["structure.columns[].containers[].blocks[]|3.settings.size"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "9ecfde2c177d1d8e70740eaf7ff476cb44b3c6c7506108b1f594dbd0e7386ec0"
+  "schemaHash": "37536e5cdca2c6a99d26bcca81988a492aa2df1ee3034744cc62643936f6c8ab"
 },
 ["structure.columns[].containers[].blocks[]|3.settings.size.desktop"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "c03f794cbcb25b907b25bf853ae71341379a35ddfcfc001f28e718613fb241eb"
+  "schemaHash": "98609b7a886726a632398fee0e273681e74eb2efb659858513cca301786b629f"
 },
 ["structure.columns[].containers[].blocks[]|3.settings.size.desktop.mode"]: {
   "required": true,
@@ -154,17 +839,17 @@ export default {
     "width",
     "height"
   ],
-  "schemaHash": "e27ccbc8542e7d9efb79ddbf88f2e7938ec2b252a620ca5541f867926cb70f10"
+  "schemaHash": "ccabffbf0f31f4f4f23d00588199cf15516a64811ff178802912c942e7de8ec3"
 },
 ["structure.columns[].containers[].blocks[]|3.settings.size.desktop.px"]: {
   "required": true,
   "type": "integer",
-  "schemaHash": "ffeb13b7004005b19938145b546d5ceb08d7dcade8822f2213892c866f7cb1fa"
+  "schemaHash": "35dd650fb6a5f62fe7fc20739ab6b54f5f4aea29f3f5841fc40e61b1e3b89a95"
 },
 ["structure.columns[].containers[].blocks[]|3.settings.size.mobile"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "c03f794cbcb25b907b25bf853ae71341379a35ddfcfc001f28e718613fb241eb"
+  "schemaHash": "98609b7a886726a632398fee0e273681e74eb2efb659858513cca301786b629f"
 },
 ["structure.columns[].containers[].blocks[]|3.settings.size.mobile.mode"]: {
   "required": true,
@@ -173,17 +858,17 @@ export default {
     "width",
     "height"
   ],
-  "schemaHash": "e27ccbc8542e7d9efb79ddbf88f2e7938ec2b252a620ca5541f867926cb70f10"
+  "schemaHash": "ccabffbf0f31f4f4f23d00588199cf15516a64811ff178802912c942e7de8ec3"
 },
 ["structure.columns[].containers[].blocks[]|3.settings.size.mobile.px"]: {
   "required": true,
   "type": "integer",
-  "schemaHash": "ffeb13b7004005b19938145b546d5ceb08d7dcade8822f2213892c866f7cb1fa"
+  "schemaHash": "35dd650fb6a5f62fe7fc20739ab6b54f5f4aea29f3f5841fc40e61b1e3b89a95"
 },
 ["structure.columns[].containers[].blocks[]|3.settings.alignment"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "df231449337f06d6d6b616cb574c508c77812efbbd2a02829ccdb35926d62c3e"
+  "schemaHash": "5a6d40dd19c05ee913025262e4a5001671aac6913feb634ce0e68f5f65bf6790"
 },
 ["structure.columns[].containers[].blocks[]|3.settings.alignment.desktop"]: {
   "required": true,
@@ -193,7 +878,7 @@ export default {
     "center",
     "right"
   ],
-  "schemaHash": "341814eb6aff7d91bd84e9006aba1a60303f85af77dc4b114c35299d29ccec79"
+  "schemaHash": "cea782e61d1a555b5c4bebddf5e1bf422ddcc83a0eb361b406b8d09d70ed7f88"
 },
 ["structure.columns[].containers[].blocks[]|3.settings.alignment.mobile"]: {
   "required": true,
@@ -203,67 +888,67 @@ export default {
     "center",
     "right"
   ],
-  "schemaHash": "341814eb6aff7d91bd84e9006aba1a60303f85af77dc4b114c35299d29ccec79"
+  "schemaHash": "cea782e61d1a555b5c4bebddf5e1bf422ddcc83a0eb361b406b8d09d70ed7f88"
 },
 ["structure.columns[].containers[].blocks[]|3.settings.margins"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "a7e49c9de944eb59b182b4170e11f27246a9a6b97991efb30eb44167d8e6e96a"
+  "schemaHash": "efb2498bfd7c3a684731d96285b8c29553f2e46b13fac6d897a5f507ebc3c9ae"
 },
 ["structure.columns[].containers[].blocks[]|3.settings.margins.desktop"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "512befe9ea2fc6099da95661f8b6f26434831be23e431b5670423c8f8cbc163d"
+  "schemaHash": "f0974842225d8b0fbd8ba7aab50640a6355e945036a7294dc4fdbf021b88812d"
 },
 ["structure.columns[].containers[].blocks[]|3.settings.margins.desktop.top"]: {
   "required": true,
   "type": "number",
-  "schemaHash": "a60791c7bd997624175e5ce942b961e03be8caff0688d64714c220d3e3069018"
+  "schemaHash": "b67221dc100f049ba504d1a2dff45ed221a9781a040e75344bd0a22af55234f4"
 },
 ["structure.columns[].containers[].blocks[]|3.settings.margins.desktop.right"]: {
   "required": true,
   "type": "number",
-  "schemaHash": "f16d2a1c75e4e368c52096f5f392478b7362f12092f61565b2505fc4904bfda5"
+  "schemaHash": "802befecff7fb4e19d2d319ec6f9b19df56b12ccc44284523ea564f3cfbc63a7"
 },
 ["structure.columns[].containers[].blocks[]|3.settings.margins.desktop.bottom"]: {
   "required": true,
   "type": "number",
-  "schemaHash": "b462dde7c9edde64ea0ef3b7baa66de119ee6b45e1275970be7d07062ca8e996"
+  "schemaHash": "7c1162100ac24e267b04a084f30aa335e5ad5dfe2712e7130507ddb00588d0ea"
 },
 ["structure.columns[].containers[].blocks[]|3.settings.margins.desktop.left"]: {
   "required": true,
   "type": "number",
-  "schemaHash": "c59c64cc82659b3f4d98141fc48d64d75303e9682323d902d0767caca9a19c31"
+  "schemaHash": "24cbcf3cacdd3be29730331e06c047439882c9a9efad7a5ce3d7a75a1eeb32ca"
 },
 ["structure.columns[].containers[].blocks[]|3.settings.margins.mobile"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "512befe9ea2fc6099da95661f8b6f26434831be23e431b5670423c8f8cbc163d"
+  "schemaHash": "f0974842225d8b0fbd8ba7aab50640a6355e945036a7294dc4fdbf021b88812d"
 },
 ["structure.columns[].containers[].blocks[]|3.settings.margins.mobile.top"]: {
   "required": true,
   "type": "number",
-  "schemaHash": "a60791c7bd997624175e5ce942b961e03be8caff0688d64714c220d3e3069018"
+  "schemaHash": "b67221dc100f049ba504d1a2dff45ed221a9781a040e75344bd0a22af55234f4"
 },
 ["structure.columns[].containers[].blocks[]|3.settings.margins.mobile.right"]: {
   "required": true,
   "type": "number",
-  "schemaHash": "f16d2a1c75e4e368c52096f5f392478b7362f12092f61565b2505fc4904bfda5"
+  "schemaHash": "802befecff7fb4e19d2d319ec6f9b19df56b12ccc44284523ea564f3cfbc63a7"
 },
 ["structure.columns[].containers[].blocks[]|3.settings.margins.mobile.bottom"]: {
   "required": true,
   "type": "number",
-  "schemaHash": "b462dde7c9edde64ea0ef3b7baa66de119ee6b45e1275970be7d07062ca8e996"
+  "schemaHash": "7c1162100ac24e267b04a084f30aa335e5ad5dfe2712e7130507ddb00588d0ea"
 },
 ["structure.columns[].containers[].blocks[]|3.settings.margins.mobile.left"]: {
   "required": true,
   "type": "number",
-  "schemaHash": "c59c64cc82659b3f4d98141fc48d64d75303e9682323d902d0767caca9a19c31"
+  "schemaHash": "24cbcf3cacdd3be29730331e06c047439882c9a9efad7a5ce3d7a75a1eeb32ca"
 },
 ["structure.columns[].containers[].blocks[]|3.settings.endDate"]: {
   "required": true,
   "type": "string",
-  "schemaHash": "acb2dc5fb6371efe566c75343d2ac338c779db34b4e3d891aba927c8e24def6a"
+  "schemaHash": "512befe9ea2fc6099da95661f8b6f26434831be23e431b5670423c8f8cbc163d"
 },
 ["structure.columns[].containers[].blocks[]|3.settings.timeZone"]: {
   "required": true,
@@ -711,16 +1396,16 @@ export default {
     "US/Pacific",
     "UTC"
   ],
-  "schemaHash": "09f0d6050dec887da138d7564376bfbc58a2272df7edd7062bebe9d0f623f5ec"
+  "schemaHash": "a60791c7bd997624175e5ce942b961e03be8caff0688d64714c220d3e3069018"
 },
 ["structure.columns[].containers[].blocks[]|3.settings.link"]: {
   "required": true,
-  "schemaHash": "a120dae208683cac8eb71bba21d28099808c2a5a18c66b7b73b7522733845f2d"
+  "schemaHash": "f16d2a1c75e4e368c52096f5f392478b7362f12092f61565b2505fc4904bfda5"
 },
 ["structure.columns[].containers[].blocks[]|3.settings.link|0"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "802befecff7fb4e19d2d319ec6f9b19df56b12ccc44284523ea564f3cfbc63a7"
+  "schemaHash": "fa375d8d3921bf6853043c6e3e9230051e2eb38d8de4a20ed66b4198059036f5"
 },
 ["structure.columns[].containers[].blocks[]|3.settings.link|0.type"]: {
   "required": true,
@@ -736,12 +1421,12 @@ export default {
     "viber",
     "other"
   ],
-  "schemaHash": "7c1162100ac24e267b04a084f30aa335e5ad5dfe2712e7130507ddb00588d0ea"
+  "schemaHash": "8ae8bf286545f6c3b1f6f73573264a9f61fa09fb6bfa2447aa5ce9bb8617ab6f"
 },
 ["structure.columns[].containers[].blocks[]|3.settings.link|0.href"]: {
   "required": true,
   "type": "string",
-  "schemaHash": "24cbcf3cacdd3be29730331e06c047439882c9a9efad7a5ce3d7a75a1eeb32ca"
+  "schemaHash": "56d55f6fcdb01c0c00118da460ddac6a6ae331e81fa89660e48ae90eeceb01bd"
 },
 ["structure.columns[].containers[].blocks[]|3.settings.link|1"]: {
   "required": true,
@@ -751,7 +1436,7 @@ export default {
 ["structure.columns[].containers[].blocks[]|3.settings.displayDays"]: {
   "required": true,
   "type": "boolean",
-  "schemaHash": "bad59b05d8a47dd8584bb58885892234e746b7288ed2ddc374e4f765fc9de520"
+  "schemaHash": "b462dde7c9edde64ea0ef3b7baa66de119ee6b45e1275970be7d07062ca8e996"
 },
 ["structure.columns[].containers[].blocks[]|3.settings.labelsLetterCase"]: {
   "required": false,
@@ -761,12 +1446,12 @@ export default {
     "UPPER",
     "LOWER"
   ],
-  "schemaHash": "e78aa562ff5c55cf163bec2ce650f69c930529b63b49bd38f471f7e5b49914dd"
+  "schemaHash": "c59c64cc82659b3f4d98141fc48d64d75303e9682323d902d0767caca9a19c31"
 },
 ["structure.columns[].containers[].blocks[]|3.settings.separator"]: {
   "required": true,
   "type": "string",
-  "schemaHash": "a72cc3300cbe156ababc83a49b26bf1d8e0c434e06e779d884223db2c025b3d5"
+  "schemaHash": "3954de1555ee8336646468d5dad24e0136cabe4665ebb85a3b60f14913067a69"
 },
 ["structure.columns[].containers[].blocks[]|3.settings.labelsLanguage"]: {
   "required": true,
@@ -810,17 +1495,17 @@ export default {
     "ja",
     "ko"
   ],
-  "schemaHash": "2be3ee80dd1e194de193b4844ca8dbd4e9e1866dbaa8128afe1f061cf309bb99"
+  "schemaHash": "0a4857291fe8770b399d2f933a25d2c3f94ec8ec39e68be73d3918997d7f3d7b"
 },
 ["structure.columns[].containers[].blocks[]|3.settings.retinaDisplaySupport"]: {
   "required": true,
   "type": "boolean",
-  "schemaHash": "53fd593d288acf21b522225268e83354d990b8d9a52f4eaf601f8e2d6600bbac"
+  "schemaHash": "5c951508c542a492ea27007225a1c8d93656bc868ca3dd23369d2586fcad9b55"
 },
 ["structure.columns[].containers[].blocks[]|3.settings.expirationImageSrc"]: {
   "required": true,
   "type": "string",
-  "schemaHash": "f0974842225d8b0fbd8ba7aab50640a6355e945036a7294dc4fdbf021b88812d"
+  "schemaHash": "cc22f8ec14817471274ae0fddcdc70ee916ee0e4e058c2adf4ccefed5b83163f"
 },
 ["structure.columns[].containers[].blocks[]|3.settings.hideElement"]: {
   "required": true,
@@ -845,7 +1530,7 @@ export default {
 ["structure.columns[].containers[].blocks[]|3.settings.anchorLinkName"]: {
   "required": true,
   "type": "string",
-  "schemaHash": "3954de1555ee8336646468d5dad24e0136cabe4665ebb85a3b60f14913067a69"
+  "schemaHash": "b85d15de86db3d5b4310adcf51daf7f021273f8024b917f8cd74e8cda32fe834"
 },
 ["structure.columns[].containers[].blocks[]|3.settings.digitsFontFamily"]: {
   "required": true,
@@ -872,717 +1557,11 @@ export default {
     "roboto,'helvetica neue',helvetica,arial,sans-serif",
     "'source sans pro','helvetica neue',helvetica,arial,sans-serif"
   ],
-  "schemaHash": "943f96b10e4a120f3b97f8a2823867f37d210fc0affad81efe7d534f40c3bc14"
+  "schemaHash": "efd732b80d28c0122ee3a66deffd934c4ce1b8e509136a46f1965cd3af5f03a5"
 },
 ["structure.columns[].containers[].blocks[]|3.settings.digitsFontSize"]: {
   "required": true,
   "type": "integer",
-  "schemaHash": "2af4ba420a23a7134874c1b643e7e0d977f1dd386d181e771417ef2a3d1c51d6"
-},
-["structure.columns[].containers[].blocks[]|3.settings.digitsFontColor"]: {
-  "required": true,
-  "type": "string",
-  "schemaHash": "e2a279620bb75ecf86b55101a4bf235bb9fcf27bec60bd4cd1c411436fb57e38"
-},
-["structure.columns[].containers[].blocks[]|3.settings.digitsAdvancedColorSettings"]: {
-  "required": false,
-  "type": "object",
-  "schemaHash": "2605c621f4a8babb5d5245952d46d9d0378cbf2fb56c439e73e40f103939843e"
-},
-["structure.columns[].containers[].blocks[]|3.settings.digitsAdvancedColorSettings.days"]: {
-  "required": true,
-  "type": "string",
-  "schemaHash": "e2a279620bb75ecf86b55101a4bf235bb9fcf27bec60bd4cd1c411436fb57e38"
-},
-["structure.columns[].containers[].blocks[]|3.settings.digitsAdvancedColorSettings.hours"]: {
-  "required": true,
-  "type": "string",
-  "schemaHash": "e2a279620bb75ecf86b55101a4bf235bb9fcf27bec60bd4cd1c411436fb57e38"
-},
-["structure.columns[].containers[].blocks[]|3.settings.digitsAdvancedColorSettings.minutes"]: {
-  "required": true,
-  "type": "string",
-  "schemaHash": "e2a279620bb75ecf86b55101a4bf235bb9fcf27bec60bd4cd1c411436fb57e38"
-},
-["structure.columns[].containers[].blocks[]|3.settings.digitsAdvancedColorSettings.seconds"]: {
-  "required": true,
-  "type": "string",
-  "schemaHash": "e2a279620bb75ecf86b55101a4bf235bb9fcf27bec60bd4cd1c411436fb57e38"
-},
-["structure.columns[].containers[].blocks[]|3.settings.labelsFontFamily"]: {
-  "required": true,
-  "type": "string",
-  "enum": [
-    "arial,'helvetica neue',helvetica,sans-serif",
-    "'comic sans ms','marker felt-thin',arial,sans-serif",
-    "'courier new',courier,'lucida sans typewriter','lucida typewriter',monospace",
-    "georgia,times,'times new roman',serif",
-    "helvetica,'helvetica neue',arial,verdana,sans-serif",
-    "'lucida sans unicode','lucida grande',sans-serif",
-    "tahoma,verdana,segoe,sans-serif",
-    "'times new roman',times,baskerville,georgia,serif",
-    "'trebuchet ms','lucida grande','lucida sans unicode','lucida sans',tahoma,sans-serif",
-    "verdana,geneva,sans-serif",
-    "arvo,courier,georgia,serif",
-    "lato,'helvetica neue',helvetica,arial,sans-serif",
-    "lora,georgia,'times new roman',serif",
-    "merriweather,georgia,'times new roman',serif",
-    "'merriweather sans','helvetica neue',helvetica,arial,sans-serif",
-    "'noticia text',georgia,'times new roman',serif",
-    "'open sans','helvetica neue',helvetica,arial,sans-serif",
-    "'playfair display',georgia,'times new roman',serif",
-    "roboto,'helvetica neue',helvetica,arial,sans-serif",
-    "'source sans pro','helvetica neue',helvetica,arial,sans-serif"
-  ],
-  "schemaHash": "943f96b10e4a120f3b97f8a2823867f37d210fc0affad81efe7d534f40c3bc14"
-},
-["structure.columns[].containers[].blocks[]|3.settings.labelsFontSize"]: {
-  "required": true,
-  "type": "integer",
-  "schemaHash": "2af4ba420a23a7134874c1b643e7e0d977f1dd386d181e771417ef2a3d1c51d6"
-},
-["structure.columns[].containers[].blocks[]|3.settings.labelsFontColor"]: {
-  "required": true,
-  "type": "string",
-  "schemaHash": "e2a279620bb75ecf86b55101a4bf235bb9fcf27bec60bd4cd1c411436fb57e38"
-},
-["structure.columns[].containers[].blocks[]|3.settings.labelsAdvancedColorSettings"]: {
-  "required": false,
-  "type": "object",
-  "schemaHash": "990186c9920bd3d20427cd16114dbe0b632d6f002d164662d0963ce5834c9f76"
-},
-["structure.columns[].containers[].blocks[]|3.settings.labelsAdvancedColorSettings.days"]: {
-  "required": true,
-  "type": "string",
-  "schemaHash": "e2a279620bb75ecf86b55101a4bf235bb9fcf27bec60bd4cd1c411436fb57e38"
-},
-["structure.columns[].containers[].blocks[]|3.settings.labelsAdvancedColorSettings.hours"]: {
-  "required": true,
-  "type": "string",
-  "schemaHash": "e2a279620bb75ecf86b55101a4bf235bb9fcf27bec60bd4cd1c411436fb57e38"
-},
-["structure.columns[].containers[].blocks[]|3.settings.labelsAdvancedColorSettings.minutes"]: {
-  "required": true,
-  "type": "string",
-  "schemaHash": "e2a279620bb75ecf86b55101a4bf235bb9fcf27bec60bd4cd1c411436fb57e38"
-},
-["structure.columns[].containers[].blocks[]|3.settings.labelsAdvancedColorSettings.seconds"]: {
-  "required": true,
-  "type": "string",
-  "schemaHash": "e2a279620bb75ecf86b55101a4bf235bb9fcf27bec60bd4cd1c411436fb57e38"
-},
-["structure.columns[].containers[].blocks[]|3.settings.separatorFontFamily"]: {
-  "required": true,
-  "type": "string",
-  "enum": [
-    "arial,'helvetica neue',helvetica,sans-serif",
-    "'comic sans ms','marker felt-thin',arial,sans-serif",
-    "'courier new',courier,'lucida sans typewriter','lucida typewriter',monospace",
-    "georgia,times,'times new roman',serif",
-    "helvetica,'helvetica neue',arial,verdana,sans-serif",
-    "'lucida sans unicode','lucida grande',sans-serif",
-    "tahoma,verdana,segoe,sans-serif",
-    "'times new roman',times,baskerville,georgia,serif",
-    "'trebuchet ms','lucida grande','lucida sans unicode','lucida sans',tahoma,sans-serif",
-    "verdana,geneva,sans-serif",
-    "arvo,courier,georgia,serif",
-    "lato,'helvetica neue',helvetica,arial,sans-serif",
-    "lora,georgia,'times new roman',serif",
-    "merriweather,georgia,'times new roman',serif",
-    "'merriweather sans','helvetica neue',helvetica,arial,sans-serif",
-    "'noticia text',georgia,'times new roman',serif",
-    "'open sans','helvetica neue',helvetica,arial,sans-serif",
-    "'playfair display',georgia,'times new roman',serif",
-    "roboto,'helvetica neue',helvetica,arial,sans-serif",
-    "'source sans pro','helvetica neue',helvetica,arial,sans-serif"
-  ],
-  "schemaHash": "943f96b10e4a120f3b97f8a2823867f37d210fc0affad81efe7d534f40c3bc14"
-},
-["structure.columns[].containers[].blocks[]|3.settings.separatorFontSize"]: {
-  "required": true,
-  "type": "integer",
-  "schemaHash": "2af4ba420a23a7134874c1b643e7e0d977f1dd386d181e771417ef2a3d1c51d6"
-},
-["structure.columns[].containers[].blocks[]|3.settings.separatorFontColor"]: {
-  "required": true,
-  "type": "string",
-  "schemaHash": "e2a279620bb75ecf86b55101a4bf235bb9fcf27bec60bd4cd1c411436fb57e38"
-},
-["structure.columns[].containers[].blocks[]|3.settings.backgroundColor"]: {
-  "required": true,
-  "type": "string",
-  "schemaHash": "f606b7cec987cb653b92ac0840d09cec1dfe35a1bdf121212817f060bd4ab3e3"
-},
-["structure.columns[].containers[].blocks[]|4"]: {
-  "required": true,
-  "type": "object",
-  "actions": {
-    "insert": "supported",
-    "delete": "supported",
-    "update": "supported",
-    "move": "supported"
-  },
-  "schemaHash": "ae9fe93f1df265f49885785d57dd82cc2849a3ac6a768117419e536fc637a9cb"
-},
-["structure.columns[].containers[].blocks[]|4.id"]: {
-  "required": true,
-  "type": "string",
-  "schemaHash": "cc22f8ec14817471274ae0fddcdc70ee916ee0e4e058c2adf4ccefed5b83163f"
-},
-["structure.columns[].containers[].blocks[]|4.type"]: {
-  "required": true,
-  "type": "string",
-  "const": "social",
-  "schemaHash": "32bb75116fb407750dcc3074334a6c1371288dfb0eb4199e9afa97a840cce676"
-},
-["structure.columns[].containers[].blocks[]|4.settings"]: {
-  "required": true,
-  "type": "object",
-  "schemaHash": "4af1f3f421635d3c1cf829b6a639a53e97d05ce88f56ddcf1cb17fc2fc8756ce"
-},
-["structure.columns[].containers[].blocks[]|4.settings.networks"]: {
-  "required": true,
-  "type": "array",
-  "schemaHash": "41a284743e9c4263b58a017a2e26003d15bb3ceec595098f7b3d4ed7179babfa"
-},
-["structure.columns[].containers[].blocks[]|4.settings.networks[]"]: {
-  "required": true,
-  "type": "object",
-  "schemaHash": "f38785d6f90bc3b830d1127ca0e1c62678c6f971e0053c2e983ade6b21cc518f"
-},
-["structure.columns[].containers[].blocks[]|4.settings.networks[].type"]: {
-  "required": true,
-  "type": "string",
-  "enum": [
-    "twitter",
-    "xcom",
-    "facebook",
-    "youtube",
-    "askfm",
-    "behance",
-    "dribbble",
-    "flickr",
-    "foursquare",
-    "googleplus",
-    "instagram",
-    "lastfm",
-    "linkedin",
-    "myspace",
-    "pinterest",
-    "soundcloud",
-    "tumblr",
-    "vimeo",
-    "hangouts",
-    "messenger",
-    "skype",
-    "snapchat",
-    "telegram",
-    "viber",
-    "whatsapp",
-    "email",
-    "website",
-    "mapmarker",
-    "world",
-    "address",
-    "phone",
-    "share",
-    "rss",
-    "appstore",
-    "googleplay",
-    "windowsstore",
-    "wechat",
-    "weibo",
-    "blogger",
-    "medium",
-    "dropbox",
-    "googledrive",
-    "slack",
-    "github",
-    "pdf",
-    "doc",
-    "xls",
-    "ppt",
-    "xing",
-    "meetup",
-    "fleeped",
-    "tripAdvisor",
-    "spotify",
-    "tiktok",
-    "workplace",
-    "gmail",
-    "iTunesPodcasts",
-    "zoom",
-    "teams",
-    "onedrive",
-    "discord",
-    "twitch",
-    "line",
-    "patreon",
-    "kofi",
-    "yammer",
-    "buyMeACoffee",
-    "huaweiAppGallery",
-    "googleBusiness",
-    "reddit",
-    "strava",
-    "goodreads",
-    "custom",
-    "yelp",
-    "google",
-    "mastodon",
-    "glassdoor",
-    "threads",
-    "bluesky",
-    "digg",
-    "meet"
-  ],
-  "schemaHash": "08f8bf937bb2d37a2f6c82d875857ad27efb1ed74a6346259311451b19124fd9"
-},
-["structure.columns[].containers[].blocks[]|4.settings.networks[].link"]: {
-  "required": false,
-  "type": "object",
-  "schemaHash": "dc9eb80a323389f58e0321ca45ecd3c568bed7b95481ebe71913d85affc63713"
-},
-["structure.columns[].containers[].blocks[]|4.settings.networks[].link.type"]: {
-  "required": true,
-  "type": "string",
-  "enum": [
-    "site",
-    "anchor",
-    "email",
-    "phone",
-    "file",
-    "sms",
-    "telegram",
-    "viber",
-    "other"
-  ],
-  "schemaHash": "7c1162100ac24e267b04a084f30aa335e5ad5dfe2712e7130507ddb00588d0ea"
-},
-["structure.columns[].containers[].blocks[]|4.settings.networks[].link.href"]: {
-  "required": true,
-  "type": "string",
-  "schemaHash": "74dd59f9b6d0cadba3367ea53c1b2175526392f52bd6af0257d84155112cf22b"
-},
-["structure.columns[].containers[].blocks[]|4.settings.networks[].icon"]: {
-  "required": false,
-  "type": "string",
-  "schemaHash": "b564d29dcc564c44080dfb30ea6618c52274f2b10d11ceab7985e6ae6191ba17"
-},
-["structure.columns[].containers[].blocks[]|4.settings.networks[].title"]: {
-  "required": true,
-  "type": "string",
-  "schemaHash": "0f095c3a12bd3abb1c1e67625ab6a0a26b0805ce0bdd676fa8afa4d25cdd00bc"
-},
-["structure.columns[].containers[].blocks[]|4.settings.networks[].alt"]: {
-  "required": false,
-  "type": "string",
-  "schemaHash": "f74eeb05658277953b41f91919dc54bbff64a5d5a8f429a69d14e564a41f8251"
-},
-["structure.columns[].containers[].blocks[]|4.settings.style"]: {
-  "required": true,
-  "type": "string",
-  "enum": [
-    "custom",
-    "logoColored",
-    "logoBlack",
-    "logoGray",
-    "logoWhite",
-    "circleColored",
-    "circleColoredBordered",
-    "roundedColored",
-    "roundedColoredBordered",
-    "squareColored",
-    "squareColoredBordered",
-    "circleBlack",
-    "circleBlackBordered",
-    "roundedBlack",
-    "roundedBlackBordered",
-    "squareBlack",
-    "squareBlackBordered",
-    "circleGray",
-    "circleGrayBordered",
-    "roundedGray",
-    "roundedGrayBordered",
-    "squareGray",
-    "squareGrayBordered",
-    "circleWhite",
-    "circleWhiteBordered",
-    "roundedWhite",
-    "roundedWhiteBordered",
-    "squareWhite",
-    "squareWhiteBordered"
-  ],
-  "schemaHash": "890a2d705fe1b9bb52da3e4ba7b2d00c28049aa7ae5ea53c29f873bd9546fc2e"
-},
-["structure.columns[].containers[].blocks[]|4.settings.iconSize"]: {
-  "required": true,
-  "type": "integer",
-  "schemaHash": "f4d18896c6c543ad6f767d40d58ce47dcdbc7d7780a8726d5766138e91756cb7"
-},
-["structure.columns[].containers[].blocks[]|4.settings.spaceBetweenIcons"]: {
-  "required": true,
-  "type": "object",
-  "schemaHash": "a68ec72ac14631e3fa0091c9cd270cbe6b0023f974e5ca680eeadebd17a0d3af"
-},
-["structure.columns[].containers[].blocks[]|4.settings.spaceBetweenIcons.desktop"]: {
-  "required": true,
-  "type": "integer",
-  "schemaHash": "bedaf821791c986093afd0ea9e0b0c0c6feb368166d1300bdd330465d7e83ce7"
-},
-["structure.columns[].containers[].blocks[]|4.settings.spaceBetweenIcons.mobile"]: {
-  "required": true,
-  "type": "integer",
-  "schemaHash": "5f75f04e22da5d74107c195139ac89d1a0dce66b3afd8f28b8f75d832b493c02"
-},
-["structure.columns[].containers[].blocks[]|4.settings.textCustomization"]: {
-  "required": true,
-  "type": "boolean",
-  "schemaHash": "787b8b040c1ec311f4a5a67e677278d3c17251d2e96400bfb5f07dd05cfbc20b"
-},
-["structure.columns[].containers[].blocks[]|4.settings.alignment"]: {
-  "required": true,
-  "type": "object",
-  "schemaHash": "13032ab10ace6af7a014092748b32bdc3805582205e93fbeba5aa3dd3cc02227"
-},
-["structure.columns[].containers[].blocks[]|4.settings.alignment.desktop"]: {
-  "required": true,
-  "type": "string",
-  "enum": [
-    "left",
-    "center",
-    "right"
-  ],
-  "schemaHash": "341814eb6aff7d91bd84e9006aba1a60303f85af77dc4b114c35299d29ccec79"
-},
-["structure.columns[].containers[].blocks[]|4.settings.alignment.mobile"]: {
-  "required": true,
-  "type": "string",
-  "enum": [
-    "left",
-    "center",
-    "right"
-  ],
-  "schemaHash": "341814eb6aff7d91bd84e9006aba1a60303f85af77dc4b114c35299d29ccec79"
-},
-["structure.columns[].containers[].blocks[]|4.settings.backgroundColor"]: {
-  "required": true,
-  "type": "string",
-  "schemaHash": "f606b7cec987cb653b92ac0840d09cec1dfe35a1bdf121212817f060bd4ab3e3"
-},
-["structure.columns[].containers[].blocks[]|4.settings.hideElement"]: {
-  "required": true,
-  "type": "string",
-  "enum": [
-    "no",
-    "desktop",
-    "mobile"
-  ],
-  "schemaHash": "b7571603839ed66295f268b8b98c6caeef06907f950caf17ef53fb63d5bf7abc"
-},
-["structure.columns[].containers[].blocks[]|4.settings.margins"]: {
-  "required": true,
-  "type": "object",
-  "schemaHash": "f295d2c26fcca2b2a87fbf813c3a5e72c33e05766cb936a89db82a1ce8556bea"
-},
-["structure.columns[].containers[].blocks[]|4.settings.margins.desktop"]: {
-  "required": true,
-  "type": "object",
-  "schemaHash": "9fccccc0a6161ea0a6492e575a6e987c974f141aedb3ef48405d06169b600cd7"
-},
-["structure.columns[].containers[].blocks[]|4.settings.margins.desktop.top"]: {
-  "required": true,
-  "type": "number",
-  "schemaHash": "c070635a0b3b95f344516ed8c36e3be7c43f6e742a0e3f16be275ac046b2d549"
-},
-["structure.columns[].containers[].blocks[]|4.settings.margins.desktop.right"]: {
-  "required": true,
-  "type": "number",
-  "schemaHash": "0197908a56f16fdf07670c39cd3aeb4e5a792f3209d5eff76414518c5b98f347"
-},
-["structure.columns[].containers[].blocks[]|4.settings.margins.desktop.bottom"]: {
-  "required": true,
-  "type": "number",
-  "schemaHash": "4be9ab3882f7482cb8e8b3ab49b728b083fff2bb0edb71e62a99a8ce6cda6b64"
-},
-["structure.columns[].containers[].blocks[]|4.settings.margins.desktop.left"]: {
-  "required": true,
-  "type": "number",
-  "schemaHash": "e13f5b000b6fb84056a7b4cb5bf8b5e1aad2190d58e741f84ad4951c84a3f5a7"
-},
-["structure.columns[].containers[].blocks[]|4.settings.margins.mobile"]: {
-  "required": true,
-  "type": "object",
-  "schemaHash": "9fccccc0a6161ea0a6492e575a6e987c974f141aedb3ef48405d06169b600cd7"
-},
-["structure.columns[].containers[].blocks[]|4.settings.margins.mobile.top"]: {
-  "required": true,
-  "type": "number",
-  "schemaHash": "c070635a0b3b95f344516ed8c36e3be7c43f6e742a0e3f16be275ac046b2d549"
-},
-["structure.columns[].containers[].blocks[]|4.settings.margins.mobile.right"]: {
-  "required": true,
-  "type": "number",
-  "schemaHash": "0197908a56f16fdf07670c39cd3aeb4e5a792f3209d5eff76414518c5b98f347"
-},
-["structure.columns[].containers[].blocks[]|4.settings.margins.mobile.bottom"]: {
-  "required": true,
-  "type": "number",
-  "schemaHash": "4be9ab3882f7482cb8e8b3ab49b728b083fff2bb0edb71e62a99a8ce6cda6b64"
-},
-["structure.columns[].containers[].blocks[]|4.settings.margins.mobile.left"]: {
-  "required": true,
-  "type": "number",
-  "schemaHash": "e13f5b000b6fb84056a7b4cb5bf8b5e1aad2190d58e741f84ad4951c84a3f5a7"
-},
-["structure.columns[].containers[].blocks[]|4.settings.includeInOutput"]: {
-  "required": true,
-  "type": "string",
-  "enum": [
-    "both",
-    "html",
-    "ampHtml"
-  ],
-  "schemaHash": "52e3402be3437c71fe10c40c6cdb1fd5aa95baa6a99786e8eacbea179002175e"
-},
-["structure.columns[].containers[].blocks[]|4.settings.anchorLinkName"]: {
-  "required": true,
-  "type": "string",
-  "schemaHash": "3954de1555ee8336646468d5dad24e0136cabe4665ebb85a3b60f14913067a69"
-},
-["structure.columns[].containers[].blocks[]|5"]: {
-  "required": true,
-  "type": "object",
-  "actions": {
-    "insert": "supported",
-    "delete": "supported",
-    "update": "supported",
-    "move": "supported"
-  },
-  "schemaHash": "f1b6b701ce0066727ebedd1e2a34a606cfc2fa94cbaba84a9b84e05b0fca91e4"
-},
-["structure.columns[].containers[].blocks[]|5.id"]: {
-  "required": true,
-  "type": "string",
-  "schemaHash": "cc22f8ec14817471274ae0fddcdc70ee916ee0e4e058c2adf4ccefed5b83163f"
-},
-["structure.columns[].containers[].blocks[]|5.type"]: {
-  "required": true,
-  "type": "string",
-  "const": "html",
-  "schemaHash": "0451958f62b2c97228ae8b8074f43d378097c8e50b3dca38a5dea0a431101af4"
-},
-["structure.columns[].containers[].blocks[]|5.settings"]: {
-  "required": true,
-  "type": "object",
-  "schemaHash": "a6d1cbfbbda2baf0738220f470e19118e348c0f26b7667a2c680eff5f498a6c2"
-},
-["structure.columns[].containers[].blocks[]|5.settings.margins"]: {
-  "required": true,
-  "type": "object",
-  "schemaHash": "a7e49c9de944eb59b182b4170e11f27246a9a6b97991efb30eb44167d8e6e96a"
-},
-["structure.columns[].containers[].blocks[]|5.settings.margins.desktop"]: {
-  "required": true,
-  "type": "object",
-  "schemaHash": "512befe9ea2fc6099da95661f8b6f26434831be23e431b5670423c8f8cbc163d"
-},
-["structure.columns[].containers[].blocks[]|5.settings.margins.desktop.top"]: {
-  "required": true,
-  "type": "number",
-  "schemaHash": "a60791c7bd997624175e5ce942b961e03be8caff0688d64714c220d3e3069018"
-},
-["structure.columns[].containers[].blocks[]|5.settings.margins.desktop.right"]: {
-  "required": true,
-  "type": "number",
-  "schemaHash": "f16d2a1c75e4e368c52096f5f392478b7362f12092f61565b2505fc4904bfda5"
-},
-["structure.columns[].containers[].blocks[]|5.settings.margins.desktop.bottom"]: {
-  "required": true,
-  "type": "number",
-  "schemaHash": "b462dde7c9edde64ea0ef3b7baa66de119ee6b45e1275970be7d07062ca8e996"
-},
-["structure.columns[].containers[].blocks[]|5.settings.margins.desktop.left"]: {
-  "required": true,
-  "type": "number",
-  "schemaHash": "c59c64cc82659b3f4d98141fc48d64d75303e9682323d902d0767caca9a19c31"
-},
-["structure.columns[].containers[].blocks[]|5.settings.margins.mobile"]: {
-  "required": true,
-  "type": "object",
-  "schemaHash": "512befe9ea2fc6099da95661f8b6f26434831be23e431b5670423c8f8cbc163d"
-},
-["structure.columns[].containers[].blocks[]|5.settings.margins.mobile.top"]: {
-  "required": true,
-  "type": "number",
-  "schemaHash": "a60791c7bd997624175e5ce942b961e03be8caff0688d64714c220d3e3069018"
-},
-["structure.columns[].containers[].blocks[]|5.settings.margins.mobile.right"]: {
-  "required": true,
-  "type": "number",
-  "schemaHash": "f16d2a1c75e4e368c52096f5f392478b7362f12092f61565b2505fc4904bfda5"
-},
-["structure.columns[].containers[].blocks[]|5.settings.margins.mobile.bottom"]: {
-  "required": true,
-  "type": "number",
-  "schemaHash": "b462dde7c9edde64ea0ef3b7baa66de119ee6b45e1275970be7d07062ca8e996"
-},
-["structure.columns[].containers[].blocks[]|5.settings.margins.mobile.left"]: {
-  "required": true,
-  "type": "number",
-  "schemaHash": "c59c64cc82659b3f4d98141fc48d64d75303e9682323d902d0767caca9a19c31"
-},
-["structure.columns[].containers[].blocks[]|5.settings.includeInOutput"]: {
-  "required": true,
-  "type": "string",
-  "enum": [
-    "both",
-    "html",
-    "ampHtml"
-  ],
-  "schemaHash": "52e3402be3437c71fe10c40c6cdb1fd5aa95baa6a99786e8eacbea179002175e"
-},
-["structure.columns[].containers[].blocks[]|5.settings.hideElement"]: {
-  "required": true,
-  "type": "string",
-  "enum": [
-    "no",
-    "desktop",
-    "mobile"
-  ],
-  "schemaHash": "b7571603839ed66295f268b8b98c6caeef06907f950caf17ef53fb63d5bf7abc"
-},
-["structure.columns[].containers[].blocks[]|5.settings.anchorLinkName"]: {
-  "required": true,
-  "type": "string",
-  "schemaHash": "3954de1555ee8336646468d5dad24e0136cabe4665ebb85a3b60f14913067a69"
-},
-["structure.columns[].containers[].blocks[]|5.content"]: {
-  "required": false,
-  "type": "string",
-  "schemaHash": "7148655db542490be44d5600efa7efc72b7dffbe15f04c51d7bcfedc681a9518"
-},
-["structure.columns[].containers[].blocks[]|6"]: {
-  "required": true,
-  "type": "object",
-  "actions": {
-    "insert": "supported",
-    "delete": "supported",
-    "update": "supported",
-    "move": "supported"
-  },
-  "schemaHash": "69307c0535942b5059edb7ee77e0a76047ae0f27e08d60a340c7112baf331042"
-},
-["structure.columns[].containers[].blocks[]|6.id"]: {
-  "required": true,
-  "type": "string",
-  "schemaHash": "cc22f8ec14817471274ae0fddcdc70ee916ee0e4e058c2adf4ccefed5b83163f"
-},
-["structure.columns[].containers[].blocks[]|6.type"]: {
-  "required": true,
-  "type": "string",
-  "const": "button",
-  "schemaHash": "5675bf3b48cc71530dfaffb22f0e7bbf2377300e650baf36a469d2f0ad37a719"
-},
-["structure.columns[].containers[].blocks[]|6.settings"]: {
-  "required": true,
-  "type": "object",
-  "schemaHash": "f94d80de9cc71ba62c05fcc95b354ee652ad64e49149f1673b204b920b76b4c3"
-},
-["structure.columns[].containers[].blocks[]|6.settings.link"]: {
-  "required": false,
-  "schemaHash": "dc6b57efee1ab477ecaf7ed64c674509f7b75bc0346dde2d0ccf430ac62e9304"
-},
-["structure.columns[].containers[].blocks[]|6.settings.link|0"]: {
-  "required": false,
-  "type": "object",
-  "schemaHash": "2677517d907eeb77fc483c1df0683cfb020b2533bfa02234249226fb0bea442d"
-},
-["structure.columns[].containers[].blocks[]|6.settings.link|0.type"]: {
-  "required": true,
-  "type": "string",
-  "enum": [
-    "site",
-    "anchor",
-    "email",
-    "phone",
-    "sms",
-    "telegram",
-    "viber",
-    "file",
-    "other"
-  ],
-  "schemaHash": "61deefde391b3a714b439be4655000cd32fb0b2498443c1447300c8241e3cfb4"
-},
-["structure.columns[].containers[].blocks[]|6.settings.link|0.value"]: {
-  "required": true,
-  "type": "string",
-  "schemaHash": "f20e5dda6dd254139c64ce8375a86c4ce1d08f200aad343e8d8044223370dde3"
-},
-["structure.columns[].containers[].blocks[]|6.settings.link|1"]: {
-  "required": false,
-  "type": "object",
-  "schemaHash": "d347387756f9155616a3b4e6badf26e271c0f8ebf4fa6007080d7c61170b5b3b"
-},
-["structure.columns[].containers[].blocks[]|6.settings.link|1.type"]: {
-  "required": true,
-  "type": "string",
-  "const": "salesforce_mc",
-  "schemaHash": "ac9151ad4a5d4554e1bdc923d842f21f2c8f1e7923c1791712e1e97ce4b44833"
-},
-["structure.columns[].containers[].blocks[]|6.settings.link|1.value"]: {
-  "required": true,
-  "type": "string",
-  "schemaHash": "bbd310725f63a51f3d1aba438d08be25e30905966b4e5e9b284a059359c6747f"
-},
-["structure.columns[].containers[].blocks[]|6.settings.link|1.salesforce"]: {
-  "required": true,
-  "type": "object",
-  "schemaHash": "b952094d83e56f3ac1796c2385be7852fdcfc7a5044670446d83f639e819be78"
-},
-["structure.columns[].containers[].blocks[]|6.settings.link|1.salesforce.trackingAlias"]: {
-  "required": true,
-  "type": "string",
-  "schemaHash": "b54a3cf83c496f68e0ecccf6f542d29acefdcadde87904b794e896cb4da4fa9b"
-},
-["structure.columns[].containers[].blocks[]|6.settings.link|1.salesforce.linkTo"]: {
-  "required": true,
-  "type": "string",
-  "schemaHash": "37a816d815e6dbdf6a8fefb6902097a07c3a8cf81fad8280cee2524b1803daaa"
-},
-["structure.columns[].containers[].blocks[]|6.settings.link|1.salesforce.conversion"]: {
-  "required": true,
-  "type": "boolean",
-  "schemaHash": "f4a7861268e296034c8838cc047dfd4d8eeb4e1714073ae6be48740b4b5a6ab2"
-},
-["structure.columns[].containers[].blocks[]|6.settings.text"]: {
-  "required": true,
-  "type": "string",
-  "schemaHash": "3b99ebeb89671d9886088bd336817526f52cc0c80c7eab43b21c2e5795bedc67"
-},
-["structure.columns[].containers[].blocks[]|6.settings.alignment"]: {
-  "required": true,
-  "type": "object",
-  "schemaHash": "31a22d79e498a049f58f727ecd2c3d327d0dfd7801f0aa50a680ac78fb1b685e"
-},
-["structure.columns[].containers[].blocks[]|6.settings.alignment.desktop"]: {
-  "required": true,
-  "type": "string",
-  "enum": [
-    "left",
-    "center",
-    "right"
-  ],
-  "schemaHash": "341814eb6aff7d91bd84e9006aba1a60303f85af77dc4b114c35299d29ccec79"
-},
-["structure.columns[].containers[].blocks[]|6.settings.alignment.mobile"]: {
-  "required": true,
-  "type": "string",
-  "enum": [
-    "left",
-    "center",
-    "right"
-  ],
-  "schemaHash": "341814eb6aff7d91bd84e9006aba1a60303f85af77dc4b114c35299d29ccec79"
+  "schemaHash": "8252330452d3e452f1f9e987f5f9fcc0c1563a90eb85bcf1b9a45c227808d935"
 }
 };

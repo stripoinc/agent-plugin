@@ -1,963 +1,1079 @@
 
 export default {
-["IBlockOperationsApi.textBlock#0=>.updateFontColor"]: {
-  "hash": "fac9fbb84504084de7f9c94665119499d92cce7d381c8772dcd7873e46074995",
+["IBlockOperationsApi.structure#0=>.insert#0(options).prepared?|1.tree.attributes?|1.title?"]: {
+  "hash": "8124a6a9299893c6ba797f4ac4736cdb99360f87e39b61754778f547f108ee65",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options)"]: {
-  "hash": "93238276f612332742eb3c20d3295aa1f8da2c074166a3dd9e0fe179d9cfc4e5",
+["IBlockOperationsApi.structure#0=>.insert#0(options).prepared?|1.tree.attributes?|1.alt?"]: {
+  "hash": "8124a6a9299893c6ba797f4ac4736cdb99360f87e39b61754778f547f108ee65",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).nodeId"]: {
-  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
+["IBlockOperationsApi.structure#0=>.insert#0(options).prepared?|1.tree.attributes?|1.align?"]: {
+  "hash": "8124a6a9299893c6ba797f4ac4736cdb99360f87e39b61754778f547f108ee65",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).htmlApi"]: {
-  "hash": "cf8fcd3dda55c3f9dbaef45b1834c4460a515ed73f752ded9acb742148d4e935",
+["IBlockOperationsApi.structure#0=>.insert#0(options).prepared?|1.tree.children"]: {
+  "hash": "1a56580e03a3671517d38c1c2785617f7997fe89de4d9556ebbc7914a306e093",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi"]: {
-  "hash": "20afc3f5fa684908d5748a66846e94e53fb56addca20679fdf4e694383a57062",
+["IBlockOperationsApi.structure#0=>.insert#0(options).prepared?|1.tree.children[]"]: {
+  "hash": "88a29aba488cea734d802dc81c2ff2828b21098cff884ebe868a5e36e52d7ae1",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createReversionedActions"]: {
-  "hash": "0ec8422021caa3c6f153ffd29a7bff44f72ac2d5a09d7a72ae9b232545a2f37f",
+["IBlockOperationsApi.structure#0=>.insert#0(options).prepared?|1.tree.customBlockId?"]: {
+  "hash": "8124a6a9299893c6ba797f4ac4736cdb99360f87e39b61754778f547f108ee65",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createReversionedActions#0(actions)"]: {
-  "hash": "ba9cd882e9f4dafef9b594a116f6dd4008b824cadded83e12ccd790f5359c144",
+["IBlockOperationsApi.structure#0=>.insert#0(options).prepared?|1.tree.config?"]: {
+  "hash": "ddfa5f41f7bd925f60e3e10c801760cb96366a406cbffe8b20d008db422e4db7",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createRemoveHtmlNodeClassAction"]: {
-  "hash": "239418e55f645859681daf9dbef4a319938ad91f6ac9751f50aacaa43314eaa2",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createRemoveHtmlNodeClassAction#0(id)"]: {
-  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createRemoveHtmlNodeClassAction#0(className)"]: {
-  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createAddHtmlNodeClassAction"]: {
-  "hash": "239418e55f645859681daf9dbef4a319938ad91f6ac9751f50aacaa43314eaa2",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createAddHtmlNodeClassAction#0(id)"]: {
-  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createAddHtmlNodeClassAction#0(className)"]: {
-  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createCreateCssTreeAction"]: {
-  "hash": "298cc523d2d96d320ab6cdce6d5a2aa3c8ff2da0be21aedf5c2ababcdd71ce10",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createCreateCssTreeAction#0(props)"]: {
-  "hash": "7cbb25667e2d0051965e9b4fcdc7d00f92e649ebc1039a9bfa0c869fb7622d45",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createCreateHtmlTreeAction"]: {
-  "hash": "47fb58da2a7b071328bfcab553054ecff517edb95b39d65ab5744328df76b0c8",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createCreateHtmlTreeAction#0(props)"]: {
-  "hash": "6de648ca0bd9cf7f08af37708e5735ab8ed126661d91e44a808b42cb2ca4873d",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createMoveCssNodeAction"]: {
-  "hash": "fbdce6dd46f827fde7941d3d831ffb1d4b81aaec465758fea50cc45ba82b5adf",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createMoveCssNodeAction#0(id)"]: {
-  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createMoveCssNodeAction#0(newPosition)"]: {
-  "hash": "c68b1cd16e2a2fa791532c854c086936914dcdceb5ce97f054626baf6684ac46",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createMoveHtmlNodeAction"]: {
-  "hash": "b13771252447af3d3c263b37922ce99756c645121c41cebc22d77d3d45403b8c",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createMoveHtmlNodeAction#0(id)"]: {
-  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createMoveHtmlNodeAction#0(newPosition)"]: {
-  "hash": "c68b1cd16e2a2fa791532c854c086936914dcdceb5ce97f054626baf6684ac46",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createRemoveCssNodesAction"]: {
-  "hash": "53f3eadba7be627e9156a2370a08c862940e0e15445c077f1301f33b2a620613",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createRemoveCssNodesAction#0(ids)"]: {
-  "hash": "2f66b41966a90abaa8087407bd4236ee55d4992f5dc7acd9e4126413e1f61a85",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createRemoveHtmlNodesAction"]: {
-  "hash": "5ebe4c9bb8c4a63313a59df876edc1d2717943ae8d362677560b48926f7f7445",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createRemoveHtmlNodesAction#0(ids)"]: {
-  "hash": "2f66b41966a90abaa8087407bd4236ee55d4992f5dc7acd9e4126413e1f61a85",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createRemoveHtmlNodesAction#0(options)"]: {
-  "hash": "42ce0a166c9961b5100cc5b2737fb265e55f2988c319b20131b35a2ac5602c65",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createRemoveHtmlNodesAction#0(options)|0"]: {
+["IBlockOperationsApi.structure#0=>.insert#0(options).prepared?|1.tree.config?|0"]: {
   "hash": "570326e88d6ea9324c701bdef940750ecb6febdbcf2bae814b6887868f904465",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createRemoveHtmlNodesAction#0(options)|1"]: {
-  "hash": "b07a4dd5fbdd595985e7338ea249af550036db49308fb77a65d9fe2c88571954",
+["IBlockOperationsApi.structure#0=>.insert#0(options).prepared?|1.tree.config?|1"]: {
+  "hash": "a9d53e72e9a0727deac49245dc70dd13e865ac5757f3eb0fdedf1175ffc37123",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createRemoveHtmlNodesAction#0(options)|1.ignoreIds?"]: {
-  "hash": "2ec766d91aea90f0b794d3002efa560a3be8fe4107146bab27f237b19ae3949b",
+["IBlockOperationsApi.structure#0=>.insert#0(options).prepared?|1.tree.change?"]: {
+  "hash": "8124a6a9299893c6ba797f4ac4736cdb99360f87e39b61754778f547f108ee65",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createRemoveHtmlNodesAction#0(options)|1.skipChildren?"]: {
+["IBlockOperationsApi.structure#0=>.insert#0(options).prepared?|1.tree.split?"]: {
   "hash": "3b5e8f4439e0cfc6fb875f2bb57f220fe176c5b6735a5abfb204411d411e0d3f",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createReplaceHtmlNodeConfigAction"]: {
-  "hash": "d57ab1725b8852e92d21e9f503d5afbf19fca292af9643334a25b56e97ef0b98",
+["IBlockOperationsApi.structure#0=>.insert#0(options).prepared?|1.tree.selectionIndex?"]: {
+  "hash": "09aa618668fb937fb40c118e2085fa37ae95333db91b994e338c6a4d83da6de4",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createReplaceHtmlNodeConfigAction#0(id)"]: {
-  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
+["IBlockOperationsApi.structure#0=>.insert#0(options).prepared?|1.tree.selectionIndex?|0"]: {
+  "hash": "570326e88d6ea9324c701bdef940750ecb6febdbcf2bae814b6887868f904465",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createReplaceHtmlNodeConfigAction#0(newConfig)"]: {
-  "hash": "38350e5d2566768828f926d90166614cc4d74893701f51bc9ee1dbb4a158fc0f",
+["IBlockOperationsApi.structure#0=>.insert#0(options).prepared?|1.tree.selectionIndex?|1"]: {
+  "hash": "7dfce2c452b1d476e3d6de3294784e14a965792354c6651f02910d0588f31ec6",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createRestoreCssNodesAction"]: {
-  "hash": "53f3eadba7be627e9156a2370a08c862940e0e15445c077f1301f33b2a620613",
+["IBlockOperationsApi.structure#0=>.insert#0(options).prepared?|1.tree.selectionIndex?|1.offset"]: {
+  "hash": "492fd291aa45171daf750c5eecef1602949a8cf4f92808d1efc72774e243d8dd",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createRestoreCssNodesAction#0(ids)"]: {
-  "hash": "2f66b41966a90abaa8087407bd4236ee55d4992f5dc7acd9e4126413e1f61a85",
+["IBlockOperationsApi.structure#0=>.insert#0(options).prepared?|1.tree.selectionIndex?|1.path"]: {
+  "hash": "500b08242c2d6b8ffdbb548fd54f6248daf3e790c91d0eb969fc16045e478e5c",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createRestoreHtmlNodesAction"]: {
-  "hash": "53f3eadba7be627e9156a2370a08c862940e0e15445c077f1301f33b2a620613",
+["IBlockOperationsApi.structure#0=>.insert#0(options).prepared?|1.tree.selectionIndex?|1.path[]"]: {
+  "hash": "fd1a55ee2217c1ac278ab485236d6c199517334ee91e965cf2f6b8575701cd1c",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createRestoreHtmlNodesAction#0(ids)"]: {
-  "hash": "2f66b41966a90abaa8087407bd4236ee55d4992f5dc7acd9e4126413e1f61a85",
+["IBlockOperationsApi.structure#0=>.insert#0(options).prepared?|1.tree.selectionIndex?|1.contentLen"]: {
+  "hash": "fd1a55ee2217c1ac278ab485236d6c199517334ee91e965cf2f6b8575701cd1c",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createSetCssNodeAttributeNameAction"]: {
-  "hash": "aaa4f678b5e600f44aed7017471fc736765268ac8e8e809777cbb9dbb0bdfe89",
+["IBlockOperationsApi.structure#0=>.insert#0(options).prepared?|1.tree.selectionIndex?|1.type"]: {
+  "hash": "348710cc95d038b24dff5c57ccf416d19b30547217310e416de3618ae5863219",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createSetCssNodeAttributeNameAction#0(id)"]: {
-  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createSetCssNodeAttributeNameAction#0(newName)"]: {
-  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createSetCssNodeAttributeValueAction"]: {
-  "hash": "637365fb84e9b1e94f46bb3b787df49a769df7c0e2841f72c7a5f565299b4e96",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createSetCssNodeAttributeValueAction#0(id)"]: {
-  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createSetCssNodeAttributeValueAction#0(value)"]: {
-  "hash": "8124a6a9299893c6ba797f4ac4736cdb99360f87e39b61754778f547f108ee65",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createSetCssNodeCommentedAction"]: {
-  "hash": "34e09e6dcfcd03b0c911c01e17d596000dd66cf1181ca33a31057133d1ebced1",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createSetCssNodeCommentedAction#0(id)"]: {
-  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createSetCssNodeCommentedAction#0(commented)"]: {
-  "hash": "a5b031ab62bc416d720c0410d802ea46b910c4fbe85c50a946ccc658b74e677e",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createSetCssNodeContentAction"]: {
-  "hash": "64cbd26d3aea0cd6375e269a2cf55e4b2be30c9245b493b7b4111c1095f55951",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createSetCssNodeContentAction#0(id)"]: {
-  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createSetCssNodeContentAction#0(content)"]: {
-  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createSetCssNodeNotToDisplayAction"]: {
-  "hash": "2c7c2e2d52387f648b313e08ddbddba1b33cc3b94785b455164d7932576b92b6",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createSetCssNodeNotToDisplayAction#0(id)"]: {
-  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createSetCssNodeNotToDisplayAction#0(notToDisplay)"]: {
-  "hash": "a5b031ab62bc416d720c0410d802ea46b910c4fbe85c50a946ccc658b74e677e",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createSetCssNodeSelectorAction"]: {
-  "hash": "5e9d5972822f042d7c4e59ab18795807a0b0c27bd91aba6ba1a8777fefc2aff9",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createSetCssNodeSelectorAction#0(id)"]: {
-  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createSetCssNodeSelectorAction#0(newSelector)"]: {
-  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createSetGlobalCssVariableAction"]: {
-  "hash": "d0c37eda304178f0ce4164dc4b66821f6e7b2a534bb105c8ad4c8eb23f1c2054",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createSetGlobalCssVariableAction#0(name)"]: {
-  "hash": "8c08936f8d7658e504e7b37fb24a1c96b0bd047f490d5f07097f02cbf3f49ed1",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createSetGlobalCssVariableAction#0(newValue)"]: {
-  "hash": "f1c26c90308d1a58eef0b2a838ec0011578388f7b19536462d4a01e569eef231",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createSetHtmlNodeAttributeAction"]: {
-  "hash": "4f97b5dbae6816ea1728ecd7c655ed96787b02e6accc2ce71ce2cdf7b900a111",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createSetHtmlNodeAttributeAction#0(id)"]: {
-  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createSetHtmlNodeAttributeAction#0(name)"]: {
-  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createSetHtmlNodeAttributeAction#0(newValue)"]: {
-  "hash": "e0dae72580801b62e6ee87641e8a51cdd8fa1d67f74fae5af6df915422e18ce7",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createSetHtmlNodeConfigAction"]: {
-  "hash": "d57ab1725b8852e92d21e9f503d5afbf19fca292af9643334a25b56e97ef0b98",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createSetHtmlNodeConfigAction#0(id)"]: {
-  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createSetHtmlNodeConfigAction#0(newConfig)"]: {
-  "hash": "38350e5d2566768828f926d90166614cc4d74893701f51bc9ee1dbb4a158fc0f",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createSetHtmlNodeContentAction"]: {
-  "hash": "71b156a626c1bb1e8e845edc2551fcd433162fb6017fc38d672ef588d5d4eafc",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createSetHtmlNodeContentAction#0(id)"]: {
-  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createSetHtmlNodeContentAction#0(newContent)"]: {
-  "hash": "8124a6a9299893c6ba797f4ac4736cdb99360f87e39b61754778f547f108ee65",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createSetHtmlNodeTextActions"]: {
-  "hash": "40c391507162d145a655e1286b07a59dc2a31cc786027539894c280580c87345",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createSetHtmlNodeTextActions#0(parentId)"]: {
-  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createSetHtmlNodeTextActions#0(text)"]: {
-  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createSetHtmlNodeStyleAction"]: {
-  "hash": "bab058e4e25554fbe1a9a9003ac43bddf9b51e3252a51da8a595a3265ac37bf6",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createSetHtmlNodeStyleAction#0(id)"]: {
-  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createSetHtmlNodeStyleAction#0(name)"]: {
-  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createSetHtmlNodeStyleAction#0(newStyle)"]: {
-  "hash": "8124a6a9299893c6ba797f4ac4736cdb99360f87e39b61754778f547f108ee65",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createSetHtmlNodeTypeAction"]: {
-  "hash": "ccb6d5f4258c42cde233eb9b43337261f8bc11f08f3b6b9707bb020e08c045b8",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createSetHtmlNodeTypeAction#0(id)"]: {
-  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createSetHtmlNodeTypeAction#0(newType)"]: {
-  "hash": "bd2acc5e8b7733f9e47be429983094f39da737e68280e38049f9c245ff9a5df0",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createSetHtmlNodeTagAction"]: {
-  "hash": "7cb11d9fcc2caf1b68cfb210e33615869970614a4bee070a35f7f6ab83c8ef2b",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createSetHtmlNodeTagAction#0(id)"]: {
-  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createSetHtmlNodeTagAction#0(newTag)"]: {
-  "hash": "8124a6a9299893c6ba797f4ac4736cdb99360f87e39b61754778f547f108ee65",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createSetUTMParametersAction"]: {
-  "hash": "d504b067d6f317795fb065efce294d39d68a2b774186428108d4ad1a58cfb43f",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createSetUTMParametersAction#0(name)"]: {
-  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createSetUTMParametersAction#0(value)"]: {
-  "hash": "8124a6a9299893c6ba797f4ac4736cdb99360f87e39b61754778f547f108ee65",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createUpdateUtmActions"]: {
-  "hash": "9685b28fa723eb46548c7220cbc627c0cb663afab4da238b5691238b4829004f",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createUpdateUtmActions#0(values)"]: {
-  "hash": "fc754dcd00f81e3e83871ec3d93f78ce2e16db517f7c167ec40bb2d699cbaeb3",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createMoveHtmlNodeBeforeAction"]: {
-  "hash": "d51ffcb59bafc295d03106b982e959e47cf6a8b4769832b9a28f3e8c11dae033",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createMoveHtmlNodeBeforeAction#0(moveId)"]: {
-  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createMoveHtmlNodeBeforeAction#0(beforeNodeId)"]: {
-  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createMoveHtmlNodeAfterAction"]: {
-  "hash": "d952656bd48029e32bf21e6ad55bcdf665ff6c691bb9d4f69a82fc0c4821707a",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createMoveHtmlNodeAfterAction#0(modeId)"]: {
-  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createMoveHtmlNodeAfterAction#0(afterNodeId)"]: {
-  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createCreateHtmlNodeBeforeAction"]: {
-  "hash": "8ae3562d4d90964743e508020ec5fbfb316b7ee39942f7c24d7acca1673185f9",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createCreateHtmlNodeBeforeAction#0(node)"]: {
-  "hash": "f15433811676373d88e9be0c54d1d9b136244aef88aab3133607a8de2bd3afcb",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createCreateHtmlNodeBeforeAction#0(beforeNodeId)"]: {
-  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createCreateHtmlNodeAfterAction"]: {
-  "hash": "763b4af5ec722e64a9495e6b3d748ad5a322ea6963f77e4c2d40fede4e76c43f",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createCreateHtmlNodeAfterAction#0(node)"]: {
-  "hash": "f15433811676373d88e9be0c54d1d9b136244aef88aab3133607a8de2bd3afcb",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createCreateHtmlNodeAfterAction#0(afterNodeId)"]: {
-  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createCreateCommentAction"]: {
-  "hash": "20f404c9ae84bd1ff992493a12367cb413b3761dc77a9f58c8aa76c0fc6badaa",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createCreateCommentAction#0(props)"]: {
-  "hash": "9d7a584c29726eee29ce0f18c1748550dc7874537b1162864b6b5fc95ea51b78",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createRemoveCommentsAction"]: {
-  "hash": "d18f68835d1bd9c6fd63551f064a8c641bf9b699f082a1bd135bc6bacfa6b73b",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createRemoveCommentsAction#0(ids)"]: {
-  "hash": "2f66b41966a90abaa8087407bd4236ee55d4992f5dc7acd9e4126413e1f61a85",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createRemoveCommentsAction#0(removedAt)"]: {
-  "hash": "d8cfecc6dde291090f184d39120684a010eeff69ef46bc45c762c87e167eb77d",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createSetCommentMessageAction"]: {
-  "hash": "3b0a99c255f2f87fad1f00fafcffebf600e69cdecb5b99a3a16ddf7d1b099e67",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createSetCommentMessageAction#0(id)"]: {
-  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createSetCommentMessageAction#0(message)"]: {
-  "hash": "e499719c780515ac3562606af7965e8a51e0c52da539d4eed4b92c16ee24af64",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createSetCommentResolvedAction"]: {
-  "hash": "186d3be9c365e9a4a14cb6f61236594f8e6399eefbdc53fd0fc9472c2ca4188b",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createSetCommentResolvedAction#0(id)"]: {
-  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createSetCommentResolvedAction#0(parentId)"]: {
-  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createSetCommentResolvedAction#0(resolved)"]: {
+["IBlockOperationsApi.structure#0=>.insert#0(options).prepared?|1.tree.dumb?"]: {
   "hash": "3b5e8f4439e0cfc6fb875f2bb57f220fe176c5b6735a5abfb204411d411e0d3f",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createSetCommentPlacementAction"]: {
-  "hash": "ab3c6159ada4d2b7b2af87240302ee240760c2594bd807915427b74685062a19",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createSetCommentPlacementAction#0(id)"]: {
-  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createSetCommentPlacementAction#0(placement)"]: {
-  "hash": "5d30666465197d476fdf5c381bfba1db935628903f726f584ece0e2b7c04661c",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createAddCommentViewedByAction"]: {
-  "hash": "d3c069a6849a593a2c9510c7fd59a496e2aaf5e568ff5f45d76e0dcb21aff2ba",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createAddCommentViewedByAction#0(id)"]: {
-  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createAddCommentViewedByAction#0(userId)"]: {
-  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createAddCommentFollowedByAction"]: {
-  "hash": "d3c069a6849a593a2c9510c7fd59a496e2aaf5e568ff5f45d76e0dcb21aff2ba",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createAddCommentFollowedByAction#0(id)"]: {
-  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createAddCommentFollowedByAction#0(userId)"]: {
-  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createRemoveCommentFollowedByAction"]: {
-  "hash": "d3c069a6849a593a2c9510c7fd59a496e2aaf5e568ff5f45d76e0dcb21aff2ba",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createRemoveCommentFollowedByAction#0(id)"]: {
-  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createRemoveCommentFollowedByAction#0(userId)"]: {
-  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createUpdateCommentsAuthorsInfoAction"]: {
-  "hash": "e8c1938738d58bc75c283cb11d44f74bece6cb156e613a25b6d9ff65d5677fff",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createUpdateCommentsAuthorsInfoAction#0(users)"]: {
-  "hash": "3cbacbf0b4e6560d907442f725578b92ef73cc3d6b16cf385dcdd956d733c6a1",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createUpdateCommentsAuthorsInfoAction#0(users)[]"]: {
-  "hash": "04a67bdbcacf2b7e44c5c51ffa6af8da279c1fd91471bd6561bc727265fc8006",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createUpdateCommentsAuthorsInfoAction#0(users)[].id"]: {
-  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createUpdateCommentsAuthorsInfoAction#0(users)[].name?"]: {
-  "hash": "8124a6a9299893c6ba797f4ac4736cdb99360f87e39b61754778f547f108ee65",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createUpdateCommentsAuthorsInfoAction#0(users)[].avatar?"]: {
-  "hash": "8124a6a9299893c6ba797f4ac4736cdb99360f87e39b61754778f547f108ee65",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createUpdateCommentsAuthorsInfoAction#0(users)[].email?"]: {
-  "hash": "8124a6a9299893c6ba797f4ac4736cdb99360f87e39b61754778f547f108ee65",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createUpdateCommentsAuthorsInfoAction#0(users)[].esWebPushContactId?"]: {
-  "hash": "8124a6a9299893c6ba797f4ac4736cdb99360f87e39b61754778f547f108ee65",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createUpdateCommentsAuthorsInfoAction#0(users)[].locale?"]: {
-  "hash": "8124a6a9299893c6ba797f4ac4736cdb99360f87e39b61754778f547f108ee65",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).actionsApi.createUpdateCommentsAuthorsInfoAction#0(users)[].anonymous?"]: {
+["IBlockOperationsApi.structure#0=>.insert#0(options).prepared?|1.tree.customRendererNode?"]: {
   "hash": "3b5e8f4439e0cfc6fb875f2bb57f220fe176c5b6735a5abfb204411d411e0d3f",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(options).fontColor"]: {
-  "hash": "225012718a0bde3a521c91ce0c3bf1579b27bf9974e29152edc101189d45c443",
+["IBlockOperationsApi.structure#0=>.insert#0(options).prepared?|1.tree.path?"]: {
+  "hash": "8902b9e2de3747f20570d9b40740a6b5b3ca081313d52853501386367b7d892c",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0(patchOptions)"]: {
-  "hash": "cde1c32dc7e44016d04507af8dad77bb92a04da179ad60ffbd540bfa460303da",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFontColor#0=>"]: {
-  "hash": "751c06d9b115f2b0703d511099c982425cdfae0d79f1e6789582ae2fb8586dd9",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateContent"]: {
-  "hash": "e9f4813826b74f85ca16a5351650336ee597193a8ac72b07c589155670ff1338",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateContent#0(options)"]: {
-  "hash": "b6b5858530c95755b356a47150f6d30e9feec8b7a479ac23d2e0363a041d4b0e",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateContent#0(options).nodeId"]: {
-  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateContent#0(options).htmlApi"]: {
-  "hash": "cf8fcd3dda55c3f9dbaef45b1834c4460a515ed73f752ded9acb742148d4e935",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateContent#0(options).actionsApi"]: {
-  "hash": "28dd7be2c2d8b50444cd1e1339e3e9b98b9f9454316e125e82b5c39025d2ee57",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateContent#0(options).content"]: {
-  "hash": "225012718a0bde3a521c91ce0c3bf1579b27bf9974e29152edc101189d45c443",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateContent#0(patchOptions)"]: {
-  "hash": "cde1c32dc7e44016d04507af8dad77bb92a04da179ad60ffbd540bfa460303da",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateContent#0=>"]: {
-  "hash": "751c06d9b115f2b0703d511099c982425cdfae0d79f1e6789582ae2fb8586dd9",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateAlignment"]: {
-  "hash": "55b2b3c649953c86005a5476c7e0af293c2b056a1cc5f79a6e98bb85d1e4a3cd",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateAlignment#0(options)"]: {
-  "hash": "fb452f396f423ce3c06adcdcd9e88ac7fffb8b7dfabb5e43db0af43241bcfe14",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateAlignment#0(options).alignment"]: {
-  "hash": "84f784fc42da4ada83143da87d407794b7add245fff74d3f0c39ff7a12bfd08e",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateAlignment#0(options).alignment|0"]: {
+["IBlockOperationsApi.structure#0=>.insert#0(options).prepared?|1.tree.path?|0"]: {
   "hash": "570326e88d6ea9324c701bdef940750ecb6febdbcf2bae814b6887868f904465",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.textBlock#0=>.updateAlignment#0(options).alignment|1"]: {
-  "hash": "4aad05e8da5da948158d20c858b6d46b8c7c425b2e557fb5992ecaaf82178cc7",
+["IBlockOperationsApi.structure#0=>.insert#0(options).prepared?|1.tree.path?|1"]: {
+  "hash": "7eb29479a35390f49cdb49fece03c453788975fce164b0b0cd8881c197e0db3e",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.textBlock#0=>.updateAlignment#0(options).alignment|1.desktop"]: {
-  "hash": "0796935d9962fb22029927826be9a34efbadabde1d6ac969d9451e8789a34ab9",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateAlignment#0(options).alignment|1.desktop|0"]: {
-  "hash": "819f67ff1482dda720b410cb4c360f4dad5c77d5d1f9d4294facca980240f31d",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateAlignment#0(options).alignment|1.desktop|1"]: {
-  "hash": "cbd0768bd6f6f248d74facab2dd798c0eb48ac09f475a893ffa66830fd14888a",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateAlignment#0(options).alignment|1.desktop|2"]: {
-  "hash": "3eabeaf62a56f04428a579e706669e9883ddd58ffa2ae8818566a69afe8320e6",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateAlignment#0(options).alignment|1.desktop|3"]: {
-  "hash": "2e7edce227bba591c30d0a53f274b005fbe73c81eefde7f1f3cb5d4baea259be",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateAlignment#0(options).alignment|1.mobile"]: {
-  "hash": "1831e6fa0c9b8d7c42c8328751ef394348882b0881d052f4d733d5e14e01c8f5",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateAlignment#0(options).preserveContentFormatting?"]: {
-  "hash": "3b5e8f4439e0cfc6fb875f2bb57f220fe176c5b6735a5abfb204411d411e0d3f",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateAlignment#0(options).actionsApi"]: {
-  "hash": "28dd7be2c2d8b50444cd1e1339e3e9b98b9f9454316e125e82b5c39025d2ee57",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateAlignment#0(options).directionOverride?"]: {
-  "hash": "fba320b8d2bd8639b8c8368bfef8999382ded52e6f1ae0b43fb422a0a72a8151",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateAlignment#0(options).directionOverride?|0"]: {
-  "hash": "570326e88d6ea9324c701bdef940750ecb6febdbcf2bae814b6887868f904465",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateAlignment#0(options).directionOverride?|1"]: {
-  "hash": "bfcd0c8c169502bcb44f0b0fb37ce01c866dadfb4f42e4b11eb68e03978b12da",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateAlignment#0(options).directionOverride?|2"]: {
-  "hash": "d16a5a4f56060e8dfd2d6cf6d9fc04f59b94f30f15abcbdb55b3e29f952c5a31",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateAlignment#0(options).nodeId"]: {
+["IBlockOperationsApi.structure#0=>.insert#0(options).prepared?|1.parentNodeId"]: {
   "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.textBlock#0=>.updateAlignment#0(options).htmlApi"]: {
-  "hash": "cf8fcd3dda55c3f9dbaef45b1834c4460a515ed73f752ded9acb742148d4e935",
+["IBlockOperationsApi.structure#0=>.insert#0(options).prepared?|1.predecessor?"]: {
+  "hash": "5212836f46a3d7e54606d73ca35430cc900a88147587b0880dd64fac0d5e0c92",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.textBlock#0=>.updateAlignment#0(options).variablesApi?"]: {
-  "hash": "c1fda19bec71fdb059964140fb20ba75c15415457d73ff3e3900fc6754f2405c",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateAlignment#0(options).variablesApi?|0"]: {
+["IBlockOperationsApi.structure#0=>.insert#0(options).prepared?|1.predecessor?|0"]: {
   "hash": "570326e88d6ea9324c701bdef940750ecb6febdbcf2bae814b6887868f904465",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.textBlock#0=>.updateAlignment#0(options).variablesApi?|1"]: {
-  "hash": "ae67c04c3bf518926701eff1e5e31115c33b1c897819ec4b5583d7c088acc737",
+["IBlockOperationsApi.structure#0=>.insert#0(options).prepared?|1.predecessor?|1"]: {
+  "hash": "c9082540f30e0c75911ea5fb73d6291aa10b9641813c3315c42bce4b5d3e6f99",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.textBlock#0=>.updateAlignment#0(patchOptions)"]: {
+["IBlockOperationsApi.structure#0=>.insert#0(options).prepared?|1.predecessor?|1.nodeId"]: {
+  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.insert#0(options).prepared?|1.predecessor?|1.token"]: {
+  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.insert#0(patchOptions)"]: {
   "hash": "cde1c32dc7e44016d04507af8dad77bb92a04da179ad60ffbd540bfa460303da",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.textBlock#0=>.updateAlignment#0=>"]: {
+["IBlockOperationsApi.structure#0=>.insert#0=>"]: {
   "hash": "751c06d9b115f2b0703d511099c982425cdfae0d79f1e6789582ae2fb8586dd9",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.textBlock#0=>.updateAlignmentDesktop"]: {
-  "hash": "9e413d39c8c0d4c1cf64e0697f5dd43e3af139a4c4fcb9480acbd11a71912567",
+["IBlockOperationsApi.structure#0=>.move"]: {
+  "hash": "7be33b9075dbc8cb9c97994a82b9851aa0551bdd7400392fc4b3496e35d0df3b",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.textBlock#0=>.updateAlignmentDesktop#0(options)"]: {
-  "hash": "5d4be874ca7e8196f5a9cab380fe87457d61c75528f8591adb418490dc859371",
+["IBlockOperationsApi.structure#0=>.move#0(options)"]: {
+  "hash": "a44f730d9460c4cb13c95c3e65058ea3757a09d6e308d114db06a23da21a4804",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.textBlock#0=>.updateAlignmentDesktop#0(options).alignment"]: {
-  "hash": "1831e6fa0c9b8d7c42c8328751ef394348882b0881d052f4d733d5e14e01c8f5",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateAlignmentDesktop#0(options).actionsApi"]: {
-  "hash": "28dd7be2c2d8b50444cd1e1339e3e9b98b9f9454316e125e82b5c39025d2ee57",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateAlignmentDesktop#0(options).directionOverride?"]: {
-  "hash": "ce1960001e5120fbe5e768fbda711f312b458e00927c1fa0c62501388fb531e1",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateAlignmentDesktop#0(options).nodeId"]: {
+["IBlockOperationsApi.structure#0=>.move#0(options).baseNodeId"]: {
   "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.textBlock#0=>.updateAlignmentDesktop#0(options).htmlApi"]: {
-  "hash": "cf8fcd3dda55c3f9dbaef45b1834c4460a515ed73f752ded9acb742148d4e935",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateAlignmentDesktop#0(options).variablesApi?"]: {
-  "hash": "910f69f7a8512602ae2a7e0b3d66f70636e45e660e2a308c02d107438a128480",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateAlignmentDesktop#0(patchOptions)"]: {
-  "hash": "cde1c32dc7e44016d04507af8dad77bb92a04da179ad60ffbd540bfa460303da",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateAlignmentDesktop#0=>"]: {
-  "hash": "751c06d9b115f2b0703d511099c982425cdfae0d79f1e6789582ae2fb8586dd9",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateAlignmentMobile"]: {
-  "hash": "7df6d0ee670fa0d2a8f76d3ec7ceb5e04c23c02a0855a3544401e2958a288f15",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateAlignmentMobile#0(options)"]: {
-  "hash": "12818949e2e79f8ace65ae1993d599ce9e9fceb622f90eddd31d3d0859d743ba",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateAlignmentMobile#0(options).alignment"]: {
-  "hash": "1831e6fa0c9b8d7c42c8328751ef394348882b0881d052f4d733d5e14e01c8f5",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateAlignmentMobile#0(options).actionsApi"]: {
-  "hash": "28dd7be2c2d8b50444cd1e1339e3e9b98b9f9454316e125e82b5c39025d2ee57",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateAlignmentMobile#0(options).directionOverride?"]: {
-  "hash": "ce1960001e5120fbe5e768fbda711f312b458e00927c1fa0c62501388fb531e1",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateAlignmentMobile#0(options).nodeId"]: {
+["IBlockOperationsApi.structure#0=>.move#0(options).newParentComponentId"]: {
   "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.textBlock#0=>.updateAlignmentMobile#0(options).htmlApi"]: {
-  "hash": "cf8fcd3dda55c3f9dbaef45b1834c4460a515ed73f752ded9acb742148d4e935",
+["IBlockOperationsApi.structure#0=>.move#0(options).newPrevComponentId?"]: {
+  "hash": "8124a6a9299893c6ba797f4ac4736cdb99360f87e39b61754778f547f108ee65",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.textBlock#0=>.updateAlignmentMobile#0(options).variablesApi?"]: {
-  "hash": "910f69f7a8512602ae2a7e0b3d66f70636e45e660e2a308c02d107438a128480",
+["IBlockOperationsApi.structure#0=>.move#0(options).newToken?"]: {
+  "hash": "8124a6a9299893c6ba797f4ac4736cdb99360f87e39b61754778f547f108ee65",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.textBlock#0=>.updateAlignmentMobile#0(patchOptions)"]: {
-  "hash": "cde1c32dc7e44016d04507af8dad77bb92a04da179ad60ffbd540bfa460303da",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateAlignmentMobile#0=>"]: {
-  "hash": "751c06d9b115f2b0703d511099c982425cdfae0d79f1e6789582ae2fb8586dd9",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateHideElement"]: {
-  "hash": "353390c333bd3a9d82ccf4388e8b94cee83148b9452a42e464b76c3b9e7ab754",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateHideElement#0(options)"]: {
-  "hash": "33c0210fef08404257ba38a8c3f2b96c1ed455657ce7f37293d64cb3a58bee96",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateHideElement#0(options).hideElement"]: {
-  "hash": "9b595bd4a8249782d71118187e7fe02144cb3e2cb060129a15949551f73622b8",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateHideElement#0(options).hideElement|0"]: {
-  "hash": "570326e88d6ea9324c701bdef940750ecb6febdbcf2bae814b6887868f904465",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateHideElement#0(options).hideElement|1"]: {
-  "hash": "44d25a028017f1421eb02bfd0097c328babc4c55423a1fd800cc97251d41c11d",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateHideElement#0(options).hideElement|2"]: {
-  "hash": "590994fc8afb3bcf47eb8d921f468c342e38c28ce2e0ced91affbd5b50fe0def",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateHideElement#0(options).hideElement|3"]: {
-  "hash": "840dd466bd081f636f18cdeb0afd6fe04ded57ebcab59c8dfae8f105cfdc6796",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateHideElement#0(options).nodeId"]: {
-  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateHideElement#0(options).htmlApi"]: {
-  "hash": "cf8fcd3dda55c3f9dbaef45b1834c4460a515ed73f752ded9acb742148d4e935",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateHideElement#0(options).actionsApi"]: {
-  "hash": "28dd7be2c2d8b50444cd1e1339e3e9b98b9f9454316e125e82b5c39025d2ee57",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateHideElement#0(options).nodesApi?"]: {
-  "hash": "4a0bd8f02fc20bc20eb16cb51ff939deaa321a67df788c4a151fade8bc4a0063",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateHideElement#0(options).nodesApi?|0"]: {
-  "hash": "570326e88d6ea9324c701bdef940750ecb6febdbcf2bae814b6887868f904465",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateHideElement#0(options).nodesApi?|1"]: {
+["IBlockOperationsApi.structure#0=>.move#0(options).crdtApi"]: {
   "hash": "c28084b11384e511aabbbda13c9358b9b24b8cea67d27d802f930954dd421f6c",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.textBlock#0=>.updateHideElement#0(options).variablesApi?"]: {
-  "hash": "910f69f7a8512602ae2a7e0b3d66f70636e45e660e2a308c02d107438a128480",
+["IBlockOperationsApi.structure#0=>.move#0(options).imageNaturalSizeProvider?"]: {
+  "hash": "3e7726dfecb0288b8bc29a7d58979bc9cfa0ae023e3ee49fe7e4fc8d62e67906",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.textBlock#0=>.updateHideElement#0(patchOptions)"]: {
-  "hash": "cde1c32dc7e44016d04507af8dad77bb92a04da179ad60ffbd540bfa460303da",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateHideElement#0=>"]: {
-  "hash": "751c06d9b115f2b0703d511099c982425cdfae0d79f1e6789582ae2fb8586dd9",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateRightToLeftTextDirection"]: {
-  "hash": "b61584cae44a192ea3c077f2962cf6a8d2cc3e57fa176116f7c72813692c1e22",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateRightToLeftTextDirection#0(options)"]: {
-  "hash": "f3be006d8b0378b3154acb32fbb85effa236527f5b856d84e1cbd98447b5d8a6",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateRightToLeftTextDirection#0(options).rightToLeftTextDirection"]: {
-  "hash": "3b5e8f4439e0cfc6fb875f2bb57f220fe176c5b6735a5abfb204411d411e0d3f",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateRightToLeftTextDirection#0(options).documentRTLEnabled?"]: {
-  "hash": "3b5e8f4439e0cfc6fb875f2bb57f220fe176c5b6735a5abfb204411d411e0d3f",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateRightToLeftTextDirection#0(options).preserveContentFormatting?"]: {
-  "hash": "3b5e8f4439e0cfc6fb875f2bb57f220fe176c5b6735a5abfb204411d411e0d3f",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateRightToLeftTextDirection#0(options).nodeId"]: {
-  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateRightToLeftTextDirection#0(options).htmlApi"]: {
-  "hash": "cf8fcd3dda55c3f9dbaef45b1834c4460a515ed73f752ded9acb742148d4e935",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateRightToLeftTextDirection#0(options).actionsApi"]: {
-  "hash": "28dd7be2c2d8b50444cd1e1339e3e9b98b9f9454316e125e82b5c39025d2ee57",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateRightToLeftTextDirection#0(options).nodesApi?"]: {
-  "hash": "903e9dcf6d28a4efae50b6eb5845bde27181651d71a3bea462d9c87a42a89011",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateRightToLeftTextDirection#0(options).variablesApi?"]: {
-  "hash": "910f69f7a8512602ae2a7e0b3d66f70636e45e660e2a308c02d107438a128480",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateRightToLeftTextDirection#0(patchOptions)"]: {
-  "hash": "cde1c32dc7e44016d04507af8dad77bb92a04da179ad60ffbd540bfa460303da",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateRightToLeftTextDirection#0=>"]: {
-  "hash": "751c06d9b115f2b0703d511099c982425cdfae0d79f1e6789582ae2fb8586dd9",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFixedHeight"]: {
-  "hash": "218f47709bf7c8a77c496b8a04adbda0344cca9de97db48c62d121d1ef4d4140",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFixedHeight#0(options)"]: {
-  "hash": "3b6ea5859ce4191c77e78e66fe3d644fc491b70f347f69612429b119cd2cf84f",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFixedHeight#0(options).fixedHeight"]: {
-  "hash": "033862c23cb4a75c0fae30397dbc96bfcedfe4139aa089e60d7fc5f6f2479899",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFixedHeight#0(options).fixedHeight|0"]: {
+["IBlockOperationsApi.structure#0=>.move#0(options).imageNaturalSizeProvider?|0"]: {
   "hash": "570326e88d6ea9324c701bdef940750ecb6febdbcf2bae814b6887868f904465",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.textBlock#0=>.updateFixedHeight#0(options).fixedHeight|1"]: {
-  "hash": "cc0f177bb44d0a6b8b4ff008b4eeb982095dffd5d5eea79b94366a6780ddee91",
+["IBlockOperationsApi.structure#0=>.move#0(options).imageNaturalSizeProvider?|1"]: {
+  "hash": "e28d86836fb650b320fc21bf190763202c562f36fd8526aa4f1523208df01720",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.textBlock#0=>.updateFixedHeight#0(options).fixedHeightTarget?"]: {
-  "hash": "8c8400008a86b2c35652c3bcdc1fb338124e5d61168363e75d512966ddc68324",
+["IBlockOperationsApi.structure#0=>.move#0(options).imageNaturalSizeProvider?|1.getImageNaturalSize?"]: {
+  "hash": "b352db214fcd37257a72c1c372cdcdc5692b398aefad17379dd48f9c340449e8",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.textBlock#0=>.updateFixedHeight#0(options).fixedHeightTarget?|0"]: {
+["IBlockOperationsApi.structure#0=>.move#0(options).imageNaturalSizeProvider?|1.getImageNaturalSize?|0"]: {
   "hash": "570326e88d6ea9324c701bdef940750ecb6febdbcf2bae814b6887868f904465",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.textBlock#0=>.updateFixedHeight#0(options).fixedHeightTarget?|1"]: {
-  "hash": "44d25a028017f1421eb02bfd0097c328babc4c55423a1fd800cc97251d41c11d",
+["IBlockOperationsApi.structure#0=>.move#0(options).imageNaturalSizeProvider?|1.getImageNaturalSize?|1"]: {
+  "hash": "a78dbcd2ad60997e224a57394cb265124230892b507de6cc675f3ddec8c0c009",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.textBlock#0=>.updateFixedHeight#0(options).fixedHeightTarget?|2"]: {
-  "hash": "590994fc8afb3bcf47eb8d921f468c342e38c28ce2e0ced91affbd5b50fe0def",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFixedHeight#0(options).fixedHeightTarget?|3"]: {
-  "hash": "c471354d39f0b6ecc14cdaa06cfc6743527c2fe2fa7c7dc34de1c21d43857ff6",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFixedHeight#0(options).nodeId"]: {
+["IBlockOperationsApi.structure#0=>.move#0(options).imageNaturalSizeProvider?|1.getImageNaturalSize?|1#0(nodeId)"]: {
   "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.textBlock#0=>.updateFixedHeight#0(options).htmlApi"]: {
-  "hash": "cf8fcd3dda55c3f9dbaef45b1834c4460a515ed73f752ded9acb742148d4e935",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFixedHeight#0(options).actionsApi"]: {
-  "hash": "28dd7be2c2d8b50444cd1e1339e3e9b98b9f9454316e125e82b5c39025d2ee57",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFixedHeight#0(options).nodesApi?"]: {
-  "hash": "903e9dcf6d28a4efae50b6eb5845bde27181651d71a3bea462d9c87a42a89011",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFixedHeight#0(options).variablesApi?"]: {
-  "hash": "910f69f7a8512602ae2a7e0b3d66f70636e45e660e2a308c02d107438a128480",
-  "group": "apiMutation"
-},
-["IBlockOperationsApi.textBlock#0=>.updateFixedHeight#0(patchOptions)"]: {
+["IBlockOperationsApi.structure#0=>.move#0(patchOptions)"]: {
   "hash": "cde1c32dc7e44016d04507af8dad77bb92a04da179ad60ffbd540bfa460303da",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.textBlock#0=>.updateFixedHeight#0=>"]: {
+["IBlockOperationsApi.structure#0=>.move#0=>"]: {
   "hash": "751c06d9b115f2b0703d511099c982425cdfae0d79f1e6789582ae2fb8586dd9",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.textBlock#0=>.setFixedHeightEnabled"]: {
-  "hash": "fd72aa34725428003579b30a2d63923e17672c242b8fd71991a6a3dc6b9411b2",
+["IBlockOperationsApi.structure#0=>.delete"]: {
+  "hash": "ab5c3520df83700f68baf72c87d24f8ca7e2aee3971ed93b0edae0d9749a6ca1",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.textBlock#0=>.setFixedHeightEnabled#0(options)"]: {
-  "hash": "b16ec58459c99c1a823d7881f631faf48b55640e2612c90fad77ea63476fa72e",
+["IBlockOperationsApi.structure#0=>.delete#0(options)"]: {
+  "hash": "b4ccb8f41d8e9f3a4be0f40fd97d09b5c6c861f5d504bf88adb60e497e920202",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.textBlock#0=>.setFixedHeightEnabled#0(options).fixedHeightTarget"]: {
-  "hash": "02486754ff249acd780bd53243261160a843ecdd4808731232cb5d46be6cdcfa",
+["IBlockOperationsApi.structure#0=>.delete#0(options).nodeId"]: {
+  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.textBlock#0=>.setFixedHeightEnabled#0(options).fixedHeightTarget|0"]: {
-  "hash": "44d25a028017f1421eb02bfd0097c328babc4c55423a1fd800cc97251d41c11d",
+["IBlockOperationsApi.structure#0=>.delete#0(options).crdtApi"]: {
+  "hash": "c28084b11384e511aabbbda13c9358b9b24b8cea67d27d802f930954dd421f6c",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.textBlock#0=>.setFixedHeightEnabled#0(options).fixedHeightTarget|1"]: {
-  "hash": "590994fc8afb3bcf47eb8d921f468c342e38c28ce2e0ced91affbd5b50fe0def",
+["IBlockOperationsApi.structure#0=>.delete#0(options).fontsCategories?"]: {
+  "hash": "190a1f31144a585f8e6630b7aef07f3b4698a9370e77dbe93c94ff248dfde923",
   "group": "apiMutation"
 },
-["IBlockOperationsApi.textBlock#0=>.setFixedHeightEnabled#0(options).enabled"]: {
+["IBlockOperationsApi.structure#0=>.delete#0(options).fontsCategories?|0"]: {
+  "hash": "570326e88d6ea9324c701bdef940750ecb6febdbcf2bae814b6887868f904465",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).fontsCategories?|1"]: {
+  "hash": "d231cca7253814bf591199fb7593e9d9be9b937942721ea696663a4e30c769b5",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).fontsCategories?|1[]"]: {
+  "hash": "aab8b322efb92ca2e9ecd2d5e63bb8c6eba128f0f8f283ac2dd7e407a4c79302",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).fontsCategories?|1[].category"]: {
+  "hash": "436dc2631c79c2a0102b8fce51aa6f172f186fd74fe58350e232c4d42e72a27b",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).fontsCategories?|1[].category|0"]: {
+  "hash": "1dd07917aff7dd61775c176a44b8c4ca27f06824a2621270eb7b80a6c48060a8",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).fontsCategories?|1[].category|1"]: {
+  "hash": "b60d3b35fbd5fb4d3e36b3c2eb9a8acdb552482bd06e4e234c9250aa96aa05e0",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).fontsCategories?|1[].category|2"]: {
+  "hash": "09adef717208a11ade40beb6a48ab73248afbab625fae97c54fa65e71d749eb8",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).fontsCategories?|1[].category|3"]: {
+  "hash": "d784a010a8dad31a259b1c603279f56b210c5e7ede304f736f3093897b7f415a",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).fontsCategories?|1[].categoryLabel?"]: {
+  "hash": "8124a6a9299893c6ba797f4ac4736cdb99360f87e39b61754778f547f108ee65",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).fontsCategories?|1[].entries"]: {
+  "hash": "8adc68f95559205c4405167c5e3c4026950d2ae5b03da045297b66390fc8b2c4",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).fontsCategories?|1[].entries[]"]: {
+  "hash": "56dfdc31cd9724e675b25c1cc345640d1125a83a78be0e43e67c87d6aa93c25c",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).fontsCategories?|1[].entries[].name"]: {
+  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).fontsCategories?|1[].entries[].value"]: {
+  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).fontsCategories?|1[].entries[].active?"]: {
+  "hash": "3b5e8f4439e0cfc6fb875f2bb57f220fe176c5b6735a5abfb204411d411e0d3f",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).fontsCategories?|1[].entries[].link?"]: {
+  "hash": "8124a6a9299893c6ba797f4ac4736cdb99360f87e39b61754778f547f108ee65",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).fontsCategories?|1[].entries[].id?"]: {
+  "hash": "492fd291aa45171daf750c5eecef1602949a8cf4f92808d1efc72774e243d8dd",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).fontsCategories?|1[].entries[].importMethod?"]: {
+  "hash": "5febe7647320f3452eee047195db413a89bcfb0fb182d6b4ddf37424a0a8f35d",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).fontsCategories?|1[].entries[].importMethod?|0"]: {
+  "hash": "570326e88d6ea9324c701bdef940750ecb6febdbcf2bae814b6887868f904465",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).fontsCategories?|1[].entries[].importMethod?|1"]: {
+  "hash": "7ff9cb19dc739d71d82c227abccf474abd2c93fcc751b5f374789c0c21572cbd",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).fontsCategories?|1[].entries[].importMethod?|2"]: {
+  "hash": "c15c65984ad2ca5d360b789e214cbe004bd1cb022ba7a08b6fc27cf43236e3d6",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).fontsCategories?|1[].entries[].importMethod?|3"]: {
+  "hash": "9afe7ceec913be65122f0f6df1ce0e6c96e19a25e0920d92dbd1c8ac92281044",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).fontsCategories?|1[].entries[].importMethod?|4"]: {
+  "hash": "43eee21512c366abba9069e54dd70754f24b459c725f488501dbc5043a0333be",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).skipUniqueClassCleanup?"]: {
+  "hash": "3b5e8f4439e0cfc6fb875f2bb57f220fe176c5b6735a5abfb204411d411e0d3f",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).skipFontCleanup?"]: {
+  "hash": "3b5e8f4439e0cfc6fb875f2bb57f220fe176c5b6735a5abfb204411d411e0d3f",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).uniqueClassCleanup?"]: {
+  "hash": "e40d4551c7c033ef7a1381ba79d5fd012e8463edd7e4ff488697dfb187b2be5c",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).uniqueClassCleanup?|0"]: {
+  "hash": "570326e88d6ea9324c701bdef940750ecb6febdbcf2bae814b6887868f904465",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).uniqueClassCleanup?|1"]: {
+  "hash": "2ac4efb3dca694a3d97171c2641ed9cf79ee74f9ab6727c3a8a918f4db38d5af",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).uniqueClassCleanup?|1#0(node)"]: {
+  "hash": "228f325e56d2d895dc628a0739e5ec1ef185058e319965150edeee8c51cd9850",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).uniqueClassCleanup?|1#0(node).getId"]: {
+  "hash": "8d67252c65f2e66032c8f9618c617ba066dc059abb08c968f731c1ce74be0efa",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).uniqueClassCleanup?|1#0(node).getType"]: {
+  "hash": "bcd84c134110e046d8406024eb45b886633e7a6f7e35fb569c6dbd251831aebd",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).uniqueClassCleanup?|1#0(node).getContent"]: {
+  "hash": "8a8155ba7d8204fb263b4bfd55b00578640df85660862042ea5940e7c32710ad",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).uniqueClassCleanup?|1#0(node).getTag"]: {
+  "hash": "8a8155ba7d8204fb263b4bfd55b00578640df85660862042ea5940e7c32710ad",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).uniqueClassCleanup?|1#0(node).getAttributes"]: {
+  "hash": "0ea9644885545a7cd09c1933cd809d5f650337ea821207a347e6ed8ab19830fa",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).uniqueClassCleanup?|1#0(node).getAttribute"]: {
+  "hash": "474b2cd78991c2e3079d92d15a789057da7ad7b70270915075dc11f3f0913c41",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).uniqueClassCleanup?|1#0(node).getAttribute#0(name)"]: {
+  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).uniqueClassCleanup?|1#0(node).getStringAttribute"]: {
+  "hash": "84c79f46ad2da53ce0847495451e53843bce2870bd51faf83a04ca83fa0e1910",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).uniqueClassCleanup?|1#0(node).getStringAttribute#0(name)"]: {
+  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).uniqueClassCleanup?|1#0(node).getNumberAttribute"]: {
+  "hash": "9dcc425e6b9c56d68b9fd429ce8253d5dbf4805dce9778195a65a25d162a76c7",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).uniqueClassCleanup?|1#0(node).getNumberAttribute#0(name)"]: {
+  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).uniqueClassCleanup?|1#0(node).getBooleanAttribute"]: {
+  "hash": "c95e461d513d3ad1aa82de8f5f64487ad00e10ebfae521f0a78012885d6b7f8e",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).uniqueClassCleanup?|1#0(node).getBooleanAttribute#0(name)"]: {
+  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).uniqueClassCleanup?|1#0(node).getClasses"]: {
+  "hash": "8d85cdbd93afb1289f2b28f424ca23345a70bc8db8933ed7bb88b7a3232976c0",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).uniqueClassCleanup?|1#0(node).hasClass"]: {
+  "hash": "548194b95f3aec5a044c07ad8e110e927692d424f8b4bb13b9214a0bdfc1b9d6",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).uniqueClassCleanup?|1#0(node).hasClass#0(className)"]: {
+  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).uniqueClassCleanup?|1#0(node).getClassList"]: {
+  "hash": "8d67252c65f2e66032c8f9618c617ba066dc059abb08c968f731c1ce74be0efa",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).uniqueClassCleanup?|1#0(node).getStyles"]: {
+  "hash": "3284ffcae1bda57c7930e48f7de71a8a9d961e84e89a058d96dd81993893bf9b",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).uniqueClassCleanup?|1#0(node).getStyle"]: {
+  "hash": "84c79f46ad2da53ce0847495451e53843bce2870bd51faf83a04ca83fa0e1910",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).uniqueClassCleanup?|1#0(node).getStyle#0(name)"]: {
+  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).uniqueClassCleanup?|1#0(node).getStyleList"]: {
+  "hash": "8d67252c65f2e66032c8f9618c617ba066dc059abb08c968f731c1ce74be0efa",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).uniqueClassCleanup?|1#0(node).getNodeConfigProp"]: {
+  "hash": "5325ae0f6bd7b5622be669e120c5535ab0d7842317232588f4d65e1a8f78d926",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).uniqueClassCleanup?|1#0(node).getNodeConfigProp#0(prop)"]: {
+  "hash": "65aef5e867d44f116ccec3af3261363bd462c25c66cd08023dc69747efc213f4",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).uniqueClassCleanup?|1#0(node).getNodeConfigProp#0(prop):constraint"]: {
+  "hash": "da149cf3599d3ca9ed91cbdf6ee3882ae1da6e934ff599415a76940422683c02",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).uniqueClassCleanup?|1#0(node).getNodeConfig"]: {
+  "hash": "338b0e5caa8d24f4a670de0aea47202f264d0e7758f290a83df71b34767d9f05",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).uniqueClassCleanup?|1#0(node).getChildren"]: {
+  "hash": "4f6dca6d2b94ebff210c8aba6c2661191632e9d34d28394473b387d42527ae73",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).uniqueClassCleanup?|1#0(node).getParent"]: {
+  "hash": "04052e2cfaa481d943a105da11b731211522133e0262dceb937aed221abca250",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).uniqueClassCleanup?|1#0(node).getAllChildrenIds"]: {
+  "hash": "7470769ec190c88fe4f6fdaf25d26319da681456dd838d0da3fff0fb9bd59bc9",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).uniqueClassCleanup?|1#0(node).find"]: {
+  "hash": "8b1798f8b836c9d8a31283e16e408358a4854af807ad8065e192a5a0d89c31f4",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).uniqueClassCleanup?|1#0(node).find#0(selectors)"]: {
+  "hash": "cfe3200f357781e00e7c47ffe83d96d6679d29832c135e3e146fc41fc31149b9",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).uniqueClassCleanup?|1#0(node).findOne"]: {
+  "hash": "8b1798f8b836c9d8a31283e16e408358a4854af807ad8065e192a5a0d89c31f4",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).uniqueClassCleanup?|1#0(node).findOne#0(selectors)"]: {
+  "hash": "cfe3200f357781e00e7c47ffe83d96d6679d29832c135e3e146fc41fc31149b9",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).uniqueClassCleanup?|1#0(node).findAll"]: {
+  "hash": "3939d9519d21f68fe489b74394d2b7f93288c10653998a8ac4a793fb8bed5f0c",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).uniqueClassCleanup?|1#0(node).findAll#0(selectors)"]: {
+  "hash": "cfe3200f357781e00e7c47ffe83d96d6679d29832c135e3e146fc41fc31149b9",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).uniqueClassCleanup?|1#0(node).getClosestParent"]: {
+  "hash": "8b1798f8b836c9d8a31283e16e408358a4854af807ad8065e192a5a0d89c31f4",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).uniqueClassCleanup?|1#0(node).getClosestParent#0(selectors)"]: {
+  "hash": "cfe3200f357781e00e7c47ffe83d96d6679d29832c135e3e146fc41fc31149b9",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).uniqueClassCleanup?|1#0(node).findParent"]: {
+  "hash": "8b1798f8b836c9d8a31283e16e408358a4854af807ad8065e192a5a0d89c31f4",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).uniqueClassCleanup?|1#0(node).findParent#0(selectors)"]: {
+  "hash": "cfe3200f357781e00e7c47ffe83d96d6679d29832c135e3e146fc41fc31149b9",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).uniqueClassCleanup?|1#0(node).getParents"]: {
+  "hash": "3cbc48febc797bf5d57b1ce7eebd6d8f55cad63626d3a13674e75ee2065088d8",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).uniqueClassCleanup?|1#0(node).getParents#0(selectors)"]: {
+  "hash": "cfe3200f357781e00e7c47ffe83d96d6679d29832c135e3e146fc41fc31149b9",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).uniqueClassCleanup?|1#0(crdtApi)"]: {
+  "hash": "c28084b11384e511aabbbda13c9358b9b24b8cea67d27d802f930954dd421f6c",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).fontRemoval?"]: {
+  "hash": "b3f6d754c03d2ecf430126a651a4e4439b690474a2da3a995a297dc1ba19df37",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).fontRemoval?|0"]: {
+  "hash": "570326e88d6ea9324c701bdef940750ecb6febdbcf2bae814b6887868f904465",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).fontRemoval?|1"]: {
+  "hash": "828fb7f8e391e7da7484351b0321551011560984751f1d34759af2bd6d011c20",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).fontRemoval?|1#0(node)"]: {
+  "hash": "5ba9c7bb79c30f819a8f374c9590623b75aaffd26a5faeedb276c182f6bc2704",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).fontRemoval?|1#0(crdtApi)"]: {
+  "hash": "c28084b11384e511aabbbda13c9358b9b24b8cea67d27d802f930954dd421f6c",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(options).fontRemoval?|1#0(fontsCategories)"]: {
+  "hash": "808bc11780c319b9a002d7a87680b8e476a7ffc23688426bac666f63d9bd2336",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0(patchOptions)"]: {
+  "hash": "cde1c32dc7e44016d04507af8dad77bb92a04da179ad60ffbd540bfa460303da",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.delete#0=>"]: {
+  "hash": "751c06d9b115f2b0703d511099c982425cdfae0d79f1e6789582ae2fb8586dd9",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.resolve"]: {
+  "hash": "d3da2d8daafa13d9b9e22a1909935bb61ed06312e9e6eba99cb163c23967f43a",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#0=>.resolve#0(htmlApi)"]: {
+  "hash": "cf8fcd3dda55c3f9dbaef45b1834c4460a515ed73f752ded9acb742148d4e935",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.structure#0=>.resolve#0(baseNodeId)"]: {
+  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.structure#1(id)"]: {
+  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>"]: {
+  "hash": "e0442eb2e002f599f4f70132895ebff8d532fb47db8ae156c9240bd2e241fb94",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.getDarkBackgroundColor"]: {
+  "hash": "8a8155ba7d8204fb263b4bfd55b00578640df85660862042ea5940e7c32710ad",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.structure#1=>.updateDarkBackgroundColor"]: {
+  "hash": "122b11305d4b039679d7fddb18211f586d7d035ee53e4e720984266c538a6ceb",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateDarkBackgroundColor#0(value)"]: {
+  "hash": "5ca3d35678992ee999a1f432d3a0748e3e6a6d22ac1e331213ed17f63a59f844",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateDarkBackgroundColor#0=>"]: {
+  "hash": "751c06d9b115f2b0703d511099c982425cdfae0d79f1e6789582ae2fb8586dd9",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.getDarkBackgroundImage"]: {
+  "hash": "8a8155ba7d8204fb263b4bfd55b00578640df85660862042ea5940e7c32710ad",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.structure#1=>.updateDarkBackgroundImage"]: {
+  "hash": "122b11305d4b039679d7fddb18211f586d7d035ee53e4e720984266c538a6ceb",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateDarkBackgroundImage#0(value)"]: {
+  "hash": "5ca3d35678992ee999a1f432d3a0748e3e6a6d22ac1e331213ed17f63a59f844",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateDarkBackgroundImage#0=>"]: {
+  "hash": "751c06d9b115f2b0703d511099c982425cdfae0d79f1e6789582ae2fb8586dd9",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateBackgroundColor"]: {
+  "hash": "b645395e0413ff8a2d0d0d493e7b47d5660587fd087ad4212589559f2e64af0a",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateBackgroundColor#0(backgroundColor)"]: {
+  "hash": "225012718a0bde3a521c91ce0c3bf1579b27bf9974e29152edc101189d45c443",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateBackgroundColor#0=>"]: {
+  "hash": "751c06d9b115f2b0703d511099c982425cdfae0d79f1e6789582ae2fb8586dd9",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.getBackgroundColor"]: {
+  "hash": "8a8155ba7d8204fb263b4bfd55b00578640df85660862042ea5940e7c32710ad",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.structure#1=>.getBackgroundColorWithGradient"]: {
+  "hash": "8a8155ba7d8204fb263b4bfd55b00578640df85660862042ea5940e7c32710ad",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.structure#1=>.getBackgroundColorAsync"]: {
+  "hash": "cc33b8e5cdae12c6662a7b53eee511d62f13dc98f279d65f3de4cfccade51a63",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.structure#1=>.updateBackgroundSettings"]: {
+  "hash": "6464496b222c6af27041bf1c46cb494a37e58e1c741f0a1d484700e4b3a60049",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateBackgroundSettings#0(settings)"]: {
+  "hash": "8a10ca961925cd68ccf21bee5029607ada0228f6cf7a12904ee1cea893587098",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateBackgroundSettings#0=>"]: {
+  "hash": "751c06d9b115f2b0703d511099c982425cdfae0d79f1e6789582ae2fb8586dd9",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.getBackgroundSettings"]: {
+  "hash": "28d8b99de4bbaef4c6e4ab5412a029fee2e93a7026e9c27007622680ad5f3ac4",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.structure#1=>.getBackgroundSettings#0=>"]: {
+  "hash": "8a10ca961925cd68ccf21bee5029607ada0228f6cf7a12904ee1cea893587098",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.structure#1=>.updateBorder"]: {
+  "hash": "52bb7bee764ac61e75890432b564e8bcf05a1457553b5fbae6fbd8114f895458",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateBorder#0(border)"]: {
+  "hash": "5802af4b5a84623ccab482b5d1021b72f7b9b58423e958e635e78137cb0274d8",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateBorder#0(isMobile)"]: {
+  "hash": "3b5e8f4439e0cfc6fb875f2bb57f220fe176c5b6735a5abfb204411d411e0d3f",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateBorder#0=>"]: {
+  "hash": "751c06d9b115f2b0703d511099c982425cdfae0d79f1e6789582ae2fb8586dd9",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateBorderWidthShort"]: {
+  "hash": "b0183ee903f3bcdae082a689063fb39ab34c802999f5f8ef5f941b0bc507809f",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateBorderWidthShort#0(width)"]: {
+  "hash": "fd1a55ee2217c1ac278ab485236d6c199517334ee91e965cf2f6b8575701cd1c",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateBorderWidthShort#0(isMobile)"]: {
+  "hash": "3b5e8f4439e0cfc6fb875f2bb57f220fe176c5b6735a5abfb204411d411e0d3f",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateBorderWidthShort#0=>"]: {
+  "hash": "751c06d9b115f2b0703d511099c982425cdfae0d79f1e6789582ae2fb8586dd9",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateBorderWidthDetailed"]: {
+  "hash": "b0c7c67ae09dba6bd04b000db224f77c65bd868db66c7c3dacb6e5ad18d0da67",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateBorderWidthDetailed#0(width)"]: {
+  "hash": "ced293f412830ed04346e8fec06fda1dbd120dd38a0eb4023021f6dee29ad240",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateBorderWidthDetailed#0(isMobile)"]: {
+  "hash": "3b5e8f4439e0cfc6fb875f2bb57f220fe176c5b6735a5abfb204411d411e0d3f",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateBorderWidthDetailed#0=>"]: {
+  "hash": "751c06d9b115f2b0703d511099c982425cdfae0d79f1e6789582ae2fb8586dd9",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateBorderColorShort"]: {
+  "hash": "52be1eb6da93c4f4e869e62b80416f1ff38b3b5b8f4803551ab55328260dc71b",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateBorderColorShort#0(color)"]: {
+  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateBorderColorShort#0(isMobile)"]: {
+  "hash": "3b5e8f4439e0cfc6fb875f2bb57f220fe176c5b6735a5abfb204411d411e0d3f",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateBorderColorShort#0=>"]: {
+  "hash": "751c06d9b115f2b0703d511099c982425cdfae0d79f1e6789582ae2fb8586dd9",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateBorderColorDetailed"]: {
+  "hash": "f01461915cb55cc37243973d84feb7a6847673aeeca0fcde7090bcd13026180f",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateBorderColorDetailed#0(color)"]: {
+  "hash": "20560090ba8a34a00e2c80ad2f82195f661064b5cd736db1b6948fb757bdc0c3",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateBorderColorDetailed#0(isMobile)"]: {
+  "hash": "3b5e8f4439e0cfc6fb875f2bb57f220fe176c5b6735a5abfb204411d411e0d3f",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateBorderColorDetailed#0=>"]: {
+  "hash": "751c06d9b115f2b0703d511099c982425cdfae0d79f1e6789582ae2fb8586dd9",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateBorderStyle"]: {
+  "hash": "3551a4ff17f273d1c7e32d268cb7495236f0780587daece25f206bd9a9929bf1",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateBorderStyle#0(style)"]: {
+  "hash": "09f36ed8ec66d9c424008b32b4d6c1c6ac8ed7034b11abd363aa0a1ee60afd30",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateBorderStyle#0(isMobile)"]: {
+  "hash": "3b5e8f4439e0cfc6fb875f2bb57f220fe176c5b6735a5abfb204411d411e0d3f",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateBorderStyle#0=>"]: {
+  "hash": "751c06d9b115f2b0703d511099c982425cdfae0d79f1e6789582ae2fb8586dd9",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateBorderModeShort"]: {
+  "hash": "7783a650cedf6c16045e1766e98b6d566d9100698e0e6616947371d47e588b11",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateBorderModeShort#0(isMobile)"]: {
+  "hash": "3b5e8f4439e0cfc6fb875f2bb57f220fe176c5b6735a5abfb204411d411e0d3f",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateBorderModeShort#0=>"]: {
+  "hash": "751c06d9b115f2b0703d511099c982425cdfae0d79f1e6789582ae2fb8586dd9",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.getBorder"]: {
+  "hash": "c417d616bf008166765aff247818a5c93f349d172c04facb63dc985fe4a03181",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.structure#1=>.getBorder#0(isMobile)"]: {
+  "hash": "3b5e8f4439e0cfc6fb875f2bb57f220fe176c5b6735a5abfb204411d411e0d3f",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.structure#1=>.updateBorderRadius"]: {
+  "hash": "d082fe0d08288d470d6ccb932d569841b82c50734868392c1ef815254da5fb8c",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateBorderRadius#0(value)"]: {
+  "hash": "09413bbda1f29d06f53f7506408cd7388a354e5b46a97e4fc1aade421b702699",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateBorderRadius#0=>"]: {
+  "hash": "751c06d9b115f2b0703d511099c982425cdfae0d79f1e6789582ae2fb8586dd9",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.getBorderRadius"]: {
+  "hash": "e0651f0456e25a00288f420cf8bb317a2a05e55df6d4f3a2d4b2106c7a37bd58",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.structure#1=>.getBorderRadiusAsync"]: {
+  "hash": "26d362fc202671f08d7b9ac17827660f7bfc444a3157b5029a6ee4e3535aa296",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.structure#1=>.updateWidthColumn"]: {
+  "hash": "941161a720986498a1447fd64f3295e1c36b6791a3ca303fc5756cc333d709f1",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateWidthColumn#0(index)"]: {
+  "hash": "fd1a55ee2217c1ac278ab485236d6c199517334ee91e965cf2f6b8575701cd1c",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateWidthColumn#0(widthColumn)"]: {
+  "hash": "fd1a55ee2217c1ac278ab485236d6c199517334ee91e965cf2f6b8575701cd1c",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateWidthColumn#0=>"]: {
+  "hash": "751c06d9b115f2b0703d511099c982425cdfae0d79f1e6789582ae2fb8586dd9",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateWidthColumns"]: {
+  "hash": "faa64ecd0a94ef338c5d60b78716b68bd00c92896c78ae90ae4a33ef754f5e85",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateWidthColumns#0(widthColumns)"]: {
+  "hash": "32b4b67186cc2fe69fc2bf85533bec9a9f6efba7c7fc7621e76d21bcdcefaad0",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateWidthColumns#0(normalizeConstraints)"]: {
+  "hash": "3b5e8f4439e0cfc6fb875f2bb57f220fe176c5b6735a5abfb204411d411e0d3f",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateWidthColumns#0=>"]: {
+  "hash": "751c06d9b115f2b0703d511099c982425cdfae0d79f1e6789582ae2fb8586dd9",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.getWidthColumns"]: {
+  "hash": "2810aea4238e445f084222845acd22b89581e2a4e151b0fc479fec2d593a03cc",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.structure#1=>.updateColumnsGapDesktop"]: {
+  "hash": "cb644bf22b1b80e97103ae42df38007d23a04a9c754d8b5ba2f6b85cde840831",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateColumnsGapDesktop#0(columnsGap)"]: {
+  "hash": "fd1a55ee2217c1ac278ab485236d6c199517334ee91e965cf2f6b8575701cd1c",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateColumnsGapDesktop#0=>"]: {
+  "hash": "751c06d9b115f2b0703d511099c982425cdfae0d79f1e6789582ae2fb8586dd9",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.getColumnsGapDesktop"]: {
+  "hash": "db2ba91749ad75575c5239d792934964c38806458d88f584d8005944cd2cb07e",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.structure#1=>.updateColumnsGapMobile"]: {
+  "hash": "cb644bf22b1b80e97103ae42df38007d23a04a9c754d8b5ba2f6b85cde840831",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateColumnsGapMobile#0(columnsGap)"]: {
+  "hash": "fd1a55ee2217c1ac278ab485236d6c199517334ee91e965cf2f6b8575701cd1c",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateColumnsGapMobile#0=>"]: {
+  "hash": "751c06d9b115f2b0703d511099c982425cdfae0d79f1e6789582ae2fb8586dd9",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.getColumnsGapMobile"]: {
+  "hash": "aba6f26e3a3c6da73537c38a482c2b813985145abdf9e44778a35ab1b8c3481b",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.structure#1=>.getColumnsGapMobile#0(responsiveEnabled)"]: {
+  "hash": "3b5e8f4439e0cfc6fb875f2bb57f220fe176c5b6735a5abfb204411d411e0d3f",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.structure#1=>.updatePaddingDesktop"]: {
+  "hash": "ce22cae6d07b4101f13a96784b2ee0ed72b0433e8962af74eda716cc4ace176a",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updatePaddingDesktop#0(padding)"]: {
+  "hash": "46ea3c3df7b49e832a49ea3dd5d5fe8c039a53909f3ce56b68c0a9e4b9d5e9a2",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updatePaddingDesktop#0=>"]: {
+  "hash": "751c06d9b115f2b0703d511099c982425cdfae0d79f1e6789582ae2fb8586dd9",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.getPaddingDesktop"]: {
+  "hash": "c2190d4270b697f7cc6b9e47aec1c7c9c24be6d4d7e5671c166e0fb19e1f6745",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.structure#1=>.updatePaddingMobile"]: {
+  "hash": "ce22cae6d07b4101f13a96784b2ee0ed72b0433e8962af74eda716cc4ace176a",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updatePaddingMobile#0(padding)"]: {
+  "hash": "46ea3c3df7b49e832a49ea3dd5d5fe8c039a53909f3ce56b68c0a9e4b9d5e9a2",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updatePaddingMobile#0=>"]: {
+  "hash": "751c06d9b115f2b0703d511099c982425cdfae0d79f1e6789582ae2fb8586dd9",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.getPaddingMobile"]: {
+  "hash": "c2190d4270b697f7cc6b9e47aec1c7c9c24be6d4d7e5671c166e0fb19e1f6745",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.structure#1=>.updateMarginsDesktop"]: {
+  "hash": "ceed4b0ea159d502988e3780b6d771c50840a0b7658311718becbd64b0dd2fd9",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateMarginsDesktop#0(margins)"]: {
+  "hash": "6ad1acd548f1b0b3fb6a303c149063fe68cb15adca099f4aecfe31f48e753039",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateMarginsDesktop#0(margins).top?"]: {
+  "hash": "492fd291aa45171daf750c5eecef1602949a8cf4f92808d1efc72774e243d8dd",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateMarginsDesktop#0(margins).right?"]: {
+  "hash": "492fd291aa45171daf750c5eecef1602949a8cf4f92808d1efc72774e243d8dd",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateMarginsDesktop#0(margins).bottom?"]: {
+  "hash": "492fd291aa45171daf750c5eecef1602949a8cf4f92808d1efc72774e243d8dd",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateMarginsDesktop#0(margins).left?"]: {
+  "hash": "492fd291aa45171daf750c5eecef1602949a8cf4f92808d1efc72774e243d8dd",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateMarginsDesktop#0=>"]: {
+  "hash": "751c06d9b115f2b0703d511099c982425cdfae0d79f1e6789582ae2fb8586dd9",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.getMarginsDesktop"]: {
+  "hash": "b0cee7692fea8f87f69f1446f527b046498d751e4be3a69bb8fa8ab613ecd8ac",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.structure#1=>.updateMarginsMobile"]: {
+  "hash": "ceed4b0ea159d502988e3780b6d771c50840a0b7658311718becbd64b0dd2fd9",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateMarginsMobile#0(margins)"]: {
+  "hash": "8add65648fd84452826ed242000cc1c168f5473e9e8c894daacbf7a0afb8817d",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateMarginsMobile#0=>"]: {
+  "hash": "751c06d9b115f2b0703d511099c982425cdfae0d79f1e6789582ae2fb8586dd9",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.getMarginsMobile"]: {
+  "hash": "b0cee7692fea8f87f69f1446f527b046498d751e4be3a69bb8fa8ab613ecd8ac",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.structure#1=>.updateIncludeInOutput"]: {
+  "hash": "3bd8fa4477d938e290b0cfec017d1b0503cbaef601f2c53561ccdd7d37d91227",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateIncludeInOutput#0(includeInOutput)"]: {
+  "hash": "0f92fe20c1a42189048896c446839c7de3ffaa47ba6e157c2a77967347f7fddd",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateIncludeInOutput#0=>"]: {
+  "hash": "751c06d9b115f2b0703d511099c982425cdfae0d79f1e6789582ae2fb8586dd9",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.getIncludeInOutput"]: {
+  "hash": "dfee3c9bfaebe57ba51e3690320df8350283b06d3e72d63ecc505f8699c99dbe",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.structure#1=>.updateHideElement"]: {
+  "hash": "004b9e10f93fc9af94599ae0d0a24787bc287342457ed0c2f448712cf7f7ac9a",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateHideElement#0(hiddenValue)"]: {
+  "hash": "0a7352f8825f3557d45c5e5bb18d30b91da686213f4106f10fe00dd2d937c71e",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateHideElement#0=>"]: {
+  "hash": "751c06d9b115f2b0703d511099c982425cdfae0d79f1e6789582ae2fb8586dd9",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.getHideElement"]: {
+  "hash": "404ca1cc2265dd418e52f2a14aee92cde2d8550e51088141bdff4a1bb529f72b",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.structure#1=>.updateResponsiveMobile"]: {
+  "hash": "e81fad923be0e301c16531344ba85ab82a79ef6dfc4076b5e8cdce4bb68cbcc6",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateResponsiveMobile#0(enabled)"]: {
   "hash": "a5b031ab62bc416d720c0410d802ea46b910c4fbe85c50a946ccc658b74e677e",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateResponsiveMobile#0(preserveInversion)"]: {
+  "hash": "3b5e8f4439e0cfc6fb875f2bb57f220fe176c5b6735a5abfb204411d411e0d3f",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateResponsiveMobile#0=>"]: {
+  "hash": "751c06d9b115f2b0703d511099c982425cdfae0d79f1e6789582ae2fb8586dd9",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.getResponsiveMobile"]: {
+  "hash": "6bd3df6f2216b5a140f7da59ba6cd56dd3537b002128ca108e9e2d71f711a18a",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.structure#1=>.getContainersPerRow"]: {
+  "hash": "070ad661387220667f7d0438e772c8000264042d2a2da739702607df3ac59b77",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.structure#1=>.updateContainersPerRow"]: {
+  "hash": "7f5dc0c9dea5466469f0dc2ede390540f647e044fc2b2dc2a3df8d31580c34d8",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateContainersPerRow#0(perRow)"]: {
+  "hash": "854ea1507ca8933661e2a6dea151f851d9619575462a27ec3c6acbada697e50c",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateContainersPerRow#0(perRow)|0"]: {
+  "hash": "cc11310c456c3690d5a74c23aa31cc25b4e74cdae146c71e54ad9dbc1d109fde",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateContainersPerRow#0(perRow)|1"]: {
+  "hash": "a4aab3f1f08004e907d2357fafe74cab56359bcb32e23f52e7eb1d3a9c0a2ad3",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateContainersPerRow#0(perRow)|2"]: {
+  "hash": "2bf175f9655e7bb7357b9f0a7c6051465a5ae701104ffe741b98e852c0e4d460",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateContainersPerRow#0(perRow)|3"]: {
+  "hash": "391552c099c101b131feaf24c5795a6a15bc8ec82015424e0d2b4274a369a0bf",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateContainersPerRow#0=>"]: {
+  "hash": "751c06d9b115f2b0703d511099c982425cdfae0d79f1e6789582ae2fb8586dd9",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateResponsiveMobileContainersInversion"]: {
+  "hash": "e6c475d00fa7ea983c142af2aff237cb9d9c947ad50f25bc8118152cec72038d",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateResponsiveMobileContainersInversion#0(enabled)"]: {
+  "hash": "a5b031ab62bc416d720c0410d802ea46b910c4fbe85c50a946ccc658b74e677e",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.updateResponsiveMobileContainersInversion#0=>"]: {
+  "hash": "751c06d9b115f2b0703d511099c982425cdfae0d79f1e6789582ae2fb8586dd9",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.structure#1=>.getResponsiveMobileContainersInversion"]: {
+  "hash": "6bd3df6f2216b5a140f7da59ba6cd56dd3537b002128ca108e9e2d71f711a18a",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.container"]: {
+  "hash": "0e3a153cd2e5da1cecefc88cfbbf9f4a852e634997d4cd5521be8367a571b715",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.container#0=>"]: {
+  "hash": "0dfeac421f03633c007d7beac3bf03455f60a46c59c76a82e25491f06dec2feb",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.container#0=>.insert"]: {
+  "hash": "3a1deedd12ca3fa80d8bd1fd0cf0bb6057f128da318345108c17389e937e7467",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.container#0=>.insert#0(options)"]: {
+  "hash": "e42cf50642499791c76ddd9785a35cacf7d8ef5ee7d16407dcfb1973908da60b",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.container#0=>.insert#0(patchOptions)"]: {
+  "hash": "cde1c32dc7e44016d04507af8dad77bb92a04da179ad60ffbd540bfa460303da",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.container#0=>.insert#0=>"]: {
+  "hash": "751c06d9b115f2b0703d511099c982425cdfae0d79f1e6789582ae2fb8586dd9",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.container#0=>.isInsertAllowed"]: {
+  "hash": "20074f7f77f8b4892ffde64326aa9cdcb29908b0bc2f4a21921ab648215c3af2",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.container#0=>.isInsertAllowed#0(options)"]: {
+  "hash": "3df377ce55a6fb364b24e36aca707e5179243ce27f62c578ddf4504faba31c31",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.container#1(id)"]: {
+  "hash": "e9e5c1c9e4f6277339d1bcde0733a59bd42f8731f449da6dc13010a916930d48",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.container#1=>"]: {
+  "hash": "e9d1f05b017bf82e4366ccd0c39cceea7f608ff2b43288c713f43aa73d5bc6db",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.container#1=>.getDarkBackgroundColor"]: {
+  "hash": "8a8155ba7d8204fb263b4bfd55b00578640df85660862042ea5940e7c32710ad",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.container#1=>.updateDarkBackgroundColor"]: {
+  "hash": "122b11305d4b039679d7fddb18211f586d7d035ee53e4e720984266c538a6ceb",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.container#1=>.updateDarkBackgroundColor#0(value)"]: {
+  "hash": "5ca3d35678992ee999a1f432d3a0748e3e6a6d22ac1e331213ed17f63a59f844",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.container#1=>.updateDarkBackgroundColor#0=>"]: {
+  "hash": "751c06d9b115f2b0703d511099c982425cdfae0d79f1e6789582ae2fb8586dd9",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.container#1=>.getDarkBackgroundImage"]: {
+  "hash": "8a8155ba7d8204fb263b4bfd55b00578640df85660862042ea5940e7c32710ad",
+  "group": "apiRead"
+},
+["IBlockOperationsApi.container#1=>.updateDarkBackgroundImage"]: {
+  "hash": "122b11305d4b039679d7fddb18211f586d7d035ee53e4e720984266c538a6ceb",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.container#1=>.updateDarkBackgroundImage#0(value)"]: {
+  "hash": "5ca3d35678992ee999a1f432d3a0748e3e6a6d22ac1e331213ed17f63a59f844",
+  "group": "apiMutation"
+},
+["IBlockOperationsApi.container#1=>.updateDarkBackgroundImage#0=>"]: {
+  "hash": "751c06d9b115f2b0703d511099c982425cdfae0d79f1e6789582ae2fb8586dd9",
   "group": "apiMutation"
 }
 };

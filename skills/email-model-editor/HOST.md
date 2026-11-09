@@ -6,7 +6,7 @@ their cache, so resolve both paths from this installed file, never from the curr
 directory, and keep the layout: the runners locate the SDK through it.
 
 This plugin ships no `bundle.json` or `mcp-tools.json`. The bundled validator's editor revision
-is `editorRevision` in `<bundle-root>/packages/convo-email-agent/editor-validator/manifest.json`.
+is the `editorRevision` the runners report under `verification`.
 When a file these skills mention is absent from the plugin, do not search the disk for it;
 continue with `PROVIDER.md`. Stripo has no saved-module library, sending interfaces,
 name/project/folder metadata writes, template creation or HTML/CSS export manifest. A shared

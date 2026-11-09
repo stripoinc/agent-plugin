@@ -1,7 +1,7 @@
 import value0 from './catalog-1.js';
-import value1 from './catalog-20.js';
+import value1 from './catalog-21.js';
 export default {
-["editorRevision"]: "1e786dd4e00a6614b2ace4d88a1df5c68a682d9e",
+["editorRevision"]: "46ab3a6821e8617a8c70f9778f2bb3e1a8b7d8e4",
 ["roots"]: [
   "metadata",
   "resources",
@@ -999,7 +999,8 @@ export default {
     "hideElement": "no",
     "textStyle": {
       "bold": false,
-      "italic": false
+      "italic": false,
+      "underline": false
     },
     "colors": {
       "mode": "shared",

@@ -6,9 +6,33 @@ import {
   parseHtml
 } from "./parse-html-7b561a99741a.js";
 import {
-  validateEmailDocument
-} from "./editor-validator-e41a98b04d42.js";
+  contextIssues,
+  getUnavailableMergeServiceSideEffects
+} from "./context-92ea7204ec76.js";
 import {
+  locationRules
+} from "./rules-c9866c302580.js";
+import {
+  canonicalFontValue
+} from "./fonts-82d1d39f0f33.js";
+import {
+  blockRoot,
+  checkValue,
+  contractDefaults,
+  documentRoot,
+  getJsonSchema,
+  nodeCapability,
+  resolveSchema,
+  schemaForValue
+} from "./contract-79faab52de2a.js";
+import {
+  RULE_TABLE
+} from "./rule-table-generated-439fbe3342c9.js";
+import {
+  collectSocialDocumentIssues
+} from "./social-f4a8e0da8c68.js";
+import {
+  LINE_HEIGHT_HINT,
   cloneJson,
   deepFreeze,
   describeNodeKind,
@@ -18,149 +42,156 @@ import {
   stableJson
 } from "./errors-3ee69a7e1eb0.js";
 
-// convo-email-agent/src/sdk/contract.ts
-import schemaData from "./contract-data/schema.js";
-import catalogData from "./contract-data/catalog.js";
-
-// convo-email-agent/vendor/editor-validator/manifest.json with { type: 'json' }
-var manifest_default = {
-  editorRevision: "1e786dd4e00a6614b2ace4d88a1df5c68a682d9e",
-  editorDirty: false,
-  esbuildVersion: "0.28.2",
-  zodVersion: "4.6.6",
-  format: "esm-modules-v1",
-  files: {
-    "NOTICE.txt": "71b2398cec127d59452cd0fe0eb870232acf79667615ffb59db61bfe0c98551d",
-    "index.mjs": "3f9eaa752cdc31c05042301f9fc3774ea0e3685dc7e4f25812d3a4d135b9896f",
-    "modules/AttributeConfigMigration-0b7b83230d08.mjs": "3bf49470ba5d322850d3a40909f63da2d2d5d1179fa61e28f116b5808eff2596",
-    "modules/ColorUtils-a33f32974f73.mjs": "3f09e142f3ce22b180dbcd269e71d820e826d85fbf7821822087c4be17fb49a4",
-    "modules/SocialNetworkType-57875c573e3d.mjs": "7f956a158766d9770a5f016f5f59a717b769118315c9f4ec60e1723f803552b8",
-    "modules/_DataView-3f8d51103b9f.mjs": "18e96eb6062f53576d78988abf5c75d953fe096072a59180a191ac7f7e07f052",
-    "modules/_Hash-6a5a8be86833.mjs": "ef27c50579ded4fee93088ce166fafca29c832f3c5dec498e58a68777811f233",
-    "modules/_baseSlice-aae12ccd937b.mjs": "7778b0e3119fe9faccd40d3811aad266e5d509807e139dc5ad1b0dd1fc2c322e",
-    "modules/api-7ec6d993fe84.mjs": "8e4370746e344d8744b88238ce84c3c9893f1eddf8febc7ee82c8d5be0ddf389",
-    "modules/asset-path-config-bce86ed0e1f1.mjs": "495868d59d34ff2dc1da8c1a20c6634a0501b435147e76021a76dc59b90637cf",
-    "modules/at-rule-2b1e381bfcd5.mjs": "1fdd1ce501cd307508eabd2be4d9cb479207e61bbb582138360e81a9074481ac",
-    "modules/blocks-constants-ce8171b56e4e.mjs": "251feb1f16715815f076c853c0871a0eda8cb6e991a3cf58bff15c5369277964",
-    "modules/builders-7d87c6093906.mjs": "8959cbda17e52f48d316ac536a2d0519876f952216f1234bb95a6863abf6e6ab",
-    "modules/checks-bd1e5de0ca09.mjs": "36944978086097c908a398a389c932808eeb1007c5d473e766685c5215678876",
-    "modules/checks-f4a190521e0d.mjs": "17edf597e28617fee334bb12ca49a57445e0a9a47d7810b655adff7b46673e53",
-    "modules/coerce-d38c736de753.mjs": "6d62aea44561195753d2e2bcc052dffa833d04551f6ba52ab71b13c9ba7413d0",
-    "modules/comment-c2c2abaee17f.mjs": "6f70b015d5c20e9b2296e0865d77e6016e14d89f9d975e176663af733e1058e5",
-    "modules/compile-fe1f1936d44e.mjs": "5a8e72187937a846c539e58963907f6c1dc9d906c0f8a0666a6a1871a3b1f426",
-    "modules/core-d6ef11a90708.mjs": "cd8c1ac928a16cdcf7e309ab4cffea07d4c9b59f04f146a7387242c7410e8100",
-    "modules/decode-codepoint-de4ce2c8771f.mjs": "7012d3eddca829d178f308b8b39b46f9950082bf6dc0d45d75faf32c0cd06a74",
-    "modules/decode-data-html-482e5b7a6675.mjs": "0fbace444376629e18d73838a56c88fe8dd7697f6dc1082f2cbd6e903511c03d",
-    "modules/doc-85ae2b2bbd32.mjs": "efdc685335d7ce52da0e478b9963d4e9f9d07eace0d11c280247be1c7154c03f",
-    "modules/document-13235feeff49.mjs": "d178b7957dc6a4e255b7be802eeb612d0667fb43c51b3a283c447cb778bb647e",
-    "modules/errors-095a9cd7e5fd.mjs": "9ef45253562474efc319fab1fcdb93384da29aaba363030a0dd23132403917d9",
-    "modules/from-json-schema-1979beab5102.mjs": "6815bd71e0178c0f6afecc6774b7c907d6933169651ccdfd837018884377b1c3",
-    "modules/fs-064e509bf2cb.mjs": "1c095b74fb7d4cbd6338219e018f30934e6e6e670c84870ddc9d0c8c6a970c14",
-    "modules/html-entity-policy-11ef1d15ef89.mjs": "9b001be6f89b1d50c834b4b8ae012e42fdbaaacefd58a9f7d69bcbfac68ffe7c",
-    "modules/index-578459128e2e.mjs": "070a414f5b69aa548a7f2f399c9f43af4cd5f7176d39e725b9fefa0ff8ef0172",
-    "modules/index-829c7f2491ea.mjs": "75e3b2581d261049bfe282a9230df29b0881c3a02d2bbfd61ef4f42a2bf86b92",
-    "modules/index-c0aa2829846f.mjs": "43b89dfb7319143c8d1117e297dfc2e310aa591b84b35d6a801ebdfd0f346594",
-    "modules/json-schema-processors-0c244c7c3151.mjs": "8d747db808a2578c4078098596fd40f3a544a64da6778baa74d0cb43d203e019",
-    "modules/map-generator-a34cf548f9d1.mjs": "ccc7391237434b5b9fddc39a29215b0c12bc7842b336bad53440ed3c9c304863",
-    "modules/master-css-6656cf175550.mjs": "6d3848826087701367e8b761853199a2a0d5ca9ba2df974f4f196b4c9e6236de",
-    "modules/master-css-variables-a84902889746.mjs": "06e2d56bc5080f3a199e189e31c9a900313b60124ef10d7254d5cbdbfe167e88",
-    "modules/master-css-variables-defaults-fd88a551a3d8.mjs": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-    "modules/memoizer-c00f0bc54290.mjs": "0228f3d867868c9f59fd0b0e44cf5bae0fdc12b161364167503239fbc3c87cb9",
-    "modules/node-909c4f08098c.mjs": "cd17184bf256801f40baec5ce88cd23f6efe4de2c16706ed2ff6f584415a26fe",
-    "modules/parse-545b503fc4ed.mjs": "0d9109245704e662d12a16a49519324075c090bf342e51ef3ac964ccbcbc44a1",
-    "modules/parse-8126121d6d62.mjs": "0a314205ead5edd3af8d50579c57c417a6c32228cc1c9cb88e63b8cc0a0a90e1",
-    "modules/regexes-d1711c96e64b.mjs": "8de55ba4ce703a656867dffacb4619627cebceeb48d7029fa76b2f15b038d5d3",
-    "modules/registries-3ceb92ae3dab.mjs": "8694e6c3c6f1fafa26a66dc6b42debb2bddd2b99ce022c7d502fbced38c48560",
-    "modules/serviceSelectorPrefix-a2f28f143508.mjs": "afa926598ce3a3dcd7ff080133ffcd5dbfc6ba4e8d99d8dd9eead9a1e039015b",
-    "modules/shared-4f53cda18c2b.mjs": "0638f4510b6c8992fea95bfddbbccf9f3c9b2931a09bc893ef2511320ff0fc01",
-    "modules/social-networks-data-4f7cb53fbb33.mjs": "5b2e6b8506d4696b107e2e7b88754e56246f1f038dd60feaadd1b631aba8f662",
-    "modules/stringifier-5d6259805667.mjs": "c42b20b303fd69c7b564c40f7d5df5e124ef82f8acdb74ecf3e8b334f05d2438",
-    "modules/terminal-highlight-0f20b1c39b48.mjs": "818191fc1cd9ba431648c0f12437d89cc4ff930c23a074b4371707c76964aa07",
-    "modules/time-zones-data-498efe19d3a8.mjs": "18068732c90e99364e90d7c1e52e40c870946cbb7bf213835d748d1a37bbee95",
-    "modules/tinycolor-2bf5fc1acbb7.mjs": "5c3a91acf39fefa5ffc62655e2b355846babf9f9efaffdf187de98de77770d57",
-    "modules/to-json-schema-b5fe38b46dc6.mjs": "14b4cebe8cea73d53a2ebd9b7c3e36f558abb5847089da8bda983db7d1d2c709",
-    "modules/tokenize-acf2d687b44d.mjs": "1bed840cdd95e62ede4e0a5a5b5c27cf1a4679c79c9c5d78619f19e4beffb8a3",
-    "modules/ue-proto-87c1854705b4.mjs": "4fe4fcc79f40e20a3f1a01dfff9db2a161901e047313b50e5b3e3e35d550a5ef",
-    "modules/url-27db039aa4f6.mjs": "ba6669a72c2b96719ac7f92e517c5119e796d0366ef68158c951a051e00bda7f"
-  },
-  sizeBytes: 1342429,
-  bundleSha256: "0ed4a25c5741dac3fc72b06adc8b08277717dc2026c5d2dcc81e3f6974ec5188"
+// convo-email-agent/src/sdk/validator/normalize.ts
+var ZERO_SIDES = { width: 0, color: "transparent" };
+function materializeText(block) {
+  if (!isObject(block) || block.type !== "text") return block;
+  const defaults = contractDefaults("text");
+  if (block.settings === void 0) return { ...block, settings: defaults };
+  if (!isObject(block.settings)) return block;
+  const settings = { ...block.settings };
+  for (const key of ["hideElement", "rightToLeftTextDirection", "padding", "includeInOutput", "backgroundColor"]) {
+    if (settings[key] === void 0) settings[key] = defaults[key];
+  }
+  return { ...block, settings };
+}
+function materializeStructure(structure) {
+  if (!isObject(structure)) return structure;
+  const columns = Array.isArray(structure.columns) ? structure.columns.map((column) => isObject(column) && Array.isArray(column.containers) ? { ...column, containers: column.containers.map((container) => isObject(container) && Array.isArray(container.blocks) ? { ...container, blocks: container.blocks.map(materializeText) } : container) } : column) : structure.columns;
+  if (!isObject(structure.settings)) return { ...structure, columns };
+  const settings = { ...structure.settings };
+  delete settings.widthColumns;
+  if (settings.backgroundColor === void 0) settings.backgroundColor = "transparent";
+  if (settings.border === void 0) {
+    settings.border = { top: { ...ZERO_SIDES }, right: { ...ZERO_SIDES }, bottom: { ...ZERO_SIDES }, left: { ...ZERO_SIDES }, style: "solid" };
+  }
+  if (settings.borderRadius === void 0) settings.borderRadius = { topLeft: 0, topRight: 0, bottomRight: 0, bottomLeft: 0 };
+  return { ...structure, columns, settings };
+}
+function materialize(target, current) {
+  if (!isObject(target)) return target;
+  const document = Array.isArray(target.stripes) ? { ...target, stripes: target.stripes.map((stripe) => isObject(stripe) && Array.isArray(stripe.structures) ? { ...stripe, structures: stripe.structures.map(materializeStructure) } : stripe) } : { ...target };
+  if (!current) return document;
+  const before = isObject(current.metadata) ? current.metadata : void 0;
+  if (document.metadata === void 0) {
+    if (before) document.metadata = cloneJson(before);
+  } else if (isObject(document.metadata)) {
+    const metadata = { ...document.metadata };
+    if (metadata.title === void 0 && before?.title !== void 0) metadata.title = before.title;
+    if (metadata.preheader === void 0 && isObject(before?.preheader)) metadata.preheader = { ...before.preheader };
+    document.metadata = metadata;
+  }
+  return document;
+}
+var TRANSFORMS = {
+  backgroundRepeat: (value) => typeof value === "boolean" ? value : ["repeat", "true"].includes(String(value).trim().toLowerCase()),
+  backgroundSize: (value) => (typeof value === "string" ? value.trim() : "") || "auto",
+  canonicalFontResources: (value) => isObject(value) && Array.isArray(value.fonts) && value.fonts.length ? { fonts: value.fonts.map((font) => ({ ...font, fontFamily: canonicalFontValue(String(font.fontFamily).trim()) })) } : void 0,
+  dropUndefinedResources: (value) => {
+    if (!isObject(value) || value.resources !== void 0) return value;
+    const { resources: _omitted, ...rest } = value;
+    return rest;
+  }
 };
-
-// convo-email-agent/src/sdk/contract.ts
-import supportData from "./contract-data/support.js";
-var blockKinds = {
-  text: true,
-  image: true,
-  video: true,
-  timer: true,
-  social: true,
-  html: true,
-  button: true,
-  spacer: true,
-  menu: true,
-  unknown: true
-};
-var schema = deepFreeze(schemaData);
-var nodes = deepFreeze(catalogData.nodes);
-function getContract() {
-  return Object.freeze({
-    editorRevision: manifest_default.editorRevision,
-    editorDirty: manifest_default.editorDirty,
-    profile: "mergeService",
-    validation: "contract",
-    validatorSha256: manifest_default.bundleSha256
-  });
+var STEPS = Object.entries(RULE_TABLE.transforms).map(([location, kinds]) => {
+  if (location.includes("|")) throw new Error("Transform inside a union branch is not ported: ".concat(location));
+  for (const kind of kinds) if (!TRANSFORMS[kind]) throw new Error("Unported validator transform: ".concat(kind));
+  return { steps: location.slice(1).match(/\.[^.[]+|\[\]/g) ?? [], kinds };
+}).sort((left, right) => right.steps.length - left.steps.length);
+function mapAt(value, steps, apply) {
+  if (!steps.length) return apply(value);
+  const [step, ...rest] = steps;
+  if (step === "[]") return Array.isArray(value) ? value.map((item) => mapAt(item, rest, apply)) : value;
+  const key = step.slice(1);
+  return isObject(value) && value[key] !== void 0 ? { ...value, [key]: mapAt(value[key], rest, apply) } : value;
 }
-function getJsonSchema() {
-  return cloneJson(schema);
-}
-function getCapabilities() {
-  const groups = supportData.groups;
-  return deepFreeze({
-    blocks: [...catalogData.blocks],
-    nodes: cloneJson(nodes),
-    fields: Object.fromEntries(Object.entries(supportData.fields).map(([path, entry]) => [path, cloneJson(groups[entry.group])]))
-  });
-}
-function nodeCapability(kind) {
-  const definition = kind in blockKinds ? "".concat(kind, "Block") : kind;
-  return nodes.find((node) => node.schemaDefinition === definition);
-}
-function resolveSchema(node) {
-  if (!node.$ref) return node;
-  const resolved = node.$ref.slice(2).split("/").reduce((value, key) => isObject(value) ? value[key] : void 0, schema);
-  if (!isObject(resolved)) throw new Error("Unresolved contract reference: ".concat(node.$ref));
-  return { ...resolveSchema(resolved), ...Object.fromEntries(Object.entries(node).filter(([key]) => key !== "$ref")) };
-}
-function nodeSchema(kind) {
-  const definition = kind in blockKinds ? "".concat(kind, "Block") : kind;
-  const result = schema.definitions?.[definition];
-  if (!result) throw new Error("Unsupported SDK node kind: ".concat(kind));
-  return resolveSchema(result);
-}
-function contractDefaults(kind) {
-  const name = "DEFAULT_".concat(kind.toUpperCase()).concat(kind === "container" ? "" : "_BLOCK", "_SETTINGS");
-  const defaults = catalogData.defaults[name];
-  return isObject(defaults) ? cloneJson(defaults) : {};
-}
-function schemaForValue(node, value) {
-  const resolved = resolveSchema(node);
-  const branches = resolved.oneOf ?? resolved.anyOf;
-  if (!branches) return resolved;
-  const candidates = branches.map(resolveSchema).filter((branch) => {
-    if (!isObject(value)) return branch.type === typeof value || value === null && branch.type === "null";
-    return Object.entries(branch.properties ?? {}).every(([key, child]) => {
-      const property = resolveSchema(child);
-      return !Object.hasOwn(value, key) || property.const === void 0 && !property.enum || (property.const !== void 0 ? property.const === value[key] : property.enum?.includes(value[key]));
-    });
-  });
-  if (candidates.length === 1) return schemaForValue(candidates[0], value);
-  return { ...resolved, properties: Object.assign({}, ...candidates.map((branch) => branch.properties ?? {})) };
+function transformDocument(document) {
+  return STEPS.reduce((value, { steps, kinds }) => kinds.reduce((current, kind) => mapAt(current, steps, TRANSFORMS[kind]), value), document);
 }
 
-// convo-email-agent/src/sdk/preparation.ts
-import { validateDocumentSnapshot, validateDocumentState, getUnavailableMergeServiceSideEffects } from "./editor-validator/index.mjs";
+// convo-email-agent/src/sdk/validator/index.ts
+function check(root, value) {
+  return checkValue(root.node, value, [], root.location, locationRules);
+}
+function validateDocumentSnapshot(document) {
+  const materialized = materialize(document);
+  const issues = check(documentRoot(), materialized);
+  return issues.length ? { success: false, input: "current", issues } : { success: true, issues: [], documentState: transformDocument(materialized) };
+}
+function validateDocumentState(target, current) {
+  let before = { stripes: [] };
+  if (current !== void 0) {
+    const parsed = validateDocumentSnapshot(current);
+    if (!parsed.success) return parsed;
+    before = parsed.documentState;
+  }
+  const materialized = materialize(target, before);
+  const issues = check(documentRoot(), materialized);
+  if (issues.length) return { success: false, input: "target", issues };
+  const documentState = transformDocument(materialized);
+  const context = isObject(documentState) ? contextIssues(documentState, before) : [];
+  return context.length ? { success: false, input: "target", issues: context } : { success: true, issues: [], documentState };
+}
+function validateBlock(block) {
+  const issues = check(blockRoot(), block);
+  return issues.length ? { success: false, input: "target", issues } : { success: true, issues: [], documentState: block };
+}
+
+// convo-email-agent/src/sdk/editor-validator.ts
+var ROOT_PATH = "<root>";
+function dotPath(segments) {
+  return segments.length === 0 ? ROOT_PATH : segments.map(String).join(".");
+}
+function pointerToPath(pointer) {
+  const segments = pointer.split("/").slice(1).map((segment) => segment.replace(/~1/gu, "/").replace(/~0/gu, "~"));
+  return dotPath(segments);
+}
+var LINE_HEIGHT_PATH = /^settings\.(?:stripes|headings\.h[1-6])\.lineHeight(?:\.(?:desktop|mobile))?$/u;
+function formatIssue(issue) {
+  const path = dotPath(issue.path);
+  if (issue.code === "unrecognized_keys" && issue.keys && issue.keys.length > 0) {
+    return issue.keys.map((key) => ({ path, code: issue.code, message: "unsupported property ".concat(JSON.stringify(key)) }));
+  }
+  const missing = issue.message.startsWith("missing required property ");
+  const message = !missing && LINE_HEIGHT_PATH.test(path) ? "".concat(issue.message, " ").concat(LINE_HEIGHT_HINT) : issue.message;
+  return [{ path, code: issue.code, message }];
+}
+var LINE_HEIGHT_GROUPS = ["stripes", ...[1, 2, 3, 4, 5, 6].map((level) => "headings/h".concat(level))];
+function lineHeightPrecisionIssues(model, current) {
+  const issues = [];
+  for (const group of LINE_HEIGHT_GROUPS) {
+    for (const platform of ["desktop", "mobile"]) {
+      const instancePath = "/settings/".concat(group, "/lineHeight/").concat(platform);
+      const value = resolveJsonPointer(model, instancePath);
+      if (typeof value !== "number" || !Number.isFinite(value) || Math.round(value * 100) / 100 === value) continue;
+      if (current !== void 0 && resolveJsonPointer(current, instancePath) === value) continue;
+      issues.push({ instancePath, message: "".concat(value, " is stored as a whole percentage and would read back as ").concat(Math.round(value * 100) / 100, ". ").concat(LINE_HEIGHT_HINT) });
+    }
+  }
+  return issues;
+}
+function validateEmailDocument(model, options = {}) {
+  const result = validateDocumentState(model, options.current);
+  const rules = [...collectSocialDocumentIssues(model), ...lineHeightPrecisionIssues(model, options.current)].map((rule) => ({ path: pointerToPath(rule.instancePath), code: "editor_rule", message: rule.message }));
+  const ruleFor = (issue) => {
+    const property = /^(?:unsupported|missing required) property "(.+)"$/u.exec(issue.message)?.[1];
+    return property === void 0 ? void 0 : rules.find((rule) => rule.path === "".concat(issue.path, ".").concat(property));
+  };
+  const issues = [];
+  const reported = /* @__PURE__ */ new Set();
+  for (const native of result.issues.flatMap(formatIssue)) {
+    const issue = ruleFor(native) ?? native;
+    if (issue !== native && reported.has(issue.path)) continue;
+    reported.add(issue.path);
+    issues.push(issue);
+  }
+  for (const rule of rules) {
+    if (reported.has(rule.path)) continue;
+    reported.add(rule.path);
+    issues.push(rule);
+  }
+  return issues;
+}
 
 // convo-email-agent/src/sdk/selectors.ts
 var LIST_KEY_KIND = {
@@ -346,8 +377,8 @@ function inlineColor(element) {
   const style = element.attrs.find((attr) => attr.name === "style")?.value ?? "";
   return /(?:^|;)\s*color\s*:\s*([^;!]+)/iu.exec(style)?.[1].trim() || void 0;
 }
-function collectColors(nodes2, found) {
-  for (const node of nodes2) {
+function collectColors(nodes, found) {
+  for (const node of nodes) {
     if (!isElement(node)) continue;
     const color = RECOLORED_TAGS.has(node.tag) ? inlineColor(node) : void 0;
     if (color) found.push(color);
@@ -398,8 +429,8 @@ function overwrittenInlineColors(before, after, inherited = []) {
   return [...new Set(replaced)];
 }
 var THEME_COLORED_TAGS = /* @__PURE__ */ new Set(["p", "h1", "h2", "h3", "h4", "h5", "h6", "li", "a"]);
-function hasBlockColoredText(nodes2) {
-  return nodes2.some((node) => !isElement(node) ? node.text.trim() !== "" : !THEME_COLORED_TAGS.has(node.tag) && !inlineColor(node) && hasBlockColoredText(node.children));
+function hasBlockColoredText(nodes) {
+  return nodes.some((node) => !isElement(node) ? node.text.trim() !== "" : !THEME_COLORED_TAGS.has(node.tag) && !inlineColor(node) && hasBlockColoredText(node.children));
 }
 function releaseCopiedFontColors(value) {
   if (Array.isArray(value)) {
@@ -483,16 +514,16 @@ function jsonIssues(value, input = "target") {
 function unknownIssues(value, input) {
   const issues = [];
   const visit = (value2, rawSchema, path) => {
-    const schema2 = schemaForValue(rawSchema, value2);
+    const schema = schemaForValue(rawSchema, value2);
     if (Array.isArray(value2)) {
-      if (schema2.items) value2.forEach((child, i) => visit(child, schema2.items, "".concat(path, ".").concat(i)));
+      if (schema.items) value2.forEach((child, i) => visit(child, schema.items, "".concat(path, ".").concat(i)));
       return;
     }
-    if (!isObject(value2) || !schema2.properties) return;
+    if (!isObject(value2) || !schema.properties) return;
     for (const [key, child] of Object.entries(value2)) {
       const childPath = path ? "".concat(path, ".").concat(key) : key;
-      if (Object.hasOwn(schema2.properties, key)) visit(child, schema2.properties[key], childPath);
-      else if (isObject(schema2.additionalProperties)) visit(child, schema2.additionalProperties, childPath);
+      if (Object.hasOwn(schema.properties, key)) visit(child, schema.properties[key], childPath);
+      else if (isObject(schema.additionalProperties)) visit(child, schema.additionalProperties, childPath);
       else issues.push({
         code: key === "containers" && path.includes("structures.") ? "LEGACY_LAYOUT_UNSUPPORTED" : "UNKNOWN_FIELD",
         stage: "json",
@@ -669,14 +700,9 @@ function requireValid(result) {
 }
 
 export {
-  getContract,
-  getJsonSchema,
-  getCapabilities,
-  nodeCapability,
-  resolveSchema,
-  nodeSchema,
-  contractDefaults,
-  schemaForValue,
+  validateBlock,
+  ROOT_PATH,
+  validateEmailDocument,
   collectNodeIndex,
   hasLink,
   linkHostContains,

@@ -95,9 +95,9 @@ performance. Missing capabilities and incomplete visual checks are reported expl
 validation alone is not a successful save.
 
 The repository root is the installable plugin. `skills/` contains Stripo-owned instructions and
-`packages/` the imported email SDK (`convo-email-agent`);
-`packages/convo-email-agent/editor-validator/manifest.json` records the validator's editor revision
-and file hashes.
+`packages/` the imported email SDK (`convo-email-agent`), which validates models with its own
+rules and no third-party libraries; its `getContract()` reports the editor revision those rules
+were generated from and their hash.
 Each email skill's `HOST.md` is plugin-owned, as is the Business Profile paragraph in
 `reference/stripo-acquisition.md`. Sync the bundle built by `npm run build:stripo` in
 `convo-email-agent` without them:

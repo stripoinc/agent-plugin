@@ -1,81 +1,23 @@
-import value0 from './schema-2.js';
 export default {
-["__schema33"]: {
   "type": "object",
   "properties": {
-    "textAlign": {
+    "letterSpacing": {
       "type": "object",
       "properties": {
-        "mobile": {
-          "anyOf": [
-            {
-              "type": "string",
-              "enum": [
-                "left",
-                "center",
-                "right"
-              ]
-            },
-            {
-              "type": "null"
-            }
-          ]
-        }
-      },
-      "required": [
-        "mobile"
-      ],
-      "additionalProperties": false
-    },
-    "textStyle": {
-      "type": "object",
-      "properties": {
-        "italic": {
-          "type": "boolean"
-        }
-      },
-      "required": [
-        "italic"
-      ],
-      "additionalProperties": false
-    },
-    "fontWeight": {
-      "anyOf": [
-        {
-          "$ref": "#/definitions/__schema25"
+        "value": {
+          "type": "number"
         },
-        {
-          "type": "null"
-        }
-      ]
-    },
-    "fontSize": {
-      "type": "object",
-      "properties": {
-        "desktop": {
-          "anyOf": [
-            {
-              "$ref": "#/definitions/__schema27"
-            },
-            {
-              "type": "null"
-            }
-          ]
-        },
-        "mobile": {
-          "anyOf": [
-            {
-              "$ref": "#/definitions/__schema28"
-            },
-            {
-              "type": "null"
-            }
+        "unit": {
+          "type": "string",
+          "enum": [
+            "px",
+            "em"
           ]
         }
       },
       "required": [
-        "desktop",
-        "mobile"
+        "value",
+        "unit"
       ],
       "additionalProperties": false
     },
@@ -83,24 +25,14 @@ export default {
       "type": "object",
       "properties": {
         "desktop": {
-          "anyOf": [
-            {
-              "$ref": "#/definitions/__schema22"
-            },
-            {
-              "type": "null"
-            }
-          ]
+          "type": "number",
+          "minimum": 0,
+          "maximum": 5
         },
         "mobile": {
-          "anyOf": [
-            {
-              "$ref": "#/definitions/__schema23"
-            },
-            {
-              "type": "null"
-            }
-          ]
+          "type": "number",
+          "minimum": 0,
+          "maximum": 5
         }
       },
       "required": [
@@ -109,60 +41,9 @@ export default {
       ],
       "additionalProperties": false
     },
-    "paragraphBottomSpace": {
-      "anyOf": [
-        {
-          "$ref": "#/definitions/__schema30"
-        },
-        {
-          "type": "null"
-        }
-      ]
-    }
-  },
-  "required": [
-    "textAlign",
-    "textStyle",
-    "fontWeight",
-    "fontSize",
-    "lineHeight",
-    "paragraphBottomSpace"
-  ],
-  "additionalProperties": false
-},
-["__schema34"]: {
-  "type": "object",
-  "properties": {
-    "outlookSupport": {
-      "type": "boolean"
-    },
-    "textStyle": {
-      "type": "object",
-      "properties": {
-        "bold": {
-          "type": "boolean"
-        },
-        "italic": {
-          "type": "boolean"
-        }
-      },
-      "required": [
-        "bold",
-        "italic"
-      ],
-      "additionalProperties": false
-    },
-    "textTransform": {
-      "type": "string",
-      "enum": [
-        "none",
-        "uppercase",
-        "capitalize",
-        "lowercase"
-      ]
-    },
     "fontFamily": {
-      "$ref": "#/definitions/__schema24",
+      "type": "string",
+      "minLength": 1,
       "x-stripo-setDocumentState": {
         "insert": "supported",
         "delete": "unsupported",
@@ -206,197 +87,373 @@ export default {
         }
       }
     },
-    "letterSpacing": {
-      "$ref": "#/definitions/__schema21"
+    "fontWeight": {
+      "type": "integer",
+      "minimum": 100,
+      "maximum": 900,
+      "multipleOf": 100
     },
-    "fontSize": {
-      "$ref": "#/definitions/__schema26"
-    },
-    "borderRadius": {
+    "header": {
       "type": "object",
       "properties": {
-        "topLeft": {
-          "type": "number",
-          "minimum": 0,
-          "maximum": 1000
+        "fontSize": {
+          "type": "object",
+          "properties": {
+            "desktop": {
+              "type": "number",
+              "minimum": 8,
+              "maximum": 72
+            },
+            "mobile": {
+              "type": "number",
+              "minimum": 8,
+              "maximum": 72
+            }
+          },
+          "required": [
+            "desktop",
+            "mobile"
+          ],
+          "additionalProperties": false
         },
-        "topRight": {
-          "type": "number",
-          "minimum": 0,
-          "maximum": 1000
+        "paragraphBottomSpace": {
+          "anyOf": [
+            {
+              "type": "object",
+              "properties": {
+                "desktop": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 100
+                },
+                "mobile": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 100
+                }
+              },
+              "required": [
+                "desktop",
+                "mobile"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "null"
+            }
+          ]
         },
-        "bottomRight": {
-          "type": "number",
-          "minimum": 0,
-          "maximum": 1000
-        },
-        "bottomLeft": {
-          "type": "number",
-          "minimum": 0,
-          "maximum": 1000
-        }
-      },
-      "required": [
-        "topLeft",
-        "topRight",
-        "bottomRight",
-        "bottomLeft"
-      ],
-      "additionalProperties": false
-    },
-    "fitContainer": {
-      "type": "object",
-      "properties": {
-        "desktop": {
-          "type": "boolean"
-        },
-        "mobile": {
-          "type": "boolean"
-        }
-      },
-      "required": [
-        "desktop",
-        "mobile"
-      ],
-      "additionalProperties": false
-    },
-    "border": {
-      "type": "object",
-      "properties": {
-        "top": {
-          "$ref": "#/definitions/__schema35"
-        },
-        "right": {
-          "$ref": "#/definitions/__schema35"
-        },
-        "bottom": {
-          "$ref": "#/definitions/__schema35"
-        },
-        "left": {
-          "$ref": "#/definitions/__schema35"
-        },
-        "style": {
-          "type": "string",
-          "enum": [
-            "solid",
-            "dashed",
-            "dotted"
+        "backgroundImage": {
+          "anyOf": [
+            {
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "string"
+                },
+                "repeat": {
+                  "type": "boolean"
+                },
+                "x": {
+                  "type": "string"
+                },
+                "y": {
+                  "type": "string"
+                },
+                "sizeX": {
+                  "type": "string"
+                },
+                "sizeY": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "path",
+                "repeat",
+                "x",
+                "y",
+                "sizeX",
+                "sizeY"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "null"
+            }
           ]
         }
       },
       "required": [
-        "top",
-        "right",
-        "bottom",
-        "left",
-        "style"
+        "fontSize",
+        "paragraphBottomSpace",
+        "backgroundImage"
       ],
       "additionalProperties": false
     },
-    "hoverButtonStyles": {
-      "type": "boolean"
+    "content": {
+      "type": "object",
+      "properties": {
+        "fontSize": {
+          "type": "object",
+          "properties": {
+            "desktop": {
+              "type": "number",
+              "minimum": 8,
+              "maximum": 72
+            },
+            "mobile": {
+              "type": "number",
+              "minimum": 8,
+              "maximum": 72
+            }
+          },
+          "required": [
+            "desktop",
+            "mobile"
+          ],
+          "additionalProperties": false
+        },
+        "paragraphBottomSpace": {
+          "anyOf": [
+            {
+              "type": "object",
+              "properties": {
+                "desktop": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 100
+                },
+                "mobile": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 100
+                }
+              },
+              "required": [
+                "desktop",
+                "mobile"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "fontSize",
+        "paragraphBottomSpace"
+      ],
+      "additionalProperties": false
     },
-    "padding": {
-      "$ref": "#/definitions/__schema16"
+    "footer": {
+      "type": "object",
+      "properties": {
+        "fontSize": {
+          "type": "object",
+          "properties": {
+            "desktop": {
+              "type": "number",
+              "minimum": 8,
+              "maximum": 72
+            },
+            "mobile": {
+              "type": "number",
+              "minimum": 8,
+              "maximum": 72
+            }
+          },
+          "required": [
+            "desktop",
+            "mobile"
+          ],
+          "additionalProperties": false
+        },
+        "paragraphBottomSpace": {
+          "anyOf": [
+            {
+              "type": "object",
+              "properties": {
+                "desktop": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 100
+                },
+                "mobile": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 100
+                }
+              },
+              "required": [
+                "desktop",
+                "mobile"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "backgroundImage": {
+          "anyOf": [
+            {
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "string"
+                },
+                "repeat": {
+                  "type": "boolean"
+                },
+                "x": {
+                  "type": "string"
+                },
+                "y": {
+                  "type": "string"
+                },
+                "sizeX": {
+                  "type": "string"
+                },
+                "sizeY": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "path",
+                "repeat",
+                "x",
+                "y",
+                "sizeX",
+                "sizeY"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "fontSize",
+        "paragraphBottomSpace",
+        "backgroundImage"
+      ],
+      "additionalProperties": false
+    },
+    "infoArea": {
+      "type": "object",
+      "properties": {
+        "fontSize": {
+          "type": "object",
+          "properties": {
+            "desktop": {
+              "type": "number",
+              "minimum": 8,
+              "maximum": 72
+            },
+            "mobile": {
+              "type": "number",
+              "minimum": 8,
+              "maximum": 72
+            }
+          },
+          "required": [
+            "desktop",
+            "mobile"
+          ],
+          "additionalProperties": false
+        },
+        "paragraphBottomSpace": {
+          "anyOf": [
+            {
+              "type": "object",
+              "properties": {
+                "desktop": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 100
+                },
+                "mobile": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 100
+                }
+              },
+              "required": [
+                "desktop",
+                "mobile"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "fontSize",
+        "paragraphBottomSpace"
+      ],
+      "additionalProperties": false
     },
     "lightTheme": {
       "type": "object",
       "properties": {
-        "buttonColor": {
-          "$ref": "#/definitions/__schema18",
-          "x-stripo-setDocumentState": {
-            "insert": "unsupported",
-            "delete": "unsupported",
-            "update": "supported",
-            "move": "unsupported"
-          },
-          "x-stripo-setDocumentStateRuntimes": {
-            "insert": {
-              "browser": false,
-              "mergeService": false
-            },
-            "delete": {
-              "browser": false,
-              "mergeService": false
-            },
-            "update": {
-              "browser": true,
-              "mergeService": true
-            },
-            "move": {
-              "browser": false,
-              "mergeService": false
-            }
-          },
-          "x-stripo-setDocumentStateUnavailableSideEffects": {
-            "insert": {
-              "browser": [],
-              "mergeService": []
-            },
-            "delete": {
-              "browser": [],
-              "mergeService": []
-            },
-            "update": {
-              "browser": [],
-              "mergeService": []
-            },
-            "move": {
-              "browser": [],
-              "mergeService": []
-            }
-          }
-        },
-        "fontColor": {
-          "$ref": "#/definitions/__schema31",
-          "x-stripo-setDocumentState": {
-            "insert": "unsupported",
-            "delete": "unsupported",
-            "update": "supported",
-            "move": "unsupported"
-          },
-          "x-stripo-setDocumentStateRuntimes": {
-            "insert": {
-              "browser": false,
-              "mergeService": false
-            },
-            "delete": {
-              "browser": false,
-              "mergeService": false
-            },
-            "update": {
-              "browser": true,
-              "mergeService": true
-            },
-            "move": {
-              "browser": false,
-              "mergeService": false
-            }
-          },
-          "x-stripo-setDocumentStateUnavailableSideEffects": {
-            "insert": {
-              "browser": [],
-              "mergeService": []
-            },
-            "delete": {
-              "browser": [],
-              "mergeService": []
-            },
-            "update": {
-              "browser": [],
-              "mergeService": []
-            },
-            "move": {
-              "browser": [],
-              "mergeService": []
-            }
-          }
-        },
-        "hoverButtonStyles": {
+        "header": {
           "type": "object",
           "properties": {
-            "backgroundColor": {
-              "$ref": "#/definitions/__schema18",
+            "stripeBackgroundColor": {
+              "type": "string",
+              "x-stripo-setDocumentState": {
+                "insert": "unsupported",
+                "delete": "unsupported",
+                "update": "supported",
+                "move": "unsupported"
+              },
+              "x-stripo-setDocumentStateRuntimes": {
+                "insert": {
+                  "browser": false,
+                  "mergeService": false
+                },
+                "delete": {
+                  "browser": false,
+                  "mergeService": false
+                },
+                "update": {
+                  "browser": true,
+                  "mergeService": true
+                },
+                "move": {
+                  "browser": false,
+                  "mergeService": false
+                }
+              },
+              "x-stripo-setDocumentStateUnavailableSideEffects": {
+                "insert": {
+                  "browser": [],
+                  "mergeService": []
+                },
+                "delete": {
+                  "browser": [],
+                  "mergeService": []
+                },
+                "update": {
+                  "browser": [],
+                  "mergeService": []
+                },
+                "move": {
+                  "browser": [],
+                  "mergeService": []
+                }
+              }
+            },
+            "contentBackgroundColor": {
+              "type": "string",
               "x-stripo-setDocumentState": {
                 "insert": "unsupported",
                 "delete": "unsupported",
@@ -441,7 +498,7 @@ export default {
               }
             },
             "fontColor": {
-              "$ref": "#/definitions/__schema31",
+              "type": "string",
               "x-stripo-setDocumentState": {
                 "insert": "unsupported",
                 "delete": "unsupported",
@@ -485,211 +542,111 @@ export default {
                 }
               }
             },
-            "borderColor": {
-              "type": "object",
-              "properties": {
-                "top": {
-                  "$ref": "#/definitions/__schema19",
-                  "x-stripo-setDocumentState": {
-                    "insert": "unsupported",
-                    "delete": "unsupported",
-                    "update": "supported",
-                    "move": "unsupported"
-                  },
-                  "x-stripo-setDocumentStateRuntimes": {
-                    "insert": {
-                      "browser": false,
-                      "mergeService": false
-                    },
-                    "delete": {
-                      "browser": false,
-                      "mergeService": false
-                    },
-                    "update": {
-                      "browser": true,
-                      "mergeService": true
-                    },
-                    "move": {
-                      "browser": false,
-                      "mergeService": false
-                    }
-                  },
-                  "x-stripo-setDocumentStateUnavailableSideEffects": {
-                    "insert": {
-                      "browser": [],
-                      "mergeService": []
-                    },
-                    "delete": {
-                      "browser": [],
-                      "mergeService": []
-                    },
-                    "update": {
-                      "browser": [],
-                      "mergeService": []
-                    },
-                    "move": {
-                      "browser": [],
-                      "mergeService": []
-                    }
-                  }
+            "linkColor": {
+              "type": "string",
+              "x-stripo-setDocumentState": {
+                "insert": "unsupported",
+                "delete": "unsupported",
+                "update": "supported",
+                "move": "unsupported"
+              },
+              "x-stripo-setDocumentStateRuntimes": {
+                "insert": {
+                  "browser": false,
+                  "mergeService": false
                 },
-                "right": {
-                  "$ref": "#/definitions/__schema19",
-                  "x-stripo-setDocumentState": {
-                    "insert": "unsupported",
-                    "delete": "unsupported",
-                    "update": "supported",
-                    "move": "unsupported"
-                  },
-                  "x-stripo-setDocumentStateRuntimes": {
-                    "insert": {
-                      "browser": false,
-                      "mergeService": false
-                    },
-                    "delete": {
-                      "browser": false,
-                      "mergeService": false
-                    },
-                    "update": {
-                      "browser": true,
-                      "mergeService": true
-                    },
-                    "move": {
-                      "browser": false,
-                      "mergeService": false
-                    }
-                  },
-                  "x-stripo-setDocumentStateUnavailableSideEffects": {
-                    "insert": {
-                      "browser": [],
-                      "mergeService": []
-                    },
-                    "delete": {
-                      "browser": [],
-                      "mergeService": []
-                    },
-                    "update": {
-                      "browser": [],
-                      "mergeService": []
-                    },
-                    "move": {
-                      "browser": [],
-                      "mergeService": []
-                    }
-                  }
+                "delete": {
+                  "browser": false,
+                  "mergeService": false
                 },
-                "bottom": {
-                  "$ref": "#/definitions/__schema19",
-                  "x-stripo-setDocumentState": {
-                    "insert": "unsupported",
-                    "delete": "unsupported",
-                    "update": "supported",
-                    "move": "unsupported"
-                  },
-                  "x-stripo-setDocumentStateRuntimes": {
-                    "insert": {
-                      "browser": false,
-                      "mergeService": false
-                    },
-                    "delete": {
-                      "browser": false,
-                      "mergeService": false
-                    },
-                    "update": {
-                      "browser": true,
-                      "mergeService": true
-                    },
-                    "move": {
-                      "browser": false,
-                      "mergeService": false
-                    }
-                  },
-                  "x-stripo-setDocumentStateUnavailableSideEffects": {
-                    "insert": {
-                      "browser": [],
-                      "mergeService": []
-                    },
-                    "delete": {
-                      "browser": [],
-                      "mergeService": []
-                    },
-                    "update": {
-                      "browser": [],
-                      "mergeService": []
-                    },
-                    "move": {
-                      "browser": [],
-                      "mergeService": []
-                    }
-                  }
+                "update": {
+                  "browser": true,
+                  "mergeService": true
                 },
-                "left": {
-                  "$ref": "#/definitions/__schema19",
-                  "x-stripo-setDocumentState": {
-                    "insert": "unsupported",
-                    "delete": "unsupported",
-                    "update": "supported",
-                    "move": "unsupported"
-                  },
-                  "x-stripo-setDocumentStateRuntimes": {
-                    "insert": {
-                      "browser": false,
-                      "mergeService": false
-                    },
-                    "delete": {
-                      "browser": false,
-                      "mergeService": false
-                    },
-                    "update": {
-                      "browser": true,
-                      "mergeService": true
-                    },
-                    "move": {
-                      "browser": false,
-                      "mergeService": false
-                    }
-                  },
-                  "x-stripo-setDocumentStateUnavailableSideEffects": {
-                    "insert": {
-                      "browser": [],
-                      "mergeService": []
-                    },
-                    "delete": {
-                      "browser": [],
-                      "mergeService": []
-                    },
-                    "update": {
-                      "browser": [],
-                      "mergeService": []
-                    },
-                    "move": {
-                      "browser": [],
-                      "mergeService": []
-                    }
-                  }
+                "move": {
+                  "browser": false,
+                  "mergeService": false
                 }
               },
-              "required": [
-                "top",
-                "right",
-                "bottom",
-                "left"
-              ],
-              "additionalProperties": false
+              "x-stripo-setDocumentStateUnavailableSideEffects": {
+                "insert": {
+                  "browser": [],
+                  "mergeService": []
+                },
+                "delete": {
+                  "browser": [],
+                  "mergeService": []
+                },
+                "update": {
+                  "browser": [],
+                  "mergeService": []
+                },
+                "move": {
+                  "browser": [],
+                  "mergeService": []
+                }
+              }
+            },
+            "linkColorHover": {
+              "type": "string",
+              "x-stripo-setDocumentState": {
+                "insert": "unsupported",
+                "delete": "unsupported",
+                "update": "supported",
+                "move": "unsupported"
+              },
+              "x-stripo-setDocumentStateRuntimes": {
+                "insert": {
+                  "browser": false,
+                  "mergeService": false
+                },
+                "delete": {
+                  "browser": false,
+                  "mergeService": false
+                },
+                "update": {
+                  "browser": true,
+                  "mergeService": true
+                },
+                "move": {
+                  "browser": false,
+                  "mergeService": false
+                }
+              },
+              "x-stripo-setDocumentStateUnavailableSideEffects": {
+                "insert": {
+                  "browser": [],
+                  "mergeService": []
+                },
+                "delete": {
+                  "browser": [],
+                  "mergeService": []
+                },
+                "update": {
+                  "browser": [],
+                  "mergeService": []
+                },
+                "move": {
+                  "browser": [],
+                  "mergeService": []
+                }
+              }
             }
           },
           "required": [
-            "backgroundColor",
+            "stripeBackgroundColor",
+            "contentBackgroundColor",
             "fontColor",
-            "borderColor"
+            "linkColor",
+            "linkColorHover"
           ],
           "additionalProperties": false
         },
-        "borderColor": {
+        "content": {
           "type": "object",
           "properties": {
-            "top": {
-              "$ref": "#/definitions/__schema19",
+            "contentBackgroundColor": {
+              "type": "string",
               "x-stripo-setDocumentState": {
                 "insert": "unsupported",
                 "delete": "unsupported",
@@ -733,8 +690,8 @@ export default {
                 }
               }
             },
-            "right": {
-              "$ref": "#/definitions/__schema19",
+            "fontColor": {
+              "type": "string",
               "x-stripo-setDocumentState": {
                 "insert": "unsupported",
                 "delete": "unsupported",
@@ -778,8 +735,8 @@ export default {
                 }
               }
             },
-            "bottom": {
-              "$ref": "#/definitions/__schema19",
+            "linkColor": {
+              "type": "string",
               "x-stripo-setDocumentState": {
                 "insert": "unsupported",
                 "delete": "unsupported",
@@ -823,8 +780,8 @@ export default {
                 }
               }
             },
-            "left": {
-              "$ref": "#/definitions/__schema19",
+            "linkColorHover": {
+              "type": "string",
               "x-stripo-setDocumentState": {
                 "insert": "unsupported",
                 "delete": "unsupported",
@@ -870,140 +827,464 @@ export default {
             }
           },
           "required": [
-            "top",
-            "right",
-            "bottom",
-            "left"
+            "contentBackgroundColor",
+            "fontColor",
+            "linkColor",
+            "linkColorHover"
+          ],
+          "additionalProperties": false
+        },
+        "footer": {
+          "type": "object",
+          "properties": {
+            "stripeBackgroundColor": {
+              "type": "string",
+              "x-stripo-setDocumentState": {
+                "insert": "unsupported",
+                "delete": "unsupported",
+                "update": "supported",
+                "move": "unsupported"
+              },
+              "x-stripo-setDocumentStateRuntimes": {
+                "insert": {
+                  "browser": false,
+                  "mergeService": false
+                },
+                "delete": {
+                  "browser": false,
+                  "mergeService": false
+                },
+                "update": {
+                  "browser": true,
+                  "mergeService": true
+                },
+                "move": {
+                  "browser": false,
+                  "mergeService": false
+                }
+              },
+              "x-stripo-setDocumentStateUnavailableSideEffects": {
+                "insert": {
+                  "browser": [],
+                  "mergeService": []
+                },
+                "delete": {
+                  "browser": [],
+                  "mergeService": []
+                },
+                "update": {
+                  "browser": [],
+                  "mergeService": []
+                },
+                "move": {
+                  "browser": [],
+                  "mergeService": []
+                }
+              }
+            },
+            "contentBackgroundColor": {
+              "type": "string",
+              "x-stripo-setDocumentState": {
+                "insert": "unsupported",
+                "delete": "unsupported",
+                "update": "supported",
+                "move": "unsupported"
+              },
+              "x-stripo-setDocumentStateRuntimes": {
+                "insert": {
+                  "browser": false,
+                  "mergeService": false
+                },
+                "delete": {
+                  "browser": false,
+                  "mergeService": false
+                },
+                "update": {
+                  "browser": true,
+                  "mergeService": true
+                },
+                "move": {
+                  "browser": false,
+                  "mergeService": false
+                }
+              },
+              "x-stripo-setDocumentStateUnavailableSideEffects": {
+                "insert": {
+                  "browser": [],
+                  "mergeService": []
+                },
+                "delete": {
+                  "browser": [],
+                  "mergeService": []
+                },
+                "update": {
+                  "browser": [],
+                  "mergeService": []
+                },
+                "move": {
+                  "browser": [],
+                  "mergeService": []
+                }
+              }
+            },
+            "fontColor": {
+              "type": "string",
+              "x-stripo-setDocumentState": {
+                "insert": "unsupported",
+                "delete": "unsupported",
+                "update": "supported",
+                "move": "unsupported"
+              },
+              "x-stripo-setDocumentStateRuntimes": {
+                "insert": {
+                  "browser": false,
+                  "mergeService": false
+                },
+                "delete": {
+                  "browser": false,
+                  "mergeService": false
+                },
+                "update": {
+                  "browser": true,
+                  "mergeService": true
+                },
+                "move": {
+                  "browser": false,
+                  "mergeService": false
+                }
+              },
+              "x-stripo-setDocumentStateUnavailableSideEffects": {
+                "insert": {
+                  "browser": [],
+                  "mergeService": []
+                },
+                "delete": {
+                  "browser": [],
+                  "mergeService": []
+                },
+                "update": {
+                  "browser": [],
+                  "mergeService": []
+                },
+                "move": {
+                  "browser": [],
+                  "mergeService": []
+                }
+              }
+            },
+            "linkColor": {
+              "type": "string",
+              "x-stripo-setDocumentState": {
+                "insert": "unsupported",
+                "delete": "unsupported",
+                "update": "supported",
+                "move": "unsupported"
+              },
+              "x-stripo-setDocumentStateRuntimes": {
+                "insert": {
+                  "browser": false,
+                  "mergeService": false
+                },
+                "delete": {
+                  "browser": false,
+                  "mergeService": false
+                },
+                "update": {
+                  "browser": true,
+                  "mergeService": true
+                },
+                "move": {
+                  "browser": false,
+                  "mergeService": false
+                }
+              },
+              "x-stripo-setDocumentStateUnavailableSideEffects": {
+                "insert": {
+                  "browser": [],
+                  "mergeService": []
+                },
+                "delete": {
+                  "browser": [],
+                  "mergeService": []
+                },
+                "update": {
+                  "browser": [],
+                  "mergeService": []
+                },
+                "move": {
+                  "browser": [],
+                  "mergeService": []
+                }
+              }
+            },
+            "linkColorHover": {
+              "type": "string",
+              "x-stripo-setDocumentState": {
+                "insert": "unsupported",
+                "delete": "unsupported",
+                "update": "supported",
+                "move": "unsupported"
+              },
+              "x-stripo-setDocumentStateRuntimes": {
+                "insert": {
+                  "browser": false,
+                  "mergeService": false
+                },
+                "delete": {
+                  "browser": false,
+                  "mergeService": false
+                },
+                "update": {
+                  "browser": true,
+                  "mergeService": true
+                },
+                "move": {
+                  "browser": false,
+                  "mergeService": false
+                }
+              },
+              "x-stripo-setDocumentStateUnavailableSideEffects": {
+                "insert": {
+                  "browser": [],
+                  "mergeService": []
+                },
+                "delete": {
+                  "browser": [],
+                  "mergeService": []
+                },
+                "update": {
+                  "browser": [],
+                  "mergeService": []
+                },
+                "move": {
+                  "browser": [],
+                  "mergeService": []
+                }
+              }
+            }
+          },
+          "required": [
+            "stripeBackgroundColor",
+            "contentBackgroundColor",
+            "fontColor",
+            "linkColor",
+            "linkColorHover"
+          ],
+          "additionalProperties": false
+        },
+        "infoArea": {
+          "type": "object",
+          "properties": {
+            "fontColor": {
+              "type": "string",
+              "x-stripo-setDocumentState": {
+                "insert": "unsupported",
+                "delete": "unsupported",
+                "update": "supported",
+                "move": "unsupported"
+              },
+              "x-stripo-setDocumentStateRuntimes": {
+                "insert": {
+                  "browser": false,
+                  "mergeService": false
+                },
+                "delete": {
+                  "browser": false,
+                  "mergeService": false
+                },
+                "update": {
+                  "browser": true,
+                  "mergeService": true
+                },
+                "move": {
+                  "browser": false,
+                  "mergeService": false
+                }
+              },
+              "x-stripo-setDocumentStateUnavailableSideEffects": {
+                "insert": {
+                  "browser": [],
+                  "mergeService": []
+                },
+                "delete": {
+                  "browser": [],
+                  "mergeService": []
+                },
+                "update": {
+                  "browser": [],
+                  "mergeService": []
+                },
+                "move": {
+                  "browser": [],
+                  "mergeService": []
+                }
+              }
+            },
+            "linkColor": {
+              "type": "string",
+              "x-stripo-setDocumentState": {
+                "insert": "unsupported",
+                "delete": "unsupported",
+                "update": "supported",
+                "move": "unsupported"
+              },
+              "x-stripo-setDocumentStateRuntimes": {
+                "insert": {
+                  "browser": false,
+                  "mergeService": false
+                },
+                "delete": {
+                  "browser": false,
+                  "mergeService": false
+                },
+                "update": {
+                  "browser": true,
+                  "mergeService": true
+                },
+                "move": {
+                  "browser": false,
+                  "mergeService": false
+                }
+              },
+              "x-stripo-setDocumentStateUnavailableSideEffects": {
+                "insert": {
+                  "browser": [],
+                  "mergeService": []
+                },
+                "delete": {
+                  "browser": [],
+                  "mergeService": []
+                },
+                "update": {
+                  "browser": [],
+                  "mergeService": []
+                },
+                "move": {
+                  "browser": [],
+                  "mergeService": []
+                }
+              }
+            },
+            "linkColorHover": {
+              "type": "string",
+              "x-stripo-setDocumentState": {
+                "insert": "unsupported",
+                "delete": "unsupported",
+                "update": "supported",
+                "move": "unsupported"
+              },
+              "x-stripo-setDocumentStateRuntimes": {
+                "insert": {
+                  "browser": false,
+                  "mergeService": false
+                },
+                "delete": {
+                  "browser": false,
+                  "mergeService": false
+                },
+                "update": {
+                  "browser": true,
+                  "mergeService": true
+                },
+                "move": {
+                  "browser": false,
+                  "mergeService": false
+                }
+              },
+              "x-stripo-setDocumentStateUnavailableSideEffects": {
+                "insert": {
+                  "browser": [],
+                  "mergeService": []
+                },
+                "delete": {
+                  "browser": [],
+                  "mergeService": []
+                },
+                "update": {
+                  "browser": [],
+                  "mergeService": []
+                },
+                "move": {
+                  "browser": [],
+                  "mergeService": []
+                }
+              }
+            }
+          },
+          "required": [
+            "fontColor",
+            "linkColor",
+            "linkColorHover"
           ],
           "additionalProperties": false
         }
       },
       "required": [
-        "buttonColor",
-        "fontColor",
-        "hoverButtonStyles",
-        "borderColor"
+        "header",
+        "content",
+        "footer",
+        "infoArea"
       ],
       "additionalProperties": false
     },
     "darkTheme": {
       "type": "object",
       "properties": {
-        "buttonColor": {
-          "anyOf": [
-            {
-              "$ref": "#/definitions/__schema18"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "x-stripo-setDocumentState": {
-            "insert": "unsupported",
-            "delete": "unsupported",
-            "update": "supported",
-            "move": "unsupported"
-          },
-          "x-stripo-setDocumentStateRuntimes": {
-            "insert": {
-              "browser": false,
-              "mergeService": false
-            },
-            "delete": {
-              "browser": false,
-              "mergeService": false
-            },
-            "update": {
-              "browser": true,
-              "mergeService": true
-            },
-            "move": {
-              "browser": false,
-              "mergeService": false
-            }
-          },
-          "x-stripo-setDocumentStateUnavailableSideEffects": {
-            "insert": {
-              "browser": [],
-              "mergeService": []
-            },
-            "delete": {
-              "browser": [],
-              "mergeService": []
-            },
-            "update": {
-              "browser": [],
-              "mergeService": []
-            },
-            "move": {
-              "browser": [],
-              "mergeService": []
-            }
-          }
-        },
-        "fontColor": {
-          "anyOf": [
-            {
-              "$ref": "#/definitions/__schema31"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "x-stripo-setDocumentState": {
-            "insert": "unsupported",
-            "delete": "unsupported",
-            "update": "supported",
-            "move": "unsupported"
-          },
-          "x-stripo-setDocumentStateRuntimes": {
-            "insert": {
-              "browser": false,
-              "mergeService": false
-            },
-            "delete": {
-              "browser": false,
-              "mergeService": false
-            },
-            "update": {
-              "browser": true,
-              "mergeService": true
-            },
-            "move": {
-              "browser": false,
-              "mergeService": false
-            }
-          },
-          "x-stripo-setDocumentStateUnavailableSideEffects": {
-            "insert": {
-              "browser": [],
-              "mergeService": []
-            },
-            "delete": {
-              "browser": [],
-              "mergeService": []
-            },
-            "update": {
-              "browser": [],
-              "mergeService": []
-            },
-            "move": {
-              "browser": [],
-              "mergeService": []
-            }
-          }
-        },
-        "hoverButtonStyles": {
+        "header": {
           "type": "object",
           "properties": {
-            "backgroundColor": {
-              "anyOf": [
-                {
-                  "$ref": "#/definitions/__schema18"
+            "stripeBackgroundColor": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "x-stripo-setDocumentState": {
+                "insert": "unsupported",
+                "delete": "unsupported",
+                "update": "supported",
+                "move": "unsupported"
+              },
+              "x-stripo-setDocumentStateRuntimes": {
+                "insert": {
+                  "browser": false,
+                  "mergeService": false
                 },
-                {
-                  "type": "null"
+                "delete": {
+                  "browser": false,
+                  "mergeService": false
+                },
+                "update": {
+                  "browser": true,
+                  "mergeService": true
+                },
+                "move": {
+                  "browser": false,
+                  "mergeService": false
                 }
+              },
+              "x-stripo-setDocumentStateUnavailableSideEffects": {
+                "insert": {
+                  "browser": [],
+                  "mergeService": []
+                },
+                "delete": {
+                  "browser": [],
+                  "mergeService": []
+                },
+                "update": {
+                  "browser": [],
+                  "mergeService": []
+                },
+                "move": {
+                  "browser": [],
+                  "mergeService": []
+                }
+              }
+            },
+            "contentBackgroundColor": {
+              "type": [
+                "string",
+                "null"
               ],
               "x-stripo-setDocumentState": {
                 "insert": "unsupported",
@@ -1049,13 +1330,9 @@ export default {
               }
             },
             "fontColor": {
-              "anyOf": [
-                {
-                  "$ref": "#/definitions/__schema31"
-                },
-                {
-                  "type": "null"
-                }
+              "type": [
+                "string",
+                "null"
               ],
               "x-stripo-setDocumentState": {
                 "insert": "unsupported",
@@ -1100,245 +1377,119 @@ export default {
                 }
               }
             },
-            "borderColor": {
-              "type": "object",
-              "properties": {
-                "top": {
-                  "anyOf": [
-                    {
-                      "$ref": "#/definitions/__schema19"
-                    },
-                    {
-                      "type": "null"
-                    }
-                  ],
-                  "x-stripo-setDocumentState": {
-                    "insert": "unsupported",
-                    "delete": "unsupported",
-                    "update": "supported",
-                    "move": "unsupported"
-                  },
-                  "x-stripo-setDocumentStateRuntimes": {
-                    "insert": {
-                      "browser": false,
-                      "mergeService": false
-                    },
-                    "delete": {
-                      "browser": false,
-                      "mergeService": false
-                    },
-                    "update": {
-                      "browser": true,
-                      "mergeService": true
-                    },
-                    "move": {
-                      "browser": false,
-                      "mergeService": false
-                    }
-                  },
-                  "x-stripo-setDocumentStateUnavailableSideEffects": {
-                    "insert": {
-                      "browser": [],
-                      "mergeService": []
-                    },
-                    "delete": {
-                      "browser": [],
-                      "mergeService": []
-                    },
-                    "update": {
-                      "browser": [],
-                      "mergeService": []
-                    },
-                    "move": {
-                      "browser": [],
-                      "mergeService": []
-                    }
-                  }
+            "linkColor": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "x-stripo-setDocumentState": {
+                "insert": "unsupported",
+                "delete": "unsupported",
+                "update": "supported",
+                "move": "unsupported"
+              },
+              "x-stripo-setDocumentStateRuntimes": {
+                "insert": {
+                  "browser": false,
+                  "mergeService": false
                 },
-                "right": {
-                  "anyOf": [
-                    {
-                      "$ref": "#/definitions/__schema19"
-                    },
-                    {
-                      "type": "null"
-                    }
-                  ],
-                  "x-stripo-setDocumentState": {
-                    "insert": "unsupported",
-                    "delete": "unsupported",
-                    "update": "supported",
-                    "move": "unsupported"
-                  },
-                  "x-stripo-setDocumentStateRuntimes": {
-                    "insert": {
-                      "browser": false,
-                      "mergeService": false
-                    },
-                    "delete": {
-                      "browser": false,
-                      "mergeService": false
-                    },
-                    "update": {
-                      "browser": true,
-                      "mergeService": true
-                    },
-                    "move": {
-                      "browser": false,
-                      "mergeService": false
-                    }
-                  },
-                  "x-stripo-setDocumentStateUnavailableSideEffects": {
-                    "insert": {
-                      "browser": [],
-                      "mergeService": []
-                    },
-                    "delete": {
-                      "browser": [],
-                      "mergeService": []
-                    },
-                    "update": {
-                      "browser": [],
-                      "mergeService": []
-                    },
-                    "move": {
-                      "browser": [],
-                      "mergeService": []
-                    }
-                  }
+                "delete": {
+                  "browser": false,
+                  "mergeService": false
                 },
-                "bottom": {
-                  "anyOf": [
-                    {
-                      "$ref": "#/definitions/__schema19"
-                    },
-                    {
-                      "type": "null"
-                    }
-                  ],
-                  "x-stripo-setDocumentState": {
-                    "insert": "unsupported",
-                    "delete": "unsupported",
-                    "update": "supported",
-                    "move": "unsupported"
-                  },
-                  "x-stripo-setDocumentStateRuntimes": {
-                    "insert": {
-                      "browser": false,
-                      "mergeService": false
-                    },
-                    "delete": {
-                      "browser": false,
-                      "mergeService": false
-                    },
-                    "update": {
-                      "browser": true,
-                      "mergeService": true
-                    },
-                    "move": {
-                      "browser": false,
-                      "mergeService": false
-                    }
-                  },
-                  "x-stripo-setDocumentStateUnavailableSideEffects": {
-                    "insert": {
-                      "browser": [],
-                      "mergeService": []
-                    },
-                    "delete": {
-                      "browser": [],
-                      "mergeService": []
-                    },
-                    "update": {
-                      "browser": [],
-                      "mergeService": []
-                    },
-                    "move": {
-                      "browser": [],
-                      "mergeService": []
-                    }
-                  }
+                "update": {
+                  "browser": true,
+                  "mergeService": true
                 },
-                "left": {
-                  "anyOf": [
-                    {
-                      "$ref": "#/definitions/__schema19"
-                    },
-                    {
-                      "type": "null"
-                    }
-                  ],
-                  "x-stripo-setDocumentState": {
-                    "insert": "unsupported",
-                    "delete": "unsupported",
-                    "update": "supported",
-                    "move": "unsupported"
-                  },
-                  "x-stripo-setDocumentStateRuntimes": {
-                    "insert": {
-                      "browser": false,
-                      "mergeService": false
-                    },
-                    "delete": {
-                      "browser": false,
-                      "mergeService": false
-                    },
-                    "update": {
-                      "browser": true,
-                      "mergeService": true
-                    },
-                    "move": {
-                      "browser": false,
-                      "mergeService": false
-                    }
-                  },
-                  "x-stripo-setDocumentStateUnavailableSideEffects": {
-                    "insert": {
-                      "browser": [],
-                      "mergeService": []
-                    },
-                    "delete": {
-                      "browser": [],
-                      "mergeService": []
-                    },
-                    "update": {
-                      "browser": [],
-                      "mergeService": []
-                    },
-                    "move": {
-                      "browser": [],
-                      "mergeService": []
-                    }
-                  }
+                "move": {
+                  "browser": false,
+                  "mergeService": false
                 }
               },
-              "required": [
-                "top",
-                "right",
-                "bottom",
-                "left"
+              "x-stripo-setDocumentStateUnavailableSideEffects": {
+                "insert": {
+                  "browser": [],
+                  "mergeService": []
+                },
+                "delete": {
+                  "browser": [],
+                  "mergeService": []
+                },
+                "update": {
+                  "browser": [],
+                  "mergeService": []
+                },
+                "move": {
+                  "browser": [],
+                  "mergeService": []
+                }
+              }
+            },
+            "linkColorHover": {
+              "type": [
+                "string",
+                "null"
               ],
-              "additionalProperties": false
+              "x-stripo-setDocumentState": {
+                "insert": "unsupported",
+                "delete": "unsupported",
+                "update": "supported",
+                "move": "unsupported"
+              },
+              "x-stripo-setDocumentStateRuntimes": {
+                "insert": {
+                  "browser": false,
+                  "mergeService": false
+                },
+                "delete": {
+                  "browser": false,
+                  "mergeService": false
+                },
+                "update": {
+                  "browser": true,
+                  "mergeService": true
+                },
+                "move": {
+                  "browser": false,
+                  "mergeService": false
+                }
+              },
+              "x-stripo-setDocumentStateUnavailableSideEffects": {
+                "insert": {
+                  "browser": [],
+                  "mergeService": []
+                },
+                "delete": {
+                  "browser": [],
+                  "mergeService": []
+                },
+                "update": {
+                  "browser": [],
+                  "mergeService": []
+                },
+                "move": {
+                  "browser": [],
+                  "mergeService": []
+                }
+              }
             }
           },
           "required": [
-            "backgroundColor",
+            "stripeBackgroundColor",
+            "contentBackgroundColor",
             "fontColor",
-            "borderColor"
+            "linkColor",
+            "linkColorHover"
           ],
           "additionalProperties": false
         },
-        "borderColor": {
+        "content": {
           "type": "object",
           "properties": {
-            "top": {
-              "anyOf": [
-                {
-                  "$ref": "#/definitions/__schema19"
-                },
-                {
-                  "type": "null"
-                }
+            "contentBackgroundColor": {
+              "type": [
+                "string",
+                "null"
               ],
               "x-stripo-setDocumentState": {
                 "insert": "unsupported",
@@ -1383,14 +1534,10 @@ export default {
                 }
               }
             },
-            "right": {
-              "anyOf": [
-                {
-                  "$ref": "#/definitions/__schema19"
-                },
-                {
-                  "type": "null"
-                }
+            "fontColor": {
+              "type": [
+                "string",
+                "null"
               ],
               "x-stripo-setDocumentState": {
                 "insert": "unsupported",
@@ -1435,14 +1582,10 @@ export default {
                 }
               }
             },
-            "bottom": {
-              "anyOf": [
-                {
-                  "$ref": "#/definitions/__schema19"
-                },
-                {
-                  "type": "null"
-                }
+            "linkColor": {
+              "type": [
+                "string",
+                "null"
               ],
               "x-stripo-setDocumentState": {
                 "insert": "unsupported",
@@ -1487,14 +1630,10 @@ export default {
                 }
               }
             },
-            "left": {
-              "anyOf": [
-                {
-                  "$ref": "#/definitions/__schema19"
-                },
-                {
-                  "type": "null"
-                }
+            "linkColorHover": {
+              "type": [
+                "string",
+                "null"
               ],
               "x-stripo-setDocumentState": {
                 "insert": "unsupported",
@@ -1541,250 +1680,442 @@ export default {
             }
           },
           "required": [
-            "top",
-            "right",
-            "bottom",
-            "left"
+            "contentBackgroundColor",
+            "fontColor",
+            "linkColor",
+            "linkColorHover"
+          ],
+          "additionalProperties": false
+        },
+        "footer": {
+          "type": "object",
+          "properties": {
+            "stripeBackgroundColor": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "x-stripo-setDocumentState": {
+                "insert": "unsupported",
+                "delete": "unsupported",
+                "update": "supported",
+                "move": "unsupported"
+              },
+              "x-stripo-setDocumentStateRuntimes": {
+                "insert": {
+                  "browser": false,
+                  "mergeService": false
+                },
+                "delete": {
+                  "browser": false,
+                  "mergeService": false
+                },
+                "update": {
+                  "browser": true,
+                  "mergeService": true
+                },
+                "move": {
+                  "browser": false,
+                  "mergeService": false
+                }
+              },
+              "x-stripo-setDocumentStateUnavailableSideEffects": {
+                "insert": {
+                  "browser": [],
+                  "mergeService": []
+                },
+                "delete": {
+                  "browser": [],
+                  "mergeService": []
+                },
+                "update": {
+                  "browser": [],
+                  "mergeService": []
+                },
+                "move": {
+                  "browser": [],
+                  "mergeService": []
+                }
+              }
+            },
+            "contentBackgroundColor": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "x-stripo-setDocumentState": {
+                "insert": "unsupported",
+                "delete": "unsupported",
+                "update": "supported",
+                "move": "unsupported"
+              },
+              "x-stripo-setDocumentStateRuntimes": {
+                "insert": {
+                  "browser": false,
+                  "mergeService": false
+                },
+                "delete": {
+                  "browser": false,
+                  "mergeService": false
+                },
+                "update": {
+                  "browser": true,
+                  "mergeService": true
+                },
+                "move": {
+                  "browser": false,
+                  "mergeService": false
+                }
+              },
+              "x-stripo-setDocumentStateUnavailableSideEffects": {
+                "insert": {
+                  "browser": [],
+                  "mergeService": []
+                },
+                "delete": {
+                  "browser": [],
+                  "mergeService": []
+                },
+                "update": {
+                  "browser": [],
+                  "mergeService": []
+                },
+                "move": {
+                  "browser": [],
+                  "mergeService": []
+                }
+              }
+            },
+            "fontColor": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "x-stripo-setDocumentState": {
+                "insert": "unsupported",
+                "delete": "unsupported",
+                "update": "supported",
+                "move": "unsupported"
+              },
+              "x-stripo-setDocumentStateRuntimes": {
+                "insert": {
+                  "browser": false,
+                  "mergeService": false
+                },
+                "delete": {
+                  "browser": false,
+                  "mergeService": false
+                },
+                "update": {
+                  "browser": true,
+                  "mergeService": true
+                },
+                "move": {
+                  "browser": false,
+                  "mergeService": false
+                }
+              },
+              "x-stripo-setDocumentStateUnavailableSideEffects": {
+                "insert": {
+                  "browser": [],
+                  "mergeService": []
+                },
+                "delete": {
+                  "browser": [],
+                  "mergeService": []
+                },
+                "update": {
+                  "browser": [],
+                  "mergeService": []
+                },
+                "move": {
+                  "browser": [],
+                  "mergeService": []
+                }
+              }
+            },
+            "linkColor": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "x-stripo-setDocumentState": {
+                "insert": "unsupported",
+                "delete": "unsupported",
+                "update": "supported",
+                "move": "unsupported"
+              },
+              "x-stripo-setDocumentStateRuntimes": {
+                "insert": {
+                  "browser": false,
+                  "mergeService": false
+                },
+                "delete": {
+                  "browser": false,
+                  "mergeService": false
+                },
+                "update": {
+                  "browser": true,
+                  "mergeService": true
+                },
+                "move": {
+                  "browser": false,
+                  "mergeService": false
+                }
+              },
+              "x-stripo-setDocumentStateUnavailableSideEffects": {
+                "insert": {
+                  "browser": [],
+                  "mergeService": []
+                },
+                "delete": {
+                  "browser": [],
+                  "mergeService": []
+                },
+                "update": {
+                  "browser": [],
+                  "mergeService": []
+                },
+                "move": {
+                  "browser": [],
+                  "mergeService": []
+                }
+              }
+            },
+            "linkColorHover": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "x-stripo-setDocumentState": {
+                "insert": "unsupported",
+                "delete": "unsupported",
+                "update": "supported",
+                "move": "unsupported"
+              },
+              "x-stripo-setDocumentStateRuntimes": {
+                "insert": {
+                  "browser": false,
+                  "mergeService": false
+                },
+                "delete": {
+                  "browser": false,
+                  "mergeService": false
+                },
+                "update": {
+                  "browser": true,
+                  "mergeService": true
+                },
+                "move": {
+                  "browser": false,
+                  "mergeService": false
+                }
+              },
+              "x-stripo-setDocumentStateUnavailableSideEffects": {
+                "insert": {
+                  "browser": [],
+                  "mergeService": []
+                },
+                "delete": {
+                  "browser": [],
+                  "mergeService": []
+                },
+                "update": {
+                  "browser": [],
+                  "mergeService": []
+                },
+                "move": {
+                  "browser": [],
+                  "mergeService": []
+                }
+              }
+            }
+          },
+          "required": [
+            "stripeBackgroundColor",
+            "contentBackgroundColor",
+            "fontColor",
+            "linkColor",
+            "linkColorHover"
+          ],
+          "additionalProperties": false
+        },
+        "infoArea": {
+          "type": "object",
+          "properties": {
+            "fontColor": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "x-stripo-setDocumentState": {
+                "insert": "unsupported",
+                "delete": "unsupported",
+                "update": "supported",
+                "move": "unsupported"
+              },
+              "x-stripo-setDocumentStateRuntimes": {
+                "insert": {
+                  "browser": false,
+                  "mergeService": false
+                },
+                "delete": {
+                  "browser": false,
+                  "mergeService": false
+                },
+                "update": {
+                  "browser": true,
+                  "mergeService": true
+                },
+                "move": {
+                  "browser": false,
+                  "mergeService": false
+                }
+              },
+              "x-stripo-setDocumentStateUnavailableSideEffects": {
+                "insert": {
+                  "browser": [],
+                  "mergeService": []
+                },
+                "delete": {
+                  "browser": [],
+                  "mergeService": []
+                },
+                "update": {
+                  "browser": [],
+                  "mergeService": []
+                },
+                "move": {
+                  "browser": [],
+                  "mergeService": []
+                }
+              }
+            },
+            "linkColor": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "x-stripo-setDocumentState": {
+                "insert": "unsupported",
+                "delete": "unsupported",
+                "update": "supported",
+                "move": "unsupported"
+              },
+              "x-stripo-setDocumentStateRuntimes": {
+                "insert": {
+                  "browser": false,
+                  "mergeService": false
+                },
+                "delete": {
+                  "browser": false,
+                  "mergeService": false
+                },
+                "update": {
+                  "browser": true,
+                  "mergeService": true
+                },
+                "move": {
+                  "browser": false,
+                  "mergeService": false
+                }
+              },
+              "x-stripo-setDocumentStateUnavailableSideEffects": {
+                "insert": {
+                  "browser": [],
+                  "mergeService": []
+                },
+                "delete": {
+                  "browser": [],
+                  "mergeService": []
+                },
+                "update": {
+                  "browser": [],
+                  "mergeService": []
+                },
+                "move": {
+                  "browser": [],
+                  "mergeService": []
+                }
+              }
+            },
+            "linkColorHover": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "x-stripo-setDocumentState": {
+                "insert": "unsupported",
+                "delete": "unsupported",
+                "update": "supported",
+                "move": "unsupported"
+              },
+              "x-stripo-setDocumentStateRuntimes": {
+                "insert": {
+                  "browser": false,
+                  "mergeService": false
+                },
+                "delete": {
+                  "browser": false,
+                  "mergeService": false
+                },
+                "update": {
+                  "browser": true,
+                  "mergeService": true
+                },
+                "move": {
+                  "browser": false,
+                  "mergeService": false
+                }
+              },
+              "x-stripo-setDocumentStateUnavailableSideEffects": {
+                "insert": {
+                  "browser": [],
+                  "mergeService": []
+                },
+                "delete": {
+                  "browser": [],
+                  "mergeService": []
+                },
+                "update": {
+                  "browser": [],
+                  "mergeService": []
+                },
+                "move": {
+                  "browser": [],
+                  "mergeService": []
+                }
+              }
+            }
+          },
+          "required": [
+            "fontColor",
+            "linkColor",
+            "linkColorHover"
           ],
           "additionalProperties": false
         }
       },
       "required": [
-        "buttonColor",
-        "fontColor",
-        "hoverButtonStyles",
-        "borderColor"
+        "header",
+        "content",
+        "footer",
+        "infoArea"
       ],
       "additionalProperties": false
     }
   },
   "required": [
-    "outlookSupport",
-    "textStyle",
-    "textTransform",
-    "fontFamily",
     "letterSpacing",
-    "fontSize",
-    "borderRadius",
-    "fitContainer",
-    "border",
-    "hoverButtonStyles",
-    "padding",
+    "lineHeight",
+    "fontFamily",
+    "fontWeight",
+    "header",
+    "content",
+    "footer",
+    "infoArea",
     "lightTheme",
     "darkTheme"
   ],
   "additionalProperties": false
-},
-["__schema35"]: {
-  "type": "object",
-  "properties": {
-    "width": {
-      "type": "number",
-      "minimum": 0,
-      "maximum": 100
-    }
-  },
-  "required": [
-    "width"
-  ],
-  "additionalProperties": false
-},
-["__schema36"]: {
-  "type": "array",
-  "items": {
-    "$ref": "#/definitions/stripe"
-  }
-},
-["__schema37"]: {
-  "type": "array",
-  "items": {
-    "$ref": "#/definitions/stripe"
-  }
-},
-["stripe"]: {
-  "type": "object",
-  "properties": {
-    "id": {
-      "$ref": "#/definitions/__schema38"
-    },
-    "settings": {
-      "$ref": "#/definitions/__schema39"
-    },
-    "moduleId": {
-      "$ref": "#/definitions/__schema62",
-      "readOnly": true
-    },
-    "structures": {
-      "$ref": "#/definitions/__schema63"
-    }
-  },
-  "required": [
-    "id"
-  ],
-  "description": "Stripe that groups structures.",
-  "x-stripo-setDocumentState": {
-    "insert": "supported",
-    "delete": "supported",
-    "update": "supported",
-    "move": "supported"
-  },
-  "x-stripo-setDocumentStateRuntimes": {
-    "insert": {
-      "browser": true,
-      "mergeService": true
-    },
-    "delete": {
-      "browser": true,
-      "mergeService": true
-    },
-    "update": {
-      "browser": true,
-      "mergeService": true
-    },
-    "move": {
-      "browser": true,
-      "mergeService": true
-    }
-  },
-  "x-stripo-setDocumentStateUnavailableSideEffects": {
-    "insert": {
-      "browser": [],
-      "mergeService": []
-    },
-    "delete": {
-      "browser": [],
-      "mergeService": []
-    },
-    "update": {
-      "browser": [],
-      "mergeService": []
-    },
-    "move": {
-      "browser": [],
-      "mergeService": []
-    }
-  },
-  "additionalProperties": false
-},
-["__schema38"]: {
-  "type": "string",
-  "minLength": 1
-},
-["__schema39"]: {
-  "type": "object",
-  "properties": {
-    "messageArea": {
-      "$ref": "#/definitions/__schema40"
-    },
-    "includeInOutput": {
-      "$ref": "#/definitions/__schema41"
-    },
-    "hideElement": {
-      "$ref": "#/definitions/hideElement"
-    },
-    "padding": {
-      "$ref": "#/definitions/__schema42"
-    },
-    "stripeBackgroundColor": {
-      "$ref": "#/definitions/__schema47"
-    },
-    "contentBackgroundColor": {
-      "$ref": "#/definitions/__schema48"
-    },
-    "backgroundImage": {
-      "$ref": "#/definitions/__schema49"
-    },
-    "contentBorder": {
-      "$ref": "#/definitions/__schema59"
-    }
-  },
-  "required": [
-    "hideElement"
-  ],
-  "description": "Stripe-level settings.",
-  "additionalProperties": false
-},
-["stripeSettings"]: {
-  "type": "object",
-  "properties": {
-    "messageArea": {
-      "$ref": "#/definitions/__schema40"
-    },
-    "includeInOutput": {
-      "$ref": "#/definitions/__schema41"
-    },
-    "hideElement": {
-      "$ref": "#/definitions/hideElement"
-    },
-    "padding": {
-      "$ref": "#/definitions/__schema42"
-    },
-    "stripeBackgroundColor": {
-      "$ref": "#/definitions/__schema47"
-    },
-    "contentBackgroundColor": {
-      "$ref": "#/definitions/__schema48"
-    },
-    "backgroundImage": {
-      "$ref": "#/definitions/__schema49"
-    },
-    "contentBorder": {
-      "$ref": "#/definitions/__schema59"
-    }
-  },
-  "required": [
-    "hideElement"
-  ],
-  "description": "Stripe-level settings.",
-  "additionalProperties": false
-},
-["__schema40"]: {
-  "type": "string",
-  "enum": [
-    "header",
-    "content",
-    "footer",
-    "infoArea"
-  ]
-},
-["__schema41"]: {
-  "type": "string",
-  "enum": [
-    "both",
-    "html",
-    "ampHtml"
-  ],
-  "description": "Include in email output formats: both, html, or ampHtml."
-},
-["outputInclusion"]: {
-  "type": "string",
-  "enum": [
-    "both",
-    "html",
-    "ampHtml"
-  ],
-  "description": "Include in email output formats: both, html, or ampHtml."
-},
-["hideElement"]: {
-  "type": "string",
-  "enum": [
-    "no",
-    "desktop",
-    "mobile"
-  ],
-  "description": "Hide element mode: no, desktop, or mobile."
-},
-["__schema42"]: {
-  "type": "object",
-  "properties": {
-    "mobile": {
-      "$ref": "#/definitions/fullSideValues"
-    }
-  },
-  "required": [
-    "mobile"
-  ],
-  "additionalProperties": false,
-  "description": "Mobile-only top, right, bottom, and left side values."
-}
 };

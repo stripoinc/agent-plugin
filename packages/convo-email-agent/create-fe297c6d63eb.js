@@ -9,13 +9,14 @@ import {
 } from "./model-2461f952bfd9.js";
 import {
   DocumentStateError,
-  contractDefaults,
   hasRecoloredInlineColor,
-  jsonIssues
-} from "./contract-22395cb9da24.js";
-import {
+  jsonIssues,
+  validateBlock,
   validateEmailDocument
-} from "./editor-validator-e41a98b04d42.js";
+} from "./editor-validator-0b64df0adc74.js";
+import {
+  contractDefaults
+} from "./contract-79faab52de2a.js";
 import {
   SOCIAL_BLOCK_DEFAULT_SETTINGS,
   buildSocialNetwork,
@@ -33,7 +34,6 @@ import {
 } from "./errors-3ee69a7e1eb0.js";
 
 // convo-email-agent/src/sdk/create.ts
-import { validateBlock } from "./editor-validator/index.mjs";
 var DEFAULT_THEME = {
   contentWidth: 600,
   backgroundColor: "#ffffff",

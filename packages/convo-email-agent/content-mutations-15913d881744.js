@@ -12,26 +12,32 @@ import {
 import {
   DocumentStateError,
   collectNodeIndex,
-  contractDefaults,
-  getJsonSchema,
   hasLink,
   isSupportedThemeReset,
   jsonIssues,
   linkHostContains,
-  nodeCapability,
-  nodeSchema,
   requireValid,
-  resolveSchema,
-  schemaForValue,
   validateChange,
   validateSnapshot
-} from "./contract-22395cb9da24.js";
+} from "./editor-validator-0b64df0adc74.js";
 import {
   buildStyleValue,
   nodeStyleSpec,
   normalizeColor,
   themeStyleSpec
 } from "./styles-961c8e1b984f.js";
+import {
+  canonicalFontValue,
+  collectUsedFontValues
+} from "./fonts-82d1d39f0f33.js";
+import {
+  contractDefaults,
+  getJsonSchema,
+  nodeCapability,
+  nodeSchema,
+  resolveSchema,
+  schemaForValue
+} from "./contract-79faab52de2a.js";
 import {
   SOCIAL_ALT_MAX_LENGTH,
   SOCIAL_CUSTOM_NETWORK_TYPE,
@@ -187,7 +193,6 @@ function mutateAnchor(content, mutation) {
 }
 
 // convo-email-agent/src/sdk/edit.ts
-import { canonicalFontValue, collectUsedFontValues } from "./editor-validator/index.mjs";
 var SETTER_HINTS = "Hints: text block \u2192 setContent(); button \u2192 setText()/setHref(); image \u2192 setSrc()/setHref()/setAlt().";
 function assertEditorEmailJson(value) {
   if (!isObject(value)) {

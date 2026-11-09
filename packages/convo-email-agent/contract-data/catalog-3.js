@@ -1,205 +1,5 @@
 
 export default {
-["$.settings.headings.h1.fontSize.mobile|0"]: {
-  "required": true,
-  "type": "number",
-  "schemaHash": "5f5faa90ccf7db107ec32bff03797c01c2cc067e17b264aff40eb49500961cff"
-},
-["$.settings.headings.h1.fontSize.mobile|1"]: {
-  "required": true,
-  "type": "null",
-  "schemaHash": "bcde375ebd4cbacf651311181173836b169d5a360c6ac158c6a2cdaf49be3f61"
-},
-["$.settings.headings.h1.lineHeight"]: {
-  "required": true,
-  "type": "object",
-  "schemaHash": "9f0a0fe279fba9126f811b8069f4466bcbe4307471172ec9d1919762abcd3930"
-},
-["$.settings.headings.h1.lineHeight.desktop"]: {
-  "required": true,
-  "schemaHash": "5b2402c7bf1c958ab0ebcbbc0ac6c9b3efc3ff0701384c2755b0835a8079cd31"
-},
-["$.settings.headings.h1.lineHeight.desktop|0"]: {
-  "required": true,
-  "type": "number",
-  "schemaHash": "76eb193d1dc62ed65e8fa68c05ddf8c469b5d2f74365e34f38707b2c39eab506"
-},
-["$.settings.headings.h1.lineHeight.desktop|1"]: {
-  "required": true,
-  "type": "null",
-  "schemaHash": "bcde375ebd4cbacf651311181173836b169d5a360c6ac158c6a2cdaf49be3f61"
-},
-["$.settings.headings.h1.lineHeight.mobile"]: {
-  "required": true,
-  "schemaHash": "759683a332d84dfac0511ebbdf795a8dc30835b14793dba809a929b96b18b35c"
-},
-["$.settings.headings.h1.lineHeight.mobile|0"]: {
-  "required": true,
-  "type": "number",
-  "schemaHash": "1bd3a9485045c1f96829d25f0423f49ea4e859d24f60f246f0c91792056737d7"
-},
-["$.settings.headings.h1.lineHeight.mobile|1"]: {
-  "required": true,
-  "type": "null",
-  "schemaHash": "bcde375ebd4cbacf651311181173836b169d5a360c6ac158c6a2cdaf49be3f61"
-},
-["$.settings.headings.h1.paragraphBottomSpace"]: {
-  "required": true,
-  "schemaHash": "4b45f026749b16802af26b35bb2d5a72a7904f0757fc91c56abc3b6d02f00644"
-},
-["$.settings.headings.h1.paragraphBottomSpace|0"]: {
-  "required": true,
-  "type": "object",
-  "schemaHash": "c202195a934f3206caad05d4917edf359b473fcbd618ac0e8c7be3504bfda45e"
-},
-["$.settings.headings.h1.paragraphBottomSpace|0.desktop"]: {
-  "required": true,
-  "type": "number",
-  "schemaHash": "a9a7f43895d5ef0107196cd9b83a85b6e3c33194dd54e4a18b5db6f0ffa591a7"
-},
-["$.settings.headings.h1.paragraphBottomSpace|0.mobile"]: {
-  "required": true,
-  "type": "number",
-  "schemaHash": "a9a7f43895d5ef0107196cd9b83a85b6e3c33194dd54e4a18b5db6f0ffa591a7"
-},
-["$.settings.headings.h1.paragraphBottomSpace|1"]: {
-  "required": true,
-  "type": "null",
-  "schemaHash": "bcde375ebd4cbacf651311181173836b169d5a360c6ac158c6a2cdaf49be3f61"
-},
-["$.settings.headings.h2"]: {
-  "required": true,
-  "type": "object",
-  "schemaHash": "98893381e5bae2e215dc20a694058566afb759f1a55825cb91761209a32efdef"
-},
-["$.settings.headings.h2.textAlign"]: {
-  "required": true,
-  "type": "object",
-  "schemaHash": "290d3b49ace85903ca1b82e095e4bbb8c188c18584461ed098fbe1372d85528f"
-},
-["$.settings.headings.h2.textAlign.mobile"]: {
-  "required": true,
-  "schemaHash": "e0a247f269f9cafbfb9ba11cf99650b5f90fd96f0dcf6de4304770527c06c5ad"
-},
-["$.settings.headings.h2.textAlign.mobile|0"]: {
-  "required": true,
-  "type": "string",
-  "enum": [
-    "left",
-    "center",
-    "right"
-  ],
-  "schemaHash": "e494aa666465b1cc779625a66e8a6119485e09965b15791b5ec35afb222eec32"
-},
-["$.settings.headings.h2.textAlign.mobile|1"]: {
-  "required": true,
-  "type": "null",
-  "schemaHash": "bcde375ebd4cbacf651311181173836b169d5a360c6ac158c6a2cdaf49be3f61"
-},
-["$.settings.headings.h2.textStyle"]: {
-  "required": true,
-  "type": "object",
-  "schemaHash": "5184a9cd6f4eac53c7dc0835ba8f6b269352988554eb850ce2bed2bdd5008486"
-},
-["$.settings.headings.h2.textStyle.italic"]: {
-  "required": true,
-  "type": "boolean",
-  "schemaHash": "7cb541e84f226754a46c21c79f131fa2898354e1242456e6fd1c162bce319553"
-},
-["$.settings.headings.h2.fontWeight"]: {
-  "required": true,
-  "schemaHash": "ad1ea54def9454f62b79aa765efc5fcc4ef0c024cffcf5e2fde425d9ce3062bf"
-},
-["$.settings.headings.h2.fontWeight|0"]: {
-  "required": true,
-  "type": "integer",
-  "schemaHash": "85efbce02ce8566bfbf6cdc3ba512be5e3a93dc63c8dc7713146874b64d54f9e"
-},
-["$.settings.headings.h2.fontWeight|1"]: {
-  "required": true,
-  "type": "null",
-  "schemaHash": "bcde375ebd4cbacf651311181173836b169d5a360c6ac158c6a2cdaf49be3f61"
-},
-["$.settings.headings.h2.fontSize"]: {
-  "required": true,
-  "type": "object",
-  "schemaHash": "bc6c04c4ed6dddce2cb9de38461775e750b959f3a78534c329e719fcca1aabaf"
-},
-["$.settings.headings.h2.fontSize.desktop"]: {
-  "required": true,
-  "schemaHash": "9603d59c32a1d0cd904b0880c19199b473bc049c4c0e17fc56ea118770a6201f"
-},
-["$.settings.headings.h2.fontSize.desktop|0"]: {
-  "required": true,
-  "type": "number",
-  "schemaHash": "d58099902cab7262b22d647c167a33cf123d31cb377fca7a9d1d6bf0b30e2a43"
-},
-["$.settings.headings.h2.fontSize.desktop|1"]: {
-  "required": true,
-  "type": "null",
-  "schemaHash": "bcde375ebd4cbacf651311181173836b169d5a360c6ac158c6a2cdaf49be3f61"
-},
-["$.settings.headings.h2.fontSize.mobile"]: {
-  "required": true,
-  "schemaHash": "beb53dab72fae840ccf9ee64a221ab81c5cb2129957e69593188f914ccfacf64"
-},
-["$.settings.headings.h2.fontSize.mobile|0"]: {
-  "required": true,
-  "type": "number",
-  "schemaHash": "5f5faa90ccf7db107ec32bff03797c01c2cc067e17b264aff40eb49500961cff"
-},
-["$.settings.headings.h2.fontSize.mobile|1"]: {
-  "required": true,
-  "type": "null",
-  "schemaHash": "bcde375ebd4cbacf651311181173836b169d5a360c6ac158c6a2cdaf49be3f61"
-},
-["$.settings.headings.h2.lineHeight"]: {
-  "required": true,
-  "type": "object",
-  "schemaHash": "9f0a0fe279fba9126f811b8069f4466bcbe4307471172ec9d1919762abcd3930"
-},
-["$.settings.headings.h2.lineHeight.desktop"]: {
-  "required": true,
-  "schemaHash": "5b2402c7bf1c958ab0ebcbbc0ac6c9b3efc3ff0701384c2755b0835a8079cd31"
-},
-["$.settings.headings.h2.lineHeight.desktop|0"]: {
-  "required": true,
-  "type": "number",
-  "schemaHash": "76eb193d1dc62ed65e8fa68c05ddf8c469b5d2f74365e34f38707b2c39eab506"
-},
-["$.settings.headings.h2.lineHeight.desktop|1"]: {
-  "required": true,
-  "type": "null",
-  "schemaHash": "bcde375ebd4cbacf651311181173836b169d5a360c6ac158c6a2cdaf49be3f61"
-},
-["$.settings.headings.h2.lineHeight.mobile"]: {
-  "required": true,
-  "schemaHash": "759683a332d84dfac0511ebbdf795a8dc30835b14793dba809a929b96b18b35c"
-},
-["$.settings.headings.h2.lineHeight.mobile|0"]: {
-  "required": true,
-  "type": "number",
-  "schemaHash": "1bd3a9485045c1f96829d25f0423f49ea4e859d24f60f246f0c91792056737d7"
-},
-["$.settings.headings.h2.lineHeight.mobile|1"]: {
-  "required": true,
-  "type": "null",
-  "schemaHash": "bcde375ebd4cbacf651311181173836b169d5a360c6ac158c6a2cdaf49be3f61"
-},
-["$.settings.headings.h2.paragraphBottomSpace"]: {
-  "required": true,
-  "schemaHash": "4b45f026749b16802af26b35bb2d5a72a7904f0757fc91c56abc3b6d02f00644"
-},
-["$.settings.headings.h2.paragraphBottomSpace|0"]: {
-  "required": true,
-  "type": "object",
-  "schemaHash": "c202195a934f3206caad05d4917edf359b473fcbd618ac0e8c7be3504bfda45e"
-},
-["$.settings.headings.h2.paragraphBottomSpace|0.desktop"]: {
-  "required": true,
-  "type": "number",
-  "schemaHash": "a9a7f43895d5ef0107196cd9b83a85b6e3c33194dd54e4a18b5db6f0ffa591a7"
-},
 ["$.settings.headings.h2.paragraphBottomSpace|0.mobile"]: {
   "required": true,
   "type": "number",
@@ -213,7 +13,7 @@ export default {
 ["$.settings.headings.h3"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "98893381e5bae2e215dc20a694058566afb759f1a55825cb91761209a32efdef"
+  "schemaHash": "3ef248a78dff46a2fdbc67f7ed4b582845a3612407eae17cb5a4f92a6a54f5d6"
 },
 ["$.settings.headings.h3.textAlign"]: {
   "required": true,
@@ -251,12 +51,12 @@ export default {
 },
 ["$.settings.headings.h3.fontWeight"]: {
   "required": true,
-  "schemaHash": "ad1ea54def9454f62b79aa765efc5fcc4ef0c024cffcf5e2fde425d9ce3062bf"
+  "schemaHash": "6e05f2f96c27b4c937eff5ef33a1575c632544d7a3e814348f1598e311747074"
 },
 ["$.settings.headings.h3.fontWeight|0"]: {
   "required": true,
   "type": "integer",
-  "schemaHash": "85efbce02ce8566bfbf6cdc3ba512be5e3a93dc63c8dc7713146874b64d54f9e"
+  "schemaHash": "c2c1be9e2417ecaff89c98d8436c76bcee539e1e8652b5d608ea44b0516cfac3"
 },
 ["$.settings.headings.h3.fontWeight|1"]: {
   "required": true,
@@ -266,16 +66,16 @@ export default {
 ["$.settings.headings.h3.fontSize"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "bc6c04c4ed6dddce2cb9de38461775e750b959f3a78534c329e719fcca1aabaf"
+  "schemaHash": "ff6b6e2ccdbd40525b5a28daaceb8c375bbd712eb3652de5fd21c37d9d7dbaf8"
 },
 ["$.settings.headings.h3.fontSize.desktop"]: {
   "required": true,
-  "schemaHash": "9603d59c32a1d0cd904b0880c19199b473bc049c4c0e17fc56ea118770a6201f"
+  "schemaHash": "25d7b7f0994300a4d4f3e522679208f4e3a47b60a0f959bb195963ac999f2f7b"
 },
 ["$.settings.headings.h3.fontSize.desktop|0"]: {
   "required": true,
   "type": "number",
-  "schemaHash": "d58099902cab7262b22d647c167a33cf123d31cb377fca7a9d1d6bf0b30e2a43"
+  "schemaHash": "aa2bb185cd32fbe435af596b02ace64cfe621e90c88944a07c25430c14a34522"
 },
 ["$.settings.headings.h3.fontSize.desktop|1"]: {
   "required": true,
@@ -284,12 +84,12 @@ export default {
 },
 ["$.settings.headings.h3.fontSize.mobile"]: {
   "required": true,
-  "schemaHash": "beb53dab72fae840ccf9ee64a221ab81c5cb2129957e69593188f914ccfacf64"
+  "schemaHash": "25d7b7f0994300a4d4f3e522679208f4e3a47b60a0f959bb195963ac999f2f7b"
 },
 ["$.settings.headings.h3.fontSize.mobile|0"]: {
   "required": true,
   "type": "number",
-  "schemaHash": "5f5faa90ccf7db107ec32bff03797c01c2cc067e17b264aff40eb49500961cff"
+  "schemaHash": "aa2bb185cd32fbe435af596b02ace64cfe621e90c88944a07c25430c14a34522"
 },
 ["$.settings.headings.h3.fontSize.mobile|1"]: {
   "required": true,
@@ -299,16 +99,16 @@ export default {
 ["$.settings.headings.h3.lineHeight"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "9f0a0fe279fba9126f811b8069f4466bcbe4307471172ec9d1919762abcd3930"
+  "schemaHash": "5e6f771511fd27f4d5ae525a932ad77b685c7796b873b2f62af3b68683a904d5"
 },
 ["$.settings.headings.h3.lineHeight.desktop"]: {
   "required": true,
-  "schemaHash": "5b2402c7bf1c958ab0ebcbbc0ac6c9b3efc3ff0701384c2755b0835a8079cd31"
+  "schemaHash": "4f255e55847ee8833e3f99d2f9953de91126696be531013c4386d8c58db7fcc1"
 },
 ["$.settings.headings.h3.lineHeight.desktop|0"]: {
   "required": true,
   "type": "number",
-  "schemaHash": "76eb193d1dc62ed65e8fa68c05ddf8c469b5d2f74365e34f38707b2c39eab506"
+  "schemaHash": "7b2898b5b4fc3e78f0a01fa3191adb1f9084d4b9ef9cbc33087b12ae3ea603fc"
 },
 ["$.settings.headings.h3.lineHeight.desktop|1"]: {
   "required": true,
@@ -317,12 +117,12 @@ export default {
 },
 ["$.settings.headings.h3.lineHeight.mobile"]: {
   "required": true,
-  "schemaHash": "759683a332d84dfac0511ebbdf795a8dc30835b14793dba809a929b96b18b35c"
+  "schemaHash": "4f255e55847ee8833e3f99d2f9953de91126696be531013c4386d8c58db7fcc1"
 },
 ["$.settings.headings.h3.lineHeight.mobile|0"]: {
   "required": true,
   "type": "number",
-  "schemaHash": "1bd3a9485045c1f96829d25f0423f49ea4e859d24f60f246f0c91792056737d7"
+  "schemaHash": "7b2898b5b4fc3e78f0a01fa3191adb1f9084d4b9ef9cbc33087b12ae3ea603fc"
 },
 ["$.settings.headings.h3.lineHeight.mobile|1"]: {
   "required": true,
@@ -331,12 +131,12 @@ export default {
 },
 ["$.settings.headings.h3.paragraphBottomSpace"]: {
   "required": true,
-  "schemaHash": "4b45f026749b16802af26b35bb2d5a72a7904f0757fc91c56abc3b6d02f00644"
+  "schemaHash": "3cbe409006f30f23de4251ed46e6b26367f5af820782283a370f94227332301b"
 },
 ["$.settings.headings.h3.paragraphBottomSpace|0"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "c202195a934f3206caad05d4917edf359b473fcbd618ac0e8c7be3504bfda45e"
+  "schemaHash": "071fa34defb14cc44e99db685ab447392c67f9fb2b4911cb9a5ce318539c5eb1"
 },
 ["$.settings.headings.h3.paragraphBottomSpace|0.desktop"]: {
   "required": true,
@@ -356,7 +156,7 @@ export default {
 ["$.settings.headings.h4"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "98893381e5bae2e215dc20a694058566afb759f1a55825cb91761209a32efdef"
+  "schemaHash": "3ef248a78dff46a2fdbc67f7ed4b582845a3612407eae17cb5a4f92a6a54f5d6"
 },
 ["$.settings.headings.h4.textAlign"]: {
   "required": true,
@@ -394,12 +194,12 @@ export default {
 },
 ["$.settings.headings.h4.fontWeight"]: {
   "required": true,
-  "schemaHash": "ad1ea54def9454f62b79aa765efc5fcc4ef0c024cffcf5e2fde425d9ce3062bf"
+  "schemaHash": "6e05f2f96c27b4c937eff5ef33a1575c632544d7a3e814348f1598e311747074"
 },
 ["$.settings.headings.h4.fontWeight|0"]: {
   "required": true,
   "type": "integer",
-  "schemaHash": "85efbce02ce8566bfbf6cdc3ba512be5e3a93dc63c8dc7713146874b64d54f9e"
+  "schemaHash": "c2c1be9e2417ecaff89c98d8436c76bcee539e1e8652b5d608ea44b0516cfac3"
 },
 ["$.settings.headings.h4.fontWeight|1"]: {
   "required": true,
@@ -409,16 +209,16 @@ export default {
 ["$.settings.headings.h4.fontSize"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "bc6c04c4ed6dddce2cb9de38461775e750b959f3a78534c329e719fcca1aabaf"
+  "schemaHash": "ff6b6e2ccdbd40525b5a28daaceb8c375bbd712eb3652de5fd21c37d9d7dbaf8"
 },
 ["$.settings.headings.h4.fontSize.desktop"]: {
   "required": true,
-  "schemaHash": "9603d59c32a1d0cd904b0880c19199b473bc049c4c0e17fc56ea118770a6201f"
+  "schemaHash": "25d7b7f0994300a4d4f3e522679208f4e3a47b60a0f959bb195963ac999f2f7b"
 },
 ["$.settings.headings.h4.fontSize.desktop|0"]: {
   "required": true,
   "type": "number",
-  "schemaHash": "d58099902cab7262b22d647c167a33cf123d31cb377fca7a9d1d6bf0b30e2a43"
+  "schemaHash": "aa2bb185cd32fbe435af596b02ace64cfe621e90c88944a07c25430c14a34522"
 },
 ["$.settings.headings.h4.fontSize.desktop|1"]: {
   "required": true,
@@ -427,12 +227,12 @@ export default {
 },
 ["$.settings.headings.h4.fontSize.mobile"]: {
   "required": true,
-  "schemaHash": "beb53dab72fae840ccf9ee64a221ab81c5cb2129957e69593188f914ccfacf64"
+  "schemaHash": "25d7b7f0994300a4d4f3e522679208f4e3a47b60a0f959bb195963ac999f2f7b"
 },
 ["$.settings.headings.h4.fontSize.mobile|0"]: {
   "required": true,
   "type": "number",
-  "schemaHash": "5f5faa90ccf7db107ec32bff03797c01c2cc067e17b264aff40eb49500961cff"
+  "schemaHash": "aa2bb185cd32fbe435af596b02ace64cfe621e90c88944a07c25430c14a34522"
 },
 ["$.settings.headings.h4.fontSize.mobile|1"]: {
   "required": true,
@@ -442,16 +242,16 @@ export default {
 ["$.settings.headings.h4.lineHeight"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "9f0a0fe279fba9126f811b8069f4466bcbe4307471172ec9d1919762abcd3930"
+  "schemaHash": "5e6f771511fd27f4d5ae525a932ad77b685c7796b873b2f62af3b68683a904d5"
 },
 ["$.settings.headings.h4.lineHeight.desktop"]: {
   "required": true,
-  "schemaHash": "5b2402c7bf1c958ab0ebcbbc0ac6c9b3efc3ff0701384c2755b0835a8079cd31"
+  "schemaHash": "4f255e55847ee8833e3f99d2f9953de91126696be531013c4386d8c58db7fcc1"
 },
 ["$.settings.headings.h4.lineHeight.desktop|0"]: {
   "required": true,
   "type": "number",
-  "schemaHash": "76eb193d1dc62ed65e8fa68c05ddf8c469b5d2f74365e34f38707b2c39eab506"
+  "schemaHash": "7b2898b5b4fc3e78f0a01fa3191adb1f9084d4b9ef9cbc33087b12ae3ea603fc"
 },
 ["$.settings.headings.h4.lineHeight.desktop|1"]: {
   "required": true,
@@ -460,12 +260,12 @@ export default {
 },
 ["$.settings.headings.h4.lineHeight.mobile"]: {
   "required": true,
-  "schemaHash": "759683a332d84dfac0511ebbdf795a8dc30835b14793dba809a929b96b18b35c"
+  "schemaHash": "4f255e55847ee8833e3f99d2f9953de91126696be531013c4386d8c58db7fcc1"
 },
 ["$.settings.headings.h4.lineHeight.mobile|0"]: {
   "required": true,
   "type": "number",
-  "schemaHash": "1bd3a9485045c1f96829d25f0423f49ea4e859d24f60f246f0c91792056737d7"
+  "schemaHash": "7b2898b5b4fc3e78f0a01fa3191adb1f9084d4b9ef9cbc33087b12ae3ea603fc"
 },
 ["$.settings.headings.h4.lineHeight.mobile|1"]: {
   "required": true,
@@ -474,12 +274,12 @@ export default {
 },
 ["$.settings.headings.h4.paragraphBottomSpace"]: {
   "required": true,
-  "schemaHash": "4b45f026749b16802af26b35bb2d5a72a7904f0757fc91c56abc3b6d02f00644"
+  "schemaHash": "3cbe409006f30f23de4251ed46e6b26367f5af820782283a370f94227332301b"
 },
 ["$.settings.headings.h4.paragraphBottomSpace|0"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "c202195a934f3206caad05d4917edf359b473fcbd618ac0e8c7be3504bfda45e"
+  "schemaHash": "071fa34defb14cc44e99db685ab447392c67f9fb2b4911cb9a5ce318539c5eb1"
 },
 ["$.settings.headings.h4.paragraphBottomSpace|0.desktop"]: {
   "required": true,
@@ -499,7 +299,7 @@ export default {
 ["$.settings.headings.h5"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "98893381e5bae2e215dc20a694058566afb759f1a55825cb91761209a32efdef"
+  "schemaHash": "3ef248a78dff46a2fdbc67f7ed4b582845a3612407eae17cb5a4f92a6a54f5d6"
 },
 ["$.settings.headings.h5.textAlign"]: {
   "required": true,
@@ -537,12 +337,12 @@ export default {
 },
 ["$.settings.headings.h5.fontWeight"]: {
   "required": true,
-  "schemaHash": "ad1ea54def9454f62b79aa765efc5fcc4ef0c024cffcf5e2fde425d9ce3062bf"
+  "schemaHash": "6e05f2f96c27b4c937eff5ef33a1575c632544d7a3e814348f1598e311747074"
 },
 ["$.settings.headings.h5.fontWeight|0"]: {
   "required": true,
   "type": "integer",
-  "schemaHash": "85efbce02ce8566bfbf6cdc3ba512be5e3a93dc63c8dc7713146874b64d54f9e"
+  "schemaHash": "c2c1be9e2417ecaff89c98d8436c76bcee539e1e8652b5d608ea44b0516cfac3"
 },
 ["$.settings.headings.h5.fontWeight|1"]: {
   "required": true,
@@ -552,16 +352,16 @@ export default {
 ["$.settings.headings.h5.fontSize"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "bc6c04c4ed6dddce2cb9de38461775e750b959f3a78534c329e719fcca1aabaf"
+  "schemaHash": "ff6b6e2ccdbd40525b5a28daaceb8c375bbd712eb3652de5fd21c37d9d7dbaf8"
 },
 ["$.settings.headings.h5.fontSize.desktop"]: {
   "required": true,
-  "schemaHash": "9603d59c32a1d0cd904b0880c19199b473bc049c4c0e17fc56ea118770a6201f"
+  "schemaHash": "25d7b7f0994300a4d4f3e522679208f4e3a47b60a0f959bb195963ac999f2f7b"
 },
 ["$.settings.headings.h5.fontSize.desktop|0"]: {
   "required": true,
   "type": "number",
-  "schemaHash": "d58099902cab7262b22d647c167a33cf123d31cb377fca7a9d1d6bf0b30e2a43"
+  "schemaHash": "aa2bb185cd32fbe435af596b02ace64cfe621e90c88944a07c25430c14a34522"
 },
 ["$.settings.headings.h5.fontSize.desktop|1"]: {
   "required": true,
@@ -570,12 +370,12 @@ export default {
 },
 ["$.settings.headings.h5.fontSize.mobile"]: {
   "required": true,
-  "schemaHash": "beb53dab72fae840ccf9ee64a221ab81c5cb2129957e69593188f914ccfacf64"
+  "schemaHash": "25d7b7f0994300a4d4f3e522679208f4e3a47b60a0f959bb195963ac999f2f7b"
 },
 ["$.settings.headings.h5.fontSize.mobile|0"]: {
   "required": true,
   "type": "number",
-  "schemaHash": "5f5faa90ccf7db107ec32bff03797c01c2cc067e17b264aff40eb49500961cff"
+  "schemaHash": "aa2bb185cd32fbe435af596b02ace64cfe621e90c88944a07c25430c14a34522"
 },
 ["$.settings.headings.h5.fontSize.mobile|1"]: {
   "required": true,
@@ -585,16 +385,16 @@ export default {
 ["$.settings.headings.h5.lineHeight"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "9f0a0fe279fba9126f811b8069f4466bcbe4307471172ec9d1919762abcd3930"
+  "schemaHash": "5e6f771511fd27f4d5ae525a932ad77b685c7796b873b2f62af3b68683a904d5"
 },
 ["$.settings.headings.h5.lineHeight.desktop"]: {
   "required": true,
-  "schemaHash": "5b2402c7bf1c958ab0ebcbbc0ac6c9b3efc3ff0701384c2755b0835a8079cd31"
+  "schemaHash": "4f255e55847ee8833e3f99d2f9953de91126696be531013c4386d8c58db7fcc1"
 },
 ["$.settings.headings.h5.lineHeight.desktop|0"]: {
   "required": true,
   "type": "number",
-  "schemaHash": "76eb193d1dc62ed65e8fa68c05ddf8c469b5d2f74365e34f38707b2c39eab506"
+  "schemaHash": "7b2898b5b4fc3e78f0a01fa3191adb1f9084d4b9ef9cbc33087b12ae3ea603fc"
 },
 ["$.settings.headings.h5.lineHeight.desktop|1"]: {
   "required": true,
@@ -603,12 +403,12 @@ export default {
 },
 ["$.settings.headings.h5.lineHeight.mobile"]: {
   "required": true,
-  "schemaHash": "759683a332d84dfac0511ebbdf795a8dc30835b14793dba809a929b96b18b35c"
+  "schemaHash": "4f255e55847ee8833e3f99d2f9953de91126696be531013c4386d8c58db7fcc1"
 },
 ["$.settings.headings.h5.lineHeight.mobile|0"]: {
   "required": true,
   "type": "number",
-  "schemaHash": "1bd3a9485045c1f96829d25f0423f49ea4e859d24f60f246f0c91792056737d7"
+  "schemaHash": "7b2898b5b4fc3e78f0a01fa3191adb1f9084d4b9ef9cbc33087b12ae3ea603fc"
 },
 ["$.settings.headings.h5.lineHeight.mobile|1"]: {
   "required": true,
@@ -617,12 +417,12 @@ export default {
 },
 ["$.settings.headings.h5.paragraphBottomSpace"]: {
   "required": true,
-  "schemaHash": "4b45f026749b16802af26b35bb2d5a72a7904f0757fc91c56abc3b6d02f00644"
+  "schemaHash": "3cbe409006f30f23de4251ed46e6b26367f5af820782283a370f94227332301b"
 },
 ["$.settings.headings.h5.paragraphBottomSpace|0"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "c202195a934f3206caad05d4917edf359b473fcbd618ac0e8c7be3504bfda45e"
+  "schemaHash": "071fa34defb14cc44e99db685ab447392c67f9fb2b4911cb9a5ce318539c5eb1"
 },
 ["$.settings.headings.h5.paragraphBottomSpace|0.desktop"]: {
   "required": true,
@@ -642,7 +442,7 @@ export default {
 ["$.settings.headings.h6"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "98893381e5bae2e215dc20a694058566afb759f1a55825cb91761209a32efdef"
+  "schemaHash": "3ef248a78dff46a2fdbc67f7ed4b582845a3612407eae17cb5a4f92a6a54f5d6"
 },
 ["$.settings.headings.h6.textAlign"]: {
   "required": true,
@@ -680,12 +480,12 @@ export default {
 },
 ["$.settings.headings.h6.fontWeight"]: {
   "required": true,
-  "schemaHash": "ad1ea54def9454f62b79aa765efc5fcc4ef0c024cffcf5e2fde425d9ce3062bf"
+  "schemaHash": "6e05f2f96c27b4c937eff5ef33a1575c632544d7a3e814348f1598e311747074"
 },
 ["$.settings.headings.h6.fontWeight|0"]: {
   "required": true,
   "type": "integer",
-  "schemaHash": "85efbce02ce8566bfbf6cdc3ba512be5e3a93dc63c8dc7713146874b64d54f9e"
+  "schemaHash": "c2c1be9e2417ecaff89c98d8436c76bcee539e1e8652b5d608ea44b0516cfac3"
 },
 ["$.settings.headings.h6.fontWeight|1"]: {
   "required": true,
@@ -695,16 +495,16 @@ export default {
 ["$.settings.headings.h6.fontSize"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "bc6c04c4ed6dddce2cb9de38461775e750b959f3a78534c329e719fcca1aabaf"
+  "schemaHash": "ff6b6e2ccdbd40525b5a28daaceb8c375bbd712eb3652de5fd21c37d9d7dbaf8"
 },
 ["$.settings.headings.h6.fontSize.desktop"]: {
   "required": true,
-  "schemaHash": "9603d59c32a1d0cd904b0880c19199b473bc049c4c0e17fc56ea118770a6201f"
+  "schemaHash": "25d7b7f0994300a4d4f3e522679208f4e3a47b60a0f959bb195963ac999f2f7b"
 },
 ["$.settings.headings.h6.fontSize.desktop|0"]: {
   "required": true,
   "type": "number",
-  "schemaHash": "d58099902cab7262b22d647c167a33cf123d31cb377fca7a9d1d6bf0b30e2a43"
+  "schemaHash": "aa2bb185cd32fbe435af596b02ace64cfe621e90c88944a07c25430c14a34522"
 },
 ["$.settings.headings.h6.fontSize.desktop|1"]: {
   "required": true,
@@ -713,12 +513,12 @@ export default {
 },
 ["$.settings.headings.h6.fontSize.mobile"]: {
   "required": true,
-  "schemaHash": "beb53dab72fae840ccf9ee64a221ab81c5cb2129957e69593188f914ccfacf64"
+  "schemaHash": "25d7b7f0994300a4d4f3e522679208f4e3a47b60a0f959bb195963ac999f2f7b"
 },
 ["$.settings.headings.h6.fontSize.mobile|0"]: {
   "required": true,
   "type": "number",
-  "schemaHash": "5f5faa90ccf7db107ec32bff03797c01c2cc067e17b264aff40eb49500961cff"
+  "schemaHash": "aa2bb185cd32fbe435af596b02ace64cfe621e90c88944a07c25430c14a34522"
 },
 ["$.settings.headings.h6.fontSize.mobile|1"]: {
   "required": true,
@@ -728,16 +528,16 @@ export default {
 ["$.settings.headings.h6.lineHeight"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "9f0a0fe279fba9126f811b8069f4466bcbe4307471172ec9d1919762abcd3930"
+  "schemaHash": "5e6f771511fd27f4d5ae525a932ad77b685c7796b873b2f62af3b68683a904d5"
 },
 ["$.settings.headings.h6.lineHeight.desktop"]: {
   "required": true,
-  "schemaHash": "5b2402c7bf1c958ab0ebcbbc0ac6c9b3efc3ff0701384c2755b0835a8079cd31"
+  "schemaHash": "4f255e55847ee8833e3f99d2f9953de91126696be531013c4386d8c58db7fcc1"
 },
 ["$.settings.headings.h6.lineHeight.desktop|0"]: {
   "required": true,
   "type": "number",
-  "schemaHash": "76eb193d1dc62ed65e8fa68c05ddf8c469b5d2f74365e34f38707b2c39eab506"
+  "schemaHash": "7b2898b5b4fc3e78f0a01fa3191adb1f9084d4b9ef9cbc33087b12ae3ea603fc"
 },
 ["$.settings.headings.h6.lineHeight.desktop|1"]: {
   "required": true,
@@ -746,12 +546,12 @@ export default {
 },
 ["$.settings.headings.h6.lineHeight.mobile"]: {
   "required": true,
-  "schemaHash": "759683a332d84dfac0511ebbdf795a8dc30835b14793dba809a929b96b18b35c"
+  "schemaHash": "4f255e55847ee8833e3f99d2f9953de91126696be531013c4386d8c58db7fcc1"
 },
 ["$.settings.headings.h6.lineHeight.mobile|0"]: {
   "required": true,
   "type": "number",
-  "schemaHash": "1bd3a9485045c1f96829d25f0423f49ea4e859d24f60f246f0c91792056737d7"
+  "schemaHash": "7b2898b5b4fc3e78f0a01fa3191adb1f9084d4b9ef9cbc33087b12ae3ea603fc"
 },
 ["$.settings.headings.h6.lineHeight.mobile|1"]: {
   "required": true,
@@ -760,12 +560,12 @@ export default {
 },
 ["$.settings.headings.h6.paragraphBottomSpace"]: {
   "required": true,
-  "schemaHash": "4b45f026749b16802af26b35bb2d5a72a7904f0757fc91c56abc3b6d02f00644"
+  "schemaHash": "3cbe409006f30f23de4251ed46e6b26367f5af820782283a370f94227332301b"
 },
 ["$.settings.headings.h6.paragraphBottomSpace|0"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "c202195a934f3206caad05d4917edf359b473fcbd618ac0e8c7be3504bfda45e"
+  "schemaHash": "071fa34defb14cc44e99db685ab447392c67f9fb2b4911cb9a5ce318539c5eb1"
 },
 ["$.settings.headings.h6.paragraphBottomSpace|0.desktop"]: {
   "required": true,
@@ -785,12 +585,12 @@ export default {
 ["$.settings.headings.lightTheme"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "0b7e9d0a43380eac1262fd053df4106ad30393c7b2bb0b5302c65dd5392e461f"
+  "schemaHash": "4bb029e623d555a018da9260803d1edf00117348740f75ed56811f402d2f9120"
 },
 ["$.settings.headings.lightTheme.h1"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "30f8a8bccd16f14a3a0db8298c67b203f054b32c7a2b39667976f7b6260eac18"
+  "schemaHash": "74c67d5af47339036c17f9608c0d47c5e67b8d53c474e0e0f502af0d50ab830b"
 },
 ["$.settings.headings.lightTheme.h1.fontColor"]: {
   "required": true,
@@ -801,12 +601,12 @@ export default {
     "update": "supported",
     "move": "unsupported"
   },
-  "schemaHash": "0ccc4c3e0911040ab0a2ad8b22a34b4d03486872b6caa668157306263d8dccb5"
+  "schemaHash": "e36cd8fcc6548e5ea85ef9d79117d92d023d30d7a838b7c4b0426d8326891b43"
 },
 ["$.settings.headings.lightTheme.h2"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "30f8a8bccd16f14a3a0db8298c67b203f054b32c7a2b39667976f7b6260eac18"
+  "schemaHash": "74c67d5af47339036c17f9608c0d47c5e67b8d53c474e0e0f502af0d50ab830b"
 },
 ["$.settings.headings.lightTheme.h2.fontColor"]: {
   "required": true,
@@ -817,12 +617,12 @@ export default {
     "update": "supported",
     "move": "unsupported"
   },
-  "schemaHash": "0ccc4c3e0911040ab0a2ad8b22a34b4d03486872b6caa668157306263d8dccb5"
+  "schemaHash": "e36cd8fcc6548e5ea85ef9d79117d92d023d30d7a838b7c4b0426d8326891b43"
 },
 ["$.settings.headings.lightTheme.h3"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "30f8a8bccd16f14a3a0db8298c67b203f054b32c7a2b39667976f7b6260eac18"
+  "schemaHash": "74c67d5af47339036c17f9608c0d47c5e67b8d53c474e0e0f502af0d50ab830b"
 },
 ["$.settings.headings.lightTheme.h3.fontColor"]: {
   "required": true,
@@ -833,12 +633,12 @@ export default {
     "update": "supported",
     "move": "unsupported"
   },
-  "schemaHash": "0ccc4c3e0911040ab0a2ad8b22a34b4d03486872b6caa668157306263d8dccb5"
+  "schemaHash": "e36cd8fcc6548e5ea85ef9d79117d92d023d30d7a838b7c4b0426d8326891b43"
 },
 ["$.settings.headings.lightTheme.h4"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "30f8a8bccd16f14a3a0db8298c67b203f054b32c7a2b39667976f7b6260eac18"
+  "schemaHash": "74c67d5af47339036c17f9608c0d47c5e67b8d53c474e0e0f502af0d50ab830b"
 },
 ["$.settings.headings.lightTheme.h4.fontColor"]: {
   "required": true,
@@ -849,12 +649,12 @@ export default {
     "update": "supported",
     "move": "unsupported"
   },
-  "schemaHash": "0ccc4c3e0911040ab0a2ad8b22a34b4d03486872b6caa668157306263d8dccb5"
+  "schemaHash": "e36cd8fcc6548e5ea85ef9d79117d92d023d30d7a838b7c4b0426d8326891b43"
 },
 ["$.settings.headings.lightTheme.h5"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "30f8a8bccd16f14a3a0db8298c67b203f054b32c7a2b39667976f7b6260eac18"
+  "schemaHash": "74c67d5af47339036c17f9608c0d47c5e67b8d53c474e0e0f502af0d50ab830b"
 },
 ["$.settings.headings.lightTheme.h5.fontColor"]: {
   "required": true,
@@ -865,12 +665,12 @@ export default {
     "update": "supported",
     "move": "unsupported"
   },
-  "schemaHash": "0ccc4c3e0911040ab0a2ad8b22a34b4d03486872b6caa668157306263d8dccb5"
+  "schemaHash": "e36cd8fcc6548e5ea85ef9d79117d92d023d30d7a838b7c4b0426d8326891b43"
 },
 ["$.settings.headings.lightTheme.h6"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "30f8a8bccd16f14a3a0db8298c67b203f054b32c7a2b39667976f7b6260eac18"
+  "schemaHash": "74c67d5af47339036c17f9608c0d47c5e67b8d53c474e0e0f502af0d50ab830b"
 },
 ["$.settings.headings.lightTheme.h6.fontColor"]: {
   "required": true,
@@ -881,167 +681,131 @@ export default {
     "update": "supported",
     "move": "unsupported"
   },
-  "schemaHash": "0ccc4c3e0911040ab0a2ad8b22a34b4d03486872b6caa668157306263d8dccb5"
+  "schemaHash": "e36cd8fcc6548e5ea85ef9d79117d92d023d30d7a838b7c4b0426d8326891b43"
 },
 ["$.settings.headings.darkTheme"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "e8539651a647217edbe4df27843eb4cb57c9d6e9501d5e05d9004d457e02a25d"
+  "schemaHash": "96ed7d6c909e5263cb77ef713fee5bd39c5139f7c7001bb9137bb14c119a73ef"
 },
 ["$.settings.headings.darkTheme.h1"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "57e589543d2a50a4a79abe28d6ba4370024fbd25b961207995789637fb83be4c"
+  "schemaHash": "b393d816234c22036fab01917754f6e047cea7f581b06c46190642df6f4140b0"
 },
 ["$.settings.headings.darkTheme.h1.fontColor"]: {
   "required": true,
+  "type": [
+    "string",
+    "null"
+  ],
   "actions": {
     "insert": "unsupported",
     "delete": "unsupported",
     "update": "supported",
     "move": "unsupported"
   },
-  "schemaHash": "beba3c6195f126ff2d6bf6d06416c0ac2d04bdd41ead17a655e449e3e9accfa4"
-},
-["$.settings.headings.darkTheme.h1.fontColor|0"]: {
-  "required": true,
-  "type": "string",
-  "schemaHash": "055c6d4727086599be832b36b7a1ffae35ceb93db54024bcf5efdcff62496290"
-},
-["$.settings.headings.darkTheme.h1.fontColor|1"]: {
-  "required": true,
-  "type": "null",
-  "schemaHash": "bcde375ebd4cbacf651311181173836b169d5a360c6ac158c6a2cdaf49be3f61"
+  "schemaHash": "53d4c32bf4bc2f91980241d23122c34ef6134cb79a9396ba8e162a7536e418cb"
 },
 ["$.settings.headings.darkTheme.h2"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "57e589543d2a50a4a79abe28d6ba4370024fbd25b961207995789637fb83be4c"
+  "schemaHash": "b393d816234c22036fab01917754f6e047cea7f581b06c46190642df6f4140b0"
 },
 ["$.settings.headings.darkTheme.h2.fontColor"]: {
   "required": true,
+  "type": [
+    "string",
+    "null"
+  ],
   "actions": {
     "insert": "unsupported",
     "delete": "unsupported",
     "update": "supported",
     "move": "unsupported"
   },
-  "schemaHash": "beba3c6195f126ff2d6bf6d06416c0ac2d04bdd41ead17a655e449e3e9accfa4"
-},
-["$.settings.headings.darkTheme.h2.fontColor|0"]: {
-  "required": true,
-  "type": "string",
-  "schemaHash": "055c6d4727086599be832b36b7a1ffae35ceb93db54024bcf5efdcff62496290"
-},
-["$.settings.headings.darkTheme.h2.fontColor|1"]: {
-  "required": true,
-  "type": "null",
-  "schemaHash": "bcde375ebd4cbacf651311181173836b169d5a360c6ac158c6a2cdaf49be3f61"
+  "schemaHash": "53d4c32bf4bc2f91980241d23122c34ef6134cb79a9396ba8e162a7536e418cb"
 },
 ["$.settings.headings.darkTheme.h3"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "57e589543d2a50a4a79abe28d6ba4370024fbd25b961207995789637fb83be4c"
+  "schemaHash": "b393d816234c22036fab01917754f6e047cea7f581b06c46190642df6f4140b0"
 },
 ["$.settings.headings.darkTheme.h3.fontColor"]: {
   "required": true,
+  "type": [
+    "string",
+    "null"
+  ],
   "actions": {
     "insert": "unsupported",
     "delete": "unsupported",
     "update": "supported",
     "move": "unsupported"
   },
-  "schemaHash": "beba3c6195f126ff2d6bf6d06416c0ac2d04bdd41ead17a655e449e3e9accfa4"
-},
-["$.settings.headings.darkTheme.h3.fontColor|0"]: {
-  "required": true,
-  "type": "string",
-  "schemaHash": "055c6d4727086599be832b36b7a1ffae35ceb93db54024bcf5efdcff62496290"
-},
-["$.settings.headings.darkTheme.h3.fontColor|1"]: {
-  "required": true,
-  "type": "null",
-  "schemaHash": "bcde375ebd4cbacf651311181173836b169d5a360c6ac158c6a2cdaf49be3f61"
+  "schemaHash": "53d4c32bf4bc2f91980241d23122c34ef6134cb79a9396ba8e162a7536e418cb"
 },
 ["$.settings.headings.darkTheme.h4"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "57e589543d2a50a4a79abe28d6ba4370024fbd25b961207995789637fb83be4c"
+  "schemaHash": "b393d816234c22036fab01917754f6e047cea7f581b06c46190642df6f4140b0"
 },
 ["$.settings.headings.darkTheme.h4.fontColor"]: {
   "required": true,
+  "type": [
+    "string",
+    "null"
+  ],
   "actions": {
     "insert": "unsupported",
     "delete": "unsupported",
     "update": "supported",
     "move": "unsupported"
   },
-  "schemaHash": "beba3c6195f126ff2d6bf6d06416c0ac2d04bdd41ead17a655e449e3e9accfa4"
-},
-["$.settings.headings.darkTheme.h4.fontColor|0"]: {
-  "required": true,
-  "type": "string",
-  "schemaHash": "055c6d4727086599be832b36b7a1ffae35ceb93db54024bcf5efdcff62496290"
-},
-["$.settings.headings.darkTheme.h4.fontColor|1"]: {
-  "required": true,
-  "type": "null",
-  "schemaHash": "bcde375ebd4cbacf651311181173836b169d5a360c6ac158c6a2cdaf49be3f61"
+  "schemaHash": "53d4c32bf4bc2f91980241d23122c34ef6134cb79a9396ba8e162a7536e418cb"
 },
 ["$.settings.headings.darkTheme.h5"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "57e589543d2a50a4a79abe28d6ba4370024fbd25b961207995789637fb83be4c"
+  "schemaHash": "b393d816234c22036fab01917754f6e047cea7f581b06c46190642df6f4140b0"
 },
 ["$.settings.headings.darkTheme.h5.fontColor"]: {
   "required": true,
+  "type": [
+    "string",
+    "null"
+  ],
   "actions": {
     "insert": "unsupported",
     "delete": "unsupported",
     "update": "supported",
     "move": "unsupported"
   },
-  "schemaHash": "beba3c6195f126ff2d6bf6d06416c0ac2d04bdd41ead17a655e449e3e9accfa4"
-},
-["$.settings.headings.darkTheme.h5.fontColor|0"]: {
-  "required": true,
-  "type": "string",
-  "schemaHash": "055c6d4727086599be832b36b7a1ffae35ceb93db54024bcf5efdcff62496290"
-},
-["$.settings.headings.darkTheme.h5.fontColor|1"]: {
-  "required": true,
-  "type": "null",
-  "schemaHash": "bcde375ebd4cbacf651311181173836b169d5a360c6ac158c6a2cdaf49be3f61"
+  "schemaHash": "53d4c32bf4bc2f91980241d23122c34ef6134cb79a9396ba8e162a7536e418cb"
 },
 ["$.settings.headings.darkTheme.h6"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "57e589543d2a50a4a79abe28d6ba4370024fbd25b961207995789637fb83be4c"
+  "schemaHash": "b393d816234c22036fab01917754f6e047cea7f581b06c46190642df6f4140b0"
 },
 ["$.settings.headings.darkTheme.h6.fontColor"]: {
   "required": true,
+  "type": [
+    "string",
+    "null"
+  ],
   "actions": {
     "insert": "unsupported",
     "delete": "unsupported",
     "update": "supported",
     "move": "unsupported"
   },
-  "schemaHash": "beba3c6195f126ff2d6bf6d06416c0ac2d04bdd41ead17a655e449e3e9accfa4"
-},
-["$.settings.headings.darkTheme.h6.fontColor|0"]: {
-  "required": true,
-  "type": "string",
-  "schemaHash": "055c6d4727086599be832b36b7a1ffae35ceb93db54024bcf5efdcff62496290"
-},
-["$.settings.headings.darkTheme.h6.fontColor|1"]: {
-  "required": true,
-  "type": "null",
-  "schemaHash": "bcde375ebd4cbacf651311181173836b169d5a360c6ac158c6a2cdaf49be3f61"
+  "schemaHash": "53d4c32bf4bc2f91980241d23122c34ef6134cb79a9396ba8e162a7536e418cb"
 },
 ["$.settings.buttons"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "b0fa461df34a68dfea65e755006c83178724be8aa66a3122dec4d1f514175c03"
+  "schemaHash": "2304617bef2acd2e5d430f921df21497d68aa7186402d77dbc99e1780b004078"
 },
 ["$.settings.buttons.outlookSupport"]: {
   "required": true,
@@ -1083,12 +847,12 @@ export default {
     "update": "supported",
     "move": "unsupported"
   },
-  "schemaHash": "9c2b4cbc5ff7baf4d0aad9250ff9eb37d8b8c4d44061fd78029d3aea62ac76f6"
+  "schemaHash": "5e36559bdb676ae61cefd2ebc722a11421199c2bc0d2de1e204864d907059aec"
 },
 ["$.settings.buttons.letterSpacing"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "9a3a2949896ce1f3f7048146819d3fa9c52198d7a2a872211526cc1643540a62"
+  "schemaHash": "e041038993406558f3251aee53bbb8da59e50c8a247b544d167d79b60def9f7e"
 },
 ["$.settings.buttons.letterSpacing.value"]: {
   "required": true,
@@ -1107,17 +871,17 @@ export default {
 ["$.settings.buttons.fontSize"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "16208d1e33d8319d4694e51b4edb93a5da5b954b3bc79281887f27e7894ee3ca"
+  "schemaHash": "13fb9bb104f38c41be265a6dc88205f458f5e8a00121f644a2828e04d82ee863"
 },
 ["$.settings.buttons.fontSize.desktop"]: {
   "required": true,
   "type": "number",
-  "schemaHash": "d58099902cab7262b22d647c167a33cf123d31cb377fca7a9d1d6bf0b30e2a43"
+  "schemaHash": "aa2bb185cd32fbe435af596b02ace64cfe621e90c88944a07c25430c14a34522"
 },
 ["$.settings.buttons.fontSize.mobile"]: {
   "required": true,
   "type": "number",
-  "schemaHash": "5f5faa90ccf7db107ec32bff03797c01c2cc067e17b264aff40eb49500961cff"
+  "schemaHash": "aa2bb185cd32fbe435af596b02ace64cfe621e90c88944a07c25430c14a34522"
 },
 ["$.settings.buttons.borderRadius"]: {
   "required": true,
@@ -1162,12 +926,12 @@ export default {
 ["$.settings.buttons.border"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "1bc63d7df11a395491980ad0d56cf8a7547d580ec087946732a6e6a91440f5bf"
+  "schemaHash": "16de603003b1366b6de4919236ebaccfb344b20701fb3c3238720747f04df54d"
 },
 ["$.settings.buttons.border.top"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "2a6f053fa93de9497df9308e3400c98d14e01bdb476a55c9507993754c96469e"
+  "schemaHash": "695732905a46eb835200145789972ae9461853b64732610d2899834a4791e71f"
 },
 ["$.settings.buttons.border.top.width"]: {
   "required": true,
@@ -1177,7 +941,7 @@ export default {
 ["$.settings.buttons.border.right"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "2a6f053fa93de9497df9308e3400c98d14e01bdb476a55c9507993754c96469e"
+  "schemaHash": "695732905a46eb835200145789972ae9461853b64732610d2899834a4791e71f"
 },
 ["$.settings.buttons.border.right.width"]: {
   "required": true,
@@ -1187,7 +951,7 @@ export default {
 ["$.settings.buttons.border.bottom"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "2a6f053fa93de9497df9308e3400c98d14e01bdb476a55c9507993754c96469e"
+  "schemaHash": "695732905a46eb835200145789972ae9461853b64732610d2899834a4791e71f"
 },
 ["$.settings.buttons.border.bottom.width"]: {
   "required": true,
@@ -1197,7 +961,7 @@ export default {
 ["$.settings.buttons.border.left"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "2a6f053fa93de9497df9308e3400c98d14e01bdb476a55c9507993754c96469e"
+  "schemaHash": "695732905a46eb835200145789972ae9461853b64732610d2899834a4791e71f"
 },
 ["$.settings.buttons.border.left.width"]: {
   "required": true,
@@ -1222,12 +986,12 @@ export default {
 ["$.settings.buttons.padding"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "332ef3d6aec272885e3e314451ee8da1b6b1622fd0eb2a6c327e6645d839ec34"
+  "schemaHash": "4dcd2f701dc0554da8add74c990730308eaca988d3b5512ebfffef76242d81ee"
 },
 ["$.settings.buttons.padding.desktop"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "57b236f9cf9fd34f4edc262820c73281988d46f8b11a5f5615459dc7201ce982"
+  "schemaHash": "6632627b851c9ee31664ca2a973c4708c4d1d0f228b09fdcfa2bc45850a51a88"
 },
 ["$.settings.buttons.padding.desktop.top"]: {
   "required": true,
@@ -1252,7 +1016,7 @@ export default {
 ["$.settings.buttons.padding.mobile"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "57b236f9cf9fd34f4edc262820c73281988d46f8b11a5f5615459dc7201ce982"
+  "schemaHash": "6632627b851c9ee31664ca2a973c4708c4d1d0f228b09fdcfa2bc45850a51a88"
 },
 ["$.settings.buttons.padding.mobile.top"]: {
   "required": true,
@@ -1277,7 +1041,7 @@ export default {
 ["$.settings.buttons.lightTheme"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "f3680f22e008140b1236b11fc22e0b3b6b2e4c26d6d3e78d08b404c717525bfc"
+  "schemaHash": "0b2d327ef11680a779951da99e2ef97c2d4b689d0c24906b562b59bc95de17fa"
 },
 ["$.settings.buttons.lightTheme.buttonColor"]: {
   "required": true,
@@ -1288,7 +1052,7 @@ export default {
     "update": "supported",
     "move": "unsupported"
   },
-  "schemaHash": "155c8ece6c5b100957c1b09bea54723c2bc2ec4750b1b6784012fe1f79cdf927"
+  "schemaHash": "e36cd8fcc6548e5ea85ef9d79117d92d023d30d7a838b7c4b0426d8326891b43"
 },
 ["$.settings.buttons.lightTheme.fontColor"]: {
   "required": true,
@@ -1299,12 +1063,12 @@ export default {
     "update": "supported",
     "move": "unsupported"
   },
-  "schemaHash": "0ccc4c3e0911040ab0a2ad8b22a34b4d03486872b6caa668157306263d8dccb5"
+  "schemaHash": "e36cd8fcc6548e5ea85ef9d79117d92d023d30d7a838b7c4b0426d8326891b43"
 },
 ["$.settings.buttons.lightTheme.hoverButtonStyles"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "ed00ace1050ac05a129dabee4b43e90b662831b516dc66d7d61c9dd28116cbaa"
+  "schemaHash": "a8ca3a6d08c946ed3364f0335f9d68fe4f19a89c13358f1461a8fe719ce23ebf"
 },
 ["$.settings.buttons.lightTheme.hoverButtonStyles.backgroundColor"]: {
   "required": true,
@@ -1315,7 +1079,7 @@ export default {
     "update": "supported",
     "move": "unsupported"
   },
-  "schemaHash": "155c8ece6c5b100957c1b09bea54723c2bc2ec4750b1b6784012fe1f79cdf927"
+  "schemaHash": "e36cd8fcc6548e5ea85ef9d79117d92d023d30d7a838b7c4b0426d8326891b43"
 },
 ["$.settings.buttons.lightTheme.hoverButtonStyles.fontColor"]: {
   "required": true,
@@ -1326,12 +1090,12 @@ export default {
     "update": "supported",
     "move": "unsupported"
   },
-  "schemaHash": "0ccc4c3e0911040ab0a2ad8b22a34b4d03486872b6caa668157306263d8dccb5"
+  "schemaHash": "e36cd8fcc6548e5ea85ef9d79117d92d023d30d7a838b7c4b0426d8326891b43"
 },
 ["$.settings.buttons.lightTheme.hoverButtonStyles.borderColor"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "bad3da961d1501f7310893e59d4af320192f46b561203676c805636ef3bd1bd0"
+  "schemaHash": "5078c56d123ed81fdb05c2cf0c25ae19093a96b4ca2ac2178c00db6de1f349da"
 },
 ["$.settings.buttons.lightTheme.hoverButtonStyles.borderColor.top"]: {
   "required": true,
@@ -1342,7 +1106,7 @@ export default {
     "update": "supported",
     "move": "unsupported"
   },
-  "schemaHash": "84b58716ffcedde1802b02ada2124c750d927a75fc1820ee578d2131288fa058"
+  "schemaHash": "e36cd8fcc6548e5ea85ef9d79117d92d023d30d7a838b7c4b0426d8326891b43"
 },
 ["$.settings.buttons.lightTheme.hoverButtonStyles.borderColor.right"]: {
   "required": true,
@@ -1353,7 +1117,7 @@ export default {
     "update": "supported",
     "move": "unsupported"
   },
-  "schemaHash": "84b58716ffcedde1802b02ada2124c750d927a75fc1820ee578d2131288fa058"
+  "schemaHash": "e36cd8fcc6548e5ea85ef9d79117d92d023d30d7a838b7c4b0426d8326891b43"
 },
 ["$.settings.buttons.lightTheme.hoverButtonStyles.borderColor.bottom"]: {
   "required": true,
@@ -1364,7 +1128,7 @@ export default {
     "update": "supported",
     "move": "unsupported"
   },
-  "schemaHash": "84b58716ffcedde1802b02ada2124c750d927a75fc1820ee578d2131288fa058"
+  "schemaHash": "e36cd8fcc6548e5ea85ef9d79117d92d023d30d7a838b7c4b0426d8326891b43"
 },
 ["$.settings.buttons.lightTheme.hoverButtonStyles.borderColor.left"]: {
   "required": true,
@@ -1375,12 +1139,12 @@ export default {
     "update": "supported",
     "move": "unsupported"
   },
-  "schemaHash": "84b58716ffcedde1802b02ada2124c750d927a75fc1820ee578d2131288fa058"
+  "schemaHash": "e36cd8fcc6548e5ea85ef9d79117d92d023d30d7a838b7c4b0426d8326891b43"
 },
 ["$.settings.buttons.lightTheme.borderColor"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "bad3da961d1501f7310893e59d4af320192f46b561203676c805636ef3bd1bd0"
+  "schemaHash": "5078c56d123ed81fdb05c2cf0c25ae19093a96b4ca2ac2178c00db6de1f349da"
 },
 ["$.settings.buttons.lightTheme.borderColor.top"]: {
   "required": true,
@@ -1391,7 +1155,7 @@ export default {
     "update": "supported",
     "move": "unsupported"
   },
-  "schemaHash": "84b58716ffcedde1802b02ada2124c750d927a75fc1820ee578d2131288fa058"
+  "schemaHash": "e36cd8fcc6548e5ea85ef9d79117d92d023d30d7a838b7c4b0426d8326891b43"
 },
 ["$.settings.buttons.lightTheme.borderColor.right"]: {
   "required": true,
@@ -1402,7 +1166,7 @@ export default {
     "update": "supported",
     "move": "unsupported"
   },
-  "schemaHash": "84b58716ffcedde1802b02ada2124c750d927a75fc1820ee578d2131288fa058"
+  "schemaHash": "e36cd8fcc6548e5ea85ef9d79117d92d023d30d7a838b7c4b0426d8326891b43"
 },
 ["$.settings.buttons.lightTheme.borderColor.bottom"]: {
   "required": true,
@@ -1413,7 +1177,7 @@ export default {
     "update": "supported",
     "move": "unsupported"
   },
-  "schemaHash": "84b58716ffcedde1802b02ada2124c750d927a75fc1820ee578d2131288fa058"
+  "schemaHash": "e36cd8fcc6548e5ea85ef9d79117d92d023d30d7a838b7c4b0426d8326891b43"
 },
 ["$.settings.buttons.lightTheme.borderColor.left"]: {
   "required": true,
@@ -1424,76 +1188,401 @@ export default {
     "update": "supported",
     "move": "unsupported"
   },
-  "schemaHash": "84b58716ffcedde1802b02ada2124c750d927a75fc1820ee578d2131288fa058"
+  "schemaHash": "e36cd8fcc6548e5ea85ef9d79117d92d023d30d7a838b7c4b0426d8326891b43"
 },
 ["$.settings.buttons.darkTheme"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "54a967d9e74e49542677eb4f24b19ba0e722d3b682b941bcc9859af477cf515d"
+  "schemaHash": "b7a28a67c03c6b5060ee62b5cf4a34d66a60161eacb67a5251d1f66047c7e230"
 },
 ["$.settings.buttons.darkTheme.buttonColor"]: {
   "required": true,
+  "type": [
+    "string",
+    "null"
+  ],
   "actions": {
     "insert": "unsupported",
     "delete": "unsupported",
     "update": "supported",
     "move": "unsupported"
   },
-  "schemaHash": "1aee4f2df24d9dd16cd6b1448074444b5e005a8f38872d2b4fcf11ecc5be4547"
-},
-["$.settings.buttons.darkTheme.buttonColor|0"]: {
-  "required": true,
-  "type": "string",
-  "schemaHash": "1c27c1067708cc6b70818f9cb1841641441677551b2160e8d27566cf80d9838b"
-},
-["$.settings.buttons.darkTheme.buttonColor|1"]: {
-  "required": true,
-  "type": "null",
-  "schemaHash": "bcde375ebd4cbacf651311181173836b169d5a360c6ac158c6a2cdaf49be3f61"
+  "schemaHash": "53d4c32bf4bc2f91980241d23122c34ef6134cb79a9396ba8e162a7536e418cb"
 },
 ["$.settings.buttons.darkTheme.fontColor"]: {
   "required": true,
+  "type": [
+    "string",
+    "null"
+  ],
   "actions": {
     "insert": "unsupported",
     "delete": "unsupported",
     "update": "supported",
     "move": "unsupported"
   },
-  "schemaHash": "beba3c6195f126ff2d6bf6d06416c0ac2d04bdd41ead17a655e449e3e9accfa4"
-},
-["$.settings.buttons.darkTheme.fontColor|0"]: {
-  "required": true,
-  "type": "string",
-  "schemaHash": "055c6d4727086599be832b36b7a1ffae35ceb93db54024bcf5efdcff62496290"
-},
-["$.settings.buttons.darkTheme.fontColor|1"]: {
-  "required": true,
-  "type": "null",
-  "schemaHash": "bcde375ebd4cbacf651311181173836b169d5a360c6ac158c6a2cdaf49be3f61"
+  "schemaHash": "53d4c32bf4bc2f91980241d23122c34ef6134cb79a9396ba8e162a7536e418cb"
 },
 ["$.settings.buttons.darkTheme.hoverButtonStyles"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "fcca7e1451c564d80193d9c34c03fd7e050bffe352807ea798785c6ceedee3cc"
+  "schemaHash": "7d42c031cbb06e9c7e6a24dfde1693815ea0dc1f413a67c0388dd28a4ae5b2c5"
 },
 ["$.settings.buttons.darkTheme.hoverButtonStyles.backgroundColor"]: {
   "required": true,
+  "type": [
+    "string",
+    "null"
+  ],
   "actions": {
     "insert": "unsupported",
     "delete": "unsupported",
     "update": "supported",
     "move": "unsupported"
   },
-  "schemaHash": "1aee4f2df24d9dd16cd6b1448074444b5e005a8f38872d2b4fcf11ecc5be4547"
+  "schemaHash": "53d4c32bf4bc2f91980241d23122c34ef6134cb79a9396ba8e162a7536e418cb"
 },
-["$.settings.buttons.darkTheme.hoverButtonStyles.backgroundColor|0"]: {
+["$.settings.buttons.darkTheme.hoverButtonStyles.fontColor"]: {
+  "required": true,
+  "type": [
+    "string",
+    "null"
+  ],
+  "actions": {
+    "insert": "unsupported",
+    "delete": "unsupported",
+    "update": "supported",
+    "move": "unsupported"
+  },
+  "schemaHash": "53d4c32bf4bc2f91980241d23122c34ef6134cb79a9396ba8e162a7536e418cb"
+},
+["$.settings.buttons.darkTheme.hoverButtonStyles.borderColor"]: {
+  "required": true,
+  "type": "object",
+  "schemaHash": "d27247870ab02f0c259c214945c14aee73b14af882c9a91ef844090ccacab4c8"
+},
+["$.settings.buttons.darkTheme.hoverButtonStyles.borderColor.top"]: {
+  "required": true,
+  "type": [
+    "string",
+    "null"
+  ],
+  "actions": {
+    "insert": "unsupported",
+    "delete": "unsupported",
+    "update": "supported",
+    "move": "unsupported"
+  },
+  "schemaHash": "53d4c32bf4bc2f91980241d23122c34ef6134cb79a9396ba8e162a7536e418cb"
+},
+["$.settings.buttons.darkTheme.hoverButtonStyles.borderColor.right"]: {
+  "required": true,
+  "type": [
+    "string",
+    "null"
+  ],
+  "actions": {
+    "insert": "unsupported",
+    "delete": "unsupported",
+    "update": "supported",
+    "move": "unsupported"
+  },
+  "schemaHash": "53d4c32bf4bc2f91980241d23122c34ef6134cb79a9396ba8e162a7536e418cb"
+},
+["$.settings.buttons.darkTheme.hoverButtonStyles.borderColor.bottom"]: {
+  "required": true,
+  "type": [
+    "string",
+    "null"
+  ],
+  "actions": {
+    "insert": "unsupported",
+    "delete": "unsupported",
+    "update": "supported",
+    "move": "unsupported"
+  },
+  "schemaHash": "53d4c32bf4bc2f91980241d23122c34ef6134cb79a9396ba8e162a7536e418cb"
+},
+["$.settings.buttons.darkTheme.hoverButtonStyles.borderColor.left"]: {
+  "required": true,
+  "type": [
+    "string",
+    "null"
+  ],
+  "actions": {
+    "insert": "unsupported",
+    "delete": "unsupported",
+    "update": "supported",
+    "move": "unsupported"
+  },
+  "schemaHash": "53d4c32bf4bc2f91980241d23122c34ef6134cb79a9396ba8e162a7536e418cb"
+},
+["$.settings.buttons.darkTheme.borderColor"]: {
+  "required": true,
+  "type": "object",
+  "schemaHash": "d27247870ab02f0c259c214945c14aee73b14af882c9a91ef844090ccacab4c8"
+},
+["$.settings.buttons.darkTheme.borderColor.top"]: {
+  "required": true,
+  "type": [
+    "string",
+    "null"
+  ],
+  "actions": {
+    "insert": "unsupported",
+    "delete": "unsupported",
+    "update": "supported",
+    "move": "unsupported"
+  },
+  "schemaHash": "53d4c32bf4bc2f91980241d23122c34ef6134cb79a9396ba8e162a7536e418cb"
+},
+["$.settings.buttons.darkTheme.borderColor.right"]: {
+  "required": true,
+  "type": [
+    "string",
+    "null"
+  ],
+  "actions": {
+    "insert": "unsupported",
+    "delete": "unsupported",
+    "update": "supported",
+    "move": "unsupported"
+  },
+  "schemaHash": "53d4c32bf4bc2f91980241d23122c34ef6134cb79a9396ba8e162a7536e418cb"
+},
+["$.settings.buttons.darkTheme.borderColor.bottom"]: {
+  "required": true,
+  "type": [
+    "string",
+    "null"
+  ],
+  "actions": {
+    "insert": "unsupported",
+    "delete": "unsupported",
+    "update": "supported",
+    "move": "unsupported"
+  },
+  "schemaHash": "53d4c32bf4bc2f91980241d23122c34ef6134cb79a9396ba8e162a7536e418cb"
+},
+["$.settings.buttons.darkTheme.borderColor.left"]: {
+  "required": true,
+  "type": [
+    "string",
+    "null"
+  ],
+  "actions": {
+    "insert": "unsupported",
+    "delete": "unsupported",
+    "update": "supported",
+    "move": "unsupported"
+  },
+  "schemaHash": "53d4c32bf4bc2f91980241d23122c34ef6134cb79a9396ba8e162a7536e418cb"
+},
+["$.stripes"]: {
+  "required": false,
+  "type": "array",
+  "schemaHash": "efb8885927bff591681672d92b2bd76467725a8d8b86e0ddeaaec020c971c696"
+},
+["$.stripes[]"]: {
+  "required": true,
+  "type": "object",
+  "actions": {
+    "insert": "supported",
+    "delete": "supported",
+    "update": "supported",
+    "move": "supported"
+  },
+  "schemaHash": "5d241408accf5c01e0ecec495ebf0bfbac38997fd8877831b2a92dedfd413743"
+},
+["$.stripes[].id"]: {
   "required": true,
   "type": "string",
+  "schemaHash": "d4f568e94371b461d0ec45ce0be979a251a8b1faf76247d8288aa1932d6ccc5d"
+},
+["$.stripes[].settings"]: {
+  "required": false,
+  "type": "object",
+  "schemaHash": "319db074a35b4649b85edb3696b651230c7f64e4d6556bca3ecf190d1e48781c"
+},
+["$.stripes[].settings.messageArea"]: {
+  "required": false,
+  "type": "string",
+  "enum": [
+    "header",
+    "content",
+    "footer",
+    "infoArea"
+  ],
+  "schemaHash": "332ef3d6aec272885e3e314451ee8da1b6b1622fd0eb2a6c327e6645d839ec34"
+},
+["$.stripes[].settings.includeInOutput"]: {
+  "required": false,
+  "type": "string",
+  "enum": [
+    "both",
+    "html",
+    "ampHtml"
+  ],
+  "schemaHash": "57b236f9cf9fd34f4edc262820c73281988d46f8b11a5f5615459dc7201ce982"
+},
+["$.stripes[].settings.hideElement"]: {
+  "required": true,
+  "type": "string",
+  "enum": [
+    "no",
+    "desktop",
+    "mobile"
+  ],
+  "schemaHash": "b7571603839ed66295f268b8b98c6caeef06907f950caf17ef53fb63d5bf7abc"
+},
+["$.stripes[].settings.padding"]: {
+  "required": false,
+  "type": "object",
   "schemaHash": "1c27c1067708cc6b70818f9cb1841641441677551b2160e8d27566cf80d9838b"
 },
-["$.settings.buttons.darkTheme.hoverButtonStyles.backgroundColor|1"]: {
+["$.stripes[].settings.padding.mobile"]: {
   "required": true,
-  "type": "null",
-  "schemaHash": "bcde375ebd4cbacf651311181173836b169d5a360c6ac158c6a2cdaf49be3f61"
+  "type": "object",
+  "schemaHash": "b0436d0d3e471e0145a05542ee662b3c21bb774c2c6dca85be780661b52d914e"
+},
+["$.stripes[].settings.padding.mobile.top"]: {
+  "required": true,
+  "type": "number",
+  "schemaHash": "dedd9a125b9b24dc461951aefa50c4abaf1a6fc4d072d7cc50e97525ce82f60d"
+},
+["$.stripes[].settings.padding.mobile.right"]: {
+  "required": true,
+  "type": "number",
+  "schemaHash": "0de0b1b8b4e02994b9415b401b414015f9024e9336e605c66dc0bce7679cf65d"
+},
+["$.stripes[].settings.padding.mobile.bottom"]: {
+  "required": true,
+  "type": "number",
+  "schemaHash": "9a3a2949896ce1f3f7048146819d3fa9c52198d7a2a872211526cc1643540a62"
+},
+["$.stripes[].settings.padding.mobile.left"]: {
+  "required": true,
+  "type": "number",
+  "schemaHash": "76eb193d1dc62ed65e8fa68c05ddf8c469b5d2f74365e34f38707b2c39eab506"
+},
+["$.stripes[].settings.stripeBackgroundColor"]: {
+  "required": false,
+  "type": "string",
+  "schemaHash": "1bd3a9485045c1f96829d25f0423f49ea4e859d24f60f246f0c91792056737d7"
+},
+["$.stripes[].settings.contentBackgroundColor"]: {
+  "required": false,
+  "type": "string",
+  "schemaHash": "85e9ffd8ec4fc5facbb9ce2e3080baadbdb68639a524135d6a6e7ca4d4c83b74"
+},
+["$.stripes[].settings.backgroundImage"]: {
+  "required": false,
+  "type": "object",
+  "schemaHash": "85efbce02ce8566bfbf6cdc3ba512be5e3a93dc63c8dc7713146874b64d54f9e"
+},
+["$.stripes[].settings.backgroundImage.path"]: {
+  "required": true,
+  "type": "string",
+  "schemaHash": "16208d1e33d8319d4694e51b4edb93a5da5b954b3bc79281887f27e7894ee3ca"
+},
+["$.stripes[].settings.backgroundImage.repeat"]: {
+  "required": true,
+  "type": "boolean",
+  "schemaHash": "7cb541e84f226754a46c21c79f131fa2898354e1242456e6fd1c162bce319553"
+},
+["$.stripes[].settings.backgroundImage.x"]: {
+  "required": true,
+  "type": "string",
+  "schemaHash": "da6e1d7cd61492fddf768d0ab72afbd2a51e56e6a3bc744db9449992f030f3c1"
+},
+["$.stripes[].settings.backgroundImage.y"]: {
+  "required": true,
+  "type": "string",
+  "schemaHash": "c202195a934f3206caad05d4917edf359b473fcbd618ac0e8c7be3504bfda45e"
+},
+["$.stripes[].settings.backgroundImage.sizeX"]: {
+  "required": true,
+  "type": "string",
+  "schemaHash": "00404e686415370f1711c4d7acfa2905444d3cf23cef2e10c47d445ebe690f96"
+},
+["$.stripes[].settings.backgroundImage.sizeY"]: {
+  "required": true,
+  "type": "string",
+  "schemaHash": "00404e686415370f1711c4d7acfa2905444d3cf23cef2e10c47d445ebe690f96"
+},
+["$.stripes[].settings.contentBorder"]: {
+  "required": false,
+  "type": "object",
+  "schemaHash": "2a6f053fa93de9497df9308e3400c98d14e01bdb476a55c9507993754c96469e"
+},
+["$.stripes[].settings.contentBorder.top"]: {
+  "required": true,
+  "type": "object",
+  "schemaHash": "f8a164c82b38ac7dace45998a4b99d512dd9f236a1721556bf02574b9af1a537"
+},
+["$.stripes[].settings.contentBorder.top.width"]: {
+  "required": true,
+  "type": "number",
+  "schemaHash": "e6eb09dafc3ddb01f64e722f3e21df06f0645e475e1759376545721b3b5c8a69"
+},
+["$.stripes[].settings.contentBorder.top.color"]: {
+  "required": true,
+  "type": "string",
+  "schemaHash": "f606b7cec987cb653b92ac0840d09cec1dfe35a1bdf121212817f060bd4ab3e3"
+},
+["$.stripes[].settings.contentBorder.right"]: {
+  "required": true,
+  "type": "object",
+  "schemaHash": "f8a164c82b38ac7dace45998a4b99d512dd9f236a1721556bf02574b9af1a537"
+},
+["$.stripes[].settings.contentBorder.right.width"]: {
+  "required": true,
+  "type": "number",
+  "schemaHash": "e6eb09dafc3ddb01f64e722f3e21df06f0645e475e1759376545721b3b5c8a69"
+},
+["$.stripes[].settings.contentBorder.right.color"]: {
+  "required": true,
+  "type": "string",
+  "schemaHash": "f606b7cec987cb653b92ac0840d09cec1dfe35a1bdf121212817f060bd4ab3e3"
+},
+["$.stripes[].settings.contentBorder.bottom"]: {
+  "required": true,
+  "type": "object",
+  "schemaHash": "f8a164c82b38ac7dace45998a4b99d512dd9f236a1721556bf02574b9af1a537"
+},
+["$.stripes[].settings.contentBorder.bottom.width"]: {
+  "required": true,
+  "type": "number",
+  "schemaHash": "e6eb09dafc3ddb01f64e722f3e21df06f0645e475e1759376545721b3b5c8a69"
+},
+["$.stripes[].settings.contentBorder.bottom.color"]: {
+  "required": true,
+  "type": "string",
+  "schemaHash": "f606b7cec987cb653b92ac0840d09cec1dfe35a1bdf121212817f060bd4ab3e3"
+},
+["$.stripes[].settings.contentBorder.left"]: {
+  "required": true,
+  "type": "object",
+  "schemaHash": "f8a164c82b38ac7dace45998a4b99d512dd9f236a1721556bf02574b9af1a537"
+},
+["$.stripes[].settings.contentBorder.left.width"]: {
+  "required": true,
+  "type": "number",
+  "schemaHash": "e6eb09dafc3ddb01f64e722f3e21df06f0645e475e1759376545721b3b5c8a69"
+},
+["$.stripes[].settings.contentBorder.left.color"]: {
+  "required": true,
+  "type": "string",
+  "schemaHash": "f606b7cec987cb653b92ac0840d09cec1dfe35a1bdf121212817f060bd4ab3e3"
+},
+["$.stripes[].settings.contentBorder.style"]: {
+  "required": true,
+  "type": "string",
+  "enum": [
+    "solid",
+    "dashed",
+    "dotted"
+  ],
+  "schemaHash": "4dccba551d73ee1e024ebf753a1823f51e085b0195de30d1842495dae37ae465"
 }
 };

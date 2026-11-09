@@ -30,21 +30,29 @@ import {
 } from "./model-2461f952bfd9.js";
 import {
   DocumentStateError,
+  jsonIssues,
+  requireValid,
+  validateBlock,
+  validateChange,
+  validateEmailDocument,
+  validateSnapshot
+} from "./editor-validator-0b64df0adc74.js";
+import "./styles-961c8e1b984f.js";
+import "./parse-html-7b561a99741a.js";
+import "./context-92ea7204ec76.js";
+import "./rules-c9866c302580.js";
+import "./colors-c40f90dc9241.js";
+import {
+  canonicalFontValue
+} from "./fonts-82d1d39f0f33.js";
+import {
   contractDefaults,
   getCapabilities,
   getContract,
   getJsonSchema,
-  jsonIssues,
-  nodeSchema,
-  requireValid,
-  validateChange,
-  validateSnapshot
-} from "./contract-22395cb9da24.js";
-import "./styles-961c8e1b984f.js";
-import "./parse-html-7b561a99741a.js";
-import {
-  validateEmailDocument
-} from "./editor-validator-e41a98b04d42.js";
+  nodeSchema
+} from "./contract-79faab52de2a.js";
+import "./rule-table-generated-439fbe3342c9.js";
 import "./social-f4a8e0da8c68.js";
 import {
   EmailSdkError,
@@ -52,9 +60,6 @@ import {
   describeNodeKind,
   isObject
 } from "./errors-3ee69a7e1eb0.js";
-
-// convo-email-agent/src/index.ts
-import { canonicalFontValue as canonicalEditorFontValue } from "./editor-validator/index.mjs";
 
 // convo-email-agent/src/sdk/value-editor.ts
 function createEmailValueEditor(email) {
@@ -80,7 +85,6 @@ function createEmailValueEditor(email) {
 }
 
 // convo-email-agent/src/sdk/document.ts
-import { validateBlock } from "./editor-validator/index.mjs";
 function openDocument(options) {
   requireValid(validateSnapshot(options.current));
   return createEmailSdk({ ...options, emailJson: options.current });
@@ -102,7 +106,7 @@ function createBlock(type, input) {
   };
   const block = { ...cloneJson(input), type, settings: complete(contractDefaults(type), input.settings ?? {}) };
   const result = validateBlock(block);
-  if (!result.success) throw new DocumentStateError(result.issues.map((issue) => ({
+  if (!result.success) throw new DocumentStateError(result.issues.flatMap((issue) => issue.code === "unrecognized_keys" && issue.keys?.length ? issue.keys.map((key) => ({ code: "UNKNOWN_FIELD", stage: "json", input: "target", path: [type, ...issue.path, key].join("."), message: "Unknown factory field." })) : [{
     code: "INVALID_BLOCK",
     stage: "schema",
     input: "target",
@@ -111,7 +115,7 @@ function createBlock(type, input) {
     nativeCode: issue.code,
     nodeId: input.id,
     nodeType: type
-  })));
+  }]));
   const checkKeys = (value, parsed, path) => {
     if (Array.isArray(value) && Array.isArray(parsed)) value.forEach((item, index) => checkKeys(item, parsed[index], "".concat(path, ".").concat(index)));
     else if (isObject(value) && isObject(parsed)) for (const key of Object.keys(value)) {
@@ -142,8 +146,8 @@ function createStructure(input, options = {}) {
 }
 
 // convo-email-agent/src/index.ts
-function canonicalFontValue(value) {
-  return canonicalEditorFontValue(value);
+function canonicalFontValue2(value) {
+  return canonicalFontValue(value);
 }
 export {
   CANONICAL_MCP_OPERATIONS,
@@ -154,7 +158,7 @@ export {
   RETENO_MCP_TOOL_MAPPING,
   STRIPO_MCP_TOOL_MAPPING,
   assertValidEmailModel,
-  canonicalFontValue,
+  canonicalFontValue2 as canonicalFontValue,
   createBlock,
   createDocument,
   createEmailBuilder,

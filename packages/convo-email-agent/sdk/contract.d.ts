@@ -33,7 +33,10 @@ export interface NodeCapability {
     readOnlyProperties: string[];
     actions: Record<'INSERT' | 'UPDATE' | 'DELETE' | 'MOVE', ActionCapability>;
 }
-/** Provenance of the bundled editor contract and merge-service validator; not a live server version query. */
+/**
+ * Provenance of the bundled editor contract and of the validator rules generated from it; not a live server version query.
+ * validatorSha256 identifies the generated rule table.
+ */
 export declare function getContract(): Readonly<{
     editorRevision: string;
     editorDirty: boolean;
@@ -46,6 +49,8 @@ export declare function getContract(): Readonly<{
  * Some native refinements/side effects are enforced only by the bundled validator; schema inspection is not validation.
  */
 export declare function getJsonSchema(): JsonSchemaNode;
+/** The frozen contract schema itself, for the SDK's validator. */
+export declare function contractSchema(): JsonSchemaNode;
 export interface FieldSupport {
     decision: string;
     method: string;

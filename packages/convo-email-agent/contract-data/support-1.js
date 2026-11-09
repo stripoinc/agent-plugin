@@ -11,4 +11,5 @@ import part9 from './support-11.js';
 import part10 from './support-12.js';
 import part11 from './support-13.js';
 import part12 from './support-14.js';
-export default {...part0, ...part1, ...part2, ...part3, ...part4, ...part5, ...part6, ...part7, ...part8, ...part9, ...part10, ...part11, ...part12};
+import part13 from './support-15.js';
+export default {...part0, ...part1, ...part2, ...part3, ...part4, ...part5, ...part6, ...part7, ...part8, ...part9, ...part10, ...part11, ...part12, ...part13};

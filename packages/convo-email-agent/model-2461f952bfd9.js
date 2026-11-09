@@ -1,12 +1,10 @@
 import {
+  ROOT_PATH,
   releaseCopiedFontColors,
   requireValid,
-  validateChange
-} from "./contract-22395cb9da24.js";
-import {
-  ROOT_PATH,
+  validateChange,
   validateEmailDocument
-} from "./editor-validator-e41a98b04d42.js";
+} from "./editor-validator-0b64df0adc74.js";
 
 // convo-email-agent/src/sdk/model.ts
 var STRUCTURAL_KEYS = /* @__PURE__ */ new Set(["stripes", "structures", "columns", "containers", "blocks"]);

@@ -5,7 +5,7 @@ Each entry says what happens, what the SDK does about it, and what to do. Read t
 the current step before building or changing the model; other references link here instead of
 restating editor behavior.
 
-Verified against editor revision `1e786dd4` on the merge-service runtime. When the editor
+Verified against editor revision `46ab3a68` on the merge-service runtime. When the editor
 contract is refreshed, re-check every entry against the new revision, rewrite or delete the ones
 the editor fixed, then update the revision above.
 
@@ -34,6 +34,11 @@ the editor fixed, then update the revision above.
 
 - Line height is stored as a whole percentage, so `1.333` reads back as `1.33` and `0.001` as `0`.
 - SDK: a changed line height with more than two decimal places is rejected, not rounded.
+
+## Menu font
+
+- A menu `fontFamily` equal to the area font fails with `NO_ACTIONS_CREATED`.
+  Do: keep the acquired font or pick another family.
 
 ## Mobile font size
 

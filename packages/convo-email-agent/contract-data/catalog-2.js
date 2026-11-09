@@ -3,7 +3,7 @@ export default {
 ["$"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "45ac305dc359e14ded6afdcd2a38c05404f578b20ffe16eb1e9ff3c22a1ed9e6"
+  "schemaHash": "55646cb30ebfecdb2fcb05e1b2e74fa69869d9b29970569def88612d8a97014b"
 },
 ["$.metadata"]: {
   "required": false,
@@ -138,7 +138,7 @@ export default {
 ["$.settings.general"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "efb8885927bff591681672d92b2bd76467725a8d8b86e0ddeaaec020c971c696"
+  "schemaHash": "106d324c503e53e3372a9b43b39741b1b6c70d42d2f7f7e08d22632a8f961a71"
 },
 ["$.settings.general.defaultStyles"]: {
   "required": true,
@@ -177,17 +177,17 @@ export default {
 },
 ["$.settings.general.backgroundImage"]: {
   "required": true,
-  "schemaHash": "781e11b4062ce50ce49389863a2beee4b6bf685b74acfb0da43b923965ce71f6"
+  "schemaHash": "6afb94e70e416e401b102aff7bcc29f6b51ba26eb20d686278effcc65a5dd334"
 },
 ["$.settings.general.backgroundImage|0"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "e312426cc686452f07482e6d815dbe230e24dadc225f90cce3283accd3fcccfa"
+  "schemaHash": "b86c1bcda56ecdbe6957c4cac32b7f661b7d1b0f8dfb6d0b8cdb83d5b12def95"
 },
 ["$.settings.general.backgroundImage|0.path"]: {
   "required": true,
   "type": "string",
-  "schemaHash": "d4f568e94371b461d0ec45ce0be979a251a8b1faf76247d8288aa1932d6ccc5d"
+  "schemaHash": "00404e686415370f1711c4d7acfa2905444d3cf23cef2e10c47d445ebe690f96"
 },
 ["$.settings.general.backgroundImage|0.repeat"]: {
   "required": true,
@@ -207,12 +207,12 @@ export default {
 ["$.settings.general.backgroundImage|0.sizeX"]: {
   "required": true,
   "type": "string",
-  "schemaHash": "319db074a35b4649b85edb3696b651230c7f64e4d6556bca3ecf190d1e48781c"
+  "schemaHash": "00404e686415370f1711c4d7acfa2905444d3cf23cef2e10c47d445ebe690f96"
 },
 ["$.settings.general.backgroundImage|0.sizeY"]: {
   "required": true,
   "type": "string",
-  "schemaHash": "319db074a35b4649b85edb3696b651230c7f64e4d6556bca3ecf190d1e48781c"
+  "schemaHash": "00404e686415370f1711c4d7acfa2905444d3cf23cef2e10c47d445ebe690f96"
 },
 ["$.settings.general.backgroundImage|1"]: {
   "required": true,
@@ -227,12 +227,12 @@ export default {
 ["$.settings.general.marginsAroundMessage"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "332ef3d6aec272885e3e314451ee8da1b6b1622fd0eb2a6c327e6645d839ec34"
+  "schemaHash": "4dcd2f701dc0554da8add74c990730308eaca988d3b5512ebfffef76242d81ee"
 },
 ["$.settings.general.marginsAroundMessage.desktop"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "57b236f9cf9fd34f4edc262820c73281988d46f8b11a5f5615459dc7201ce982"
+  "schemaHash": "6632627b851c9ee31664ca2a973c4708c4d1d0f228b09fdcfa2bc45850a51a88"
 },
 ["$.settings.general.marginsAroundMessage.desktop.top"]: {
   "required": true,
@@ -257,7 +257,7 @@ export default {
 ["$.settings.general.marginsAroundMessage.mobile"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "57b236f9cf9fd34f4edc262820c73281988d46f8b11a5f5615459dc7201ce982"
+  "schemaHash": "6632627b851c9ee31664ca2a973c4708c4d1d0f228b09fdcfa2bc45850a51a88"
 },
 ["$.settings.general.marginsAroundMessage.mobile.top"]: {
   "required": true,
@@ -282,12 +282,12 @@ export default {
 ["$.settings.general.defaultStructurePadding"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "332ef3d6aec272885e3e314451ee8da1b6b1622fd0eb2a6c327e6645d839ec34"
+  "schemaHash": "4dcd2f701dc0554da8add74c990730308eaca988d3b5512ebfffef76242d81ee"
 },
 ["$.settings.general.defaultStructurePadding.desktop"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "57b236f9cf9fd34f4edc262820c73281988d46f8b11a5f5615459dc7201ce982"
+  "schemaHash": "6632627b851c9ee31664ca2a973c4708c4d1d0f228b09fdcfa2bc45850a51a88"
 },
 ["$.settings.general.defaultStructurePadding.desktop.top"]: {
   "required": true,
@@ -312,7 +312,7 @@ export default {
 ["$.settings.general.defaultStructurePadding.mobile"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "57b236f9cf9fd34f4edc262820c73281988d46f8b11a5f5615459dc7201ce982"
+  "schemaHash": "6632627b851c9ee31664ca2a973c4708c4d1d0f228b09fdcfa2bc45850a51a88"
 },
 ["$.settings.general.defaultStructurePadding.mobile.top"]: {
   "required": true,
@@ -366,7 +366,7 @@ export default {
 ["$.settings.general.lightTheme"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "7aa92dae0b8b0e9e6232a02693c745bfbfca5fdddbc49b4c53072f94b7aca9d0"
+  "schemaHash": "04adba0ca97dd7923c426479001a1b16ea76e98ef6f4457ab1c2314fa32ef4a6"
 },
 ["$.settings.general.lightTheme.backgroundColor"]: {
   "required": true,
@@ -377,12 +377,12 @@ export default {
     "update": "supported",
     "move": "unsupported"
   },
-  "schemaHash": "155c8ece6c5b100957c1b09bea54723c2bc2ec4750b1b6784012fe1f79cdf927"
+  "schemaHash": "e36cd8fcc6548e5ea85ef9d79117d92d023d30d7a838b7c4b0426d8326891b43"
 },
 ["$.settings.general.lightTheme.customListStyles"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "731de8b5369983da41e86cf419e4afb995c6b1f63b1a36a4d64fd24b7cad358e"
+  "schemaHash": "b5ac425a27240f7da03f894b873558021b313c3d8d21346d8e5ae3b8cba8c7b6"
 },
 ["$.settings.general.lightTheme.customListStyles.listMarkerColor"]: {
   "required": true,
@@ -393,7 +393,7 @@ export default {
     "update": "supported",
     "move": "unsupported"
   },
-  "schemaHash": "84b58716ffcedde1802b02ada2124c750d927a75fc1820ee578d2131288fa058"
+  "schemaHash": "e36cd8fcc6548e5ea85ef9d79117d92d023d30d7a838b7c4b0426d8326891b43"
 },
 ["$.settings.general.lightTheme.customListStyles.listNumberMarkerColor"]: {
   "required": true,
@@ -404,107 +404,83 @@ export default {
     "update": "supported",
     "move": "unsupported"
   },
-  "schemaHash": "84b58716ffcedde1802b02ada2124c750d927a75fc1820ee578d2131288fa058"
+  "schemaHash": "e36cd8fcc6548e5ea85ef9d79117d92d023d30d7a838b7c4b0426d8326891b43"
 },
 ["$.settings.general.darkTheme"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "7ddd64fd0ff7f86be3155e976affe02b6e16508e4bab924dcdc1e2197a51dc4c"
+  "schemaHash": "c8b7dbdb74ff718ac2cbbb46973a29c66483d192a4279ae997b327b7c2893129"
 },
 ["$.settings.general.darkTheme.backgroundColor"]: {
   "required": true,
+  "type": [
+    "string",
+    "null"
+  ],
   "actions": {
     "insert": "unsupported",
     "delete": "unsupported",
     "update": "supported",
     "move": "unsupported"
   },
-  "schemaHash": "1aee4f2df24d9dd16cd6b1448074444b5e005a8f38872d2b4fcf11ecc5be4547"
-},
-["$.settings.general.darkTheme.backgroundColor|0"]: {
-  "required": true,
-  "type": "string",
-  "schemaHash": "1c27c1067708cc6b70818f9cb1841641441677551b2160e8d27566cf80d9838b"
-},
-["$.settings.general.darkTheme.backgroundColor|1"]: {
-  "required": true,
-  "type": "null",
-  "schemaHash": "bcde375ebd4cbacf651311181173836b169d5a360c6ac158c6a2cdaf49be3f61"
+  "schemaHash": "53d4c32bf4bc2f91980241d23122c34ef6134cb79a9396ba8e162a7536e418cb"
 },
 ["$.settings.general.darkTheme.customListStyles"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "5f930ae1051696264e6a1447c939c2f3428d3105d6d0b3b991c171553e44ddf4"
+  "schemaHash": "7c5327ee62bfe8d661fe73c2ae61fe2d44bc6af85534c03663cb7be0a8d5d600"
 },
 ["$.settings.general.darkTheme.customListStyles.listMarkerColor"]: {
   "required": true,
+  "type": [
+    "string",
+    "null"
+  ],
   "actions": {
     "insert": "unsupported",
     "delete": "unsupported",
     "update": "supported",
     "move": "unsupported"
   },
-  "schemaHash": "945d6ad22a8b541c11dff8e773635c3d18d65c4715c8bbb6cd889eb0f08f5c2e"
-},
-["$.settings.general.darkTheme.customListStyles.listMarkerColor|0"]: {
-  "required": true,
-  "type": "string",
-  "schemaHash": "dedd9a125b9b24dc461951aefa50c4abaf1a6fc4d072d7cc50e97525ce82f60d"
-},
-["$.settings.general.darkTheme.customListStyles.listMarkerColor|1"]: {
-  "required": true,
-  "type": "null",
-  "schemaHash": "bcde375ebd4cbacf651311181173836b169d5a360c6ac158c6a2cdaf49be3f61"
+  "schemaHash": "53d4c32bf4bc2f91980241d23122c34ef6134cb79a9396ba8e162a7536e418cb"
 },
 ["$.settings.general.darkTheme.customListStyles.listNumberMarkerColor"]: {
   "required": true,
+  "type": [
+    "string",
+    "null"
+  ],
   "actions": {
     "insert": "unsupported",
     "delete": "unsupported",
     "update": "supported",
     "move": "unsupported"
   },
-  "schemaHash": "945d6ad22a8b541c11dff8e773635c3d18d65c4715c8bbb6cd889eb0f08f5c2e"
-},
-["$.settings.general.darkTheme.customListStyles.listNumberMarkerColor|0"]: {
-  "required": true,
-  "type": "string",
-  "schemaHash": "dedd9a125b9b24dc461951aefa50c4abaf1a6fc4d072d7cc50e97525ce82f60d"
-},
-["$.settings.general.darkTheme.customListStyles.listNumberMarkerColor|1"]: {
-  "required": true,
-  "type": "null",
-  "schemaHash": "bcde375ebd4cbacf651311181173836b169d5a360c6ac158c6a2cdaf49be3f61"
+  "schemaHash": "53d4c32bf4bc2f91980241d23122c34ef6134cb79a9396ba8e162a7536e418cb"
 },
 ["$.settings.general.darkTheme.backgroundImage"]: {
   "required": false,
+  "type": [
+    "string",
+    "null"
+  ],
   "actions": {
     "insert": "supported",
     "delete": "supported",
     "update": "supported",
     "move": "unsupported"
   },
-  "schemaHash": "8002267ab24c373dbbf0168a3422977b0b2c9bdda832d1c30596cab93a8cf43e"
-},
-["$.settings.general.darkTheme.backgroundImage|0"]: {
-  "required": false,
-  "type": "string",
-  "schemaHash": "d4f568e94371b461d0ec45ce0be979a251a8b1faf76247d8288aa1932d6ccc5d"
-},
-["$.settings.general.darkTheme.backgroundImage|1"]: {
-  "required": false,
-  "type": "null",
-  "schemaHash": "bcde375ebd4cbacf651311181173836b169d5a360c6ac158c6a2cdaf49be3f61"
+  "schemaHash": "37386421f902fdc4ad2ca9a93b8cfa8895d701619a61df82172d29e348373718"
 },
 ["$.settings.stripes"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "0de0b1b8b4e02994b9415b401b414015f9024e9336e605c66dc0bce7679cf65d"
+  "schemaHash": "a288ddf1780c6f8df7d84335a031ed57eebf3dd8e8cd1dd0fbdd23747fb3da42"
 },
 ["$.settings.stripes.letterSpacing"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "9a3a2949896ce1f3f7048146819d3fa9c52198d7a2a872211526cc1643540a62"
+  "schemaHash": "e041038993406558f3251aee53bbb8da59e50c8a247b544d167d79b60def9f7e"
 },
 ["$.settings.stripes.letterSpacing.value"]: {
   "required": true,
@@ -523,17 +499,17 @@ export default {
 ["$.settings.stripes.lineHeight"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "612eac311fd0fb921a1fc8b64b7cb57aacbcc9e9a3078532dc1e5a14eee2ffc5"
+  "schemaHash": "b364b73c3961994098627a5c8ce92594a28ffce0fd95190834464b3231e157f8"
 },
 ["$.settings.stripes.lineHeight.desktop"]: {
   "required": true,
   "type": "number",
-  "schemaHash": "76eb193d1dc62ed65e8fa68c05ddf8c469b5d2f74365e34f38707b2c39eab506"
+  "schemaHash": "7b2898b5b4fc3e78f0a01fa3191adb1f9084d4b9ef9cbc33087b12ae3ea603fc"
 },
 ["$.settings.stripes.lineHeight.mobile"]: {
   "required": true,
   "type": "number",
-  "schemaHash": "1bd3a9485045c1f96829d25f0423f49ea4e859d24f60f246f0c91792056737d7"
+  "schemaHash": "7b2898b5b4fc3e78f0a01fa3191adb1f9084d4b9ef9cbc33087b12ae3ea603fc"
 },
 ["$.settings.stripes.fontFamily"]: {
   "required": true,
@@ -544,41 +520,41 @@ export default {
     "update": "supported",
     "move": "unsupported"
   },
-  "schemaHash": "9c2b4cbc5ff7baf4d0aad9250ff9eb37d8b8c4d44061fd78029d3aea62ac76f6"
+  "schemaHash": "5e36559bdb676ae61cefd2ebc722a11421199c2bc0d2de1e204864d907059aec"
 },
 ["$.settings.stripes.fontWeight"]: {
   "required": true,
   "type": "integer",
-  "schemaHash": "85efbce02ce8566bfbf6cdc3ba512be5e3a93dc63c8dc7713146874b64d54f9e"
+  "schemaHash": "c2c1be9e2417ecaff89c98d8436c76bcee539e1e8652b5d608ea44b0516cfac3"
 },
 ["$.settings.stripes.header"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "0df7516faef0e3b7225f4933ad3b72737fca7cef6dcb4cd12eb66d75106760a4"
+  "schemaHash": "4aa51b530e1c411e80114fce121d58b6e48ffa4dde331c15c9fdef666a043697"
 },
 ["$.settings.stripes.header.fontSize"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "16208d1e33d8319d4694e51b4edb93a5da5b954b3bc79281887f27e7894ee3ca"
+  "schemaHash": "13fb9bb104f38c41be265a6dc88205f458f5e8a00121f644a2828e04d82ee863"
 },
 ["$.settings.stripes.header.fontSize.desktop"]: {
   "required": true,
   "type": "number",
-  "schemaHash": "d58099902cab7262b22d647c167a33cf123d31cb377fca7a9d1d6bf0b30e2a43"
+  "schemaHash": "aa2bb185cd32fbe435af596b02ace64cfe621e90c88944a07c25430c14a34522"
 },
 ["$.settings.stripes.header.fontSize.mobile"]: {
   "required": true,
   "type": "number",
-  "schemaHash": "5f5faa90ccf7db107ec32bff03797c01c2cc067e17b264aff40eb49500961cff"
+  "schemaHash": "aa2bb185cd32fbe435af596b02ace64cfe621e90c88944a07c25430c14a34522"
 },
 ["$.settings.stripes.header.paragraphBottomSpace"]: {
   "required": true,
-  "schemaHash": "da6e1d7cd61492fddf768d0ab72afbd2a51e56e6a3bc744db9449992f030f3c1"
+  "schemaHash": "3cbe409006f30f23de4251ed46e6b26367f5af820782283a370f94227332301b"
 },
 ["$.settings.stripes.header.paragraphBottomSpace|0"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "c202195a934f3206caad05d4917edf359b473fcbd618ac0e8c7be3504bfda45e"
+  "schemaHash": "071fa34defb14cc44e99db685ab447392c67f9fb2b4911cb9a5ce318539c5eb1"
 },
 ["$.settings.stripes.header.paragraphBottomSpace|0.desktop"]: {
   "required": true,
@@ -597,17 +573,17 @@ export default {
 },
 ["$.settings.stripes.header.backgroundImage"]: {
   "required": true,
-  "schemaHash": "781e11b4062ce50ce49389863a2beee4b6bf685b74acfb0da43b923965ce71f6"
+  "schemaHash": "6afb94e70e416e401b102aff7bcc29f6b51ba26eb20d686278effcc65a5dd334"
 },
 ["$.settings.stripes.header.backgroundImage|0"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "e312426cc686452f07482e6d815dbe230e24dadc225f90cce3283accd3fcccfa"
+  "schemaHash": "b86c1bcda56ecdbe6957c4cac32b7f661b7d1b0f8dfb6d0b8cdb83d5b12def95"
 },
 ["$.settings.stripes.header.backgroundImage|0.path"]: {
   "required": true,
   "type": "string",
-  "schemaHash": "d4f568e94371b461d0ec45ce0be979a251a8b1faf76247d8288aa1932d6ccc5d"
+  "schemaHash": "00404e686415370f1711c4d7acfa2905444d3cf23cef2e10c47d445ebe690f96"
 },
 ["$.settings.stripes.header.backgroundImage|0.repeat"]: {
   "required": true,
@@ -627,12 +603,12 @@ export default {
 ["$.settings.stripes.header.backgroundImage|0.sizeX"]: {
   "required": true,
   "type": "string",
-  "schemaHash": "319db074a35b4649b85edb3696b651230c7f64e4d6556bca3ecf190d1e48781c"
+  "schemaHash": "00404e686415370f1711c4d7acfa2905444d3cf23cef2e10c47d445ebe690f96"
 },
 ["$.settings.stripes.header.backgroundImage|0.sizeY"]: {
   "required": true,
   "type": "string",
-  "schemaHash": "319db074a35b4649b85edb3696b651230c7f64e4d6556bca3ecf190d1e48781c"
+  "schemaHash": "00404e686415370f1711c4d7acfa2905444d3cf23cef2e10c47d445ebe690f96"
 },
 ["$.settings.stripes.header.backgroundImage|1"]: {
   "required": true,
@@ -642,31 +618,31 @@ export default {
 ["$.settings.stripes.content"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "199867167201b66901560188a25e0a853f6252315ee195bfe06e26a6a6802c61"
+  "schemaHash": "38cb21ff585a87d49c3a8f92bc75906d698291c1ae47d0aabe43e7dde83f0db9"
 },
 ["$.settings.stripes.content.fontSize"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "16208d1e33d8319d4694e51b4edb93a5da5b954b3bc79281887f27e7894ee3ca"
+  "schemaHash": "13fb9bb104f38c41be265a6dc88205f458f5e8a00121f644a2828e04d82ee863"
 },
 ["$.settings.stripes.content.fontSize.desktop"]: {
   "required": true,
   "type": "number",
-  "schemaHash": "d58099902cab7262b22d647c167a33cf123d31cb377fca7a9d1d6bf0b30e2a43"
+  "schemaHash": "aa2bb185cd32fbe435af596b02ace64cfe621e90c88944a07c25430c14a34522"
 },
 ["$.settings.stripes.content.fontSize.mobile"]: {
   "required": true,
   "type": "number",
-  "schemaHash": "5f5faa90ccf7db107ec32bff03797c01c2cc067e17b264aff40eb49500961cff"
+  "schemaHash": "aa2bb185cd32fbe435af596b02ace64cfe621e90c88944a07c25430c14a34522"
 },
 ["$.settings.stripes.content.paragraphBottomSpace"]: {
   "required": true,
-  "schemaHash": "da6e1d7cd61492fddf768d0ab72afbd2a51e56e6a3bc744db9449992f030f3c1"
+  "schemaHash": "3cbe409006f30f23de4251ed46e6b26367f5af820782283a370f94227332301b"
 },
 ["$.settings.stripes.content.paragraphBottomSpace|0"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "c202195a934f3206caad05d4917edf359b473fcbd618ac0e8c7be3504bfda45e"
+  "schemaHash": "071fa34defb14cc44e99db685ab447392c67f9fb2b4911cb9a5ce318539c5eb1"
 },
 ["$.settings.stripes.content.paragraphBottomSpace|0.desktop"]: {
   "required": true,
@@ -686,31 +662,31 @@ export default {
 ["$.settings.stripes.footer"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "0df7516faef0e3b7225f4933ad3b72737fca7cef6dcb4cd12eb66d75106760a4"
+  "schemaHash": "4aa51b530e1c411e80114fce121d58b6e48ffa4dde331c15c9fdef666a043697"
 },
 ["$.settings.stripes.footer.fontSize"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "16208d1e33d8319d4694e51b4edb93a5da5b954b3bc79281887f27e7894ee3ca"
+  "schemaHash": "13fb9bb104f38c41be265a6dc88205f458f5e8a00121f644a2828e04d82ee863"
 },
 ["$.settings.stripes.footer.fontSize.desktop"]: {
   "required": true,
   "type": "number",
-  "schemaHash": "d58099902cab7262b22d647c167a33cf123d31cb377fca7a9d1d6bf0b30e2a43"
+  "schemaHash": "aa2bb185cd32fbe435af596b02ace64cfe621e90c88944a07c25430c14a34522"
 },
 ["$.settings.stripes.footer.fontSize.mobile"]: {
   "required": true,
   "type": "number",
-  "schemaHash": "5f5faa90ccf7db107ec32bff03797c01c2cc067e17b264aff40eb49500961cff"
+  "schemaHash": "aa2bb185cd32fbe435af596b02ace64cfe621e90c88944a07c25430c14a34522"
 },
 ["$.settings.stripes.footer.paragraphBottomSpace"]: {
   "required": true,
-  "schemaHash": "da6e1d7cd61492fddf768d0ab72afbd2a51e56e6a3bc744db9449992f030f3c1"
+  "schemaHash": "3cbe409006f30f23de4251ed46e6b26367f5af820782283a370f94227332301b"
 },
 ["$.settings.stripes.footer.paragraphBottomSpace|0"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "c202195a934f3206caad05d4917edf359b473fcbd618ac0e8c7be3504bfda45e"
+  "schemaHash": "071fa34defb14cc44e99db685ab447392c67f9fb2b4911cb9a5ce318539c5eb1"
 },
 ["$.settings.stripes.footer.paragraphBottomSpace|0.desktop"]: {
   "required": true,
@@ -729,17 +705,17 @@ export default {
 },
 ["$.settings.stripes.footer.backgroundImage"]: {
   "required": true,
-  "schemaHash": "781e11b4062ce50ce49389863a2beee4b6bf685b74acfb0da43b923965ce71f6"
+  "schemaHash": "6afb94e70e416e401b102aff7bcc29f6b51ba26eb20d686278effcc65a5dd334"
 },
 ["$.settings.stripes.footer.backgroundImage|0"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "e312426cc686452f07482e6d815dbe230e24dadc225f90cce3283accd3fcccfa"
+  "schemaHash": "b86c1bcda56ecdbe6957c4cac32b7f661b7d1b0f8dfb6d0b8cdb83d5b12def95"
 },
 ["$.settings.stripes.footer.backgroundImage|0.path"]: {
   "required": true,
   "type": "string",
-  "schemaHash": "d4f568e94371b461d0ec45ce0be979a251a8b1faf76247d8288aa1932d6ccc5d"
+  "schemaHash": "00404e686415370f1711c4d7acfa2905444d3cf23cef2e10c47d445ebe690f96"
 },
 ["$.settings.stripes.footer.backgroundImage|0.repeat"]: {
   "required": true,
@@ -759,12 +735,12 @@ export default {
 ["$.settings.stripes.footer.backgroundImage|0.sizeX"]: {
   "required": true,
   "type": "string",
-  "schemaHash": "319db074a35b4649b85edb3696b651230c7f64e4d6556bca3ecf190d1e48781c"
+  "schemaHash": "00404e686415370f1711c4d7acfa2905444d3cf23cef2e10c47d445ebe690f96"
 },
 ["$.settings.stripes.footer.backgroundImage|0.sizeY"]: {
   "required": true,
   "type": "string",
-  "schemaHash": "319db074a35b4649b85edb3696b651230c7f64e4d6556bca3ecf190d1e48781c"
+  "schemaHash": "00404e686415370f1711c4d7acfa2905444d3cf23cef2e10c47d445ebe690f96"
 },
 ["$.settings.stripes.footer.backgroundImage|1"]: {
   "required": true,
@@ -774,31 +750,31 @@ export default {
 ["$.settings.stripes.infoArea"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "199867167201b66901560188a25e0a853f6252315ee195bfe06e26a6a6802c61"
+  "schemaHash": "38cb21ff585a87d49c3a8f92bc75906d698291c1ae47d0aabe43e7dde83f0db9"
 },
 ["$.settings.stripes.infoArea.fontSize"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "16208d1e33d8319d4694e51b4edb93a5da5b954b3bc79281887f27e7894ee3ca"
+  "schemaHash": "13fb9bb104f38c41be265a6dc88205f458f5e8a00121f644a2828e04d82ee863"
 },
 ["$.settings.stripes.infoArea.fontSize.desktop"]: {
   "required": true,
   "type": "number",
-  "schemaHash": "d58099902cab7262b22d647c167a33cf123d31cb377fca7a9d1d6bf0b30e2a43"
+  "schemaHash": "aa2bb185cd32fbe435af596b02ace64cfe621e90c88944a07c25430c14a34522"
 },
 ["$.settings.stripes.infoArea.fontSize.mobile"]: {
   "required": true,
   "type": "number",
-  "schemaHash": "5f5faa90ccf7db107ec32bff03797c01c2cc067e17b264aff40eb49500961cff"
+  "schemaHash": "aa2bb185cd32fbe435af596b02ace64cfe621e90c88944a07c25430c14a34522"
 },
 ["$.settings.stripes.infoArea.paragraphBottomSpace"]: {
   "required": true,
-  "schemaHash": "da6e1d7cd61492fddf768d0ab72afbd2a51e56e6a3bc744db9449992f030f3c1"
+  "schemaHash": "3cbe409006f30f23de4251ed46e6b26367f5af820782283a370f94227332301b"
 },
 ["$.settings.stripes.infoArea.paragraphBottomSpace|0"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "c202195a934f3206caad05d4917edf359b473fcbd618ac0e8c7be3504bfda45e"
+  "schemaHash": "071fa34defb14cc44e99db685ab447392c67f9fb2b4911cb9a5ce318539c5eb1"
 },
 ["$.settings.stripes.infoArea.paragraphBottomSpace|0.desktop"]: {
   "required": true,
@@ -818,12 +794,12 @@ export default {
 ["$.settings.stripes.lightTheme"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "af44e70b5b158a4050b5ba50931b11babd75f5f24100c9b0631e357a0fd29538"
+  "schemaHash": "7670faff4c5b7aa3649b56b00e716594ac22fa6b7d0f13872caa7071030506d2"
 },
 ["$.settings.stripes.lightTheme.header"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "fecc9b977c409e26c8e438ffc14b4f2beab4d91109acacba2d73fb61ccc0e919"
+  "schemaHash": "a853037409c3c295d08eb7d07dbde6ae7b5e86646254be72f16bdf9b9d38391c"
 },
 ["$.settings.stripes.lightTheme.header.stripeBackgroundColor"]: {
   "required": true,
@@ -834,7 +810,7 @@ export default {
     "update": "supported",
     "move": "unsupported"
   },
-  "schemaHash": "155c8ece6c5b100957c1b09bea54723c2bc2ec4750b1b6784012fe1f79cdf927"
+  "schemaHash": "e36cd8fcc6548e5ea85ef9d79117d92d023d30d7a838b7c4b0426d8326891b43"
 },
 ["$.settings.stripes.lightTheme.header.contentBackgroundColor"]: {
   "required": true,
@@ -845,7 +821,7 @@ export default {
     "update": "supported",
     "move": "unsupported"
   },
-  "schemaHash": "155c8ece6c5b100957c1b09bea54723c2bc2ec4750b1b6784012fe1f79cdf927"
+  "schemaHash": "e36cd8fcc6548e5ea85ef9d79117d92d023d30d7a838b7c4b0426d8326891b43"
 },
 ["$.settings.stripes.lightTheme.header.fontColor"]: {
   "required": true,
@@ -856,7 +832,7 @@ export default {
     "update": "supported",
     "move": "unsupported"
   },
-  "schemaHash": "0ccc4c3e0911040ab0a2ad8b22a34b4d03486872b6caa668157306263d8dccb5"
+  "schemaHash": "e36cd8fcc6548e5ea85ef9d79117d92d023d30d7a838b7c4b0426d8326891b43"
 },
 ["$.settings.stripes.lightTheme.header.linkColor"]: {
   "required": true,
@@ -867,7 +843,7 @@ export default {
     "update": "supported",
     "move": "unsupported"
   },
-  "schemaHash": "0ccc4c3e0911040ab0a2ad8b22a34b4d03486872b6caa668157306263d8dccb5"
+  "schemaHash": "e36cd8fcc6548e5ea85ef9d79117d92d023d30d7a838b7c4b0426d8326891b43"
 },
 ["$.settings.stripes.lightTheme.header.linkColorHover"]: {
   "required": true,
@@ -878,12 +854,12 @@ export default {
     "update": "supported",
     "move": "unsupported"
   },
-  "schemaHash": "0ccc4c3e0911040ab0a2ad8b22a34b4d03486872b6caa668157306263d8dccb5"
+  "schemaHash": "e36cd8fcc6548e5ea85ef9d79117d92d023d30d7a838b7c4b0426d8326891b43"
 },
 ["$.settings.stripes.lightTheme.content"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "8bd70e131d9a8a21983d61a5bb97d119575f845afb80e33c68e79e93820dc5d0"
+  "schemaHash": "2cdf6c1dd68edfe4610003044d002c3700fdcffe993ce554f2f6a893ce4b3b76"
 },
 ["$.settings.stripes.lightTheme.content.contentBackgroundColor"]: {
   "required": true,
@@ -894,7 +870,7 @@ export default {
     "update": "supported",
     "move": "unsupported"
   },
-  "schemaHash": "155c8ece6c5b100957c1b09bea54723c2bc2ec4750b1b6784012fe1f79cdf927"
+  "schemaHash": "e36cd8fcc6548e5ea85ef9d79117d92d023d30d7a838b7c4b0426d8326891b43"
 },
 ["$.settings.stripes.lightTheme.content.fontColor"]: {
   "required": true,
@@ -905,7 +881,7 @@ export default {
     "update": "supported",
     "move": "unsupported"
   },
-  "schemaHash": "0ccc4c3e0911040ab0a2ad8b22a34b4d03486872b6caa668157306263d8dccb5"
+  "schemaHash": "e36cd8fcc6548e5ea85ef9d79117d92d023d30d7a838b7c4b0426d8326891b43"
 },
 ["$.settings.stripes.lightTheme.content.linkColor"]: {
   "required": true,
@@ -916,7 +892,7 @@ export default {
     "update": "supported",
     "move": "unsupported"
   },
-  "schemaHash": "0ccc4c3e0911040ab0a2ad8b22a34b4d03486872b6caa668157306263d8dccb5"
+  "schemaHash": "e36cd8fcc6548e5ea85ef9d79117d92d023d30d7a838b7c4b0426d8326891b43"
 },
 ["$.settings.stripes.lightTheme.content.linkColorHover"]: {
   "required": true,
@@ -927,12 +903,12 @@ export default {
     "update": "supported",
     "move": "unsupported"
   },
-  "schemaHash": "0ccc4c3e0911040ab0a2ad8b22a34b4d03486872b6caa668157306263d8dccb5"
+  "schemaHash": "e36cd8fcc6548e5ea85ef9d79117d92d023d30d7a838b7c4b0426d8326891b43"
 },
 ["$.settings.stripes.lightTheme.footer"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "fecc9b977c409e26c8e438ffc14b4f2beab4d91109acacba2d73fb61ccc0e919"
+  "schemaHash": "a853037409c3c295d08eb7d07dbde6ae7b5e86646254be72f16bdf9b9d38391c"
 },
 ["$.settings.stripes.lightTheme.footer.stripeBackgroundColor"]: {
   "required": true,
@@ -943,7 +919,7 @@ export default {
     "update": "supported",
     "move": "unsupported"
   },
-  "schemaHash": "155c8ece6c5b100957c1b09bea54723c2bc2ec4750b1b6784012fe1f79cdf927"
+  "schemaHash": "e36cd8fcc6548e5ea85ef9d79117d92d023d30d7a838b7c4b0426d8326891b43"
 },
 ["$.settings.stripes.lightTheme.footer.contentBackgroundColor"]: {
   "required": true,
@@ -954,7 +930,7 @@ export default {
     "update": "supported",
     "move": "unsupported"
   },
-  "schemaHash": "155c8ece6c5b100957c1b09bea54723c2bc2ec4750b1b6784012fe1f79cdf927"
+  "schemaHash": "e36cd8fcc6548e5ea85ef9d79117d92d023d30d7a838b7c4b0426d8326891b43"
 },
 ["$.settings.stripes.lightTheme.footer.fontColor"]: {
   "required": true,
@@ -965,7 +941,7 @@ export default {
     "update": "supported",
     "move": "unsupported"
   },
-  "schemaHash": "0ccc4c3e0911040ab0a2ad8b22a34b4d03486872b6caa668157306263d8dccb5"
+  "schemaHash": "e36cd8fcc6548e5ea85ef9d79117d92d023d30d7a838b7c4b0426d8326891b43"
 },
 ["$.settings.stripes.lightTheme.footer.linkColor"]: {
   "required": true,
@@ -976,7 +952,7 @@ export default {
     "update": "supported",
     "move": "unsupported"
   },
-  "schemaHash": "0ccc4c3e0911040ab0a2ad8b22a34b4d03486872b6caa668157306263d8dccb5"
+  "schemaHash": "e36cd8fcc6548e5ea85ef9d79117d92d023d30d7a838b7c4b0426d8326891b43"
 },
 ["$.settings.stripes.lightTheme.footer.linkColorHover"]: {
   "required": true,
@@ -987,12 +963,12 @@ export default {
     "update": "supported",
     "move": "unsupported"
   },
-  "schemaHash": "0ccc4c3e0911040ab0a2ad8b22a34b4d03486872b6caa668157306263d8dccb5"
+  "schemaHash": "e36cd8fcc6548e5ea85ef9d79117d92d023d30d7a838b7c4b0426d8326891b43"
 },
 ["$.settings.stripes.lightTheme.infoArea"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "22c2c16de27fd0f39075aff064bde110d7c7eab8de2965d86006b364312f2292"
+  "schemaHash": "6b11ffc2ba43fd2eabc519d9a3666714e34024de12ad748659f0853d07d33829"
 },
 ["$.settings.stripes.lightTheme.infoArea.fontColor"]: {
   "required": true,
@@ -1003,7 +979,7 @@ export default {
     "update": "supported",
     "move": "unsupported"
   },
-  "schemaHash": "0ccc4c3e0911040ab0a2ad8b22a34b4d03486872b6caa668157306263d8dccb5"
+  "schemaHash": "e36cd8fcc6548e5ea85ef9d79117d92d023d30d7a838b7c4b0426d8326891b43"
 },
 ["$.settings.stripes.lightTheme.infoArea.linkColor"]: {
   "required": true,
@@ -1014,7 +990,7 @@ export default {
     "update": "supported",
     "move": "unsupported"
   },
-  "schemaHash": "0ccc4c3e0911040ab0a2ad8b22a34b4d03486872b6caa668157306263d8dccb5"
+  "schemaHash": "e36cd8fcc6548e5ea85ef9d79117d92d023d30d7a838b7c4b0426d8326891b43"
 },
 ["$.settings.stripes.lightTheme.infoArea.linkColorHover"]: {
   "required": true,
@@ -1025,382 +1001,280 @@ export default {
     "update": "supported",
     "move": "unsupported"
   },
-  "schemaHash": "0ccc4c3e0911040ab0a2ad8b22a34b4d03486872b6caa668157306263d8dccb5"
+  "schemaHash": "e36cd8fcc6548e5ea85ef9d79117d92d023d30d7a838b7c4b0426d8326891b43"
 },
 ["$.settings.stripes.darkTheme"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "95107f17dd23867fa2dba66065d6494db1f4aacc408364284318b727a69f3394"
+  "schemaHash": "3b8cef264af4c2c235655e740b83bc65fd979b61d1027a4233ab9315d5a9921e"
 },
 ["$.settings.stripes.darkTheme.header"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "b5f4cc09ce48b1ea650f24143a926b5d2ee5060c41baeafb504c670cbad629c8"
+  "schemaHash": "aa45f7d76cc1b9f67e93a89c4b5e1b519c1fc7ec65745aeb3f273bd9a5310ccf"
 },
 ["$.settings.stripes.darkTheme.header.stripeBackgroundColor"]: {
   "required": true,
+  "type": [
+    "string",
+    "null"
+  ],
   "actions": {
     "insert": "unsupported",
     "delete": "unsupported",
     "update": "supported",
     "move": "unsupported"
   },
-  "schemaHash": "1aee4f2df24d9dd16cd6b1448074444b5e005a8f38872d2b4fcf11ecc5be4547"
-},
-["$.settings.stripes.darkTheme.header.stripeBackgroundColor|0"]: {
-  "required": true,
-  "type": "string",
-  "schemaHash": "1c27c1067708cc6b70818f9cb1841641441677551b2160e8d27566cf80d9838b"
-},
-["$.settings.stripes.darkTheme.header.stripeBackgroundColor|1"]: {
-  "required": true,
-  "type": "null",
-  "schemaHash": "bcde375ebd4cbacf651311181173836b169d5a360c6ac158c6a2cdaf49be3f61"
+  "schemaHash": "53d4c32bf4bc2f91980241d23122c34ef6134cb79a9396ba8e162a7536e418cb"
 },
 ["$.settings.stripes.darkTheme.header.contentBackgroundColor"]: {
   "required": true,
+  "type": [
+    "string",
+    "null"
+  ],
   "actions": {
     "insert": "unsupported",
     "delete": "unsupported",
     "update": "supported",
     "move": "unsupported"
   },
-  "schemaHash": "1aee4f2df24d9dd16cd6b1448074444b5e005a8f38872d2b4fcf11ecc5be4547"
-},
-["$.settings.stripes.darkTheme.header.contentBackgroundColor|0"]: {
-  "required": true,
-  "type": "string",
-  "schemaHash": "1c27c1067708cc6b70818f9cb1841641441677551b2160e8d27566cf80d9838b"
-},
-["$.settings.stripes.darkTheme.header.contentBackgroundColor|1"]: {
-  "required": true,
-  "type": "null",
-  "schemaHash": "bcde375ebd4cbacf651311181173836b169d5a360c6ac158c6a2cdaf49be3f61"
+  "schemaHash": "53d4c32bf4bc2f91980241d23122c34ef6134cb79a9396ba8e162a7536e418cb"
 },
 ["$.settings.stripes.darkTheme.header.fontColor"]: {
   "required": true,
+  "type": [
+    "string",
+    "null"
+  ],
   "actions": {
     "insert": "unsupported",
     "delete": "unsupported",
     "update": "supported",
     "move": "unsupported"
   },
-  "schemaHash": "beba3c6195f126ff2d6bf6d06416c0ac2d04bdd41ead17a655e449e3e9accfa4"
-},
-["$.settings.stripes.darkTheme.header.fontColor|0"]: {
-  "required": true,
-  "type": "string",
-  "schemaHash": "055c6d4727086599be832b36b7a1ffae35ceb93db54024bcf5efdcff62496290"
-},
-["$.settings.stripes.darkTheme.header.fontColor|1"]: {
-  "required": true,
-  "type": "null",
-  "schemaHash": "bcde375ebd4cbacf651311181173836b169d5a360c6ac158c6a2cdaf49be3f61"
+  "schemaHash": "53d4c32bf4bc2f91980241d23122c34ef6134cb79a9396ba8e162a7536e418cb"
 },
 ["$.settings.stripes.darkTheme.header.linkColor"]: {
   "required": true,
+  "type": [
+    "string",
+    "null"
+  ],
   "actions": {
     "insert": "unsupported",
     "delete": "unsupported",
     "update": "supported",
     "move": "unsupported"
   },
-  "schemaHash": "beba3c6195f126ff2d6bf6d06416c0ac2d04bdd41ead17a655e449e3e9accfa4"
-},
-["$.settings.stripes.darkTheme.header.linkColor|0"]: {
-  "required": true,
-  "type": "string",
-  "schemaHash": "055c6d4727086599be832b36b7a1ffae35ceb93db54024bcf5efdcff62496290"
-},
-["$.settings.stripes.darkTheme.header.linkColor|1"]: {
-  "required": true,
-  "type": "null",
-  "schemaHash": "bcde375ebd4cbacf651311181173836b169d5a360c6ac158c6a2cdaf49be3f61"
+  "schemaHash": "53d4c32bf4bc2f91980241d23122c34ef6134cb79a9396ba8e162a7536e418cb"
 },
 ["$.settings.stripes.darkTheme.header.linkColorHover"]: {
   "required": true,
+  "type": [
+    "string",
+    "null"
+  ],
   "actions": {
     "insert": "unsupported",
     "delete": "unsupported",
     "update": "supported",
     "move": "unsupported"
   },
-  "schemaHash": "beba3c6195f126ff2d6bf6d06416c0ac2d04bdd41ead17a655e449e3e9accfa4"
-},
-["$.settings.stripes.darkTheme.header.linkColorHover|0"]: {
-  "required": true,
-  "type": "string",
-  "schemaHash": "055c6d4727086599be832b36b7a1ffae35ceb93db54024bcf5efdcff62496290"
-},
-["$.settings.stripes.darkTheme.header.linkColorHover|1"]: {
-  "required": true,
-  "type": "null",
-  "schemaHash": "bcde375ebd4cbacf651311181173836b169d5a360c6ac158c6a2cdaf49be3f61"
+  "schemaHash": "53d4c32bf4bc2f91980241d23122c34ef6134cb79a9396ba8e162a7536e418cb"
 },
 ["$.settings.stripes.darkTheme.content"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "6d980b1b3f50dd9021c83e657bec23ee3f40d46a31bdfff5a7bacb0341cbbbd0"
+  "schemaHash": "43f566df3f9037173648dee0ab4f53c73fa5856656705e4c8a7ac9737e306323"
 },
 ["$.settings.stripes.darkTheme.content.contentBackgroundColor"]: {
   "required": true,
+  "type": [
+    "string",
+    "null"
+  ],
   "actions": {
     "insert": "unsupported",
     "delete": "unsupported",
     "update": "supported",
     "move": "unsupported"
   },
-  "schemaHash": "1aee4f2df24d9dd16cd6b1448074444b5e005a8f38872d2b4fcf11ecc5be4547"
-},
-["$.settings.stripes.darkTheme.content.contentBackgroundColor|0"]: {
-  "required": true,
-  "type": "string",
-  "schemaHash": "1c27c1067708cc6b70818f9cb1841641441677551b2160e8d27566cf80d9838b"
-},
-["$.settings.stripes.darkTheme.content.contentBackgroundColor|1"]: {
-  "required": true,
-  "type": "null",
-  "schemaHash": "bcde375ebd4cbacf651311181173836b169d5a360c6ac158c6a2cdaf49be3f61"
+  "schemaHash": "53d4c32bf4bc2f91980241d23122c34ef6134cb79a9396ba8e162a7536e418cb"
 },
 ["$.settings.stripes.darkTheme.content.fontColor"]: {
   "required": true,
+  "type": [
+    "string",
+    "null"
+  ],
   "actions": {
     "insert": "unsupported",
     "delete": "unsupported",
     "update": "supported",
     "move": "unsupported"
   },
-  "schemaHash": "beba3c6195f126ff2d6bf6d06416c0ac2d04bdd41ead17a655e449e3e9accfa4"
-},
-["$.settings.stripes.darkTheme.content.fontColor|0"]: {
-  "required": true,
-  "type": "string",
-  "schemaHash": "055c6d4727086599be832b36b7a1ffae35ceb93db54024bcf5efdcff62496290"
-},
-["$.settings.stripes.darkTheme.content.fontColor|1"]: {
-  "required": true,
-  "type": "null",
-  "schemaHash": "bcde375ebd4cbacf651311181173836b169d5a360c6ac158c6a2cdaf49be3f61"
+  "schemaHash": "53d4c32bf4bc2f91980241d23122c34ef6134cb79a9396ba8e162a7536e418cb"
 },
 ["$.settings.stripes.darkTheme.content.linkColor"]: {
   "required": true,
+  "type": [
+    "string",
+    "null"
+  ],
   "actions": {
     "insert": "unsupported",
     "delete": "unsupported",
     "update": "supported",
     "move": "unsupported"
   },
-  "schemaHash": "beba3c6195f126ff2d6bf6d06416c0ac2d04bdd41ead17a655e449e3e9accfa4"
-},
-["$.settings.stripes.darkTheme.content.linkColor|0"]: {
-  "required": true,
-  "type": "string",
-  "schemaHash": "055c6d4727086599be832b36b7a1ffae35ceb93db54024bcf5efdcff62496290"
-},
-["$.settings.stripes.darkTheme.content.linkColor|1"]: {
-  "required": true,
-  "type": "null",
-  "schemaHash": "bcde375ebd4cbacf651311181173836b169d5a360c6ac158c6a2cdaf49be3f61"
+  "schemaHash": "53d4c32bf4bc2f91980241d23122c34ef6134cb79a9396ba8e162a7536e418cb"
 },
 ["$.settings.stripes.darkTheme.content.linkColorHover"]: {
   "required": true,
+  "type": [
+    "string",
+    "null"
+  ],
   "actions": {
     "insert": "unsupported",
     "delete": "unsupported",
     "update": "supported",
     "move": "unsupported"
   },
-  "schemaHash": "beba3c6195f126ff2d6bf6d06416c0ac2d04bdd41ead17a655e449e3e9accfa4"
-},
-["$.settings.stripes.darkTheme.content.linkColorHover|0"]: {
-  "required": true,
-  "type": "string",
-  "schemaHash": "055c6d4727086599be832b36b7a1ffae35ceb93db54024bcf5efdcff62496290"
-},
-["$.settings.stripes.darkTheme.content.linkColorHover|1"]: {
-  "required": true,
-  "type": "null",
-  "schemaHash": "bcde375ebd4cbacf651311181173836b169d5a360c6ac158c6a2cdaf49be3f61"
+  "schemaHash": "53d4c32bf4bc2f91980241d23122c34ef6134cb79a9396ba8e162a7536e418cb"
 },
 ["$.settings.stripes.darkTheme.footer"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "b5f4cc09ce48b1ea650f24143a926b5d2ee5060c41baeafb504c670cbad629c8"
+  "schemaHash": "aa45f7d76cc1b9f67e93a89c4b5e1b519c1fc7ec65745aeb3f273bd9a5310ccf"
 },
 ["$.settings.stripes.darkTheme.footer.stripeBackgroundColor"]: {
   "required": true,
+  "type": [
+    "string",
+    "null"
+  ],
   "actions": {
     "insert": "unsupported",
     "delete": "unsupported",
     "update": "supported",
     "move": "unsupported"
   },
-  "schemaHash": "1aee4f2df24d9dd16cd6b1448074444b5e005a8f38872d2b4fcf11ecc5be4547"
-},
-["$.settings.stripes.darkTheme.footer.stripeBackgroundColor|0"]: {
-  "required": true,
-  "type": "string",
-  "schemaHash": "1c27c1067708cc6b70818f9cb1841641441677551b2160e8d27566cf80d9838b"
-},
-["$.settings.stripes.darkTheme.footer.stripeBackgroundColor|1"]: {
-  "required": true,
-  "type": "null",
-  "schemaHash": "bcde375ebd4cbacf651311181173836b169d5a360c6ac158c6a2cdaf49be3f61"
+  "schemaHash": "53d4c32bf4bc2f91980241d23122c34ef6134cb79a9396ba8e162a7536e418cb"
 },
 ["$.settings.stripes.darkTheme.footer.contentBackgroundColor"]: {
   "required": true,
+  "type": [
+    "string",
+    "null"
+  ],
   "actions": {
     "insert": "unsupported",
     "delete": "unsupported",
     "update": "supported",
     "move": "unsupported"
   },
-  "schemaHash": "1aee4f2df24d9dd16cd6b1448074444b5e005a8f38872d2b4fcf11ecc5be4547"
-},
-["$.settings.stripes.darkTheme.footer.contentBackgroundColor|0"]: {
-  "required": true,
-  "type": "string",
-  "schemaHash": "1c27c1067708cc6b70818f9cb1841641441677551b2160e8d27566cf80d9838b"
-},
-["$.settings.stripes.darkTheme.footer.contentBackgroundColor|1"]: {
-  "required": true,
-  "type": "null",
-  "schemaHash": "bcde375ebd4cbacf651311181173836b169d5a360c6ac158c6a2cdaf49be3f61"
+  "schemaHash": "53d4c32bf4bc2f91980241d23122c34ef6134cb79a9396ba8e162a7536e418cb"
 },
 ["$.settings.stripes.darkTheme.footer.fontColor"]: {
   "required": true,
+  "type": [
+    "string",
+    "null"
+  ],
   "actions": {
     "insert": "unsupported",
     "delete": "unsupported",
     "update": "supported",
     "move": "unsupported"
   },
-  "schemaHash": "beba3c6195f126ff2d6bf6d06416c0ac2d04bdd41ead17a655e449e3e9accfa4"
-},
-["$.settings.stripes.darkTheme.footer.fontColor|0"]: {
-  "required": true,
-  "type": "string",
-  "schemaHash": "055c6d4727086599be832b36b7a1ffae35ceb93db54024bcf5efdcff62496290"
-},
-["$.settings.stripes.darkTheme.footer.fontColor|1"]: {
-  "required": true,
-  "type": "null",
-  "schemaHash": "bcde375ebd4cbacf651311181173836b169d5a360c6ac158c6a2cdaf49be3f61"
+  "schemaHash": "53d4c32bf4bc2f91980241d23122c34ef6134cb79a9396ba8e162a7536e418cb"
 },
 ["$.settings.stripes.darkTheme.footer.linkColor"]: {
   "required": true,
+  "type": [
+    "string",
+    "null"
+  ],
   "actions": {
     "insert": "unsupported",
     "delete": "unsupported",
     "update": "supported",
     "move": "unsupported"
   },
-  "schemaHash": "beba3c6195f126ff2d6bf6d06416c0ac2d04bdd41ead17a655e449e3e9accfa4"
-},
-["$.settings.stripes.darkTheme.footer.linkColor|0"]: {
-  "required": true,
-  "type": "string",
-  "schemaHash": "055c6d4727086599be832b36b7a1ffae35ceb93db54024bcf5efdcff62496290"
-},
-["$.settings.stripes.darkTheme.footer.linkColor|1"]: {
-  "required": true,
-  "type": "null",
-  "schemaHash": "bcde375ebd4cbacf651311181173836b169d5a360c6ac158c6a2cdaf49be3f61"
+  "schemaHash": "53d4c32bf4bc2f91980241d23122c34ef6134cb79a9396ba8e162a7536e418cb"
 },
 ["$.settings.stripes.darkTheme.footer.linkColorHover"]: {
   "required": true,
+  "type": [
+    "string",
+    "null"
+  ],
   "actions": {
     "insert": "unsupported",
     "delete": "unsupported",
     "update": "supported",
     "move": "unsupported"
   },
-  "schemaHash": "beba3c6195f126ff2d6bf6d06416c0ac2d04bdd41ead17a655e449e3e9accfa4"
-},
-["$.settings.stripes.darkTheme.footer.linkColorHover|0"]: {
-  "required": true,
-  "type": "string",
-  "schemaHash": "055c6d4727086599be832b36b7a1ffae35ceb93db54024bcf5efdcff62496290"
-},
-["$.settings.stripes.darkTheme.footer.linkColorHover|1"]: {
-  "required": true,
-  "type": "null",
-  "schemaHash": "bcde375ebd4cbacf651311181173836b169d5a360c6ac158c6a2cdaf49be3f61"
+  "schemaHash": "53d4c32bf4bc2f91980241d23122c34ef6134cb79a9396ba8e162a7536e418cb"
 },
 ["$.settings.stripes.darkTheme.infoArea"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "7b41000bd9994edbbe133b2cbfad19e58696bb8dc47dd4dcad8716ae14b14c00"
+  "schemaHash": "911d039bc69dabffff1adecac57fc308350004210788f34be7665bc399e3d708"
 },
 ["$.settings.stripes.darkTheme.infoArea.fontColor"]: {
   "required": true,
+  "type": [
+    "string",
+    "null"
+  ],
   "actions": {
     "insert": "unsupported",
     "delete": "unsupported",
     "update": "supported",
     "move": "unsupported"
   },
-  "schemaHash": "beba3c6195f126ff2d6bf6d06416c0ac2d04bdd41ead17a655e449e3e9accfa4"
-},
-["$.settings.stripes.darkTheme.infoArea.fontColor|0"]: {
-  "required": true,
-  "type": "string",
-  "schemaHash": "055c6d4727086599be832b36b7a1ffae35ceb93db54024bcf5efdcff62496290"
-},
-["$.settings.stripes.darkTheme.infoArea.fontColor|1"]: {
-  "required": true,
-  "type": "null",
-  "schemaHash": "bcde375ebd4cbacf651311181173836b169d5a360c6ac158c6a2cdaf49be3f61"
+  "schemaHash": "53d4c32bf4bc2f91980241d23122c34ef6134cb79a9396ba8e162a7536e418cb"
 },
 ["$.settings.stripes.darkTheme.infoArea.linkColor"]: {
   "required": true,
+  "type": [
+    "string",
+    "null"
+  ],
   "actions": {
     "insert": "unsupported",
     "delete": "unsupported",
     "update": "supported",
     "move": "unsupported"
   },
-  "schemaHash": "beba3c6195f126ff2d6bf6d06416c0ac2d04bdd41ead17a655e449e3e9accfa4"
-},
-["$.settings.stripes.darkTheme.infoArea.linkColor|0"]: {
-  "required": true,
-  "type": "string",
-  "schemaHash": "055c6d4727086599be832b36b7a1ffae35ceb93db54024bcf5efdcff62496290"
-},
-["$.settings.stripes.darkTheme.infoArea.linkColor|1"]: {
-  "required": true,
-  "type": "null",
-  "schemaHash": "bcde375ebd4cbacf651311181173836b169d5a360c6ac158c6a2cdaf49be3f61"
+  "schemaHash": "53d4c32bf4bc2f91980241d23122c34ef6134cb79a9396ba8e162a7536e418cb"
 },
 ["$.settings.stripes.darkTheme.infoArea.linkColorHover"]: {
   "required": true,
+  "type": [
+    "string",
+    "null"
+  ],
   "actions": {
     "insert": "unsupported",
     "delete": "unsupported",
     "update": "supported",
     "move": "unsupported"
   },
-  "schemaHash": "beba3c6195f126ff2d6bf6d06416c0ac2d04bdd41ead17a655e449e3e9accfa4"
-},
-["$.settings.stripes.darkTheme.infoArea.linkColorHover|0"]: {
-  "required": true,
-  "type": "string",
-  "schemaHash": "055c6d4727086599be832b36b7a1ffae35ceb93db54024bcf5efdcff62496290"
-},
-["$.settings.stripes.darkTheme.infoArea.linkColorHover|1"]: {
-  "required": true,
-  "type": "null",
-  "schemaHash": "bcde375ebd4cbacf651311181173836b169d5a360c6ac158c6a2cdaf49be3f61"
+  "schemaHash": "53d4c32bf4bc2f91980241d23122c34ef6134cb79a9396ba8e162a7536e418cb"
 },
 ["$.settings.headings"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "e00b956ff6ecbac26ec4ca8424356ddbb836d29dd871e3e1fd083f02ce2ccc12"
+  "schemaHash": "55e6ba0dbb45a93fba9561bc2ac8a18a1482104a0cb3f83bef43b6e2fc2c9f3e"
 },
 ["$.settings.headings.letterSpacing"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "9a3a2949896ce1f3f7048146819d3fa9c52198d7a2a872211526cc1643540a62"
+  "schemaHash": "e041038993406558f3251aee53bbb8da59e50c8a247b544d167d79b60def9f7e"
 },
 ["$.settings.headings.letterSpacing.value"]: {
   "required": true,
@@ -1425,12 +1299,12 @@ export default {
     "update": "supported",
     "move": "unsupported"
   },
-  "schemaHash": "9c2b4cbc5ff7baf4d0aad9250ff9eb37d8b8c4d44061fd78029d3aea62ac76f6"
+  "schemaHash": "5e36559bdb676ae61cefd2ebc722a11421199c2bc0d2de1e204864d907059aec"
 },
 ["$.settings.headings.h1"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "98893381e5bae2e215dc20a694058566afb759f1a55825cb91761209a32efdef"
+  "schemaHash": "3ef248a78dff46a2fdbc67f7ed4b582845a3612407eae17cb5a4f92a6a54f5d6"
 },
 ["$.settings.headings.h1.textAlign"]: {
   "required": true,
@@ -1468,12 +1342,12 @@ export default {
 },
 ["$.settings.headings.h1.fontWeight"]: {
   "required": true,
-  "schemaHash": "ad1ea54def9454f62b79aa765efc5fcc4ef0c024cffcf5e2fde425d9ce3062bf"
+  "schemaHash": "6e05f2f96c27b4c937eff5ef33a1575c632544d7a3e814348f1598e311747074"
 },
 ["$.settings.headings.h1.fontWeight|0"]: {
   "required": true,
   "type": "integer",
-  "schemaHash": "85efbce02ce8566bfbf6cdc3ba512be5e3a93dc63c8dc7713146874b64d54f9e"
+  "schemaHash": "c2c1be9e2417ecaff89c98d8436c76bcee539e1e8652b5d608ea44b0516cfac3"
 },
 ["$.settings.headings.h1.fontWeight|1"]: {
   "required": true,
@@ -1483,16 +1357,16 @@ export default {
 ["$.settings.headings.h1.fontSize"]: {
   "required": true,
   "type": "object",
-  "schemaHash": "bc6c04c4ed6dddce2cb9de38461775e750b959f3a78534c329e719fcca1aabaf"
+  "schemaHash": "ff6b6e2ccdbd40525b5a28daaceb8c375bbd712eb3652de5fd21c37d9d7dbaf8"
 },
 ["$.settings.headings.h1.fontSize.desktop"]: {
   "required": true,
-  "schemaHash": "9603d59c32a1d0cd904b0880c19199b473bc049c4c0e17fc56ea118770a6201f"
+  "schemaHash": "25d7b7f0994300a4d4f3e522679208f4e3a47b60a0f959bb195963ac999f2f7b"
 },
 ["$.settings.headings.h1.fontSize.desktop|0"]: {
   "required": true,
   "type": "number",
-  "schemaHash": "d58099902cab7262b22d647c167a33cf123d31cb377fca7a9d1d6bf0b30e2a43"
+  "schemaHash": "aa2bb185cd32fbe435af596b02ace64cfe621e90c88944a07c25430c14a34522"
 },
 ["$.settings.headings.h1.fontSize.desktop|1"]: {
   "required": true,
@@ -1501,6 +1375,206 @@ export default {
 },
 ["$.settings.headings.h1.fontSize.mobile"]: {
   "required": true,
-  "schemaHash": "beb53dab72fae840ccf9ee64a221ab81c5cb2129957e69593188f914ccfacf64"
+  "schemaHash": "25d7b7f0994300a4d4f3e522679208f4e3a47b60a0f959bb195963ac999f2f7b"
+},
+["$.settings.headings.h1.fontSize.mobile|0"]: {
+  "required": true,
+  "type": "number",
+  "schemaHash": "aa2bb185cd32fbe435af596b02ace64cfe621e90c88944a07c25430c14a34522"
+},
+["$.settings.headings.h1.fontSize.mobile|1"]: {
+  "required": true,
+  "type": "null",
+  "schemaHash": "bcde375ebd4cbacf651311181173836b169d5a360c6ac158c6a2cdaf49be3f61"
+},
+["$.settings.headings.h1.lineHeight"]: {
+  "required": true,
+  "type": "object",
+  "schemaHash": "5e6f771511fd27f4d5ae525a932ad77b685c7796b873b2f62af3b68683a904d5"
+},
+["$.settings.headings.h1.lineHeight.desktop"]: {
+  "required": true,
+  "schemaHash": "4f255e55847ee8833e3f99d2f9953de91126696be531013c4386d8c58db7fcc1"
+},
+["$.settings.headings.h1.lineHeight.desktop|0"]: {
+  "required": true,
+  "type": "number",
+  "schemaHash": "7b2898b5b4fc3e78f0a01fa3191adb1f9084d4b9ef9cbc33087b12ae3ea603fc"
+},
+["$.settings.headings.h1.lineHeight.desktop|1"]: {
+  "required": true,
+  "type": "null",
+  "schemaHash": "bcde375ebd4cbacf651311181173836b169d5a360c6ac158c6a2cdaf49be3f61"
+},
+["$.settings.headings.h1.lineHeight.mobile"]: {
+  "required": true,
+  "schemaHash": "4f255e55847ee8833e3f99d2f9953de91126696be531013c4386d8c58db7fcc1"
+},
+["$.settings.headings.h1.lineHeight.mobile|0"]: {
+  "required": true,
+  "type": "number",
+  "schemaHash": "7b2898b5b4fc3e78f0a01fa3191adb1f9084d4b9ef9cbc33087b12ae3ea603fc"
+},
+["$.settings.headings.h1.lineHeight.mobile|1"]: {
+  "required": true,
+  "type": "null",
+  "schemaHash": "bcde375ebd4cbacf651311181173836b169d5a360c6ac158c6a2cdaf49be3f61"
+},
+["$.settings.headings.h1.paragraphBottomSpace"]: {
+  "required": true,
+  "schemaHash": "3cbe409006f30f23de4251ed46e6b26367f5af820782283a370f94227332301b"
+},
+["$.settings.headings.h1.paragraphBottomSpace|0"]: {
+  "required": true,
+  "type": "object",
+  "schemaHash": "071fa34defb14cc44e99db685ab447392c67f9fb2b4911cb9a5ce318539c5eb1"
+},
+["$.settings.headings.h1.paragraphBottomSpace|0.desktop"]: {
+  "required": true,
+  "type": "number",
+  "schemaHash": "a9a7f43895d5ef0107196cd9b83a85b6e3c33194dd54e4a18b5db6f0ffa591a7"
+},
+["$.settings.headings.h1.paragraphBottomSpace|0.mobile"]: {
+  "required": true,
+  "type": "number",
+  "schemaHash": "a9a7f43895d5ef0107196cd9b83a85b6e3c33194dd54e4a18b5db6f0ffa591a7"
+},
+["$.settings.headings.h1.paragraphBottomSpace|1"]: {
+  "required": true,
+  "type": "null",
+  "schemaHash": "bcde375ebd4cbacf651311181173836b169d5a360c6ac158c6a2cdaf49be3f61"
+},
+["$.settings.headings.h2"]: {
+  "required": true,
+  "type": "object",
+  "schemaHash": "3ef248a78dff46a2fdbc67f7ed4b582845a3612407eae17cb5a4f92a6a54f5d6"
+},
+["$.settings.headings.h2.textAlign"]: {
+  "required": true,
+  "type": "object",
+  "schemaHash": "290d3b49ace85903ca1b82e095e4bbb8c188c18584461ed098fbe1372d85528f"
+},
+["$.settings.headings.h2.textAlign.mobile"]: {
+  "required": true,
+  "schemaHash": "e0a247f269f9cafbfb9ba11cf99650b5f90fd96f0dcf6de4304770527c06c5ad"
+},
+["$.settings.headings.h2.textAlign.mobile|0"]: {
+  "required": true,
+  "type": "string",
+  "enum": [
+    "left",
+    "center",
+    "right"
+  ],
+  "schemaHash": "e494aa666465b1cc779625a66e8a6119485e09965b15791b5ec35afb222eec32"
+},
+["$.settings.headings.h2.textAlign.mobile|1"]: {
+  "required": true,
+  "type": "null",
+  "schemaHash": "bcde375ebd4cbacf651311181173836b169d5a360c6ac158c6a2cdaf49be3f61"
+},
+["$.settings.headings.h2.textStyle"]: {
+  "required": true,
+  "type": "object",
+  "schemaHash": "5184a9cd6f4eac53c7dc0835ba8f6b269352988554eb850ce2bed2bdd5008486"
+},
+["$.settings.headings.h2.textStyle.italic"]: {
+  "required": true,
+  "type": "boolean",
+  "schemaHash": "7cb541e84f226754a46c21c79f131fa2898354e1242456e6fd1c162bce319553"
+},
+["$.settings.headings.h2.fontWeight"]: {
+  "required": true,
+  "schemaHash": "6e05f2f96c27b4c937eff5ef33a1575c632544d7a3e814348f1598e311747074"
+},
+["$.settings.headings.h2.fontWeight|0"]: {
+  "required": true,
+  "type": "integer",
+  "schemaHash": "c2c1be9e2417ecaff89c98d8436c76bcee539e1e8652b5d608ea44b0516cfac3"
+},
+["$.settings.headings.h2.fontWeight|1"]: {
+  "required": true,
+  "type": "null",
+  "schemaHash": "bcde375ebd4cbacf651311181173836b169d5a360c6ac158c6a2cdaf49be3f61"
+},
+["$.settings.headings.h2.fontSize"]: {
+  "required": true,
+  "type": "object",
+  "schemaHash": "ff6b6e2ccdbd40525b5a28daaceb8c375bbd712eb3652de5fd21c37d9d7dbaf8"
+},
+["$.settings.headings.h2.fontSize.desktop"]: {
+  "required": true,
+  "schemaHash": "25d7b7f0994300a4d4f3e522679208f4e3a47b60a0f959bb195963ac999f2f7b"
+},
+["$.settings.headings.h2.fontSize.desktop|0"]: {
+  "required": true,
+  "type": "number",
+  "schemaHash": "aa2bb185cd32fbe435af596b02ace64cfe621e90c88944a07c25430c14a34522"
+},
+["$.settings.headings.h2.fontSize.desktop|1"]: {
+  "required": true,
+  "type": "null",
+  "schemaHash": "bcde375ebd4cbacf651311181173836b169d5a360c6ac158c6a2cdaf49be3f61"
+},
+["$.settings.headings.h2.fontSize.mobile"]: {
+  "required": true,
+  "schemaHash": "25d7b7f0994300a4d4f3e522679208f4e3a47b60a0f959bb195963ac999f2f7b"
+},
+["$.settings.headings.h2.fontSize.mobile|0"]: {
+  "required": true,
+  "type": "number",
+  "schemaHash": "aa2bb185cd32fbe435af596b02ace64cfe621e90c88944a07c25430c14a34522"
+},
+["$.settings.headings.h2.fontSize.mobile|1"]: {
+  "required": true,
+  "type": "null",
+  "schemaHash": "bcde375ebd4cbacf651311181173836b169d5a360c6ac158c6a2cdaf49be3f61"
+},
+["$.settings.headings.h2.lineHeight"]: {
+  "required": true,
+  "type": "object",
+  "schemaHash": "5e6f771511fd27f4d5ae525a932ad77b685c7796b873b2f62af3b68683a904d5"
+},
+["$.settings.headings.h2.lineHeight.desktop"]: {
+  "required": true,
+  "schemaHash": "4f255e55847ee8833e3f99d2f9953de91126696be531013c4386d8c58db7fcc1"
+},
+["$.settings.headings.h2.lineHeight.desktop|0"]: {
+  "required": true,
+  "type": "number",
+  "schemaHash": "7b2898b5b4fc3e78f0a01fa3191adb1f9084d4b9ef9cbc33087b12ae3ea603fc"
+},
+["$.settings.headings.h2.lineHeight.desktop|1"]: {
+  "required": true,
+  "type": "null",
+  "schemaHash": "bcde375ebd4cbacf651311181173836b169d5a360c6ac158c6a2cdaf49be3f61"
+},
+["$.settings.headings.h2.lineHeight.mobile"]: {
+  "required": true,
+  "schemaHash": "4f255e55847ee8833e3f99d2f9953de91126696be531013c4386d8c58db7fcc1"
+},
+["$.settings.headings.h2.lineHeight.mobile|0"]: {
+  "required": true,
+  "type": "number",
+  "schemaHash": "7b2898b5b4fc3e78f0a01fa3191adb1f9084d4b9ef9cbc33087b12ae3ea603fc"
+},
+["$.settings.headings.h2.lineHeight.mobile|1"]: {
+  "required": true,
+  "type": "null",
+  "schemaHash": "bcde375ebd4cbacf651311181173836b169d5a360c6ac158c6a2cdaf49be3f61"
+},
+["$.settings.headings.h2.paragraphBottomSpace"]: {
+  "required": true,
+  "schemaHash": "3cbe409006f30f23de4251ed46e6b26367f5af820782283a370f94227332301b"
+},
+["$.settings.headings.h2.paragraphBottomSpace|0"]: {
+  "required": true,
+  "type": "object",
+  "schemaHash": "071fa34defb14cc44e99db685ab447392c67f9fb2b4911cb9a5ce318539c5eb1"
+},
+["$.settings.headings.h2.paragraphBottomSpace|0.desktop"]: {
+  "required": true,
+  "type": "number",
+  "schemaHash": "a9a7f43895d5ef0107196cd9b83a85b6e3c33194dd54e4a18b5db6f0ffa591a7"
 }
 };

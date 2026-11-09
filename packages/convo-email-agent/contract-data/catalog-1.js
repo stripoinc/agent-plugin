@@ -16,4 +16,5 @@ import part14 from './catalog-16.js';
 import part15 from './catalog-17.js';
 import part16 from './catalog-18.js';
 import part17 from './catalog-19.js';
-export default {...part0, ...part1, ...part2, ...part3, ...part4, ...part5, ...part6, ...part7, ...part8, ...part9, ...part10, ...part11, ...part12, ...part13, ...part14, ...part15, ...part16, ...part17};
+import part18 from './catalog-20.js';
+export default {...part0, ...part1, ...part2, ...part3, ...part4, ...part5, ...part6, ...part7, ...part8, ...part9, ...part10, ...part11, ...part12, ...part13, ...part14, ...part15, ...part16, ...part17, ...part18};

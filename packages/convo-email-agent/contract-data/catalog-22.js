@@ -4,6 +4,720 @@ export default [
   "actions": {
     "INSERT": {
       "runtimes": {
+        "browser": true,
+        "mergeService": true
+      },
+      "supported": true,
+      "unavailableSideEffects": {
+        "browser": [],
+        "mergeService": []
+      }
+    },
+    "DELETE": {
+      "runtimes": {
+        "browser": true,
+        "mergeService": true
+      },
+      "supported": true,
+      "unavailableSideEffects": {
+        "browser": [],
+        "mergeService": []
+      }
+    },
+    "UPDATE": {
+      "runtimes": {
+        "browser": true,
+        "mergeService": true
+      },
+      "supported": true,
+      "unavailableSideEffects": {
+        "browser": [],
+        "mergeService": []
+      }
+    },
+    "MOVE": {
+      "runtimes": {
+        "browser": false,
+        "mergeService": false
+      },
+      "supported": false,
+      "unavailableSideEffects": {
+        "browser": [],
+        "mergeService": []
+      }
+    }
+  },
+  "nodeType": "DocumentResourcesFonts",
+  "schemaPath": [
+    "resources",
+    "fonts"
+  ]
+},
+{
+  "actions": {
+    "INSERT": {
+      "runtimes": {
+        "browser": true,
+        "mergeService": true
+      },
+      "supported": true,
+      "unavailableSideEffects": {
+        "browser": [],
+        "mergeService": []
+      }
+    },
+    "DELETE": {
+      "runtimes": {
+        "browser": false,
+        "mergeService": false
+      },
+      "supported": false,
+      "unavailableSideEffects": {
+        "browser": [],
+        "mergeService": []
+      }
+    },
+    "UPDATE": {
+      "runtimes": {
+        "browser": true,
+        "mergeService": true
+      },
+      "supported": true,
+      "unavailableSideEffects": {
+        "browser": [],
+        "mergeService": []
+      }
+    },
+    "MOVE": {
+      "runtimes": {
+        "browser": false,
+        "mergeService": false
+      },
+      "supported": false,
+      "unavailableSideEffects": {
+        "browser": [],
+        "mergeService": []
+      }
+    }
+  },
+  "nodeType": "DocumentSettingTitle",
+  "schemaPath": [
+    "metadata",
+    "title"
+  ]
+},
+{
+  "actions": {
+    "INSERT": {
+      "runtimes": {
+        "browser": true,
+        "mergeService": true
+      },
+      "supported": true,
+      "unavailableSideEffects": {
+        "browser": [],
+        "mergeService": []
+      }
+    },
+    "DELETE": {
+      "runtimes": {
+        "browser": false,
+        "mergeService": false
+      },
+      "supported": false,
+      "unavailableSideEffects": {
+        "browser": [],
+        "mergeService": []
+      }
+    },
+    "UPDATE": {
+      "runtimes": {
+        "browser": true,
+        "mergeService": true
+      },
+      "supported": true,
+      "unavailableSideEffects": {
+        "browser": [],
+        "mergeService": []
+      }
+    },
+    "MOVE": {
+      "runtimes": {
+        "browser": false,
+        "mergeService": false
+      },
+      "supported": false,
+      "unavailableSideEffects": {
+        "browser": [],
+        "mergeService": []
+      }
+    }
+  },
+  "nodeType": "DocumentSettingPreheader",
+  "schemaPath": [
+    "metadata",
+    "preheader"
+  ]
+},
+{
+  "actions": {
+    "INSERT": {
+      "runtimes": {
+        "browser": true,
+        "mergeService": true
+      },
+      "supported": true,
+      "unavailableSideEffects": {
+        "browser": [],
+        "mergeService": []
+      }
+    },
+    "DELETE": {
+      "runtimes": {
+        "browser": false,
+        "mergeService": false
+      },
+      "supported": false,
+      "unavailableSideEffects": {
+        "browser": [],
+        "mergeService": []
+      }
+    },
+    "UPDATE": {
+      "runtimes": {
+        "browser": true,
+        "mergeService": true
+      },
+      "supported": true,
+      "unavailableSideEffects": {
+        "browser": [],
+        "mergeService": []
+      }
+    },
+    "MOVE": {
+      "runtimes": {
+        "browser": false,
+        "mergeService": false
+      },
+      "supported": false,
+      "unavailableSideEffects": {
+        "browser": [],
+        "mergeService": []
+      }
+    }
+  },
+  "nodeType": "DocumentSettingHeadingsFontFamily",
+  "schemaPath": [
+    "settings",
+    "headings",
+    "fontFamily"
+  ]
+},
+{
+  "actions": {
+    "INSERT": {
+      "runtimes": {
+        "browser": true,
+        "mergeService": true
+      },
+      "supported": true,
+      "unavailableSideEffects": {
+        "browser": [],
+        "mergeService": []
+      }
+    },
+    "DELETE": {
+      "runtimes": {
+        "browser": false,
+        "mergeService": false
+      },
+      "supported": false,
+      "unavailableSideEffects": {
+        "browser": [],
+        "mergeService": []
+      }
+    },
+    "UPDATE": {
+      "runtimes": {
+        "browser": true,
+        "mergeService": true
+      },
+      "supported": true,
+      "unavailableSideEffects": {
+        "browser": [],
+        "mergeService": []
+      }
+    },
+    "MOVE": {
+      "runtimes": {
+        "browser": false,
+        "mergeService": false
+      },
+      "supported": false,
+      "unavailableSideEffects": {
+        "browser": [],
+        "mergeService": []
+      }
+    }
+  },
+  "nodeType": "DocumentSettingButtonsFontFamily",
+  "schemaPath": [
+    "settings",
+    "buttons",
+    "fontFamily"
+  ]
+},
+{
+  "actions": {
+    "INSERT": {
+      "runtimes": {
+        "browser": true,
+        "mergeService": true
+      },
+      "supported": true,
+      "unavailableSideEffects": {
+        "browser": [],
+        "mergeService": []
+      }
+    },
+    "DELETE": {
+      "runtimes": {
+        "browser": false,
+        "mergeService": false
+      },
+      "supported": false,
+      "unavailableSideEffects": {
+        "browser": [],
+        "mergeService": []
+      }
+    },
+    "UPDATE": {
+      "runtimes": {
+        "browser": true,
+        "mergeService": true
+      },
+      "supported": true,
+      "unavailableSideEffects": {
+        "browser": [],
+        "mergeService": []
+      }
+    },
+    "MOVE": {
+      "runtimes": {
+        "browser": false,
+        "mergeService": false
+      },
+      "supported": false,
+      "unavailableSideEffects": {
+        "browser": [],
+        "mergeService": []
+      }
+    }
+  },
+  "nodeType": "DocumentSettingStripesFontFamily",
+  "schemaPath": [
+    "settings",
+    "stripes",
+    "fontFamily"
+  ]
+},
+{
+  "actions": {
+    "INSERT": {
+      "runtimes": {
+        "browser": true,
+        "mergeService": true
+      },
+      "supported": true,
+      "unavailableSideEffects": {
+        "browser": [],
+        "mergeService": []
+      }
+    },
+    "DELETE": {
+      "runtimes": {
+        "browser": true,
+        "mergeService": true
+      },
+      "supported": true,
+      "unavailableSideEffects": {
+        "browser": [],
+        "mergeService": []
+      }
+    },
+    "UPDATE": {
+      "runtimes": {
+        "browser": true,
+        "mergeService": true
+      },
+      "supported": true,
+      "unavailableSideEffects": {
+        "browser": [],
+        "mergeService": []
+      }
+    },
+    "MOVE": {
+      "runtimes": {
+        "browser": false,
+        "mergeService": false
+      },
+      "supported": false,
+      "unavailableSideEffects": {
+        "browser": [],
+        "mergeService": []
+      }
+    }
+  },
+  "nodeType": "StripeSettingDarkThemeStripeBackgroundColor",
+  "schemaPath": [
+    "stripes",
+    "settings",
+    "darkTheme",
+    "stripeBackgroundColor"
+  ]
+},
+{
+  "actions": {
+    "INSERT": {
+      "runtimes": {
+        "browser": true,
+        "mergeService": true
+      },
+      "supported": true,
+      "unavailableSideEffects": {
+        "browser": [],
+        "mergeService": []
+      }
+    },
+    "DELETE": {
+      "runtimes": {
+        "browser": true,
+        "mergeService": true
+      },
+      "supported": true,
+      "unavailableSideEffects": {
+        "browser": [],
+        "mergeService": []
+      }
+    },
+    "UPDATE": {
+      "runtimes": {
+        "browser": true,
+        "mergeService": true
+      },
+      "supported": true,
+      "unavailableSideEffects": {
+        "browser": [],
+        "mergeService": []
+      }
+    },
+    "MOVE": {
+      "runtimes": {
+        "browser": false,
+        "mergeService": false
+      },
+      "supported": false,
+      "unavailableSideEffects": {
+        "browser": [],
+        "mergeService": []
+      }
+    }
+  },
+  "nodeType": "StripeSettingDarkThemeContentBackgroundColor",
+  "schemaPath": [
+    "stripes",
+    "settings",
+    "darkTheme",
+    "contentBackgroundColor"
+  ]
+},
+{
+  "actions": {
+    "INSERT": {
+      "runtimes": {
+        "browser": true,
+        "mergeService": true
+      },
+      "supported": true,
+      "unavailableSideEffects": {
+        "browser": [],
+        "mergeService": []
+      }
+    },
+    "DELETE": {
+      "runtimes": {
+        "browser": true,
+        "mergeService": true
+      },
+      "supported": true,
+      "unavailableSideEffects": {
+        "browser": [],
+        "mergeService": []
+      }
+    },
+    "UPDATE": {
+      "runtimes": {
+        "browser": true,
+        "mergeService": true
+      },
+      "supported": true,
+      "unavailableSideEffects": {
+        "browser": [],
+        "mergeService": []
+      }
+    },
+    "MOVE": {
+      "runtimes": {
+        "browser": false,
+        "mergeService": false
+      },
+      "supported": false,
+      "unavailableSideEffects": {
+        "browser": [],
+        "mergeService": []
+      }
+    }
+  },
+  "nodeType": "StripeSettingDarkThemeBackgroundImage",
+  "schemaPath": [
+    "stripes",
+    "settings",
+    "darkTheme",
+    "backgroundImage"
+  ]
+},
+{
+  "actions": {
+    "INSERT": {
+      "runtimes": {
+        "browser": true,
+        "mergeService": true
+      },
+      "supported": true,
+      "unavailableSideEffects": {
+        "browser": [],
+        "mergeService": []
+      }
+    },
+    "DELETE": {
+      "runtimes": {
+        "browser": true,
+        "mergeService": true
+      },
+      "supported": true,
+      "unavailableSideEffects": {
+        "browser": [],
+        "mergeService": []
+      }
+    },
+    "UPDATE": {
+      "runtimes": {
+        "browser": true,
+        "mergeService": true
+      },
+      "supported": true,
+      "unavailableSideEffects": {
+        "browser": [],
+        "mergeService": []
+      }
+    },
+    "MOVE": {
+      "runtimes": {
+        "browser": false,
+        "mergeService": false
+      },
+      "supported": false,
+      "unavailableSideEffects": {
+        "browser": [],
+        "mergeService": []
+      }
+    }
+  },
+  "nodeType": "StructureSettingDarkThemeBackgroundColor",
+  "schemaPath": [
+    "stripes",
+    "structures",
+    "settings",
+    "darkTheme",
+    "backgroundColor"
+  ]
+},
+{
+  "actions": {
+    "INSERT": {
+      "runtimes": {
+        "browser": true,
+        "mergeService": true
+      },
+      "supported": true,
+      "unavailableSideEffects": {
+        "browser": [],
+        "mergeService": []
+      }
+    },
+    "DELETE": {
+      "runtimes": {
+        "browser": true,
+        "mergeService": true
+      },
+      "supported": true,
+      "unavailableSideEffects": {
+        "browser": [],
+        "mergeService": []
+      }
+    },
+    "UPDATE": {
+      "runtimes": {
+        "browser": true,
+        "mergeService": true
+      },
+      "supported": true,
+      "unavailableSideEffects": {
+        "browser": [],
+        "mergeService": []
+      }
+    },
+    "MOVE": {
+      "runtimes": {
+        "browser": false,
+        "mergeService": false
+      },
+      "supported": false,
+      "unavailableSideEffects": {
+        "browser": [],
+        "mergeService": []
+      }
+    }
+  },
+  "nodeType": "StructureSettingDarkThemeBackgroundImage",
+  "schemaPath": [
+    "stripes",
+    "structures",
+    "settings",
+    "darkTheme",
+    "backgroundImage"
+  ]
+},
+{
+  "actions": {
+    "INSERT": {
+      "runtimes": {
+        "browser": true,
+        "mergeService": true
+      },
+      "supported": true,
+      "unavailableSideEffects": {
+        "browser": [],
+        "mergeService": []
+      }
+    },
+    "DELETE": {
+      "runtimes": {
+        "browser": true,
+        "mergeService": true
+      },
+      "supported": true,
+      "unavailableSideEffects": {
+        "browser": [],
+        "mergeService": []
+      }
+    },
+    "UPDATE": {
+      "runtimes": {
+        "browser": true,
+        "mergeService": true
+      },
+      "supported": true,
+      "unavailableSideEffects": {
+        "browser": [],
+        "mergeService": []
+      }
+    },
+    "MOVE": {
+      "runtimes": {
+        "browser": false,
+        "mergeService": false
+      },
+      "supported": false,
+      "unavailableSideEffects": {
+        "browser": [],
+        "mergeService": []
+      }
+    }
+  },
+  "nodeType": "ContainerSettingDarkThemeBackgroundColor",
+  "schemaPath": [
+    "stripes",
+    "structures",
+    "columns",
+    "containers",
+    "settings",
+    "darkTheme",
+    "backgroundColor"
+  ]
+},
+{
+  "actions": {
+    "INSERT": {
+      "runtimes": {
+        "browser": true,
+        "mergeService": true
+      },
+      "supported": true,
+      "unavailableSideEffects": {
+        "browser": [],
+        "mergeService": []
+      }
+    },
+    "DELETE": {
+      "runtimes": {
+        "browser": true,
+        "mergeService": true
+      },
+      "supported": true,
+      "unavailableSideEffects": {
+        "browser": [],
+        "mergeService": []
+      }
+    },
+    "UPDATE": {
+      "runtimes": {
+        "browser": true,
+        "mergeService": true
+      },
+      "supported": true,
+      "unavailableSideEffects": {
+        "browser": [],
+        "mergeService": []
+      }
+    },
+    "MOVE": {
+      "runtimes": {
+        "browser": false,
+        "mergeService": false
+      },
+      "supported": false,
+      "unavailableSideEffects": {
+        "browser": [],
+        "mergeService": []
+      }
+    }
+  },
+  "nodeType": "ContainerSettingDarkThemeBackgroundImage",
+  "schemaPath": [
+    "stripes",
+    "structures",
+    "columns",
+    "containers",
+    "settings",
+    "darkTheme",
+    "backgroundImage"
+  ]
+},
+{
+  "actions": {
+    "INSERT": {
+      "runtimes": {
         "browser": false,
         "mergeService": false
       },
@@ -47,11 +761,66 @@ export default [
       }
     }
   },
-  "nodeType": "DocumentSettingThemeDarkGeneralListMarker",
+  "nodeType": "DocumentSettingThemeLightGeneralBackground",
   "schemaPath": [
     "settings",
     "general",
-    "darkTheme",
+    "lightTheme",
+    "backgroundColor"
+  ]
+},
+{
+  "actions": {
+    "INSERT": {
+      "runtimes": {
+        "browser": false,
+        "mergeService": false
+      },
+      "supported": false,
+      "unavailableSideEffects": {
+        "browser": [],
+        "mergeService": []
+      }
+    },
+    "DELETE": {
+      "runtimes": {
+        "browser": false,
+        "mergeService": false
+      },
+      "supported": false,
+      "unavailableSideEffects": {
+        "browser": [],
+        "mergeService": []
+      }
+    },
+    "UPDATE": {
+      "runtimes": {
+        "browser": true,
+        "mergeService": true
+      },
+      "supported": true,
+      "unavailableSideEffects": {
+        "browser": [],
+        "mergeService": []
+      }
+    },
+    "MOVE": {
+      "runtimes": {
+        "browser": false,
+        "mergeService": false
+      },
+      "supported": false,
+      "unavailableSideEffects": {
+        "browser": [],
+        "mergeService": []
+      }
+    }
+  },
+  "nodeType": "DocumentSettingThemeLightGeneralListMarker",
+  "schemaPath": [
+    "settings",
+    "general",
+    "lightTheme",
     "customListStyles",
     "listMarkerColor"
   ]
@@ -103,11 +872,11 @@ export default [
       }
     }
   },
-  "nodeType": "DocumentSettingThemeDarkGeneralListNumberMarker",
+  "nodeType": "DocumentSettingThemeLightGeneralListNumberMarker",
   "schemaPath": [
     "settings",
     "general",
-    "darkTheme",
+    "lightTheme",
     "customListStyles",
     "listNumberMarkerColor"
   ]
@@ -159,11 +928,11 @@ export default [
       }
     }
   },
-  "nodeType": "DocumentSettingThemeDarkStripesHeaderBackground",
+  "nodeType": "DocumentSettingThemeLightStripesHeaderBackground",
   "schemaPath": [
     "settings",
     "stripes",
-    "darkTheme",
+    "lightTheme",
     "header",
     "stripeBackgroundColor"
   ]
@@ -215,11 +984,11 @@ export default [
       }
     }
   },
-  "nodeType": "DocumentSettingThemeDarkStripesHeaderContentBackground",
+  "nodeType": "DocumentSettingThemeLightStripesHeaderContentBackground",
   "schemaPath": [
     "settings",
     "stripes",
-    "darkTheme",
+    "lightTheme",
     "header",
     "contentBackgroundColor"
   ]
@@ -271,11 +1040,11 @@ export default [
       }
     }
   },
-  "nodeType": "DocumentSettingThemeDarkStripesHeaderFont",
+  "nodeType": "DocumentSettingThemeLightStripesHeaderFont",
   "schemaPath": [
     "settings",
     "stripes",
-    "darkTheme",
+    "lightTheme",
     "header",
     "fontColor"
   ]
@@ -327,11 +1096,11 @@ export default [
       }
     }
   },
-  "nodeType": "DocumentSettingThemeDarkStripesHeaderLink",
+  "nodeType": "DocumentSettingThemeLightStripesHeaderLink",
   "schemaPath": [
     "settings",
     "stripes",
-    "darkTheme",
+    "lightTheme",
     "header",
     "linkColor"
   ]
@@ -383,11 +1152,11 @@ export default [
       }
     }
   },
-  "nodeType": "DocumentSettingThemeDarkStripesHeaderLinkHover",
+  "nodeType": "DocumentSettingThemeLightStripesHeaderLinkHover",
   "schemaPath": [
     "settings",
     "stripes",
-    "darkTheme",
+    "lightTheme",
     "header",
     "linkColorHover"
   ]
@@ -439,11 +1208,11 @@ export default [
       }
     }
   },
-  "nodeType": "DocumentSettingThemeDarkStripesContentBackground",
+  "nodeType": "DocumentSettingThemeLightStripesContentBackground",
   "schemaPath": [
     "settings",
     "stripes",
-    "darkTheme",
+    "lightTheme",
     "content",
     "contentBackgroundColor"
   ]
@@ -495,11 +1264,11 @@ export default [
       }
     }
   },
-  "nodeType": "DocumentSettingThemeDarkStripesContentFont",
+  "nodeType": "DocumentSettingThemeLightStripesContentFont",
   "schemaPath": [
     "settings",
     "stripes",
-    "darkTheme",
+    "lightTheme",
     "content",
     "fontColor"
   ]
@@ -551,11 +1320,11 @@ export default [
       }
     }
   },
-  "nodeType": "DocumentSettingThemeDarkStripesContentLink",
+  "nodeType": "DocumentSettingThemeLightStripesContentLink",
   "schemaPath": [
     "settings",
     "stripes",
-    "darkTheme",
+    "lightTheme",
     "content",
     "linkColor"
   ]
@@ -607,11 +1376,11 @@ export default [
       }
     }
   },
-  "nodeType": "DocumentSettingThemeDarkStripesContentLinkHover",
+  "nodeType": "DocumentSettingThemeLightStripesContentLinkHover",
   "schemaPath": [
     "settings",
     "stripes",
-    "darkTheme",
+    "lightTheme",
     "content",
     "linkColorHover"
   ]
@@ -663,11 +1432,11 @@ export default [
       }
     }
   },
-  "nodeType": "DocumentSettingThemeDarkStripesFooterBackground",
+  "nodeType": "DocumentSettingThemeLightStripesFooterBackground",
   "schemaPath": [
     "settings",
     "stripes",
-    "darkTheme",
+    "lightTheme",
     "footer",
     "stripeBackgroundColor"
   ]
@@ -719,11 +1488,11 @@ export default [
       }
     }
   },
-  "nodeType": "DocumentSettingThemeDarkStripesFooterContentBackground",
+  "nodeType": "DocumentSettingThemeLightStripesFooterContentBackground",
   "schemaPath": [
     "settings",
     "stripes",
-    "darkTheme",
+    "lightTheme",
     "footer",
     "contentBackgroundColor"
   ]
@@ -775,11 +1544,11 @@ export default [
       }
     }
   },
-  "nodeType": "DocumentSettingThemeDarkStripesFooterFont",
+  "nodeType": "DocumentSettingThemeLightStripesFooterFont",
   "schemaPath": [
     "settings",
     "stripes",
-    "darkTheme",
+    "lightTheme",
     "footer",
     "fontColor"
   ]
@@ -831,11 +1600,11 @@ export default [
       }
     }
   },
-  "nodeType": "DocumentSettingThemeDarkStripesFooterLink",
+  "nodeType": "DocumentSettingThemeLightStripesFooterLink",
   "schemaPath": [
     "settings",
     "stripes",
-    "darkTheme",
+    "lightTheme",
     "footer",
     "linkColor"
   ]
@@ -887,11 +1656,11 @@ export default [
       }
     }
   },
-  "nodeType": "DocumentSettingThemeDarkStripesFooterLinkHover",
+  "nodeType": "DocumentSettingThemeLightStripesFooterLinkHover",
   "schemaPath": [
     "settings",
     "stripes",
-    "darkTheme",
+    "lightTheme",
     "footer",
     "linkColorHover"
   ]
@@ -943,11 +1712,11 @@ export default [
       }
     }
   },
-  "nodeType": "DocumentSettingThemeDarkStripesInfoFont",
+  "nodeType": "DocumentSettingThemeLightStripesInfoFont",
   "schemaPath": [
     "settings",
     "stripes",
-    "darkTheme",
+    "lightTheme",
     "infoArea",
     "fontColor"
   ]
@@ -999,11 +1768,11 @@ export default [
       }
     }
   },
-  "nodeType": "DocumentSettingThemeDarkStripesInfoLink",
+  "nodeType": "DocumentSettingThemeLightStripesInfoLink",
   "schemaPath": [
     "settings",
     "stripes",
-    "darkTheme",
+    "lightTheme",
     "infoArea",
     "linkColor"
   ]
@@ -1055,11 +1824,11 @@ export default [
       }
     }
   },
-  "nodeType": "DocumentSettingThemeDarkStripesInfoLinkHover",
+  "nodeType": "DocumentSettingThemeLightStripesInfoLinkHover",
   "schemaPath": [
     "settings",
     "stripes",
-    "darkTheme",
+    "lightTheme",
     "infoArea",
     "linkColorHover"
   ]
@@ -1111,11 +1880,11 @@ export default [
       }
     }
   },
-  "nodeType": "DocumentSettingThemeDarkHeadingsH1Font",
+  "nodeType": "DocumentSettingThemeLightHeadingsH1Font",
   "schemaPath": [
     "settings",
     "headings",
-    "darkTheme",
+    "lightTheme",
     "h1",
     "fontColor"
   ]
@@ -1167,11 +1936,11 @@ export default [
       }
     }
   },
-  "nodeType": "DocumentSettingThemeDarkHeadingsH2Font",
+  "nodeType": "DocumentSettingThemeLightHeadingsH2Font",
   "schemaPath": [
     "settings",
     "headings",
-    "darkTheme",
+    "lightTheme",
     "h2",
     "fontColor"
   ]
@@ -1223,11 +1992,11 @@ export default [
       }
     }
   },
-  "nodeType": "DocumentSettingThemeDarkHeadingsH3Font",
+  "nodeType": "DocumentSettingThemeLightHeadingsH3Font",
   "schemaPath": [
     "settings",
     "headings",
-    "darkTheme",
+    "lightTheme",
     "h3",
     "fontColor"
   ]
@@ -1279,11 +2048,11 @@ export default [
       }
     }
   },
-  "nodeType": "DocumentSettingThemeDarkHeadingsH4Font",
+  "nodeType": "DocumentSettingThemeLightHeadingsH4Font",
   "schemaPath": [
     "settings",
     "headings",
-    "darkTheme",
+    "lightTheme",
     "h4",
     "fontColor"
   ]
@@ -1335,11 +2104,11 @@ export default [
       }
     }
   },
-  "nodeType": "DocumentSettingThemeDarkHeadingsH5Font",
+  "nodeType": "DocumentSettingThemeLightHeadingsH5Font",
   "schemaPath": [
     "settings",
     "headings",
-    "darkTheme",
+    "lightTheme",
     "h5",
     "fontColor"
   ]
@@ -1391,11 +2160,11 @@ export default [
       }
     }
   },
-  "nodeType": "DocumentSettingThemeDarkHeadingsH6Font",
+  "nodeType": "DocumentSettingThemeLightHeadingsH6Font",
   "schemaPath": [
     "settings",
     "headings",
-    "darkTheme",
+    "lightTheme",
     "h6",
     "fontColor"
   ]
@@ -1447,11 +2216,11 @@ export default [
       }
     }
   },
-  "nodeType": "DocumentSettingThemeDarkButtonsBackground",
+  "nodeType": "DocumentSettingThemeLightButtonsBackground",
   "schemaPath": [
     "settings",
     "buttons",
-    "darkTheme",
+    "lightTheme",
     "buttonColor"
   ]
 },
@@ -1502,11 +2271,11 @@ export default [
       }
     }
   },
-  "nodeType": "DocumentSettingThemeDarkButtonsText",
+  "nodeType": "DocumentSettingThemeLightButtonsText",
   "schemaPath": [
     "settings",
     "buttons",
-    "darkTheme",
+    "lightTheme",
     "fontColor"
   ]
 },
@@ -1557,11 +2326,11 @@ export default [
       }
     }
   },
-  "nodeType": "DocumentSettingThemeDarkButtonsHoverBackground",
+  "nodeType": "DocumentSettingThemeLightButtonsHoverBackground",
   "schemaPath": [
     "settings",
     "buttons",
-    "darkTheme",
+    "lightTheme",
     "hoverButtonStyles",
     "backgroundColor"
   ]
@@ -1613,11 +2382,11 @@ export default [
       }
     }
   },
-  "nodeType": "DocumentSettingThemeDarkButtonsHoverText",
+  "nodeType": "DocumentSettingThemeLightButtonsHoverText",
   "schemaPath": [
     "settings",
     "buttons",
-    "darkTheme",
+    "lightTheme",
     "hoverButtonStyles",
     "fontColor"
   ]
@@ -1669,11 +2438,11 @@ export default [
       }
     }
   },
-  "nodeType": "DocumentSettingThemeDarkButtonsBorderTop",
+  "nodeType": "DocumentSettingThemeLightButtonsBorderTop",
   "schemaPath": [
     "settings",
     "buttons",
-    "darkTheme",
+    "lightTheme",
     "borderColor",
     "top"
   ]
@@ -1725,408 +2494,13 @@ export default [
       }
     }
   },
-  "nodeType": "DocumentSettingThemeDarkButtonsBorderRight",
+  "nodeType": "DocumentSettingThemeLightButtonsBorderRight",
   "schemaPath": [
     "settings",
     "buttons",
-    "darkTheme",
+    "lightTheme",
     "borderColor",
     "right"
-  ]
-},
-{
-  "actions": {
-    "INSERT": {
-      "runtimes": {
-        "browser": false,
-        "mergeService": false
-      },
-      "supported": false,
-      "unavailableSideEffects": {
-        "browser": [],
-        "mergeService": []
-      }
-    },
-    "DELETE": {
-      "runtimes": {
-        "browser": false,
-        "mergeService": false
-      },
-      "supported": false,
-      "unavailableSideEffects": {
-        "browser": [],
-        "mergeService": []
-      }
-    },
-    "UPDATE": {
-      "runtimes": {
-        "browser": true,
-        "mergeService": true
-      },
-      "supported": true,
-      "unavailableSideEffects": {
-        "browser": [],
-        "mergeService": []
-      }
-    },
-    "MOVE": {
-      "runtimes": {
-        "browser": false,
-        "mergeService": false
-      },
-      "supported": false,
-      "unavailableSideEffects": {
-        "browser": [],
-        "mergeService": []
-      }
-    }
-  },
-  "nodeType": "DocumentSettingThemeDarkButtonsBorderBottom",
-  "schemaPath": [
-    "settings",
-    "buttons",
-    "darkTheme",
-    "borderColor",
-    "bottom"
-  ]
-},
-{
-  "actions": {
-    "INSERT": {
-      "runtimes": {
-        "browser": false,
-        "mergeService": false
-      },
-      "supported": false,
-      "unavailableSideEffects": {
-        "browser": [],
-        "mergeService": []
-      }
-    },
-    "DELETE": {
-      "runtimes": {
-        "browser": false,
-        "mergeService": false
-      },
-      "supported": false,
-      "unavailableSideEffects": {
-        "browser": [],
-        "mergeService": []
-      }
-    },
-    "UPDATE": {
-      "runtimes": {
-        "browser": true,
-        "mergeService": true
-      },
-      "supported": true,
-      "unavailableSideEffects": {
-        "browser": [],
-        "mergeService": []
-      }
-    },
-    "MOVE": {
-      "runtimes": {
-        "browser": false,
-        "mergeService": false
-      },
-      "supported": false,
-      "unavailableSideEffects": {
-        "browser": [],
-        "mergeService": []
-      }
-    }
-  },
-  "nodeType": "DocumentSettingThemeDarkButtonsBorderLeft",
-  "schemaPath": [
-    "settings",
-    "buttons",
-    "darkTheme",
-    "borderColor",
-    "left"
-  ]
-},
-{
-  "actions": {
-    "INSERT": {
-      "runtimes": {
-        "browser": false,
-        "mergeService": false
-      },
-      "supported": false,
-      "unavailableSideEffects": {
-        "browser": [],
-        "mergeService": []
-      }
-    },
-    "DELETE": {
-      "runtimes": {
-        "browser": false,
-        "mergeService": false
-      },
-      "supported": false,
-      "unavailableSideEffects": {
-        "browser": [],
-        "mergeService": []
-      }
-    },
-    "UPDATE": {
-      "runtimes": {
-        "browser": true,
-        "mergeService": true
-      },
-      "supported": true,
-      "unavailableSideEffects": {
-        "browser": [],
-        "mergeService": []
-      }
-    },
-    "MOVE": {
-      "runtimes": {
-        "browser": false,
-        "mergeService": false
-      },
-      "supported": false,
-      "unavailableSideEffects": {
-        "browser": [],
-        "mergeService": []
-      }
-    }
-  },
-  "nodeType": "DocumentSettingThemeDarkButtonsHoverBorderTop",
-  "schemaPath": [
-    "settings",
-    "buttons",
-    "darkTheme",
-    "hoverButtonStyles",
-    "borderColor",
-    "top"
-  ]
-},
-{
-  "actions": {
-    "INSERT": {
-      "runtimes": {
-        "browser": false,
-        "mergeService": false
-      },
-      "supported": false,
-      "unavailableSideEffects": {
-        "browser": [],
-        "mergeService": []
-      }
-    },
-    "DELETE": {
-      "runtimes": {
-        "browser": false,
-        "mergeService": false
-      },
-      "supported": false,
-      "unavailableSideEffects": {
-        "browser": [],
-        "mergeService": []
-      }
-    },
-    "UPDATE": {
-      "runtimes": {
-        "browser": true,
-        "mergeService": true
-      },
-      "supported": true,
-      "unavailableSideEffects": {
-        "browser": [],
-        "mergeService": []
-      }
-    },
-    "MOVE": {
-      "runtimes": {
-        "browser": false,
-        "mergeService": false
-      },
-      "supported": false,
-      "unavailableSideEffects": {
-        "browser": [],
-        "mergeService": []
-      }
-    }
-  },
-  "nodeType": "DocumentSettingThemeDarkButtonsHoverBorderRight",
-  "schemaPath": [
-    "settings",
-    "buttons",
-    "darkTheme",
-    "hoverButtonStyles",
-    "borderColor",
-    "right"
-  ]
-},
-{
-  "actions": {
-    "INSERT": {
-      "runtimes": {
-        "browser": false,
-        "mergeService": false
-      },
-      "supported": false,
-      "unavailableSideEffects": {
-        "browser": [],
-        "mergeService": []
-      }
-    },
-    "DELETE": {
-      "runtimes": {
-        "browser": false,
-        "mergeService": false
-      },
-      "supported": false,
-      "unavailableSideEffects": {
-        "browser": [],
-        "mergeService": []
-      }
-    },
-    "UPDATE": {
-      "runtimes": {
-        "browser": true,
-        "mergeService": true
-      },
-      "supported": true,
-      "unavailableSideEffects": {
-        "browser": [],
-        "mergeService": []
-      }
-    },
-    "MOVE": {
-      "runtimes": {
-        "browser": false,
-        "mergeService": false
-      },
-      "supported": false,
-      "unavailableSideEffects": {
-        "browser": [],
-        "mergeService": []
-      }
-    }
-  },
-  "nodeType": "DocumentSettingThemeDarkButtonsHoverBorderBottom",
-  "schemaPath": [
-    "settings",
-    "buttons",
-    "darkTheme",
-    "hoverButtonStyles",
-    "borderColor",
-    "bottom"
-  ]
-},
-{
-  "actions": {
-    "INSERT": {
-      "runtimes": {
-        "browser": false,
-        "mergeService": false
-      },
-      "supported": false,
-      "unavailableSideEffects": {
-        "browser": [],
-        "mergeService": []
-      }
-    },
-    "DELETE": {
-      "runtimes": {
-        "browser": false,
-        "mergeService": false
-      },
-      "supported": false,
-      "unavailableSideEffects": {
-        "browser": [],
-        "mergeService": []
-      }
-    },
-    "UPDATE": {
-      "runtimes": {
-        "browser": true,
-        "mergeService": true
-      },
-      "supported": true,
-      "unavailableSideEffects": {
-        "browser": [],
-        "mergeService": []
-      }
-    },
-    "MOVE": {
-      "runtimes": {
-        "browser": false,
-        "mergeService": false
-      },
-      "supported": false,
-      "unavailableSideEffects": {
-        "browser": [],
-        "mergeService": []
-      }
-    }
-  },
-  "nodeType": "DocumentSettingThemeDarkButtonsHoverBorderLeft",
-  "schemaPath": [
-    "settings",
-    "buttons",
-    "darkTheme",
-    "hoverButtonStyles",
-    "borderColor",
-    "left"
-  ]
-},
-{
-  "actions": {
-    "INSERT": {
-      "runtimes": {
-        "browser": true,
-        "mergeService": true
-      },
-      "supported": true,
-      "unavailableSideEffects": {
-        "browser": [],
-        "mergeService": []
-      }
-    },
-    "DELETE": {
-      "runtimes": {
-        "browser": true,
-        "mergeService": true
-      },
-      "supported": true,
-      "unavailableSideEffects": {
-        "browser": [],
-        "mergeService": []
-      }
-    },
-    "UPDATE": {
-      "runtimes": {
-        "browser": true,
-        "mergeService": true
-      },
-      "supported": true,
-      "unavailableSideEffects": {
-        "browser": [],
-        "mergeService": []
-      }
-    },
-    "MOVE": {
-      "runtimes": {
-        "browser": false,
-        "mergeService": false
-      },
-      "supported": false,
-      "unavailableSideEffects": {
-        "browser": [],
-        "mergeService": []
-      }
-    }
-  },
-  "nodeType": "DocumentSettingThemeDarkGeneralBackgroundImage",
-  "schemaPath": [
-    "settings",
-    "general",
-    "darkTheme",
-    "backgroundImage"
   ]
 }
 ];

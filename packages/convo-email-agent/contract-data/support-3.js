@@ -1,189 +1,5 @@
 
 export default {
-["$.settings.headings.h4.fontSize"]: {
-  "hash": "b0b4a9feb9bc7aa0671aa152ca26b9cf9eeb898586e8d4a3aa21ad8d873368be",
-  "group": "patch"
-},
-["$.settings.headings.h4.fontSize.desktop"]: {
-  "hash": "10593a73be1863846319148184e101cf517278ff783d17d33a80a0e0676072d0",
-  "group": "patch"
-},
-["$.settings.headings.h4.fontSize.desktop|0"]: {
-  "hash": "bd8c3b311aa08b4bafa2d3859018447523f20f59a419eb58b37526bb514a4215",
-  "group": "patch"
-},
-["$.settings.headings.h4.fontSize.desktop|1"]: {
-  "hash": "2113410e6e71d275cf23b02cee5cf7435cf2646d0abf89b0b8da041f9fdfa0d7",
-  "group": "patch"
-},
-["$.settings.headings.h4.fontSize.mobile"]: {
-  "hash": "66bf5572cefb7117b49d88f79890f03e2a28bc081d3ac473ddd92d8b9970472a",
-  "group": "patch"
-},
-["$.settings.headings.h4.fontSize.mobile|0"]: {
-  "hash": "e81aed31761ea539e90fb82214c5db834a1055fd97069d2c31fe6acc591d1edb",
-  "group": "patch"
-},
-["$.settings.headings.h4.fontSize.mobile|1"]: {
-  "hash": "2113410e6e71d275cf23b02cee5cf7435cf2646d0abf89b0b8da041f9fdfa0d7",
-  "group": "patch"
-},
-["$.settings.headings.h4.lineHeight"]: {
-  "hash": "50832814b28baa2adc3a16c6c6b4d4e30d272e064cd517565c44421b2fa8e6d8",
-  "group": "patch"
-},
-["$.settings.headings.h4.lineHeight.desktop"]: {
-  "hash": "d937b34d2edeb4748196715a6742d85a35fd35fde00d9c24274a0ce6a0410e29",
-  "group": "patch"
-},
-["$.settings.headings.h4.lineHeight.desktop|0"]: {
-  "hash": "8d3d438f0489f1626aa7e08ccd2201e891c9813fcc1c82fb86834115c0862f74",
-  "group": "patch"
-},
-["$.settings.headings.h4.lineHeight.desktop|1"]: {
-  "hash": "2113410e6e71d275cf23b02cee5cf7435cf2646d0abf89b0b8da041f9fdfa0d7",
-  "group": "patch"
-},
-["$.settings.headings.h4.lineHeight.mobile"]: {
-  "hash": "1c156d66b871ba31529600af396d235c99478cdf8f720757350c8962656bed06",
-  "group": "patch"
-},
-["$.settings.headings.h4.lineHeight.mobile|0"]: {
-  "hash": "869b563d91c01cfc151f5abdf0e82915790ab10d4df5b7e9d5110260ce96f026",
-  "group": "patch"
-},
-["$.settings.headings.h4.lineHeight.mobile|1"]: {
-  "hash": "2113410e6e71d275cf23b02cee5cf7435cf2646d0abf89b0b8da041f9fdfa0d7",
-  "group": "patch"
-},
-["$.settings.headings.h4.paragraphBottomSpace"]: {
-  "hash": "a3167ec11f2bf28a150f27b0e348c219ab1e8157d537611cf6dcedca7446cf11",
-  "group": "patch"
-},
-["$.settings.headings.h4.paragraphBottomSpace|0"]: {
-  "hash": "66a8ddd77771c6aee99dd8721e7a611cb9ae7e90d82ae2eed2e3b345803dfe0a",
-  "group": "patch"
-},
-["$.settings.headings.h4.paragraphBottomSpace|0.desktop"]: {
-  "hash": "f3606ee9efa4397c598dc1c9348b00c6c6d3b9e86ee293953e3c7be81eaa2d12",
-  "group": "patch"
-},
-["$.settings.headings.h4.paragraphBottomSpace|0.mobile"]: {
-  "hash": "f3606ee9efa4397c598dc1c9348b00c6c6d3b9e86ee293953e3c7be81eaa2d12",
-  "group": "patch"
-},
-["$.settings.headings.h4.paragraphBottomSpace|1"]: {
-  "hash": "2113410e6e71d275cf23b02cee5cf7435cf2646d0abf89b0b8da041f9fdfa0d7",
-  "group": "patch"
-},
-["$.settings.headings.h5"]: {
-  "hash": "7476f543f64b10416adcbcef719688b85696bff1e62fda8f8c4f9a78421a7abc",
-  "group": "patch"
-},
-["$.settings.headings.h5.textAlign"]: {
-  "hash": "4a6a97dc2c9efb4fc28131f414e5a34bf3aa29ad7ee0ae65e048f197ce7744bb",
-  "group": "patch"
-},
-["$.settings.headings.h5.textAlign.mobile"]: {
-  "hash": "5375df54269a84fc139784fe3567a925e67a6fdadc14968f47129d43af69e27f",
-  "group": "patch"
-},
-["$.settings.headings.h5.textAlign.mobile|0"]: {
-  "hash": "a783a3f4a5c26611e215539d3071f56d9232df6a43ffec2c40861c45d7800288",
-  "group": "patch"
-},
-["$.settings.headings.h5.textAlign.mobile|1"]: {
-  "hash": "2113410e6e71d275cf23b02cee5cf7435cf2646d0abf89b0b8da041f9fdfa0d7",
-  "group": "patch"
-},
-["$.settings.headings.h5.textStyle"]: {
-  "hash": "ad9ef54d3395d1e634650d6e31bfa86aa3a7057d598a0ad6348caf15ccc6a62f",
-  "group": "patch"
-},
-["$.settings.headings.h5.textStyle.italic"]: {
-  "hash": "0d417e250727a3e7c0e64ca4d9577f6f8a0063dea676170464269c244a701b04",
-  "group": "patch"
-},
-["$.settings.headings.h5.fontWeight"]: {
-  "hash": "487e06ccc68d7e5ae8fbf621387f0cd09fa5ccf9735bd107860766837e506684",
-  "group": "patch"
-},
-["$.settings.headings.h5.fontWeight|0"]: {
-  "hash": "59152bdb3f73ff7b005724cb7ceb9c7b8a0760de270a9c2e65e00a41c9e216bc",
-  "group": "patch"
-},
-["$.settings.headings.h5.fontWeight|1"]: {
-  "hash": "2113410e6e71d275cf23b02cee5cf7435cf2646d0abf89b0b8da041f9fdfa0d7",
-  "group": "patch"
-},
-["$.settings.headings.h5.fontSize"]: {
-  "hash": "b0b4a9feb9bc7aa0671aa152ca26b9cf9eeb898586e8d4a3aa21ad8d873368be",
-  "group": "patch"
-},
-["$.settings.headings.h5.fontSize.desktop"]: {
-  "hash": "10593a73be1863846319148184e101cf517278ff783d17d33a80a0e0676072d0",
-  "group": "patch"
-},
-["$.settings.headings.h5.fontSize.desktop|0"]: {
-  "hash": "bd8c3b311aa08b4bafa2d3859018447523f20f59a419eb58b37526bb514a4215",
-  "group": "patch"
-},
-["$.settings.headings.h5.fontSize.desktop|1"]: {
-  "hash": "2113410e6e71d275cf23b02cee5cf7435cf2646d0abf89b0b8da041f9fdfa0d7",
-  "group": "patch"
-},
-["$.settings.headings.h5.fontSize.mobile"]: {
-  "hash": "66bf5572cefb7117b49d88f79890f03e2a28bc081d3ac473ddd92d8b9970472a",
-  "group": "patch"
-},
-["$.settings.headings.h5.fontSize.mobile|0"]: {
-  "hash": "e81aed31761ea539e90fb82214c5db834a1055fd97069d2c31fe6acc591d1edb",
-  "group": "patch"
-},
-["$.settings.headings.h5.fontSize.mobile|1"]: {
-  "hash": "2113410e6e71d275cf23b02cee5cf7435cf2646d0abf89b0b8da041f9fdfa0d7",
-  "group": "patch"
-},
-["$.settings.headings.h5.lineHeight"]: {
-  "hash": "50832814b28baa2adc3a16c6c6b4d4e30d272e064cd517565c44421b2fa8e6d8",
-  "group": "patch"
-},
-["$.settings.headings.h5.lineHeight.desktop"]: {
-  "hash": "d937b34d2edeb4748196715a6742d85a35fd35fde00d9c24274a0ce6a0410e29",
-  "group": "patch"
-},
-["$.settings.headings.h5.lineHeight.desktop|0"]: {
-  "hash": "8d3d438f0489f1626aa7e08ccd2201e891c9813fcc1c82fb86834115c0862f74",
-  "group": "patch"
-},
-["$.settings.headings.h5.lineHeight.desktop|1"]: {
-  "hash": "2113410e6e71d275cf23b02cee5cf7435cf2646d0abf89b0b8da041f9fdfa0d7",
-  "group": "patch"
-},
-["$.settings.headings.h5.lineHeight.mobile"]: {
-  "hash": "1c156d66b871ba31529600af396d235c99478cdf8f720757350c8962656bed06",
-  "group": "patch"
-},
-["$.settings.headings.h5.lineHeight.mobile|0"]: {
-  "hash": "869b563d91c01cfc151f5abdf0e82915790ab10d4df5b7e9d5110260ce96f026",
-  "group": "patch"
-},
-["$.settings.headings.h5.lineHeight.mobile|1"]: {
-  "hash": "2113410e6e71d275cf23b02cee5cf7435cf2646d0abf89b0b8da041f9fdfa0d7",
-  "group": "patch"
-},
-["$.settings.headings.h5.paragraphBottomSpace"]: {
-  "hash": "a3167ec11f2bf28a150f27b0e348c219ab1e8157d537611cf6dcedca7446cf11",
-  "group": "patch"
-},
-["$.settings.headings.h5.paragraphBottomSpace|0"]: {
-  "hash": "66a8ddd77771c6aee99dd8721e7a611cb9ae7e90d82ae2eed2e3b345803dfe0a",
-  "group": "patch"
-},
-["$.settings.headings.h5.paragraphBottomSpace|0.desktop"]: {
-  "hash": "f3606ee9efa4397c598dc1c9348b00c6c6d3b9e86ee293953e3c7be81eaa2d12",
-  "group": "patch"
-},
 ["$.settings.headings.h5.paragraphBottomSpace|0.mobile"]: {
   "hash": "f3606ee9efa4397c598dc1c9348b00c6c6d3b9e86ee293953e3c7be81eaa2d12",
   "group": "patch"
@@ -193,7 +9,7 @@ export default {
   "group": "patch"
 },
 ["$.settings.headings.h6"]: {
-  "hash": "7476f543f64b10416adcbcef719688b85696bff1e62fda8f8c4f9a78421a7abc",
+  "hash": "3248bf195816bb6692eec2fc06f24c1b4bf5caf4e71aea355db34a700a621214",
   "group": "patch"
 },
 ["$.settings.headings.h6.textAlign"]: {
@@ -221,11 +37,11 @@ export default {
   "group": "patch"
 },
 ["$.settings.headings.h6.fontWeight"]: {
-  "hash": "487e06ccc68d7e5ae8fbf621387f0cd09fa5ccf9735bd107860766837e506684",
+  "hash": "d57843bb4be0f74a6be66b9b2cbd78b98349fb2f470853d6794014728c1bba12",
   "group": "patch"
 },
 ["$.settings.headings.h6.fontWeight|0"]: {
-  "hash": "59152bdb3f73ff7b005724cb7ceb9c7b8a0760de270a9c2e65e00a41c9e216bc",
+  "hash": "f9cc084e81b7130edaa4155b9c2de3d76bb5963f46571d9def896eddcb33cfe1",
   "group": "patch"
 },
 ["$.settings.headings.h6.fontWeight|1"]: {
@@ -233,15 +49,15 @@ export default {
   "group": "patch"
 },
 ["$.settings.headings.h6.fontSize"]: {
-  "hash": "b0b4a9feb9bc7aa0671aa152ca26b9cf9eeb898586e8d4a3aa21ad8d873368be",
+  "hash": "cfac00282df434e0191c9caadbf65270b968bedb3408dd935748947208f00b4e",
   "group": "patch"
 },
 ["$.settings.headings.h6.fontSize.desktop"]: {
-  "hash": "10593a73be1863846319148184e101cf517278ff783d17d33a80a0e0676072d0",
+  "hash": "570c5dce68e5152f1bcab0477f87de50d7491bc79237ad916f7dc9c66caa1ed0",
   "group": "patch"
 },
 ["$.settings.headings.h6.fontSize.desktop|0"]: {
-  "hash": "bd8c3b311aa08b4bafa2d3859018447523f20f59a419eb58b37526bb514a4215",
+  "hash": "7052251cf6cf0510399d1c3b31d01c93453e815a6dac51fbec498255e9afe0f7",
   "group": "patch"
 },
 ["$.settings.headings.h6.fontSize.desktop|1"]: {
@@ -249,11 +65,11 @@ export default {
   "group": "patch"
 },
 ["$.settings.headings.h6.fontSize.mobile"]: {
-  "hash": "66bf5572cefb7117b49d88f79890f03e2a28bc081d3ac473ddd92d8b9970472a",
+  "hash": "570c5dce68e5152f1bcab0477f87de50d7491bc79237ad916f7dc9c66caa1ed0",
   "group": "patch"
 },
 ["$.settings.headings.h6.fontSize.mobile|0"]: {
-  "hash": "e81aed31761ea539e90fb82214c5db834a1055fd97069d2c31fe6acc591d1edb",
+  "hash": "7052251cf6cf0510399d1c3b31d01c93453e815a6dac51fbec498255e9afe0f7",
   "group": "patch"
 },
 ["$.settings.headings.h6.fontSize.mobile|1"]: {
@@ -261,15 +77,15 @@ export default {
   "group": "patch"
 },
 ["$.settings.headings.h6.lineHeight"]: {
-  "hash": "50832814b28baa2adc3a16c6c6b4d4e30d272e064cd517565c44421b2fa8e6d8",
+  "hash": "032acf9b51970fa414eeba6b8cb680ca40ebc646ff101c5a76c3fb2ad45982c8",
   "group": "patch"
 },
 ["$.settings.headings.h6.lineHeight.desktop"]: {
-  "hash": "d937b34d2edeb4748196715a6742d85a35fd35fde00d9c24274a0ce6a0410e29",
+  "hash": "e2426094deab8e33f78e4953abea6781a1ed40e3fc25b441c8a0b596a5f94000",
   "group": "patch"
 },
 ["$.settings.headings.h6.lineHeight.desktop|0"]: {
-  "hash": "8d3d438f0489f1626aa7e08ccd2201e891c9813fcc1c82fb86834115c0862f74",
+  "hash": "8b1233ab757e418bec3dde32951ff3f2c0ee824e0fb85b8df9934fe1cd94ba86",
   "group": "patch"
 },
 ["$.settings.headings.h6.lineHeight.desktop|1"]: {
@@ -277,11 +93,11 @@ export default {
   "group": "patch"
 },
 ["$.settings.headings.h6.lineHeight.mobile"]: {
-  "hash": "1c156d66b871ba31529600af396d235c99478cdf8f720757350c8962656bed06",
+  "hash": "e2426094deab8e33f78e4953abea6781a1ed40e3fc25b441c8a0b596a5f94000",
   "group": "patch"
 },
 ["$.settings.headings.h6.lineHeight.mobile|0"]: {
-  "hash": "869b563d91c01cfc151f5abdf0e82915790ab10d4df5b7e9d5110260ce96f026",
+  "hash": "8b1233ab757e418bec3dde32951ff3f2c0ee824e0fb85b8df9934fe1cd94ba86",
   "group": "patch"
 },
 ["$.settings.headings.h6.lineHeight.mobile|1"]: {
@@ -289,11 +105,11 @@ export default {
   "group": "patch"
 },
 ["$.settings.headings.h6.paragraphBottomSpace"]: {
-  "hash": "a3167ec11f2bf28a150f27b0e348c219ab1e8157d537611cf6dcedca7446cf11",
+  "hash": "6108d6cdbbde38830d3dbf1c0931bc4c3f58242a400372b9da1e6df404876e3d",
   "group": "patch"
 },
 ["$.settings.headings.h6.paragraphBottomSpace|0"]: {
-  "hash": "66a8ddd77771c6aee99dd8721e7a611cb9ae7e90d82ae2eed2e3b345803dfe0a",
+  "hash": "4e946a80499691e3a0d4697aa58f1fbbf6d9f45c6af485e40e30a26c80c449af",
   "group": "patch"
 },
 ["$.settings.headings.h6.paragraphBottomSpace|0.desktop"]: {
@@ -309,159 +125,111 @@ export default {
   "group": "patch"
 },
 ["$.settings.headings.lightTheme"]: {
-  "hash": "5437f09c2a41a18e60df2ae801483b9dc79c8a17edd064b1c65e3a6ad7ab8001",
+  "hash": "f64d36aeafd12c066e39be00515dd8f9eb3fdc313d7497026e2ad095e613f474",
   "group": "patch"
 },
 ["$.settings.headings.lightTheme.h1"]: {
-  "hash": "20c564708aa3a97f51fa2f746e14167d3ed686f629aee98a5f8b8f070455e013",
+  "hash": "0b5875b09664ff1b8aa6777b41e529fef1400af7a6821f4f34519f917030ceb7",
   "group": "patch"
 },
 ["$.settings.headings.lightTheme.h1.fontColor"]: {
-  "hash": "f888414d14ede53b51ddaafcca2945ff589be0913bd0ac1dc0bd3bbd6ad51064",
+  "hash": "695136f8a829f18d3f2e100754dfe4cb25664b67ea152bbe6891d781e3f4c8a7",
   "group": "patch"
 },
 ["$.settings.headings.lightTheme.h2"]: {
-  "hash": "20c564708aa3a97f51fa2f746e14167d3ed686f629aee98a5f8b8f070455e013",
+  "hash": "0b5875b09664ff1b8aa6777b41e529fef1400af7a6821f4f34519f917030ceb7",
   "group": "patch"
 },
 ["$.settings.headings.lightTheme.h2.fontColor"]: {
-  "hash": "f888414d14ede53b51ddaafcca2945ff589be0913bd0ac1dc0bd3bbd6ad51064",
+  "hash": "695136f8a829f18d3f2e100754dfe4cb25664b67ea152bbe6891d781e3f4c8a7",
   "group": "patch"
 },
 ["$.settings.headings.lightTheme.h3"]: {
-  "hash": "20c564708aa3a97f51fa2f746e14167d3ed686f629aee98a5f8b8f070455e013",
+  "hash": "0b5875b09664ff1b8aa6777b41e529fef1400af7a6821f4f34519f917030ceb7",
   "group": "patch"
 },
 ["$.settings.headings.lightTheme.h3.fontColor"]: {
-  "hash": "f888414d14ede53b51ddaafcca2945ff589be0913bd0ac1dc0bd3bbd6ad51064",
+  "hash": "695136f8a829f18d3f2e100754dfe4cb25664b67ea152bbe6891d781e3f4c8a7",
   "group": "patch"
 },
 ["$.settings.headings.lightTheme.h4"]: {
-  "hash": "20c564708aa3a97f51fa2f746e14167d3ed686f629aee98a5f8b8f070455e013",
+  "hash": "0b5875b09664ff1b8aa6777b41e529fef1400af7a6821f4f34519f917030ceb7",
   "group": "patch"
 },
 ["$.settings.headings.lightTheme.h4.fontColor"]: {
-  "hash": "f888414d14ede53b51ddaafcca2945ff589be0913bd0ac1dc0bd3bbd6ad51064",
+  "hash": "695136f8a829f18d3f2e100754dfe4cb25664b67ea152bbe6891d781e3f4c8a7",
   "group": "patch"
 },
 ["$.settings.headings.lightTheme.h5"]: {
-  "hash": "20c564708aa3a97f51fa2f746e14167d3ed686f629aee98a5f8b8f070455e013",
+  "hash": "0b5875b09664ff1b8aa6777b41e529fef1400af7a6821f4f34519f917030ceb7",
   "group": "patch"
 },
 ["$.settings.headings.lightTheme.h5.fontColor"]: {
-  "hash": "f888414d14ede53b51ddaafcca2945ff589be0913bd0ac1dc0bd3bbd6ad51064",
+  "hash": "695136f8a829f18d3f2e100754dfe4cb25664b67ea152bbe6891d781e3f4c8a7",
   "group": "patch"
 },
 ["$.settings.headings.lightTheme.h6"]: {
-  "hash": "20c564708aa3a97f51fa2f746e14167d3ed686f629aee98a5f8b8f070455e013",
+  "hash": "0b5875b09664ff1b8aa6777b41e529fef1400af7a6821f4f34519f917030ceb7",
   "group": "patch"
 },
 ["$.settings.headings.lightTheme.h6.fontColor"]: {
-  "hash": "f888414d14ede53b51ddaafcca2945ff589be0913bd0ac1dc0bd3bbd6ad51064",
+  "hash": "695136f8a829f18d3f2e100754dfe4cb25664b67ea152bbe6891d781e3f4c8a7",
   "group": "patch"
 },
 ["$.settings.headings.darkTheme"]: {
-  "hash": "e4ea10440ce409d21f3821c324dd6228a783f2cbc1e3d50d28e669d73e4c1f29",
+  "hash": "0cf595ddc71a22be53b10c069f338ae26698aa9c9a7d80f0b5f029e8a8f2682d",
   "group": "patch"
 },
 ["$.settings.headings.darkTheme.h1"]: {
-  "hash": "e47102bdf1743655426f425706d541028eea381afb1ac76e339b21573a1e381b",
+  "hash": "eb6747321167f4eb9c1a9f6755ac7c38ff8a71ab4a3030cd2433e0af78817712",
   "group": "patch"
 },
 ["$.settings.headings.darkTheme.h1.fontColor"]: {
-  "hash": "5aca9613258bbcdc2c67c6606ab8594a001b898d45ddee4928f75de8ec818392",
-  "group": "patch"
-},
-["$.settings.headings.darkTheme.h1.fontColor|0"]: {
-  "hash": "1f58ab5e592092e2ee6db625ef1f12a1e29af2c70694bd975a29f38689e42772",
-  "group": "patch"
-},
-["$.settings.headings.darkTheme.h1.fontColor|1"]: {
-  "hash": "2113410e6e71d275cf23b02cee5cf7435cf2646d0abf89b0b8da041f9fdfa0d7",
+  "hash": "593b9dc5c1a48fd4b2a81ab9ed12bbe72462614b93276d15d186f289395dba90",
   "group": "patch"
 },
 ["$.settings.headings.darkTheme.h2"]: {
-  "hash": "e47102bdf1743655426f425706d541028eea381afb1ac76e339b21573a1e381b",
+  "hash": "eb6747321167f4eb9c1a9f6755ac7c38ff8a71ab4a3030cd2433e0af78817712",
   "group": "patch"
 },
 ["$.settings.headings.darkTheme.h2.fontColor"]: {
-  "hash": "5aca9613258bbcdc2c67c6606ab8594a001b898d45ddee4928f75de8ec818392",
-  "group": "patch"
-},
-["$.settings.headings.darkTheme.h2.fontColor|0"]: {
-  "hash": "1f58ab5e592092e2ee6db625ef1f12a1e29af2c70694bd975a29f38689e42772",
-  "group": "patch"
-},
-["$.settings.headings.darkTheme.h2.fontColor|1"]: {
-  "hash": "2113410e6e71d275cf23b02cee5cf7435cf2646d0abf89b0b8da041f9fdfa0d7",
+  "hash": "593b9dc5c1a48fd4b2a81ab9ed12bbe72462614b93276d15d186f289395dba90",
   "group": "patch"
 },
 ["$.settings.headings.darkTheme.h3"]: {
-  "hash": "e47102bdf1743655426f425706d541028eea381afb1ac76e339b21573a1e381b",
+  "hash": "eb6747321167f4eb9c1a9f6755ac7c38ff8a71ab4a3030cd2433e0af78817712",
   "group": "patch"
 },
 ["$.settings.headings.darkTheme.h3.fontColor"]: {
-  "hash": "5aca9613258bbcdc2c67c6606ab8594a001b898d45ddee4928f75de8ec818392",
-  "group": "patch"
-},
-["$.settings.headings.darkTheme.h3.fontColor|0"]: {
-  "hash": "1f58ab5e592092e2ee6db625ef1f12a1e29af2c70694bd975a29f38689e42772",
-  "group": "patch"
-},
-["$.settings.headings.darkTheme.h3.fontColor|1"]: {
-  "hash": "2113410e6e71d275cf23b02cee5cf7435cf2646d0abf89b0b8da041f9fdfa0d7",
+  "hash": "593b9dc5c1a48fd4b2a81ab9ed12bbe72462614b93276d15d186f289395dba90",
   "group": "patch"
 },
 ["$.settings.headings.darkTheme.h4"]: {
-  "hash": "e47102bdf1743655426f425706d541028eea381afb1ac76e339b21573a1e381b",
+  "hash": "eb6747321167f4eb9c1a9f6755ac7c38ff8a71ab4a3030cd2433e0af78817712",
   "group": "patch"
 },
 ["$.settings.headings.darkTheme.h4.fontColor"]: {
-  "hash": "5aca9613258bbcdc2c67c6606ab8594a001b898d45ddee4928f75de8ec818392",
-  "group": "patch"
-},
-["$.settings.headings.darkTheme.h4.fontColor|0"]: {
-  "hash": "1f58ab5e592092e2ee6db625ef1f12a1e29af2c70694bd975a29f38689e42772",
-  "group": "patch"
-},
-["$.settings.headings.darkTheme.h4.fontColor|1"]: {
-  "hash": "2113410e6e71d275cf23b02cee5cf7435cf2646d0abf89b0b8da041f9fdfa0d7",
+  "hash": "593b9dc5c1a48fd4b2a81ab9ed12bbe72462614b93276d15d186f289395dba90",
   "group": "patch"
 },
 ["$.settings.headings.darkTheme.h5"]: {
-  "hash": "e47102bdf1743655426f425706d541028eea381afb1ac76e339b21573a1e381b",
+  "hash": "eb6747321167f4eb9c1a9f6755ac7c38ff8a71ab4a3030cd2433e0af78817712",
   "group": "patch"
 },
 ["$.settings.headings.darkTheme.h5.fontColor"]: {
-  "hash": "5aca9613258bbcdc2c67c6606ab8594a001b898d45ddee4928f75de8ec818392",
-  "group": "patch"
-},
-["$.settings.headings.darkTheme.h5.fontColor|0"]: {
-  "hash": "1f58ab5e592092e2ee6db625ef1f12a1e29af2c70694bd975a29f38689e42772",
-  "group": "patch"
-},
-["$.settings.headings.darkTheme.h5.fontColor|1"]: {
-  "hash": "2113410e6e71d275cf23b02cee5cf7435cf2646d0abf89b0b8da041f9fdfa0d7",
+  "hash": "593b9dc5c1a48fd4b2a81ab9ed12bbe72462614b93276d15d186f289395dba90",
   "group": "patch"
 },
 ["$.settings.headings.darkTheme.h6"]: {
-  "hash": "e47102bdf1743655426f425706d541028eea381afb1ac76e339b21573a1e381b",
+  "hash": "eb6747321167f4eb9c1a9f6755ac7c38ff8a71ab4a3030cd2433e0af78817712",
   "group": "patch"
 },
 ["$.settings.headings.darkTheme.h6.fontColor"]: {
-  "hash": "5aca9613258bbcdc2c67c6606ab8594a001b898d45ddee4928f75de8ec818392",
-  "group": "patch"
-},
-["$.settings.headings.darkTheme.h6.fontColor|0"]: {
-  "hash": "1f58ab5e592092e2ee6db625ef1f12a1e29af2c70694bd975a29f38689e42772",
-  "group": "patch"
-},
-["$.settings.headings.darkTheme.h6.fontColor|1"]: {
-  "hash": "2113410e6e71d275cf23b02cee5cf7435cf2646d0abf89b0b8da041f9fdfa0d7",
+  "hash": "593b9dc5c1a48fd4b2a81ab9ed12bbe72462614b93276d15d186f289395dba90",
   "group": "patch"
 },
 ["$.settings.buttons"]: {
-  "hash": "a37657ce319c73df79da30f36cd77126e6566b150589fb04b8fc8bdc7baf571d",
+  "hash": "4f0d47f8d4327cbec7012fffeadaede0b75985bb1c32a6ff7e2934a1fd0d95ed",
   "group": "patch"
 },
 ["$.settings.buttons.outlookSupport"]: {
@@ -485,11 +253,11 @@ export default {
   "group": "patch"
 },
 ["$.settings.buttons.fontFamily"]: {
-  "hash": "c21ee58041cd121b85ca447e29f607eb51c582e1c59f7158c21e4c0e5561f655",
+  "hash": "8a523a1a890a7a7597758693112cdfd8f45f9b95863447075656b5796d7c174b",
   "group": "patch"
 },
 ["$.settings.buttons.letterSpacing"]: {
-  "hash": "665ee50e0f7356058dcf3d6e810577f39d694e6148718916eef123a77473c468",
+  "hash": "4b6df7b7d8acba226e6369452190e1cec9ff7cba33579faf49eeb1851e3960b4",
   "group": "patch"
 },
 ["$.settings.buttons.letterSpacing.value"]: {
@@ -501,15 +269,15 @@ export default {
   "group": "patch"
 },
 ["$.settings.buttons.fontSize"]: {
-  "hash": "031fc285c0887f173bc2e6735eb550e6253cb96a9c803aa2d7cae8d0e3d27495",
+  "hash": "b0ed205ab2af2ece88e20a5994952d8f2d667371140d9d22619210c1d3640849",
   "group": "patch"
 },
 ["$.settings.buttons.fontSize.desktop"]: {
-  "hash": "bd8c3b311aa08b4bafa2d3859018447523f20f59a419eb58b37526bb514a4215",
+  "hash": "7052251cf6cf0510399d1c3b31d01c93453e815a6dac51fbec498255e9afe0f7",
   "group": "patch"
 },
 ["$.settings.buttons.fontSize.mobile"]: {
-  "hash": "e81aed31761ea539e90fb82214c5db834a1055fd97069d2c31fe6acc591d1edb",
+  "hash": "7052251cf6cf0510399d1c3b31d01c93453e815a6dac51fbec498255e9afe0f7",
   "group": "patch"
 },
 ["$.settings.buttons.borderRadius"]: {
@@ -545,11 +313,11 @@ export default {
   "group": "patch"
 },
 ["$.settings.buttons.border"]: {
-  "hash": "48c67385da148885deacd5d3138aa1b912c9a0859295634e687955d0b36ae579",
+  "hash": "45fee3675ef40a7ed4bd5749e740fee41200580822433a6a1ebc578f46c26c5a",
   "group": "patch"
 },
 ["$.settings.buttons.border.top"]: {
-  "hash": "e761349b5accff433bf324540fb3cc2e30fc3bca26464956d7e50ab4ddd7b2b9",
+  "hash": "7830b4b4e9bc99f7bcee7028bd512d2ebfa9c179d3e5715beb31bb9a78b96ec9",
   "group": "patch"
 },
 ["$.settings.buttons.border.top.width"]: {
@@ -557,7 +325,7 @@ export default {
   "group": "patch"
 },
 ["$.settings.buttons.border.right"]: {
-  "hash": "e761349b5accff433bf324540fb3cc2e30fc3bca26464956d7e50ab4ddd7b2b9",
+  "hash": "7830b4b4e9bc99f7bcee7028bd512d2ebfa9c179d3e5715beb31bb9a78b96ec9",
   "group": "patch"
 },
 ["$.settings.buttons.border.right.width"]: {
@@ -565,7 +333,7 @@ export default {
   "group": "patch"
 },
 ["$.settings.buttons.border.bottom"]: {
-  "hash": "e761349b5accff433bf324540fb3cc2e30fc3bca26464956d7e50ab4ddd7b2b9",
+  "hash": "7830b4b4e9bc99f7bcee7028bd512d2ebfa9c179d3e5715beb31bb9a78b96ec9",
   "group": "patch"
 },
 ["$.settings.buttons.border.bottom.width"]: {
@@ -573,7 +341,7 @@ export default {
   "group": "patch"
 },
 ["$.settings.buttons.border.left"]: {
-  "hash": "e761349b5accff433bf324540fb3cc2e30fc3bca26464956d7e50ab4ddd7b2b9",
+  "hash": "7830b4b4e9bc99f7bcee7028bd512d2ebfa9c179d3e5715beb31bb9a78b96ec9",
   "group": "patch"
 },
 ["$.settings.buttons.border.left.width"]: {
@@ -589,11 +357,11 @@ export default {
   "group": "patch"
 },
 ["$.settings.buttons.padding"]: {
-  "hash": "8ab766d10be8eb2ffe369f6644d2622a23e79cb5db03b7c41b68f4b3f37181a8",
+  "hash": "af38c35f7dcccd7ab85a507c0921eca6899b90496c5b27a6d598fa68cc677a94",
   "group": "patch"
 },
 ["$.settings.buttons.padding.desktop"]: {
-  "hash": "11192dc2b519889916eaade6afe624180e6832fc72ed8cad43b4fe45be559f66",
+  "hash": "d70b6f8c5ca8ea3b936d06f0ca581e65e78b1d9649edc1a16620458541bb5de0",
   "group": "patch"
 },
 ["$.settings.buttons.padding.desktop.top"]: {
@@ -613,7 +381,7 @@ export default {
   "group": "patch"
 },
 ["$.settings.buttons.padding.mobile"]: {
-  "hash": "11192dc2b519889916eaade6afe624180e6832fc72ed8cad43b4fe45be559f66",
+  "hash": "d70b6f8c5ca8ea3b936d06f0ca581e65e78b1d9649edc1a16620458541bb5de0",
   "group": "patch"
 },
 ["$.settings.buttons.padding.mobile.top"]: {
@@ -633,231 +401,135 @@ export default {
   "group": "patch"
 },
 ["$.settings.buttons.lightTheme"]: {
-  "hash": "c32bedadd6106e298a535d587c48d97cda9382c71c01d0d8767885aaafbf4906",
+  "hash": "c9e925b6f435ab68a859cd9c40b1bb08ea54c25faf568a2d6db89896f8dd74cc",
   "group": "patch"
 },
 ["$.settings.buttons.lightTheme.buttonColor"]: {
-  "hash": "3f4762ffeb4e854eeb4640a6244a058677a7a368ef73e7c92cd17d4dc2f72f23",
+  "hash": "695136f8a829f18d3f2e100754dfe4cb25664b67ea152bbe6891d781e3f4c8a7",
   "group": "patch"
 },
 ["$.settings.buttons.lightTheme.fontColor"]: {
-  "hash": "f888414d14ede53b51ddaafcca2945ff589be0913bd0ac1dc0bd3bbd6ad51064",
+  "hash": "695136f8a829f18d3f2e100754dfe4cb25664b67ea152bbe6891d781e3f4c8a7",
   "group": "patch"
 },
 ["$.settings.buttons.lightTheme.hoverButtonStyles"]: {
-  "hash": "d6691844b110b2077412c4ebb66dff330d246cf00780b3d86fb613ac8ae2fd7f",
+  "hash": "27fa5ed31bce32830e3371a1cf87f9bfd11f0f1082a205ca4271307e109f10d6",
   "group": "patch"
 },
 ["$.settings.buttons.lightTheme.hoverButtonStyles.backgroundColor"]: {
-  "hash": "3f4762ffeb4e854eeb4640a6244a058677a7a368ef73e7c92cd17d4dc2f72f23",
+  "hash": "695136f8a829f18d3f2e100754dfe4cb25664b67ea152bbe6891d781e3f4c8a7",
   "group": "patch"
 },
 ["$.settings.buttons.lightTheme.hoverButtonStyles.fontColor"]: {
-  "hash": "f888414d14ede53b51ddaafcca2945ff589be0913bd0ac1dc0bd3bbd6ad51064",
+  "hash": "695136f8a829f18d3f2e100754dfe4cb25664b67ea152bbe6891d781e3f4c8a7",
   "group": "patch"
 },
 ["$.settings.buttons.lightTheme.hoverButtonStyles.borderColor"]: {
-  "hash": "b8c039d11e6abeb479b5c5a5423c1e6d231112e874dd6ac6367784902f92374c",
+  "hash": "ebf7eb83c72acf33a643e36f5669a39354a0b9b68f4285c8a790a8f9f0fa19d3",
   "group": "patch"
 },
 ["$.settings.buttons.lightTheme.hoverButtonStyles.borderColor.top"]: {
-  "hash": "bd1b5e4cf1430497e21c2bd090435d3618aed1c2c04e555fea4b0af3bafbeaa5",
+  "hash": "695136f8a829f18d3f2e100754dfe4cb25664b67ea152bbe6891d781e3f4c8a7",
   "group": "patch"
 },
 ["$.settings.buttons.lightTheme.hoverButtonStyles.borderColor.right"]: {
-  "hash": "bd1b5e4cf1430497e21c2bd090435d3618aed1c2c04e555fea4b0af3bafbeaa5",
+  "hash": "695136f8a829f18d3f2e100754dfe4cb25664b67ea152bbe6891d781e3f4c8a7",
   "group": "patch"
 },
 ["$.settings.buttons.lightTheme.hoverButtonStyles.borderColor.bottom"]: {
-  "hash": "bd1b5e4cf1430497e21c2bd090435d3618aed1c2c04e555fea4b0af3bafbeaa5",
+  "hash": "695136f8a829f18d3f2e100754dfe4cb25664b67ea152bbe6891d781e3f4c8a7",
   "group": "patch"
 },
 ["$.settings.buttons.lightTheme.hoverButtonStyles.borderColor.left"]: {
-  "hash": "bd1b5e4cf1430497e21c2bd090435d3618aed1c2c04e555fea4b0af3bafbeaa5",
+  "hash": "695136f8a829f18d3f2e100754dfe4cb25664b67ea152bbe6891d781e3f4c8a7",
   "group": "patch"
 },
 ["$.settings.buttons.lightTheme.borderColor"]: {
-  "hash": "b8c039d11e6abeb479b5c5a5423c1e6d231112e874dd6ac6367784902f92374c",
+  "hash": "ebf7eb83c72acf33a643e36f5669a39354a0b9b68f4285c8a790a8f9f0fa19d3",
   "group": "patch"
 },
 ["$.settings.buttons.lightTheme.borderColor.top"]: {
-  "hash": "bd1b5e4cf1430497e21c2bd090435d3618aed1c2c04e555fea4b0af3bafbeaa5",
+  "hash": "695136f8a829f18d3f2e100754dfe4cb25664b67ea152bbe6891d781e3f4c8a7",
   "group": "patch"
 },
 ["$.settings.buttons.lightTheme.borderColor.right"]: {
-  "hash": "bd1b5e4cf1430497e21c2bd090435d3618aed1c2c04e555fea4b0af3bafbeaa5",
+  "hash": "695136f8a829f18d3f2e100754dfe4cb25664b67ea152bbe6891d781e3f4c8a7",
   "group": "patch"
 },
 ["$.settings.buttons.lightTheme.borderColor.bottom"]: {
-  "hash": "bd1b5e4cf1430497e21c2bd090435d3618aed1c2c04e555fea4b0af3bafbeaa5",
+  "hash": "695136f8a829f18d3f2e100754dfe4cb25664b67ea152bbe6891d781e3f4c8a7",
   "group": "patch"
 },
 ["$.settings.buttons.lightTheme.borderColor.left"]: {
-  "hash": "bd1b5e4cf1430497e21c2bd090435d3618aed1c2c04e555fea4b0af3bafbeaa5",
+  "hash": "695136f8a829f18d3f2e100754dfe4cb25664b67ea152bbe6891d781e3f4c8a7",
   "group": "patch"
 },
 ["$.settings.buttons.darkTheme"]: {
-  "hash": "3468f0ba1aa16fe911500c72a0e53eae928028c150114310e89f5b475dff8463",
+  "hash": "abc2a651c1b1daf991dbb95c72e8e4862689947e87a80498452783b0aeeebe7f",
   "group": "patch"
 },
 ["$.settings.buttons.darkTheme.buttonColor"]: {
-  "hash": "f6db24d505d3d521eb50c1668bc3fdcc310bf8ef0b72a98456efe7e9be235be9",
-  "group": "patch"
-},
-["$.settings.buttons.darkTheme.buttonColor|0"]: {
-  "hash": "d263deb0bf5d237634d23dcc9635925f3bdd33d36d8a9b2420f16ac389368191",
-  "group": "patch"
-},
-["$.settings.buttons.darkTheme.buttonColor|1"]: {
-  "hash": "2113410e6e71d275cf23b02cee5cf7435cf2646d0abf89b0b8da041f9fdfa0d7",
+  "hash": "593b9dc5c1a48fd4b2a81ab9ed12bbe72462614b93276d15d186f289395dba90",
   "group": "patch"
 },
 ["$.settings.buttons.darkTheme.fontColor"]: {
-  "hash": "5aca9613258bbcdc2c67c6606ab8594a001b898d45ddee4928f75de8ec818392",
-  "group": "patch"
-},
-["$.settings.buttons.darkTheme.fontColor|0"]: {
-  "hash": "1f58ab5e592092e2ee6db625ef1f12a1e29af2c70694bd975a29f38689e42772",
-  "group": "patch"
-},
-["$.settings.buttons.darkTheme.fontColor|1"]: {
-  "hash": "2113410e6e71d275cf23b02cee5cf7435cf2646d0abf89b0b8da041f9fdfa0d7",
+  "hash": "593b9dc5c1a48fd4b2a81ab9ed12bbe72462614b93276d15d186f289395dba90",
   "group": "patch"
 },
 ["$.settings.buttons.darkTheme.hoverButtonStyles"]: {
-  "hash": "a2528112bdd3b1a19eba5dec9b09241373f098bef8dd312158a2cb692e6e92e5",
+  "hash": "7c52f0b90de7b9e15e5c4874c177fddc08be25220a56ed74158fe1ad12158afc",
   "group": "patch"
 },
 ["$.settings.buttons.darkTheme.hoverButtonStyles.backgroundColor"]: {
-  "hash": "f6db24d505d3d521eb50c1668bc3fdcc310bf8ef0b72a98456efe7e9be235be9",
-  "group": "patch"
-},
-["$.settings.buttons.darkTheme.hoverButtonStyles.backgroundColor|0"]: {
-  "hash": "d263deb0bf5d237634d23dcc9635925f3bdd33d36d8a9b2420f16ac389368191",
-  "group": "patch"
-},
-["$.settings.buttons.darkTheme.hoverButtonStyles.backgroundColor|1"]: {
-  "hash": "2113410e6e71d275cf23b02cee5cf7435cf2646d0abf89b0b8da041f9fdfa0d7",
+  "hash": "593b9dc5c1a48fd4b2a81ab9ed12bbe72462614b93276d15d186f289395dba90",
   "group": "patch"
 },
 ["$.settings.buttons.darkTheme.hoverButtonStyles.fontColor"]: {
-  "hash": "5aca9613258bbcdc2c67c6606ab8594a001b898d45ddee4928f75de8ec818392",
-  "group": "patch"
-},
-["$.settings.buttons.darkTheme.hoverButtonStyles.fontColor|0"]: {
-  "hash": "1f58ab5e592092e2ee6db625ef1f12a1e29af2c70694bd975a29f38689e42772",
-  "group": "patch"
-},
-["$.settings.buttons.darkTheme.hoverButtonStyles.fontColor|1"]: {
-  "hash": "2113410e6e71d275cf23b02cee5cf7435cf2646d0abf89b0b8da041f9fdfa0d7",
+  "hash": "593b9dc5c1a48fd4b2a81ab9ed12bbe72462614b93276d15d186f289395dba90",
   "group": "patch"
 },
 ["$.settings.buttons.darkTheme.hoverButtonStyles.borderColor"]: {
-  "hash": "e3fa8379856598da16016b30725f4cb095cc8372cdce7fb5b446c7bfc99b6538",
+  "hash": "7153801012e2651c7b43483e87621403d74724ab16f217ddd0000dbe724b43bc",
   "group": "patch"
 },
 ["$.settings.buttons.darkTheme.hoverButtonStyles.borderColor.top"]: {
-  "hash": "6bdd03f3aba951b7c1b0c31ca83832c3bf2a7cb2e4b51b5844b6f78998749852",
-  "group": "patch"
-},
-["$.settings.buttons.darkTheme.hoverButtonStyles.borderColor.top|0"]: {
-  "hash": "c329ddb0a3abd4ff080d591000ab08bae3d87243868dc208648c4964d0f25f79",
-  "group": "patch"
-},
-["$.settings.buttons.darkTheme.hoverButtonStyles.borderColor.top|1"]: {
-  "hash": "2113410e6e71d275cf23b02cee5cf7435cf2646d0abf89b0b8da041f9fdfa0d7",
+  "hash": "593b9dc5c1a48fd4b2a81ab9ed12bbe72462614b93276d15d186f289395dba90",
   "group": "patch"
 },
 ["$.settings.buttons.darkTheme.hoverButtonStyles.borderColor.right"]: {
-  "hash": "6bdd03f3aba951b7c1b0c31ca83832c3bf2a7cb2e4b51b5844b6f78998749852",
-  "group": "patch"
-},
-["$.settings.buttons.darkTheme.hoverButtonStyles.borderColor.right|0"]: {
-  "hash": "c329ddb0a3abd4ff080d591000ab08bae3d87243868dc208648c4964d0f25f79",
-  "group": "patch"
-},
-["$.settings.buttons.darkTheme.hoverButtonStyles.borderColor.right|1"]: {
-  "hash": "2113410e6e71d275cf23b02cee5cf7435cf2646d0abf89b0b8da041f9fdfa0d7",
+  "hash": "593b9dc5c1a48fd4b2a81ab9ed12bbe72462614b93276d15d186f289395dba90",
   "group": "patch"
 },
 ["$.settings.buttons.darkTheme.hoverButtonStyles.borderColor.bottom"]: {
-  "hash": "6bdd03f3aba951b7c1b0c31ca83832c3bf2a7cb2e4b51b5844b6f78998749852",
-  "group": "patch"
-},
-["$.settings.buttons.darkTheme.hoverButtonStyles.borderColor.bottom|0"]: {
-  "hash": "c329ddb0a3abd4ff080d591000ab08bae3d87243868dc208648c4964d0f25f79",
-  "group": "patch"
-},
-["$.settings.buttons.darkTheme.hoverButtonStyles.borderColor.bottom|1"]: {
-  "hash": "2113410e6e71d275cf23b02cee5cf7435cf2646d0abf89b0b8da041f9fdfa0d7",
+  "hash": "593b9dc5c1a48fd4b2a81ab9ed12bbe72462614b93276d15d186f289395dba90",
   "group": "patch"
 },
 ["$.settings.buttons.darkTheme.hoverButtonStyles.borderColor.left"]: {
-  "hash": "6bdd03f3aba951b7c1b0c31ca83832c3bf2a7cb2e4b51b5844b6f78998749852",
-  "group": "patch"
-},
-["$.settings.buttons.darkTheme.hoverButtonStyles.borderColor.left|0"]: {
-  "hash": "c329ddb0a3abd4ff080d591000ab08bae3d87243868dc208648c4964d0f25f79",
-  "group": "patch"
-},
-["$.settings.buttons.darkTheme.hoverButtonStyles.borderColor.left|1"]: {
-  "hash": "2113410e6e71d275cf23b02cee5cf7435cf2646d0abf89b0b8da041f9fdfa0d7",
+  "hash": "593b9dc5c1a48fd4b2a81ab9ed12bbe72462614b93276d15d186f289395dba90",
   "group": "patch"
 },
 ["$.settings.buttons.darkTheme.borderColor"]: {
-  "hash": "e3fa8379856598da16016b30725f4cb095cc8372cdce7fb5b446c7bfc99b6538",
+  "hash": "7153801012e2651c7b43483e87621403d74724ab16f217ddd0000dbe724b43bc",
   "group": "patch"
 },
 ["$.settings.buttons.darkTheme.borderColor.top"]: {
-  "hash": "6bdd03f3aba951b7c1b0c31ca83832c3bf2a7cb2e4b51b5844b6f78998749852",
-  "group": "patch"
-},
-["$.settings.buttons.darkTheme.borderColor.top|0"]: {
-  "hash": "c329ddb0a3abd4ff080d591000ab08bae3d87243868dc208648c4964d0f25f79",
-  "group": "patch"
-},
-["$.settings.buttons.darkTheme.borderColor.top|1"]: {
-  "hash": "2113410e6e71d275cf23b02cee5cf7435cf2646d0abf89b0b8da041f9fdfa0d7",
+  "hash": "593b9dc5c1a48fd4b2a81ab9ed12bbe72462614b93276d15d186f289395dba90",
   "group": "patch"
 },
 ["$.settings.buttons.darkTheme.borderColor.right"]: {
-  "hash": "6bdd03f3aba951b7c1b0c31ca83832c3bf2a7cb2e4b51b5844b6f78998749852",
-  "group": "patch"
-},
-["$.settings.buttons.darkTheme.borderColor.right|0"]: {
-  "hash": "c329ddb0a3abd4ff080d591000ab08bae3d87243868dc208648c4964d0f25f79",
-  "group": "patch"
-},
-["$.settings.buttons.darkTheme.borderColor.right|1"]: {
-  "hash": "2113410e6e71d275cf23b02cee5cf7435cf2646d0abf89b0b8da041f9fdfa0d7",
+  "hash": "593b9dc5c1a48fd4b2a81ab9ed12bbe72462614b93276d15d186f289395dba90",
   "group": "patch"
 },
 ["$.settings.buttons.darkTheme.borderColor.bottom"]: {
-  "hash": "6bdd03f3aba951b7c1b0c31ca83832c3bf2a7cb2e4b51b5844b6f78998749852",
-  "group": "patch"
-},
-["$.settings.buttons.darkTheme.borderColor.bottom|0"]: {
-  "hash": "c329ddb0a3abd4ff080d591000ab08bae3d87243868dc208648c4964d0f25f79",
-  "group": "patch"
-},
-["$.settings.buttons.darkTheme.borderColor.bottom|1"]: {
-  "hash": "2113410e6e71d275cf23b02cee5cf7435cf2646d0abf89b0b8da041f9fdfa0d7",
+  "hash": "593b9dc5c1a48fd4b2a81ab9ed12bbe72462614b93276d15d186f289395dba90",
   "group": "patch"
 },
 ["$.settings.buttons.darkTheme.borderColor.left"]: {
-  "hash": "6bdd03f3aba951b7c1b0c31ca83832c3bf2a7cb2e4b51b5844b6f78998749852",
-  "group": "patch"
-},
-["$.settings.buttons.darkTheme.borderColor.left|0"]: {
-  "hash": "c329ddb0a3abd4ff080d591000ab08bae3d87243868dc208648c4964d0f25f79",
-  "group": "patch"
-},
-["$.settings.buttons.darkTheme.borderColor.left|1"]: {
-  "hash": "2113410e6e71d275cf23b02cee5cf7435cf2646d0abf89b0b8da041f9fdfa0d7",
+  "hash": "593b9dc5c1a48fd4b2a81ab9ed12bbe72462614b93276d15d186f289395dba90",
   "group": "patch"
 },
 ["$.stripes"]: {
-  "hash": "291562bbfd15e14554db37416e4ed4391ac280b985cb6ab6f95dc355c4dc66ec",
+  "hash": "50729aac22dbbc784a12bacebf5dcb7268b41ee29d44fdc1f61b61af27e8cb43",
   "group": "shape"
 },
 ["$.stripes[]"]: {
@@ -865,19 +537,19 @@ export default {
   "group": "shape"
 },
 ["$.stripes[].id"]: {
-  "hash": "7fb7843466a9673aa653107bf3c92d2f46bf1a6b3ed9cd330387447a9bdc2da8",
+  "hash": "d40a6894a1d660e278467cd87702c19694bbc37684221eb1062ac7861114f0f7",
   "group": "shape"
 },
 ["$.stripes[].settings"]: {
-  "hash": "65a2a5383b50f9545fcb4e10463067ea780cec6984dadcba3534683c2ce10932",
+  "hash": "160dcb242da5ed4dedd0ef3b7987f2ef7984d2f01fc34ffa0e10299555a3e961",
   "group": "patch"
 },
 ["$.stripes[].settings.messageArea"]: {
-  "hash": "3e6ed7ff4514d54851bc042bbadc2c86bc82ff5ea4c9f0d5e482260cacf363e3",
+  "hash": "5fa46ff73af9c0834a043d3c6e2cecfca2cbabc783f156fa9f3db0d3a35face5",
   "group": "patch"
 },
 ["$.stripes[].settings.includeInOutput"]: {
-  "hash": "27b96de783f26bafc4c2d0462d20b405001d15bf0566318b526e6b25f87ca60a",
+  "hash": "1acd82527089cdeaca2adcbf12a77444a1f7b973dd61858510e8d7b0e4ae8e0c",
   "group": "patch"
 },
 ["$.stripes[].settings.hideElement"]: {
@@ -885,7 +557,7 @@ export default {
   "group": "patch"
 },
 ["$.stripes[].settings.padding"]: {
-  "hash": "882baa436209af318fb72870ffc54d380ff1b76b21659f4a23916e722be7c209",
+  "hash": "1d91f0aceb5b787561d73730db2ad94ed2ed70f123e7bd3b78c4fffd053999bd",
   "group": "patch"
 },
 ["$.stripes[].settings.padding.mobile"]: {
@@ -893,35 +565,35 @@ export default {
   "group": "patch"
 },
 ["$.stripes[].settings.padding.mobile.top"]: {
-  "hash": "e90ad696f9b3afb6004437bd8141c41a1f583eee0f1bef3da2d35241b4db64c4",
+  "hash": "c1e4123cf5518247700ac4d19f2fd6a4fdabc52a2eb766ab7355c528b1cb679f",
   "group": "patch"
 },
 ["$.stripes[].settings.padding.mobile.right"]: {
-  "hash": "67b152ae1d6b716dfc2183a33a2685a6cfc8e532a71a943177807238ba2ed794",
+  "hash": "9355d08e923559e6d713e77628d931659b5424492c84a04f247151ab047fd2bd",
   "group": "patch"
 },
 ["$.stripes[].settings.padding.mobile.bottom"]: {
-  "hash": "3bee2d4eb0f540a1f790b62fff3c3a7252736f62527f021b41beeb1eba9c16d1",
+  "hash": "66c92592ec597bed47ebeea9e2389fb67e4f952781da00a0b975316e54bc3942",
   "group": "patch"
 },
 ["$.stripes[].settings.padding.mobile.left"]: {
-  "hash": "86b7191f7a109f56a52115c1b19e2d70fa145f65032646e803af98058441be82",
+  "hash": "8d3d438f0489f1626aa7e08ccd2201e891c9813fcc1c82fb86834115c0862f74",
   "group": "patch"
 },
 ["$.stripes[].settings.stripeBackgroundColor"]: {
-  "hash": "28625dcffbf4b3d9194bc7f37f9762b634924739d3171b872d818feddccef501",
+  "hash": "3b539a97d018a91512a4a31f98aee0b23a4a6342f7fdeead77fba32f5cb6dab1",
   "group": "patch"
 },
 ["$.stripes[].settings.contentBackgroundColor"]: {
-  "hash": "4db4d6b351ea02c970c6b862eeb2d3a2faae3bdd50f924f69804571ff8f39621",
+  "hash": "a6ea9f79e012d9ece0c4bcde4f9b91a8344b7224b2cbe71220051870a0b9e741",
   "group": "patch"
 },
 ["$.stripes[].settings.backgroundImage"]: {
-  "hash": "459d54b46cbfca55f800623f5d48283a58093458ed0b38695943c8210103288e",
+  "hash": "1b476444b89c76e44eb5fe0890d6f83fafcb493e2e754cb6ac17e3e1f496c716",
   "group": "patch"
 },
 ["$.stripes[].settings.backgroundImage.path"]: {
-  "hash": "b49b1aca41bd8038f2094cef060768aab0d93d9907ff0e4a007000a4b39fe97a",
+  "hash": "4955d09948928a76f7b93ae081c58c5d38189ed87426ec473f06dd680ea1a3ba",
   "group": "patch"
 },
 ["$.stripes[].settings.backgroundImage.repeat"]: {
@@ -929,11 +601,11 @@ export default {
   "group": "patch"
 },
 ["$.stripes[].settings.backgroundImage.x"]: {
-  "hash": "157b6ab179a3e01b00908890aff68add489b17d21916251e6a6d62d7698fa3a7",
+  "hash": "97a0d622dbc559902ac5b2487be6235005f895e1cf675e5e090d31f078ae7fae",
   "group": "patch"
 },
 ["$.stripes[].settings.backgroundImage.y"]: {
-  "hash": "616cbb99a8ee21cb91f8951ec42448092c3d88d1a2d34cbddde142e72a2e6be9",
+  "hash": "8aa8b533f3dabfabb90bb95b4b921e06de4943b95a9f89bd6ac7841030b1ea06",
   "group": "patch"
 },
 ["$.stripes[].settings.backgroundImage.sizeX"]: {
@@ -945,7 +617,7 @@ export default {
   "group": "patch"
 },
 ["$.stripes[].settings.contentBorder"]: {
-  "hash": "964d3283e1d44ae92c12d138740e09bcc730afcb00f33672d921ea4df77095db",
+  "hash": "465204c372dac4069e299c421f5995968fd74dc059eae342e617fd53cc0f4f8d",
   "group": "patch"
 },
 ["$.stripes[].settings.contentBorder.top"]: {
@@ -953,7 +625,7 @@ export default {
   "group": "patch"
 },
 ["$.stripes[].settings.contentBorder.top.width"]: {
-  "hash": "cf5e994947ee0a3e924f9d5b5e4cf49fc9fa5309a29408096662a474ccee6205",
+  "hash": "5486361cb80423e81b45ecd2cdfd070b9cc82a38f77c264e8e804ad639c87474",
   "group": "patch"
 },
 ["$.stripes[].settings.contentBorder.top.color"]: {
@@ -965,7 +637,7 @@ export default {
   "group": "patch"
 },
 ["$.stripes[].settings.contentBorder.right.width"]: {
-  "hash": "cf5e994947ee0a3e924f9d5b5e4cf49fc9fa5309a29408096662a474ccee6205",
+  "hash": "5486361cb80423e81b45ecd2cdfd070b9cc82a38f77c264e8e804ad639c87474",
   "group": "patch"
 },
 ["$.stripes[].settings.contentBorder.right.color"]: {
@@ -977,7 +649,7 @@ export default {
   "group": "patch"
 },
 ["$.stripes[].settings.contentBorder.bottom.width"]: {
-  "hash": "cf5e994947ee0a3e924f9d5b5e4cf49fc9fa5309a29408096662a474ccee6205",
+  "hash": "5486361cb80423e81b45ecd2cdfd070b9cc82a38f77c264e8e804ad639c87474",
   "group": "patch"
 },
 ["$.stripes[].settings.contentBorder.bottom.color"]: {
@@ -989,7 +661,7 @@ export default {
   "group": "patch"
 },
 ["$.stripes[].settings.contentBorder.left.width"]: {
-  "hash": "cf5e994947ee0a3e924f9d5b5e4cf49fc9fa5309a29408096662a474ccee6205",
+  "hash": "5486361cb80423e81b45ecd2cdfd070b9cc82a38f77c264e8e804ad639c87474",
   "group": "patch"
 },
 ["$.stripes[].settings.contentBorder.left.color"]: {
@@ -997,15 +669,47 @@ export default {
   "group": "patch"
 },
 ["$.stripes[].settings.contentBorder.style"]: {
-  "hash": "2ecfd390d78065356c119e0c89a07ddd2c0732868238de385e8047d588d4a240",
+  "hash": "fff868e3f7b1ec693fc4ebc5efcb0d6bc86d9c01e4e8f0c616c3287965f0b791",
+  "group": "patch"
+},
+["$.stripes[].settings.darkTheme"]: {
+  "hash": "fe17ce589ac882c1c530a86f6a41de5dc5be6bb29e88e39bcd69ab9e8a6f5c2e",
+  "group": "patch"
+},
+["$.stripes[].settings.darkTheme.stripeBackgroundColor"]: {
+  "hash": "4573639e6197de64b09e92b6592afcad04731ab9bfbd1212e84352aa0ceb274f",
+  "group": "patch"
+},
+["$.stripes[].settings.darkTheme.stripeBackgroundColor|0"]: {
+  "hash": "10ff737fbd46f4a34d25e6eddd7d02ebd9a302eb5147f1f4ce845b58a60584fa",
+  "group": "patch"
+},
+["$.stripes[].settings.darkTheme.stripeBackgroundColor|1"]: {
+  "hash": "187bd7dc59ec49eaea553fedf922a42eed8db5a6e46b415f82e14a06469b7f25",
+  "group": "patch"
+},
+["$.stripes[].settings.darkTheme.contentBackgroundColor"]: {
+  "hash": "d33540af2ce0c895127203b9c8fe3d73a05d54edb8dd18bb6c4ec88bfe5c5e01",
+  "group": "patch"
+},
+["$.stripes[].settings.darkTheme.contentBackgroundColor|0"]: {
+  "hash": "10ff737fbd46f4a34d25e6eddd7d02ebd9a302eb5147f1f4ce845b58a60584fa",
+  "group": "patch"
+},
+["$.stripes[].settings.darkTheme.contentBackgroundColor|1"]: {
+  "hash": "187bd7dc59ec49eaea553fedf922a42eed8db5a6e46b415f82e14a06469b7f25",
+  "group": "patch"
+},
+["$.stripes[].settings.darkTheme.backgroundImage"]: {
+  "hash": "df08709d3e81d8b4de30fde659a0aa66bb41d3d10f73411585739345ea2e726d",
   "group": "patch"
 },
 ["$.stripes[].moduleId"]: {
-  "hash": "4057c2f69abae51189ed8222696a788c4a2d84e690ecb5f7e2fb650e1e7e05a6",
+  "hash": "e32aad9672d036376cef6a44d51832e4ee653f25b50ccbebeeace13b2e8956f4",
   "group": "readonly"
 },
 ["$.stripes[].structures"]: {
-  "hash": "125e2bb8f31ffb29e41dc257b1e2145b86f3bd092e13e8ab7648bc2cc8bd1edb",
+  "hash": "7001c1a51010e7070ecdae95eb1137df0792087facc6bbb5995ef45aa36175d5",
   "group": "shape"
 },
 ["$.stripes[].structures[]"]: {
@@ -1013,11 +717,11 @@ export default {
   "group": "shape"
 },
 ["$.stripes[].structures[].id"]: {
-  "hash": "a8f84494bbdf68cf9103ca647d6ac6ed19c46379214e414cc0e5c3ccfb9c9b73",
+  "hash": "46b3827ee83a1b2395838e07c56c360dadd2c7c32265d523fa0965b7df1be500",
   "group": "shape"
 },
 ["$.stripes[].structures[].settings"]: {
-  "hash": "fc758c8c192b293584383e0a937a8764f670761cfda8d99fff0da0e2400ff0e7",
+  "hash": "cd41735b29d3528226cca04e9dbe77e7105e448635c0f5e6767bcb60250a888b",
   "group": "patch"
 },
 ["$.stripes[].structures[].settings.backgroundColor"]: {
@@ -1025,11 +729,11 @@ export default {
   "group": "patch"
 },
 ["$.stripes[].structures[].settings.backgroundImage"]: {
-  "hash": "7bcc959fc1ca677cd3a51893404cdbd5dd8d975eff80876b52d1b9f4902394c2",
+  "hash": "6491c0d9b39d6261319888c4527bc0471782ddba6f232ae102e8dcd07adec48b",
   "group": "patch"
 },
 ["$.stripes[].structures[].settings.backgroundImage.path"]: {
-  "hash": "b49b1aca41bd8038f2094cef060768aab0d93d9907ff0e4a007000a4b39fe97a",
+  "hash": "4955d09948928a76f7b93ae081c58c5d38189ed87426ec473f06dd680ea1a3ba",
   "group": "patch"
 },
 ["$.stripes[].structures[].settings.backgroundImage.repeat"]: {
@@ -1037,11 +741,11 @@ export default {
   "group": "patch"
 },
 ["$.stripes[].structures[].settings.backgroundImage.x"]: {
-  "hash": "157b6ab179a3e01b00908890aff68add489b17d21916251e6a6d62d7698fa3a7",
+  "hash": "97a0d622dbc559902ac5b2487be6235005f895e1cf675e5e090d31f078ae7fae",
   "group": "patch"
 },
 ["$.stripes[].structures[].settings.backgroundImage.y"]: {
-  "hash": "616cbb99a8ee21cb91f8951ec42448092c3d88d1a2d34cbddde142e72a2e6be9",
+  "hash": "8aa8b533f3dabfabb90bb95b4b921e06de4943b95a9f89bd6ac7841030b1ea06",
   "group": "patch"
 },
 ["$.stripes[].structures[].settings.backgroundImage.sizeX"]: {
@@ -1061,7 +765,7 @@ export default {
   "group": "patch"
 },
 ["$.stripes[].structures[].settings.border.top.width"]: {
-  "hash": "cf5e994947ee0a3e924f9d5b5e4cf49fc9fa5309a29408096662a474ccee6205",
+  "hash": "5486361cb80423e81b45ecd2cdfd070b9cc82a38f77c264e8e804ad639c87474",
   "group": "patch"
 },
 ["$.stripes[].structures[].settings.border.top.color"]: {
@@ -1073,7 +777,7 @@ export default {
   "group": "patch"
 },
 ["$.stripes[].structures[].settings.border.right.width"]: {
-  "hash": "cf5e994947ee0a3e924f9d5b5e4cf49fc9fa5309a29408096662a474ccee6205",
+  "hash": "5486361cb80423e81b45ecd2cdfd070b9cc82a38f77c264e8e804ad639c87474",
   "group": "patch"
 },
 ["$.stripes[].structures[].settings.border.right.color"]: {
@@ -1085,7 +789,7 @@ export default {
   "group": "patch"
 },
 ["$.stripes[].structures[].settings.border.bottom.width"]: {
-  "hash": "cf5e994947ee0a3e924f9d5b5e4cf49fc9fa5309a29408096662a474ccee6205",
+  "hash": "5486361cb80423e81b45ecd2cdfd070b9cc82a38f77c264e8e804ad639c87474",
   "group": "patch"
 },
 ["$.stripes[].structures[].settings.border.bottom.color"]: {
@@ -1097,7 +801,7 @@ export default {
   "group": "patch"
 },
 ["$.stripes[].structures[].settings.border.left.width"]: {
-  "hash": "cf5e994947ee0a3e924f9d5b5e4cf49fc9fa5309a29408096662a474ccee6205",
+  "hash": "5486361cb80423e81b45ecd2cdfd070b9cc82a38f77c264e8e804ad639c87474",
   "group": "patch"
 },
 ["$.stripes[].structures[].settings.border.left.color"]: {
@@ -1105,7 +809,7 @@ export default {
   "group": "patch"
 },
 ["$.stripes[].structures[].settings.border.style"]: {
-  "hash": "2ecfd390d78065356c119e0c89a07ddd2c0732868238de385e8047d588d4a240",
+  "hash": "fff868e3f7b1ec693fc4ebc5efcb0d6bc86d9c01e4e8f0c616c3287965f0b791",
   "group": "patch"
 },
 ["$.stripes[].structures[].settings.borderRadius"]: {
@@ -1113,43 +817,43 @@ export default {
   "group": "patch"
 },
 ["$.stripes[].structures[].settings.borderRadius.topLeft"]: {
-  "hash": "3f17dbd3d098f1ccfa264a604aac56d6c5b5368425ce120c1c066332be408243",
+  "hash": "837e20ca9f174780974c39c830cdd2950fe182c982dbbf75dc0a9838189538a3",
   "group": "patch"
 },
 ["$.stripes[].structures[].settings.borderRadius.topRight"]: {
-  "hash": "d61fd865902321b64df120b6691df9fed3a6e398988390700196dd2b4a26647f",
+  "hash": "5138c4a875c4abe8880461f7eebcdd86e52e4a981d454a3a6d9886aa61e5296a",
   "group": "patch"
 },
 ["$.stripes[].structures[].settings.borderRadius.bottomRight"]: {
-  "hash": "90da3b9939d1002c475db7b21954e487c4341edd188d4eba882beda66310344c",
+  "hash": "89a31741c05211d3060746318baf42a8887cfa0ebc25941a6bafc42d3f3aa138",
   "group": "patch"
 },
 ["$.stripes[].structures[].settings.borderRadius.bottomLeft"]: {
-  "hash": "137b9d2592910769c815a933143ad8eaa3c108a4b2f0dab23401c6751a256089",
+  "hash": "4d180a10d112b0f1bf9e89f90ab7aa9a42a07988097aec8e522e0a2ba148d5e7",
   "group": "patch"
 },
 ["$.stripes[].structures[].settings.columnsGap"]: {
-  "hash": "d9c3c07347922c2c1f211b0412418046a9b65002d0e716708b8358689e28d649",
+  "hash": "d3223b8f2b27173bbe141b6f97606685071cc5d64eed31ac08df01eba67f3800",
   "group": "patch"
 },
 ["$.stripes[].structures[].settings.columnsGap.desktop"]: {
-  "hash": "640ef283cd781666b9da6e2b181a6b08915e860a808433d05005d8cc0ab75855",
+  "hash": "7acf98ef9c2134f57e96b418e50e6a825d44a679988b0aaad5ff7fd13d3bb6f4",
   "group": "patch"
 },
 ["$.stripes[].structures[].settings.columnsGap.mobile"]: {
-  "hash": "8b3072481c20304ae616c1ef2af02aef563fb08058853ba18c933e00bb66a47f",
+  "hash": "9914c4ce06c3e4d380a4eeb1f6506a7b7f57a0d9c40ecea33729aaa6e0894122",
   "group": "patch"
 },
 ["$.stripes[].structures[].settings.responsiveMobile"]: {
-  "hash": "1a46c1f93bf182b3016d6c6a8ce19b0f1a6ef4a6acb168beb034a585414bdd09",
+  "hash": "81a6be8601358a91380cd59bac2303c49bb48ac7e018e79fd348de5b785fd3a0",
   "group": "patch"
 },
 ["$.stripes[].structures[].settings.responsiveMobileContainersInversion"]: {
-  "hash": "3cfc8f8e74bd9bd43a6f36a48ad1347b8d9e59d5c6c05d18dabe2e5b6ecb5f3f",
+  "hash": "28ed716922270e8ba6c37223deffbbf70bfa224d2e1ee0572b12164d49782066",
   "group": "patch"
 },
 ["$.stripes[].structures[].settings.padding"]: {
-  "hash": "636e72ee376b27e1aa5fb96239d220a3bb44f74851016930ae66fefc9728bba0",
+  "hash": "62cbf86a3e811e06dc9ec119d6bf126664e2d371fb55a41c3bfd1034bfed0492",
   "group": "patch"
 },
 ["$.stripes[].structures[].settings.padding.desktop"]: {
@@ -1157,19 +861,19 @@ export default {
   "group": "patch"
 },
 ["$.stripes[].structures[].settings.padding.desktop.top"]: {
-  "hash": "e90ad696f9b3afb6004437bd8141c41a1f583eee0f1bef3da2d35241b4db64c4",
+  "hash": "c1e4123cf5518247700ac4d19f2fd6a4fdabc52a2eb766ab7355c528b1cb679f",
   "group": "patch"
 },
 ["$.stripes[].structures[].settings.padding.desktop.right"]: {
-  "hash": "67b152ae1d6b716dfc2183a33a2685a6cfc8e532a71a943177807238ba2ed794",
+  "hash": "9355d08e923559e6d713e77628d931659b5424492c84a04f247151ab047fd2bd",
   "group": "patch"
 },
 ["$.stripes[].structures[].settings.padding.desktop.bottom"]: {
-  "hash": "3bee2d4eb0f540a1f790b62fff3c3a7252736f62527f021b41beeb1eba9c16d1",
+  "hash": "66c92592ec597bed47ebeea9e2389fb67e4f952781da00a0b975316e54bc3942",
   "group": "patch"
 },
 ["$.stripes[].structures[].settings.padding.desktop.left"]: {
-  "hash": "86b7191f7a109f56a52115c1b19e2d70fa145f65032646e803af98058441be82",
+  "hash": "8d3d438f0489f1626aa7e08ccd2201e891c9813fcc1c82fb86834115c0862f74",
   "group": "patch"
 },
 ["$.stripes[].structures[].settings.padding.mobile"]: {
@@ -1177,23 +881,23 @@ export default {
   "group": "patch"
 },
 ["$.stripes[].structures[].settings.padding.mobile.top"]: {
-  "hash": "e90ad696f9b3afb6004437bd8141c41a1f583eee0f1bef3da2d35241b4db64c4",
+  "hash": "c1e4123cf5518247700ac4d19f2fd6a4fdabc52a2eb766ab7355c528b1cb679f",
   "group": "patch"
 },
 ["$.stripes[].structures[].settings.padding.mobile.right"]: {
-  "hash": "67b152ae1d6b716dfc2183a33a2685a6cfc8e532a71a943177807238ba2ed794",
+  "hash": "9355d08e923559e6d713e77628d931659b5424492c84a04f247151ab047fd2bd",
   "group": "patch"
 },
 ["$.stripes[].structures[].settings.padding.mobile.bottom"]: {
-  "hash": "3bee2d4eb0f540a1f790b62fff3c3a7252736f62527f021b41beeb1eba9c16d1",
+  "hash": "66c92592ec597bed47ebeea9e2389fb67e4f952781da00a0b975316e54bc3942",
   "group": "patch"
 },
 ["$.stripes[].structures[].settings.padding.mobile.left"]: {
-  "hash": "86b7191f7a109f56a52115c1b19e2d70fa145f65032646e803af98058441be82",
+  "hash": "8d3d438f0489f1626aa7e08ccd2201e891c9813fcc1c82fb86834115c0862f74",
   "group": "patch"
 },
 ["$.stripes[].structures[].settings.margins"]: {
-  "hash": "06525a6796e980cc3e2ac27fc9ea40a7f8b141a1376df0c3b4bccc01ede0c199",
+  "hash": "f93e09a282d9d04ba779325cb5ec14571b44f6dee44b8d9969b00b683982815e",
   "group": "patch"
 },
 ["$.stripes[].structures[].settings.margins.desktop"]: {
@@ -1201,19 +905,19 @@ export default {
   "group": "patch"
 },
 ["$.stripes[].structures[].settings.margins.desktop.top"]: {
-  "hash": "e90ad696f9b3afb6004437bd8141c41a1f583eee0f1bef3da2d35241b4db64c4",
+  "hash": "c1e4123cf5518247700ac4d19f2fd6a4fdabc52a2eb766ab7355c528b1cb679f",
   "group": "patch"
 },
 ["$.stripes[].structures[].settings.margins.desktop.right"]: {
-  "hash": "67b152ae1d6b716dfc2183a33a2685a6cfc8e532a71a943177807238ba2ed794",
+  "hash": "9355d08e923559e6d713e77628d931659b5424492c84a04f247151ab047fd2bd",
   "group": "patch"
 },
 ["$.stripes[].structures[].settings.margins.desktop.bottom"]: {
-  "hash": "3bee2d4eb0f540a1f790b62fff3c3a7252736f62527f021b41beeb1eba9c16d1",
+  "hash": "66c92592ec597bed47ebeea9e2389fb67e4f952781da00a0b975316e54bc3942",
   "group": "patch"
 },
 ["$.stripes[].structures[].settings.margins.desktop.left"]: {
-  "hash": "86b7191f7a109f56a52115c1b19e2d70fa145f65032646e803af98058441be82",
+  "hash": "8d3d438f0489f1626aa7e08ccd2201e891c9813fcc1c82fb86834115c0862f74",
   "group": "patch"
 },
 ["$.stripes[].structures[].settings.margins.mobile"]: {
@@ -1221,35 +925,55 @@ export default {
   "group": "patch"
 },
 ["$.stripes[].structures[].settings.margins.mobile.top"]: {
-  "hash": "e90ad696f9b3afb6004437bd8141c41a1f583eee0f1bef3da2d35241b4db64c4",
+  "hash": "c1e4123cf5518247700ac4d19f2fd6a4fdabc52a2eb766ab7355c528b1cb679f",
   "group": "patch"
 },
 ["$.stripes[].structures[].settings.margins.mobile.right"]: {
-  "hash": "67b152ae1d6b716dfc2183a33a2685a6cfc8e532a71a943177807238ba2ed794",
+  "hash": "9355d08e923559e6d713e77628d931659b5424492c84a04f247151ab047fd2bd",
   "group": "patch"
 },
 ["$.stripes[].structures[].settings.margins.mobile.bottom"]: {
-  "hash": "3bee2d4eb0f540a1f790b62fff3c3a7252736f62527f021b41beeb1eba9c16d1",
+  "hash": "66c92592ec597bed47ebeea9e2389fb67e4f952781da00a0b975316e54bc3942",
   "group": "patch"
 },
 ["$.stripes[].structures[].settings.margins.mobile.left"]: {
-  "hash": "86b7191f7a109f56a52115c1b19e2d70fa145f65032646e803af98058441be82",
+  "hash": "8d3d438f0489f1626aa7e08ccd2201e891c9813fcc1c82fb86834115c0862f74",
   "group": "patch"
 },
 ["$.stripes[].structures[].settings.includeInOutput"]: {
-  "hash": "b3d059f820bd6d66b4269eec55393517b07ee491e7cdd08940c611805fd0bad4",
+  "hash": "f240703a3478320fd6d82fda89b3eb4c231fafe3cfc4e21175889909d67dbd33",
   "group": "patch"
 },
 ["$.stripes[].structures[].settings.hideElement"]: {
-  "hash": "b0ec35bd9e9c53c5263d61bfc0107bb8f46d09fafeb070bf5ef0b8ee4f69c1b3",
+  "hash": "8e4931963a76e965513ed0402cb634dd7382294aebbb995e630a32c40503473d",
+  "group": "patch"
+},
+["$.stripes[].structures[].settings.darkTheme"]: {
+  "hash": "b48ea78ec9f39597789feb51fd7d4216f2db07287659502ead450fd407237039",
+  "group": "patch"
+},
+["$.stripes[].structures[].settings.darkTheme.backgroundColor"]: {
+  "hash": "5b32fdb7c6b0b6b8890a9fbf442a0e08202295b26319b14ab46ce5133b9eaa2d",
+  "group": "patch"
+},
+["$.stripes[].structures[].settings.darkTheme.backgroundColor|0"]: {
+  "hash": "10ff737fbd46f4a34d25e6eddd7d02ebd9a302eb5147f1f4ce845b58a60584fa",
+  "group": "patch"
+},
+["$.stripes[].structures[].settings.darkTheme.backgroundColor|1"]: {
+  "hash": "187bd7dc59ec49eaea553fedf922a42eed8db5a6e46b415f82e14a06469b7f25",
+  "group": "patch"
+},
+["$.stripes[].structures[].settings.darkTheme.backgroundImage"]: {
+  "hash": "df08709d3e81d8b4de30fde659a0aa66bb41d3d10f73411585739345ea2e726d",
   "group": "patch"
 },
 ["$.stripes[].structures[].moduleId"]: {
-  "hash": "23021dccc13f51945cd27a73bb658afb2a756d614807d2fa8272328d0b537b60",
+  "hash": "9b15ba828215b8252e00c914c6c1f2f23501a356f82618a7419c67eb7e489df4",
   "group": "readonly"
 },
 ["$.stripes[].structures[].columns"]: {
-  "hash": "c79d27ae6cc099ce5ff532b304d5ec433ee853f376ac0c6645ee9e5559333859",
+  "hash": "5508802f58a1d859d3b48f7b7ed59a651fb589fd15a05615380168d7861f8100",
   "group": "shape"
 },
 ["$.stripes[].structures[].columns[]"]: {
@@ -1257,19 +981,19 @@ export default {
   "group": "shape"
 },
 ["$.stripes[].structures[].columns[].id"]: {
-  "hash": "e9d9b88d280ee8fad38575498c70befeac3fa4cbad78e2ea95571283e6d9c2f5",
+  "hash": "2f8ebebc09a816d4fea8bc376fe115a600d7998ec3b0292d1eabde9b8bd5d52e",
   "group": "shape"
 },
 ["$.stripes[].structures[].columns[].settings"]: {
-  "hash": "e73629926c049b97e45cc32c59485b0a8fa6043c8a5f821742edb04025355ebb",
+  "hash": "7bcc959fc1ca677cd3a51893404cdbd5dd8d975eff80876b52d1b9f4902394c2",
   "group": "patch"
 },
 ["$.stripes[].structures[].columns[].settings.width"]: {
-  "hash": "008bac3e4d1d45a94af3afc57b20042c80c5c4b620cee1884b7d935ecaa662b1",
+  "hash": "953363c7b83754d309d76fc5db80592d7e0181f5cf07713b3cd6670902670d07",
   "group": "patch"
 },
 ["$.stripes[].structures[].columns[].containers"]: {
-  "hash": "afd6c6ae636bb30d60ccc5a5788c60e7cb709f64f2337d47c47ef6160dca7bce",
+  "hash": "e2fb392599915cc1b6e3167abea668f8f3590695ae33f576f048184ed00f990a",
   "group": "shape"
 },
 ["$.stripes[].structures[].columns[].containers[]"]: {
@@ -1277,11 +1001,11 @@ export default {
   "group": "shape"
 },
 ["$.stripes[].structures[].columns[].containers[].id"]: {
-  "hash": "64940011a56f70b490f7ad648d38cf9dd03f0fe48875574905609266ff86f555",
+  "hash": "4041ab264a25318c03f0e49ce884376ca625a30546008d3b1b9f802a8a54c01b",
   "group": "shape"
 },
 ["$.stripes[].structures[].columns[].containers[].settings"]: {
-  "hash": "92b60664fb01dfca80a8e4153cde4c4233f7b936a571866f02bddd692c619df6",
+  "hash": "ffa34ddf49d9e2c6d6305187d2c8bca26e59306cc77d6650faffe4edb5d75a9b",
   "group": "patch"
 },
 ["$.stripes[].structures[].columns[].containers[].settings.padding"]: {
@@ -1293,23 +1017,251 @@ export default {
   "group": "patch"
 },
 ["$.stripes[].structures[].columns[].containers[].settings.padding.desktop.top"]: {
-  "hash": "e90ad696f9b3afb6004437bd8141c41a1f583eee0f1bef3da2d35241b4db64c4",
+  "hash": "c1e4123cf5518247700ac4d19f2fd6a4fdabc52a2eb766ab7355c528b1cb679f",
   "group": "patch"
 },
 ["$.stripes[].structures[].columns[].containers[].settings.padding.desktop.right"]: {
-  "hash": "67b152ae1d6b716dfc2183a33a2685a6cfc8e532a71a943177807238ba2ed794",
+  "hash": "9355d08e923559e6d713e77628d931659b5424492c84a04f247151ab047fd2bd",
   "group": "patch"
 },
 ["$.stripes[].structures[].columns[].containers[].settings.padding.desktop.bottom"]: {
-  "hash": "3bee2d4eb0f540a1f790b62fff3c3a7252736f62527f021b41beeb1eba9c16d1",
+  "hash": "66c92592ec597bed47ebeea9e2389fb67e4f952781da00a0b975316e54bc3942",
   "group": "patch"
 },
 ["$.stripes[].structures[].columns[].containers[].settings.padding.desktop.left"]: {
-  "hash": "86b7191f7a109f56a52115c1b19e2d70fa145f65032646e803af98058441be82",
+  "hash": "8d3d438f0489f1626aa7e08ccd2201e891c9813fcc1c82fb86834115c0862f74",
   "group": "patch"
 },
 ["$.stripes[].structures[].columns[].containers[].settings.padding.mobile"]: {
   "hash": "530a79cfa7fc3268de3d667672a36fb6ee8cebda5a0aec7cad949eb7046fc165",
+  "group": "patch"
+},
+["$.stripes[].structures[].columns[].containers[].settings.padding.mobile.top"]: {
+  "hash": "c1e4123cf5518247700ac4d19f2fd6a4fdabc52a2eb766ab7355c528b1cb679f",
+  "group": "patch"
+},
+["$.stripes[].structures[].columns[].containers[].settings.padding.mobile.right"]: {
+  "hash": "9355d08e923559e6d713e77628d931659b5424492c84a04f247151ab047fd2bd",
+  "group": "patch"
+},
+["$.stripes[].structures[].columns[].containers[].settings.padding.mobile.bottom"]: {
+  "hash": "66c92592ec597bed47ebeea9e2389fb67e4f952781da00a0b975316e54bc3942",
+  "group": "patch"
+},
+["$.stripes[].structures[].columns[].containers[].settings.padding.mobile.left"]: {
+  "hash": "8d3d438f0489f1626aa7e08ccd2201e891c9813fcc1c82fb86834115c0862f74",
+  "group": "patch"
+},
+["$.stripes[].structures[].columns[].containers[].settings.includeInOutput"]: {
+  "hash": "43ef4403126741fefe20c0302c6adbb7935cc896bec8a4f40a212e25b3da47df",
+  "group": "patch"
+},
+["$.stripes[].structures[].columns[].containers[].settings.hideElement"]: {
+  "hash": "e0dd8ccad4294747d0139023b3236682ac91376fe433de5e0041ce473f14871c",
+  "group": "patch"
+},
+["$.stripes[].structures[].columns[].containers[].settings.backgroundColor"]: {
+  "hash": "420abc74821ad5bb4fde224b72252fbb66bcc77a69457707f962b2f9402bb2a9",
+  "group": "patch"
+},
+["$.stripes[].structures[].columns[].containers[].settings.backgroundImage"]: {
+  "hash": "d9c3c07347922c2c1f211b0412418046a9b65002d0e716708b8358689e28d649",
+  "group": "patch"
+},
+["$.stripes[].structures[].columns[].containers[].settings.backgroundImage.path"]: {
+  "hash": "4955d09948928a76f7b93ae081c58c5d38189ed87426ec473f06dd680ea1a3ba",
+  "group": "patch"
+},
+["$.stripes[].structures[].columns[].containers[].settings.backgroundImage.repeat"]: {
+  "hash": "0d417e250727a3e7c0e64ca4d9577f6f8a0063dea676170464269c244a701b04",
+  "group": "patch"
+},
+["$.stripes[].structures[].columns[].containers[].settings.backgroundImage.x"]: {
+  "hash": "97a0d622dbc559902ac5b2487be6235005f895e1cf675e5e090d31f078ae7fae",
+  "group": "patch"
+},
+["$.stripes[].structures[].columns[].containers[].settings.backgroundImage.y"]: {
+  "hash": "8aa8b533f3dabfabb90bb95b4b921e06de4943b95a9f89bd6ac7841030b1ea06",
+  "group": "patch"
+},
+["$.stripes[].structures[].columns[].containers[].settings.backgroundImage.sizeX"]: {
+  "hash": "3caea3976714f26c8fa89314b1fc9d91b71f391d81083b2742a6abac0dddbb8b",
+  "group": "patch"
+},
+["$.stripes[].structures[].columns[].containers[].settings.backgroundImage.sizeY"]: {
+  "hash": "3caea3976714f26c8fa89314b1fc9d91b71f391d81083b2742a6abac0dddbb8b",
+  "group": "patch"
+},
+["$.stripes[].structures[].columns[].containers[].settings.border"]: {
+  "hash": "d7813c942b60a51c6455b8934603f541b6689ea769e42b53b3e7ace9d2d95e73",
+  "group": "patch"
+},
+["$.stripes[].structures[].columns[].containers[].settings.border.top"]: {
+  "hash": "6a1816fc2c2f538b9fef2b25416766b1427718d057785d4b6d313aa6c3bd36cd",
+  "group": "patch"
+},
+["$.stripes[].structures[].columns[].containers[].settings.border.top.width"]: {
+  "hash": "5486361cb80423e81b45ecd2cdfd070b9cc82a38f77c264e8e804ad639c87474",
+  "group": "patch"
+},
+["$.stripes[].structures[].columns[].containers[].settings.border.top.color"]: {
+  "hash": "420abc74821ad5bb4fde224b72252fbb66bcc77a69457707f962b2f9402bb2a9",
+  "group": "patch"
+},
+["$.stripes[].structures[].columns[].containers[].settings.border.right"]: {
+  "hash": "6a1816fc2c2f538b9fef2b25416766b1427718d057785d4b6d313aa6c3bd36cd",
+  "group": "patch"
+},
+["$.stripes[].structures[].columns[].containers[].settings.border.right.width"]: {
+  "hash": "5486361cb80423e81b45ecd2cdfd070b9cc82a38f77c264e8e804ad639c87474",
+  "group": "patch"
+},
+["$.stripes[].structures[].columns[].containers[].settings.border.right.color"]: {
+  "hash": "420abc74821ad5bb4fde224b72252fbb66bcc77a69457707f962b2f9402bb2a9",
+  "group": "patch"
+},
+["$.stripes[].structures[].columns[].containers[].settings.border.bottom"]: {
+  "hash": "6a1816fc2c2f538b9fef2b25416766b1427718d057785d4b6d313aa6c3bd36cd",
+  "group": "patch"
+},
+["$.stripes[].structures[].columns[].containers[].settings.border.bottom.width"]: {
+  "hash": "5486361cb80423e81b45ecd2cdfd070b9cc82a38f77c264e8e804ad639c87474",
+  "group": "patch"
+},
+["$.stripes[].structures[].columns[].containers[].settings.border.bottom.color"]: {
+  "hash": "420abc74821ad5bb4fde224b72252fbb66bcc77a69457707f962b2f9402bb2a9",
+  "group": "patch"
+},
+["$.stripes[].structures[].columns[].containers[].settings.border.left"]: {
+  "hash": "6a1816fc2c2f538b9fef2b25416766b1427718d057785d4b6d313aa6c3bd36cd",
+  "group": "patch"
+},
+["$.stripes[].structures[].columns[].containers[].settings.border.left.width"]: {
+  "hash": "5486361cb80423e81b45ecd2cdfd070b9cc82a38f77c264e8e804ad639c87474",
+  "group": "patch"
+},
+["$.stripes[].structures[].columns[].containers[].settings.border.left.color"]: {
+  "hash": "420abc74821ad5bb4fde224b72252fbb66bcc77a69457707f962b2f9402bb2a9",
+  "group": "patch"
+},
+["$.stripes[].structures[].columns[].containers[].settings.border.style"]: {
+  "hash": "fff868e3f7b1ec693fc4ebc5efcb0d6bc86d9c01e4e8f0c616c3287965f0b791",
+  "group": "patch"
+},
+["$.stripes[].structures[].columns[].containers[].settings.radius"]: {
+  "hash": "0967d2f6802a161ec8d942a6642a2224a06c171595149bffaa9c92803a7088ee",
+  "group": "patch"
+},
+["$.stripes[].structures[].columns[].containers[].settings.radius.topLeft"]: {
+  "hash": "837e20ca9f174780974c39c830cdd2950fe182c982dbbf75dc0a9838189538a3",
+  "group": "patch"
+},
+["$.stripes[].structures[].columns[].containers[].settings.radius.topRight"]: {
+  "hash": "5138c4a875c4abe8880461f7eebcdd86e52e4a981d454a3a6d9886aa61e5296a",
+  "group": "patch"
+},
+["$.stripes[].structures[].columns[].containers[].settings.radius.bottomRight"]: {
+  "hash": "89a31741c05211d3060746318baf42a8887cfa0ebc25941a6bafc42d3f3aa138",
+  "group": "patch"
+},
+["$.stripes[].structures[].columns[].containers[].settings.radius.bottomLeft"]: {
+  "hash": "4d180a10d112b0f1bf9e89f90ab7aa9a42a07988097aec8e522e0a2ba148d5e7",
+  "group": "patch"
+},
+["$.stripes[].structures[].columns[].containers[].settings.darkTheme"]: {
+  "hash": "5b2d6100d733eabe8ebd4cf83dd993652076ee4dbfab57ba8430e1081e730c40",
+  "group": "patch"
+},
+["$.stripes[].structures[].columns[].containers[].settings.darkTheme.backgroundColor"]: {
+  "hash": "5b32fdb7c6b0b6b8890a9fbf442a0e08202295b26319b14ab46ce5133b9eaa2d",
+  "group": "patch"
+},
+["$.stripes[].structures[].columns[].containers[].settings.darkTheme.backgroundColor|0"]: {
+  "hash": "10ff737fbd46f4a34d25e6eddd7d02ebd9a302eb5147f1f4ce845b58a60584fa",
+  "group": "patch"
+},
+["$.stripes[].structures[].columns[].containers[].settings.darkTheme.backgroundColor|1"]: {
+  "hash": "187bd7dc59ec49eaea553fedf922a42eed8db5a6e46b415f82e14a06469b7f25",
+  "group": "patch"
+},
+["$.stripes[].structures[].columns[].containers[].settings.darkTheme.backgroundImage"]: {
+  "hash": "df08709d3e81d8b4de30fde659a0aa66bb41d3d10f73411585739345ea2e726d",
+  "group": "patch"
+},
+["$.stripes[].structures[].columns[].containers[].moduleId"]: {
+  "hash": "f6eb1dabb65b39927fc914f897f31d9528954d6bb9f519be3d19c76c40b98f2a",
+  "group": "readonly"
+},
+["$.stripes[].structures[].columns[].containers[].blocks"]: {
+  "hash": "cb9d45faf7b9eb4e728c4e6fa52563ade1921f8999881c0adccef01272bafe25",
+  "group": "shape"
+},
+["$.stripes[].structures[].columns[].containers[].blocks[]"]: {
+  "hash": "33e6af2466225437c2df7a3db7336e727b8519198f518e5dd5c9b25e339f9f0c",
+  "group": "shape"
+},
+["$.stripes[].structures[].columns[].containers[].blocks[]|0"]: {
+  "hash": "01d9300710017b8ac77d39de6f4c0bf2c0d7f9abe2966fd636be8421b1439e4c",
+  "group": "shape"
+},
+["$.stripes[].structures[].columns[].containers[].blocks[]|0.id"]: {
+  "hash": "bbadaddac297bc729991402af8b42657eabedfed9e0df5b06e9bdb2139371b48",
+  "group": "shape"
+},
+["$.stripes[].structures[].columns[].containers[].blocks[]|0.type"]: {
+  "hash": "25a00de70ec80e63e44837795c6c0d35dac4a743ee14c0b718720aa73eab6769",
+  "group": "shape"
+},
+["$.stripes[].structures[].columns[].containers[].blocks[]|0.settings"]: {
+  "hash": "06525a6796e980cc3e2ac27fc9ea40a7f8b141a1376df0c3b4bccc01ede0c199",
+  "group": "patch"
+},
+["$.stripes[].structures[].columns[].containers[].blocks[]|0.settings.fontColor"]: {
+  "hash": "ee8155add1d02ee7a2737c6e988970ee4750927a2234fcaa09e23efc9ad54815",
+  "group": "patch"
+},
+["$.stripes[].structures[].columns[].containers[].blocks[]|0.settings.hideElement"]: {
+  "hash": "e0dd8ccad4294747d0139023b3236682ac91376fe433de5e0041ce473f14871c",
+  "group": "patch"
+},
+["$.stripes[].structures[].columns[].containers[].blocks[]|0.settings.rightToLeftTextDirection"]: {
+  "hash": "0d417e250727a3e7c0e64ca4d9577f6f8a0063dea676170464269c244a701b04",
+  "group": "patch"
+},
+["$.stripes[].structures[].columns[].containers[].blocks[]|0.settings.alignment"]: {
+  "hash": "9cfa179ad03548b3c2cab9b59f79b74478bdf3f1175a1ab1105ac0b0784fed90",
+  "group": "patch"
+},
+["$.stripes[].structures[].columns[].containers[].blocks[]|0.settings.alignment.desktop"]: {
+  "hash": "2638eb5826f4bed6eba0d2e94854cfaefd0a99786b08956521aaa55eb22accf5",
+  "group": "patch"
+},
+["$.stripes[].structures[].columns[].containers[].blocks[]|0.settings.alignment.mobile"]: {
+  "hash": "2638eb5826f4bed6eba0d2e94854cfaefd0a99786b08956521aaa55eb22accf5",
+  "group": "patch"
+},
+["$.stripes[].structures[].columns[].containers[].blocks[]|0.settings.fixedHeight"]: {
+  "hash": "260ce4bfda248b17c90017caa9e105e4278d72eedc931c22fb43122066794da4",
+  "group": "patch"
+},
+["$.stripes[].structures[].columns[].containers[].blocks[]|0.settings.fixedHeight.desktop"]: {
+  "hash": "e46e0be0ad0f7e3c9244b18a6edead1e3e7723dea94951565c406acb242e07a8",
+  "group": "patch"
+},
+["$.stripes[].structures[].columns[].containers[].blocks[]|0.settings.fixedHeight.desktop.height"]: {
+  "hash": "b8d98fe0fcde118ccbe34264f29f59c4bf1ac86abb437678b046a2c3bd93963c",
+  "group": "patch"
+},
+["$.stripes[].structures[].columns[].containers[].blocks[]|0.settings.fixedHeight.desktop.verticalAlignment"]: {
+  "hash": "809214e5b8017408493dbbef3a827dd9a4b94493d10a504f8e259a6890929b53",
+  "group": "patch"
+},
+["$.stripes[].structures[].columns[].containers[].blocks[]|0.settings.fixedHeight.mobile"]: {
+  "hash": "e73629926c049b97e45cc32c59485b0a8fa6043c8a5f821742edb04025355ebb",
+  "group": "patch"
+},
+["$.stripes[].structures[].columns[].containers[].blocks[]|0.settings.fixedHeight.mobile.height"]: {
+  "hash": "b8d98fe0fcde118ccbe34264f29f59c4bf1ac86abb437678b046a2c3bd93963c",
   "group": "patch"
 }
 };
