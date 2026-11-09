@@ -1,5 +1,4 @@
 // src/skill-scripts/email-from-reference/create-from-brief.ts
-import { randomUUID } from "node:crypto";
 import { readFileSync as readFileSync2, rmSync as rmSync2 } from "node:fs";
 import path2 from "node:path";
 import { fileURLToPath as fileURLToPath2 } from "node:url";
@@ -546,6 +545,7 @@ async function main() {
     const typedBrief = brief;
     typedBrief.message.referenceMode = typedBrief.message.referenceMode === "copy-action" ? "tailored" : typedBrief.message.referenceMode ?? "creative";
     const sdk = await loadSdk(sdkPath);
+    const runSeed = `${Date.now().toString(36)}-${Math.random().toString(36).slice(2)}`;
     const baselineEmailJson = baselinePath === void 0 ? void 0 : readJson(baselinePath);
     const baselineStripes = isObject3(baselineEmailJson) && Array.isArray(baselineEmailJson.stripes) ? baselineEmailJson.stripes : [];
     const creationModel = structuredClone(typedBrief.model);
@@ -555,7 +555,8 @@ async function main() {
       baselineEmailJson,
       intent: { removeNodes: baselineStripes.filter(isObject3).map((stripe) => String(stripe.id)) },
       regenerateIds: true,
-      idFactory: () => randomUUID()
+      // Every build assigns fresh IDs; a per-run seed keeps reruns from repeating them.
+      idFactory: (seed, isTaken) => sdk.uniqueUuidFromSeed(`brief:${runSeed}:${seed}`, isTaken)
     });
     const validation = await validateEditorJson(emailJson, sdkPath, { current: baselineEmailJson });
     if (!validation.valid) {
