@@ -13,7 +13,7 @@ import {parseArgs} from 'node:util';
 const MAX_BYTES = 64 * 1024 * 1024;
 const TIMEOUT_MS = 60_000;
 // Uploads go only to the Stripo MCP storage buckets that issue the signed tickets.
-const STORAGE_HOSTS = new Set(['live', 'stage', 'dev'].map(env => `stripo-mcp-content-${env}.s3.eu-west-1.amazonaws.com`));
+const STORAGE_HOSTS = new Set(['live', 'stage', 'dev'].map(stage => `stripo-mcp-content-${stage}.s3.eu-west-1.amazonaws.com`));
 const blocked = new BlockList();
 for (const [address, prefix] of [
   ['0.0.0.0', 8], ['10.0.0.0', 8], ['100.64.0.0', 10], ['127.0.0.0', 8],
