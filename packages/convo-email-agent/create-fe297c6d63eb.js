@@ -1,12 +1,12 @@
 import {
-  createEmailMutationSdk,
-  uniqueUuidFromSeed
-} from "./content-mutations-15913d881744.js";
+  createEmailMutationSdk
+} from "./content-mutations-ebc855083abe.js";
 import {
   EditorJsonMutationCore,
   EmailSdkSchemaError,
-  assertValidEmailModel
-} from "./model-2461f952bfd9.js";
+  assertValidEmailModel,
+  uniqueUuidFromSeed
+} from "./ids-a682767b7fbb.js";
 import {
   DocumentStateError,
   hasRecoloredInlineColor,

@@ -6,6 +6,40 @@ import {
   validateEmailDocument
 } from "./editor-validator-0b64df0adc74.js";
 
+// convo-email-agent/src/sdk/ids.ts
+var SEED_PREFIX = "eds-clone-v1:";
+function stableHex(seed) {
+  let h1 = 3735928559;
+  let h2 = 1103547991;
+  let h3 = 2654435769;
+  let h4 = 2246822507;
+  for (let i = 0; i < seed.length; i += 1) {
+    const c = seed.charCodeAt(i);
+    h1 = Math.imul(h1 ^ c, 2654435761);
+    h2 = Math.imul(h2 ^ c, 1597334677);
+    h3 = Math.imul(h3 ^ c, 2246822507);
+    h4 = Math.imul(h4 ^ c, 3266489909);
+  }
+  h1 = Math.imul(h1 ^ h1 >>> 16, 2246822507) ^ Math.imul(h2 ^ h2 >>> 13, 3266489909);
+  h2 = Math.imul(h2 ^ h2 >>> 16, 2246822507) ^ Math.imul(h3 ^ h3 >>> 13, 3266489909);
+  h3 = Math.imul(h3 ^ h3 >>> 16, 2246822507) ^ Math.imul(h4 ^ h4 >>> 13, 3266489909);
+  h4 = Math.imul(h4 ^ h4 >>> 16, 2246822507) ^ Math.imul(h1 ^ h1 >>> 13, 3266489909);
+  return [h1, h2, h3, h4].map((value) => (value >>> 0).toString(16).padStart(8, "0")).join("");
+}
+function uuidFromSeed(seed) {
+  const hex = stableHex(SEED_PREFIX + seed);
+  const variantNibble = (parseInt(hex[16], 16) & 3 | 8).toString(16);
+  const h = hex.slice(0, 12) + "4" + hex.slice(13, 16) + variantNibble + hex.slice(17, 32);
+  return "".concat(h.slice(0, 8), "-").concat(h.slice(8, 12), "-").concat(h.slice(12, 16), "-").concat(h.slice(16, 20), "-").concat(h.slice(20, 32));
+}
+function uniqueUuidFromSeed(seed, isTaken) {
+  let candidate = uuidFromSeed(seed);
+  for (let retry = 1; isTaken(candidate); retry += 1) {
+    candidate = uuidFromSeed("".concat(seed, "#r").concat(retry));
+  }
+  return candidate;
+}
+
 // convo-email-agent/src/sdk/model.ts
 var STRUCTURAL_KEYS = /* @__PURE__ */ new Set(["stripes", "structures", "columns", "containers", "blocks"]);
 function isObject(value) {
@@ -13,11 +47,6 @@ function isObject(value) {
 }
 function deepClone(value) {
   return structuredClone(value);
-}
-function randomUUID() {
-  const cryptoApi = globalThis.crypto;
-  if (cryptoApi?.randomUUID !== void 0) return cryptoApi.randomUUID();
-  throw new EditorJsonMutationError("globalThis.crypto.randomUUID is not available; pass idFactory to createEmailMutationSdk.");
 }
 function regenerateNestedIds(value, nestedIds, usedNestedIds, generateId) {
   const stack = [value];
@@ -272,14 +301,15 @@ var EditorJsonMutationCore = class {
   lastInsertByAnchor = /* @__PURE__ */ new Map();
   // The draft is always validated with the editor rules bundled in the SDK.
   // `idFactory` supplies ids for cloned descendants that were not remapped via
-  // nestedIds (the Email SDK injects a deterministic factory; the default keeps
-  // the historical random behaviour). `options.current` is the acquired document
-  // an edit replaces; a new document validates against an empty current state.
-  constructor(templateJson, idFactory = randomUUID, options = {}) {
+  // nestedIds (the Email SDK injects its own factory; the default derives ids from a
+  // session ordinal and skips ids the draft holds). `options.current` is the acquired
+  // document an edit replaces; a new document validates against an empty current state.
+  constructor(templateJson, idFactory, options = {}) {
     this.current = isObject(options.current) ? deepClone(options.current) : void 0;
     assertValidTemplate(templateJson, "Initial JSON", void 0, { current: this.current });
     this.draft = deepClone(templateJson);
-    this.idFactory = idFactory;
+    let ordinal = 0;
+    this.idFactory = idFactory ?? (() => uniqueUuidFromSeed("fallback#".concat(ordinal++), (id) => findElementById(this.draft, id) !== void 0));
   }
   beginTransaction() {
     return {
@@ -552,6 +582,8 @@ var EditorJsonMutationCore = class {
 };
 
 export {
+  uuidFromSeed,
+  uniqueUuidFromSeed,
   setEmailSchema,
   assertValidEmailModel,
   EmailSdkSchemaError,
