@@ -392,7 +392,7 @@ function changeReport(before, after) {
     }
     if (value !== null && typeof value === "object") {
       truncated = true;
-      return Array.isArray(value) ? { type: "array", length: value.length } : { type: "object", keys: Object.keys(value).slice(0, 8) };
+      return Array.isArray(value) ? { type: "array", length: value.length } : { type: "object", fields: Object.keys(value).slice(0, 8) };
     }
     return value;
   };

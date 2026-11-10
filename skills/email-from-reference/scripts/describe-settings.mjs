@@ -170,8 +170,8 @@ function compact(rows) {
     const previous = grouped.at(-1);
     const previousSplit = previous ? previous.path.lastIndexOf(".") : -1;
     if (previous && parent && previous.shape === row.shape && previous.path.slice(0, previousSplit + 1) === parent && !prop.includes("{")) {
-      const keys = previous.path.slice(previousSplit + 1).replace(/^\{|\}$/gu, "");
-      previous.path = `${parent}{${keys},${prop}}`;
+      const siblings = previous.path.slice(previousSplit + 1).replace(/^\{|\}$/gu, "");
+      previous.path = `${parent}{${siblings},${prop}}`;
     } else grouped.push({ ...row });
   }
   return grouped;
