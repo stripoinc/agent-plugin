@@ -16,13 +16,13 @@ function parseArgs(argv) {
   }
   return args;
 }
-function requireString(args, key) {
-  const value = optionalString(args, key);
-  if (value === void 0) throw new Error(`Missing required --${key} argument.`);
+function requireString(args, option) {
+  const value = optionalString(args, option);
+  if (value === void 0) throw new Error(`Missing required --${option} argument.`);
   return value;
 }
-function optionalString(args, key) {
-  const value = args[key];
+function optionalString(args, option) {
+  const value = args[option];
   return typeof value === "string" && value.trim() !== "" ? value : void 0;
 }
 function compactError(error) {
@@ -32,7 +32,7 @@ function compactError(error) {
     name: typeof fields?.name === "string" ? fields.name : "Error",
     message: String(fields?.message ?? error).slice(0, 2e3),
     ...errors ? { errors } : {},
-    ...Object.fromEntries(["code", "stage", "input", "path", "issues"].flatMap((key) => fields && key in fields ? [[key, fields[key]]] : []))
+    ...Object.fromEntries(["code", "stage", "input", "path", "issues"].flatMap((option) => fields && option in fields ? [[option, fields[option]]] : []))
   };
 }
 function resolveSdkDist(args, startUrl = import.meta.url) {
@@ -124,7 +124,7 @@ async function main() {
       return;
     }
     if (node.properties) {
-      for (const [key, child] of Object.entries(objectProperties(node))) walk(child, path2 ? `${path2}.${key}` : key);
+      for (const [prop, child] of Object.entries(objectProperties(node))) walk(child, path2 ? `${path2}.${prop}` : prop);
       return;
     }
     if (node.type === "array") return walk(node.items, `${path2}[]`);
@@ -166,12 +166,12 @@ function compact(rows) {
   for (const row of merged) {
     const split = row.path.lastIndexOf(".");
     const parent = split < 0 ? "" : row.path.slice(0, split + 1);
-    const key = row.path.slice(split + 1);
+    const prop = row.path.slice(split + 1);
     const previous = grouped.at(-1);
     const previousSplit = previous ? previous.path.lastIndexOf(".") : -1;
-    if (previous && parent && previous.shape === row.shape && previous.path.slice(0, previousSplit + 1) === parent && !key.includes("{")) {
+    if (previous && parent && previous.shape === row.shape && previous.path.slice(0, previousSplit + 1) === parent && !prop.includes("{")) {
       const keys = previous.path.slice(previousSplit + 1).replace(/^\{|\}$/gu, "");
-      previous.path = `${parent}{${keys},${key}}`;
+      previous.path = `${parent}{${keys},${prop}}`;
     } else grouped.push({ ...row });
   }
   return grouped;

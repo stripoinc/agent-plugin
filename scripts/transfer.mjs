@@ -84,8 +84,8 @@ function publicAddress(address) {
 function requestHeaders(input, contentType, body) {
   requireValue(input && typeof input === 'object' && !Array.isArray(input), 'INVALID_HEADERS', 'Headers must be a JSON object.');
   const headers = {};
-  for (const [key, value] of Object.entries(input)) {
-    const name = key.toLowerCase();
+  for (const [field, value] of Object.entries(input)) {
+    const name = field.toLowerCase();
     requireValue(/^[!#$%&'*+.^_`|~0-9a-z-]+$/.test(name) && typeof value === 'string' && !/[\r\n\x00]/.test(value),
       'INVALID_HEADERS', 'Invalid transfer header.');
     requireValue(!['authorization', 'proxy-authorization', 'cookie', 'host', 'content-length', 'transfer-encoding',

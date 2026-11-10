@@ -22,13 +22,13 @@ function parseArgs(argv) {
   }
   return args;
 }
-function requireString(args, key) {
-  const value = optionalString(args, key);
-  if (value === void 0) throw new Error(`Missing required --${key} argument.`);
+function requireString(args, option) {
+  const value = optionalString(args, option);
+  if (value === void 0) throw new Error(`Missing required --${option} argument.`);
   return value;
 }
-function optionalString(args, key) {
-  const value = args[key];
+function optionalString(args, option) {
+  const value = args[option];
   return typeof value === "string" && value.trim() !== "" ? value : void 0;
 }
 function readJson(filePath) {
@@ -77,7 +77,7 @@ function compactError(error) {
     name: typeof fields?.name === "string" ? fields.name : "Error",
     message: String(fields?.message ?? error).slice(0, 2e3),
     ...errors ? { errors } : {},
-    ...Object.fromEntries(["code", "stage", "input", "path", "issues"].flatMap((key) => fields && key in fields ? [[key, fields[key]]] : []))
+    ...Object.fromEntries(["code", "stage", "input", "path", "issues"].flatMap((option) => fields && option in fields ? [[option, fields[option]]] : []))
   };
 }
 function resolveSdkDist(args, startUrl = import.meta.url) {
@@ -133,9 +133,9 @@ function stripHtml(html) {
 function pushLimited(list, value) {
   if (list.length < MAX_ITEMS) list.push(value);
 }
-function count(map, key) {
-  const safeKey = key || "unknown";
-  map[safeKey] = (map[safeKey] ?? 0) + 1;
+function count(map, label) {
+  const safeLabel = label || "unknown";
+  map[safeLabel] = (map[safeLabel] ?? 0) + 1;
 }
 function linkValue(link) {
   if (!isObject2(link)) return void 0;
@@ -401,8 +401,8 @@ function changeReport(before, after) {
     if (a !== null && b !== null && typeof a === "object" && typeof b === "object" && Array.isArray(a) === Array.isArray(b)) {
       const left = a;
       const right = b;
-      for (const key of /* @__PURE__ */ new Set([...Object.keys(left), ...Object.keys(right)])) {
-        walk(Object.hasOwn(left, key) ? left[key] : void 0, Object.hasOwn(right, key) ? right[key] : void 0, pointer + "/" + key.replaceAll("~", "~0").replaceAll("/", "~1"));
+      for (const prop of /* @__PURE__ */ new Set([...Object.keys(left), ...Object.keys(right)])) {
+        walk(Object.hasOwn(left, prop) ? left[prop] : void 0, Object.hasOwn(right, prop) ? right[prop] : void 0, pointer + "/" + prop.replaceAll("~", "~0").replaceAll("/", "~1"));
       }
       return;
     }
@@ -477,9 +477,9 @@ async function main() {
   let sdkPath;
   beginOutputs(outputPath, diagnosticsPath, [inputPath, scriptPath, optionalString(args, "runtime-snapshot")]);
   try {
-    for (const key of Object.keys(args)) {
-      if (!["input", "script", "output", "diagnostics", "schema", "runtime-snapshot", "runtime", "sdk"].includes(key)) {
-        throw new Error(`Unknown argument: --${key}`);
+    for (const option of Object.keys(args)) {
+      if (!["input", "script", "output", "diagnostics", "schema", "runtime-snapshot", "runtime", "sdk"].includes(option)) {
+        throw new Error(`Unknown argument: --${option}`);
       }
     }
     sdkPath = resolveSdkDist(args);

@@ -16,9 +16,9 @@ function stripHtml(html) {
 function pushLimited(list, value) {
   if (list.length < MAX_ITEMS) list.push(value);
 }
-function count(map, key) {
-  const safeKey = key || "unknown";
-  map[safeKey] = (map[safeKey] ?? 0) + 1;
+function count(map, label) {
+  const safeLabel = label || "unknown";
+  map[safeLabel] = (map[safeLabel] ?? 0) + 1;
 }
 function linkValue(link) {
   if (!isObject(link)) return void 0;
