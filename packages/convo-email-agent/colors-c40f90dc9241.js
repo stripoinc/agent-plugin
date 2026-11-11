@@ -32,16 +32,15 @@ function isEditorColor(value, allowTransparent) {
   const parsed = parse(value);
   return parsed.valid && (allowTransparent || !parsed.transparent);
 }
-var DYNAMIC = /\b(?:(?:var|env)\s*\(|currentcolor\b)/i;
+var DYNAMIC = /\b(?:var\s*\(|currentcolor\b)/i;
 var GRADIENT_LAYER = /^(?:(?:repeating-)?(?:linear|radial|conic))-gradient\s*\(/i;
-var CSS_WIDE_KEYWORDS = /* @__PURE__ */ new Set(["inherit", "initial", "revert", "revert-layer", "unset"]);
-var ENVIRONMENT_COLORS = new Set("accentcolor accentcolortext activeborder activecaption activetext appworkspace background buttonborder buttonface buttonhighlight buttonshadow buttontext canvas canvastext captiontext field fieldtext graytext highlight highlighttext inactiveborder inactivecaption inactivecaptiontext infobackground infotext linktext mark marktext menu menutext scrollbar selecteditem selecteditemtext threeddarkshadow threedface threedhighlight threedlightshadow threedshadow visitedtext window windowframe windowtext".split(" "));
+var SYSTEM_COLORS = new Set("accentcolor accentcolortext activeborder activecaption activetext appworkspace background buttonborder buttonface buttonhighlight buttonshadow buttontext canvas canvastext captiontext field fieldtext graytext highlight highlighttext inactiveborder inactivecaption inactivecaptiontext infobackground infotext linktext mark marktext menu menutext scrollbar selecteditem selecteditemtext threeddarkshadow threedface threedhighlight threedlightshadow threedshadow visitedtext window windowframe windowtext".split(" "));
 function isRuntimeDependent(raw) {
   const value = raw.trim().replace(/\s*!\s*important\s*$/i, "").trim();
-  if (DYNAMIC.test(value) || CSS_WIDE_KEYWORDS.has(value.toLowerCase())) return true;
+  if (DYNAMIC.test(value)) return true;
   for (const [, word, call] of value.matchAll(/([^\s,/()'"]+)(\()?/g)) {
     const name = word.toLowerCase();
-    if (call ? name === "light-dark" : ENVIRONMENT_COLORS.has(name) || name.startsWith("-")) return true;
+    if (call ? name === "light-dark" : SYSTEM_COLORS.has(name) || name.startsWith("-")) return true;
   }
   return false;
 }

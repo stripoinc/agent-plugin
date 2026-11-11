@@ -4,7 +4,7 @@
 
 Follow the edit/rebuild contract in the provider's persistence topic (`PROVIDER.md`). Prepare distinct candidate and base tickets where
 required, upload the complete candidate and byte-exact acquisition through the configured helper,
-and finalize only after every transfer succeeds. Never swap their ticket IDs, pass JSON inline,
+and finalize only after every transfer succeeds. Never swap their ticket IDs, send JSON inline,
 or discard the concurrency protection to force a write. Use the provider's exact hash,
 idempotency, ticket-consumption, and retry rules; these are not interchangeable.
 

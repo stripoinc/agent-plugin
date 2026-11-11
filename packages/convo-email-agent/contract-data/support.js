@@ -96,13 +96,13 @@ export default {
   "apiMutation": {
     "decision": "document-state-operation",
     "method": "typed patchSettings / content / layout / collection methods",
-    "omission": "Command arguments map to the native field shape; command execution belongs to ordinary set.",
+    "omission": "Command arguments map to the native field shape; command execution belongs to ordinary set().",
     "source": "ui-editor-ui/src/app/core/block-operations-api/facade/interfaces.ts",
     "scenario": "test/fieldCoverage.test.ts"
   },
   "host": {
     "decision": "host",
-    "method": "upload / set / get / importDocumentSnapshot / prepareDocumentState",
+    "method": "upload() / set() / get() / importDocumentSnapshot() / prepareDocumentState()",
     "omission": "IPC lifecycle, CRDT patches, browser effects and gallery persistence have no direct JSON setter.",
     "source": "ui-editor-ui/src/app/core/block-operations-api/facade/interfaces.ts",
     "scenario": "test/editorRuntime.test.ts"

@@ -15,10 +15,8 @@ import {
 } from "./create-fe297c6d63eb.js";
 import {
   createEmailMutationSdk,
-  createEmailSdk,
-  uniqueUuidFromSeed,
-  uuidFromSeed
-} from "./content-mutations-15913d881744.js";
+  createEmailSdk
+} from "./content-mutations-ebc855083abe.js";
 import "./transplant-format-b3ed852356b0.js";
 import {
   summarizeEditorJson
@@ -26,8 +24,10 @@ import {
 import {
   EmailSdkSchemaError,
   assertValidEmailModel,
-  setEmailSchema
-} from "./model-2461f952bfd9.js";
+  setEmailSchema,
+  uniqueUuidFromSeed,
+  uuidFromSeed
+} from "./ids-a682767b7fbb.js";
 import {
   DocumentStateError,
   jsonIssues,

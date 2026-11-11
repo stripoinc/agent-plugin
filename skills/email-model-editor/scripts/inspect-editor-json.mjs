@@ -16,13 +16,13 @@ function parseArgs(argv) {
   }
   return args;
 }
-function requireString(args, key) {
-  const value = optionalString(args, key);
-  if (value === void 0) throw new Error(`Missing required --${key} argument.`);
+function requireString(args, option) {
+  const value = optionalString(args, option);
+  if (value === void 0) throw new Error(`Missing required --${option} argument.`);
   return value;
 }
-function optionalString(args, key) {
-  const value = args[key];
+function optionalString(args, option) {
+  const value = args[option];
   return typeof value === "string" && value.trim() !== "" ? value : void 0;
 }
 function readJson(filePath) {
@@ -40,7 +40,7 @@ function compactError(error) {
     name: typeof fields?.name === "string" ? fields.name : "Error",
     message: String(fields?.message ?? error).slice(0, 2e3),
     ...errors ? { errors } : {},
-    ...Object.fromEntries(["code", "stage", "input", "path", "issues"].flatMap((key) => fields && key in fields ? [[key, fields[key]]] : []))
+    ...Object.fromEntries(["code", "stage", "input", "path", "issues"].flatMap((option) => fields && option in fields ? [[option, fields[option]]] : []))
   };
 }
 function resolveSdkDist(args, startUrl = import.meta.url) {
@@ -59,7 +59,7 @@ function resolveSdkDist(args, startUrl = import.meta.url) {
   }
   if (candidate && existsSync(candidate) && statSync(candidate).isFile()) return candidate;
   throw new Error(
-    `Cannot find the packaged convo-email-agent SDK${candidate ? ` at ${candidate}` : ""}. Install skills/ and packages/ together or pass --sdk with an existing index.js.`
+    `Cannot find the packaged convo-email-agent SDK${candidate ? ` at ${candidate}` : ""}. Install skills/ and packages/ together or use --sdk with an existing index.js.`
   );
 }
 async function loadSdk(sdkPath) {
@@ -146,9 +146,9 @@ function stripHtml(html) {
 function pushLimited(list, value) {
   if (list.length < MAX_ITEMS) list.push(value);
 }
-function count(map, key) {
-  const safeKey = key || "unknown";
-  map[safeKey] = (map[safeKey] ?? 0) + 1;
+function count(map, label) {
+  const safeLabel = label || "unknown";
+  map[safeLabel] = (map[safeLabel] ?? 0) + 1;
 }
 function linkValue(link) {
   if (!isObject2(link)) return void 0;

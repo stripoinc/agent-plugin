@@ -1,5 +1,4 @@
 // src/skill-scripts/email-from-reference/create-from-brief.ts
-import { randomUUID } from "node:crypto";
 import { readFileSync as readFileSync2, rmSync as rmSync2 } from "node:fs";
 import path2 from "node:path";
 import { fileURLToPath as fileURLToPath2 } from "node:url";
@@ -22,13 +21,13 @@ function parseArgs(argv) {
   }
   return args;
 }
-function requireString(args, key) {
-  const value = optionalString(args, key);
-  if (value === void 0) throw new Error(`Missing required --${key} argument.`);
+function requireString(args, option) {
+  const value = optionalString(args, option);
+  if (value === void 0) throw new Error(`Missing required --${option} argument.`);
   return value;
 }
-function optionalString(args, key) {
-  const value = args[key];
+function optionalString(args, option) {
+  const value = args[option];
   return typeof value === "string" && value.trim() !== "" ? value : void 0;
 }
 function readJson(filePath) {
@@ -77,7 +76,7 @@ function compactError(error) {
     name: typeof fields?.name === "string" ? fields.name : "Error",
     message: String(fields?.message ?? error).slice(0, 2e3),
     ...errors ? { errors } : {},
-    ...Object.fromEntries(["code", "stage", "input", "path", "issues"].flatMap((key) => fields && key in fields ? [[key, fields[key]]] : []))
+    ...Object.fromEntries(["code", "stage", "input", "path", "issues"].flatMap((option) => fields && option in fields ? [[option, fields[option]]] : []))
   };
 }
 function resolveSdkDist(args, startUrl = import.meta.url) {
@@ -96,7 +95,7 @@ function resolveSdkDist(args, startUrl = import.meta.url) {
   }
   if (candidate && existsSync(candidate) && statSync(candidate).isFile()) return candidate;
   throw new Error(
-    `Cannot find the packaged convo-email-agent SDK${candidate ? ` at ${candidate}` : ""}. Install skills/ and packages/ together or pass --sdk with an existing index.js.`
+    `Cannot find the packaged convo-email-agent SDK${candidate ? ` at ${candidate}` : ""}. Install skills/ and packages/ together or use --sdk with an existing index.js.`
   );
 }
 async function loadSdk(sdkPath) {
@@ -133,9 +132,9 @@ function stripHtml(html) {
 function pushLimited(list, value) {
   if (list.length < MAX_ITEMS) list.push(value);
 }
-function count(map, key) {
-  const safeKey = key || "unknown";
-  map[safeKey] = (map[safeKey] ?? 0) + 1;
+function count(map, label) {
+  const safeLabel = label || "unknown";
+  map[safeLabel] = (map[safeLabel] ?? 0) + 1;
 }
 function linkValue(link) {
   if (!isObject2(link)) return void 0;
@@ -389,7 +388,7 @@ function nonEmptyString(value) {
 function detachReferenceModules(model) {
   const detached = [];
   const children = ["stripes", "structures", "columns", "containers", "blocks"];
-  const hasBlocks = (node) => children.some((key) => Array.isArray(node[key]) && node[key].some((value) => isObject3(value) && (key === "blocks" || hasBlocks(value))));
+  const hasBlocks = (node) => children.some((prop) => Array.isArray(node[prop]) && node[prop].some((value) => isObject3(value) && (prop === "blocks" || hasBlocks(value))));
   const visit = (node, path3, kind) => {
     if (["stripes", "structures", "containers"].includes(kind) && Object.hasOwn(node, "moduleId")) {
       if (typeof node.moduleId !== "number" || !Number.isFinite(node.moduleId)) {
@@ -401,10 +400,10 @@ function detachReferenceModules(model) {
       detached.push({ path: `${path3}.moduleId`, sourceNodeId: nonEmptyString(node.id), moduleId: node.moduleId });
       delete node.moduleId;
     }
-    for (const key of children) {
-      const rows = node[key];
+    for (const prop of children) {
+      const rows = node[prop];
       if (Array.isArray(rows)) rows.forEach((value, index) => {
-        if (isObject3(value)) visit(value, `${path3}.${key}[${index}]`, key);
+        if (isObject3(value)) visit(value, `${path3}.${prop}[${index}]`, prop);
       });
     }
   };
@@ -437,7 +436,7 @@ function backgroundImageFindings(model, exact) {
       if (isObject3(value.backgroundImage) && value.backgroundImage.sizeX === "cover" && value.backgroundImage.sizeY === "cover") {
         findings.push(`${path3}.backgroundImage.sizeY: use "auto" when sizeX is "cover"; this native combination fails the host document-state SET`);
       }
-      for (const [key, child] of Object.entries(value)) inspect(child, `${path3}.${key}`);
+      for (const [prop, child] of Object.entries(value)) inspect(child, `${path3}.${prop}`);
     }
   };
   inspect(model.stripes, "brief.model.stripes");
@@ -458,7 +457,7 @@ function unbreakableRuleFindings(model) {
       if (value.type === "text" && typeof value.content === "string" && /[━─═]{24,}/u.test(value.content)) {
         findings.push(`${path3}.content: repeated rule glyphs force the mobile table wider than the viewport; use a full-width border-top span instead`);
       }
-      for (const [key, child] of Object.entries(value)) inspect(child, `${path3}.${key}`);
+      for (const [prop, child] of Object.entries(value)) inspect(child, `${path3}.${prop}`);
     }
   };
   inspect(model.stripes, "brief.model.stripes");
@@ -485,21 +484,21 @@ function validateCreationBrief(brief, policy) {
   if (!isObject3(brief.message)) {
     findings.push("brief.message: required metadata object");
   } else {
-    for (const key of policy.requiredMessageStrings) {
-      if (nonEmptyString(brief.message[key]) === void 0) findings.push(`brief.message.${key}: required non-empty ${key}`);
+    for (const prop of policy.requiredMessageStrings) {
+      if (nonEmptyString(brief.message[prop]) === void 0) findings.push(`brief.message.${prop}: required non-empty ${prop}`);
     }
-    if (policy.allowedMessageFields !== null) for (const key of Object.keys(brief.message)) {
-      if (!policy.allowedMessageFields.includes(key)) findings.push(`brief.message.${key}: unsupported ${policy.provider} metadata`);
+    if (policy.allowedMessageFields !== null) for (const prop of Object.keys(brief.message)) {
+      if (!policy.allowedMessageFields.includes(prop)) findings.push(`brief.message.${prop}: unsupported ${policy.provider} metadata`);
     }
-    for (const [key, maximum] of Object.entries(policy.maxMessageLengths)) {
-      const value = brief.message[key];
+    for (const [prop, maximum] of Object.entries(policy.maxMessageLengths)) {
+      const value = brief.message[prop];
       if (value !== void 0 && (typeof value !== "string" || value.length > maximum)) {
-        findings.push(`brief.message.${key}: expected a string of at most ${maximum} characters`);
+        findings.push(`brief.message.${prop}: expected a string of at most ${maximum} characters`);
       }
     }
-    for (const key of policy.positiveIntegerMessageFields) {
-      const value = brief.message[key];
-      if (value !== void 0 && (!Number.isSafeInteger(value) || value < 1)) findings.push(`brief.message.${key}: expected a positive integer`);
+    for (const prop of policy.positiveIntegerMessageFields) {
+      const value = brief.message[prop];
+      if (value !== void 0 && (!Number.isSafeInteger(value) || value < 1)) findings.push(`brief.message.${prop}: expected a positive integer`);
     }
     if (Object.hasOwn(brief.message, "preheader") || Object.hasOwn(brief.message, "preHeader")) {
       findings.push("brief.message.preheader and brief.message.preHeader must be absent; use brief.model.metadata.preheader with text and boolean fillSpace");
@@ -516,9 +515,9 @@ function validateCreationBrief(brief, policy) {
     if (policy.checkBackgroundImages) findings.push(...backgroundImageFindings(brief.model, isObject3(brief.message) && brief.message.referenceMode === "exact"));
     if (policy.checkUnbreakableRules) findings.push(...unbreakableRuleFindings(brief.model));
   }
-  for (const key of Object.keys(brief)) {
-    if (!["v", "note", "sourceSummary", "message", "model"].includes(key)) {
-      findings.push(`brief.${key}: unsupported field; put native editor fields inside brief.model`);
+  for (const prop of Object.keys(brief)) {
+    if (!["v", "note", "sourceSummary", "message", "model"].includes(prop)) {
+      findings.push(`brief.${prop}: unsupported field; put native editor fields inside brief.model`);
     }
   }
   return findings;
@@ -546,6 +545,7 @@ async function main() {
     const typedBrief = brief;
     typedBrief.message.referenceMode = typedBrief.message.referenceMode === "copy-action" ? "tailored" : typedBrief.message.referenceMode ?? "creative";
     const sdk = await loadSdk(sdkPath);
+    const runSeed = `${Date.now().toString(36)}-${Math.random().toString(36).slice(2)}`;
     const baselineEmailJson = baselinePath === void 0 ? void 0 : readJson(baselinePath);
     const baselineStripes = isObject3(baselineEmailJson) && Array.isArray(baselineEmailJson.stripes) ? baselineEmailJson.stripes : [];
     const creationModel = structuredClone(typedBrief.model);
@@ -555,7 +555,8 @@ async function main() {
       baselineEmailJson,
       intent: { removeNodes: baselineStripes.filter(isObject3).map((stripe) => String(stripe.id)) },
       regenerateIds: true,
-      idFactory: () => randomUUID()
+      // Every build assigns fresh IDs; a per-run seed keeps reruns from repeating them.
+      idFactory: (seed, isTaken) => sdk.uniqueUuidFromSeed(`brief:${runSeed}:${seed}`, isTaken)
     });
     const validation = await validateEditorJson(emailJson, sdkPath, { current: baselineEmailJson });
     if (!validation.valid) {

@@ -16,13 +16,13 @@ function parseArgs(argv) {
   }
   return args;
 }
-function requireString(args, key) {
-  const value = optionalString(args, key);
-  if (value === void 0) throw new Error(`Missing required --${key} argument.`);
+function requireString(args, option) {
+  const value = optionalString(args, option);
+  if (value === void 0) throw new Error(`Missing required --${option} argument.`);
   return value;
 }
-function optionalString(args, key) {
-  const value = args[key];
+function optionalString(args, option) {
+  const value = args[option];
   return typeof value === "string" && value.trim() !== "" ? value : void 0;
 }
 function compactError(error) {
@@ -32,7 +32,7 @@ function compactError(error) {
     name: typeof fields?.name === "string" ? fields.name : "Error",
     message: String(fields?.message ?? error).slice(0, 2e3),
     ...errors ? { errors } : {},
-    ...Object.fromEntries(["code", "stage", "input", "path", "issues"].flatMap((key) => fields && key in fields ? [[key, fields[key]]] : []))
+    ...Object.fromEntries(["code", "stage", "input", "path", "issues"].flatMap((option) => fields && option in fields ? [[option, fields[option]]] : []))
   };
 }
 function resolveSdkDist(args, startUrl = import.meta.url) {
@@ -51,7 +51,7 @@ function resolveSdkDist(args, startUrl = import.meta.url) {
   }
   if (candidate && existsSync(candidate) && statSync(candidate).isFile()) return candidate;
   throw new Error(
-    `Cannot find the packaged convo-email-agent SDK${candidate ? ` at ${candidate}` : ""}. Install skills/ and packages/ together or pass --sdk with an existing index.js.`
+    `Cannot find the packaged convo-email-agent SDK${candidate ? ` at ${candidate}` : ""}. Install skills/ and packages/ together or use --sdk with an existing index.js.`
   );
 }
 async function loadSdk(sdkPath) {
@@ -69,14 +69,14 @@ var TARGET_GUIDANCE = {
     "columnsGap.mobile > 0 requires columns.length > 1.",
     "responsiveMobileContainersInversion=true requires exactly 2 columns.",
     "# Creation defaults",
-    "Single-column draft: omit responsiveMobile or set false. Set true for multi-column mobile stacking.",
+    "Single-column draft: omit responsiveMobile or make it false. Make it true for multi-column mobile stacking.",
     "createStructure({id, columns}) defaults mobile to columns.length > 1; a raw draft does not infer stacking."
   ],
   image: [
     "# Constraints (native validator)",
     "responsiveMobile=true requires size.mobile to equal size.desktop (both mode and px).",
     "responsiveMobile=true requires alignment.mobile to equal alignment.desktop.",
-    "For different mobile dimensions or alignment, set responsiveMobile=false.",
+    "For different mobile dimensions or alignment, use responsiveMobile=false.",
     "# Creation defaults",
     "The image draft builder defaults responsiveMobile to true and omitted mobile size to desktop size.",
     'Adaptive photo settings: {"size":{"desktop":{"mode":"width","px":284}},"responsiveMobile":true}',
@@ -124,7 +124,7 @@ async function main() {
       return;
     }
     if (node.properties) {
-      for (const [key, child] of Object.entries(objectProperties(node))) walk(child, path2 ? `${path2}.${key}` : key);
+      for (const [prop, child] of Object.entries(objectProperties(node))) walk(child, path2 ? `${path2}.${prop}` : prop);
       return;
     }
     if (node.type === "array") return walk(node.items, `${path2}[]`);
@@ -166,12 +166,12 @@ function compact(rows) {
   for (const row of merged) {
     const split = row.path.lastIndexOf(".");
     const parent = split < 0 ? "" : row.path.slice(0, split + 1);
-    const key = row.path.slice(split + 1);
+    const prop = row.path.slice(split + 1);
     const previous = grouped.at(-1);
     const previousSplit = previous ? previous.path.lastIndexOf(".") : -1;
-    if (previous && parent && previous.shape === row.shape && previous.path.slice(0, previousSplit + 1) === parent && !key.includes("{")) {
-      const keys = previous.path.slice(previousSplit + 1).replace(/^\{|\}$/gu, "");
-      previous.path = `${parent}{${keys},${key}}`;
+    if (previous && parent && previous.shape === row.shape && previous.path.slice(0, previousSplit + 1) === parent && !prop.includes("{")) {
+      const siblings = previous.path.slice(previousSplit + 1).replace(/^\{|\}$/gu, "");
+      previous.path = `${parent}{${siblings},${prop}}`;
     } else grouped.push({ ...row });
   }
   return grouped;

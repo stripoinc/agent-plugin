@@ -1,5 +1,0 @@
-schema_version: "1.1"
-name: rebuild-from-screenshot
-context:
-  # Writes competitor-email.png into the workspace; run the suite with --scaffold.
-  scaffold_script: fixture.sh

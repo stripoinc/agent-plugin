@@ -213,7 +213,7 @@ export interface EmailThemeApi {
         readonly background: {
             /** Area content background in lightTheme for header, content or footer (infoArea has none); node background syntax, including transparent. */
             setContentColor(value: unknown, options?: StyleOptions): EmailDocument;
-            /** Outer stripe background in lightTheme. Only header and footer have one, so pass {area}; the content default fails. */
+            /** Outer stripe background in lightTheme. Only header and footer have one, so give {area}; the content default fails. */
             setStripeColor(value: unknown, options?: StyleOptions): EmailDocument;
         };
         readonly typography: {
@@ -314,14 +314,14 @@ export interface EmailNode {
     setLink(mutation: LinkMutation): EmailNode;
     /** Alias of style.set; see EmailNodeStyleApi for supported properties, target kinds, units and value shapes. */
     setStyle(property: string, value: unknown, options?: StyleOptions): EmailNode;
-    setMenuItem(itemIndex: number, set: MenuItemMutation): EmailNode;
-    setMenuShared(set: MenuSharedMutation): EmailNode;
+    setMenuItem(itemIndex: number, changes: MenuItemMutation): EmailNode;
+    setMenuShared(changes: MenuSharedMutation): EmailNode;
     /** Edit an existing network; a string type must resolve uniquely. Use its zero-based index for duplicate types. */
-    setSocialNetwork(target: SocialNetworkTarget, set: SocialNetworkMutation): EmailNode;
+    setSocialNetwork(target: SocialNetworkTarget, changes: SocialNetworkMutation): EmailNode;
     /** Append by default or insert relative to an existing network. See SocialNetworkInput for custom-icon/link rules. */
     addSocialNetwork(network: SocialNetworkInput, position?: SocialNetworkPosition): EmailNode;
     removeSocialNetwork(target: SocialNetworkTarget): EmailNode;
-    setSocialShared(set: SocialSharedMutation): EmailNode;
+    setSocialShared(changes: SocialSharedMutation): EmailNode;
     /** Delete the selected subtree, subject to pinned native operation support; acquired timer blocks cannot be deleted. */
     remove(): void;
     /**
