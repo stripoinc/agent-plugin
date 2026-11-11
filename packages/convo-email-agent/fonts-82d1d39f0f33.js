@@ -18,6 +18,7 @@ var CssSyntaxError = class extends Error {
 };
 function skipGroup(css, start) {
   const char = css[start];
+  if (char === "\\") return Math.min(start + 2, css.length);
   if (char === '"' || char === "'") {
     for (let index = start + 1; index < css.length; index++) {
       if (css[index] === "\\") index++;
@@ -34,6 +35,10 @@ function skipGroup(css, start) {
     let depth = 0;
     for (let index = start; index < css.length; ) {
       const current = css[index];
+      if (current === "\\") {
+        index += 2;
+        continue;
+      }
       if ((current === '"' || current === "'") && /[(,\s]/.test(css[index - 1])) {
         index = skipGroup(css, index);
         continue;

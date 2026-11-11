@@ -157,9 +157,11 @@ function decorateInlineElements(block, template) {
     if (element.tag === "a") {
       if (template.anchorAttrs !== void 0) {
         const href = element.attrs.find((attr) => attr.name === "href");
+        const target = element.attrs.find((attr) => attr.name === "target");
         element.attrs = [
           ...href ? [{ ...href }] : [],
-          ...cloneAttrs(template.anchorAttrs)
+          ...cloneAttrs(template.anchorAttrs.filter((attr) => target === void 0 || attr.name !== "target")),
+          ...target ? [{ ...target }] : []
         ];
       }
       return;

@@ -4,7 +4,10 @@ import {
   requireValid,
   validateChange,
   validateEmailDocument
-} from "./editor-validator-0b64df0adc74.js";
+} from "./content-mutations-fb63277cc72e.js";
+import {
+  EmailSdkError
+} from "./errors-3ee69a7e1eb0.js";
 
 // convo-email-agent/src/sdk/ids.ts
 var SEED_PREFIX = "eds-clone-v1:";
@@ -31,6 +34,12 @@ function uuidFromSeed(seed) {
   const variantNibble = (parseInt(hex[16], 16) & 3 | 8).toString(16);
   const h = hex.slice(0, 12) + "4" + hex.slice(13, 16) + variantNibble + hex.slice(17, 32);
   return "".concat(h.slice(0, 8), "-").concat(h.slice(8, 12), "-").concat(h.slice(12, 16), "-").concat(h.slice(16, 20), "-").concat(h.slice(20, 32));
+}
+function issueNodeId(idFactory, seed, isTaken) {
+  if (typeof idFactory !== "function") {
+    throw new EmailSdkError("Creating a node requires idFactory: new node IDs must stay unique across sessions started from one document, so give the session a random source, for example idFactory: (_seed, isTaken) => { let id = randomUUID(); while (isTaken(id)) id = randomUUID(); return id; } with randomUUID from node:crypto.");
+  }
+  return idFactory(seed, isTaken);
 }
 function uniqueUuidFromSeed(seed, isTaken) {
   let candidate = uuidFromSeed(seed);
@@ -301,15 +310,14 @@ var EditorJsonMutationCore = class {
   lastInsertByAnchor = /* @__PURE__ */ new Map();
   // The draft is always validated with the editor rules bundled in the SDK.
   // `idFactory` supplies ids for cloned descendants that were not remapped via
-  // nestedIds (the Email SDK injects its own factory; the default derives ids from a
-  // session ordinal and skips ids the draft holds). `options.current` is the acquired
+  // nestedIds (the Email SDK injects its own factory). Without one, a clone fails like any
+  // other new node without the host's random idFactory. `options.current` is the acquired
   // document an edit replaces; a new document validates against an empty current state.
   constructor(templateJson, idFactory, options = {}) {
     this.current = isObject(options.current) ? deepClone(options.current) : void 0;
     assertValidTemplate(templateJson, "Initial JSON", void 0, { current: this.current });
     this.draft = deepClone(templateJson);
-    let ordinal = 0;
-    this.idFactory = idFactory ?? (() => uniqueUuidFromSeed("fallback#".concat(ordinal++), (id) => findElementById(this.draft, id) !== void 0));
+    this.idFactory = idFactory ?? (() => issueNodeId(void 0, "clone", () => false));
   }
   beginTransaction() {
     return {
@@ -583,6 +591,7 @@ var EditorJsonMutationCore = class {
 
 export {
   uuidFromSeed,
+  issueNodeId,
   uniqueUuidFromSeed,
   setEmailSchema,
   assertValidEmailModel,

@@ -2,457 +2,907 @@
 var RULE_TABLE = {
   "editorRevision": "46ab3a6821e8617a8c70f9778f2bb3e1a8b7d8e4",
   "editorDirty": false,
-  "rulesSha256": "dbb31a043179512fdbd2f65c8504d6acdc91522bf07b4fd2efc8ac030de418e5",
+  "rulesSha256": "596c68a272a5a3ffd1c4e39e19bdb9a2ac744d1a9d4a398262775f125052a74a",
   "refines": {
     "$.resources.fonts[]|0.fontFamily": [
-      "nonblank"
+      [
+        "nonblank",
+        "Font family cannot be blank."
+      ]
     ],
     "$.resources.fonts[]|1.fontFamily": [
-      "nonblank"
+      [
+        "nonblank",
+        "Font family cannot be blank."
+      ]
     ],
     "$.resources.fonts[]|2.fontFamily": [
-      "nonblank"
+      [
+        "nonblank",
+        "Font family cannot be blank."
+      ]
     ],
     "$.settings.buttons.darkTheme.borderColor.bottom": [
-      "staticColorTransparent"
+      [
+        "staticColorTransparent",
+        "Expected a valid static CSS color value."
+      ]
     ],
     "$.settings.buttons.darkTheme.borderColor.left": [
-      "staticColorTransparent"
+      [
+        "staticColorTransparent",
+        "Expected a valid static CSS color value."
+      ]
     ],
     "$.settings.buttons.darkTheme.borderColor.right": [
-      "staticColorTransparent"
+      [
+        "staticColorTransparent",
+        "Expected a valid static CSS color value."
+      ]
     ],
     "$.settings.buttons.darkTheme.borderColor.top": [
-      "staticColorTransparent"
+      [
+        "staticColorTransparent",
+        "Expected a valid static CSS color value."
+      ]
     ],
     "$.settings.buttons.darkTheme.buttonColor": [
-      "themeBackground"
+      [
+        "themeBackground",
+        "Expected a static solid color or one static CSS gradient followed by a solid fallback."
+      ]
     ],
     "$.settings.buttons.darkTheme.fontColor": [
-      "staticColor"
+      [
+        "staticColor",
+        "Expected a valid static non-transparent CSS color value."
+      ]
     ],
     "$.settings.buttons.darkTheme.hoverButtonStyles.backgroundColor": [
-      "themeBackground"
+      [
+        "themeBackground",
+        "Expected a static solid color or one static CSS gradient followed by a solid fallback."
+      ]
     ],
     "$.settings.buttons.darkTheme.hoverButtonStyles.borderColor.bottom": [
-      "staticColorTransparent"
+      [
+        "staticColorTransparent",
+        "Expected a valid static CSS color value."
+      ]
     ],
     "$.settings.buttons.darkTheme.hoverButtonStyles.borderColor.left": [
-      "staticColorTransparent"
+      [
+        "staticColorTransparent",
+        "Expected a valid static CSS color value."
+      ]
     ],
     "$.settings.buttons.darkTheme.hoverButtonStyles.borderColor.right": [
-      "staticColorTransparent"
+      [
+        "staticColorTransparent",
+        "Expected a valid static CSS color value."
+      ]
     ],
     "$.settings.buttons.darkTheme.hoverButtonStyles.borderColor.top": [
-      "staticColorTransparent"
+      [
+        "staticColorTransparent",
+        "Expected a valid static CSS color value."
+      ]
     ],
     "$.settings.buttons.darkTheme.hoverButtonStyles.fontColor": [
-      "staticColor"
+      [
+        "staticColor",
+        "Expected a valid static non-transparent CSS color value."
+      ]
     ],
     "$.settings.buttons.fontFamily": [
-      "nonblank"
+      [
+        "nonblank",
+        "Font family cannot be blank."
+      ]
     ],
     "$.settings.buttons.lightTheme.borderColor.bottom": [
-      "staticColorTransparent"
+      [
+        "staticColorTransparent",
+        "Expected a valid static CSS color value."
+      ]
     ],
     "$.settings.buttons.lightTheme.borderColor.left": [
-      "staticColorTransparent"
+      [
+        "staticColorTransparent",
+        "Expected a valid static CSS color value."
+      ]
     ],
     "$.settings.buttons.lightTheme.borderColor.right": [
-      "staticColorTransparent"
+      [
+        "staticColorTransparent",
+        "Expected a valid static CSS color value."
+      ]
     ],
     "$.settings.buttons.lightTheme.borderColor.top": [
-      "staticColorTransparent"
+      [
+        "staticColorTransparent",
+        "Expected a valid static CSS color value."
+      ]
     ],
     "$.settings.buttons.lightTheme.buttonColor": [
-      "themeBackground"
+      [
+        "themeBackground",
+        "Expected a static solid color or one static CSS gradient followed by a solid fallback."
+      ]
     ],
     "$.settings.buttons.lightTheme.fontColor": [
-      "staticColor"
+      [
+        "staticColor",
+        "Expected a valid static non-transparent CSS color value."
+      ]
     ],
     "$.settings.buttons.lightTheme.hoverButtonStyles.backgroundColor": [
-      "themeBackground"
+      [
+        "themeBackground",
+        "Expected a static solid color or one static CSS gradient followed by a solid fallback."
+      ]
     ],
     "$.settings.buttons.lightTheme.hoverButtonStyles.borderColor.bottom": [
-      "staticColorTransparent"
+      [
+        "staticColorTransparent",
+        "Expected a valid static CSS color value."
+      ]
     ],
     "$.settings.buttons.lightTheme.hoverButtonStyles.borderColor.left": [
-      "staticColorTransparent"
+      [
+        "staticColorTransparent",
+        "Expected a valid static CSS color value."
+      ]
     ],
     "$.settings.buttons.lightTheme.hoverButtonStyles.borderColor.right": [
-      "staticColorTransparent"
+      [
+        "staticColorTransparent",
+        "Expected a valid static CSS color value."
+      ]
     ],
     "$.settings.buttons.lightTheme.hoverButtonStyles.borderColor.top": [
-      "staticColorTransparent"
+      [
+        "staticColorTransparent",
+        "Expected a valid static CSS color value."
+      ]
     ],
     "$.settings.buttons.lightTheme.hoverButtonStyles.fontColor": [
-      "staticColor"
+      [
+        "staticColor",
+        "Expected a valid static non-transparent CSS color value."
+      ]
     ],
     "$.settings.general.backgroundImage.path": [
-      "normalizedNonempty"
+      [
+        "normalizedNonempty",
+        "Invalid input"
+      ]
     ],
     "$.settings.general.backgroundImage.sizeX": [
-      "normalizedNonempty"
+      [
+        "normalizedNonempty",
+        "Invalid input"
+      ]
     ],
     "$.settings.general.backgroundImage.sizeY": [
-      "normalizedNonempty"
+      [
+        "normalizedNonempty",
+        "Invalid input"
+      ]
     ],
     "$.settings.general.darkTheme.backgroundColor": [
-      "themeBackground"
+      [
+        "themeBackground",
+        "Expected a static solid color or one static CSS gradient followed by a solid fallback."
+      ]
     ],
     "$.settings.general.darkTheme.backgroundImage": [
-      "normalizedNonempty"
+      [
+        "normalizedNonempty",
+        "Invalid input"
+      ]
     ],
     "$.settings.general.darkTheme.customListStyles.listMarkerColor": [
-      "staticColorTransparent"
+      [
+        "staticColorTransparent",
+        "Expected a valid static CSS color value."
+      ]
     ],
     "$.settings.general.darkTheme.customListStyles.listNumberMarkerColor": [
-      "staticColorTransparent"
+      [
+        "staticColorTransparent",
+        "Expected a valid static CSS color value."
+      ]
     ],
     "$.settings.general.lightTheme.backgroundColor": [
-      "themeBackground"
+      [
+        "themeBackground",
+        "Expected a static solid color or one static CSS gradient followed by a solid fallback."
+      ]
     ],
     "$.settings.general.lightTheme.customListStyles.listMarkerColor": [
-      "staticColorTransparent"
+      [
+        "staticColorTransparent",
+        "Expected a valid static CSS color value."
+      ]
     ],
     "$.settings.general.lightTheme.customListStyles.listNumberMarkerColor": [
-      "staticColorTransparent"
+      [
+        "staticColorTransparent",
+        "Expected a valid static CSS color value."
+      ]
     ],
     "$.settings.headings.darkTheme.h1.fontColor": [
-      "staticColor"
+      [
+        "staticColor",
+        "Expected a valid static non-transparent CSS color value."
+      ]
     ],
     "$.settings.headings.darkTheme.h2.fontColor": [
-      "staticColor"
+      [
+        "staticColor",
+        "Expected a valid static non-transparent CSS color value."
+      ]
     ],
     "$.settings.headings.darkTheme.h3.fontColor": [
-      "staticColor"
+      [
+        "staticColor",
+        "Expected a valid static non-transparent CSS color value."
+      ]
     ],
     "$.settings.headings.darkTheme.h4.fontColor": [
-      "staticColor"
+      [
+        "staticColor",
+        "Expected a valid static non-transparent CSS color value."
+      ]
     ],
     "$.settings.headings.darkTheme.h5.fontColor": [
-      "staticColor"
+      [
+        "staticColor",
+        "Expected a valid static non-transparent CSS color value."
+      ]
     ],
     "$.settings.headings.darkTheme.h6.fontColor": [
-      "staticColor"
+      [
+        "staticColor",
+        "Expected a valid static non-transparent CSS color value."
+      ]
     ],
     "$.settings.headings.fontFamily": [
-      "nonblank"
+      [
+        "nonblank",
+        "Font family cannot be blank."
+      ]
     ],
     "$.settings.headings.lightTheme.h1.fontColor": [
-      "staticColor"
+      [
+        "staticColor",
+        "Expected a valid static non-transparent CSS color value."
+      ]
     ],
     "$.settings.headings.lightTheme.h2.fontColor": [
-      "staticColor"
+      [
+        "staticColor",
+        "Expected a valid static non-transparent CSS color value."
+      ]
     ],
     "$.settings.headings.lightTheme.h3.fontColor": [
-      "staticColor"
+      [
+        "staticColor",
+        "Expected a valid static non-transparent CSS color value."
+      ]
     ],
     "$.settings.headings.lightTheme.h4.fontColor": [
-      "staticColor"
+      [
+        "staticColor",
+        "Expected a valid static non-transparent CSS color value."
+      ]
     ],
     "$.settings.headings.lightTheme.h5.fontColor": [
-      "staticColor"
+      [
+        "staticColor",
+        "Expected a valid static non-transparent CSS color value."
+      ]
     ],
     "$.settings.headings.lightTheme.h6.fontColor": [
-      "staticColor"
+      [
+        "staticColor",
+        "Expected a valid static non-transparent CSS color value."
+      ]
     ],
     "$.settings.stripes.darkTheme.content.contentBackgroundColor": [
-      "themeBackground"
+      [
+        "themeBackground",
+        "Expected a static solid color or one static CSS gradient followed by a solid fallback."
+      ]
     ],
     "$.settings.stripes.darkTheme.content.fontColor": [
-      "staticColor"
+      [
+        "staticColor",
+        "Expected a valid static non-transparent CSS color value."
+      ]
     ],
     "$.settings.stripes.darkTheme.content.linkColor": [
-      "staticColor"
+      [
+        "staticColor",
+        "Expected a valid static non-transparent CSS color value."
+      ]
     ],
     "$.settings.stripes.darkTheme.content.linkColorHover": [
-      "staticColor"
+      [
+        "staticColor",
+        "Expected a valid static non-transparent CSS color value."
+      ]
     ],
     "$.settings.stripes.darkTheme.footer.contentBackgroundColor": [
-      "themeBackground"
+      [
+        "themeBackground",
+        "Expected a static solid color or one static CSS gradient followed by a solid fallback."
+      ]
     ],
     "$.settings.stripes.darkTheme.footer.fontColor": [
-      "staticColor"
+      [
+        "staticColor",
+        "Expected a valid static non-transparent CSS color value."
+      ]
     ],
     "$.settings.stripes.darkTheme.footer.linkColor": [
-      "staticColor"
+      [
+        "staticColor",
+        "Expected a valid static non-transparent CSS color value."
+      ]
     ],
     "$.settings.stripes.darkTheme.footer.linkColorHover": [
-      "staticColor"
+      [
+        "staticColor",
+        "Expected a valid static non-transparent CSS color value."
+      ]
     ],
     "$.settings.stripes.darkTheme.footer.stripeBackgroundColor": [
-      "themeBackground"
+      [
+        "themeBackground",
+        "Expected a static solid color or one static CSS gradient followed by a solid fallback."
+      ]
     ],
     "$.settings.stripes.darkTheme.header.contentBackgroundColor": [
-      "themeBackground"
+      [
+        "themeBackground",
+        "Expected a static solid color or one static CSS gradient followed by a solid fallback."
+      ]
     ],
     "$.settings.stripes.darkTheme.header.fontColor": [
-      "staticColor"
+      [
+        "staticColor",
+        "Expected a valid static non-transparent CSS color value."
+      ]
     ],
     "$.settings.stripes.darkTheme.header.linkColor": [
-      "staticColor"
+      [
+        "staticColor",
+        "Expected a valid static non-transparent CSS color value."
+      ]
     ],
     "$.settings.stripes.darkTheme.header.linkColorHover": [
-      "staticColor"
+      [
+        "staticColor",
+        "Expected a valid static non-transparent CSS color value."
+      ]
     ],
     "$.settings.stripes.darkTheme.header.stripeBackgroundColor": [
-      "themeBackground"
+      [
+        "themeBackground",
+        "Expected a static solid color or one static CSS gradient followed by a solid fallback."
+      ]
     ],
     "$.settings.stripes.darkTheme.infoArea.fontColor": [
-      "staticColor"
+      [
+        "staticColor",
+        "Expected a valid static non-transparent CSS color value."
+      ]
     ],
     "$.settings.stripes.darkTheme.infoArea.linkColor": [
-      "staticColor"
+      [
+        "staticColor",
+        "Expected a valid static non-transparent CSS color value."
+      ]
     ],
     "$.settings.stripes.darkTheme.infoArea.linkColorHover": [
-      "staticColor"
+      [
+        "staticColor",
+        "Expected a valid static non-transparent CSS color value."
+      ]
     ],
     "$.settings.stripes.fontFamily": [
-      "nonblank"
+      [
+        "nonblank",
+        "Font family cannot be blank."
+      ]
     ],
     "$.settings.stripes.footer.backgroundImage.path": [
-      "normalizedNonempty"
+      [
+        "normalizedNonempty",
+        "Invalid input"
+      ]
     ],
     "$.settings.stripes.footer.backgroundImage.sizeX": [
-      "normalizedNonempty"
+      [
+        "normalizedNonempty",
+        "Invalid input"
+      ]
     ],
     "$.settings.stripes.footer.backgroundImage.sizeY": [
-      "normalizedNonempty"
+      [
+        "normalizedNonempty",
+        "Invalid input"
+      ]
     ],
     "$.settings.stripes.header.backgroundImage.path": [
-      "normalizedNonempty"
+      [
+        "normalizedNonempty",
+        "Invalid input"
+      ]
     ],
     "$.settings.stripes.header.backgroundImage.sizeX": [
-      "normalizedNonempty"
+      [
+        "normalizedNonempty",
+        "Invalid input"
+      ]
     ],
     "$.settings.stripes.header.backgroundImage.sizeY": [
-      "normalizedNonempty"
+      [
+        "normalizedNonempty",
+        "Invalid input"
+      ]
     ],
     "$.settings.stripes.lightTheme.content.contentBackgroundColor": [
-      "themeBackground"
+      [
+        "themeBackground",
+        "Expected a static solid color or one static CSS gradient followed by a solid fallback."
+      ]
     ],
     "$.settings.stripes.lightTheme.content.fontColor": [
-      "staticColor"
+      [
+        "staticColor",
+        "Expected a valid static non-transparent CSS color value."
+      ]
     ],
     "$.settings.stripes.lightTheme.content.linkColor": [
-      "staticColor"
+      [
+        "staticColor",
+        "Expected a valid static non-transparent CSS color value."
+      ]
     ],
     "$.settings.stripes.lightTheme.content.linkColorHover": [
-      "staticColor"
+      [
+        "staticColor",
+        "Expected a valid static non-transparent CSS color value."
+      ]
     ],
     "$.settings.stripes.lightTheme.footer.contentBackgroundColor": [
-      "themeBackground"
+      [
+        "themeBackground",
+        "Expected a static solid color or one static CSS gradient followed by a solid fallback."
+      ]
     ],
     "$.settings.stripes.lightTheme.footer.fontColor": [
-      "staticColor"
+      [
+        "staticColor",
+        "Expected a valid static non-transparent CSS color value."
+      ]
     ],
     "$.settings.stripes.lightTheme.footer.linkColor": [
-      "staticColor"
+      [
+        "staticColor",
+        "Expected a valid static non-transparent CSS color value."
+      ]
     ],
     "$.settings.stripes.lightTheme.footer.linkColorHover": [
-      "staticColor"
+      [
+        "staticColor",
+        "Expected a valid static non-transparent CSS color value."
+      ]
     ],
     "$.settings.stripes.lightTheme.footer.stripeBackgroundColor": [
-      "themeBackground"
+      [
+        "themeBackground",
+        "Expected a static solid color or one static CSS gradient followed by a solid fallback."
+      ]
     ],
     "$.settings.stripes.lightTheme.header.contentBackgroundColor": [
-      "themeBackground"
+      [
+        "themeBackground",
+        "Expected a static solid color or one static CSS gradient followed by a solid fallback."
+      ]
     ],
     "$.settings.stripes.lightTheme.header.fontColor": [
-      "staticColor"
+      [
+        "staticColor",
+        "Expected a valid static non-transparent CSS color value."
+      ]
     ],
     "$.settings.stripes.lightTheme.header.linkColor": [
-      "staticColor"
+      [
+        "staticColor",
+        "Expected a valid static non-transparent CSS color value."
+      ]
     ],
     "$.settings.stripes.lightTheme.header.linkColorHover": [
-      "staticColor"
+      [
+        "staticColor",
+        "Expected a valid static non-transparent CSS color value."
+      ]
     ],
     "$.settings.stripes.lightTheme.header.stripeBackgroundColor": [
-      "themeBackground"
+      [
+        "themeBackground",
+        "Expected a static solid color or one static CSS gradient followed by a solid fallback."
+      ]
     ],
     "$.settings.stripes.lightTheme.infoArea.fontColor": [
-      "staticColor"
+      [
+        "staticColor",
+        "Expected a valid static non-transparent CSS color value."
+      ]
     ],
     "$.settings.stripes.lightTheme.infoArea.linkColor": [
-      "staticColor"
+      [
+        "staticColor",
+        "Expected a valid static non-transparent CSS color value."
+      ]
     ],
     "$.settings.stripes.lightTheme.infoArea.linkColorHover": [
-      "staticColor"
+      [
+        "staticColor",
+        "Expected a valid static non-transparent CSS color value."
+      ]
     ],
     "$.stripes[].settings.contentBackgroundColor": [
-      "colorTransparent"
+      [
+        "colorTransparent",
+        "Expected a valid CSS color value."
+      ]
     ],
     "$.stripes[].settings.contentBorder.bottom.color": [
-      "colorTransparent"
+      [
+        "colorTransparent",
+        "Expected a valid CSS color value."
+      ]
     ],
     "$.stripes[].settings.contentBorder.left.color": [
-      "colorTransparent"
+      [
+        "colorTransparent",
+        "Expected a valid CSS color value."
+      ]
     ],
     "$.stripes[].settings.contentBorder.right.color": [
-      "colorTransparent"
+      [
+        "colorTransparent",
+        "Expected a valid CSS color value."
+      ]
     ],
     "$.stripes[].settings.contentBorder.top.color": [
-      "colorTransparent"
+      [
+        "colorTransparent",
+        "Expected a valid CSS color value."
+      ]
     ],
     "$.stripes[].settings.darkTheme.backgroundImage": [
-      "normalizedNonempty"
+      [
+        "normalizedNonempty",
+        "Expected a non-empty normalized background image path."
+      ]
     ],
     "$.stripes[].settings.darkTheme.contentBackgroundColor": [
-      "colorTransparent"
+      [
+        "colorTransparent",
+        "Expected a valid CSS color value."
+      ]
     ],
     "$.stripes[].settings.darkTheme.stripeBackgroundColor": [
-      "colorTransparent"
+      [
+        "colorTransparent",
+        "Expected a valid CSS color value."
+      ]
     ],
     "$.stripes[].settings.stripeBackgroundColor": [
-      "colorTransparent"
+      [
+        "colorTransparent",
+        "Expected a valid CSS color value."
+      ]
     ],
     "$.stripes[].structures[].columns[].containers[].blocks[]|0.settings.backgroundColor": [
-      "colorTransparent"
+      [
+        "colorTransparent",
+        "Expected a valid CSS color value."
+      ]
     ],
     "$.stripes[].structures[].columns[].containers[].blocks[]|0.settings.fixedHeight": [
-      "fixedHeightTarget"
+      [
+        "fixedHeightTarget",
+        "At least one fixed-height target must be provided."
+      ]
     ],
     "$.stripes[].structures[].columns[].containers[].blocks[]|0.settings.fontColor": [
-      "color"
+      [
+        "color",
+        "Expected a valid non-transparent CSS color value."
+      ]
     ],
     "$.stripes[].structures[].columns[].containers[].blocks[]|2.settings.customThumbnail.src": [
-      "nonemptyThumbnail"
+      [
+        "nonemptyThumbnail",
+        "Custom thumbnail path cannot be empty."
+      ]
     ],
     "$.stripes[].structures[].columns[].containers[].blocks[]|3.settings.backgroundColor": [
-      "colorTransparent"
+      [
+        "colorTransparent",
+        "Expected a valid CSS color value."
+      ]
     ],
     "$.stripes[].structures[].columns[].containers[].blocks[]|3.settings.digitsAdvancedColorSettings.days": [
-      "color"
+      [
+        "color",
+        "Expected a valid non-transparent CSS color value."
+      ]
     ],
     "$.stripes[].structures[].columns[].containers[].blocks[]|3.settings.digitsAdvancedColorSettings.hours": [
-      "color"
+      [
+        "color",
+        "Expected a valid non-transparent CSS color value."
+      ]
     ],
     "$.stripes[].structures[].columns[].containers[].blocks[]|3.settings.digitsAdvancedColorSettings.minutes": [
-      "color"
+      [
+        "color",
+        "Expected a valid non-transparent CSS color value."
+      ]
     ],
     "$.stripes[].structures[].columns[].containers[].blocks[]|3.settings.digitsAdvancedColorSettings.seconds": [
-      "color"
+      [
+        "color",
+        "Expected a valid non-transparent CSS color value."
+      ]
     ],
     "$.stripes[].structures[].columns[].containers[].blocks[]|3.settings.digitsFontColor": [
-      "color"
+      [
+        "color",
+        "Expected a valid non-transparent CSS color value."
+      ]
     ],
     "$.stripes[].structures[].columns[].containers[].blocks[]|3.settings.labelsAdvancedColorSettings.days": [
-      "color"
+      [
+        "color",
+        "Expected a valid non-transparent CSS color value."
+      ]
     ],
     "$.stripes[].structures[].columns[].containers[].blocks[]|3.settings.labelsAdvancedColorSettings.hours": [
-      "color"
+      [
+        "color",
+        "Expected a valid non-transparent CSS color value."
+      ]
     ],
     "$.stripes[].structures[].columns[].containers[].blocks[]|3.settings.labelsAdvancedColorSettings.minutes": [
-      "color"
+      [
+        "color",
+        "Expected a valid non-transparent CSS color value."
+      ]
     ],
     "$.stripes[].structures[].columns[].containers[].blocks[]|3.settings.labelsAdvancedColorSettings.seconds": [
-      "color"
+      [
+        "color",
+        "Expected a valid non-transparent CSS color value."
+      ]
     ],
     "$.stripes[].structures[].columns[].containers[].blocks[]|3.settings.labelsFontColor": [
-      "color"
+      [
+        "color",
+        "Expected a valid non-transparent CSS color value."
+      ]
     ],
     "$.stripes[].structures[].columns[].containers[].blocks[]|3.settings.separatorFontColor": [
-      "color"
+      [
+        "color",
+        "Expected a valid non-transparent CSS color value."
+      ]
     ],
     "$.stripes[].structures[].columns[].containers[].blocks[]|4.settings|0.backgroundColor": [
-      "colorTransparent"
+      [
+        "colorTransparent",
+        "Expected a valid CSS color value."
+      ]
     ],
     "$.stripes[].structures[].columns[].containers[].blocks[]|4.settings|1.backgroundColor": [
-      "colorTransparent"
+      [
+        "colorTransparent",
+        "Expected a valid CSS color value."
+      ]
     ],
     "$.stripes[].structures[].columns[].containers[].blocks[]|6.settings.backgroundColor": [
-      "colorTransparent"
+      [
+        "colorTransparent",
+        "Expected a valid CSS color value."
+      ]
     ],
     "$.stripes[].structures[].columns[].containers[].blocks[]|6.settings.blockBackgroundColor": [
-      "colorTransparent"
+      [
+        "colorTransparent",
+        "Expected a valid CSS color value."
+      ]
     ],
     "$.stripes[].structures[].columns[].containers[].blocks[]|6.settings.border.bottom.color": [
-      "colorTransparent"
+      [
+        "colorTransparent",
+        "Expected a valid CSS color value."
+      ]
     ],
     "$.stripes[].structures[].columns[].containers[].blocks[]|6.settings.border.left.color": [
-      "colorTransparent"
+      [
+        "colorTransparent",
+        "Expected a valid CSS color value."
+      ]
     ],
     "$.stripes[].structures[].columns[].containers[].blocks[]|6.settings.border.right.color": [
-      "colorTransparent"
+      [
+        "colorTransparent",
+        "Expected a valid CSS color value."
+      ]
     ],
     "$.stripes[].structures[].columns[].containers[].blocks[]|6.settings.border.top.color": [
-      "colorTransparent"
+      [
+        "colorTransparent",
+        "Expected a valid CSS color value."
+      ]
     ],
     "$.stripes[].structures[].columns[].containers[].blocks[]|6.settings.fontColor": [
-      "color"
+      [
+        "color",
+        "Expected a valid non-transparent CSS color value."
+      ]
     ],
     "$.stripes[].structures[].columns[].containers[].blocks[]|6.settings.fontFamily": [
-      "nonblank"
+      [
+        "nonblank",
+        "Font family cannot be blank."
+      ]
     ],
     "$.stripes[].structures[].columns[].containers[].blocks[]|7.settings.backgroundColor": [
-      "colorTransparent"
+      [
+        "colorTransparent",
+        "Expected a valid CSS color value."
+      ]
     ],
     "$.stripes[].structures[].columns[].containers[].blocks[]|7.settings.border.color": [
-      "color"
+      [
+        "color",
+        "Expected a valid non-transparent CSS color value."
+      ]
     ],
     "$.stripes[].structures[].columns[].containers[].blocks[]|7.settings.mobileBorder.color": [
-      "color"
+      [
+        "color",
+        "Expected a valid non-transparent CSS color value."
+      ]
     ],
     "$.stripes[].structures[].columns[].containers[].blocks[]|8.settings.colors|0.link": [
-      "color"
+      [
+        "color",
+        "Expected a valid non-transparent CSS color value."
+      ]
     ],
     "$.stripes[].structures[].columns[].containers[].blocks[]|8.settings.fontFamily": [
-      "nonblank"
+      [
+        "nonblank",
+        "Font family cannot be blank."
+      ]
     ],
     "$.stripes[].structures[].columns[].containers[].blocks[]|8.settings.items[].colors.background": [
-      "colorTransparent"
+      [
+        "colorTransparent",
+        "Expected a valid CSS color value."
+      ]
     ],
     "$.stripes[].structures[].columns[].containers[].blocks[]|8.settings.items[].colors.link": [
-      "color"
+      [
+        "color",
+        "Expected a valid non-transparent CSS color value."
+      ]
     ],
     "$.stripes[].structures[].columns[].containers[].blocks[]|8.settings.separator.color": [
-      "color"
+      [
+        "color",
+        "Expected a valid non-transparent CSS color value."
+      ]
     ],
     "$.stripes[].structures[].columns[].containers[].blocks[]|9.settings": [
-      "emptySettings"
+      [
+        "emptySettings",
+        "Unknown block settings are not supported."
+      ]
     ],
     "$.stripes[].structures[].columns[].containers[].settings.backgroundColor": [
-      "colorTransparent"
+      [
+        "colorTransparent",
+        "Expected a valid CSS color value."
+      ]
     ],
     "$.stripes[].structures[].columns[].containers[].settings.border.bottom.color": [
-      "colorTransparent"
+      [
+        "colorTransparent",
+        "Expected a valid CSS color value."
+      ]
     ],
     "$.stripes[].structures[].columns[].containers[].settings.border.left.color": [
-      "colorTransparent"
+      [
+        "colorTransparent",
+        "Expected a valid CSS color value."
+      ]
     ],
     "$.stripes[].structures[].columns[].containers[].settings.border.right.color": [
-      "colorTransparent"
+      [
+        "colorTransparent",
+        "Expected a valid CSS color value."
+      ]
     ],
     "$.stripes[].structures[].columns[].containers[].settings.border.top.color": [
-      "colorTransparent"
+      [
+        "colorTransparent",
+        "Expected a valid CSS color value."
+      ]
     ],
     "$.stripes[].structures[].columns[].containers[].settings.darkTheme.backgroundColor": [
-      "colorTransparent"
+      [
+        "colorTransparent",
+        "Expected a valid CSS color value."
+      ]
     ],
     "$.stripes[].structures[].columns[].containers[].settings.darkTheme.backgroundImage": [
-      "normalizedNonempty"
+      [
+        "normalizedNonempty",
+        "Expected a non-empty normalized background image path."
+      ]
     ],
     "$.stripes[].structures[].settings.backgroundColor": [
-      "colorTransparent"
+      [
+        "colorTransparent",
+        "Expected a valid CSS color value."
+      ]
     ],
     "$.stripes[].structures[].settings.border.bottom.color": [
-      "colorTransparent"
+      [
+        "colorTransparent",
+        "Expected a valid CSS color value."
+      ]
     ],
     "$.stripes[].structures[].settings.border.left.color": [
-      "colorTransparent"
+      [
+        "colorTransparent",
+        "Expected a valid CSS color value."
+      ]
     ],
     "$.stripes[].structures[].settings.border.right.color": [
-      "colorTransparent"
+      [
+        "colorTransparent",
+        "Expected a valid CSS color value."
+      ]
     ],
     "$.stripes[].structures[].settings.border.top.color": [
-      "colorTransparent"
+      [
+        "colorTransparent",
+        "Expected a valid CSS color value."
+      ]
     ],
     "$.stripes[].structures[].settings.darkTheme.backgroundColor": [
-      "colorTransparent"
+      [
+        "colorTransparent",
+        "Expected a valid CSS color value."
+      ]
     ],
     "$.stripes[].structures[].settings.darkTheme.backgroundImage": [
-      "normalizedNonempty"
+      [
+        "normalizedNonempty",
+        "Expected a non-empty normalized background image path."
+      ]
     ]
   },
   "rules": {
@@ -594,6 +1044,20 @@ var RULE_TABLE = {
     ],
     "$.stripes[].structures[].settings.backgroundImage.sizeY": [
       "backgroundSize"
+    ]
+  },
+  "inputTypes": {
+    "$.stripes[].settings.backgroundImage.repeat": [
+      "boolean",
+      "string"
+    ],
+    "$.stripes[].structures[].columns[].containers[].settings.backgroundImage.repeat": [
+      "boolean",
+      "string"
+    ],
+    "$.stripes[].structures[].settings.backgroundImage.repeat": [
+      "boolean",
+      "string"
     ]
   }
 };

@@ -3,6 +3,8 @@
 Validation runs the editor's own Document State rules bundled into the SDK. No schema download
 or initialization is required. `bundle.json.editorValidator` records the editor revision.
 `finish()` validates edits against the acquired input; create mode validates a new document.
+Without `--input`, the module receives `context.idFactory`, the random source that every node
+it creates through `createDocument`, `createEmailBuilder` or `createEmailFromDraft` needs.
 The service also validates its deployed revision and applies the write to its live state;
 local success does not establish persistence.
 
@@ -65,6 +67,11 @@ derive `updatedHtml` from the block's fresh acquired `content`, preserving unrel
 text, attributes, links, and literal merge expressions. Use `node.setHtml(updatedHtml)` and
 assert `node.inspect().element.content === updatedHtml`. This edits native JSON block content
 through the SDK; continue through the native-model persistence workflow.
+
+Every new or changed link in text-block `content` carries `target="_blank"`, whether supplied
+through `setContent()`, `setHtml()`, or `setTextLink()` (`set: {href, target: "_blank"}`).
+Validation rejects such a link without it (`TEXT_LINK_TARGET_MISSING`); acquired links that
+the edit leaves unchanged are not affected.
 
 Rules for the module:
 

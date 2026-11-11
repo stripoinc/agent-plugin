@@ -7,7 +7,9 @@ import {
   fontResourceIssues
 } from "./fonts-82d1d39f0f33.js";
 import {
-  abort
+  abort,
+  contractSchema,
+  resolveSchema
 } from "./contract-79faab52de2a.js";
 import {
   RULE_TABLE
@@ -17,12 +19,8 @@ import {
 } from "./errors-3ee69a7e1eb0.js";
 
 // convo-email-agent/src/sdk/validator/rules.ts
-import catalogData from "./contract-data/catalog.js";
 var custom = (path, message) => ({ path: [...path], code: "custom", message });
 var text = (value) => typeof value === "string" ? value : "";
-function refine(test, message) {
-  return (value, path) => test(value) ? [] : [custom(path, message)];
-}
 var LINK_PREFIXES = {
   site: { test: /^https?:\/\//i, prefix: "http:// or https://", name: "Site", length: (value) => value.toLowerCase().startsWith("https://") ? 8 : 7 },
   anchor: { test: /^#/, prefix: "#", name: "Anchor", length: () => 1 },
@@ -69,31 +67,28 @@ function valueLink(subject) {
     return issues;
   };
 }
+var BLOCK = resolveSchema(contractSchema().definitions.block);
+var BLOCK_KINDS = (BLOCK.oneOf ?? BLOCK.anyOf ?? []).map(resolveSchema).filter((branch) => branch.type !== "null").map((branch) => {
+  const type = resolveSchema(branch.properties.type);
+  return String(type.const ?? type.enum?.[0]);
+});
 var blockKind = (location) => {
   const index = /\.blocks\[\]\|(\d+)/.exec(location)?.[1];
-  return index === void 0 ? void 0 : catalogData.blocks[Number(index)];
+  return index === void 0 ? void 0 : BLOCK_KINDS[Number(index)];
+};
+var REFINES = {
+  nonblank: (value) => typeof value !== "string" || value.trim().length > 0,
+  normalizedNonempty: (value) => typeof value !== "string" || value.length > 0 && value.trim() === value,
+  color: (value) => typeof value !== "string" || isEditorColor(value, false),
+  colorTransparent: (value) => typeof value !== "string" || isEditorColor(value, true),
+  staticColor: (value) => typeof value !== "string" || isStaticThemeColor(value, false),
+  staticColorTransparent: (value) => typeof value !== "string" || isStaticThemeColor(value, true),
+  themeBackground: (value) => typeof value !== "string" || isThemeBackground(value),
+  fixedHeightTarget: (value) => !isObject(value) || value.desktop !== void 0 || value.mobile !== void 0,
+  emptySettings: (value) => !isObject(value) || Object.keys(value).length === 0,
+  nonemptyThumbnail: (value) => value !== ""
 };
 var KINDS = {
-  // Refinements.
-  nonblank: refine((value) => typeof value !== "string" || value.trim().length > 0, "Font family cannot be blank."),
-  normalizedNonempty: refine(
-    (value) => typeof value !== "string" || value.length > 0 && value.trim() === value,
-    "Expected a non-empty value without leading or trailing spaces."
-  ),
-  color: refine((value) => typeof value !== "string" || isEditorColor(value, false), "Expected a valid non-transparent CSS color value."),
-  colorTransparent: refine((value) => typeof value !== "string" || isEditorColor(value, true), "Expected a valid CSS color value."),
-  staticColor: refine((value) => typeof value !== "string" || isStaticThemeColor(value, false), "Expected a valid static non-transparent CSS color value."),
-  staticColorTransparent: refine((value) => typeof value !== "string" || isStaticThemeColor(value, true), "Expected a valid static CSS color value."),
-  themeBackground: refine(
-    (value) => typeof value !== "string" || isThemeBackground(value),
-    "Expected a static solid color or one static CSS gradient followed by a solid fallback."
-  ),
-  fixedHeightTarget: refine(
-    (value) => !isObject(value) || value.desktop !== void 0 || value.mobile !== void 0,
-    "At least one fixed-height target must be provided."
-  ),
-  emptySettings: refine((value) => !isObject(value) || Object.keys(value).length === 0, "Unknown block settings are not supported."),
-  nonemptyThumbnail: refine((value) => value !== "", "Custom thumbnail path cannot be empty."),
   // Object rules.
   fontResources: (value, path) => Array.isArray(value) ? fontResourceIssues(value).map((issue) => custom([...path, ...issue.path], issue.message)) : [],
   structureColumns: (value, path) => {
@@ -208,11 +203,30 @@ var KINDS = {
   canonicalFontResources: () => [],
   dropUndefinedResources: () => []
 };
-var tables = RULE_TABLE;
-for (const table of [tables.refines, tables.rules, tables.transforms]) {
-  for (const kinds of Object.values(table)) for (const kind of kinds) if (!KINDS[kind]) throw new Error("Unported validator rule kind: ".concat(kind));
+var RULES = /* @__PURE__ */ new Map();
+var addRule = (location, rule) => {
+  RULES.set(location, [...RULES.get(location) ?? [], rule]);
+};
+for (const [location, refinements] of Object.entries(RULE_TABLE.refines)) {
+  for (const [kind, message] of refinements) {
+    const test = REFINES[kind];
+    if (!test) throw new Error("Unported validator refinement kind: ".concat(kind));
+    addRule(location, (value, path) => test(value) ? [] : [custom(path, message)]);
+  }
 }
-var locationRules = (location, value, path) => [...tables.refines[location] ?? [], ...tables.rules[location] ?? [], ...tables.transforms[location] ?? []].flatMap((kind) => KINDS[kind](value, path, location));
+for (const table of [RULE_TABLE.rules, RULE_TABLE.transforms]) {
+  for (const [location, kinds] of Object.entries(table)) {
+    for (const kind of kinds) {
+      if (!KINDS[kind]) throw new Error("Unported validator rule kind: ".concat(kind));
+      addRule(location, KINDS[kind]);
+    }
+  }
+}
+var locationRules = (location, value, path) => {
+  const rules = RULES.get(location);
+  if (!rules) return [];
+  return rules.length === 1 ? rules[0](value, path, location) : rules.flatMap((rule) => rule(value, path, location));
+};
 
 export {
   locationRules

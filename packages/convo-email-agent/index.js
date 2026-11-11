@@ -16,7 +16,7 @@ import {
 import {
   createEmailMutationSdk,
   createEmailSdk
-} from "./content-mutations-ebc855083abe.js";
+} from "./edit-4a8ccc56a9a8.js";
 import "./transplant-format-b3ed852356b0.js";
 import {
   summarizeEditorJson
@@ -36,7 +36,7 @@ import {
   validateChange,
   validateEmailDocument,
   validateSnapshot
-} from "./editor-validator-0b64df0adc74.js";
+} from "./content-mutations-fb63277cc72e.js";
 import "./styles-961c8e1b984f.js";
 import "./parse-html-7b561a99741a.js";
 import "./context-92ea7204ec76.js";
@@ -116,14 +116,6 @@ function createBlock(type, input) {
     nodeId: input.id,
     nodeType: type
   }]));
-  const checkKeys = (value, parsed, path) => {
-    if (Array.isArray(value) && Array.isArray(parsed)) value.forEach((item, index) => checkKeys(item, parsed[index], "".concat(path, ".").concat(index)));
-    else if (isObject(value) && isObject(parsed)) for (const key of Object.keys(value)) {
-      if (!Object.hasOwn(parsed, key)) throw new DocumentStateError([{ code: "UNKNOWN_FIELD", stage: "json", input: "target", path: "".concat(path, ".").concat(key), message: "Unknown factory field." }]);
-      checkKeys(value[key], parsed[key], "".concat(path, ".").concat(key));
-    }
-  };
-  checkKeys(block, result.documentState, type);
   return cloneJson(result.documentState);
 }
 function createStripe(input) {
@@ -134,7 +126,7 @@ function createStructure(input, options = {}) {
   const problems = jsonIssues(input);
   if (problems.length) throw new DocumentStateError(problems);
   if (input.columns.some((column) => !Number.isFinite(column.weight) || column.weight <= 0)) throw new Error("Column weights must be positive finite numbers.");
-  const seed = { stripes: [{ structures: [{
+  const seed = { stripes: [{ id: "".concat(input.id, "#stripe"), structures: [{
     id: input.id,
     settings: { ...input.settings, responsiveMobile: input.mobile ?? input.columns.length > 1 },
     columns: input.columns.map((column) => ({ id: column.id, settings: { width: column.weight }, containers: column.containers }))

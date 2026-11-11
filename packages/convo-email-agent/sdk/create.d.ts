@@ -25,6 +25,7 @@ export interface EmailBuilderTheme {
 }
 export interface CreateMinimalEmailSeedOptions {
     theme?: EmailBuilderTheme;
+    /** Random source of every ID the seed or builder generates; creating a node without it fails. */
     idFactory?: IdFactory;
 }
 export interface CreateEmailBuilderOptions extends CreateMinimalEmailSeedOptions {
@@ -41,6 +42,7 @@ export interface CreateEmailFromDraftOptions {
     baselineEmailJson?: unknown;
     /** Assign new structural IDs when copying/rebuilding; defaults to false, preserving supplied IDs. */
     regenerateIds?: boolean;
+    /** Random source of missing and regenerated IDs; a draft that needs one fails without it. */
     idFactory?: IdFactory;
     intent?: ChangeIntent;
 }
@@ -122,7 +124,7 @@ export interface EmailBuilder {
      * finish() removes them and runs the complete change check.
      */
     toJSON(): unknown;
-    /** Open an independent mutation session on a snapshot; subsequent edits do not update this builder. */
+    /** Open an independent mutation session on a snapshot with the builder's idFactory, which new nodes require; subsequent edits do not update this builder. */
     toMutationSdk(): EmailMutationSdkSession;
     /**
      * Remove unused default placeholders, validate, and seal; returns native Document State, not serialized JSON.

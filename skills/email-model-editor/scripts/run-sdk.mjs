@@ -1,4 +1,5 @@
 // src/skill-scripts/email-model-editor/run-sdk.ts
+import { randomUUID } from "node:crypto";
 import path2 from "node:path";
 import { pathToFileURL as pathToFileURL2 } from "node:url";
 import { isDeepStrictEqual as isDeepStrictEqual2 } from "node:util";
@@ -492,14 +493,21 @@ async function main() {
     if (components !== void 0 && !isObject(components)) {
       throw new Error("The script's components export must be an object keyed by component name.");
     }
+    const idFactory = (_seed, isTaken) => {
+      let id = randomUUID();
+      while (isTaken(id)) id = randomUUID();
+      return id;
+    };
     const session = inputJson === void 0 ? void 0 : sdk.createEmailMutationSdk({
       emailJson: inputJson,
-      components
+      components,
+      idFactory
     });
     const changeContext = session ? { email: session.email, skip: (reason) => session.skip(reason), transaction: (callback) => session.transaction(callback) } : {
       email: void 0,
       session,
       sdk,
+      idFactory,
       input: inputJson,
       inputPath,
       outputPath,

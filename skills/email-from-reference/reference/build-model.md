@@ -19,7 +19,7 @@ defines the editor model. Put global styles in `model.settings` and content unde
 The builder supplies omitted node IDs and default settings. Supply the complete intended
 topology, each column's `settings.width` in pixels, and the content of every block:
 
-- Text: `type: "text"` with `content` containing semantic HTML.
+- Text: `type: "text"`, semantic HTML `content`; links get `target="_blank"`.
 - Image: `type: "image"` with `settings.src`; optional `settings.altText.text` and native `settings.link`.
 - Button: `type: "button"` with `settings.text` and native `settings.link`, such as
   `{ "type": "site", "value": "https://example.com" }` or `{ "type": "email", "value": "mailto:help@example.com" }`.
@@ -79,7 +79,7 @@ Raw JSON drafts require explicit stacking. Correct incompatible settings in the 
 Menu and social arrays use explicit collection methods. Timer/video changes that require an
 unavailable preview fail rather than fabricate assets. Preserve supplied native values and
 resources. For a rebuild, use the acquired target as `baselineEmailJson`, or use
-`createDocument({current})`.
+`createDocument({current, idFactory: context.idFactory})`.
 Creation and editing use the same current/target preparation and loss
 guards. The successful result is the normalized validated JSON; failed preparation removes
 stale output. An optional encoded-model preflight is stronger local evidence, while a server
@@ -113,7 +113,7 @@ defines external metadata support. Use `email-model-editor` for bounded metadata
 
 Prefer semantic text, image, button, spacer, and social blocks for newly drafted content. Preserve other
 schema-valid native blocks from the reference; do not replace editable content with newly authored
-raw HTML blocks. Text-block `content` is limited to the semantic markup needed inside that block.
+raw HTML blocks. Text-block `content` holds only the semantic markup it needs.
 
 Build a complete email. In Exact, preserve the source's intentional content and desktop/mobile
 structure; do not add a new section or CTA merely to improve the design. In Tailored and Creative,
@@ -157,7 +157,7 @@ node <skill-dir>/scripts/create-from-brief.mjs \
 ```
 
 For a full rebuild, acquire the target before building and add `--baseline <target-model.json>`
-to the command. Pass its untouched, complete native model. This allows unchanged imported
+with its untouched, complete native model. This allows unchanged imported
 title/preheader text above 500 UTF-16 code units while still rejecting changed text above the
 limit. For a new email, omit `--baseline`; do not use a reference as the target baseline.
 

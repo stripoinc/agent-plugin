@@ -52,11 +52,16 @@ function nodeCapability(kind) {
   const definition = kind in blockKinds ? "".concat(kind, "Block") : kind;
   return nodes.find((node) => node.schemaDefinition === definition);
 }
+var resolvedNodes = /* @__PURE__ */ new WeakMap();
 function resolveSchema(node) {
   if (!node.$ref) return node;
+  const cached = resolvedNodes.get(node);
+  if (cached) return cached;
   const resolved = node.$ref.slice(2).split("/").reduce((value, key) => isObject(value) ? value[key] : void 0, schema);
   if (!isObject(resolved)) throw new Error("Unresolved contract reference: ".concat(node.$ref));
-  return { ...resolveSchema(resolved), ...Object.fromEntries(Object.entries(node).filter(([key]) => key !== "$ref")) };
+  const result = Object.freeze({ ...resolveSchema(resolved), ...Object.fromEntries(Object.entries(node).filter(([key]) => key !== "$ref")) });
+  resolvedNodes.set(node, result);
+  return result;
 }
 function nodeSchema(kind) {
   const definition = kind in blockKinds ? "".concat(kind, "Block") : kind;
@@ -69,6 +74,8 @@ function contractDefaults(kind) {
   const defaults = catalogData.defaults[name];
   return isObject(defaults) ? cloneJson(defaults) : {};
 }
+var declaredProperties = /* @__PURE__ */ new WeakMap();
+var mergedBranches = /* @__PURE__ */ new WeakMap();
 function schemaForValue(node, value) {
   const resolved = resolveSchema(node);
   const branches = resolved.oneOf ?? resolved.anyOf;
@@ -81,10 +88,22 @@ function schemaForValue(node, value) {
       return !Object.hasOwn(value, key) || property.const === void 0 && !property.enum || (property.const !== void 0 ? property.const === value[key] : property.enum?.includes(value[key]));
     });
   });
-  const declared = Object.assign({}, ...variants.map((branch) => branch.properties ?? {}));
+  const declared = declaredProperties.get(resolved) ?? Object.freeze(Object.assign({}, ...variants.map((branch) => branch.properties ?? {})));
+  declaredProperties.set(resolved, declared);
   if (candidates.length === 1) {
     const chosen = schemaForValue(candidates[0], value);
-    return chosen.properties ? { ...chosen, properties: { ...declared, ...chosen.properties } } : chosen;
+    if (!chosen.properties) return chosen;
+    let merged = mergedBranches.get(resolved);
+    if (!merged) {
+      merged = /* @__PURE__ */ new WeakMap();
+      mergedBranches.set(resolved, merged);
+    }
+    let result = merged.get(chosen);
+    if (!result) {
+      result = Object.freeze({ ...chosen, properties: Object.freeze({ ...declared, ...chosen.properties }) });
+      merged.set(chosen, result);
+    }
+    return result;
   }
   return { ...resolved, properties: candidates.length ? Object.assign({}, ...candidates.map((branch) => branch.properties ?? {})) : declared };
 }
@@ -119,26 +138,37 @@ function matchesType(type, value) {
       return typeof value === type;
   }
 }
-var isNullBranch = (node) => resolveSchema(node).type === "null";
-function discriminator(branches) {
-  return Object.keys(branches[0]?.properties ?? {}).find((key) => {
-    const values = branches.map((branch) => branch.properties?.[key] ? allowedValues(branch.properties[key]) : []);
-    const all = values.flat();
-    return values.every((list) => list.length > 0) && new Set(all).size === all.length;
-  });
-}
+var INPUT_TYPES = RULE_TABLE.inputTypes;
 function allowedValues(property) {
   const resolved = resolveSchema(property);
   return resolved.const !== void 0 ? [resolved.const] : resolved.enum ?? [];
 }
-function checkUnion(branches, discriminated, value, path, location, rules) {
-  const resolved = branches.map(resolveSchema);
-  const key = isObject(value) ? discriminator(resolved) : void 0;
+var unions = /* @__PURE__ */ new WeakMap();
+function unionOf(schema2, branches) {
+  const cached = unions.get(schema2);
+  if (cached) return cached;
+  const nonNull = branches.filter((branch) => resolveSchema(branch).type !== "null");
+  const resolved = nonNull.map(resolveSchema);
+  const key = Object.keys(resolved[0]?.properties ?? {}).find((name) => {
+    const values = resolved.map((branch) => branch.properties?.[name] ? allowedValues(branch.properties[name]) : []);
+    const all = values.flat();
+    return values.every((list) => list.length > 0) && new Set(all).size === all.length;
+  });
+  const union = {
+    nullable: nonNull.length < branches.length,
+    branches: nonNull,
+    key,
+    allowed: key === void 0 ? [] : resolved.map((branch) => allowedValues(branch.properties[key]))
+  };
+  unions.set(schema2, union);
+  return union;
+}
+function checkUnion({ branches, key, allowed }, discriminated, value, path, location, rules) {
   if (key !== void 0 && isObject(value)) {
-    const index = resolved.findIndex((branch) => allowedValues(branch.properties[key]).includes(value[key]));
+    const index = allowed.findIndex((values) => values.includes(value[key]));
     if (index < 0) {
-      const allowed = resolved.flatMap((branch) => allowedValues(branch.properties[key]));
-      return [{ path: [...path, key], code: discriminated ? "invalid_union" : "invalid_value", values: allowed, message: "must be one of ".concat(quoteAll(allowed)) }];
+      const all = allowed.flat();
+      return [{ path: [...path, key], code: discriminated ? "invalid_union" : "invalid_value", values: all, message: "must be one of ".concat(quoteAll(all)) }];
     }
     return checkValue(branches[index], value, path, "".concat(location, "|").concat(index), rules);
   }
@@ -156,12 +186,12 @@ function checkValue(node, value, path, location, rules) {
   const schema2 = resolveSchema(node);
   const branches = schema2.oneOf ?? schema2.anyOf;
   if (branches) {
-    const nonNull = branches.filter((branch) => !isNullBranch(branch));
-    if (value === null && nonNull.length < branches.length) return [];
-    if (nonNull.length === 1) return checkValue(nonNull[0], value, path, location, rules);
-    return finish(checkUnion(nonNull, schema2.oneOf !== void 0, value, path, location, rules), location, value, path, rules);
+    const union = unionOf(schema2, branches);
+    if (value === null && union.nullable) return [];
+    if (union.branches.length === 1) return checkValue(union.branches[0], value, path, location, rules);
+    return finish(checkUnion(union, schema2.oneOf !== void 0, value, path, location, rules), location, value, path, rules);
   }
-  const types = schema2.type === void 0 ? void 0 : Array.isArray(schema2.type) ? schema2.type : [schema2.type];
+  const types = INPUT_TYPES[location] ?? (schema2.type === void 0 ? void 0 : Array.isArray(schema2.type) ? schema2.type : [schema2.type]);
   if (value === null && types?.includes("null")) return [];
   if (types && !types.some((type) => matchesType(type, value))) {
     const expected = types.filter((type) => type !== "null").map((type) => TYPE_NAMES[type] ?? type).join(" | ");
@@ -195,7 +225,7 @@ function checkValue(node, value, path, location, rules) {
     const unknown = [];
     for (const [key, child] of Object.entries(value)) {
       if (child === void 0) continue;
-      const property = schema2.properties?.[key];
+      const property = schema2.properties && Object.hasOwn(schema2.properties, key) ? schema2.properties[key] : void 0;
       if (property) issues.push(...checkValue(property, child, [...path, key], "".concat(location, ".").concat(key), rules));
       else if (isObject(schema2.additionalProperties)) issues.push(...checkValue(schema2.additionalProperties, child, [...path, key], "".concat(location, ".*"), rules));
       else if (schema2.additionalProperties === false) unknown.push(key);
@@ -227,6 +257,7 @@ function blockRoot() {
 export {
   getContract,
   getJsonSchema,
+  contractSchema,
   getCapabilities,
   nodeCapability,
   resolveSchema,

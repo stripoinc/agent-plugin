@@ -1,4 +1,5 @@
 // src/skill-scripts/email-from-reference/create-from-brief.ts
+import { randomUUID } from "node:crypto";
 import { readFileSync as readFileSync2, rmSync as rmSync2 } from "node:fs";
 import path2 from "node:path";
 import { fileURLToPath as fileURLToPath2 } from "node:url";
@@ -545,7 +546,7 @@ async function main() {
     const typedBrief = brief;
     typedBrief.message.referenceMode = typedBrief.message.referenceMode === "copy-action" ? "tailored" : typedBrief.message.referenceMode ?? "creative";
     const sdk = await loadSdk(sdkPath);
-    const runSeed = `${Date.now().toString(36)}-${Math.random().toString(36).slice(2)}`;
+    const runSeed = randomUUID();
     const baselineEmailJson = baselinePath === void 0 ? void 0 : readJson(baselinePath);
     const baselineStripes = isObject3(baselineEmailJson) && Array.isArray(baselineEmailJson.stripes) ? baselineEmailJson.stripes : [];
     const creationModel = structuredClone(typedBrief.model);

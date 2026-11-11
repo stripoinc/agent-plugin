@@ -100,7 +100,7 @@
                     "blocks": [
                       {
                         "type": "text",
-                        "content": "<p>If you did not request this email, you can ignore it.</p><p>Verified company address</p><p><a id=\"unsubscribe\" href=\"{{unsubscribe_url}}\">Unsubscribe</a></p>"
+                        "content": "<p>If you did not request this email, you can ignore it.</p><p>Verified company address</p><p><a id=\"unsubscribe\" href=\"{{unsubscribe_url}}\" target=\"_blank\">Unsubscribe</a></p>"
                       }
                     ]
                   }

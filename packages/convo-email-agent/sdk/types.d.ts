@@ -477,6 +477,12 @@ export interface CreateEmailSdkOptions {
     /** Preloaded components keyed by library-relative name for string-based insert(); when supplied, components is ignored. */
     library?: ReadonlyMap<string, EmailLibraryComponent>;
     components?: ReadonlyMap<string, EmailComponent> | Record<string, EmailComponent>;
+    /**
+     * New node IDs from a random source (the skill runners build one on randomUUID). Every session
+     * needs it for its first new node (insert, append, repeat, duplicate), so sessions started from
+     * one document never issue the same IDs; a session without new nodes may omit it.
+     * createEmailMutationSdk requires it in its type.
+     */
     idFactory?: IdFactory;
     /** Used by create/import wrappers; an edit otherwise uses emailJson as current. */
     current?: unknown;

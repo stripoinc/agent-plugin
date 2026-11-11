@@ -8,19 +8,24 @@ import {
   EditorJsonMutationCore,
   EditorJsonMutationError,
   EmailSdkSchemaError,
-  uniqueUuidFromSeed
+  issueNodeId
 } from "./ids-a682767b7fbb.js";
 import {
   DocumentStateError,
+  assertSafeHref,
   collectNodeIndex,
   hasLink,
   isSupportedThemeReset,
   jsonIssues,
   linkHostContains,
+  mutateAnchor,
+  normalizeText,
+  replaceVisibleText,
   requireValid,
+  stripTags,
   validateChange,
   validateSnapshot
-} from "./editor-validator-0b64df0adc74.js";
+} from "./content-mutations-fb63277cc72e.js";
 import {
   buildStyleValue,
   nodeStyleSpec,
@@ -66,99 +71,6 @@ import {
   stableJson
 } from "./errors-3ee69a7e1eb0.js";
 
-// convo-email-agent/src/sdk/content-mutations.ts
-var ANCHOR_PATTERN = /<a\b([^>]*)>([\s\S]*?)<\/a>/giu;
-var HREF_SCHEME = /^([a-zA-Z][a-zA-Z0-9+.-]*):/u;
-var ALLOWED_HREF_SCHEMES = /* @__PURE__ */ new Set(["http", "https", "mailto", "tel"]);
-function normalizeText(value) {
-  return value.replace(/\s+/g, " ").trim();
-}
-function stripTags(html) {
-  return html.replace(/<[^>]*>/gu, "");
-}
-function assertSafeHref(href) {
-  const trimmed = href.trim();
-  const match = HREF_SCHEME.exec(trimmed);
-  if (match !== null && !ALLOWED_HREF_SCHEMES.has(match[1].toLowerCase())) {
-    throw new EmailSdkError('Unsafe href scheme "'.concat(match[1], '". Allowed schemes: http, https, mailto, tel.'));
-  }
-}
-function attrValue(rawAttrs, name) {
-  const pattern = new RegExp("".concat(name, "\\s*=\\s*(?:\"([^\"]*)\"|'([^']*)'|([^\\s>]+))"), "iu");
-  const match = pattern.exec(rawAttrs);
-  return match === null ? void 0 : match[1] ?? match[2] ?? match[3];
-}
-function setAttr(rawAttrs, name, value) {
-  const escaped = value.replaceAll('"', "&quot;");
-  const pattern = new RegExp("(".concat(name, "\\s*=\\s*)(?:\"[^\"]*\"|'[^']*'|[^\\s>]+)"), "iu");
-  if (pattern.test(rawAttrs)) return rawAttrs.replace(pattern, '$1"'.concat(escaped, '"'));
-  return "".concat(rawAttrs, " ").concat(name, '="').concat(escaped, '"');
-}
-function replaceVisibleText(content, matchText, replace, occurrence = 0) {
-  if (!Number.isInteger(occurrence) || occurrence < 0) {
-    throw new EmailSdkError("replaceText occurrence must be a non-negative integer.");
-  }
-  const runs = [];
-  const tagPattern = /<[^>]*>/gu;
-  let cursor = 0;
-  for (const tag of content.matchAll(tagPattern)) {
-    const tagStart = tag.index ?? 0;
-    if (tagStart > cursor) runs.push({ start: cursor, end: tagStart, text: content.slice(cursor, tagStart) });
-    cursor = tagStart + tag[0].length;
-  }
-  if (cursor < content.length) runs.push({ start: cursor, end: content.length, text: content.slice(cursor) });
-  const matches = [];
-  for (const run of runs) {
-    let offset = run.text.indexOf(matchText);
-    while (offset !== -1) {
-      matches.push({ start: run.start + offset, end: run.start + offset + matchText.length });
-      offset = run.text.indexOf(matchText, offset + Math.max(1, matchText.length));
-    }
-  }
-  if (matches.length === 0) {
-    throw new EmailSdkError('Text "'.concat(matchText, '" was not found inside one visible text run.'));
-  }
-  if (occurrence >= matches.length) {
-    throw new EmailSdkError('Text "'.concat(matchText, '" occurrence ').concat(occurrence, " is out of range; found ").concat(matches.length, "."));
-  }
-  const span = matches[occurrence];
-  return "".concat(content.slice(0, span.start)).concat(replace).concat(content.slice(span.end));
-}
-function mutateAnchor(content, mutation) {
-  const candidates = [];
-  let ordinal = 0;
-  for (const match of content.matchAll(ANCHOR_PATTERN)) {
-    const attrs2 = match[1] ?? "";
-    const inner2 = match[2] ?? "";
-    const href = attrValue(attrs2, "href");
-    if (mutation.match.href !== void 0 && href !== mutation.match.href) {
-      ordinal += 1;
-      continue;
-    }
-    if (mutation.match.text !== void 0 && normalizeText(stripTags(inner2)) !== normalizeText(mutation.match.text)) {
-      ordinal += 1;
-      continue;
-    }
-    const start = match.index ?? 0;
-    candidates.push({ index: ordinal, full: match[0], attrs: attrs2, inner: inner2, start, end: start + match[0].length });
-    ordinal += 1;
-  }
-  if (candidates.length === 0) throw new EmailSdkError("No text anchor matched.");
-  if (candidates.length > 1) throw new EmailSdkError("Text anchor match is ambiguous: ".concat(candidates.length, " anchors matched."));
-  const candidate = candidates[0];
-  let attrs = candidate.attrs;
-  if (mutation.set.href !== void 0) {
-    assertSafeHref(mutation.set.href);
-    attrs = setAttr(attrs, "href", mutation.set.href);
-  }
-  if (mutation.set.target !== void 0) {
-    attrs = setAttr(attrs, "target", mutation.set.target);
-  }
-  const inner = mutation.set.text ?? candidate.inner;
-  const next = "<a".concat(attrs, ">").concat(inner, "</a>");
-  return "".concat(content.slice(0, candidate.start)).concat(next).concat(content.slice(candidate.end));
-}
-
 // convo-email-agent/src/sdk/edit.ts
 var SETTER_HINTS = "Hints: text block \u2192 setContent(); button \u2192 setText()/setHref(); image \u2192 setSrc()/setHref()/setAlt().";
 function assertEditorEmailJson(value) {
@@ -203,10 +115,11 @@ function createEmailSdk(options) {
   const snapshotValidation = validateSnapshot(options.emailJson);
   if (!snapshotValidation.success && snapshotValidation.issues.some((issue) => issue.stage === "json")) requireValid(snapshotValidation);
   let fallbackOrdinal = 0;
-  const generateUniqueId = (seed, isTaken) => options.idFactory?.(seed, isTaken) ?? uniqueUuidFromSeed(seed, isTaken);
+  const reservedIds = /* @__PURE__ */ new Set([...collectAllIds(options.emailJson), ...collectAllIds(options.current)]);
+  const generateUniqueId = (seed, isTaken) => issueNodeId(options.idFactory, seed, (id) => reservedIds.has(id) || isTaken(id));
   const sdk = new EditorJsonMutationCore(
     options.emailJson,
-    () => generateUniqueId("fallback#".concat(fallbackOrdinal++), () => false),
+    () => generateUniqueId("fallback#".concat(fallbackOrdinal++), (id) => sdk.hasElement(id)),
     { current: options.current ?? options.emailJson }
   );
   const initialMetadata = sdk.snapshot().metadata;
@@ -628,7 +541,7 @@ function createEmailSdk(options) {
     const result = cloneJson(current);
     const description = schemaForValue(schema, { ...current, ...patch });
     for (const [key, value] of Object.entries(patch)) {
-      const property = description.properties?.[key];
+      const property = description.properties && Object.hasOwn(description.properties, key) ? description.properties[key] : void 0;
       if (!property) throw new EmailSdkError("Unknown settings key: ".concat(path, ".").concat(key, "."));
       if (resolveSchema(property).readOnly) throw new EmailSdkError("Read-only settings key: ".concat(path, ".").concat(key, "."));
       if (key === "networks" || key === "items") throw new EmailSdkError("".concat(path, ".").concat(key, " must be changed with collection methods."));

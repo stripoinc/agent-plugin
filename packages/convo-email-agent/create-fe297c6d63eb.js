@@ -1,11 +1,11 @@
 import {
-  createEmailMutationSdk
-} from "./content-mutations-ebc855083abe.js";
+  createEmailSdk
+} from "./edit-4a8ccc56a9a8.js";
 import {
   EditorJsonMutationCore,
   EmailSdkSchemaError,
   assertValidEmailModel,
-  uniqueUuidFromSeed
+  issueNodeId
 } from "./ids-a682767b7fbb.js";
 import {
   DocumentStateError,
@@ -13,7 +13,7 @@ import {
   jsonIssues,
   validateBlock,
   validateEmailDocument
-} from "./editor-validator-0b64df0adc74.js";
+} from "./content-mutations-fb63277cc72e.js";
 import {
   contractDefaults
 } from "./contract-79faab52de2a.js";
@@ -116,7 +116,7 @@ function collectIds(value) {
 function idIssuer(idFactory, initialTaken = []) {
   const issued = new Set(initialTaken);
   return (seed) => {
-    const id = idFactory?.(seed, (candidate) => issued.has(candidate)) ?? uniqueUuidFromSeed("email-builder:".concat(seed), (candidate) => issued.has(candidate));
+    const id = issueNodeId(idFactory, seed, (candidate) => issued.has(candidate));
     if (issued.has(id)) {
       throw new EmailSdkError('idFactory returned duplicate id "'.concat(id, '" for seed "').concat(seed, '".'));
     }
@@ -654,7 +654,7 @@ var minimalEmailComponents = Object.freeze({
       "footer",
       [
         textBlock("minimal-footer-legal", "<p>You are receiving this email because you subscribed.</p>"),
-        textBlock("minimal-footer-unsubscribe", '<p><a href="https://example.com/unsubscribe">Unsubscribe</a></p>')
+        textBlock("minimal-footer-unsubscribe", '<p><a href="https://example.com/unsubscribe" target="_blank">Unsubscribe</a></p>')
       ]
     ),
     slots: Object.freeze([
@@ -790,7 +790,7 @@ function createEmailBuilder(options = {}) {
         assertNonEmptyString(sectionOptions.unsubscribeHref, "Footer unsubscribeHref");
         blocks.push(textBlock(
           issueId("footer-section:".concat(sectionCount + 1, ":unsubscribe-block")),
-          '<p><a href="'.concat(sectionOptions.unsubscribeHref, '">Unsubscribe</a></p>'),
+          '<p><a href="'.concat(sectionOptions.unsubscribeHref, '" target="_blank">Unsubscribe</a></p>'),
           theme
         ));
       }
@@ -821,10 +821,7 @@ function createEmailBuilder(options = {}) {
       return validateAndClone("snapshot");
     },
     toMutationSdk() {
-      return createEmailMutationSdk({
-        emailJson: builder.toJSON(),
-        idFactory: options.idFactory
-      });
+      return createEmailSdk({ emailJson: builder.toJSON(), idFactory: options.idFactory });
     },
     finish() {
       assertNotSealed();

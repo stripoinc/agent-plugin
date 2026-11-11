@@ -32,6 +32,7 @@ import {
   collectSocialDocumentIssues
 } from "./social-f4a8e0da8c68.js";
 import {
+  EmailSdkError,
   LINE_HEIGHT_HINT,
   cloneJson,
   deepFreeze,
@@ -442,6 +443,106 @@ function releaseCopiedFontColors(value) {
   for (const child of Object.values(value)) releaseCopiedFontColors(child);
 }
 
+// convo-email-agent/src/sdk/content-mutations.ts
+var ANCHOR_PATTERN = /<a\b([^>]*)>([\s\S]*?)<\/a>/giu;
+var HREF_SCHEME = /^([a-zA-Z][a-zA-Z0-9+.-]*):/u;
+var ALLOWED_HREF_SCHEMES = /* @__PURE__ */ new Set(["http", "https", "mailto", "tel"]);
+function normalizeText(value) {
+  return value.replace(/\s+/g, " ").trim();
+}
+function stripTags(html) {
+  return html.replace(/<[^>]*>/gu, "");
+}
+function assertSafeHref(href) {
+  const trimmed = href.trim();
+  const match = HREF_SCHEME.exec(trimmed);
+  if (match !== null && !ALLOWED_HREF_SCHEMES.has(match[1].toLowerCase())) {
+    throw new EmailSdkError('Unsafe href scheme "'.concat(match[1], '". Allowed schemes: http, https, mailto, tel.'));
+  }
+}
+var ANCHOR_OPEN_TAG = /<a\b([^>]*)>/giu;
+function linksWithoutBlankTarget(content, acquired) {
+  return [...content.matchAll(ANCHOR_OPEN_TAG)].filter((match) => !acquired.has(match[0]) && attrValue(match[1], "href") !== void 0 && attrValue(match[1], "target")?.trim().toLowerCase() !== "_blank").map((match) => match[0]);
+}
+function anchorOpenTags(content) {
+  return [...content.matchAll(ANCHOR_OPEN_TAG)].map((match) => match[0]);
+}
+function attrValue(rawAttrs, name) {
+  const pattern = new RegExp("".concat(name, "\\s*=\\s*(?:\"([^\"]*)\"|'([^']*)'|([^\\s>]+))"), "iu");
+  const match = pattern.exec(rawAttrs);
+  return match === null ? void 0 : match[1] ?? match[2] ?? match[3];
+}
+function setAttr(rawAttrs, name, value) {
+  const escaped = value.replaceAll('"', "&quot;");
+  const pattern = new RegExp("(".concat(name, "\\s*=\\s*)(?:\"[^\"]*\"|'[^']*'|[^\\s>]+)"), "iu");
+  if (pattern.test(rawAttrs)) return rawAttrs.replace(pattern, '$1"'.concat(escaped, '"'));
+  return "".concat(rawAttrs, " ").concat(name, '="').concat(escaped, '"');
+}
+function replaceVisibleText(content, matchText, replace, occurrence = 0) {
+  if (!Number.isInteger(occurrence) || occurrence < 0) {
+    throw new EmailSdkError("replaceText occurrence must be a non-negative integer.");
+  }
+  const runs = [];
+  const tagPattern = /<[^>]*>/gu;
+  let cursor = 0;
+  for (const tag of content.matchAll(tagPattern)) {
+    const tagStart = tag.index ?? 0;
+    if (tagStart > cursor) runs.push({ start: cursor, end: tagStart, text: content.slice(cursor, tagStart) });
+    cursor = tagStart + tag[0].length;
+  }
+  if (cursor < content.length) runs.push({ start: cursor, end: content.length, text: content.slice(cursor) });
+  const matches = [];
+  for (const run of runs) {
+    let offset = run.text.indexOf(matchText);
+    while (offset !== -1) {
+      matches.push({ start: run.start + offset, end: run.start + offset + matchText.length });
+      offset = run.text.indexOf(matchText, offset + Math.max(1, matchText.length));
+    }
+  }
+  if (matches.length === 0) {
+    throw new EmailSdkError('Text "'.concat(matchText, '" was not found inside one visible text run.'));
+  }
+  if (occurrence >= matches.length) {
+    throw new EmailSdkError('Text "'.concat(matchText, '" occurrence ').concat(occurrence, " is out of range; found ").concat(matches.length, "."));
+  }
+  const span = matches[occurrence];
+  return "".concat(content.slice(0, span.start)).concat(replace).concat(content.slice(span.end));
+}
+function mutateAnchor(content, mutation) {
+  const candidates = [];
+  let ordinal = 0;
+  for (const match of content.matchAll(ANCHOR_PATTERN)) {
+    const attrs2 = match[1] ?? "";
+    const inner2 = match[2] ?? "";
+    const href = attrValue(attrs2, "href");
+    if (mutation.match.href !== void 0 && href !== mutation.match.href) {
+      ordinal += 1;
+      continue;
+    }
+    if (mutation.match.text !== void 0 && normalizeText(stripTags(inner2)) !== normalizeText(mutation.match.text)) {
+      ordinal += 1;
+      continue;
+    }
+    const start = match.index ?? 0;
+    candidates.push({ index: ordinal, full: match[0], attrs: attrs2, inner: inner2, start, end: start + match[0].length });
+    ordinal += 1;
+  }
+  if (candidates.length === 0) throw new EmailSdkError("No text anchor matched.");
+  if (candidates.length > 1) throw new EmailSdkError("Text anchor match is ambiguous: ".concat(candidates.length, " anchors matched."));
+  const candidate = candidates[0];
+  let attrs = candidate.attrs;
+  if (mutation.set.href !== void 0) {
+    assertSafeHref(mutation.set.href);
+    attrs = setAttr(attrs, "href", mutation.set.href);
+  }
+  if (mutation.set.target !== void 0) {
+    attrs = setAttr(attrs, "target", mutation.set.target);
+  }
+  const inner = mutation.set.text ?? candidate.inner;
+  const next = "<a".concat(attrs, ">").concat(inner, "</a>");
+  return "".concat(content.slice(0, candidate.start)).concat(next).concat(content.slice(candidate.end));
+}
+
 // convo-email-agent/src/sdk/preparation.ts
 var DocumentStateError = class extends Error {
   constructor(issues) {
@@ -627,6 +728,7 @@ function validateChange({ current, target, intent }) {
     }
   }
   const inherited = before.filter((node) => node.blockType === "text").flatMap((node) => textBlockColors(node.element));
+  const acquiredLinks = new Set(before.filter((node) => node.blockType === "text" && typeof node.element.content === "string").flatMap((node) => anchorOpenTags(node.element.content)));
   for (const entry of after) if (entry.blockType === "text") {
     const previous = before.find((node) => node.id === entry.id && node.blockType === "text");
     const replaced = overwrittenInlineColors(previous?.element, entry.element, inherited);
@@ -638,6 +740,16 @@ function validateChange({ current, target, intent }) {
       nodeId: entry.id,
       nodeType: "text",
       message: previous ? "This write changes both content and fontColor; the editor applies fontColor to every p, h1-h6, li and span, replacing the newly supplied inline colors ".concat(replaced.join(", "), ". Align or remove them, or keep the acquired fontColor for intentional multicolor text.") : "The editor applies a new text block's fontColor to every p, h1-h6, li and span, replacing the inline colors ".concat(replaced.join(", "), ". Omit fontColor to keep the content's colors, or align or remove them.")
+    });
+    const links = typeof entry.element.content === "string" ? linksWithoutBlankTarget(entry.element.content, acquiredLinks) : [];
+    if (links.length) issues.push({
+      code: "TEXT_LINK_TARGET_MISSING",
+      stage: "change",
+      input: "target",
+      path: "".concat(entry.id, ".content"),
+      nodeId: entry.id,
+      nodeType: "text",
+      message: 'New or changed text links must open in a new tab; add target="_blank" to '.concat(links.join(", "), ".")
     });
   }
   for (const entry of after) if (!before.some((node) => node.kind === entry.kind && node.id === entry.id)) {
@@ -709,6 +821,11 @@ export {
   isSupportedThemeReset,
   hasRecoloredInlineColor,
   releaseCopiedFontColors,
+  normalizeText,
+  stripTags,
+  assertSafeHref,
+  replaceVisibleText,
+  mutateAnchor,
   DocumentStateError,
   jsonIssues,
   validateSnapshot,
