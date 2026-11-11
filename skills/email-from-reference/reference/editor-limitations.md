@@ -1,13 +1,9 @@
 # Editor limitations
 
-Behavior of the editor that writes the model and renders the email, which the SDK cannot change.
-Each entry says what happens, what the SDK does about it, and what to do. Read the entries for
-the current step before building or changing the model; other references link here instead of
-restating editor behavior.
+Read the editor limitations and SDK workarounds relevant to your changes.
 
-Verified against editor revision `46ab3a68` on the merge-service runtime. When the editor
-contract is refreshed, re-check every entry against the new revision, rewrite or delete the ones
-the editor fixed, then update the revision above.
+Verified against editor revision `46ab3a68` on the merge-service runtime. When the pin
+changes, re-check all entries, revise or remove them as needed, and update this revision.
 
 ## Text color
 
@@ -34,6 +30,12 @@ the editor fixed, then update the revision above.
 
 - Line height is stored as a whole percentage, so `1.333` reads back as `1.33` and `0.001` as `0`.
 - SDK: a changed line height with more than two decimal places is rejected, not rounded.
+
+## Letter spacing
+
+- Use integers for `letterSpacing` in `px`. Changing `settings.buttons.letterSpacing` from
+  `0px` to `0.15px` passes validation but rounds to the current value. The write fails with
+  `ACTION_NOT_APPLIED` (`NO_ACTIONS_CREATED`). Stripo MCP may report `WRITE_UNCONFIRMED`.
 
 ## Menu font
 

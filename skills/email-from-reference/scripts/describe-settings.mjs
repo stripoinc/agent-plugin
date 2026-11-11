@@ -144,7 +144,10 @@ async function main() {
   console.log([
     `# ${heading}; {a,b} lists siblings with the same shape; the builder fills omitted settings`,
     ...TARGET_GUIDANCE[target] ?? [],
-    ...compact(rows).map((row) => `${row.path}: ${row.shape}`)
+    ...compact(rows).map((row) => {
+      const note = row.path === "letterSpacing.value" ? ' (use an integer when letterSpacing.unit is "px")' : "";
+      return `${row.path}: ${row.shape}${note}`;
+    })
   ].join("\n"));
 }
 function objectProperties(node) {
