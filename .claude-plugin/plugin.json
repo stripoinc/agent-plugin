@@ -1,7 +1,7 @@
 {
   "name": "stripo",
   "displayName": "Stripo",
-  "version": "0.13.3",
+  "version": "0.13.4",
   "description": "Create and edit Stripo emails, including generating and editing images.",
   "author": {
     "name": "Stripo",
@@ -18,6 +18,7 @@
     "marketing"
   ],
   "icon": "./assets/stripo.svg",
+  "documentationUrl": "https://support.stripo.email/en/articles/15921958-how-to-connect-your-ai-assistant-to-stripo",
   "supportUrl": "https://support.stripo.email",
   "privacyPolicyUrl": "https://stripo.email/privacy-policy/",
   "termsOfServiceUrl": "https://stripo.email/terms-of-use/"
