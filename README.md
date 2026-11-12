@@ -38,10 +38,11 @@ codex plugin add stripo@stripo
 
 Start a new session to load the installed skills.
 
-The skills require an authenticated `stripo-mcp` connection configured separately in your agent;
+The skills require an authenticated `stripo-mcp` connection. The plugin declares it in `.mcp.json`
+for `https://mcp.stripo.email/mcp`;
 see [How to connect your AI assistant to Stripo](https://support.stripo.email/en/articles/15921958-how-to-connect-your-ai-assistant-to-stripo).
-Stripo uses `https://mcp.stripo.email/mcp` with scopes `mcp:tools` and `offline_access`.
-The plugin contains no tokens, client secrets or fixed MCP server entry. Browser sign-in belongs
+Stripo uses scopes `mcp:tools` and `offline_access`.
+The plugin contains no tokens or client secrets. Browser sign-in belongs
 to you and your agent's OAuth flow; never paste tokens into chat or plugin files.
 
 Other clients with an authenticated Stripo MCP connection can load `skills/` from this repository.
