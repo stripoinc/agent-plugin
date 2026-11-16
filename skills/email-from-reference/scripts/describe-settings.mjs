@@ -25,6 +25,12 @@ function optionalString(args, option) {
   const value = args[option];
   return typeof value === "string" && value.trim() !== "" ? value : void 0;
 }
+function readJson(filePath) {
+  return JSON.parse(readFileSync(filePath, "utf8"));
+}
+function readServerSchema(sdk, file) {
+  return file === void 0 ? void 0 : new sdk.ServerDocumentSchema(readJson(file));
+}
 function compactError(error) {
   const fields = error instanceof Error || isObject(error) ? error : void 0;
   const errors = fields && "errors" in fields && Array.isArray(fields.errors) ? fields.errors : void 0;
@@ -86,6 +92,7 @@ var TARGET_GUIDANCE = {
 async function main() {
   const args = parseArgs(process.argv.slice(2));
   const sdk = await loadSdk(resolveSdkDist(args, import.meta.url));
+  const serverSchema = readServerSchema(sdk, args["server-schema"] === void 0 ? void 0 : requireString(args, "server-schema"));
   const schema = sdk.getJsonSchema();
   const definitions = schema.definitions;
   const blocks = sdk.getCapabilities().blocks.filter((kind) => kind !== "unknown");
@@ -136,10 +143,10 @@ async function main() {
     walk(properties(schema.properties ? schema.properties.settings : {})[target], "");
   } else if (NODE_KINDS.includes(target)) {
     heading = `${target}.settings`;
-    walk(properties(definitions[target]).settings, "");
+    walk(properties(serverSchema?.node(target) ?? definitions[target]).settings, "");
   } else {
     heading = `${target} block settings (type: "${target}")`;
-    walk(properties(definitions[`${target}Block`]).settings, "");
+    walk(properties(serverSchema?.node(target) ?? definitions[`${target}Block`]).settings, "");
   }
   console.log([
     `# ${heading}; {a,b} lists siblings with the same shape; the builder fills omitted settings`,

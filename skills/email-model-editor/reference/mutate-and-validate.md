@@ -1,7 +1,7 @@
 # Mutate and validate
 
-Validation runs the editor's own Document State rules bundled into the SDK. No schema download
-or initialization is required. `bundle.json.editorValidator` records the editor revision.
+Validation uses bundled Document State rules and the target server schema when supplied.
+`bundle.json.editorValidator` records the bundled editor revision.
 `finish()` validates edits against the acquired input; create mode validates a new document.
 Without `--input`, the module receives `context.idFactory`, the random source that every node
 it creates through `createDocument`, `createEmailBuilder` or `createEmailFromDraft` needs.
@@ -127,6 +127,15 @@ node <skill-dir>/scripts/run-sdk.mjs \
   --diagnostics <diagnostics.json>
 ```
 
+For Stripo, add `--server-schema <downloaded-schema.json>` using the target server schema from
+the provider's acquisition step. Inspect `node.describe().settings` or use
+`describe-settings.mjs --target <kind> --server-schema <file>` from the creation skill.
+Set a new native field through `node.patchSettings()` when the settings schema lists it.
+Supply a complete gradient, module link, lock, mobile border, or Smart Block object. A null
+value clears nullable overrides where the schema allows it. Use `updateMenuItem()` for an
+individual item's dark colors. For a Social or Spacer gradient, use the native
+`backgroundColor` string containing a CSS gradient and its solid fallback.
+
 Create the module and run it in the same local command when practical. The runner prints
 validation, SDK diagnostics and a bounded before/after change report, so a separate diagnostic
 script is unnecessary when that report fully describes the edit. Require exit code 0 and confirm:
@@ -152,8 +161,14 @@ confirms the already-correct value. A setter that silently changes nothing is an
 error. Keep the acquired model, inspection, module, candidate and diagnostics as task artifacts.
 On any preparation failure, the runner removes stale output. Diagnostics distinguish JSON,
 schema, capability, loss and optional runtime stages; inspect `diagnostics.error.issues`.
-Local contract validation is against the pinned revision. `--runtime-snapshot <file>` plus
+Local validation applies the bundled rules and any supported fields confirmed by
+`--server-schema`. `--runtime-snapshot <file>` plus
 `--runtime <file>` explicitly requests model preflight and fails if context is missing.
+When `validation.scope` is `pinned-fields`, the runner validated known fields and carried the
+values listed in `sdkDiagnostics.compatibility` into the full candidate. Edits to those values or
+collections that hold them can fail with `PRESERVED_FIELD_CONFLICT` and an exact path.
+Upload the candidate alongside the untouched acquisition to the same target. Model preflight
+requires a matching runtime and fails when the candidate has values carried from a newer revision.
 Only a successful server set followed by get confirms persistence.
 
 ## Inline-style candidate checks

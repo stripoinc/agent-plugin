@@ -28,6 +28,8 @@ types, settings or unlisted methods from the full declarations only when needed.
 this remains the default so detail is not discarded. `--detail summary` requires `--output`.
 
 Both modes run the same validation and retain the same report and failing exit status.
+When the report shows `schema.scope: "pinned-fields"`, the fields known to the SDK passed validation
+and `schema.compatibility` identifies additional acquired values the edit runner preserves.
 Investigate reported duplicate IDs, locked blocks and schema errors before editing; full error
 details remain in `schema.error`. The reference does not select targets, authorize mutations or
 override native capability limits. Download and run inspection in the same local command when

@@ -4,7 +4,7 @@ import {
   requireValid,
   validateChange,
   validateEmailDocument
-} from "./content-mutations-fb63277cc72e.js";
+} from "./content-mutations-8d3806a195bd.js";
 import {
   EmailSdkError
 } from "./errors-3ee69a7e1eb0.js";
@@ -120,7 +120,7 @@ function setEmailSchema(schema) {
   }
 }
 function assertValidTemplate(value, context, details, options = {}) {
-  const errors = validateEmailDocument(value, { current: options.current });
+  const errors = validateEmailDocument(value, options);
   if (errors.length > 0) throw new EmailSdkSchemaError(context, errors, details);
 }
 function assertValidEmailModel(value, options = {}) {
@@ -300,6 +300,7 @@ var EditorJsonMutationCore = class {
   // The document state a write of this draft would replace. Rules that depend on it (duplicate
   // IDs, unchanged long metadata, the alignment lock of full-width media) compare against it.
   current;
+  serverSchema;
   idFactory;
   // Most recent clone produced from each source id during this session. cloneElement
   // uses it to keep a run of clones from the same source in command order (see the
@@ -315,7 +316,8 @@ var EditorJsonMutationCore = class {
   // document an edit replaces; a new document validates against an empty current state.
   constructor(templateJson, idFactory, options = {}) {
     this.current = isObject(options.current) ? deepClone(options.current) : void 0;
-    assertValidTemplate(templateJson, "Initial JSON", void 0, { current: this.current });
+    this.serverSchema = options.serverSchema;
+    assertValidTemplate(templateJson, "Initial JSON", void 0, { current: this.current, serverSchema: this.serverSchema });
     this.draft = deepClone(templateJson);
     this.idFactory = idFactory ?? (() => issueNodeId(void 0, "clone", () => false));
   }
@@ -348,7 +350,7 @@ var EditorJsonMutationCore = class {
     return this;
   }
   validateDraft(context, details) {
-    assertValidTemplate(this.draft, context, details, { current: this.current });
+    assertValidTemplate(this.draft, context, details, { current: this.current, serverSchema: this.serverSchema });
     return this;
   }
   // Read-only companion to setContent: the element's `content` when it is a
@@ -582,7 +584,7 @@ var EditorJsonMutationCore = class {
     return { kind: "block" };
   }
   apply(intent) {
-    return deepClone(requireValid(validateChange({ current: this.current, target: this.draft, intent })));
+    return deepClone(requireValid(validateChange({ current: this.current, target: this.draft, intent, serverSchema: this.serverSchema })));
   }
   snapshot() {
     return deepClone(this.draft);

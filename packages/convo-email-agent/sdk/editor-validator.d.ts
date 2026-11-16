@@ -1,3 +1,4 @@
+import type { ServerDocumentSchema } from "./server-schema.js";
 /** One validation failure, addressed the way set_document_state reports it: a dot path. */
 export interface EmailValidationIssue {
     /** Dot path into the document (array indexes as numbers); `<root>` for the document itself. */
@@ -13,6 +14,7 @@ export interface EmailValidationOptions {
      * of full-width media — see an empty document when it is omitted.
      */
     readonly current?: unknown;
+    readonly serverSchema?: ServerDocumentSchema;
 }
 export declare const ROOT_PATH = "<root>";
 /** `/stripes/0/blocks` → `stripes.0.blocks`; `` → `<root>`. */

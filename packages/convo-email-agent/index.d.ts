@@ -9,6 +9,7 @@ export { createEmailBuilder, createEmailFromDraft, createMinimalEmailSeed, minim
 export { CANONICAL_MCP_OPERATIONS, EMAIL_INTERFACE_MCP_BRANDS, getMcpOperationsForBrand, getMcpToolMapping, supportsEmailInterfaces, type CanonicalMcpOperation, type EmailInterfaceMcpBrand, type McpBrand, type McpOperationForBrand, type McpToolMapping, RETENO_MCP_TOOL_MAPPING, STRIPO_MCP_TOOL_MAPPING, } from "./mcp-tools.js";
 export { openDocument, createDocument, createBlock, createStripe, createStructure, type OpenDocumentOptions, type CreateDocumentOptions, type StructureInput } from './sdk/document.js';
 export { getContract, getCapabilities, getJsonSchema, type DocumentState, type DocumentBlock, type BlockKind, type BlockOf, type BlockSettings, type JsonSchemaNode } from './sdk/contract.js';
-export { validateSnapshot, validateChange, DocumentStateError, type ValidationResult, type DocumentIssue, type ChangeIntent } from './sdk/preparation.js';
+export { validateSnapshot, validateChange, DocumentStateError, type ValidationResult, type DocumentIssue, type ChangeIntent, type DocumentCompatibility } from './sdk/preparation.js';
 export { summarizeEditorJson } from './sdk/inspection.js';
+export { ServerDocumentSchema } from './sdk/server-schema.js';
 export type { EmailChangeRecord, TypedBlockNode, DeepPatch } from './sdk/types.js';

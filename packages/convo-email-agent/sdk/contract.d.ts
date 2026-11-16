@@ -16,6 +16,7 @@ export interface JsonSchemaNode {
     additionalProperties?: boolean | JsonSchemaNode;
     [key: string]: unknown;
 }
+export type SchemaResolver = (node: JsonSchemaNode) => JsonSchemaNode;
 export interface ActionCapability {
     supported: boolean;
     runtimes: {
@@ -73,4 +74,4 @@ export declare function resolveSchema(node: JsonSchemaNode): JsonSchemaNode;
 export declare function nodeSchema(kind: string): JsonSchemaNode;
 export declare function contractDefaults(kind: BlockKind | 'container'): Record<string, unknown>;
 /** Pick the actual discriminator branch before checking unknown keys or patching. */
-export declare function schemaForValue(node: JsonSchemaNode, value: unknown): JsonSchemaNode;
+export declare function schemaForValue(node: JsonSchemaNode, value: unknown, resolve?: SchemaResolver): JsonSchemaNode;

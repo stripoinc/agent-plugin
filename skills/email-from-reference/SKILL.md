@@ -58,10 +58,9 @@ Keep these rules throughout:
 - For a write request, the required outcome is a persisted email. A local JSON file and local
   validation are intermediate results. The bundle contains no MCP endpoint or credentials; use
   the selected MCP server and authorization configured by the consuming agent.
-- Validation runs the editor's own Document State rules bundled into the SDK; no schema download
-  or initialization is required. `bundle.json.editorValidator` records the editor revision. New documents validate without a baseline; a rebuild uses the
-  acquired target as `--baseline`. The service also validates its deployed revision and applies
-  the write to its live state; local success does not establish persistence.
+- The SDK validates with bundled Document State rules and any server schema supplied per
+  `PROVIDER.md`. For a rebuild, use the acquired target as `--baseline`. The service validates
+  against its deployed revision and applies the write to live state.
 - Report missing capabilities or incomplete verification accurately; keep a known target's ID
   during recovery instead of creating another email.
 

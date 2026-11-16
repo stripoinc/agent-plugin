@@ -137,5 +137,6 @@ function isThemeBackground(value) {
 export {
   isEditorColor,
   isStaticThemeColor,
+  splitLayers,
   isThemeBackground
 };

@@ -13,10 +13,10 @@ import {
   jsonIssues,
   validateBlock,
   validateEmailDocument
-} from "./content-mutations-fb63277cc72e.js";
+} from "./content-mutations-8d3806a195bd.js";
 import {
   contractDefaults
-} from "./contract-79faab52de2a.js";
+} from "./contract-a5416d02a6a0.js";
 import {
   SOCIAL_BLOCK_DEFAULT_SETTINGS,
   buildSocialNetwork,
@@ -465,7 +465,7 @@ function createEmailFromDraft(options) {
   if (inputProblems.length) throw new DocumentStateError(inputProblems);
   if (!isObject(options.emailJson)) throw new EmailSdkError("emailJson must be a native editor JSON object.");
   if (options.baselineEmailJson !== void 0) {
-    assertValidEmailModel(options.baselineEmailJson, { current: options.baselineEmailJson });
+    assertValidEmailModel(options.baselineEmailJson, { current: options.baselineEmailJson, serverSchema: options.serverSchema });
   }
   const baseline = isObject(options.baselineEmailJson) ? cloneJson(options.baselineEmailJson) : void 0;
   const draft = { ...baseline, ...cloneJson(options.emailJson) };
@@ -599,7 +599,7 @@ function createEmailFromDraft(options) {
       });
     });
   });
-  const completed = new EditorJsonMutationCore(draft, void 0, { current: options.baselineEmailJson }).apply(options.intent);
+  const completed = new EditorJsonMutationCore(draft, void 0, { current: options.baselineEmailJson, serverSchema: options.serverSchema }).apply(options.intent);
   assertMetadataTextLimits(completed.metadata, options.baselineEmailJson?.metadata);
   return completed;
 }
@@ -735,7 +735,7 @@ function createEmailBuilder(options = {}) {
   }
   function validateAndClone(context) {
     try {
-      const result = context === "finish" ? new EditorJsonMutationCore(draft).apply() : new EditorJsonMutationCore(draft).snapshot();
+      const result = context === "finish" ? new EditorJsonMutationCore(draft, void 0, { serverSchema: options.serverSchema }).apply() : new EditorJsonMutationCore(draft, void 0, { serverSchema: options.serverSchema }).snapshot();
       if (context === "finish") validation = "passed";
       return result;
     } catch (error) {
@@ -807,9 +807,9 @@ function createEmailBuilder(options = {}) {
       if (issues.length) throw new DocumentStateError(issues);
       const candidate = cloneJson(draft);
       setPath(candidate, path.split("."), value);
-      const after = validateEmailDocument(candidate);
+      const after = validateEmailDocument(candidate, { serverSchema: options.serverSchema });
       if (after.length) {
-        const existing = new Set(validateEmailDocument(draft).map((issue) => "".concat(issue.path, "\n").concat(issue.message)));
+        const existing = new Set(validateEmailDocument(draft, { serverSchema: options.serverSchema }).map((issue) => "".concat(issue.path, "\n").concat(issue.message)));
         const introduced = after.filter((issue) => !existing.has("".concat(issue.path, "\n").concat(issue.message)));
         if (introduced.length) throw new EmailSdkSchemaError("Theme write ".concat(JSON.stringify(path)), introduced);
       }

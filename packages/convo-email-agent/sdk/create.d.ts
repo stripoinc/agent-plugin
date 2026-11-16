@@ -1,4 +1,5 @@
 import type { EmailMutationSdkSession, IdFactory } from "./types.js";
+import type { ServerDocumentSchema } from './server-schema.js';
 import type { ChangeIntent } from './preparation.js';
 import { type SocialNetworkInput } from "./social.js";
 type JsonArray = JsonValue[];
@@ -29,6 +30,7 @@ export interface CreateMinimalEmailSeedOptions {
     idFactory?: IdFactory;
 }
 export interface CreateEmailBuilderOptions extends CreateMinimalEmailSeedOptions {
+    serverSchema?: ServerDocumentSchema;
     /**
      * Complete native seed; cloned, not mutated. Omitting it uses createMinimalEmailSeed.
      * Theme options supply defaults for new sections; they do not restyle an explicitly supplied seed.
@@ -36,6 +38,7 @@ export interface CreateEmailBuilderOptions extends CreateMinimalEmailSeedOptions
     seedEmailJson?: unknown;
 }
 export interface CreateEmailFromDraftOptions {
+    serverSchema?: ServerDocumentSchema;
     /** Native draft object, not a JSON string. IDs/settings may be omitted; content and required assets must be supplied. */
     emailJson: unknown;
     /** Acquired target for validation and change intent, not visual defaults; unchanged imported metadata text may exceed 500 UTF-16 code units. */

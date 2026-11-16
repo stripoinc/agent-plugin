@@ -34,6 +34,9 @@ function optionalString(args, option) {
 function readJson(filePath) {
   return JSON.parse(readFileSync(filePath, "utf8"));
 }
+function readServerSchema(sdk, file) {
+  return file === void 0 ? void 0 : new sdk.ServerDocumentSchema(readJson(file));
+}
 function writeJson(filePath, value) {
   mkdirSync(path.dirname(filePath), { recursive: true });
   writeFileSync(filePath, `${JSON.stringify(value, null, 2)}
@@ -55,16 +58,29 @@ function beginOutputs(output, diagnostics, inputs) {
 }
 async function prepareOutput(sdk, options) {
   if (!options.runtimeSnapshotPath) {
-    const result = options.session?.validate() ?? sdk.validateChange(options);
+    const result = options.session?.validate() ?? sdk.validateChange({ ...options, target: options.target });
     if (!result.success) throw new sdk.DocumentStateError(result.issues);
-    return { documentState: options.session ? options.session.finish() : result.documentState, verification: { level: "contract", ...sdk.getContract() } };
+    return {
+      documentState: options.session ? options.session.finish() : result.documentState,
+      verification: {
+        level: "contract",
+        ...sdk.getContract(),
+        ...result.compatibility && { compatibility: result.compatibility },
+        ...options.serverSchema && { serverFields: options.serverSchema.supportedFields }
+      }
+    };
   }
   if (!options.runtimePath) throw new Error("--runtime-snapshot requires --runtime pointing to the optional SDK runtime entry.");
   if (!options.session && options.current === void 0) throw new Error("Runtime verification requires an acquired current baseline.");
   const runtime = await import(pathToFileURL(path.resolve(options.runtimePath)).href);
   const raw = readJson(options.runtimeSnapshotPath);
   if (!isObject(raw) || typeof raw.encodedModel !== "string" || !/^[A-Za-z0-9+/]+={0,2}$/.test(raw.encodedModel)) throw new Error("Runtime snapshot must contain a base64 encodedModel.");
-  const session = options.session ?? sdk.createEmailSdk({ emailJson: options.target, current: options.current, intent: options.intent });
+  const session = options.session ?? sdk.createEmailSdk({
+    emailJson: options.target,
+    current: options.current,
+    intent: options.intent,
+    serverSchema: options.serverSchema
+  });
   return runtime.prepareDocumentState({ session, snapshot: {
     ...raw,
     encodedModel: new Uint8Array(Buffer.from(raw.encodedModel, "base64"))
@@ -528,9 +544,10 @@ async function main() {
   const briefPath = requireString(args, "brief");
   const outputPath = requireString(args, "output");
   const baselinePath = args.baseline === void 0 ? void 0 : requireString(args, "baseline");
+  const serverSchemaPath = args["server-schema"] === void 0 ? void 0 : requireString(args, "server-schema");
   const diagnosticsPath = optionalString(args, "diagnostics") ?? `${outputPath}.diagnostics.json`;
   let sdkPath;
-  beginOutputs(outputPath, diagnosticsPath, [briefPath, baselinePath, optionalString(args, "runtime-snapshot")]);
+  beginOutputs(outputPath, diagnosticsPath, [briefPath, baselinePath, serverSchemaPath, optionalString(args, "runtime-snapshot")]);
   try {
     sdkPath = resolveSdkDist(args);
     const policy = readCreationPolicy();
@@ -546,6 +563,7 @@ async function main() {
     const typedBrief = brief;
     typedBrief.message.referenceMode = typedBrief.message.referenceMode === "copy-action" ? "tailored" : typedBrief.message.referenceMode ?? "creative";
     const sdk = await loadSdk(sdkPath);
+    const serverSchema = readServerSchema(sdk, serverSchemaPath);
     const runSeed = randomUUID();
     const baselineEmailJson = baselinePath === void 0 ? void 0 : readJson(baselinePath);
     const baselineStripes = isObject3(baselineEmailJson) && Array.isArray(baselineEmailJson.stripes) ? baselineEmailJson.stripes : [];
@@ -553,19 +571,21 @@ async function main() {
     const detachedModules = detachReferenceModules(creationModel);
     const emailJson = sdk.createEmailFromDraft({
       emailJson: creationModel,
+      serverSchema,
       baselineEmailJson,
       intent: { removeNodes: baselineStripes.filter(isObject3).map((stripe) => String(stripe.id)) },
       regenerateIds: true,
       // Every build assigns fresh IDs; a per-run seed keeps reruns from repeating them.
       idFactory: (seed, isTaken) => sdk.uniqueUuidFromSeed(`brief:${runSeed}:${seed}`, isTaken)
     });
-    const validation = await validateEditorJson(emailJson, sdkPath, { current: baselineEmailJson });
+    const validation = await validateEditorJson(emailJson, sdkPath, { current: baselineEmailJson, serverSchema });
     if (!validation.valid) {
       throw new Error(`Created model failed native editor schema validation: ${validation.error?.message ?? "unknown error"}`);
     }
     const prepared = await prepareOutput(sdk, {
       current: baselineEmailJson,
       target: emailJson,
+      serverSchema,
       intent: { removeNodes: baselineStripes.filter(isObject3).map((stripe) => String(stripe.id)) },
       runtimeSnapshotPath: optionalString(args, "runtime-snapshot"),
       runtimePath: optionalString(args, "runtime")

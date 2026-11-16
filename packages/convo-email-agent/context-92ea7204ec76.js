@@ -147,12 +147,17 @@ function advancedColorsEqual(left, right) {
   return ["days", "hours", "minutes", "seconds"].every((key) => left[key] === right[key]);
 }
 function videoPreviewChanged(before, settings) {
+  const darkThumbnail = (value) => {
+    const dark = isObject(value.darkTheme) ? value.darkTheme : {};
+    return isObject(dark.customThumbnail) ? dark.customThumbnail.src : void 0;
+  };
+  const nextDarkThumbnail = darkThumbnail(settings);
   if (before?.type !== "video") {
-    return settings.videoLink !== VIDEO_DEFAULTS.videoLink || settings.customThumbnail !== void 0 || settings.playButtonStyle !== VIDEO_DEFAULTS.playButtonStyle;
+    return settings.videoLink !== VIDEO_DEFAULTS.videoLink || settings.customThumbnail !== void 0 || settings.playButtonStyle !== VIDEO_DEFAULTS.playButtonStyle || nextDarkThumbnail !== void 0;
   }
   const previous = settingsOf(before);
   const thumbnail = (value) => isObject(value.customThumbnail) ? value.customThumbnail.src : void 0;
-  return previous.videoLink !== settings.videoLink || thumbnail(previous) !== thumbnail(settings) || previous.playButtonStyle !== settings.playButtonStyle;
+  return previous.videoLink !== settings.videoLink || thumbnail(previous) !== thumbnail(settings) || previous.playButtonStyle !== settings.playButtonStyle || nextDarkThumbnail !== void 0 && nextDarkThumbnail !== darkThumbnail(previous);
 }
 function timerPreviewChanged(before, settings) {
   if (before?.type !== "timer") return true;

@@ -21,12 +21,12 @@ Never write the Business Profile from these skills: do not call `patch_business_
 `replace_business_profile` or `prepare_business_profile_upload`. When the project has no
 profile, continue from the reference.
 
-Acquire the reference/target with `get_document_state(id, type)`; it returns a temporary
-`downloadUrl`, download to a local JSON file and keep that file unmodified: it is the base the
-write uploads next to the candidate (see [persistence](stripo-persistence.md)). Require
-`status=OK`; a missing, inaccessible or broken model is not an empty reference. The runners
-validate with the editor rules bundled in the SDK. `get_document_state_schema()` remains
-available for field documentation.
+Call `get_document_state(id, type)` for the reference or target. Download its `downloadUrl`
+after `status=OK`. Keep the target file untouched for the [base upload](stripo-persistence.md).
+
+Before drafting or editing, call `get_document_state_schema()` on the write connection and
+download its `downloadUrl`. Use `--server-schema <file>` for settings discovery, inspection,
+creation, and edits. If unavailable, use bundled fields and report any blocked feature.
 
 Use `get_content(id, type, includeHtml=false)` for name and project/folder metadata.
 Use `get_screenshot(id, type, mode="BOTH")` for reference and final desktop/mobile inspection.

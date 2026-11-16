@@ -1,4 +1,11 @@
 import {
+  abort
+} from "./structure-d6da5ce20cb1.js";
+import {
+  contractSchema,
+  resolveSchema
+} from "./contract-a5416d02a6a0.js";
+import {
   isEditorColor,
   isStaticThemeColor,
   isThemeBackground
@@ -6,11 +13,6 @@ import {
 import {
   fontResourceIssues
 } from "./fonts-82d1d39f0f33.js";
-import {
-  abort,
-  contractSchema,
-  resolveSchema
-} from "./contract-79faab52de2a.js";
 import {
   RULE_TABLE
 } from "./rule-table-generated-439fbe3342c9.js";

@@ -53,6 +53,7 @@ export declare class EditorJsonMutationCore {
     reference(path: readonly (string | number)[]): string;
     referencePath(token: string): Array<string | number> | undefined;
     private readonly current;
+    private readonly serverSchema;
     private readonly idFactory;
     private readonly lastCloneBySource;
     private readonly lastInsertByAnchor;

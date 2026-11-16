@@ -66,7 +66,7 @@ the `mailto:` prefix required for persistence. Duplicate IDs fail validation.
 Global defaults live in `model.settings.{general,stripes,headings,buttons}`; block `settings`
 accepts only that block type's native keys. Before adding a field, run
 `node <skill-dir>/scripts/describe-settings.mjs --target <name>` for the block type, node kind
-or global group. Its normal output includes conditional rules; no full schema read is needed.
+or global group. Pass the provider's `--server-schema <file>` to discovery and the builder when available.
 A global-only field affects all elements of that type and fails as `unsupported property` on a
 block. For buttons, `letterSpacing` and `textTransform` exist only in `settings.buttons`;
 `settings.buttons.hoverButtonStyles` enables hover, with colors in `settings.buttons.lightTheme.hoverButtonStyles`.

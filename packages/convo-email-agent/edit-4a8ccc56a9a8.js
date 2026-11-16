@@ -2,6 +2,9 @@ import {
   transplantContentFormat
 } from "./transplant-format-b3ed852356b0.js";
 import {
+  trackAcquiredFields
+} from "./forward-compatibility-48f1fa495a89.js";
+import {
   summarizeEditorJson
 } from "./inspection-70055d97b33b.js";
 import {
@@ -14,6 +17,7 @@ import {
   DocumentStateError,
   assertSafeHref,
   collectNodeIndex,
+  hasCssGradient,
   hasLink,
   isSupportedThemeReset,
   jsonIssues,
@@ -25,17 +29,7 @@ import {
   stripTags,
   validateChange,
   validateSnapshot
-} from "./content-mutations-fb63277cc72e.js";
-import {
-  buildStyleValue,
-  nodeStyleSpec,
-  normalizeColor,
-  themeStyleSpec
-} from "./styles-961c8e1b984f.js";
-import {
-  canonicalFontValue,
-  collectUsedFontValues
-} from "./fonts-82d1d39f0f33.js";
+} from "./content-mutations-8d3806a195bd.js";
 import {
   contractDefaults,
   getJsonSchema,
@@ -43,7 +37,7 @@ import {
   nodeSchema,
   resolveSchema,
   schemaForValue
-} from "./contract-79faab52de2a.js";
+} from "./contract-a5416d02a6a0.js";
 import {
   SOCIAL_ALT_MAX_LENGTH,
   SOCIAL_CUSTOM_NETWORK_TYPE,
@@ -55,6 +49,16 @@ import {
   normalizeIconSize,
   normalizeSpaceBetweenIcons
 } from "./social-f4a8e0da8c68.js";
+import {
+  buildStyleValue,
+  nodeStyleSpec,
+  normalizeColor,
+  themeStyleSpec
+} from "./styles-961c8e1b984f.js";
+import {
+  canonicalFontValue,
+  collectUsedFontValues
+} from "./fonts-82d1d39f0f33.js";
 import {
   EmailSdkError,
   assertMetadataTextLimits,
@@ -110,9 +114,14 @@ function assertNoSchemaOption(options) {
   }
 }
 function createEmailSdk(options) {
+  return createEditingSession(options);
+}
+function createEditingSession(options, acquired) {
   assertNoSchemaOption(options);
+  const { serverSchema } = options;
+  const schemaOf = (kind) => serverSchema?.node(kind) ?? nodeSchema(kind);
   assertEditorEmailJson(options.emailJson);
-  const snapshotValidation = validateSnapshot(options.emailJson);
+  const snapshotValidation = validateSnapshot(options.emailJson, serverSchema);
   if (!snapshotValidation.success && snapshotValidation.issues.some((issue) => issue.stage === "json")) requireValid(snapshotValidation);
   let fallbackOrdinal = 0;
   const reservedIds = /* @__PURE__ */ new Set([...collectAllIds(options.emailJson), ...collectAllIds(options.current)]);
@@ -120,8 +129,9 @@ function createEmailSdk(options) {
   const sdk = new EditorJsonMutationCore(
     options.emailJson,
     () => generateUniqueId("fallback#".concat(fallbackOrdinal++), (id) => sdk.hasElement(id)),
-    { current: options.current ?? options.emailJson }
+    { current: options.current ?? options.emailJson, serverSchema }
   );
+  const compatibility = acquired && trackAcquiredFields(acquired, sdk, serverSchema);
   const initialMetadata = sdk.snapshot().metadata;
   const tempToReal = /* @__PURE__ */ new Map();
   const realToTemp = /* @__PURE__ */ new Map();
@@ -210,8 +220,18 @@ function createEmailSdk(options) {
       replaceCollections: [.../* @__PURE__ */ new Set([...intent.replaceCollections ?? [], ...next.replaceCollections ?? []])]
     };
   }
-  function prepared() {
-    return validateChange({ current: baseline, target: sdk.snapshot(), intent });
+  function prepared(target = sdk.snapshot()) {
+    const issues = compatibility?.check(target);
+    if (issues?.length) return { success: false, issues };
+    const result = validateChange({ current: baseline, target, intent, serverSchema });
+    if (!result.success || !compatibility) return result;
+    const complete = compatibility.complete(result.documentState);
+    if ("issues" in complete) return { success: false, issues: complete.issues };
+    return { ...result, documentState: complete.documentState, compatibility: compatibility.summary };
+  }
+  function fullDraft() {
+    const draft = sdk.snapshot();
+    return compatibility ? compatibility.draft(draft) : draft;
   }
   function atomic(type, callback) {
     assertNotSealed();
@@ -258,7 +278,11 @@ function createEmailSdk(options) {
         version++;
         skipped = void 0;
       }
-      if (transactionDepth === 0) requireValid(prepared());
+      if (transactionDepth === 0) requireValid(prepared(after));
+      else {
+        const issues = compatibility?.check(after);
+        if (issues?.length) throw new DocumentStateError(issues);
+      }
       validation = "pending";
       return result;
     } catch (error) {
@@ -477,8 +501,13 @@ function createEmailSdk(options) {
   }
   function writeStyle(realId, property, value, styleOptions = {}) {
     writeSettings(realId, (settings, entry) => {
+      if (property === "backgroundColor" && serverSchema?.has(entry.blockType ?? entry.kind, property) && hasCssGradient(value)) {
+        settings.backgroundColor = value;
+        return;
+      }
       const spec = nodeStyleSpec(entry.kind, entry.blockType, property, styleOptions);
       const writePath = spec.shape === "textStyle" ? spec.path.slice(0, -1) : spec.path;
+      if (writePath[0] === "backgroundColor") compatibility?.assertCanWrite(sdk.snapshot(), entry.path, ["settings", ...writePath]);
       const leaf = spec.shape === "textStyle" ? spec.path.at(-1) : void 0;
       const existing = readNested(settings, writePath);
       setNested(settings, writePath, buildStyleValue(spec.shape, value, styleOptions, existing, leaf));
@@ -535,28 +564,37 @@ function createEmailSdk(options) {
     if (resets.length) addIntent({ resetFields: resets });
     mutationCount += 1;
   }
-  function patchObject(current, patch, schema, path) {
+  function patchObject(current, patch, schema, path, pointer) {
     const issues = jsonIssues(patch);
     if (issues.length) throw new DocumentStateError(issues);
     const result = cloneJson(current);
-    const description = schemaForValue(schema, { ...current, ...patch });
+    const description = schemaForValue(schema, { ...current, ...patch }, serverSchema?.resolve);
     for (const [key, value] of Object.entries(patch)) {
       const property = description.properties && Object.hasOwn(description.properties, key) ? description.properties[key] : void 0;
       if (!property) throw new EmailSdkError("Unknown settings key: ".concat(path, ".").concat(key, "."));
       if (resolveSchema(property).readOnly) throw new EmailSdkError("Read-only settings key: ".concat(path, ".").concat(key, "."));
       if (key === "networks" || key === "items") throw new EmailSdkError("".concat(path, ".").concat(key, " must be changed with collection methods."));
+      const fieldPointer = pointer && pointer + "/" + key;
+      if (property.editorExtension) {
+        if (fieldPointer) addIntent({ replaceCollections: [fieldPointer] });
+        if (key !== "darkTheme") {
+          result[key] = cloneJson(value);
+          continue;
+        }
+      }
       if (Array.isArray(value)) throw new EmailSdkError("".concat(path, ".").concat(key, " has no declared atomic patch operation."));
       const previous = current[key];
       const switchesVariant = isObject(value) && isObject(previous) && ["type", "mode"].some((discriminator) => Object.hasOwn(value, discriminator) && previous[discriminator] !== value[discriminator]);
-      result[key] = isObject(value) ? patchObject(switchesVariant || !isObject(previous) ? {} : previous, value, property, "".concat(path, ".").concat(key)) : cloneJson(value);
+      result[key] = isObject(value) ? patchObject(switchesVariant || !isObject(previous) ? {} : previous, value, property, "".concat(path, ".").concat(key), fieldPointer) : cloneJson(value);
     }
     return result;
   }
   function patchNodeSettings(realId, patch) {
     writeSettings(realId, (settings, entry) => {
-      const descriptor = nodeSchema(entry.blockType ?? entry.kind).properties?.settings;
+      if (Object.hasOwn(patch, "backgroundColor")) compatibility?.assertCanWrite(sdk.snapshot(), entry.path, ["settings", "backgroundColor"]);
+      const descriptor = schemaOf(entry.blockType ?? entry.kind).properties?.settings;
       if (!descriptor) throw new EmailSdkError("This node has no editable settings.");
-      const result = patchObject(settings, patch, descriptor, "".concat(entry.blockType ?? entry.kind, ".settings"));
+      const result = patchObject(settings, patch, descriptor, "".concat(entry.blockType ?? entry.kind, ".settings"), "/" + entry.id + "/settings");
       for (const key of Object.keys(settings)) delete settings[key];
       Object.assign(settings, result);
     });
@@ -944,7 +982,7 @@ function createEmailSdk(options) {
         const entry = entryFor(realId);
         return deepFreeze({
           kind: entry.blockType ?? entry.kind,
-          settings: cloneJson(resolveSchema(nodeSchema(entry.blockType ?? entry.kind).properties.settings)),
+          settings: cloneJson(resolveSchema(schemaOf(entry.blockType ?? entry.kind).properties.settings)),
           capabilities: cloneJson(nodeCapability(entry.blockType ?? entry.kind))
         });
       },
@@ -980,6 +1018,7 @@ function createEmailSdk(options) {
       setSpacerMode(mode, patch = {}) {
         writeSettings(realId, (settings, entry) => {
           if (entry.blockType !== "spacer") throw new EmailSdkError("setSpacerMode requires a spacer.");
+          if (Object.hasOwn(patch, "backgroundColor")) compatibility?.assertCanWrite(sdk.snapshot(), entry.path, ["settings", "backgroundColor"]);
           const defaults = contractDefaults("spacer");
           settings.mode = mode;
           const remove = mode === "line" ? ["height"] : ["width", "border", "mobileBorder", "alignment"];
@@ -1023,7 +1062,7 @@ function createEmailSdk(options) {
           if (entry.blockType !== "menu") throw new EmailSdkError("updateMenuItem requires a menu.");
           const items = settings.items;
           assertCollectionIndex(items.length, index);
-          const settingsSchema = resolveSchema(nodeSchema("menu").properties.settings);
+          const settingsSchema = resolveSchema(schemaOf("menu").properties.settings);
           const itemSchema = resolveSchema(settingsSchema.properties.items).items;
           items[index] = patchObject(items[index], patch, itemSchema, "menu.items");
         });
@@ -1041,6 +1080,7 @@ function createEmailSdk(options) {
       moveMenuItem(index, position) {
         writeSettings(realId, (settings, entry) => {
           if (entry.blockType !== "menu") throw new EmailSdkError("moveMenuItem requires a menu.");
+          compatibility?.assertCanWrite(sdk.snapshot(), entry.path, ["settings", "items"]);
           const items = settings.items;
           assertCollectionIndex(items.length, index);
           const target = collectionPosition(items.length, position);
@@ -1053,6 +1093,7 @@ function createEmailSdk(options) {
         writeSettings(realId, (settings, entry) => {
           assertSocialBlock(entry, "moveSocialNetwork");
           const items = socialNetworksOf(settings, "moveSocialNetwork");
+          compatibility?.assertCanWrite(sdk.snapshot(), entry.path, ["settings", "networks"]);
           const from = resolveSocialNetworkIndex(items, target, "moveSocialNetwork");
           const to = resolveSocialNetworkIndex(items, "before" in position ? position.before : position.after, "moveSocialNetwork") + ("before" in position ? 0 : 1);
           const [item] = items.splice(from, 1);
@@ -1062,7 +1103,9 @@ function createEmailSdk(options) {
       },
       duplicate(position) {
         assertMutable(realId);
-        return insertComponent({ node: entryFor(realId).element, slots: [] }, position ?? { after: node });
+        const entry = entryFor(realId);
+        compatibility?.assertCanCopy(sdk.snapshot(), entry.path);
+        return insertComponent({ node: entry.element, slots: [] }, position ?? { after: node });
       },
       move(position) {
         assertMutable(realId);
@@ -1575,7 +1618,7 @@ function createEmailSdk(options) {
       return makeNode(String(copy.id), String(copy.id));
     },
     insertFrom(reference, nodeId, position) {
-      const sourceDocument = requireValid(validateSnapshot(reference));
+      const sourceDocument = requireValid(validateSnapshot(reference, serverSchema));
       const candidates = collectNodeIndex(sourceDocument).filter((node) => node.id === nodeId);
       if (candidates.length !== 1) throw new EmailSdkError("insertFrom requires an unambiguous source node.");
       const source = candidates[0];
@@ -1630,11 +1673,9 @@ function createEmailSdk(options) {
       }
     },
     toJSON() {
-      return sdk.snapshot();
+      return fullDraft();
     },
-    snapshot() {
-      return sdk.snapshot();
-    },
+    snapshot: fullDraft,
     validate() {
       const result = prepared();
       validation = result.success ? "passed" : "failed";
@@ -1644,7 +1685,7 @@ function createEmailSdk(options) {
       return deepFreeze(cloneJson(journal));
     },
     inspect() {
-      return summarizeEditorJson(sdk.snapshot());
+      return summarizeEditorJson(fullDraft());
     },
     skip(reason) {
       assertNotSealed();
@@ -1678,7 +1719,7 @@ function createEmailSdk(options) {
       return version;
     },
     get current() {
-      return deepFreeze(cloneJson(baseline));
+      return deepFreeze(cloneJson(acquired?.original ?? baseline));
     },
     diagnostics() {
       return {
@@ -1686,7 +1727,9 @@ function createEmailSdk(options) {
         warnings: Object.freeze([...warnings]),
         selectorMisses: Object.freeze(selectorMisses.map((miss) => cloneJson(miss))),
         validation,
-        skipped
+        skipped,
+        ...compatibility && { compatibility: compatibility.summary },
+        ...serverSchema?.supportedFields.length && { serverFields: serverSchema.supportedFields }
       };
     },
     get mutationCount() {
@@ -1700,5 +1743,6 @@ function createEmailMutationSdk(options) {
 
 export {
   createEmailSdk,
+  createEditingSession,
   createEmailMutationSdk
 };

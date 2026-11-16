@@ -18,7 +18,7 @@ Read the topic for the current step:
 
 | Step | Topic |
 | --- | --- |
-| Read a reference or target, download artifacts, network access | [Acquisition and transfers](reference/stripo-acquisition.md) |
+| Before drafting or editing: server schema, models and downloads | [Acquisition and transfers](reference/stripo-acquisition.md) |
 | Create an email; document title, preheader and external metadata | [Creation and metadata](reference/stripo-creation.md) |
 | Image jobs; attached, pasted or local images | [Images](reference/stripo-images.md) |
 | Any document write and saved-state verification | [Persistence and verification](reference/stripo-persistence.md) |

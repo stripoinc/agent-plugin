@@ -35,6 +35,9 @@ function optionalString(args, option) {
 function readJson(filePath) {
   return JSON.parse(readFileSync(filePath, "utf8"));
 }
+function readServerSchema(sdk, file) {
+  return file === void 0 ? void 0 : new sdk.ServerDocumentSchema(readJson(file));
+}
 function writeJson(filePath, value) {
   mkdirSync(path.dirname(filePath), { recursive: true });
   writeFileSync(filePath, `${JSON.stringify(value, null, 2)}
@@ -56,16 +59,29 @@ function beginOutputs(output, diagnostics, inputs) {
 }
 async function prepareOutput(sdk, options) {
   if (!options.runtimeSnapshotPath) {
-    const result = options.session?.validate() ?? sdk.validateChange(options);
+    const result = options.session?.validate() ?? sdk.validateChange({ ...options, target: options.target });
     if (!result.success) throw new sdk.DocumentStateError(result.issues);
-    return { documentState: options.session ? options.session.finish() : result.documentState, verification: { level: "contract", ...sdk.getContract() } };
+    return {
+      documentState: options.session ? options.session.finish() : result.documentState,
+      verification: {
+        level: "contract",
+        ...sdk.getContract(),
+        ...result.compatibility && { compatibility: result.compatibility },
+        ...options.serverSchema && { serverFields: options.serverSchema.supportedFields }
+      }
+    };
   }
   if (!options.runtimePath) throw new Error("--runtime-snapshot requires --runtime pointing to the optional SDK runtime entry.");
   if (!options.session && options.current === void 0) throw new Error("Runtime verification requires an acquired current baseline.");
   const runtime = await import(pathToFileURL(path.resolve(options.runtimePath)).href);
   const raw = readJson(options.runtimeSnapshotPath);
   if (!isObject(raw) || typeof raw.encodedModel !== "string" || !/^[A-Za-z0-9+/]+={0,2}$/.test(raw.encodedModel)) throw new Error("Runtime snapshot must contain a base64 encodedModel.");
-  const session = options.session ?? sdk.createEmailSdk({ emailJson: options.target, current: options.current, intent: options.intent });
+  const session = options.session ?? sdk.createEmailSdk({
+    emailJson: options.target,
+    current: options.current,
+    intent: options.intent,
+    serverSchema: options.serverSchema
+  });
   return runtime.prepareDocumentState({ session, snapshot: {
     ...raw,
     encodedModel: new Uint8Array(Buffer.from(raw.encodedModel, "base64"))
@@ -434,7 +450,9 @@ function normalizeDiagnostics(diagnostics) {
     warnings: Array.isArray(diagnostics.warnings) ? diagnostics.warnings.slice(0, 50) : [],
     selectorMisses: Array.isArray(diagnostics.selectorMisses) ? diagnostics.selectorMisses.slice(0, 50) : [],
     validation: diagnostics.validation,
-    skipped: diagnostics.skipped
+    skipped: diagnostics.skipped,
+    ...diagnostics.compatibility && { compatibility: diagnostics.compatibility },
+    ...diagnostics.serverFields && { serverFields: diagnostics.serverFields }
   };
 }
 async function importFresh(filePath) {
@@ -474,17 +492,19 @@ async function main() {
   const scriptPath = requireString(args, "script");
   const outputPath = requireString(args, "output");
   const diagnosticsPath = optionalString(args, "diagnostics") ?? `${outputPath}.diagnostics.json`;
+  const serverSchemaPath = args["server-schema"] === void 0 ? void 0 : requireString(args, "server-schema");
   const mode = inputPath ? "mutate" : "create";
   let sdkPath;
-  beginOutputs(outputPath, diagnosticsPath, [inputPath, scriptPath, optionalString(args, "runtime-snapshot")]);
+  beginOutputs(outputPath, diagnosticsPath, [inputPath, scriptPath, serverSchemaPath, optionalString(args, "runtime-snapshot")]);
   try {
     for (const option of Object.keys(args)) {
-      if (!["input", "script", "output", "diagnostics", "schema", "runtime-snapshot", "runtime", "sdk"].includes(option)) {
+      if (!["input", "script", "output", "diagnostics", "schema", "server-schema", "runtime-snapshot", "runtime", "sdk"].includes(option)) {
         throw new Error(`Unknown argument: --${option}`);
       }
     }
     sdkPath = resolveSdkDist(args);
     const sdk = await loadSdk(sdkPath);
+    const serverSchema = readServerSchema(sdk, serverSchemaPath);
     const inputJson = inputPath ? readJson(inputPath) : void 0;
     const inputSummary = inputJson === void 0 ? void 0 : summarizeEditorJson(inputJson);
     const scriptModule = await importFresh(scriptPath);
@@ -498,8 +518,10 @@ async function main() {
       while (isTaken(id)) id = randomUUID();
       return id;
     };
-    const session = inputJson === void 0 ? void 0 : sdk.createEmailMutationSdk({
-      emailJson: inputJson,
+    const session = inputJson === void 0 ? void 0 : sdk.openDocument({
+      current: inputJson,
+      preserveUnknownFields: true,
+      serverSchema,
       components,
       idFactory
     });
@@ -507,6 +529,7 @@ async function main() {
       email: void 0,
       session,
       sdk,
+      serverSchema,
       idFactory,
       input: inputJson,
       inputPath,
@@ -521,6 +544,7 @@ async function main() {
       current: inputJson,
       target: session ? void 0 : resolveResult(returned),
       session,
+      serverSchema,
       runtimeSnapshotPath: optionalString(args, "runtime-snapshot"),
       runtimePath: optionalString(args, "runtime")
     });
@@ -529,12 +553,12 @@ async function main() {
     if (!isEditorJson(resultJson)) {
       throw new Error("SDK script did not produce native email editor JSON with settings and optional stripes.");
     }
-    const validation = await validateEditorJson(resultJson, sdkPath, { current: inputJson });
+    const sdkDiagnostics = normalizeDiagnostics(session?.diagnostics?.());
+    const validation = session ? { valid: true, ...sdkDiagnostics?.compatibility && { scope: "pinned-fields" } } : await validateEditorJson(resultJson, sdkPath, { serverSchema });
     if (!validation.valid) {
       throw new Error(`Output failed native editor schema validation: ${validation.error?.message ?? "unknown error"}`);
     }
     const outputSummary = summarizeEditorJson(resultJson);
-    const sdkDiagnostics = normalizeDiagnostics(session?.diagnostics?.());
     if (session) {
       if (sdkDiagnostics?.skipped) {
         writeJson(diagnosticsPath, { status: "skipped", reason: sdkDiagnostics.skipped, inputPath, outputPath, sdkDiagnostics });

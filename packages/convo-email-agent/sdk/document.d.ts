@@ -1,13 +1,16 @@
 import { type BlockKind, type DocumentBlock, type DocumentState } from './contract.js';
 import type { CreateEmailSdkOptions, DeepPatch, EmailSdkSession, IdFactory } from './types.js';
 import type { BlockOf, NativeStructure, NativeStripe } from './generated/document-state.js';
-export interface OpenDocumentOptions extends Omit<CreateEmailSdkOptions, 'emailJson'> {
+import type { AdditionalNodeSettings, ServerDocumentSchema } from './server-schema.js';
+export interface OpenDocumentOptions extends Omit<CreateEmailSdkOptions, 'emailJson' | 'current'> {
     /** Complete acquired native Document State object; validated and cloned, never mutated in place. */
     current: unknown;
+    /** Preserve fields from a newer editor while editing the fields the pinned contract supports. */
+    preserveUnknownFields?: boolean;
 }
 /** Validate an acquired native snapshot and open a local edit session; all required settings must already be present. */
-export declare function openDocument(options: OpenDocumentOptions): EmailSdkSession;
-export interface CreateDocumentOptions extends OpenDocumentOptions {
+export declare function openDocument({ current, preserveUnknownFields, ...options }: OpenDocumentOptions): EmailSdkSession;
+export interface CreateDocumentOptions extends Omit<OpenDocumentOptions, 'preserveUnknownFields'> {
     /** Native new content. Metadata, resources and settings are preserved from current. */
     stripes?: DocumentState['stripes'];
 }
@@ -22,7 +25,9 @@ export declare function createDocument({ current, stripes, ...options }: CreateD
  * Rejects unknown fields and invalid blocks; insertion may impose additional runtime/side-effect restrictions.
  */
 export declare function createBlock<K extends BlockKind>(type: K, input: Omit<BlockOf<K>, 'type' | 'settings'> & {
-    settings?: DeepPatch<BlockOf<K>['settings']>;
+    settings?: DeepPatch<BlockOf<K>['settings'] & AdditionalNodeSettings<K>>;
+}, options?: {
+    serverSchema?: ServerDocumentSchema;
 }): BlockOf<K>;
 export interface StructureInput {
     id: string;
@@ -37,15 +42,18 @@ export interface StructureInput {
     }>;
     /** Enable mobile stacking; defaults to true for multiple columns and false for a single column. */
     mobile?: boolean;
-    settings?: Partial<NativeStructure['settings']>;
+    settings?: Partial<NonNullable<NativeStructure['settings']> & AdditionalNodeSettings<'structure'>>;
 }
 /** Complete and validate a native stripe using fixed draft defaults; does not inherit a live document's theme. */
 export declare function createStripe(input: {
     id: string;
     structures: NativeStructure[];
-    settings?: DeepPatch<NativeStripe['settings']>;
+    settings?: DeepPatch<NonNullable<NativeStripe['settings']> & AdditionalNodeSettings<'stripe'>>;
+}, options?: {
+    serverSchema?: ServerDocumentSchema;
 }): NativeStripe;
 /** Complete a native structure through the draft builder. Supply positive column weights and native block content. */
 export declare function createStructure(input: StructureInput, options?: {
     idFactory?: IdFactory;
+    serverSchema?: ServerDocumentSchema;
 }): NativeStructure;

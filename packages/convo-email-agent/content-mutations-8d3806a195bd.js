@@ -1,4 +1,23 @@
 import {
+  locationRules
+} from "./rules-c9866c302580.js";
+import {
+  blockRoot,
+  checkValue,
+  documentRoot
+} from "./structure-d6da5ce20cb1.js";
+import {
+  contractDefaults,
+  contractSchema,
+  getJsonSchema,
+  nodeCapability,
+  resolveSchema,
+  schemaForValue
+} from "./contract-a5416d02a6a0.js";
+import {
+  collectSocialDocumentIssues
+} from "./social-f4a8e0da8c68.js";
+import {
   normalizeColor
 } from "./styles-961c8e1b984f.js";
 import {
@@ -6,31 +25,19 @@ import {
   parseHtml
 } from "./parse-html-7b561a99741a.js";
 import {
+  isEditorColor,
+  isThemeBackground
+} from "./colors-c40f90dc9241.js";
+import {
   contextIssues,
   getUnavailableMergeServiceSideEffects
 } from "./context-92ea7204ec76.js";
 import {
-  locationRules
-} from "./rules-c9866c302580.js";
-import {
   canonicalFontValue
 } from "./fonts-82d1d39f0f33.js";
 import {
-  blockRoot,
-  checkValue,
-  contractDefaults,
-  documentRoot,
-  getJsonSchema,
-  nodeCapability,
-  resolveSchema,
-  schemaForValue
-} from "./contract-79faab52de2a.js";
-import {
   RULE_TABLE
 } from "./rule-table-generated-439fbe3342c9.js";
-import {
-  collectSocialDocumentIssues
-} from "./social-f4a8e0da8c68.js";
 import {
   EmailSdkError,
   LINE_HEIGHT_HINT,
@@ -108,90 +115,6 @@ function mapAt(value, steps, apply) {
 }
 function transformDocument(document) {
   return STEPS.reduce((value, { steps, kinds }) => kinds.reduce((current, kind) => mapAt(current, steps, TRANSFORMS[kind]), value), document);
-}
-
-// convo-email-agent/src/sdk/validator/index.ts
-function check(root, value) {
-  return checkValue(root.node, value, [], root.location, locationRules);
-}
-function validateDocumentSnapshot(document) {
-  const materialized = materialize(document);
-  const issues = check(documentRoot(), materialized);
-  return issues.length ? { success: false, input: "current", issues } : { success: true, issues: [], documentState: transformDocument(materialized) };
-}
-function validateDocumentState(target, current) {
-  let before = { stripes: [] };
-  if (current !== void 0) {
-    const parsed = validateDocumentSnapshot(current);
-    if (!parsed.success) return parsed;
-    before = parsed.documentState;
-  }
-  const materialized = materialize(target, before);
-  const issues = check(documentRoot(), materialized);
-  if (issues.length) return { success: false, input: "target", issues };
-  const documentState = transformDocument(materialized);
-  const context = isObject(documentState) ? contextIssues(documentState, before) : [];
-  return context.length ? { success: false, input: "target", issues: context } : { success: true, issues: [], documentState };
-}
-function validateBlock(block) {
-  const issues = check(blockRoot(), block);
-  return issues.length ? { success: false, input: "target", issues } : { success: true, issues: [], documentState: block };
-}
-
-// convo-email-agent/src/sdk/editor-validator.ts
-var ROOT_PATH = "<root>";
-function dotPath(segments) {
-  return segments.length === 0 ? ROOT_PATH : segments.map(String).join(".");
-}
-function pointerToPath(pointer) {
-  const segments = pointer.split("/").slice(1).map((segment) => segment.replace(/~1/gu, "/").replace(/~0/gu, "~"));
-  return dotPath(segments);
-}
-var LINE_HEIGHT_PATH = /^settings\.(?:stripes|headings\.h[1-6])\.lineHeight(?:\.(?:desktop|mobile))?$/u;
-function formatIssue(issue) {
-  const path = dotPath(issue.path);
-  if (issue.code === "unrecognized_keys" && issue.keys && issue.keys.length > 0) {
-    return issue.keys.map((key) => ({ path, code: issue.code, message: "unsupported property ".concat(JSON.stringify(key)) }));
-  }
-  const missing = issue.message.startsWith("missing required property ");
-  const message = !missing && LINE_HEIGHT_PATH.test(path) ? "".concat(issue.message, " ").concat(LINE_HEIGHT_HINT) : issue.message;
-  return [{ path, code: issue.code, message }];
-}
-var LINE_HEIGHT_GROUPS = ["stripes", ...[1, 2, 3, 4, 5, 6].map((level) => "headings/h".concat(level))];
-function lineHeightPrecisionIssues(model, current) {
-  const issues = [];
-  for (const group of LINE_HEIGHT_GROUPS) {
-    for (const platform of ["desktop", "mobile"]) {
-      const instancePath = "/settings/".concat(group, "/lineHeight/").concat(platform);
-      const value = resolveJsonPointer(model, instancePath);
-      if (typeof value !== "number" || !Number.isFinite(value) || Math.round(value * 100) / 100 === value) continue;
-      if (current !== void 0 && resolveJsonPointer(current, instancePath) === value) continue;
-      issues.push({ instancePath, message: "".concat(value, " is stored as a whole percentage and would read back as ").concat(Math.round(value * 100) / 100, ". ").concat(LINE_HEIGHT_HINT) });
-    }
-  }
-  return issues;
-}
-function validateEmailDocument(model, options = {}) {
-  const result = validateDocumentState(model, options.current);
-  const rules = [...collectSocialDocumentIssues(model), ...lineHeightPrecisionIssues(model, options.current)].map((rule) => ({ path: pointerToPath(rule.instancePath), code: "editor_rule", message: rule.message }));
-  const ruleFor = (issue) => {
-    const property = /^(?:unsupported|missing required) property "(.+)"$/u.exec(issue.message)?.[1];
-    return property === void 0 ? void 0 : rules.find((rule) => rule.path === "".concat(issue.path, ".").concat(property));
-  };
-  const issues = [];
-  const reported = /* @__PURE__ */ new Set();
-  for (const native of result.issues.flatMap(formatIssue)) {
-    const issue = ruleFor(native) ?? native;
-    if (issue !== native && reported.has(issue.path)) continue;
-    reported.add(issue.path);
-    issues.push(issue);
-  }
-  for (const rule of rules) {
-    if (reported.has(rule.path)) continue;
-    reported.add(rule.path);
-    issues.push(rule);
-  }
-  return issues;
 }
 
 // convo-email-agent/src/sdk/selectors.ts
@@ -299,6 +222,184 @@ function linkHostContains(element, blockType, needle) {
     }
   }
   return urls.some((url) => url.toLowerCase().includes(lowerNeedle));
+}
+
+// convo-email-agent/src/sdk/validator/server-field-rules.ts
+function hasCssGradient(value) {
+  return typeof value === "string" && /^(?:(?:repeating-)?(?:linear|radial|conic))-gradient\s*\(/i.test(value.trim());
+}
+function serverFieldIssues(document, serverSchema, current) {
+  const issues = [];
+  const report = (path, message) => {
+    issues.push({ code: "custom", path, message });
+  };
+  for (const node of collectNodeIndex(document)) {
+    const kind = node.blockType ?? node.kind;
+    const settings = objectValue(node.element.settings);
+    const dark = objectValue(settings.darkTheme);
+    const path = [...node.path, "settings"];
+    if (current !== void 0 && ["social", "spacer"].includes(kind) && hasCssGradient(settings.backgroundColor) && !serverSchema.has(kind, "backgroundColor")) {
+      const previous = collectNodeIndex(current).find((entry) => entry.id === node.id && entry.blockType === kind);
+      if (objectValue(previous?.element.settings).backgroundColor !== settings.backgroundColor) {
+        report([...path, "backgroundColor"], "The server schema must confirm gradient backgrounds for this block.");
+      }
+    }
+    if (["social", "spacer"].includes(kind) && typeof dark.backgroundColor === "string" && !isThemeBackground(dark.backgroundColor)) {
+      report([...path, "darkTheme", "backgroundColor"], "Expected a static color or a CSS gradient with a solid fallback.");
+    }
+    for (const [value, imagePath] of [
+      [dark.src, ["darkTheme", "src"]],
+      [objectValue(dark.customThumbnail).src, ["darkTheme", "customThumbnail", "src"]]
+    ]) {
+      if (typeof value === "string" && (!value.length || value.trim() !== value)) {
+        report([...path, ...imagePath], "Supply a nonempty image path without surrounding whitespace or use null to clear it.");
+      }
+    }
+    if (kind === "menu" && objectValue(settings.colors).mode === "shared" && Array.isArray(settings.items)) {
+      settings.items.forEach((item, index) => {
+        const colors = objectValue(objectValue(objectValue(item).darkTheme).colors);
+        for (const [key, value] of Object.entries(colors)) {
+          if (typeof value === "string" && isEditorColor(value, false)) {
+            report([...path, "items", index, "darkTheme", "colors", key], "Menu item dark colors require perItem color mode.");
+          }
+        }
+      });
+    }
+    if (node.kind === "block" || node.kind === "column") continue;
+    for (const [owner, prefix, keys] of [
+      [settings, path, ["backgroundGradient", "stripeBackgroundGradient", "contentBackgroundGradient"]],
+      [dark, [...path, "darkTheme"], ["backgroundGradient", "stripeBackgroundGradient", "contentBackgroundGradient"]]
+    ]) {
+      for (const key of keys) {
+        const stops = objectValue(owner[key]).gradientItems;
+        if (Array.isArray(stops)) stops.forEach((stop, index) => {
+          const color = objectValue(stop).color;
+          if (typeof color === "string" && !isEditorColor(color, true)) {
+            report([...prefix, key, "gradientItems", index, "color"], "Expected an editable gradient stop color.");
+          }
+        });
+      }
+    }
+    if (isObject(settings.link)) {
+      const link = settings.link;
+      if (typeof link.href === "string" && (link.href.trim() !== link.href || /^(?:javascript|data|vbscript):/i.test(link.href))) {
+        report([...path, "link", "href"], "Supply a safe link without surrounding whitespace.");
+      }
+      const binding = objectValue(link.calendarEvent);
+      if (isObject(binding.event) && binding.event.uuid !== binding.uuid) {
+        report([...path, "link", "calendarEvent", "event", "uuid"], "Calendar record UUID must match the link binding.");
+      }
+    }
+    if (isObject(settings.smartBlock)) {
+      const smart = settings.smartBlock;
+      const variables = Array.isArray(smart.variables) ? smart.variables.map(objectValue) : [];
+      const seen = /* @__PURE__ */ new Set();
+      variables.forEach((variable, index) => {
+        if (seen.has(variable.variable)) report([...path, "smartBlock", "variables", index, "variable"], "Smart Block variable names must be unique.");
+        seen.add(variable.variable);
+      });
+      for (const key of Object.keys(objectValue(smart.values))) {
+        if (!seen.has(key)) report([...path, "smartBlock", "values", key], "Value references an unknown Smart Block variable.");
+      }
+      const checkMappings = (value, mappingPath) => {
+        if (Array.isArray(value)) value.forEach((mapping, index) => {
+          const attribute = objectValue(mapping).attribute;
+          if (typeof attribute === "string" && /^(?:on.+|srcdoc)$/i.test(attribute)) {
+            report([...mappingPath, index, "attribute"], "Active content attributes cannot be mapped.");
+          }
+        });
+      };
+      checkMappings(smart.blockMappings, [...path, "smartBlock", "blockMappings"]);
+      variables.forEach((variable, index) => checkMappings(variable.blockMapping, [...path, "smartBlock", "variables", index, "blockMapping"]));
+    }
+  }
+  return issues;
+}
+
+// convo-email-agent/src/sdk/validator/index.ts
+function check(root, value, serverSchema) {
+  return checkValue(root.node, value, [], root.location, locationRules, serverSchema?.resolve);
+}
+function validateDocumentSnapshot(document, serverSchema) {
+  const materialized = materialize(document);
+  const issues = check(documentRoot(), materialized, serverSchema);
+  if (!issues.length && serverSchema) issues.push(...serverFieldIssues(materialized, serverSchema));
+  return issues.length ? { success: false, input: "current", issues } : { success: true, issues: [], documentState: transformDocument(materialized) };
+}
+function validateDocumentState(target, current, serverSchema) {
+  let before = { stripes: [] };
+  if (current !== void 0) {
+    const parsed = validateDocumentSnapshot(current, serverSchema);
+    if (!parsed.success) return parsed;
+    before = parsed.documentState;
+  }
+  const materialized = materialize(target, before);
+  const issues = check(documentRoot(), materialized, serverSchema);
+  if (!issues.length && serverSchema) issues.push(...serverFieldIssues(materialized, serverSchema, before));
+  if (issues.length) return { success: false, input: "target", issues };
+  const documentState = transformDocument(materialized);
+  const context = isObject(documentState) ? contextIssues(documentState, before) : [];
+  return context.length ? { success: false, input: "target", issues: context } : { success: true, issues: [], documentState };
+}
+function validateBlock(block, serverSchema) {
+  const issues = check(blockRoot(), block, serverSchema);
+  return issues.length ? { success: false, input: "target", issues } : { success: true, issues: [], documentState: block };
+}
+
+// convo-email-agent/src/sdk/editor-validator.ts
+var ROOT_PATH = "<root>";
+function dotPath(segments) {
+  return segments.length === 0 ? ROOT_PATH : segments.map(String).join(".");
+}
+function pointerToPath(pointer) {
+  const segments = pointer.split("/").slice(1).map((segment) => segment.replace(/~1/gu, "/").replace(/~0/gu, "~"));
+  return dotPath(segments);
+}
+var LINE_HEIGHT_PATH = /^settings\.(?:stripes|headings\.h[1-6])\.lineHeight(?:\.(?:desktop|mobile))?$/u;
+function formatIssue(issue) {
+  const path = dotPath(issue.path);
+  if (issue.code === "unrecognized_keys" && issue.keys && issue.keys.length > 0) {
+    return issue.keys.map((key) => ({ path, code: issue.code, message: "unsupported property ".concat(JSON.stringify(key)) }));
+  }
+  const missing = issue.message.startsWith("missing required property ");
+  const message = !missing && LINE_HEIGHT_PATH.test(path) ? "".concat(issue.message, " ").concat(LINE_HEIGHT_HINT) : issue.message;
+  return [{ path, code: issue.code, message }];
+}
+var LINE_HEIGHT_GROUPS = ["stripes", ...[1, 2, 3, 4, 5, 6].map((level) => "headings/h".concat(level))];
+function lineHeightPrecisionIssues(model, current) {
+  const issues = [];
+  for (const group of LINE_HEIGHT_GROUPS) {
+    for (const platform of ["desktop", "mobile"]) {
+      const instancePath = "/settings/".concat(group, "/lineHeight/").concat(platform);
+      const value = resolveJsonPointer(model, instancePath);
+      if (typeof value !== "number" || !Number.isFinite(value) || Math.round(value * 100) / 100 === value) continue;
+      if (current !== void 0 && resolveJsonPointer(current, instancePath) === value) continue;
+      issues.push({ instancePath, message: "".concat(value, " is stored as a whole percentage and would read back as ").concat(Math.round(value * 100) / 100, ". ").concat(LINE_HEIGHT_HINT) });
+    }
+  }
+  return issues;
+}
+function validateEmailDocument(model, options = {}) {
+  const result = validateDocumentState(model, options.current, options.serverSchema);
+  const rules = [...collectSocialDocumentIssues(model), ...lineHeightPrecisionIssues(model, options.current)].map((rule) => ({ path: pointerToPath(rule.instancePath), code: "editor_rule", message: rule.message }));
+  const ruleFor = (issue) => {
+    const property = /^(?:unsupported|missing required) property "(.+)"$/u.exec(issue.message)?.[1];
+    return property === void 0 ? void 0 : rules.find((rule) => rule.path === "".concat(issue.path, ".").concat(property));
+  };
+  const issues = [];
+  const reported = /* @__PURE__ */ new Set();
+  for (const native of result.issues.flatMap(formatIssue)) {
+    const issue = ruleFor(native) ?? native;
+    if (issue !== native && reported.has(issue.path)) continue;
+    reported.add(issue.path);
+    issues.push(issue);
+  }
+  for (const rule of rules) {
+    if (reported.has(rule.path)) continue;
+    reported.add(rule.path);
+    issues.push(rule);
+  }
+  return issues;
 }
 
 // convo-email-agent/src/sdk/lost-keys.ts
@@ -612,37 +713,45 @@ function jsonIssues(value, input = "target") {
   visit(value, "<root>");
   return issues;
 }
-function unknownIssues(value, input) {
-  const issues = [];
+function visitDocumentFields(value, visitField, serverSchema) {
   const visit = (value2, rawSchema, path) => {
-    const schema = schemaForValue(rawSchema, value2);
+    const schema = schemaForValue(rawSchema, value2, serverSchema?.resolve);
     if (Array.isArray(value2)) {
-      if (schema.items) value2.forEach((child, i) => visit(child, schema.items, "".concat(path, ".").concat(i)));
+      if (schema.items) value2.forEach((child, i) => visit(child, schema.items, [...path, i]));
       return;
     }
     if (!isObject(value2) || !schema.properties) return;
     for (const [key, child] of Object.entries(value2)) {
-      const childPath = path ? "".concat(path, ".").concat(key) : key;
-      if (Object.hasOwn(schema.properties, key)) visit(child, schema.properties[key], childPath);
-      else if (isObject(schema.additionalProperties)) visit(child, schema.additionalProperties, childPath);
-      else issues.push({
-        code: key === "containers" && path.includes("structures.") ? "LEGACY_LAYOUT_UNSUPPORTED" : "UNKNOWN_FIELD",
-        stage: "json",
-        input,
-        path: childPath,
-        message: "This field is not part of the pinned SDK format."
-      });
+      const childPath = [...path, key];
+      const childSchema = Object.hasOwn(schema.properties, key) ? schema.properties[key] : isObject(schema.additionalProperties) ? schema.additionalProperties : void 0;
+      visitField(value2, childPath, childSchema !== void 0);
+      if (childSchema) visit(child, childSchema, childPath);
     }
   };
-  visit(value, getJsonSchema(), "");
+  visit(value, contractSchema(), []);
+}
+function isLegacyStructureLayout(path) {
+  return path.at(-1) === "containers" && path.at(-3) === "structures";
+}
+function unknownIssues(value, input, serverSchema) {
+  const issues = [];
+  visitDocumentFields(value, (_parent, path, known) => {
+    if (!known) issues.push({
+      code: isLegacyStructureLayout(path) ? "LEGACY_LAYOUT_UNSUPPORTED" : "UNKNOWN_FIELD",
+      stage: "json",
+      input,
+      path: path.join("."),
+      message: "This field is not part of the pinned SDK format."
+    });
+  }, serverSchema);
   return issues;
 }
-function validateSnapshot(document) {
+function validateSnapshot(document, serverSchema) {
   const json = jsonIssues(document, "current");
   if (json.length) return { success: false, issues: json };
-  const unknown = unknownIssues(document, "current");
+  const unknown = unknownIssues(document, "current", serverSchema);
   if (unknown.length) return { success: false, issues: unknown };
-  const result = validateDocumentSnapshot(document);
+  const result = validateDocumentSnapshot(document, serverSchema);
   if (!result.success) return { success: false, issues: result.issues.map((issue) => ({
     code: "INVALID_SNAPSHOT",
     stage: "schema",
@@ -653,15 +762,15 @@ function validateSnapshot(document) {
   })) };
   return { success: true, documentState: deepFreeze(cloneJson(result.documentState)), normalizations: [], issues: [], verification: "contract" };
 }
-function validateChange({ current, target, intent }) {
-  const currentResult = current === void 0 ? void 0 : validateSnapshot(current);
+function validateChange({ current, target, intent, serverSchema }) {
+  const currentResult = current === void 0 ? void 0 : validateSnapshot(current, serverSchema);
   if (currentResult && !currentResult.success) return currentResult;
   const json = jsonIssues(target);
   if (json.length) return { success: false, issues: json };
-  const unknown = unknownIssues(target, "target");
+  const unknown = unknownIssues(target, "target", serverSchema);
   if (unknown.length) return { success: false, issues: unknown };
-  const native = validateDocumentState(target, current);
-  const validation = validateEmailDocument(target, { current });
+  const native = validateDocumentState(target, current, serverSchema);
+  const validation = validateEmailDocument(target, { current, serverSchema });
   if (!native.success || validation.length) return { success: false, issues: validation.length ? validation.map((issue) => ({ ...issue, nativeCode: issue.code, code: "INVALID_DOCUMENT", stage: "schema", input: native.input ?? "target" })) : native.issues.map((issue) => ({ code: "INVALID_DOCUMENT", nativeCode: issue.code, stage: "schema", input: native.input ?? "target", path: issue.path.join("."), message: issue.message })) };
   const candidate = native.documentState;
   const before = collectNodeIndex(currentResult?.success ? currentResult.documentState : { stripes: [] });
@@ -686,7 +795,11 @@ function validateChange({ current, target, intent }) {
   for (const pointer of intent?.replaceCollections ?? []) {
     const match = /^\/([^/]+)\/settings\/([^/]+)$/.exec(pointer);
     const node = match && [...after, ...before].find((entry) => entry.id === match[1]);
-    const supported = pointer === "/resources/fonts" || node && (node.blockType === "social" && match[2] === "networks" || node.blockType === "menu" && ["items", "itemType", "colors"].includes(match[2]) || ["image", "button"].includes(node.blockType ?? "") && match[2] === "link");
+    const extended = serverSchema && [...before, ...after].some((entry) => {
+      const prefix = "/" + entry.id + "/settings/";
+      return pointer.startsWith(prefix) && serverSchema.isAdditional(entry.blockType ?? entry.kind, pointer.slice(prefix.length).replaceAll("/", "."));
+    });
+    const supported = extended || pointer === "/resources/fonts" || node && (node.blockType === "social" && match[2] === "networks" || node.blockType === "menu" && ["items", "itemType", "colors"].includes(match[2]) || ["image", "button"].includes(node.blockType ?? "") && match[2] === "link");
     if (!supported) issues.push({ code: "UNSUPPORTED_COLLECTION_REPLACEMENT", stage: "change", input: "target", path: pointer, message: "No reviewed native atomic replacement exists for this path." });
   }
   for (const entry of before) {
@@ -812,12 +925,13 @@ function requireValid(result) {
 }
 
 export {
-  validateBlock,
-  ROOT_PATH,
-  validateEmailDocument,
   collectNodeIndex,
   hasLink,
   linkHostContains,
+  hasCssGradient,
+  validateBlock,
+  ROOT_PATH,
+  validateEmailDocument,
   isSupportedThemeReset,
   hasRecoloredInlineColor,
   releaseCopiedFontColors,
@@ -828,6 +942,8 @@ export {
   mutateAnchor,
   DocumentStateError,
   jsonIssues,
+  visitDocumentFields,
+  isLegacyStructureLayout,
   validateSnapshot,
   validateChange,
   requireValid

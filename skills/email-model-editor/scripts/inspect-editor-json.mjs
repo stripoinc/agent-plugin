@@ -28,6 +28,9 @@ function optionalString(args, option) {
 function readJson(filePath) {
   return JSON.parse(readFileSync(filePath, "utf8"));
 }
+function readServerSchema(sdk, file) {
+  return file === void 0 ? void 0 : new sdk.ServerDocumentSchema(readJson(file));
+}
 function writeJson(filePath, value) {
   mkdirSync(path.dirname(filePath), { recursive: true });
   writeFileSync(filePath, `${JSON.stringify(value, null, 2)}
@@ -64,15 +67,6 @@ function resolveSdkDist(args, startUrl = import.meta.url) {
 }
 async function loadSdk(sdkPath) {
   return import(pathToFileURL(sdkPath).href);
-}
-async function validateEditorJson(emailJson, sdkPath, options = {}) {
-  try {
-    const sdk = await loadSdk(sdkPath);
-    sdk.assertValidEmailModel(emailJson, options);
-    return { valid: true };
-  } catch (error) {
-    return { valid: false, error: compactError(error) };
-  }
 }
 
 // src/skill-scripts/shared/sdk-method-reference.ts
@@ -401,12 +395,28 @@ async function main(argv = process.argv.slice(2)) {
   if (detail !== "summary" && detail !== "full") throw new Error("--detail must be summary or full.");
   if (detail === "summary" && !outputPath) throw new Error("--detail summary requires --output to retain the full inspection report.");
   const sdkPath = resolveSdkDist(args);
+  const sdk = await loadSdk(sdkPath);
   const emailJson = readJson(inputPath);
   const summary = summarizeEditorJson(emailJson);
+  const schema = (() => {
+    try {
+      const serverSchema = readServerSchema(sdk, args["server-schema"] === void 0 ? void 0 : requireString(args, "server-schema"));
+      const session = sdk.openDocument({ current: emailJson, preserveUnknownFields: true, serverSchema });
+      const validation = session.validate();
+      if (!validation.success) throw new sdk.DocumentStateError(validation.issues);
+      return {
+        valid: true,
+        ...validation.compatibility && { scope: "pinned-fields", compatibility: validation.compatibility },
+        ...serverSchema && { serverFields: serverSchema.supportedFields }
+      };
+    } catch (error) {
+      return { valid: false, error: compactError(error) };
+    }
+  })();
   const result = {
     inputPath,
     sdkPath,
-    schema: await validateEditorJson(emailJson, sdkPath, { current: emailJson }),
+    schema,
     summary,
     sdkMethods: sdkMethodReference(sdkPath, Object.keys(summary.blockTypes))
   };
@@ -415,6 +425,9 @@ async function main(argv = process.argv.slice(2)) {
     inputPath,
     outputPath,
     schemaValid: result.schema.valid,
+    schemaScope: result.schema.valid ? result.schema.scope : void 0,
+    compatibility: result.schema.valid ? result.schema.compatibility : void 0,
+    serverFields: result.schema.valid ? result.schema.serverFields : void 0,
     metadata: result.summary.metadata,
     counts: result.summary.counts,
     blockTypes: result.summary.blockTypes,

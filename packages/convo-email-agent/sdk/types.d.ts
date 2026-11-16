@@ -1,7 +1,8 @@
 import type { SocialNetworkInput } from "./social.js";
 import type { BlockKind, BlockSettings, DocumentState, NativeMenuItem } from './generated/document-state.js';
-import type { ChangeIntent, ValidationResult } from './preparation.js';
+import type { ChangeIntent, DocumentCompatibility, ValidationResult } from './preparation.js';
 import type { NodeIndexEntry } from './selectors.js';
+import type { AdditionalNodeSettings, ServerDocumentSchema } from './server-schema.js';
 export type { SocialNetworkInput } from "./social.js";
 export type IdsMap = Record<string, string | number>;
 /** Return a non-empty unique ID; use isTaken to avoid collisions in the destination document. */
@@ -28,6 +29,8 @@ export interface EmailDiagnostics {
     }[];
     validation: "pending" | "passed" | "failed";
     skipped?: string;
+    compatibility?: DocumentCompatibility;
+    serverFields?: readonly string[];
 }
 export interface TextReplacementOptions {
     /** Zero-based index among all matches in the block's text runs, in document order; defaults to 0. A match cannot span HTML tags. */
@@ -268,13 +271,13 @@ export interface EmailNode {
      * Append a complete native menu item, or insert before/after a zero-based existing item index.
      * The item must satisfy the current shared/per-item menu mode; image requirements depend on that mode.
      */
-    addMenuItem(item: NativeMenuItem, position?: {
+    addMenuItem(item: NativeMenuItem & AdditionalNodeSettings<'menuItem'>, position?: {
         before: number;
     } | {
         after: number;
     }): EmailNode;
     /** Deep patch one existing zero-based item. A type/mode change must include its complete new variant. */
-    updateMenuItem(index: number, patch: DeepPatch<NativeMenuItem>): EmailNode;
+    updateMenuItem(index: number, patch: DeepPatch<NativeMenuItem & AdditionalNodeSettings<'menuItem'>>): EmailNode;
     removeMenuItem(index: number): EmailNode;
     /** Move an existing zero-based item relative to another item; both indices refer to the list before the move. */
     moveMenuItem(index: number, position: {
@@ -464,6 +467,8 @@ export type MenuSharedMutation = {
     shared_link_color?: string;
 };
 export interface CreateEmailSdkOptions {
+    /** Schema downloaded from the target server for this operation. */
+    serverSchema?: ServerDocumentSchema;
     /**
      * Complete native Document State object, not serialized JSON or a partial patch.
      * Only plain JSON data is accepted: no undefined, NaN/Infinity, cycles, functions, class instances or accessors.
@@ -494,7 +499,7 @@ export type DeepPatch<T> = T extends readonly unknown[] ? T : T extends object ?
     [K in keyof T]?: DeepPatch<T[K]>;
 } : T;
 export type TypedBlockNode<K extends BlockKind> = Omit<EmailNode, 'patchSettings'> & {
-    patchSettings(patch: DeepPatch<Omit<BlockSettings<K>, 'networks' | 'items'>>): TypedBlockNode<K>;
+    patchSettings(patch: DeepPatch<Omit<BlockSettings<K>, 'networks' | 'items'> & AdditionalNodeSettings<K>>): TypedBlockNode<K>;
 };
 export interface EmailChangeRecord {
     operation: number;
