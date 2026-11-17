@@ -1,6 +1,6 @@
-import {createHash} from 'node:crypto';
+import {createHash, randomUUID} from 'node:crypto';
 import {constants} from 'node:fs';
-import {mkdir, mkdtemp, open, realpath, rename, rm} from 'node:fs/promises';
+import {mkdir, open, realpath, rename, rm} from 'node:fs/promises';
 import {validateHeaderValue} from 'node:http';
 import {tmpdir} from 'node:os';
 import {basename, dirname, join, resolve, sep} from 'node:path';
@@ -74,15 +74,16 @@ async function atomicWrite(destination, bytes, roots, signal) {
     'The destination changed during the transfer.');
   const parent = dirname(resolve(destination));
   await mkdir(parent, {recursive: true});
-  const temporary = await mkdtemp(join(parent, '.stripo-transfer-'));
-  const file = join(temporary, 'payload');
+  const file = join(parent, '.stripo-transfer-' + randomUUID());
+  const handle = await open(file, 'wx', 0o600);
   try {
-    const handle = await open(file, 'wx', 0o600);
     try { await handle.writeFile(bytes, {signal}); await handle.sync(); } finally { await handle.close(); }
-    signal?.throwIfAborted();
+    signal.throwIfAborted();
+    // Rename is the commit point. After it succeeds there is no staging cleanup to fail.
     await rename(file, destination);
-  } finally {
-    await rm(temporary, {recursive: true, force: true});
+  } catch (error) {
+    await rm(file, {force: true});
+    throw error;
   }
 }
 
