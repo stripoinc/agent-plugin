@@ -37,51 +37,56 @@ Do not use quota-consuming `export_to_html` as routine model-write verification.
 
 ## Transfers
 
-Transfer signed URLs with the desktop plugin's installed helper unless `HOST.md` installs another
-authorized binding. This bundle does not ship the helper itself:
+Start with the installed helper under ordinary host permissions (Codex `use_default`).
+The consuming host supplies the binding in `HOST.md`.
 
 ```bash
 node <bundle-root>/scripts/transfer.mjs download --url '<downloadUrl>' --output <local-file>
 node <bundle-root>/scripts/transfer.mjs upload --url '<uploadUrl>' --input <local-file> --max-bytes <ticket maxBytes> --method PUT
 ```
 
-Pass the exact signed URL, including its query, without OAuth, Cookie or Authorization headers.
-These are direct public HTTPS/S3 transfers; their origin differs from the MCP endpoint. The
-helper verifies TLS, refuses redirects and non-public destinations, applies a 64 MiB ceiling
-that `--max-bytes` can lower, never retries automatically, and leaves an existing destination
-untouched on failure. Pass `--sha256` when a manifest supplies one. Uploads need the ticket's
-`maxBytes`, the actual `--content-type` for images, and `--headers-file <headers.json>` holding
-the exact ticket headers when MCP returns any. A download prints `downloaded:true` with its byte
-count and SHA-256; an upload prints `transferred:true, persisted:false`, which confirms only the
-file transfer: call `set_document_state`, `upload_image` or the appropriate finalizer next. A
-failure prints `{success:false, code, error}`. Without the helper or another authorized binding,
-stop that step; never invent a proxy route or download through another tool.
+Keep the exact signed HTTPS request target, TLS verification and the configured network route.
+Refuse redirects. Send only the ticket headers (`--headers-file`) and image MIME type
+(`--content-type`), with no OAuth, Cookie or Authorization. Keep input, output and header files
+in the private task directory under system temp. Limit the stream to 64 MiB or the smaller
+ticket/manifest `--max-bytes`. Verify completeness and any supplied download `--sha256` before
+atomically replacing the destination. Direct connections validate every DNS answer and pin a
+public IP. The plugin supports proxy-side DNS only for its exact Stripo storage hosts on 443.
+Uploads require a storage ticket, its method, original bytes, headers and limit.
 
-## Network access before downloading
+Use the helper's automatic curl fallback for technical failures. If the entry point cannot run,
+use the alternate binding in `HOST.md` or an available host client enforcing this contract.
+The same resource, recipient, method, data and permissions need no further approval. Report
+a missing binding if none can enforce the contract.
 
-Successful Stripo MCP calls do not establish network access for local shell commands. Before
-the first model, preview or hosted-image download, check the host's effective network policy
-and its transfer instructions in `HOST.md` when installed. If the transfer needs access beyond
-the shell sandbox, request it through the host's supported approval mechanism with that first
-`transfer.mjs` command, asking only for HTTPS access to the returned URL's host. Do not run a
-command merely to demonstrate a known restriction. Respect approval denials and report a
-blocked transfer; these instructions do not grant permissions.
+GET returns `downloaded:true`, bytes and SHA-256. PUT returns `transferred:true, persisted:false`
+before MCP finalization. Failures return `{success:false, code, error}` plus known transport,
+phase, attempts and HTTP status. Treat signed URLs as temporary credentials. Keep queries,
+proxy credentials, ticket headers and bodies out of diagnostics.
 
-Interpret a failed transfer by its `code`:
+## Failures and retries
 
-| `code` | Meaning | Next step |
-| --- | --- | --- |
-| `ENOTFOUND`, `EAI_AGAIN` | DNS resolution failed: usually sandbox network policy, never proof of an expired URL or a broken model. | Check the execution context and network approval; do not repeat under an unchanged restriction. |
-| `HTTP_ERROR` with HTTP 403 or 400 | The signed URL expired or no longer matches its signature. | Request a fresh URL through the same read tool with the same `(id, type)`. |
-| `ECONNRESET`, `ETIMEDOUT`, `ECONNREFUSED`, `ABORT_ERR`, `TRANSFER_FAILED`, `HTTP_ERROR` with HTTP 5xx | Transient or unknown transport failure. | Retry once on the permitted path, reusing the same URL while it remains valid. |
-| `CHECKSUM_MISMATCH`, `INCOMPLETE_RESPONSE`, `SIZE_LIMIT` | The received bytes are not the advertised artifact or exceed its limit. | Discard them and download once from a fresh URL; report a repeated mismatch. |
-| `NON_PUBLIC_HOST`, `INVALID_URL`, `INVALID_HEADERS`, `INVALID_ARGUMENT` | The URL, headers or command are not an authorized direct transfer. | Correct a local argument error; otherwise report it and never bypass the check. |
-
-Use bounded retries only for transient failures on a permitted network path. Download a fresh
-response completely and keep a newly acquired model unmodified as the base for later editing.
-Never recreate an email, repeat a write, or restart an image job to recover a download. These
-GET rules do not apply to upload tickets or writes; follow [document-write recovery](stripo-persistence.md)
-or [image-upload recovery](stripo-images.md#supplied-images).
-
-Treat signed URLs as temporary credentials: keep them and their query parameters out of
-user-facing reports and diagnostic output.
+- **Execution or access.** Report a pre-launch refusal as the execution tool's decision. An unavailable
+  escalation mode still permits an authorized default-mode attempt. Request extra access only
+  when needed and supported. Never repeat an unavailable mode. A denial for the action or destination
+  binds all clients. Any alternative must be permitted and resolve the reviewer's stated reason.
+- **Transport.** `ENOTFOUND`, `EAI_AGAIN` identify DNS failures. Check the reported phase and host
+  policy. A reset or timeout may also be technical. Keep the same proxy, DNS and TLS policy.
+- **HTTP.** Inspect the status, recognized provider error code and ticket expiry. A 400 or 403
+  alone leaves the cause open. Respect access denials and proxy refusals. Correct a signature
+  or header mismatch at its source. On confirmed expiry, obtain a fresh URL for the same
+  resource from the issuing tool, e.g. `get_document_state(id, type)`, `get_screenshot` with
+  the same mode, or `get_document_state_schema()`.
+- **Validation.** Stop on an unsafe URL/host/path/header, TLS verification, checksum, size or
+  incomplete-response failure. Preserve the previous destination and correct the cause.
+- **GET.** Allow two transfer attempts total per resource across helper, fallback and agent,
+  including a refreshed ticket or a retry after a transient 5xx. Subtract the reported
+  `attempts` and use `--max-attempts 1` for the last try. Never recreate an email, repeat a
+  write, or restart an image job to recover a download.
+- **PUT and finalize.** Fallback is possible only before origin request bytes could have been
+  sent. Keep the same ticket, bytes, method, content type and required headers. If a PUT is
+  uncertain, keep its ticket and files, stop before finalization and use documented recovery
+  when available. After an uncertain document finalizer, read saved state before any replay.
+  For an uncertain image finalizer with no gallery readback, report the uncertainty.
+  Follow [document recovery](stripo-errors.md#document-writes) or
+  [image recovery](stripo-errors.md#image-uploads).

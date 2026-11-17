@@ -7,6 +7,11 @@ const checks = {node: version[0] > 20 || version[0] === 20 && (version[1] > 18 |
 checks.hostNotes = ['email-from-reference', 'email-model-editor']
   .every(skill => existsSync(new URL(`../skills/${skill}/HOST.md`, import.meta.url)));
 try {
+  checks.transfer = typeof (await import('./transfer.mjs')).transferFile === 'function';
+} catch {
+  checks.transfer = false;
+}
+try {
   const sdk = await import('../packages/convo-email-agent/index.js');
   checks.emailSdk = ['assertValidEmailModel', 'validateEmailDocument', 'createEmailSdk', 'getContract'].every(name => typeof sdk[name] === 'function');
 } catch (error) {

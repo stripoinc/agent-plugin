@@ -70,20 +70,23 @@ of recreating the image.
 
 ## Signed file transfers
 
-`node <bundle-root>/scripts/transfer.mjs` is this host's transfer binding. Its commands, limits
-and failure codes are in [Acquisition and transfers](reference/stripo-acquisition.md#transfers).
-This plugin's helper also uploads only to Stripo storage (`UNSUPPORTED_HOST` otherwise) and
-reads and writes local files only under the system temp directory (`OUTSIDE_TASK_DIR`): keep
-every `--input`, `--output` and `--headers-file` in the task directory, and copy a supplied file
-there before uploading it. Signed URLs point to Stripo storage, not to the MCP host. Codex's
-default sandbox has no network: run the first transfer of a task with an escalation request
-whose justification names the URL's host and with `prefix_rule` set to `node` and the helper's
-absolute path, so later transfers need no new approval; run each transfer as its own command,
-not in a pipeline or `&&` chain, so the rule matches. Claude Code runs it under its Bash
-permission rules; with sandboxing enabled the host must be allowed. A denied approval stops the
-transfer; report it. For a website reference in Codex, fetch its public data with the web tool
-when available, otherwise with one escalated command that fetches every needed feed or page
-together.
+Start `node <bundle-root>/scripts/transfer.mjs` with ordinary host permissions (Codex
+`use_default`). Follow [Acquisition and transfers](reference/stripo-acquisition.md#transfers)
+for commands, safeguards, the two-attempt budget and finalization. Keep all file arguments in
+the private task directory under system temp. Copy supplied files there before uploading.
+
+The helper tries Node first and can select curl automatically. If its primary entry is missing
+or cannot start, run `node <bundle-root>/scripts/transfer-curl.mjs` with the same arguments
+and remaining budget. If Node cannot start or the curl capability probe returns
+`CURL_UNAVAILABLE`, use a distinct available host-managed binding enforcing the linked
+contract. The probe consumes no transfer attempt. Do not retry an unavailable binding.
+Use the existing authorization. A bare curl invocation lacks the destination, file and
+integrity checks.
+
+Apply the host's current network policy. Request escalation only when needed and supported.
+A pre-launch refusal belongs to the execution tool. A concrete denial for the action or
+recipient applies to all clients. For public website references, use an authorized web or
+browser tool under the same host policy.
 
 ## Images
 

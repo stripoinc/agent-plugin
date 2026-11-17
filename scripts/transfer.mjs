@@ -1,244 +1,127 @@
 #!/usr/bin/env node
 // Transfer exact file bytes using URLs returned by Stripo MCP. OAuth stays with the host.
-import {createHash} from 'node:crypto';
-import {lookup as resolveHost} from 'node:dns/promises';
-import {mkdir, mkdtemp, open, readFile, realpath, rename, rm} from 'node:fs/promises';
-import {request as httpsRequest} from 'node:https';
-import {BlockList, isIP} from 'node:net';
-import {tmpdir} from 'node:os';
-import {basename, dirname, join, resolve, sep} from 'node:path';
+import {request as httpRequest} from 'node:http';
+import {Agent, request as httpsRequest} from 'node:https';
+import {resolve} from 'node:path';
+import {connect as tlsConnect} from 'node:tls';
 import {fileURLToPath} from 'node:url';
-import {parseArgs} from 'node:util';
+import {boundedBytes, httpFailure, responseLength, runCli, runTransfer} from './transfer-common.mjs';
+import {curl} from './transfer-curl.mjs';
+import {pinnedLookup, requireValue, resolveAddress, TransferError} from './transfer-route.mjs';
 
-const MAX_BYTES = 64 * 1024 * 1024;
-const TIMEOUT_MS = 60_000;
-// Uploads go only to the Stripo MCP storage buckets that issue the signed tickets.
-const STORAGE_HOSTS = new Set(['live', 'stage', 'dev'].map(stage => `stripo-mcp-content-${stage}.s3.eu-west-1.amazonaws.com`));
-const blocked = new BlockList();
-for (const [address, prefix] of [
-  ['0.0.0.0', 8], ['10.0.0.0', 8], ['100.64.0.0', 10], ['127.0.0.0', 8],
-  ['169.254.0.0', 16], ['172.16.0.0', 12], ['192.0.0.0', 24], ['192.0.2.0', 24],
-  ['192.88.99.0', 24], ['192.168.0.0', 16], ['198.18.0.0', 15], ['198.51.100.0', 24],
-  ['203.0.113.0', 24], ['224.0.0.0', 4], ['240.0.0.0', 4],
-]) blocked.addSubnet(address, prefix, 'ipv4');
-for (const [address, prefix] of [['2001::', 23], ['2001:db8::', 32], ['2002::', 16], ['3fff::', 20]]) {
-  blocked.addSubnet(address, prefix, 'ipv6');
-}
-const globalV6 = new BlockList();
-globalV6.addSubnet('2000::', 3, 'ipv6');
-
-class TransferError extends Error {
-  constructor(code, message) { super(message); this.code = code; }
-}
-function requireValue(condition, code, message) {
-  if (!condition) throw new TransferError(code, message);
-}
-
-function targetUrl(raw) {
-  requireValue(typeof raw === 'string' && !/[\s\x00-\x1f\x7f\\]/u.test(raw), 'INVALID_URL', 'Use the exact HTTPS URL returned by MCP.');
-  let url;
-  try { url = new URL(raw); } catch { throw new TransferError('INVALID_URL', 'Invalid transfer URL.'); }
-  const parts = /^https:\/\/([^/?#]+)([^#]*)$/i.exec(raw);
-  requireValue(parts && url.protocol === 'https:' && !parts[1].includes('@') && !url.username && !url.password,
-    'INVALID_URL', 'Only HTTPS URLs without credentials or fragments are supported.');
-  const hostname = url.hostname.replace(/^\[|\]$/g, '');
-  // Keep the signed path and query byte-for-byte, including escapes and parameter order.
-  const path = !parts[2] || parts[2].startsWith('?') ? `/${parts[2]}` : parts[2];
-  return {hostname, port: url.port || 443, path};
-}
-
-// Local files stay under the system temp directory, so an approved transfer cannot read or
-// replace files elsewhere.
-async function taskRoots() {
-  const roots = [];
-  for (const directory of new Set([tmpdir(), '/tmp'])) {
-    try { roots.push(await realpath(directory)); } catch { /* absent on this platform */ }
+async function openTunnel(context) {
+  const {route: {target, proxy}, signal} = context;
+  const hostname = proxy.hostname.replace(/^\[|\]$/g, '');
+  context.phase = 'proxy-dns';
+  const address = await resolveAddress(hostname, context, false);
+  signal.throwIfAborted();
+  const authority = target.hostname + ':' + target.port;
+  const headers = {host: authority};
+  if (proxy.username || proxy.password) {
+    const credentials = decodeURIComponent(proxy.username) + ':' + decodeURIComponent(proxy.password);
+    headers['Proxy-Authorization'] = 'Basic ' + Buffer.from(credentials).toString('base64');
   }
-  return roots;
-}
-
-async function taskFile(file, roots, option) {
-  requireValue(typeof file === 'string' && file.length > 0, 'INVALID_ARGUMENT', `${option} requires a file path.`);
-  // Resolve the deepest existing ancestor, so symlinks cannot lead outside the temp directory.
-  let existing = resolve(file);
-  const missing = [];
-  for (;;) {
-    try { existing = await realpath(existing); break; } catch (error) { if (error.code !== 'ENOENT') throw error; }
-    const parent = dirname(existing);
-    requireValue(parent !== existing, 'OUTSIDE_TASK_DIR', `${option} must be inside the task directory.`);
-    missing.unshift(basename(existing));
-    existing = parent;
-  }
-  const path = join(existing, ...missing);
-  requireValue(roots.some(root => path.startsWith(root.endsWith(sep) ? root : root + sep)),
-    'OUTSIDE_TASK_DIR', `${option} must be inside the task directory under the system temp directory.`);
-  return path;
-}
-
-function publicAddress(address) {
-  const family = isIP(address);
-  return family === 4 ? !blocked.check(address, 'ipv4')
-    : family === 6 && globalV6.check(address, 'ipv6') && !blocked.check(address, 'ipv6');
-}
-
-function requestHeaders(input, contentType, body) {
-  requireValue(input && typeof input === 'object' && !Array.isArray(input), 'INVALID_HEADERS', 'Headers must be a JSON object.');
-  const headers = {};
-  for (const [field, value] of Object.entries(input)) {
-    const name = field.toLowerCase();
-    requireValue(/^[!#$%&'*+.^_`|~0-9a-z-]+$/.test(name) && typeof value === 'string' && !/[\r\n\x00]/.test(value),
-      'INVALID_HEADERS', 'Invalid transfer header.');
-    requireValue(!['authorization', 'proxy-authorization', 'cookie', 'host', 'content-length', 'transfer-encoding',
-      'connection', 'upgrade', 'expect', 'te', 'trailer'].includes(name), 'INVALID_HEADERS', 'Authentication and transport headers are not accepted.');
-    requireValue(!(name in headers), 'INVALID_HEADERS', 'Duplicate transfer header.');
-    headers[name] = value;
-  }
-  if (body !== undefined) {
-    if (contentType !== undefined) {
-      requireValue(typeof contentType === 'string' && contentType.length > 0 && !/[\r\n\x00]/.test(contentType),
-        'INVALID_HEADERS', 'Invalid content type.');
-      requireValue(!headers['content-type'] || headers['content-type'] === contentType,
-        'INVALID_HEADERS', 'Content type differs from the ticket headers.');
-      headers['content-type'] = contentType;
-    }
-    headers['content-type'] ??= 'application/json';
-    headers['content-length'] = String(body.length);
-  }
-  return headers;
-}
-
-async function responseBytes(response, maxBytes) {
-  requireValue(response.statusCode >= 200 && response.statusCode < 300,
-    'HTTP_ERROR', `File transfer returned HTTP ${response.statusCode}; no retry was attempted.`);
-  const length = response.headers['content-length'];
-  requireValue(length === undefined || /^\d+$/.test(length), 'INVALID_RESPONSE', 'Invalid response Content-Length.');
-  const expected = length === undefined ? undefined : Number(length);
-  requireValue(expected === undefined || (Number.isSafeInteger(expected) && expected <= maxBytes),
-    'SIZE_LIMIT', 'Response exceeds the byte limit.');
-  const chunks = [];
-  let size = 0;
-  for await (const chunk of response) {
-    size += chunk.length;
-    requireValue(size <= maxBytes, 'SIZE_LIMIT', 'Response exceeds the byte limit.');
-    chunks.push(chunk);
-  }
-  requireValue(expected === undefined || size === expected, 'INCOMPLETE_RESPONSE', 'Response length does not match Content-Length.');
-  return Buffer.concat(chunks, size);
-}
-
-async function exchange(target, method, body, headers, maxBytes, {lookup, request}) {
-  const signal = AbortSignal.timeout(TIMEOUT_MS);
-  const addresses = isIP(target.hostname) ? [{address: target.hostname, family: isIP(target.hostname)}]
-    : await lookup(target.hostname, {all: true, verbatim: true});
-  requireValue(addresses.length > 0 && addresses.every(({address}) => publicAddress(address)),
-    'NON_PUBLIC_HOST', 'Transfer host must resolve only to public addresses.');
-  const address = addresses.find(item => item.family === 4) ?? addresses[0];
+  context.phase = 'proxy-connect';
+  const request = proxy.protocol === 'https:' ? httpsRequest : httpRequest;
   return new Promise((fulfill, reject) => {
-    const req = request({
-      ...target, method, headers, agent: false, rejectUnauthorized: true, signal,
-      family: address.family, autoSelectFamily: false,
-      lookup: (_host, options, callback) => options.all ? callback(null, [address]) : callback(null, address.address, address.family),
-    }, response => {
-      responseBytes(response, maxBytes).then(fulfill, error => { response.destroy(); reject(error); });
-    });
+    const req = request({hostname, port: proxy.port || (proxy.protocol === 'https:' ? 443 : 80),
+      method: 'CONNECT', path: authority, headers, agent: false, signal, rejectUnauthorized: true,
+      family: address.family, autoSelectFamily: false, lookup: pinnedLookup(address)});
     req.on('error', reject);
-    req.end(body);
+    req.once('connect', (response, socket, head) => {
+      if (response.statusCode !== 200 || head.length) {
+        socket.destroy();
+        if (response.statusCode !== 200) {
+          context.httpStatus = response.statusCode;
+          reject(new TransferError('PROXY_HTTP_ERROR', 'Proxy returned HTTP ' + response.statusCode + '.'));
+        } else reject(new TransferError('INVALID_RESPONSE', 'Unexpected data before tunnel TLS.'));
+      } else fulfill(socket);
+    });
+    req.end();
   });
 }
 
-async function atomicWrite(destination, bytes) {
-  const parent = dirname(resolve(destination));
-  await mkdir(parent, {recursive: true});
-  const temporary = await mkdtemp(join(parent, '.stripo-transfer-'));
-  const file = join(temporary, 'payload');
-  try {
-    const handle = await open(file, 'wx', 0o600);
-    try { await handle.writeFile(bytes); await handle.sync(); } finally { await handle.close(); }
-    await rename(file, destination);
-  } finally {
-    await rm(temporary, {recursive: true, force: true});
-  }
-}
-
-export async function transferFile(options, {lookup = resolveHost, request = httpsRequest, roots} = {}) {
-  const {operation, url, sha256, contentType, headers = {}} = options;
-  let {input, output} = options;
-  requireValue(['download', 'upload'].includes(operation), 'INVALID_ARGUMENT', 'Choose download or upload.');
-  const target = targetUrl(url);
-  requireValue(operation === 'download' || STORAGE_HOSTS.has(target.hostname.toLowerCase()),
-    'UNSUPPORTED_HOST', 'Uploads go only to Stripo storage URLs returned by MCP.');
-  roots ??= await taskRoots();
-  if (input !== undefined) input = await taskFile(input, roots, '--input');
-  if (output !== undefined) output = await taskFile(output, roots, '--output');
-  const maxBytes = options.maxBytes ?? MAX_BYTES;
-  requireValue(Number.isSafeInteger(maxBytes) && maxBytes > 0 && maxBytes <= MAX_BYTES,
-    'INVALID_ARGUMENT', `max-bytes must be between 1 and ${MAX_BYTES}.`);
-  const method = options.method ?? (operation === 'download' ? 'GET' : 'PUT');
-  requireValue(method === (operation === 'download' ? 'GET' : 'PUT'), 'INVALID_ARGUMENT', 'Downloads require GET; Stripo uploads require PUT.');
-  requireValue(sha256 === undefined || (operation === 'download' && /^[a-f0-9]{64}$/i.test(sha256)),
-    'INVALID_ARGUMENT', 'sha256 must be a download checksum of 64 hexadecimal characters.');
-  let body;
-  if (operation === 'upload') {
-    requireValue(input && !output && options.maxBytes !== undefined, 'INVALID_ARGUMENT', 'Upload requires --input and the ticket max-bytes; --output is download-only.');
-    const handle = await open(input, 'r');
+async function readResponse(response, maxBytes, context) {
+  const {statusCode: status, headers} = response;
+  context.phase = 'response';
+  context.httpStatus = status;
+  if (status < 200 || status >= 300) {
+    // S3 can return its error code in XML. Never retain or print the complete error body.
+    const sample = [];
+    let remaining = Math.min(4096, maxBytes);
     try {
-      const stat = await handle.stat();
-      requireValue(stat.isFile() && stat.size > 0 && stat.size <= maxBytes, 'SIZE_LIMIT', 'Upload must be a nonempty file within the ticket byte limit.');
-      body = await handle.readFile();
-      requireValue(body.length === stat.size, 'FILE_CHANGED', 'The input size changed while reading; inspect it before uploading.');
-    } finally { await handle.close(); }
-  } else {
-    requireValue(output && !input, 'INVALID_ARGUMENT', 'Download requires --output; --input is upload-only.');
+      for await (const chunk of response) {
+        sample.push(chunk.subarray(0, remaining));
+        remaining -= sample.at(-1).length;
+        if (!remaining) break;
+      }
+    } catch { /* the received HTTP status still applies */ }
+    throw httpFailure(status, headers['x-amz-error-code'], Buffer.concat(sample).toString('utf8'));
   }
-  const response = await exchange(target, method, body, requestHeaders(headers, contentType, body), maxBytes, {lookup, request});
-  const bytes = body ?? response;
-  const digest = createHash('sha256').update(bytes).digest('hex');
-  requireValue(!sha256 || digest === sha256.toLowerCase(), 'CHECKSUM_MISMATCH', 'Downloaded file checksum does not match the manifest.');
-  if (operation === 'download') {
-    await atomicWrite(output, response);
-    return {downloaded: true, bytes: bytes.length, sha256: digest};
+  const expected = responseLength(status, headers['content-length'], headers['content-range'], maxBytes);
+  let bytes;
+  try { bytes = await boundedBytes(response, maxBytes); }
+  catch (error) {
+    if (response.complete === false && ['ECONNRESET', 'ERR_STREAM_PREMATURE_CLOSE'].includes(error.code))
+      throw new TransferError('INCOMPLETE_RESPONSE', 'The HTTP response ended prematurely.');
+    throw error;
   }
-  // An empty S3 HTTP 200 response is valid. Only the subsequent MCP call saves the entity.
-  return {transferred: true, bytes: bytes.length, sha256: digest, persisted: false};
+  requireValue(response.complete !== false && (expected === undefined || bytes.length === expected),
+    'INCOMPLETE_RESPONSE', 'The HTTP response was incomplete.');
+  return bytes;
 }
 
-async function main() {
-  let values, positionals;
+async function node({method, body, headers, maxBytes}, context) {
+  const {route: {target, proxy, address}, signal, request = httpsRequest} = context;
+  let tunnel, agent, cancel;
   try {
-    ({values, positionals} = parseArgs({allowPositionals: true, options: {
-      url: {type: 'string'}, input: {type: 'string'}, output: {type: 'string'},
-      method: {type: 'string'}, 'content-type': {type: 'string'}, 'max-bytes': {type: 'string'},
-      sha256: {type: 'string'}, 'headers-file': {type: 'string'}, help: {type: 'boolean'},
-    }}));
-  } catch { throw new TransferError('INVALID_ARGUMENT', 'Invalid arguments; use --help.'); }
-  if (values.help) {
-    console.log('node transfer.mjs download --url <MCP URL> --output <file> [--sha256 <hex>] [--max-bytes <n>]\n'
-      + 'node transfer.mjs upload --url <MCP URL> --input <file> --max-bytes <ticket limit> [--content-type <mime>] [--method PUT]\n'
-      + 'Optional: --headers-file <JSON object returned by MCP>. HTTPS only; no redirects or automatic retries.');
-    return;
+    let connection;
+    if (proxy) {
+      tunnel = await openTunnel(context);
+      signal.throwIfAborted();
+      agent = new Agent();
+      agent.createConnection = () => tlsConnect({socket: tunnel, servername: target.hostname, rejectUnauthorized: true});
+      connection = {agent};
+      context.phase = 'tls';
+    } else {
+      connection = {agent: false, family: address.family, autoSelectFamily: false, lookup: pinnedLookup(address)};
+      context.phase = 'connect';
+    }
+    return await new Promise((fulfill, reject) => {
+      const req = request({...target, ...connection, method, headers, signal, rejectUnauthorized: true}, response => {
+        readResponse(response, maxBytes, context).then(fulfill, error => { response.destroy(); reject(error); });
+      });
+      req.on('error', reject);
+      cancel = () => {
+        req.destroy?.();
+        reject(signal.reason);
+      };
+      signal.addEventListener('abort', cancel, {once: true});
+      if (signal.aborted) return cancel();
+      const send = () => {
+        context.putStarted = body !== undefined;
+        req.end(body);
+      };
+      req.on('socket', socket => {
+        socket.once('connect', () => { context.phase = 'tls'; });
+        socket.once('secureConnect', () => {
+          context.phase = 'request';
+          if (body !== undefined && request === httpsRequest) send();
+        });
+      });
+      // Core allocates a fresh socket before end(). Hold PUT bytes until verified TLS.
+      // An injected request binding owns its socket lifecycle, so handing it bytes is final.
+      if (body === undefined || request !== httpsRequest) send();
+    });
+  } finally {
+    if (cancel) signal.removeEventListener('abort', cancel);
+    agent?.destroy();
+    tunnel?.destroy();
   }
-  requireValue(positionals.length === 1, 'INVALID_ARGUMENT', 'Choose one operation; use --help.');
-  let headers = {};
-  if (values['headers-file']) {
-    const file = await taskFile(values['headers-file'], await taskRoots(), '--headers-file');
-    try { headers = JSON.parse(await readFile(file, 'utf8')); }
-    catch { throw new TransferError('INVALID_HEADERS', 'Cannot read the ticket headers JSON file.'); }
-  }
-  const result = await transferFile({
-    operation: positionals[0], url: values.url, input: values.input, output: values.output,
-    method: values.method, contentType: values['content-type'], sha256: values.sha256, headers,
-    maxBytes: values['max-bytes'] === undefined ? undefined : Number(values['max-bytes']),
-  });
-  console.log(JSON.stringify(result));
 }
 
-if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
-  main().catch(error => {
-    // Network/filesystem error messages can contain signed URLs, paths or upstream bodies.
-    const code = error instanceof TransferError ? error.code
-      : /^[A-Z][A-Z0-9_]{0,63}$/.test(error.code ?? '') ? error.code : 'TRANSFER_FAILED';
-    console.log(JSON.stringify({success: false, code, error: error instanceof TransferError ? error.message
-      : 'File transfer failed; inspect network access, TLS trust and local paths. No retry was attempted.'}));
-    process.exitCode = 1;
-  });
+export function transferFile(options, dependencies = {}) {
+  return runTransfer(options, dependencies, [node, curl]);
 }
+
+if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) await runCli(transferFile);

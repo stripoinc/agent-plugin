@@ -18,7 +18,8 @@ requests to inspect content do not start image jobs.
 
 Requirements: Node.js 20.18.1+ and an agent with shell, file, image inspection and MCP tools.
 The supplied shell examples use POSIX syntax; on Windows use WSL or an equivalent shell.
-The email skills need no npm install, curl, Python runtime or private source checkout.
+The bundled Node client needs no npm install. An optional curl 8.4+ installation with HTTPS
+enables the alternate transport.
 
 Claude Code:
 
@@ -49,18 +50,56 @@ Keep the complete plugin together, including
 `packages/`: the local commands resolve the SDK relative to the skills.
 
 Run `node scripts/doctor.mjs` from the plugin directory to check local prerequisites (`node`,
-`emailSdk` and `hostNotes`). In a new agent session, ask for a read-only `whoami` check and
+`emailSdk`, `transfer` and `hostNotes`). In a new agent session, ask for a read-only `whoami` check and
 verify the intended account/project before editing. Local prerequisite checks do not prove MCP
 authentication or write access.
 
-The bundled `scripts/transfer.mjs` downloads models, references and previews and uploads prepared
-files using the exact HTTPS URLs returned by MCP. It supports direct S3 links, keeps file bytes
-unchanged, checks size limits and optional download checksums, and replaces downloads atomically.
-Uploads go only to Stripo storage, and it reads and writes local files only under the system temp
-directory.
-It returns compact JSON without printing signed URLs. See
-[Transfers](skills/email-model-editor/reference/stripo-acquisition.md#transfers) for commands and
-upload finalization.
+## Signed file transfers
+
+`scripts/transfer.mjs` starts with ordinary host permissions. It downloads authorized HTTPS
+models, references and previews and stages files for Stripo using PUT. Both clients keep the
+original request path and query, verify TLS, refuse redirects, bound response streams and
+verify any supplied download SHA-256. The limit is 64 MiB or the smaller manifest/ticket
+limit. Keep local files in the private task directory under system temp. Downloads replace
+the destination atomically after verification. The JSON result includes the transport,
+attempt count and HTTP status when known. See the [CLI and recovery rules](skills/email-model-editor/reference/stripo-acquisition.md#transfers).
+
+- **Direct.** The host resolver must return only public addresses. Both clients connect to
+  the same checked IP with certificate verification for the original hostname. A failed DNS
+  lookup can be retried within budget. A direct transfer always needs a validated address.
+- **Proxy.** The helper uses the host-configured HTTP or HTTPS proxy, including on Node 20.
+  It selects `https_proxy`/`HTTPS_PROXY`, then `http_proxy`/`HTTP_PROXY`, then
+  `all_proxy`/`ALL_PROXY`. Lowercase takes precedence within each pair. CGI ignores uppercase
+  `HTTP_PROXY`. `no_proxy`/`NO_PROXY` supports comma-separated exact hosts, optional ports,
+  `.domain` or `*.domain` for subdomains, IP literals, IP ranges/CIDR and `*`.
+  Both clients use the selected route throughout the transfer.
+- **Proxy destination policy.** CONNECT delegates target DNS only for the three exact hosts
+  `stripo-mcp-content-live.s3.eu-west-1.amazonaws.com`,
+  `stripo-mcp-content-stage.s3.eu-west-1.amazonaws.com` and
+  `stripo-mcp-content-dev.s3.eu-west-1.amazonaws.com`, on port 443. PUT uses this same
+  allowlist on every route. This trusts the host's configured proxy and resolver to route
+  those provider-controlled names correctly. The client cannot verify the IP chosen by the
+  proxy. Arbitrary reference hosts need an already-permitted direct route with public-IP
+  pinning. Proxy credentials, if configured, go only to the proxy. Ticket headers travel
+  inside the origin TLS connection.
+- **Fallback.** Node runs first. An eligible DNS, connection, timeout or native transport
+  failure can select curl once. A PUT can switch only before handing bytes to the origin.
+  HTTP responses, access denials, cancellation and failed safety checks end that attempt
+  path. An unavailable curl capability probe consumes no transfer attempt.
+  Each attempt has a 60-second deadline covering DNS, CONNECT, TLS and the body.
+  The total budget across clients and agent retries is two. If the primary entry cannot
+  start, `scripts/transfer-curl.mjs` accepts the same CLI arguments and shares all guards.
+  Both bundled entries require Node 20.18.1+. A host without Node needs an equivalent
+  managed binding to transfer the file.
+- **curl prerequisites.** curl 8.4+ enforces the byte cap even for unknown-length responses.
+  HTTPS proxies also require the curl HTTPS-proxy feature. The helper disables curl's
+  startup file, supplies the request target and headers through stdin, and keeps staged data
+  in a private temporary directory. Node uses its configured TLS trust. curl uses its TLS
+  backend defaults or the host's CA settings (`CURL_CA_BUNDLE`, `SSL_CERT_FILE`,
+  `SSL_CERT_DIR`, or Node's extra CA bundle). With only `NODE_EXTRA_CA_CERTS`, curl reuses
+  Node's effective roots on runtimes providing `tls.getCACertificates`. Older runtimes use
+  the explicit extra PEM for that fallback, so its issuer coverage can be narrower.
+  See the [curl size-limit documentation](https://curl.se/docs/manpage.html#--max-filesize).
 
 ## Examples
 
@@ -110,7 +149,12 @@ rsync -a --delete --exclude HOST.md --exclude business-profile/ <convo-email-age
 rsync -a --delete --exclude brandkit-runtime/ <convo-email-agent>/dist/convo-email-agent/stripo/packages/ packages/
 ```
 
-Then restore that paragraph in both email skills and run `node scripts/doctor.mjs`.
+Then restore that paragraph in both email skills. The transfer helper and its sibling modules
+in `scripts/` are maintained here. For a plugin release, update the version in `plugin.json`,
+`.codex-plugin/plugin.json` and `.claude-plugin/plugin.json` together.
+
+Package the reviewed commit with `git archive --format=tar.gz HEAD` and run
+`node scripts/doctor.mjs` from the extracted archive.
 The development-only `evals/` suite checks routing and scope. Marketplace installs copy the whole
 repository root, including `evals/`.
 

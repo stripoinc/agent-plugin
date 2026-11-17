@@ -1,6 +1,6 @@
 {
   "name": "@ardas/convo-email-agent",
-  "version": "0.2.23-rc.13",
+  "version": "0.2.23-rc.14",
   "private": true,
   "type": "module",
   "types": "./index.d.ts",

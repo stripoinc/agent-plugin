@@ -1,6 +1,7 @@
 .DS_Store
 node_modules/
 work/
+/tests/
 .idea
 evals/results/
 *.iml
