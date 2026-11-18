@@ -73,15 +73,16 @@ attempt count and HTTP status when known. See the [CLI and recovery rules](skill
   `HTTP_PROXY`. `no_proxy`/`NO_PROXY` supports comma-separated exact hosts, optional ports,
   `.domain` or `*.domain` for subdomains, IP literals, IP ranges/CIDR and `*`.
   Both clients use the selected route throughout the transfer.
-- **Proxy destination policy.** CONNECT delegates target DNS only for the three exact hosts
+- **Proxy destination policy.** On HTTPS port 443, GET and PUT can use the storage hosts
   `stripo-mcp-content-live.s3.eu-west-1.amazonaws.com`,
   `stripo-mcp-content-stage.s3.eu-west-1.amazonaws.com` and
-  `stripo-mcp-content-dev.s3.eu-west-1.amazonaws.com`, on port 443. PUT uses this same
-  allowlist on every route. This trusts the host's configured proxy and resolver to route
-  those provider-controlled names correctly. The client cannot verify the IP chosen by the
-  proxy. Arbitrary reference hosts need an already-permitted direct route with public-IP
-  pinning. Proxy credentials, if configured, go only to the proxy. Ticket headers travel
-  inside the origin TLS connection.
+  `stripo-mcp-content-dev.s3.eu-west-1.amazonaws.com`. PUT is restricted to these hosts on
+  every route. Proxy GET also accepts `*.stripocdn.email` on port 443 for generated images.
+  The wildcard matches one or more DNS labels below `stripocdn.email` (for example,
+  `rf.stripocdn.email`). CONNECT trusts the configured proxy and its resolver to choose
+  the destination IP for these Stripo names. Other reference hosts need an already-permitted
+  direct route with public-IP pinning. Proxy credentials, if configured, go only to the proxy.
+  Ticket headers travel inside the origin TLS connection.
 - **Fallback.** Node runs first. An eligible DNS, connection, timeout or native transport
   failure can select curl once. A PUT can switch only before handing bytes to the origin.
   HTTP responses, access denials, cancellation and failed safety checks end that attempt

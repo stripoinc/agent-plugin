@@ -51,8 +51,9 @@ Refuse redirects. Send only the ticket headers (`--headers-file`) and image MIME
 in the private task directory under system temp. Limit the stream to 64 MiB or the smaller
 ticket/manifest `--max-bytes`. Verify completeness and any supplied download `--sha256` before
 atomically replacing the destination. Direct connections validate every DNS answer and pin a
-public IP. The plugin supports proxy-side DNS only for its exact Stripo storage hosts on 443.
-Uploads require a storage ticket, its method, original bytes, headers and limit.
+public IP. Proxy GET accepts the three Stripo storage hosts and `*.stripocdn.email` for images
+on port 443. On every route, PUT requires a ticket for one of those storage hosts on port 443.
+Keep the ticket's method, original bytes, headers and limit.
 
 Use the helper's automatic curl fallback for technical failures. If the entry point cannot run,
 use the alternate binding in `HOST.md` or an available host client enforcing this contract.

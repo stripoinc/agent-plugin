@@ -2,10 +2,10 @@ import {spawn} from 'node:child_process';
 import {BlockList, isIP} from 'node:net';
 import {execPath} from 'node:process';
 
-// These exact bucket names are controlled by Stripo. Never delegate an arbitrary target
-// name to a proxy resolver. Direct connections pin one address from an all-public answer.
 const storage = new Set(['live', 'stage', 'dev'].map(stage =>
   'stripo-mcp-content-' + stage + '.s3.eu-west-1.amazonaws.com'));
+// Require at least one complete DNS label under the Stripo CDN for proxy downloads.
+const cdnSubdomain = /^(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+stripocdn\.email$/;
 const blocked = new BlockList();
 for (const [address, prefix] of [
   ['0.0.0.0', 8], ['10.0.0.0', 8], ['100.64.0.0', 10], ['127.0.0.0', 8],
@@ -78,7 +78,10 @@ export function transferRoute(raw, operation, environment) {
   const httpProxy = environment.REQUEST_METHOD ? environment.http_proxy : setting('HTTP_PROXY');
   const proxyUrl = setting('HTTPS_PROXY') || httpProxy || setting('ALL_PROXY');
   if (!proxyUrl || bypassProxy(setting('NO_PROXY') ?? '', target)) return {target};
-  requireValue(isStorage, 'UNSUPPORTED_HOST', 'Proxy resolution requires an exact Stripo storage host on port 443.');
+  const isCdnDownload = operation === 'download' && target.port === 443 &&
+    target.hostname.length <= 253 && cdnSubdomain.test(target.hostname);
+  requireValue(isStorage || isCdnDownload, 'UNSUPPORTED_HOST',
+    'Proxy downloads require a Stripo storage host or a subdomain of stripocdn.email on port 443.');
   let proxy;
   try {
     proxy = new URL(proxyUrl);
